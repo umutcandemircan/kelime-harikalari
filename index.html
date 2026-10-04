@@ -3,13 +3,749 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-  <title>Kelime Harikaları - Türkiye Turu (100 Bölüm)</title>
-  <link rel="stylesheet" href="style.css">
+  <title>Kelime Harikaları - Words of Wonders</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --font-main: 'Outfit', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      --gold: #f59e0b;
+      --gold-light: #fef3c7;
+      --gold-shadow: #b45309;
+      --green: #22c55e;
+      --green-shadow: #15803d;
+      --navy: #0f172a;
+      --wheel-size: 220px;
+    }
+
+    @media (max-height: 740px) {
+      :root { --wheel-size: 195px; }
+    }
+    @media (max-height: 640px) {
+      :root { --wheel-size: 170px; }
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      user-select: none;
+      -webkit-user-select: none;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    html, body {
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      position: fixed;
+      touch-action: none;
+      -webkit-overflow-scrolling: touch;
+      font-family: var(--font-main);
+      background: #090d16;
+      color: #ffffff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    /* SCENIC BACKGROUND */
+    .scenic-bg {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-size: cover;
+      background-position: center;
+      transition: background-image 0.6s ease;
+      z-index: 0;
+    }
+
+    .scenic-tint {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(circle at center, rgba(15, 23, 42, 0.45) 0%, rgba(15, 23, 42, 0.85) 100%);
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    /* GAME VIEWPORT (POKI / CRAZYGAMES RESPONSIVE CONTAINER) */
+    .game-viewport {
+      width: 100%;
+      max-width: 440px;
+      height: 100vh;
+      height: 100dvh;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      background: #0f172a;
+      overflow: hidden;
+      box-shadow: 0 30px 80px rgba(0, 0, 0, 0.85);
+    }
+
+    @media (min-width: 481px) {
+      .game-viewport {
+        height: min(880px, 96vh);
+        max-height: 880px;
+        border-radius: 32px;
+        border: 1px solid rgba(255, 255, 255, 0.14);
+      }
+    }
+
+    /* SCREENS */
+    .screen {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 10;
+      display: flex;
+      flex-direction: column;
+      transition: opacity 0.28s ease, transform 0.28s ease;
+    }
+
+    .screen.hidden {
+      opacity: 0;
+      pointer-events: none;
+      transform: scale(0.96);
+    }
+
+    /* HOME SCREEN */
+    .screen-home {
+      align-items: center;
+      justify-content: center;
+      padding: clamp(16px, 4vh, 32px) 24px;
+    }
+
+    .home-content {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: clamp(14px, 3vh, 26px);
+      text-align: center;
+    }
+
+    .home-badge {
+      display: inline-block;
+      background: rgba(0, 0, 0, 0.5);
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      border-radius: 20px;
+      padding: 4px 14px;
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 1px;
+      color: var(--gold);
+      margin-bottom: 10px;
+    }
+
+    .home-title {
+      font-size: clamp(32px, 7vw, 42px);
+      font-weight: 900;
+      line-height: 1.05;
+      text-shadow: 0 4px 16px rgba(0, 0, 0, 0.8);
+    }
+
+    .home-title .highlight {
+      background: linear-gradient(180deg, #fde047 0%, #f59e0b 50%, #d97706 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      filter: drop-shadow(0 2px 8px rgba(245, 158, 11, 0.5));
+    }
+
+    .home-desc {
+      font-size: 12px;
+      color: rgba(255, 255, 255, 0.75);
+      font-weight: 600;
+      margin-top: 6px;
+    }
+
+    .home-status-card {
+      width: 100%;
+      max-width: 320px;
+      background: rgba(15, 23, 42, 0.75);
+      border: 1.5px solid rgba(255, 255, 255, 0.18);
+      border-radius: 20px;
+      padding: 14px 18px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+    }
+
+    .status-left {
+      display: flex;
+      flex-direction: column;
+      text-align: left;
+      gap: 2px;
+    }
+
+    .current-loc {
+      font-size: 11px;
+      font-weight: 800;
+      color: var(--gold);
+      text-transform: uppercase;
+    }
+
+    .current-lvl {
+      font-size: 16px;
+      font-weight: 900;
+    }
+
+    .home-coin-badge {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      background: rgba(0, 0, 0, 0.4);
+      border: 1px solid var(--gold);
+      border-radius: 16px;
+      padding: 5px 12px;
+      font-size: 14px;
+      font-weight: 900;
+    }
+
+    .btn-big-play {
+      width: 100%;
+      max-width: 320px;
+      background: linear-gradient(180deg, #22c55e 0%, #16a34a 100%);
+      border: 2px solid #86efac;
+      border-radius: 22px;
+      padding: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      color: #fff;
+      font-family: var(--font-main);
+      font-size: 22px;
+      font-weight: 900;
+      letter-spacing: 1px;
+      cursor: pointer;
+      box-shadow: 0 6px 0 var(--green-shadow), 0 12px 25px rgba(22, 163, 74, 0.45);
+      transition: transform 0.08s;
+      animation: playPulse 2.4s infinite;
+    }
+
+    @keyframes playPulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.025); }
+    }
+
+    .btn-big-play:active {
+      transform: translateY(4px);
+      box-shadow: 0 2px 0 var(--green-shadow);
+    }
+
+    .btn-home-sub {
+      width: 100%;
+      max-width: 320px;
+      background: rgba(255, 255, 255, 0.12);
+      border: 1.5px solid rgba(255, 255, 255, 0.25);
+      border-radius: 18px;
+      padding: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      color: #fff;
+      font-family: var(--font-main);
+      font-size: 14px;
+      font-weight: 800;
+      cursor: pointer;
+      transition: transform 0.08s;
+    }
+
+    .btn-home-sub:active { transform: translateY(2px); }
+
+    /* GAME TOPBAR */
+    .game-topbar {
+      position: relative;
+      z-index: 10;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: clamp(8px, 1.8vh, 14px) clamp(10px, 3vw, 16px) 4px;
+    }
+
+    .top-col {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .circle-btn {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      background: rgba(0, 0, 0, 0.4);
+      border: 1.5px solid rgba(255, 255, 255, 0.2);
+      color: #fff;
+      font-size: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: transform 0.08s;
+      touch-action: manipulation;
+    }
+
+    .circle-btn:active { transform: scale(0.92); }
+
+    .level-pill {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      background: rgba(0, 0, 0, 0.45);
+      border: 1.5px solid rgba(255, 255, 255, 0.18);
+      border-radius: 20px;
+      padding: 3px 14px;
+      cursor: pointer;
+      transition: transform 0.08s;
+      touch-action: manipulation;
+    }
+
+    .level-pill:active { transform: scale(0.95); }
+
+    .region-txt {
+      font-size: 9px;
+      font-weight: 800;
+      letter-spacing: 1px;
+      color: var(--gold);
+      text-transform: uppercase;
+    }
+
+    .level-num {
+      font-size: 13px;
+      font-weight: 900;
+      color: #ffffff;
+    }
+
+    .coin-capsule {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      background: rgba(0, 0, 0, 0.45);
+      border: 1.5px solid var(--gold);
+      border-radius: 20px;
+      padding: 4px 10px;
+      cursor: pointer;
+      color: #fff;
+      font-weight: 900;
+      font-size: 13px;
+      box-shadow: 0 2px 8px rgba(245, 158, 11, 0.3);
+      touch-action: manipulation;
+    }
+
+    .bonus-capsule {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      background: rgba(234, 88, 12, 0.35);
+      border: 1.5px solid #f97316;
+      border-radius: 20px;
+      padding: 4px 8px;
+      font-size: 11px;
+      font-weight: 900;
+      cursor: pointer;
+      transition: transform 0.15s;
+    }
+
+    .bonus-capsule.bounce {
+      animation: jarBounce 0.4s ease;
+    }
+
+    @keyframes jarBounce {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.2); }
+    }
+
+    /* UPPER SECTION: CROSSWORD GRID (WORDS OF WONDERS UX) */
+    .board-area {
+      position: relative;
+      z-index: 5;
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 6px 12px;
+      overflow: hidden;
+      width: 100%;
+    }
+
+    .crossword-matrix {
+      display: grid;
+      gap: 4px;
+      justify-content: center;
+      align-content: center;
+      transition: transform 0.2s ease;
+    }
+
+    .cw-cell {
+      width: var(--cell-size, 38px);
+      height: var(--cell-size, 38px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: var(--cell-font, 20px);
+      font-weight: 900;
+      border-radius: 8px;
+      position: relative;
+    }
+
+    .cw-cell.empty {
+      background: transparent;
+      pointer-events: none;
+    }
+
+    /* Frosted Ivory Unsolved Slot */
+    .cw-cell.slot {
+      background: rgba(255, 255, 255, 0.20);
+      border: 1.5px solid rgba(255, 255, 255, 0.45);
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2), inset 0 1px 2px rgba(255, 255, 255, 0.25);
+      color: transparent;
+    }
+
+    /* Solved Solid 3D Ivory/White Tile with Green/Gold Glow */
+    .cw-cell.slot.revealed {
+      background: #ffffff;
+      border: 1.5px solid #ffffff;
+      color: #0f172a;
+      box-shadow: 0 4px 0 #cbd5e1, 0 8px 18px rgba(0, 0, 0, 0.35);
+      animation: tileFlip 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    .cw-cell.slot.revealed.hinted {
+      border-color: var(--gold);
+      box-shadow: 0 4px 0 var(--gold-shadow), 0 0 16px rgba(245, 158, 11, 0.7);
+    }
+
+    @keyframes tileFlip {
+      0% { transform: scale(0.6) rotateX(90deg); opacity: 0; }
+      60% { transform: scale(1.1) rotateX(0deg); }
+      100% { transform: scale(1) rotateX(0deg); opacity: 1; }
+    }
+
+    /* WORD PREVIEW PILL */
+    .word-preview-zone {
+      position: relative;
+      z-index: 10;
+      height: 34px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .word-preview-pill {
+      font-size: 19px;
+      font-weight: 900;
+      letter-spacing: 2px;
+      color: #0f172a;
+      background: #ffffff;
+      padding: 3px 20px;
+      border-radius: 20px;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.45);
+      opacity: 0;
+      transform: translateY(6px);
+      transition: opacity 0.12s, transform 0.12s;
+      pointer-events: none;
+    }
+
+    .word-preview-pill.active {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .word-preview-pill.shake {
+      animation: shakePill 0.35s ease;
+      background: #ef4444;
+      color: #ffffff;
+    }
+
+    @keyframes shakePill {
+      0%, 100% { transform: translateX(0); }
+      20%, 60% { transform: translateX(-6px); }
+      40%, 80% { transform: translateX(6px); }
+    }
+
+    /* LOWER SECTION: LETTER WHEEL & DRAWING LAYER */
+    .wheel-zone {
+      position: relative;
+      z-index: 10;
+      padding-bottom: clamp(10px, 2.5vh, 22px);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: clamp(8px, 3.5vw, 16px);
+      touch-action: none;
+    }
+
+    .side-action-btn {
+      width: clamp(42px, 11vw, 52px);
+      height: clamp(42px, 11vw, 52px);
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.18);
+      border: 2px solid rgba(255, 255, 255, 0.35);
+      color: #ffffff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+      transition: transform 0.08s;
+      touch-action: manipulation;
+    }
+
+    .side-action-btn:active { transform: scale(0.92); }
+
+    .side-action-btn.hint-btn {
+      background: rgba(245, 158, 11, 0.25);
+      border-color: var(--gold);
+    }
+
+    .side-action-btn.ad-btn {
+      background: rgba(34, 197, 94, 0.25);
+      border-color: var(--green);
+    }
+
+    .btn-sub-badge {
+      font-size: 10px;
+      font-weight: 900;
+      line-height: 1;
+      margin-top: 1px;
+    }
+    .hint-btn .btn-sub-badge { color: var(--gold); }
+    .ad-btn .btn-sub-badge { color: #86efac; }
+
+    .wheel-turntable {
+      position: relative;
+      width: var(--wheel-size);
+      height: var(--wheel-size);
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(255, 255, 255, 0.14) 0%, rgba(15, 23, 42, 0.7) 100%);
+      border: 2px solid rgba(255, 255, 255, 0.25);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), inset 0 2px 4px rgba(255, 255, 255, 0.2);
+      touch-action: none;
+    }
+
+    /* SVG Connecting Lines: STRICTLY UNDER LETTER CHIPS (z-index: 1) */
+    .wheel-svg-layer {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .wheel-svg-layer polyline {
+      stroke: var(--gold);
+      stroke-width: 8;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      fill: none;
+      filter: drop-shadow(0 2px 8px rgba(245, 158, 11, 0.8));
+    }
+
+    .letter-disc-container {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      touch-action: none;
+      z-index: 2;
+    }
+
+    /* 100% Solid Opaque 3D Ivory Letter Chips (z-index: 10 - Lines never cover letter text!) */
+    .letter-node {
+      position: absolute;
+      width: var(--node-size, 52px);
+      height: var(--node-size, 52px);
+      border-radius: 50%;
+      background: #ffffff;
+      border: 2.5px solid #ffffff;
+      color: #0f172a;
+      font-size: var(--node-font-size, 24px);
+      font-weight: 900;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      box-shadow: 0 4px 0 #94a3b8, 0 6px 14px rgba(0, 0, 0, 0.35);
+      transform: translate(-50%, -50%) translateZ(0);
+      will-change: transform;
+      transition: transform 0.08s ease, background 0.12s ease;
+      z-index: 10;
+      touch-action: none;
+    }
+
+    .letter-node.selected {
+      background: var(--gold);
+      color: #ffffff;
+      border-color: #fef3c7;
+      transform: translate(-50%, -50%) scale(1.15) translateZ(0);
+      box-shadow: 0 2px 0 var(--gold-shadow), 0 0 18px rgba(245, 158, 11, 0.7);
+    }
+
+    /* MODALS */
+    .modal-backdrop {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(10, 15, 28, 0.88);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+      z-index: 100;
+      transition: opacity 0.25s ease;
+    }
+
+    .modal-backdrop.hidden {
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .modal-card {
+      background: #1e293b;
+      border: 1.5px solid rgba(255, 255, 255, 0.16);
+      border-radius: 26px;
+      padding: 24px 20px;
+      width: 100%;
+      max-width: 340px;
+      text-align: center;
+      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.85);
+      animation: modalScale 0.22s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+
+    @keyframes modalScale {
+      from { transform: scale(0.9) translateY(16px); opacity: 0; }
+      to { transform: scale(1) translateY(0); opacity: 1; }
+    }
+
+    .trophy-badge { font-size: 46px; margin-bottom: 4px; }
+    .eyebrow { font-size: 11px; font-weight: 800; letter-spacing: 1.5px; color: var(--gold); }
+    .modal-title { font-size: 22px; font-weight: 900; margin: 4px 0; }
+    .modal-subtitle { font-size: 12px; color: rgba(255, 255, 255, 0.7); margin-bottom: 16px; }
+
+    .reward-capsule {
+      background: rgba(245, 158, 11, 0.12);
+      border: 1.5px dashed var(--gold);
+      border-radius: 16px;
+      padding: 10px;
+      margin-bottom: 18px;
+    }
+    .reward-lbl { display: block; font-size: 11px; color: var(--gold); font-weight: 800; }
+    .reward-val { font-size: 22px; font-weight: 900; }
+
+    .modal-btns {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .btn-modal-primary {
+      background: linear-gradient(180deg, #10b981 0%, #059669 100%);
+      color: #fff;
+      border: none;
+      border-radius: 16px;
+      padding: 13px;
+      font-size: 15px;
+      font-weight: 800;
+      box-shadow: 0 4px 0 #047857;
+      cursor: pointer;
+      font-family: var(--font-main);
+    }
+    .btn-modal-primary:active { transform: translateY(2px); box-shadow: 0 2px 0 #047857; }
+
+    .btn-modal-ghost {
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      color: #fff;
+      border-radius: 16px;
+      padding: 11px;
+      font-size: 13px;
+      font-weight: 700;
+      cursor: pointer;
+      font-family: var(--font-main);
+    }
+
+    /* AD SIMULATOR MODALS (POKI / CRAZYGAMES COMPLIANT) */
+    .ad-card {
+      background: #0f172a;
+      border: 1.5px solid rgba(245, 158, 11, 0.4);
+      position: relative;
+    }
+    .ad-video-mock {
+      width: 100%;
+      height: 150px;
+      background: linear-gradient(135deg, #1e1b4b 0%, #31104b 100%);
+      border-radius: 16px;
+      margin: 12px 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    .ad-progress-bar {
+      width: 80%;
+      height: 6px;
+      background: rgba(255, 255, 255, 0.15);
+      border-radius: 3px;
+      overflow: hidden;
+      margin-top: 8px;
+    }
+    .ad-progress-fill {
+      height: 100%;
+      background: var(--gold);
+      width: 0%;
+      transition: width 0.1s linear;
+    }
+
+    /* CONFETTI CANVAS */
+    #confetti-canvas {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 99;
+    }
+
+    /* TOAST */
+    #ka-toast {
+      position: fixed;
+      top: 24px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #0f172a;
+      color: #fff;
+      padding: 9px 20px;
+      border-radius: 20px;
+      font-weight: 800;
+      font-size: 13px;
+      z-index: 9999;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+      border: 1px solid rgba(255,255,255,0.2);
+      pointer-events: none;
+      display: none;
+    }
+  </style>
 </head>
-<body class="theme-cappadocia">
+<body>
 
   <div class="game-viewport">
     <!-- Scenic Photography Background -->
@@ -17,48 +753,35 @@
     <div class="scenic-tint"></div>
 
     <!-- ============================================== -->
-    <!-- 1. GİRİŞ EKRANI (TITLE / HOME SCREEN)          -->
+    <!-- 1. GİRİŞ EKRANI (HOME SCREEN)                  -->
     <!-- ============================================== -->
     <div id="screen-home" class="screen screen-home">
       <div class="home-content">
-        
-        <!-- Game Logo & Header -->
-        <div class="home-logo-box">
+        <div>
           <span class="home-badge">🏛️ TÜRKİYE KELİME TURU</span>
           <h1 class="home-title">KELİME<br><span class="highlight">HARİKALARI</span></h1>
-          <p class="home-desc">100 Bölüm • 10 Tarihi Bölge • Zengin TDK Kelimeleri</p>
+          <p class="home-desc">Words of Wonders & Kelime Gezmece Deneyimi</p>
         </div>
 
-        <!-- Player Journey Status Card -->
         <div class="home-status-card">
           <div class="status-left">
-            <span class="current-loc" id="home-current-loc">Kapadokya</span>
-            <strong class="current-lvl" id="home-current-lvl">Bölüm 1 / 100</strong>
+            <span class="current-loc" id="home-current-loc">KAPADOKYA</span>
+            <strong class="current-lvl" id="home-current-lvl">Bölüm 1 / 8</strong>
           </div>
-          <div class="status-right">
-            <div class="home-coin-badge">
-              <span>🪙</span>
-              <strong id="home-coins">100</strong>
-            </div>
+          <div class="home-coin-badge">
+            <span>🪙</span>
+            <strong id="home-coins">100</strong>
           </div>
         </div>
 
-        <!-- Big 3D Play Button -->
-        <div class="home-actions">
+        <div style="width: 100%; display: flex; flex-direction: column; align-items: center; gap: 10px;">
           <button id="btn-home-play" class="btn-big-play">
-            <span class="play-icon">▶</span>
+            <span>▶</span>
             <span>OYNA</span>
           </button>
-
-          <button id="btn-home-map" class="btn-secondary-home">
-            <span>🗺️</span>
-            <span>Bölüm Haritası</span>
+          <button id="btn-home-rewarded" class="btn-home-sub">
+            <span>🎁 Ücretsiz +100 Altın</span>
           </button>
-        </div>
-
-        <!-- Bottom Link / Credits -->
-        <div class="home-footer">
-          <span>Harfleri birleştir, gizli kelimeleri keşfet!</span>
         </div>
       </div>
     </div>
@@ -75,71 +798,63 @@
         </div>
 
         <div class="top-col center">
-          <div class="level-pill" id="btn-level-pill" title="Bölüm Haritasını Aç">
+          <div class="level-pill" id="btn-level-pill">
             <span class="region-txt" id="location-badge">KAPADOKYA</span>
             <div class="level-num">BÖLÜM <span id="level-display">1</span></div>
           </div>
         </div>
 
         <div class="top-col right">
-          <button id="btn-shop" class="coin-capsule" title="Altın Mağazası">
-            <span class="coin-icon">🪙</span>
-            <span id="coin-count" class="coin-val">100</span>
-            <span class="coin-plus">+</span>
-          </button>
+          <div class="bonus-capsule" id="bonus-capsule" title="Bonus Kelimeler (5 kelimeye +25 Altın)">
+            <span>🍯</span>
+            <span id="bonus-count">0/5</span>
+          </div>
+          <div class="coin-capsule" id="btn-free-coins" title="Altın Bakiye & Reklam">
+            <span>🪙</span>
+            <span id="coin-count">100</span>
+            <span style="color: #86efac; font-size: 11px; margin-left: 2px;">+</span>
+          </div>
         </div>
       </header>
 
-      <!-- Clean Word Grid Area (Düzgün & Dengeli Kelime Tablosu) -->
+      <!-- UPPER SECTION: CROSSWORD GRID MATRIX (WORDS OF WONDERS UX) -->
       <main class="board-area">
-        <div id="word-board" class="word-board">
-          <!-- Javascript fills target word rows cleanly -->
+        <div id="crossword-board" class="crossword-matrix">
+          <!-- Javascript renders intersecting crossword cells -->
         </div>
       </main>
 
-      <!-- Word Preview Pill -->
+      <!-- Current Word Preview Pill -->
       <div class="word-preview-zone">
         <div id="current-word-preview" class="word-preview-pill"></div>
       </div>
 
-      <!-- Letter Wheel with Underground Connecting Lines -->
+      <!-- LOWER SECTION: LETTER WHEEL & DRAWING LAYER -->
       <footer class="wheel-zone">
-        <button id="btn-shuffle" class="side-action-btn left" title="Harfleri Karıştır">
-          <svg class="side-icon" viewBox="0 0 24 24" fill="currentColor">
+        <!-- Shuffle Button (Free) -->
+        <button id="btn-shuffle" class="side-action-btn" title="Harfleri Karıştır (Ücretsiz)">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
             <path d="M10.59 9.17L5.41 4 4 5.41l5.17 5.17 1.42-1.41zM14.5 4l2.04 2.04L4 18.59 5.41 20 17.96 7.46 20 9.5V4h-5.5zm.33 9.41l-1.41 1.41 3.13 3.13L14.5 20H20v-5.5l-2.04 2.04-3.13-3.13z"/>
           </svg>
+          <span class="btn-sub-badge">Karıştır</span>
         </button>
 
+        <!-- Turntable (SVG Line under letters) -->
         <div class="wheel-turntable">
-          <!-- SVG line layer stays STRICTLY UNDER the letter nodes -->
           <svg id="wheel-lines" class="wheel-svg-layer"></svg>
           <div id="letter-wheel" class="letter-disc-container">
-            <!-- 3D Ivory letter stones in front -->
+            <!-- 3D Solid Ivory Letter Stones -->
           </div>
         </div>
 
-        <button id="btn-hint" class="side-action-btn right" title="İpucu Al (25 Altın)">
-          <svg class="side-icon" viewBox="0 0 24 24" fill="currentColor">
+        <!-- Hint Button (Cost: 50 Coins) -->
+        <button id="btn-hint" class="side-action-btn hint-btn" title="İpucu Al (50 Altın)">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
             <path d="M9 21c0 .55.45 1 1 1h4c.55 0 1-.45 1-1v-1H9v1zm3-19C8.14 2 5 5.14 5 9c0 2.38 1.19 4.47 3 5.74V17c0 .55.45 1 1 1h6c.55 0 1-.45 1-1v-2.26c1.81-1.27 3-3.36 3-5.74 0-3.86-3.14-7-7-7z"/>
           </svg>
-          <span class="hint-price">25</span>
+          <span class="btn-sub-badge">50 🪙</span>
         </button>
       </footer>
-    </div>
-  </div>
-
-  <!-- BÖLÜM HARİTASI MODAL -->
-  <div id="modal-map" class="modal-backdrop hidden">
-    <div class="modal-card map-card">
-      <div class="card-head">
-        <h3>🗺️ Bölüm Haritası</h3>
-        <button id="btn-close-map" class="btn-close">&times;</button>
-      </div>
-      <p class="card-sub">Türkiye'nin 10 Harikası arasından dilediğin bölüme atla:</p>
-
-      <div class="regions-grid" id="regions-grid">
-        <!-- Javascript fills regions dynamically -->
-      </div>
     </div>
   </div>
 
@@ -147,64 +862,1363 @@
   <div id="modal-victory" class="modal-backdrop hidden">
     <div class="modal-card">
       <div class="trophy-badge">🏆</div>
-      <span class="eyebrow">BÖLÜM GEÇİLDİ!</span>
+      <span class="eyebrow">TEBRİKLER!</span>
       <h2 id="victory-title" class="modal-title">Bölüm 1 Tamamlandı</h2>
-      <p class="modal-subtitle">Tüm kelimeleri ustalıkla çözdün.</p>
+      <p class="modal-subtitle">Tüm çapraz bulmaca kelimelerini çözdün.</p>
       
       <div class="reward-capsule">
         <span class="reward-lbl">Bölüm Ödülü</span>
-        <span class="reward-val">+30 🪙</span>
+        <span class="reward-val">+30 🪙 Altın</span>
       </div>
 
       <div class="modal-btns">
-        <button id="btn-next-level" class="btn-success">Sonraki Bölüm ➔</button>
-        <button id="btn-share" class="btn-ghost">Arkadaşına Gönder 📲</button>
+        <button id="btn-next-level" class="btn-modal-primary">Sonraki Bölüm ➔</button>
+        <button id="btn-share" class="btn-modal-ghost">Arkadaşına Gönder 📲</button>
       </div>
     </div>
   </div>
 
-  <!-- SHOP MODAL -->
-  <div id="modal-shop" class="modal-backdrop hidden">
-    <div class="modal-card shop-modal">
-      <div class="card-head">
-        <h3>🪙 Altın Mağazası</h3>
-        <button id="btn-close-shop" class="btn-close">&times;</button>
-      </div>
-      <p class="card-sub">İpuçları alarak zorlu kelimeleri rahatça çöz!</p>
-
-      <div class="shop-pack-list">
-        <div class="shop-pack featured">
-          <span class="ribbon">Fırsat</span>
-          <div class="pack-meta">
-            <strong>🚫 Reklamları Kaldır</strong>
-            <small>Ömür boyu kesintisiz oyun keyfi</small>
-          </div>
-          <button class="pack-buy-btn" onclick="game.fakePurchase('Reklamları Kaldır', '29.99 TL')">29.99 TL</button>
-        </div>
-
-        <div class="shop-pack">
-          <div class="pack-meta">
-            <strong>🪙 300 Altın Paketi</strong>
-            <small>12 adet harf ipucu hakkı</small>
-          </div>
-          <button class="pack-buy-btn" onclick="game.fakePurchase('300 Altın', '19.99 TL', 300)">19.99 TL</button>
-        </div>
-
-        <div class="shop-pack">
-          <div class="pack-meta">
-            <strong>👑 1000 Hazine Sandığı</strong>
-            <small>Bolca ipucu ve altın</small>
-          </div>
-          <button class="pack-buy-btn" onclick="game.fakePurchase('1000 Altın', '49.99 TL', 1000)">49.99 TL</button>
+  <!-- REWARDED AD MODAL (CRAZYGAMES / POKI HOOKS & SIMULATOR) -->
+  <div id="modal-rewarded" class="modal-backdrop hidden">
+    <div class="modal-card ad-card">
+      <span class="eyebrow">📺 ÖDÜLLÜ REKLAM</span>
+      <h3 style="font-size: 18px; margin: 4px 0;">+100 Altın Kazan</h3>
+      <p style="font-size: 11px; color: rgba(255,255,255,0.65);">Reklamı sonuna kadar izle ve altınlarını anında al!</p>
+      
+      <div class="ad-video-mock">
+        <div style="font-size: 32px;">🎬</div>
+        <strong id="ad-timer-text" style="font-size: 15px; color: var(--gold);">5 saniye kaldı...</strong>
+        <div class="ad-progress-bar">
+          <div id="ad-progress-fill" class="ad-progress-fill"></div>
         </div>
       </div>
+
+      <p style="font-size: 10px; color: rgba(255,255,255,0.5);">Poki & CrazyGames Monetization API Uyumlu</p>
+    </div>
+  </div>
+
+  <!-- INTERSTITIAL AD MODAL (EVERY 2 LEVELS) -->
+  <div id="modal-interstitial" class="modal-backdrop hidden">
+    <div class="modal-card ad-card">
+      <span class="eyebrow">☕ KISA MOLA</span>
+      <h3 style="font-size: 18px; margin: 4px 0;">Oyun Arası</h3>
+      <div class="ad-video-mock" style="height: 120px;">
+        <div style="font-size: 28px;">🎮</div>
+        <small style="color: rgba(255,255,255,0.7);">Reklam yükleniyor...</small>
+      </div>
+      <button id="btn-skip-interstitial" class="btn-modal-primary" style="background: rgba(255,255,255,0.18);">3s sonra geçebilirsiniz</button>
     </div>
   </div>
 
   <canvas id="confetti-canvas"></canvas>
+  <div id="ka-toast"></div>
 
-  <script src="audio.js"></script>
-  <script src="levels.js"></script>
-  <script src="game.js"></script>
+  <!-- ============================================== -->
+  <!-- 3. JAVASCRIPT MOTORU (PROCEDURAL AUDIO & LOGIC)-->
+  <!-- ============================================== -->
+  <script>
+    // TURKISH LOCALE SAFE HELPERS (Strict tr-TR compatibility)
+    const toUpperTR = (str) => (str || '').toLocaleUpperCase('tr-TR');
+    const toLowerTR = (str) => (str || '').toLocaleLowerCase('tr-TR');
+
+    // -----------------------------------------------------------------
+    // 1. WEB AUDIO API PROCEDURAL SOUND SYNTHESIZER (NO EXTERNAL AUDIO)
+    // -----------------------------------------------------------------
+    class SoundFX {
+      constructor() {
+        this.ctx = null;
+        this.enabled = true;
+      }
+
+      init() {
+        if (!this.ctx) {
+          const AudioContextClass = window.AudioContext || window.webkitAudioContext;
+          this.ctx = new AudioContextClass();
+        }
+        if (this.ctx && this.ctx.state === 'suspended') {
+          this.ctx.resume();
+        }
+      }
+
+      toggle() {
+        this.enabled = !this.enabled;
+        return this.enabled;
+      }
+
+      // Incremental letter pitch: 261Hz, 329Hz, 392Hz, 523Hz, 659Hz, 784Hz, 1046Hz
+      playLetterTone(index) {
+        if (!this.enabled) return;
+        this.init();
+
+        const frequencies = [261.63, 329.63, 392.00, 523.25, 659.25, 783.99, 1046.50];
+        const freq = frequencies[index % frequencies.length] || 261.63;
+
+        const osc = this.ctx.createOscillator();
+        const gain = this.ctx.createGain();
+
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(freq, this.ctx.currentTime);
+
+        gain.gain.setValueAtTime(0.22, this.ctx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.001, this.ctx.currentTime + 0.16);
+
+        osc.connect(gain);
+        gain.connect(this.ctx.destination);
+
+        osc.start();
+        osc.stop(this.ctx.currentTime + 0.16);
+      }
+
+      // Successful word finding harmonic C-major arpeggio
+      playWordSuccess() {
+        if (!this.enabled) return;
+        this.init();
+
+        const chord = [523.25, 659.25, 783.99, 1046.50];
+        chord.forEach((freq, idx) => {
+          const osc = this.ctx.createOscillator();
+          const gain = this.ctx.createGain();
+          const start = this.ctx.currentTime + idx * 0.06;
+
+          osc.type = 'triangle';
+          osc.frequency.setValueAtTime(freq, start);
+
+          gain.gain.setValueAtTime(0.24, start);
+          gain.gain.exponentialRampToValueAtTime(0.001, start + 0.38);
+
+          osc.connect(gain);
+          gain.connect(this.ctx.destination);
+
+          osc.start(start);
+          osc.stop(start + 0.38);
+        });
+      }
+
+      // Subtle low bass boop for wrong/invalid word
+      playInvalid() {
+        if (!this.enabled) return;
+        this.init();
+
+        const osc = this.ctx.createOscillator();
+        const gain = this.ctx.createGain();
+
+        osc.type = 'sawtooth';
+        osc.frequency.setValueAtTime(130, this.ctx.currentTime);
+        osc.frequency.exponentialRampToValueAtTime(75, this.ctx.currentTime + 0.2);
+
+        gain.gain.setValueAtTime(0.16, this.ctx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.001, this.ctx.currentTime + 0.2);
+
+        osc.connect(gain);
+        gain.connect(this.ctx.destination);
+
+        osc.start();
+        osc.stop(this.ctx.currentTime + 0.2);
+      }
+
+      // Hint chime
+      playHint() {
+        if (!this.enabled) return;
+        this.init();
+
+        const notes = [1046.50, 1318.51, 1567.98, 2093.00];
+        notes.forEach((f, i) => {
+          const osc = this.ctx.createOscillator();
+          const gain = this.ctx.createGain();
+          const t = this.ctx.currentTime + i * 0.05;
+
+          osc.type = 'sine';
+          osc.frequency.setValueAtTime(f, t);
+
+          gain.gain.setValueAtTime(0.2, t);
+          gain.gain.exponentialRampToValueAtTime(0.001, t + 0.28);
+
+          osc.connect(gain);
+          gain.connect(this.ctx.destination);
+
+          osc.start(t);
+          osc.stop(t + 0.28);
+        });
+      }
+
+      // Shuffle mechanical tick
+      playShuffle() {
+        if (!this.enabled) return;
+        this.init();
+
+        const osc = this.ctx.createOscillator();
+        const gain = this.ctx.createGain();
+
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(480, this.ctx.currentTime);
+        osc.frequency.exponentialRampToValueAtTime(120, this.ctx.currentTime + 0.08);
+
+        gain.gain.setValueAtTime(0.18, this.ctx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.001, this.ctx.currentTime + 0.08);
+
+        osc.connect(gain);
+        gain.connect(this.ctx.destination);
+
+        osc.start();
+        osc.stop(this.ctx.currentTime + 0.08);
+      }
+
+      // Bonus word / Coin collect ping
+      playCoin() {
+        if (!this.enabled) return;
+        this.init();
+
+        const osc = this.ctx.createOscillator();
+        const gain = this.ctx.createGain();
+
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(1174.66, this.ctx.currentTime);
+        osc.frequency.setValueAtTime(1760.00, this.ctx.currentTime + 0.07);
+
+        gain.gain.setValueAtTime(0.22, this.ctx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.001, this.ctx.currentTime + 0.22);
+
+        osc.connect(gain);
+        gain.connect(this.ctx.destination);
+
+        osc.start();
+        osc.stop(this.ctx.currentTime + 0.22);
+      }
+
+      // Level Complete Victory Fanfare
+      playVictory() {
+        if (!this.enabled) return;
+        this.init();
+
+        const fanfare = [
+          { f: 523.25, d: 0.12 },
+          { f: 659.25, d: 0.12 },
+          { f: 783.99, d: 0.15 },
+          { f: 1046.50, d: 0.20 },
+          { f: 1318.51, d: 0.45 }
+        ];
+
+        let t = this.ctx.currentTime;
+        fanfare.forEach(note => {
+          const osc = this.ctx.createOscillator();
+          const gain = this.ctx.createGain();
+
+          osc.type = 'triangle';
+          osc.frequency.setValueAtTime(note.f, t);
+
+          gain.gain.setValueAtTime(0.28, t);
+          gain.gain.exponentialRampToValueAtTime(0.001, t + note.d);
+
+          osc.connect(gain);
+          gain.connect(this.ctx.destination);
+
+          osc.start(t);
+          osc.stop(t + note.d);
+
+          t += note.d * 0.8;
+        });
+      }
+    }
+
+    const soundFX = new SoundFX();
+
+    // -----------------------------------------------------------------
+    // 2. LEVEL DATABASE (8 INTERSECTING CROSSWORD LEVELS)
+    // -----------------------------------------------------------------
+    const WOW_LEVELS = [
+    {
+        "level": 1,
+        "location": "Kapadokya - Peri Bacaları",
+        "bg": "https://images.unsplash.com/photo-1570939274717-7eda259b50ed?auto=format&fit=crop&w=800&q=80",
+        "wheel": [
+            "A",
+            "K",
+            "T"
+        ],
+        "words": [
+            {
+                "id": "w1",
+                "word": "KAT",
+                "row": 2,
+                "col": 0,
+                "dir": "H"
+            },
+            {
+                "id": "w2",
+                "word": "TAK",
+                "row": 0,
+                "col": 0,
+                "dir": "V"
+            }
+        ],
+        "bonus": [
+            "AK"
+        ]
+    },
+    {
+        "level": 2,
+        "location": "Pamukkale - Travertenler",
+        "bg": "https://images.unsplash.com/photo-1549880338-65ddcdfd017b?auto=format&fit=crop&w=800&q=80",
+        "wheel": [
+            "E",
+            "K",
+            "A",
+            "L"
+        ],
+        "words": [
+            {
+                "id": "w1",
+                "word": "KALE",
+                "row": 2,
+                "col": 0,
+                "dir": "H"
+            },
+            {
+                "id": "w2",
+                "word": "KEL",
+                "row": 2,
+                "col": 0,
+                "dir": "V"
+            },
+            {
+                "id": "w3",
+                "word": "ELA",
+                "row": 0,
+                "col": 1,
+                "dir": "V"
+            }
+        ],
+        "bonus": [
+            "LAK",
+            "LAKE"
+        ]
+    },
+    {
+        "level": 3,
+        "location": "Galata Kulesi - İstanbul",
+        "bg": "https://images.unsplash.com/photo-1527838832700-5059252407fa?auto=format&fit=crop&w=800&q=80",
+        "wheel": [
+            "S",
+            "M",
+            "A",
+            "A"
+        ],
+        "words": [
+            {
+                "id": "w1",
+                "word": "MASA",
+                "row": 2,
+                "col": 0,
+                "dir": "H"
+            },
+            {
+                "id": "w2",
+                "word": "ASMA",
+                "row": 0,
+                "col": 0,
+                "dir": "V"
+            }
+        ],
+        "bonus": [
+            "AMA",
+            "SAM",
+            "AS"
+        ]
+    },
+    {
+        "level": 4,
+        "location": "Efes Antik Kenti - İzmir",
+        "bg": "https://images.unsplash.com/photo-1564507592333-c60657eea523?auto=format&fit=crop&w=800&q=80",
+        "wheel": [
+            "I",
+            "B",
+            "K",
+            "A",
+            "L"
+        ],
+        "words": [
+            {
+                "id": "w1",
+                "word": "BALIK",
+                "row": 2,
+                "col": 0,
+                "dir": "H"
+            },
+            {
+                "id": "w2",
+                "word": "BAL",
+                "row": 2,
+                "col": 0,
+                "dir": "V"
+            },
+            {
+                "id": "w3",
+                "word": "AKIL",
+                "row": 2,
+                "col": 1,
+                "dir": "V"
+            },
+            {
+                "id": "w4",
+                "word": "KIL",
+                "row": 0,
+                "col": 2,
+                "dir": "V"
+            }
+        ],
+        "bonus": [
+            "ALIK",
+            "BAK",
+            "KAL",
+            "LAK"
+        ]
+    },
+    {
+        "level": 5,
+        "location": "Nemrut Dağı - Gün Doğumu",
+        "bg": "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=800&q=80",
+        "wheel": [
+            "T",
+            "P",
+            "İ",
+            "K",
+            "A"
+        ],
+        "words": [
+            {
+                "id": "w1",
+                "word": "KİTAP",
+                "row": 3,
+                "col": 0,
+                "dir": "H"
+            },
+            {
+                "id": "w2",
+                "word": "TAKİP",
+                "row": 1,
+                "col": 0,
+                "dir": "V"
+            },
+            {
+                "id": "w3",
+                "word": "PATİK",
+                "row": 0,
+                "col": 1,
+                "dir": "V"
+            },
+            {
+                "id": "w4",
+                "word": "PAK",
+                "row": 2,
+                "col": 3,
+                "dir": "V"
+            }
+        ],
+        "bonus": [
+            "TİP",
+            "PAT",
+            "KAT",
+            "AİT"
+        ]
+    },
+    {
+        "level": 6,
+        "location": "Göbeklitepe - Şanlıurfa",
+        "bg": "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=800&q=80",
+        "wheel": [
+            "N",
+            "Z",
+            "E",
+            "D",
+            "İ"
+        ],
+        "words": [
+            {
+                "id": "w1",
+                "word": "DENİZ",
+                "row": 2,
+                "col": 0,
+                "dir": "H"
+            },
+            {
+                "id": "w2",
+                "word": "DİZ",
+                "row": 2,
+                "col": 0,
+                "dir": "V"
+            },
+            {
+                "id": "w3",
+                "word": "DİN",
+                "row": 0,
+                "col": 2,
+                "dir": "V"
+            }
+        ],
+        "bonus": [
+            "DİZE",
+            "İZ",
+            "İN",
+            "ZİN"
+        ]
+    },
+    {
+        "level": 7,
+        "location": "Ölüdeniz - Fethiye",
+        "bg": "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=800&q=80",
+        "wheel": [
+            "R",
+            "H",
+            "A",
+            "B",
+            "A"
+        ],
+        "words": [
+            {
+                "id": "w1",
+                "word": "BAHAR",
+                "row": 1,
+                "col": 0,
+                "dir": "H"
+            },
+            {
+                "id": "w2",
+                "word": "BAR",
+                "row": 1,
+                "col": 0,
+                "dir": "V"
+            },
+            {
+                "id": "w3",
+                "word": "HARA",
+                "row": 0,
+                "col": 1,
+                "dir": "V"
+            },
+            {
+                "id": "w4",
+                "word": "ARA",
+                "row": 1,
+                "col": 1,
+                "dir": "V"
+            }
+        ],
+        "bonus": [
+            "RAB",
+            "ABA",
+            "AHA"
+        ]
+    },
+    {
+        "level": 8,
+        "location": "Sümela Manastırı - Trabzon",
+        "bg": "https://images.unsplash.com/photo-1448375240586-882707db888b?auto=format&fit=crop&w=800&q=80",
+        "wheel": [
+            "L",
+            "M",
+            "E",
+            "K",
+            "A"
+        ],
+        "words": [
+            {
+                "id": "w1",
+                "word": "KALEM",
+                "row": 1,
+                "col": 0,
+                "dir": "H"
+            },
+            {
+                "id": "w2",
+                "word": "KELAM",
+                "row": 1,
+                "col": 0,
+                "dir": "V"
+            },
+            {
+                "id": "w3",
+                "word": "KALE",
+                "row": 0,
+                "col": 1,
+                "dir": "V"
+            },
+            {
+                "id": "w4",
+                "word": "ELA",
+                "row": 0,
+                "col": 2,
+                "dir": "V"
+            }
+        ],
+        "bonus": [
+            "AMEL",
+            "MAL",
+            "LAK",
+            "KEM"
+        ]
+    }
+];
+
+    // -----------------------------------------------------------------
+    // 3. MAIN GAME CONTROLLER (WOW & POKI/CRAZYGAMES STANDARDS)
+    // -----------------------------------------------------------------
+    class WoWGame {
+      constructor() {
+        this.storageKey = 'wow_singlefile_save_v1';
+        this.state = this.loadState();
+
+        this.currentWord = "";
+        this.selectedNodes = [];
+        this.isDragging = false;
+
+        // Pre-cached geometry for 120 FPS Dragging
+        this.nodeData = [];
+        this.wheelRect = null;
+
+        // Crossword grid map: key 'r,c' -> { el, char, wordIds, revealed }
+        this.cellMap = new Map();
+        this.solvedWordIds = new Set();
+        this.bonusWordsFound = new Set();
+        this.bonusProgress = 0; // 0 to 5
+
+        // DOM Elements
+        this.screenHome = document.getElementById('screen-home');
+        this.screenGame = document.getElementById('screen-game');
+        this.scenicBg = document.getElementById('scenic-bg');
+
+        this.homeLoc = document.getElementById('home-current-loc');
+        this.homeLvl = document.getElementById('home-current-lvl');
+        this.homeCoins = document.getElementById('home-coins');
+
+        this.boardEl = document.getElementById('crossword-board');
+        this.letterWheel = document.getElementById('letter-wheel');
+        this.wheelSvg = document.getElementById('wheel-lines');
+        this.wordPreview = document.getElementById('current-word-preview');
+
+        this.levelDisplay = document.getElementById('level-display');
+        this.locationBadge = document.getElementById('location-badge');
+        this.coinCount = document.getElementById('coin-count');
+        this.bonusCount = document.getElementById('bonus-count');
+        this.bonusCapsule = document.getElementById('bonus-capsule');
+
+        // Modals
+        this.modalVictory = document.getElementById('modal-victory');
+        this.modalRewarded = document.getElementById('modal-rewarded');
+        this.modalInterstitial = document.getElementById('modal-interstitial');
+
+        // Confetti Canvas
+        this.canvas = document.getElementById('confetti-canvas');
+        this.ctx = this.canvas.getContext('2d');
+        this.confettiParticles = [];
+
+        this.init();
+      }
+
+      loadState() {
+        try {
+          const raw = localStorage.getItem(this.storageKey);
+          if (raw) {
+            const parsed = JSON.parse(raw);
+            return {
+              levelIndex: Math.max(0, parsed.levelIndex || 0),
+              coins: Math.max(0, parsed.coins !== undefined ? parsed.coins : 100),
+              bonusWords: parsed.bonusWords || []
+            };
+          }
+        } catch(e) {}
+        return { levelIndex: 0, coins: 100, bonusWords: [] };
+      }
+
+      saveState() {
+        localStorage.setItem(this.storageKey, JSON.stringify(this.state));
+        this.updateHeaderUI();
+      }
+
+      updateHeaderUI() {
+        if (this.coinCount) this.coinCount.textContent = this.state.coins;
+        if (this.homeCoins) this.homeCoins.textContent = this.state.coins;
+        const cur = this.getCurrentLevel();
+        if (cur) {
+          if (this.homeLoc) this.homeLoc.textContent = toUpperTR(cur.location.split(' - ')[0]);
+          if (this.homeLvl) this.homeLvl.textContent = `Bölüm ${cur.level} / ${WOW_LEVELS.length}`;
+        }
+        if (this.bonusCount) this.bonusCount.textContent = `${this.bonusProgress}/5`;
+      }
+
+      getCurrentLevel() {
+        return WOW_LEVELS[this.state.levelIndex % WOW_LEVELS.length];
+      }
+
+      init() {
+        this.setupWindowResize();
+        this.setupEventListeners();
+        this.updateHeaderUI();
+      }
+
+      setupWindowResize() {
+        let timer = null;
+        const resize = () => {
+          this.canvas.width = window.innerWidth;
+          this.canvas.height = window.innerHeight;
+          this.adjustCrosswordScale();
+          if (this.letterWheel) {
+            this.wheelRect = this.letterWheel.getBoundingClientRect();
+          }
+        };
+        window.addEventListener('resize', () => {
+          clearTimeout(timer);
+          timer = setTimeout(resize, 60);
+        });
+        resize();
+      }
+
+      setupEventListeners() {
+        // Screen switching
+        document.getElementById('btn-home-play').addEventListener('click', () => {
+          this.showScreen('game');
+          this.loadLevel(this.state.levelIndex);
+        });
+
+        document.getElementById('btn-back-home').addEventListener('click', () => {
+          this.showScreen('home');
+          this.saveState();
+        });
+
+        // Sound Toggle
+        document.getElementById('btn-sound').addEventListener('click', (e) => {
+          const isEnabled = soundFX.toggle();
+          e.target.textContent = isEnabled ? '🔊' : '🔇';
+          e.target.style.opacity = isEnabled ? '1' : '0.5';
+        });
+
+        // Functional Game Buttons (Shuffle, Hint, Free Coins)
+        document.getElementById('btn-shuffle').addEventListener('click', () => this.shuffleWheel());
+        document.getElementById('btn-hint').addEventListener('click', () => this.useHint());
+        document.getElementById('btn-free-coins').addEventListener('click', () => this.showRewardedAd());
+        document.getElementById('btn-home-rewarded').addEventListener('click', () => this.showRewardedAd());
+
+        // Victory Buttons
+        document.getElementById('btn-next-level').addEventListener('click', () => this.nextLevel());
+        document.getElementById('btn-share').addEventListener('click', () => this.shareGame());
+
+        // Interstitial Ad Skip
+        document.getElementById('btn-skip-interstitial').addEventListener('click', () => {
+          this.closeModal(this.modalInterstitial);
+        });
+
+        // Pointer Gestures on Turntable (Zero-latency touch tracking)
+        this.letterWheel.addEventListener('pointerdown', (e) => this.onPointerDown(e), { passive: false });
+        window.addEventListener('pointermove', (e) => this.onPointerMove(e), { passive: false });
+        window.addEventListener('pointerup', () => this.onPointerUp(), { passive: false });
+        window.addEventListener('pointercancel', () => this.onPointerUp(), { passive: false });
+      }
+
+      showScreen(name) {
+        if (name === 'game') {
+          this.screenHome.classList.add('hidden');
+          this.screenGame.classList.remove('hidden');
+          setTimeout(() => {
+            this.adjustCrosswordScale();
+            this.updateWheelGeometry();
+          }, 60);
+        } else {
+          this.screenGame.classList.add('hidden');
+          this.screenHome.classList.remove('hidden');
+        }
+      }
+
+      loadLevel(index) {
+        this.state.levelIndex = index;
+        this.saveState();
+
+        const level = this.getCurrentLevel();
+        this.levelDisplay.textContent = level.level;
+        this.locationBadge.textContent = toUpperTR(level.location.split(' - ')[0]);
+        this.scenicBg.style.backgroundImage = `url('${level.bg}')`;
+
+        this.cellMap.clear();
+        this.solvedWordIds.clear();
+        this.bonusWordsFound.clear();
+        this.closeModal(this.modalVictory);
+
+        // Build crossword matrix
+        this.renderCrosswordGrid(level);
+        this.renderWheel(level.wheel);
+      }
+
+      renderCrosswordGrid(level) {
+        this.boardEl.innerHTML = '';
+
+        let maxR = 0, maxC = 0;
+        level.words.forEach(w => {
+          const endR = w.dir === 'V' ? w.row + w.word.length - 1 : w.row;
+          const endC = w.dir === 'H' ? w.col + w.word.length - 1 : w.col;
+          if (endR > maxR) maxR = endR;
+          if (endC > maxC) maxC = endC;
+        });
+
+        const rows = maxR + 1;
+        const cols = maxC + 1;
+
+        // Map overlapping cell data
+        const gridData = {};
+        level.words.forEach(wObj => {
+          for (let i = 0; i < wObj.word.length; i++) {
+            const r = wObj.dir === 'V' ? wObj.row + i : wObj.row;
+            const c = wObj.dir === 'H' ? wObj.col + i : wObj.col;
+            const key = `${r},${c}`;
+            const char = toUpperTR(wObj.word[i]);
+
+            if (!gridData[key]) {
+              gridData[key] = { char: char, wordIds: [wObj.id] };
+            } else {
+              gridData[key].wordIds.push(wObj.id);
+            }
+          }
+        });
+
+        // Set CSS Grid template
+        this.boardEl.style.gridTemplateColumns = `repeat(${cols}, var(--cell-size, 38px))`;
+        this.boardEl.style.gridTemplateRows = `repeat(${rows}, var(--cell-size, 38px))`;
+        this.boardRows = rows;
+        this.boardCols = cols;
+
+        for (let r = 0; r < rows; r++) {
+          for (let c = 0; c < cols; c++) {
+            const key = `${r},${c}`;
+            const cell = document.createElement('div');
+            cell.className = 'cw-cell';
+            cell.dataset.r = r;
+            cell.dataset.c = c;
+
+            if (gridData[key]) {
+              cell.classList.add('slot');
+              cell.dataset.char = gridData[key].char;
+              this.cellMap.set(key, {
+                el: cell,
+                char: gridData[key].char,
+                wordIds: gridData[key].wordIds,
+                revealed: false
+              });
+            } else {
+              cell.classList.add('empty');
+            }
+
+            this.boardEl.appendChild(cell);
+          }
+        }
+
+        this.adjustCrosswordScale();
+      }
+
+      adjustCrosswordScale() {
+        if (!this.boardRows || !this.boardCols) return;
+        const boardArea = this.boardEl.parentElement;
+        const availW = Math.min(boardArea ? boardArea.clientWidth - 20 : 380, 400);
+        const availH = Math.max(160, boardArea ? boardArea.clientHeight - 20 : 250);
+
+        const cellW = Math.floor((availW - (this.boardCols - 1) * 4) / this.boardCols);
+        const cellH = Math.floor((availH - (this.boardRows - 1) * 4) / this.boardRows);
+
+        const cellSize = Math.max(26, Math.min(46, cellW, cellH));
+        const font = Math.max(14, Math.floor(cellSize * 0.54));
+
+        this.boardEl.style.setProperty('--cell-size', `${cellSize}px`);
+        this.boardEl.style.setProperty('--cell-font', `${font}px`);
+      }
+
+      updateWheelGeometry() {
+        if (!this.letterWheel) return;
+        this.wheelRect = this.letterWheel.getBoundingClientRect();
+      }
+
+      renderWheel(letters) {
+        this.letterWheel.innerHTML = '';
+        this.wheelSvg.innerHTML = '';
+        this.nodeData = [];
+
+        const turntableW = this.letterWheel.clientWidth || 220;
+        const center = turntableW / 2;
+        const radius = center * 0.65;
+        const total = letters.length;
+
+        let nodeSize = 52;
+        let fontSize = 25;
+        if (total === 5) { nodeSize = 48; fontSize = 23; }
+        else if (total >= 6) { nodeSize = 42; fontSize = 20; }
+
+        if (turntableW < 200) {
+          nodeSize = Math.floor(nodeSize * 0.88);
+          fontSize = Math.floor(fontSize * 0.88);
+        }
+
+        this.letterWheel.style.setProperty('--node-size', `${nodeSize}px`);
+        this.letterWheel.style.setProperty('--node-font-size', `${fontSize}px`);
+
+        letters.forEach((charRaw, i) => {
+          const char = toUpperTR(charRaw);
+          const angle = (i * (360 / total) - 90) * (Math.PI / 180);
+          const x = center + radius * Math.cos(angle);
+          const y = center + radius * Math.sin(angle);
+
+          const node = document.createElement('div');
+          node.className = 'letter-node';
+          node.textContent = char;
+          node.dataset.char = char;
+          node.style.left = `${x.toFixed(1)}px`;
+          node.style.top = `${y.toFixed(1)}px`;
+
+          this.letterWheel.appendChild(node);
+
+          this.nodeData.push({
+            el: node,
+            char: char,
+            x: x,
+            y: y,
+            hitRadius: (nodeSize / 2) + 12
+          });
+        });
+
+        this.updateWheelGeometry();
+      }
+
+      shuffleWheel() {
+        const level = this.getCurrentLevel();
+        const letters = [...level.wheel];
+        const targetWords = level.words.map(w => w.word);
+
+        // Smart circular scramble
+        let best = [...letters];
+        let minViolations = 999;
+        for (let t = 0; t < 150; t++) {
+          letters.sort(() => Math.random() - 0.5);
+          const doubled = letters.join('') + letters.join('');
+          const revDoubled = [...letters].reverse().join('') + [...letters].reverse().join('');
+          let v = 0;
+          for (const tw of targetWords) {
+            if (tw.length >= 3 && (doubled.includes(tw) || revDoubled.includes(tw))) v += tw.length;
+          }
+          if (v === 0) { best = [...letters]; break; }
+          if (v < minViolations) { minViolations = v; best = [...letters]; }
+        }
+
+        soundFX.playShuffle();
+        this.renderWheel(best);
+      }
+
+      // -------------------------------------------------------------
+      // 4. DRAWING LAYER & TOUCH TRACKING (120 FPS CACHED GEOMETRY)
+      // -------------------------------------------------------------
+      onPointerDown(e) {
+        if (e.cancelable) e.preventDefault();
+        this.updateWheelGeometry();
+
+        const relX = e.clientX - this.wheelRect.left;
+        const relY = e.clientY - this.wheelRect.top;
+
+        const hit = this.nodeData.find(n => Math.hypot(relX - n.x, relY - n.y) <= n.hitRadius);
+        if (hit) {
+          this.isDragging = true;
+          this.selectedNodes = [hit];
+          this.currentWord = hit.char;
+          hit.el.classList.add('selected');
+
+          soundFX.playLetterTone(0);
+          if (navigator.vibrate) navigator.vibrate(15);
+
+          this.updatePreview();
+          this.updateSvgPolyline(relX, relY);
+        }
+      }
+
+      onPointerMove(e) {
+        if (!this.isDragging) return;
+        if (e.cancelable) e.preventDefault();
+
+        const relX = e.clientX - this.wheelRect.left;
+        const relY = e.clientY - this.wheelRect.top;
+
+        const hit = this.nodeData.find(n => Math.hypot(relX - n.x, relY - n.y) <= n.hitRadius);
+        if (hit) {
+          const len = this.selectedNodes.length;
+          // Backtrack support
+          if (len >= 2 && hit === this.selectedNodes[len - 2]) {
+            const popped = this.selectedNodes.pop();
+            popped.el.classList.remove('selected');
+            this.currentWord = this.selectedNodes.map(n => n.char).join('');
+            soundFX.playLetterTone(this.selectedNodes.length - 1);
+            if (navigator.vibrate) navigator.vibrate(10);
+            this.updatePreview();
+          } else if (!this.selectedNodes.includes(hit)) {
+            this.selectedNodes.push(hit);
+            this.currentWord += hit.char;
+            hit.el.classList.add('selected');
+
+            soundFX.playLetterTone(this.selectedNodes.length - 1);
+            if (navigator.vibrate) navigator.vibrate(15);
+            this.updatePreview();
+          }
+        }
+
+        this.updateSvgPolyline(relX, relY);
+      }
+
+      onPointerUp() {
+        if (!this.isDragging) return;
+        this.isDragging = false;
+
+        this.validateWord(this.currentWord);
+
+        this.selectedNodes.forEach(item => item.el.classList.remove('selected'));
+        this.selectedNodes = [];
+        this.currentWord = "";
+        this.wheelSvg.innerHTML = '';
+        this.wordPreview.classList.remove('active');
+        this.wordPreview.textContent = "";
+      }
+
+      updateSvgPolyline(pointerRelX, pointerRelY) {
+        if (this.selectedNodes.length === 0) {
+          this.wheelSvg.innerHTML = '';
+          return;
+        }
+
+        const points = this.selectedNodes.map(n => `${n.x.toFixed(1)},${n.y.toFixed(1)}`);
+        if (this.isDragging && pointerRelX !== undefined && pointerRelY !== undefined) {
+          points.push(`${pointerRelX.toFixed(1)},${pointerRelY.toFixed(1)}`);
+        }
+
+        let polyline = this.wheelSvg.firstElementChild;
+        if (!polyline) {
+          polyline = document.createElementNS('http://www.w3.org/2000/svg', 'polyline');
+          this.wheelSvg.appendChild(polyline);
+        }
+        polyline.setAttribute('points', points.join(' '));
+      }
+
+      updatePreview() {
+        if (this.currentWord.length > 0) {
+          this.wordPreview.textContent = this.currentWord;
+          this.wordPreview.classList.add('active');
+        } else {
+          this.wordPreview.classList.remove('active');
+        }
+      }
+
+      // -------------------------------------------------------------
+      // 5. WORD VALIDATION & REVEAL ANIMATIONS
+      // -------------------------------------------------------------
+      validateWord(wordRaw) {
+        if (!wordRaw || wordRaw.length < 2) return;
+        const word = toUpperTR(wordRaw);
+        const level = this.getCurrentLevel();
+
+        const match = level.words.find(w => toUpperTR(w.word) === word);
+
+        if (match) {
+          if (this.solvedWordIds.has(match.id)) {
+            this.flashToast("Bu kelimeyi zaten buldun!");
+            soundFX.playInvalid();
+            return;
+          }
+
+          this.solvedWordIds.add(match.id);
+          this.revealCrosswordWord(match);
+          soundFX.playWordSuccess();
+          if (navigator.vibrate) navigator.vibrate([15, 30, 20]);
+
+          if (this.solvedWordIds.size === level.words.length) {
+            setTimeout(() => this.triggerVictory(), 600);
+          }
+        } else if (level.bonus && level.bonus.some(b => toUpperTR(b) === word)) {
+          if (this.bonusWordsFound.has(word)) {
+            this.flashToast("Bonus kelimeyi zaten aldın!");
+          } else {
+            this.bonusWordsFound.add(word);
+            this.bonusProgress++;
+            soundFX.playCoin();
+            this.bonusCapsule.classList.add('bounce');
+            setTimeout(() => this.bonusCapsule.classList.remove('bounce'), 450);
+
+            if (this.bonusProgress >= 5) {
+              this.bonusProgress = 0;
+              this.state.coins += 25;
+              this.saveState();
+              this.flashToast("🎉 5 Bonus Kelime! +25 🪙 Kazanıldı!");
+            } else {
+              this.flashToast(`🍯 Bonus Kelime: ${word}! (${this.bonusProgress}/5)`);
+            }
+            this.updateHeaderUI();
+          }
+        } else {
+          soundFX.playInvalid();
+          this.wordPreview.classList.add('shake');
+          setTimeout(() => this.wordPreview.classList.remove('shake'), 380);
+        }
+      }
+
+      revealCrosswordWord(wObj) {
+        for (let i = 0; i < wObj.word.length; i++) {
+          const r = wObj.dir === 'V' ? wObj.row + i : wObj.row;
+          const c = wObj.dir === 'H' ? wObj.col + i : wObj.col;
+          const key = `${r},${c}`;
+          const cell = this.cellMap.get(key);
+          if (cell) {
+            setTimeout(() => {
+              cell.revealed = true;
+              cell.el.textContent = cell.char;
+              cell.el.classList.add('revealed');
+            }, i * 65);
+          }
+        }
+      }
+
+      // -------------------------------------------------------------
+      // 6. ECONOMY, HINTS & MONETIZATION (POKI / CRAZYGAMES STANDARDS)
+      // -------------------------------------------------------------
+      useHint() {
+        const cost = 50;
+        if (this.state.coins < cost) {
+          this.flashToast("Yetersiz Altın! Reklam izleyerek +100 Altın kazan!");
+          this.showRewardedAd();
+          return;
+        }
+
+        const unrevealed = [];
+        this.cellMap.forEach(cell => {
+          if (!cell.revealed) unrevealed.push(cell);
+        });
+
+        if (unrevealed.length === 0) {
+          this.flashToast("Açılacak harf kalmadı!");
+          return;
+        }
+
+        const chosen = unrevealed[Math.floor(Math.random() * unrevealed.length)];
+        chosen.revealed = true;
+        chosen.el.textContent = chosen.char;
+        chosen.el.classList.add('revealed', 'hinted');
+
+        this.state.coins -= cost;
+        this.saveState();
+        soundFX.playHint();
+
+        // Check if any word is fully revealed
+        const level = this.getCurrentLevel();
+        level.words.forEach(wObj => {
+          if (!this.solvedWordIds.has(wObj.id)) {
+            let all = true;
+            for (let i = 0; i < wObj.word.length; i++) {
+              const r = wObj.dir === 'V' ? wObj.row + i : wObj.row;
+              const c = wObj.dir === 'H' ? wObj.col + i : wObj.col;
+              const cd = this.cellMap.get(`${r},${c}`);
+              if (!cd || !cd.revealed) { all = false; break; }
+            }
+            if (all) this.solvedWordIds.add(wObj.id);
+          }
+        });
+
+        if (this.solvedWordIds.size === level.words.length) {
+          setTimeout(() => this.triggerVictory(), 600);
+        }
+      }
+
+      // Rewarded Ad (+100 Coins) - Poki / CrazyGames Hooks & High-polish Simulator
+      showRewardedAd() {
+        const grantReward = () => {
+          this.state.coins += 100;
+          this.saveState();
+          soundFX.playCoin();
+          this.flashToast("🪙 +100 Altın Bakiyene Eklendi!");
+        };
+
+        // 1. Check CrazyGames SDK
+        if (window.CrazyGames && window.CrazyGames.SDK && window.CrazyGames.SDK.ad) {
+          window.CrazyGames.SDK.ad.requestAd('rewarded', {
+            adFinished: () => grantReward(),
+            adError: () => grantReward()
+          });
+          return;
+        }
+
+        // 2. Check Poki SDK
+        if (window.PokiSDK && window.PokiSDK.rewardedBreak) {
+          window.PokiSDK.rewardedBreak().then(success => {
+            if (success) grantReward();
+          });
+          return;
+        }
+
+        // 3. Fallback High-polish Built-in Video Ad Simulator (5 Seconds)
+        this.openModal(this.modalRewarded);
+        let secondsLeft = 5;
+        const timerText = document.getElementById('ad-timer-text');
+        const fillBar = document.getElementById('ad-progress-fill');
+        fillBar.style.width = '0%';
+        timerText.textContent = `${secondsLeft} saniye kaldı...`;
+
+        const interval = setInterval(() => {
+          secondsLeft--;
+          fillBar.style.width = `${(5 - secondsLeft) * 20}%`;
+          if (secondsLeft > 0) {
+            timerText.textContent = `${secondsLeft} saniye kaldı...`;
+          } else {
+            clearInterval(interval);
+            timerText.textContent = 'Tamamlandı! Ödül veriliyor...';
+            setTimeout(() => {
+              this.closeModal(this.modalRewarded);
+              grantReward();
+            }, 400);
+          }
+        }, 900);
+      }
+
+      // Interstitial Ad (Every 2 levels)
+      showInterstitialAd(callback) {
+        // Poki / CrazyGames Interstitial Hooks
+        if (window.CrazyGames && window.CrazyGames.SDK && window.CrazyGames.SDK.ad) {
+          window.CrazyGames.SDK.ad.requestAd('midgame', {
+            adFinished: () => callback && callback(),
+            adError: () => callback && callback()
+          });
+          return;
+        }
+
+        if (window.PokiSDK && window.PokiSDK.commercialBreak) {
+          window.PokiSDK.commercialBreak().then(() => callback && callback());
+          return;
+        }
+
+        // Built-in simulator with 3s skip
+        this.openModal(this.modalInterstitial);
+        const btnSkip = document.getElementById('btn-skip-interstitial');
+        let countdown = 3;
+        btnSkip.textContent = `${countdown}s sonra geçebilirsiniz`;
+        btnSkip.disabled = true;
+
+        const timer = setInterval(() => {
+          countdown--;
+          if (countdown > 0) {
+            btnSkip.textContent = `${countdown}s sonra geçebilirsiniz`;
+          } else {
+            clearInterval(timer);
+            btnSkip.textContent = 'Reklamı Kapat ➔';
+            btnSkip.disabled = false;
+            btnSkip.style.background = 'var(--green)';
+            btnSkip.onclick = () => {
+              this.closeModal(this.modalInterstitial);
+              if (callback) callback();
+            };
+          }
+        }, 900);
+      }
+
+      triggerVictory() {
+        soundFX.playVictory();
+        this.startConfetti();
+        this.state.coins += 30;
+        this.saveState();
+
+        const level = this.getCurrentLevel();
+        document.getElementById('victory-title').textContent = `Bölüm ${level.level} Tamamlandı!`;
+        this.openModal(this.modalVictory);
+      }
+
+      nextLevel() {
+        this.stopConfetti();
+        const nextIdx = this.state.levelIndex + 1;
+        this.closeModal(this.modalVictory);
+
+        // Every 2 levels show interstitial ad
+        if (nextIdx % 2 === 0) {
+          this.showInterstitialAd(() => {
+            this.loadLevel(nextIdx % WOW_LEVELS.length);
+          });
+        } else {
+          this.loadLevel(nextIdx % WOW_LEVELS.length);
+        }
+      }
+
+      shareGame() {
+        const lvl = this.getCurrentLevel();
+        const text = `🏆 Kelime Harikaları'nda ${lvl.location} (Bölüm ${lvl.level}/${WOW_LEVELS.length}) çengelini bitirdim! Sen de oyna: https://umutcandemircan.github.io/kelime-harikalari/`;
+        if (navigator.share) {
+          navigator.share({ title: 'Kelime Harikaları', text }).catch(() => {});
+        } else {
+          navigator.clipboard.writeText(text);
+          this.flashToast("Meydan okuma panoya kopyalandı!");
+        }
+      }
+
+      openModal(el) { el.classList.remove('hidden'); }
+      closeModal(el) { el.classList.add('hidden'); }
+
+      flashToast(msg) {
+        const toast = document.getElementById('ka-toast');
+        toast.textContent = msg;
+        toast.style.display = 'block';
+        clearTimeout(this.toastTimer);
+        this.toastTimer = setTimeout(() => { toast.style.display = 'none'; }, 2400);
+      }
+
+      // -------------------------------------------------------------
+      // 7. PROCEDURAL CONFETTI CANNON
+      // -------------------------------------------------------------
+      startConfetti() {
+        this.confettiParticles = [];
+        const colors = ['#f59e0b', '#fbbf24', '#10b981', '#3b82f6', '#ec4899', '#ffffff'];
+        for (let i = 0; i < 90; i++) {
+          this.confettiParticles.push({
+            x: this.canvas.width / 2,
+            y: this.canvas.height / 2,
+            vx: (Math.random() - 0.5) * 14,
+            vy: (Math.random() - 0.7) * 16,
+            size: Math.random() * 8 + 4,
+            color: colors[Math.floor(Math.random() * colors.length)],
+            rotation: Math.random() * 360,
+            rSpeed: (Math.random() - 0.5) * 12,
+            gravity: 0.3
+          });
+        }
+
+        const render = () => {
+          if (this.confettiParticles.length === 0) return;
+          this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+
+          this.confettiParticles.forEach((p, idx) => {
+            p.vy += p.gravity;
+            p.x += p.vx;
+            p.y += p.vy;
+            p.rotation += p.rSpeed;
+
+            this.ctx.save();
+            this.ctx.translate(p.x, p.y);
+            this.ctx.rotate((p.rotation * Math.PI) / 180);
+            this.ctx.fillStyle = p.color;
+            this.ctx.fillRect(-p.size / 2, -p.size / 2, p.size, p.size);
+            this.ctx.restore();
+
+            if (p.y > this.canvas.height + 25) {
+              this.confettiParticles.splice(idx, 1);
+            }
+          });
+
+          this.confettiAnimId = requestAnimationFrame(render);
+        };
+
+        render();
+      }
+
+      stopConfetti() {
+        if (this.confettiAnimId) cancelAnimationFrame(this.confettiAnimId);
+        this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+        this.confettiParticles = [];
+      }
+    }
+
+    window.addEventListener('DOMContentLoaded', () => {
+      window.game = new WoWGame();
+    });
+  </script>
 </body>
 </html>

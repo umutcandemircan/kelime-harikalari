@@ -1,22 +1,20 @@
-// Words of Wonders (WoW) Studio Engine - 100 TDK Levels
+// Words of Wonders (WoW) - Authentic 100 TDK Levels Engine
 class WoWGame {
   constructor() {
-    this.storageKey = 'wow_tr_save_v2';
-    this.secretSalt = 'wow_pure_tdk_2026';
+    this.storageKey = 'wow_official_save_v3';
+    this.secretSalt = 'wow_pure_tdk_100_levels';
 
-    // State
     this.state = this.loadSecureState();
     this.currentWord = "";
     this.selectedNodes = [];
     this.isDragging = false;
-    this.isHammerMode = false;
 
-    // Crossword Grid Tracking
-    this.cellMap = new Map(); // "r,c" => { el, char, words: [wId], revealed: bool }
+    // Crossword Grid State
+    this.cellMap = new Map();
     this.solvedWords = new Set();
     this.bonusWordsFound = new Set();
 
-    // DOM Elements
+    // Elements
     this.boardEl = document.getElementById('crossword-board');
     this.letterWheel = document.getElementById('letter-wheel');
     this.wheelSvg = document.getElementById('wheel-lines');
@@ -24,14 +22,10 @@ class WoWGame {
     this.levelDisplay = document.getElementById('level-display');
     this.locationBadge = document.getElementById('location-badge');
     this.coinCount = document.getElementById('coin-count');
-    this.jarCountEl = document.getElementById('jar-count');
-    this.jarModalCountEl = document.getElementById('jar-modal-count');
 
     // Modals
     this.modalVictory = document.getElementById('modal-victory');
     this.modalShop = document.getElementById('modal-shop');
-    this.modalJar = document.getElementById('modal-jar');
-    this.modalQr = document.getElementById('modal-qr');
 
     // Confetti
     this.canvas = document.getElementById('confetti-canvas');
@@ -45,8 +39,7 @@ class WoWGame {
     const raw = localStorage.getItem(this.storageKey);
     const defaultState = {
       levelIndex: 0,
-      coins: 120,
-      jarCount: 0,
+      coins: 100,
       noAds: false
     };
 
@@ -54,14 +47,11 @@ class WoWGame {
 
     try {
       const data = JSON.parse(raw);
-      const computedHash = this.computeHash(data.levelIndex, data.coins, data.jarCount);
-      if (data.checksum !== computedHash) {
-        return defaultState;
-      }
+      const computedHash = this.computeHash(data.levelIndex, data.coins);
+      if (data.checksum !== computedHash) return defaultState;
       return {
         levelIndex: Math.max(0, data.levelIndex || 0),
-        coins: Math.max(0, data.coins || 120),
-        jarCount: Math.max(0, data.jarCount || 0),
+        coins: Math.max(0, data.coins || 100),
         noAds: !!data.noAds
       };
     } catch (e) {
@@ -70,19 +60,16 @@ class WoWGame {
   }
 
   saveSecureState() {
-    const checksum = this.computeHash(this.state.levelIndex, this.state.coins, this.state.jarCount);
-    const payload = {
+    const checksum = this.computeHash(this.state.levelIndex, this.state.coins);
+    localStorage.setItem(this.storageKey, JSON.stringify({
       ...this.state,
-      checksum: checksum
-    };
-    localStorage.setItem(this.storageKey, JSON.stringify(payload));
+      checksum
+    }));
     this.coinCount.textContent = this.state.coins;
-    this.jarCountEl.textContent = `${this.state.jarCount}/5`;
-    this.jarModalCountEl.textContent = `${this.state.jarCount} / 5 Kelime`;
   }
 
-  computeHash(lvl, coins, jar) {
-    const str = `${lvl}-${coins}-${jar}-${this.secretSalt}`;
+  computeHash(lvl, coins) {
+    const str = `${lvl}-${coins}-${this.secretSalt}`;
     let hash = 0;
     for (let i = 0; i < str.length; i++) {
       hash = (hash << 5) - hash + str.charCodeAt(i);
@@ -110,40 +97,25 @@ class WoWGame {
 
   setupEventListeners() {
     // Sound
-    document.getElementById('btn-sound').addEventListener('click', () => {
+    document.getElementById('btn-sound').addEventListener('click', (e) => {
       const isMuted = !window.soundFX.toggle();
-      const soundBtn = document.getElementById('btn-sound');
-      soundBtn.style.opacity = isMuted ? '0.4' : '1';
-    });
-
-    // QR Phone Share Modal
-    document.getElementById('btn-qr').addEventListener('click', () => this.openModal(this.modalQr));
-    document.getElementById('btn-close-qr').addEventListener('click', () => this.closeModal(this.modalQr));
-    document.getElementById('btn-copy-url').addEventListener('click', () => {
-      const input = document.getElementById('mobile-url-input');
-      navigator.clipboard.writeText(input.value);
-      this.flashToast("Bağlantı kopyalandı! Ailenize gönderebilirsiniz.");
+      e.target.textContent = isMuted ? '🔇' : '🔊';
+      e.target.style.opacity = isMuted ? '0.5' : '1';
     });
 
     // Shop
     document.getElementById('btn-shop').addEventListener('click', () => this.openModal(this.modalShop));
     document.getElementById('btn-close-shop').addEventListener('click', () => this.closeModal(this.modalShop));
 
-    // Bonus Jar
-    document.getElementById('btn-bonus-jar').addEventListener('click', () => this.openJarModal());
-    document.getElementById('btn-close-jar').addEventListener('click', () => this.closeModal(this.modalJar));
-    document.getElementById('btn-claim-jar').addEventListener('click', () => this.claimJar());
-
-    // Powerups
+    // Powerups (WoW Minimal Setup)
     document.getElementById('btn-shuffle').addEventListener('click', () => this.shuffleWheel());
     document.getElementById('btn-hint').addEventListener('click', () => this.useRandomHint());
-    document.getElementById('btn-magic-hint').addEventListener('click', () => this.toggleHammerMode());
 
     // Victory
     document.getElementById('btn-next-level').addEventListener('click', () => this.nextLevel());
     document.getElementById('btn-share').addEventListener('click', () => this.shareScore());
 
-    // Pointer Drag on Letter Turntable
+    // Pointer Gestures
     this.letterWheel.addEventListener('pointerdown', (e) => this.onPointerDown(e));
     window.addEventListener('pointermove', (e) => this.onPointerMove(e));
     window.addEventListener('pointerup', () => this.onPointerUp());
@@ -160,16 +132,15 @@ class WoWGame {
 
     const level = this.getCurrentLevel();
     this.levelDisplay.textContent = level.level;
-    this.locationBadge.textContent = level.location;
+    this.locationBadge.textContent = level.location.toUpperCase();
     document.body.className = `theme-${level.bgTheme || 'cappadocia'}`;
 
     this.solvedWords.clear();
     this.bonusWordsFound.clear();
     this.cellMap.clear();
     this.closeModal(this.modalVictory);
-    this.setHammerMode(false);
 
-    // 1. Grid Bounding Box
+    // Compute bounds
     let maxR = 0, maxC = 0;
     level.words.forEach(w => {
       const endR = w.dir === 'V' ? w.row + w.word.length - 1 : w.row;
@@ -181,17 +152,17 @@ class WoWGame {
     const rows = maxR + 1;
     const cols = maxC + 1;
 
-    // Responsive cell calculation (Compact & Centered)
-    const availableW = Math.min(window.innerWidth - 32, 380);
-    const availableH = Math.min(window.innerHeight * 0.38, 300);
-    const cellSize = Math.min(48, Math.floor(Math.min(availableW / (cols + 0.3), availableH / (rows + 0.3))));
+    // Sizing
+    const availW = Math.min(window.innerWidth - 32, 380);
+    const availH = Math.min(window.innerHeight * 0.42, 320);
+    const cellSize = Math.min(50, Math.floor(Math.min(availW / (cols + 0.2), availH / (rows + 0.2))));
 
-    this.boardEl.style.setProperty('--tile-size', `${cellSize}px`);
+    this.boardEl.style.setProperty('--cell-size', `${cellSize}px`);
     this.boardEl.style.gridTemplateColumns = `repeat(${cols}, ${cellSize}px)`;
     this.boardEl.style.gridTemplateRows = `repeat(${rows}, ${cellSize}px)`;
     this.boardEl.innerHTML = '';
 
-    // 2. Map coordinates
+    // Map letters
     const gridData = {};
     level.words.forEach(wObj => {
       for (let i = 0; i < wObj.word.length; i++) {
@@ -206,7 +177,7 @@ class WoWGame {
       }
     });
 
-    // 3. Render 2D Matrix
+    // Render cells
     for (let r = 0; r < rows; r++) {
       for (let c = 0; c < cols; c++) {
         const key = `${r},${c}`;
@@ -218,8 +189,6 @@ class WoWGame {
         if (gridData[key]) {
           cell.classList.add('slot');
           cell.dataset.char = gridData[key].char;
-          cell.addEventListener('click', () => this.onCellClick(r, c));
-
           this.cellMap.set(key, {
             el: cell,
             char: gridData[key].char,
@@ -234,7 +203,6 @@ class WoWGame {
       }
     }
 
-    // 4. Render Letter Nodes
     this.renderWheel(level.wheelLetters);
   }
 
@@ -250,10 +218,10 @@ class WoWGame {
     });
     const rows = maxR + 1;
     const cols = maxC + 1;
-    const availableW = Math.min(window.innerWidth - 32, 380);
-    const availableH = Math.min(window.innerHeight * 0.38, 300);
-    const cellSize = Math.min(48, Math.floor(Math.min(availableW / (cols + 0.3), availableH / (rows + 0.3))));
-    this.boardEl.style.setProperty('--tile-size', `${cellSize}px`);
+    const availW = Math.min(window.innerWidth - 32, 380);
+    const availH = Math.min(window.innerHeight * 0.42, 320);
+    const cellSize = Math.min(50, Math.floor(Math.min(availW / (cols + 0.2), availH / (rows + 0.2))));
+    this.boardEl.style.setProperty('--cell-size', `${cellSize}px`);
     this.boardEl.style.gridTemplateColumns = `repeat(${cols}, ${cellSize}px)`;
     this.boardEl.style.gridTemplateRows = `repeat(${rows}, ${cellSize}px)`;
   }
@@ -261,8 +229,8 @@ class WoWGame {
   renderWheel(letters) {
     this.letterWheel.innerHTML = '';
     this.wheelSvg.innerHTML = '';
-    const radius = 78;
-    const center = 118;
+    const radius = 76;
+    const center = 115;
     const total = letters.length;
 
     letters.forEach((char, i) => {
@@ -288,7 +256,6 @@ class WoWGame {
     this.renderWheel(shuffled);
   }
 
-  // POINTER & TOUCH HANDLING
   onPointerDown(e) {
     const node = this.getNodeUnderPointer(e.clientX, e.clientY);
     if (node) {
@@ -298,7 +265,7 @@ class WoWGame {
       node.classList.add('selected');
 
       window.soundFX.playLetterSelect(0);
-      if (navigator.vibrate) navigator.vibrate(12);
+      if (navigator.vibrate) navigator.vibrate(10);
 
       this.updatePreview();
       this.updateWheelLines(e.clientX, e.clientY);
@@ -315,7 +282,7 @@ class WoWGame {
       node.classList.add('selected');
 
       window.soundFX.playLetterSelect(this.selectedNodes.length - 1);
-      if (navigator.vibrate) navigator.vibrate(12);
+      if (navigator.vibrate) navigator.vibrate(10);
 
       this.updatePreview();
     }
@@ -389,7 +356,6 @@ class WoWGame {
     }
   }
 
-  // TDK KELİME KONTROLÜ
   validateWord(word) {
     const level = this.getCurrentLevel();
     const matchedWordObj = level.words.find(w => w.word === word);
@@ -410,10 +376,13 @@ class WoWGame {
       }
     } else if (level.bonusWords && level.bonusWords.includes(word)) {
       if (this.bonusWordsFound.has(word)) {
-        this.flashToast("Bu bonus kelimeyi zaten kavanoza koydun!");
+        this.flashToast("Bonus kelimeyi zaten aldın!");
       } else {
         this.bonusWordsFound.add(word);
-        this.addBonusToJar(word);
+        this.state.coins += 5;
+        this.saveSecureState();
+        window.soundFX.playCoinCollect();
+        this.flashToast(`Bonus Kelime: ${word}! (+5 🪙)`);
       }
     } else {
       if (word.length >= 2) window.soundFX.playInvalid();
@@ -437,42 +406,11 @@ class WoWGame {
     }
   }
 
-  // BONUS JAR
-  addBonusToJar(word) {
-    window.soundFX.playJarPop();
-    this.state.jarCount = Math.min(5, this.state.jarCount + 1);
-    this.saveSecureState();
-
-    this.flashToast(`🏺 "${word}" Kavanoza Girdi! (${this.state.jarCount}/5)`);
-
-    if (this.state.jarCount >= 5) {
-      setTimeout(() => this.openJarModal(), 400);
-    }
-  }
-
-  openJarModal() {
-    const claimBtn = document.getElementById('btn-claim-jar');
-    claimBtn.disabled = this.state.jarCount < 5;
-    this.openModal(this.modalJar);
-  }
-
-  claimJar() {
-    if (this.state.jarCount >= 5) {
-      this.state.jarCount = 0;
-      this.state.coins += 30;
-      this.saveSecureState();
-      window.soundFX.playCoinCollect();
-      this.closeModal(this.modalJar);
-      this.flashToast("🏺 Kavanoz açıldı: +30 Altın Kazandın! 🪙");
-    }
-  }
-
-  // HINTS & HAMMER
   useRandomHint() {
     const cost = 25;
     if (this.state.coins < cost) {
       this.openModal(this.modalShop);
-      this.flashToast("Yetersiz Altın! Mağazadan altın alabilirsin.");
+      this.flashToast("Yetersiz Altın! Mağazadan alabilirsin.");
       return;
     }
 
@@ -487,75 +425,26 @@ class WoWGame {
     }
 
     const chosen = unrevealed[Math.floor(Math.random() * unrevealed.length)];
-    this.revealSingleCell(chosen);
+    chosen.revealed = true;
+    chosen.el.textContent = chosen.char;
+    chosen.el.classList.add('revealed');
 
     this.state.coins -= cost;
     this.saveSecureState();
     window.soundFX.playCoinCollect();
-  }
 
-  toggleHammerMode() {
-    const cost = 50;
-    if (this.state.coins < cost && !this.isHammerMode) {
-      this.openModal(this.modalShop);
-      this.flashToast("Sihirli Çekiç için 50 Altın gerekli!");
-      return;
-    }
-    this.setHammerMode(!this.isHammerMode);
-  }
-
-  setHammerMode(active) {
-    this.isHammerMode = active;
-    const btn = document.getElementById('btn-magic-hint');
-    btn.classList.toggle('active-hammer', active);
-
-    this.cellMap.forEach(cell => {
-      if (!cell.revealed) {
-        cell.el.classList.toggle('hammer-target', active);
-      }
-    });
-
-    if (active) {
-      this.flashToast("🔨 İstediğin bir kareye tıkla!");
-    }
-  }
-
-  onCellClick(r, c) {
-    if (!this.isHammerMode) return;
-
-    const key = `${r},${c}`;
-    const cell = this.cellMap.get(key);
-    if (cell && !cell.revealed) {
-      window.soundFX.playHammer();
-      this.state.coins -= 50;
-      this.saveSecureState();
-      this.revealSingleCell(cell);
-      this.setHammerMode(false);
-    }
-  }
-
-  revealSingleCell(cellData) {
-    cellData.revealed = true;
-    cellData.el.textContent = cellData.char;
-    cellData.el.classList.add('revealed');
-    cellData.el.classList.remove('hammer-target');
-
+    // Check completion
     const level = this.getCurrentLevel();
     level.words.forEach(wObj => {
       if (!this.solvedWords.has(wObj.id)) {
-        let allRevealed = true;
+        let allRev = true;
         for (let i = 0; i < wObj.word.length; i++) {
           const r = wObj.dir === 'V' ? wObj.row + i : wObj.row;
           const c = wObj.dir === 'H' ? wObj.col + i : wObj.col;
-          const data = this.cellMap.get(`${r},${c}`);
-          if (!data || !data.revealed) {
-            allRevealed = false;
-            break;
-          }
+          const d = this.cellMap.get(`${r},${c}`);
+          if (!d || !d.revealed) { allRev = false; break; }
         }
-        if (allRevealed) {
-          this.solvedWords.add(wObj.id);
-        }
+        if (allRev) this.solvedWords.add(wObj.id);
       }
     });
 
@@ -580,7 +469,7 @@ class WoWGame {
     this.saveSecureState();
 
     const level = this.getCurrentLevel();
-    document.getElementById('victory-title').textContent = `${level.location} - Bölüm ${level.level}`;
+    document.getElementById('victory-title').textContent = `Bölüm ${level.level} Tamamlandı!`;
     this.openModal(this.modalVictory);
   }
 
@@ -591,7 +480,7 @@ class WoWGame {
 
   shareScore() {
     const lvl = this.getCurrentLevel();
-    const text = `🏆 Kelime Harikaları'nda ${lvl.location} (Bölüm ${lvl.level}/100) çengel bulmacasını bitirdim! Hadi sen de dene: http://10.35.240.87:8080`;
+    const text = `🏆 Kelime Harikaları'nda ${lvl.location} (Bölüm ${lvl.level}/100) çengel bulmacasını bitirdim! Hadi sen de oyna: https://umutcandemircan.github.io/kelime-harikalari/`;
     if (navigator.share) {
       navigator.share({ title: 'Kelime Harikaları', text });
     } else {
@@ -600,13 +489,8 @@ class WoWGame {
     }
   }
 
-  openModal(el) {
-    el.classList.remove('hidden');
-  }
-
-  closeModal(el) {
-    el.classList.add('hidden');
-  }
+  openModal(el) { el.classList.remove('hidden'); }
+  closeModal(el) { el.classList.add('hidden'); }
 
   flashToast(msg) {
     let toast = document.getElementById('ka-toast');
@@ -620,12 +504,12 @@ class WoWGame {
         transform: translateX(-50%);
         background: #0f172a;
         color: #fff;
-        padding: 10px 22px;
+        padding: 9px 20px;
         border-radius: 20px;
-        font-weight: 700;
+        font-weight: 800;
         font-size: 13px;
         z-index: 9999;
-        box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+        box-shadow: 0 4px 20px rgba(0,0,0,0.5);
         border: 1px solid rgba(255,255,255,0.2);
       `;
       document.body.appendChild(toast);
@@ -642,7 +526,7 @@ class WoWGame {
   startConfetti() {
     this.confettiParticles = [];
     const colors = ['#f59e0b', '#fbbf24', '#10b981', '#3b82f6', '#ffffff'];
-    for (let i = 0; i < 85; i++) {
+    for (let i = 0; i < 80; i++) {
       this.confettiParticles.push({
         x: this.canvas.width / 2,
         y: this.canvas.height / 2,

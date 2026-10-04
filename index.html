@@ -3,195 +3,130 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-  <title>Kelime Harikaları - Türkiye Turu (100 Bölüm)</title>
+  <title>Kelime Harikaları - 100 Bölüm Türkçe</title>
   <link rel="stylesheet" href="style.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Outfit:wght@600;800;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@600;700;800;900&display=swap" rel="stylesheet">
 </head>
 <body class="theme-cappadocia">
 
-  <!-- Main Game Frame -->
-  <div class="game-container">
-    
-    <!-- Organic Scenic Photography Background -->
-    <div class="scenic-backdrop" id="scenic-backdrop"></div>
-    <div class="vignette-overlay"></div>
+  <div class="game-stage">
+    <!-- Scenic Photography Background -->
+    <div class="scenic-bg" id="scenic-bg"></div>
+    <div class="scenic-tint"></div>
 
-    <!-- Top Navigation & Status Bar -->
-    <header class="game-navbar">
-      <div class="nav-cluster left">
-        <button id="btn-sound" class="btn-bubble" title="Ses">
-          <svg class="ui-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/></svg>
-        </button>
-        <button id="btn-qr" class="btn-bubble phone-share-bubble" title="Telefonda Oyna (QR Kod)">
-          <svg class="ui-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M17 1H7c-1.1 0-2 .9-2 2v18c0 1.1.9 2 2 2h10c1.1 0 2-.9 2-2V3c0-1.1-.9-2-2-2zm0 18H7V5h10v14z"/></svg>
-          <span class="share-tag">Telefona Aktar</span>
-        </button>
+    <!-- Minimal Native Game Header -->
+    <header class="game-topbar">
+      <div class="top-col left">
+        <button id="btn-sound" class="circle-btn" title="Ses">🔊</button>
       </div>
 
-      <div class="nav-cluster center">
-        <div class="badge-location" id="location-badge">Kapadokya</div>
-        <div class="level-counter">
-          <span class="level-lbl">BÖLÜM</span>
-          <span class="level-val" id="level-display">1</span>
-          <span class="level-max">/100</span>
+      <div class="top-col center">
+        <div class="level-pill">
+          <span class="region-txt" id="location-badge">KAPADOKYA</span>
+          <div class="level-num">BÖLÜM <span id="level-display">1</span></div>
         </div>
       </div>
 
-      <div class="nav-cluster right">
-        <!-- Coins Pill -->
-        <button id="btn-shop" class="coin-pill" title="Altın Mağazası">
-          <span class="coin-gem">🪙</span>
-          <span id="coin-count" class="coin-num">120</span>
-          <span class="coin-add">+</span>
-        </button>
-        <!-- Bonus Jar -->
-        <button id="btn-bonus-jar" class="btn-bubble jar-bubble" title="Bonus Kelime Kavanozu">
-          <span class="jar-emoji">🏺</span>
-          <span id="jar-count" class="jar-badge">0/5</span>
+      <div class="top-col right">
+        <button id="btn-shop" class="coin-capsule" title="Altın">
+          <span class="coin-icon">🪙</span>
+          <span id="coin-count" class="coin-val">120</span>
+          <span class="coin-plus">+</span>
         </button>
       </div>
     </header>
 
-    <!-- Crossword Board (Çengel Bulmaca Izgarası) -->
-    <main class="crossword-viewport">
-      <div id="crossword-board" class="crossword-grid">
-        <!-- Dinamik çengel matrisi -->
+    <!-- Crossword Matrix Area -->
+    <main class="board-area">
+      <div id="crossword-board" class="crossword-matrix">
+        <!-- Javascript 2D çengel matrisi -->
       </div>
     </main>
 
-    <!-- Word Formation Preview -->
-    <div class="preview-strip">
-      <div id="current-word-preview" class="preview-bubble"></div>
+    <!-- Current Word Preview Pill -->
+    <div class="word-preview-zone">
+      <div id="current-word-preview" class="word-preview-pill"></div>
     </div>
 
-    <!-- Bottom Controls & Wooden Letter Turntable -->
-    <footer class="turntable-zone">
-      <div class="powerup-dock">
-        <button id="btn-shuffle" class="powerup-btn" title="Harfleri Karıştır">
-          <div class="powerup-icon-box">
-            <svg class="action-svg" viewBox="0 0 24 24" fill="currentColor"><path d="M10.59 9.17L5.41 4 4 5.41l5.17 5.17 1.42-1.41zM14.5 4l2.04 2.04L4 18.59 5.41 20 17.96 7.46 20 9.5V4h-5.5zm.33 9.41l-1.41 1.41 3.13 3.13L14.5 20H20v-5.5l-2.04 2.04-3.13-3.13z"/></svg>
-          </div>
-          <span class="powerup-title">Karıştır</span>
-        </button>
+    <!-- Letter Wheel & Iconic Side Buttons (Classic WoW Setup) -->
+    <footer class="wheel-zone">
+      <button id="btn-shuffle" class="side-action-btn left" title="Karıştır">
+        <svg class="side-icon" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M10.59 9.17L5.41 4 4 5.41l5.17 5.17 1.42-1.41zM14.5 4l2.04 2.04L4 18.59 5.41 20 17.96 7.46 20 9.5V4h-5.5zm.33 9.41l-1.41 1.41 3.13 3.13L14.5 20H20v-5.5l-2.04 2.04-3.13-3.13z"/>
+        </svg>
+      </button>
 
-        <button id="btn-magic-hint" class="powerup-btn hammer-powerup" title="Sihirli Çekiç (50 Altın)">
-          <div class="powerup-icon-box">
-            <span class="powerup-emoji">🔨</span>
-          </div>
-          <span class="powerup-title">Çekiç</span>
-          <span class="powerup-price">50 🪙</span>
-        </button>
-
-        <button id="btn-hint" class="powerup-btn hint-powerup" title="Rastgele Harf Aç (25 Altın)">
-          <div class="powerup-icon-box">
-            <span class="powerup-emoji">💡</span>
-          </div>
-          <span class="powerup-title">İpucu</span>
-          <span class="powerup-price">25 🪙</span>
-        </button>
-      </div>
-
-      <!-- Tactile Circular Turntable -->
-      <div class="turntable-wrapper">
-        <svg id="wheel-lines" class="turntable-canvas-svg"></svg>
-        <div id="letter-wheel" class="letter-wheel-disc">
+      <div class="wheel-turntable">
+        <svg id="wheel-lines" class="wheel-svg-layer"></svg>
+        <div id="letter-wheel" class="letter-disc-container">
           <!-- 3D Ivory letter stones -->
         </div>
       </div>
+
+      <button id="btn-hint" class="side-action-btn right" title="İpucu">
+        <svg class="side-icon" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M9 21c0 .55.45 1 1 1h4c.55 0 1-.45 1-1v-1H9v1zm3-19C8.14 2 5 5.14 5 9c0 2.38 1.19 4.47 3 5.74V17c0 .55.45 1 1 1h6c.55 0 1-.45 1-1v-2.26c1.81-1.27 3-3.36 3-5.74 0-3.86-3.14-7-7-7z"/>
+        </svg>
+        <span class="hint-price">25</span>
+      </button>
     </footer>
-  </div>
-
-  <!-- QR CODE / TELEFONDA OYNA MODAL -->
-  <div id="modal-qr" class="modal-backdrop hidden">
-    <div class="modal-sheet qr-sheet">
-      <div class="sheet-handle"></div>
-      <div class="modal-top">
-        <h3>📲 Telefonda Oyna & Ailene Gönder</h3>
-        <button id="btn-close-qr" class="close-cross">&times;</button>
-      </div>
-      <p class="modal-description">
-        Telefonunun kamerasını aşağıdaki QR koda tutarak oyunu anında mobil tarayıcında açabilirsin. Aynı Wi-Fi ağına bağlı ailen ve arkadaşların da hemen oynayabilir!
-      </p>
-
-      <div class="qr-container">
-        <img id="qr-image" class="qr-code-img" src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=http://10.35.240.87:8080" alt="QR Kod">
-      </div>
-
-      <div class="direct-link-box">
-        <span class="link-label">Doğrudan Bağlantı:</span>
-        <input type="text" id="mobile-url-input" class="link-input" value="http://10.35.240.87:8080" readonly>
-        <button id="btn-copy-url" class="btn-copy">Kopyala</button>
-      </div>
-    </div>
   </div>
 
   <!-- VICTORY MODAL -->
   <div id="modal-victory" class="modal-backdrop hidden">
-    <div class="modal-sheet victory-sheet">
-      <div class="stamp-icon">🏆</div>
-      <span class="eyebrow-tag">BÖLÜM GEÇİLDİ!</span>
-      <h2 id="victory-title" class="sheet-heading">Kapadokya Harikası</h2>
-      <p class="sheet-lead">Tüm TDK kelimelerini kusursuzca birleştirdin.</p>
+    <div class="modal-card">
+      <div class="trophy-badge">🏆</div>
+      <span class="eyebrow">TEBRİKLER!</span>
+      <h2 id="victory-title" class="modal-title">Bölüm 1 Tamamlandı</h2>
+      <p class="modal-subtitle">Tüm kelimeleri ustalıkla çözdün.</p>
       
-      <div class="trophy-reward-card">
-        <span class="reward-title">Kazanılan Altın</span>
-        <span class="reward-num">+30 🪙</span>
+      <div class="reward-capsule">
+        <span class="reward-lbl">Ödül</span>
+        <span class="reward-val">+30 🪙</span>
       </div>
 
-      <div class="sheet-actions">
-        <button id="btn-next-level" class="btn-solid-success">Sonraki Bölüm ➔</button>
-        <button id="btn-share" class="btn-outline">WhatsApp'ta Paylaş 📲</button>
+      <div class="modal-btns">
+        <button id="btn-next-level" class="btn-success">Sonraki Bölüm ➔</button>
+        <button id="btn-share" class="btn-ghost">Arkadaşınla Paylaş 📲</button>
       </div>
-    </div>
-  </div>
-
-  <!-- BONUS JAR MODAL -->
-  <div id="modal-jar" class="modal-backdrop hidden">
-    <div class="modal-sheet">
-      <div class="modal-top">
-        <h3>🏺 Bonus Kelime Kavanozu</h3>
-        <button id="btn-close-jar" class="close-cross">&times;</button>
-      </div>
-      <div class="jar-showcase">
-        <span class="jar-mega-icon">🍯</span>
-        <div id="jar-modal-count" class="jar-score">0 / 5 Kelime</div>
-      </div>
-      <p class="modal-description">Çengelde yer almayan ek TDK kelimeleri bularak kavanozu doldur. 5 kelime olduğunda kır ve 30 Altın kap!</p>
-      <button id="btn-claim-jar" class="btn-solid-gold" disabled>30 Altını Al</button>
     </div>
   </div>
 
   <!-- SHOP MODAL -->
   <div id="modal-shop" class="modal-backdrop hidden">
-    <div class="modal-sheet shop-sheet">
-      <div class="modal-top">
-        <h3>💎 Altın & Paketler</h3>
-        <button id="btn-close-shop" class="close-cross">&times;</button>
+    <div class="modal-card shop-modal">
+      <div class="card-head">
+        <h3>Altın Mağazası</h3>
+        <button id="btn-close-shop" class="btn-close">&times;</button>
       </div>
-      <div class="market-list">
-        <div class="market-card popular">
-          <span class="tag-badge">Fırsat</span>
-          <div class="market-text">
+      <p class="card-sub">Takıldığın kelimelerde ipucu alarak devam et!</p>
+
+      <div class="shop-pack-list">
+        <div class="shop-pack featured">
+          <span class="ribbon">Fırsat</span>
+          <div class="pack-meta">
             <strong>🚫 Reklamları Kaldır</strong>
-            <span>Ömür boyu kesintisiz oyun keyfi</span>
+            <small>Ömür boyu kesintisiz oyun</small>
           </div>
-          <button class="btn-price-tag" onclick="game.fakePurchase('Reklamları Kaldır', '29.99 TL')">29.99 TL</button>
+          <button class="pack-buy-btn" onclick="game.fakePurchase('Reklamları Kaldır', '29.99 TL')">29.99 TL</button>
         </div>
-        <div class="market-card">
-          <div class="market-text">
+
+        <div class="shop-pack">
+          <div class="pack-meta">
             <strong>🪙 300 Altın Paketi</strong>
-            <span>12 adet harf ipucu</span>
+            <small>12 adet harf ipucu</small>
           </div>
-          <button class="btn-price-tag" onclick="game.fakePurchase('300 Altın', '19.99 TL', 300)">19.99 TL</button>
+          <button class="pack-buy-btn" onclick="game.fakePurchase('300 Altın', '19.99 TL', 300)">19.99 TL</button>
         </div>
-        <div class="market-card">
-          <div class="market-text">
+
+        <div class="shop-pack">
+          <div class="pack-meta">
             <strong>👑 1000 Hazine Sandığı</strong>
-            <span>Sınırsız çekiç ve altın</span>
+            <small>Bolca ipucu ve altın</small>
           </div>
-          <button class="btn-price-tag" onclick="game.fakePurchase('1000 Altın', '49.99 TL', 1000)">49.99 TL</button>
+          <button class="pack-buy-btn" onclick="game.fakePurchase('1000 Altın', '49.99 TL', 1000)">49.99 TL</button>
         </div>
       </div>
     </div>

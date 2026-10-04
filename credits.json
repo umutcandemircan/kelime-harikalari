@@ -1,0 +1,98 @@
+[
+  {
+    "id": "kapadokya",
+    "title": "Kapadokya - Peri Bacaları ve Balonlar",
+    "location": "Nevşehir, Türkiye",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/Hot_air_balloon_over_Cappadocia.jpg/1280px-Hot_air_balloon_over_Cappadocia.jpg",
+    "author": "Yusuf Kaya",
+    "license": "CC BY-SA 4.0",
+    "source_url": "https://commons.wikimedia.org/wiki/File:Hot_air_balloon_over_Cappadocia.jpg",
+    "unesco": "1985 - Karma (Doğal ve Kültürel)",
+    "summary": "Milyonlarca yıl önce Erciyes ve Hasandağı'nın püskürttüğü lav ve küllerin rüzgâr ve yağmurla aşınmasıyla oluşan peri bacaları, benzersiz yeraltı şehirleri ve kaya oyma kiliseleriyle dünyanın en büyüleyici açık hava müzelerinden biridir.",
+    "trivia": "Kapadokya adı antik Pers dilinde 'Katpatuka' yani 'Güzel Atlar Ülkesi' anlamına gelmektedir."
+  },
+  {
+    "id": "pamukkale",
+    "title": "Pamukkale Travertenleri ve Hierapolis",
+    "location": "Denizli, Türkiye",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/be/Pamukkale_Terraces.jpg/1280px-Pamukkale_Terraces.jpg",
+    "author": "Antoine Taveneaux",
+    "license": "CC BY-SA 3.0",
+    "source_url": "https://commons.wikimedia.org/wiki/File:Pamukkale_Terraces.jpg",
+    "unesco": "1988 - Karma (Doğal ve Kültürel)",
+    "summary": "Termal kaynak sularının havadaki oksijen ile teması sonucu kalsiyum karbonatın çökelmesiyle oluşan bembeyaz pamuksu teraslar, antik Roma döneminden beri şifa arayanlara ev sahipliği yapmaktadır.",
+    "trivia": "Traverten havuzlarının sıcaklığı yıl boyunca 35-36 derece civarında sabit kalır."
+  },
+  {
+    "id": "galata",
+    "title": "Galata Kulesi",
+    "location": "Beyoğlu, İstanbul, Türkiye",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/06/Galata_Tower_Istanbul.jpg/1280px-Galata_Tower_Istanbul.jpg",
+    "author": "Arild Vågen",
+    "license": "CC BY-SA 4.0",
+    "source_url": "https://commons.wikimedia.org/wiki/File:Galata_Tower_Istanbul.jpg",
+    "unesco": "2013 - Geçici Miras Listesi",
+    "summary": "1348 yılında Cenevizliler tarafından 'İsa Kulesi' adıyla inşa edilen 67 metre yüksekliğindeki kule, İstanbul Boğazı ve Haliç'in eşsiz panoramik manzarasına hakim tarihi bir fenerdir.",
+    "trivia": "17. yüzyılda Hezarfen Ahmed Çelebi, kollarına taktığı kartal kanatlarıyla kuleden havalanarak Boğaz'ı aşmış ve Üsküdar Doğancılar Meydanı'na inmiştir."
+  },
+  {
+    "id": "efes",
+    "title": "Efes - Celsus Kütüphanesi",
+    "location": "Selçuk, İzmir, Türkiye",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/30/Library_of_Celsus_Ephesus_Turkey.jpg/1280px-Library_of_Celsus_Ephesus_Turkey.jpg",
+    "author": "Benh LIEU SONG",
+    "license": "CC BY-SA 3.0",
+    "source_url": "https://commons.wikimedia.org/wiki/File:Library_of_Celsus_Ephesus_Turkey.jpg",
+    "unesco": "2015 - Kültürel Miras",
+    "summary": "Roma İmparatoru Trajan döneminde Tiberius Julius Celsus Polemaeanus onuruna oğlu tarafından yaptırılan kütüphane, antik dünyanın en zengin üçüncü kütüphanesidir.",
+    "trivia": "Kütüphanenin cephesindeki 4 kadın heykeli Sophia (Akıl), Arete (Erdem), Ennoia (Kavrayış) ve Episteme (Bilgi) değerlerini temsil eder."
+  },
+  {
+    "id": "nemrut",
+    "title": "Nemrut Dağı - Tanrılar Tahtı",
+    "location": "Kahta, Adıyaman, Türkiye",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/29/Nemrut_Dagi_Heads.jpg/1280px-Nemrut_Dagi_Heads.jpg",
+    "author": "Bernard Gagnon",
+    "license": "CC BY-SA 3.0",
+    "source_url": "https://commons.wikimedia.org/wiki/File:Nemrut_Dagi_Heads.jpg",
+    "unesco": "1987 - Kültürel Miras",
+    "summary": "2150 metre yükseklikte Kommagene Kralı I. Antiochos'un ebedi istirahatgahı olarak inşa ettirdiği devasa kral, aslan, kartal ve tanrı heykelleri doğu ve batı medeniyetlerinin sentezidir.",
+    "trivia": "Nemrut Dağı'ndaki aslan horoskopu kabartması, tarihin bilinen en eski astrolojik takvimidir."
+  },
+  {
+    "id": "gobeklitepe",
+    "title": "Göbeklitepe - Tarihin Sıfır Noktası",
+    "location": "Haliliye, Şanlıurfa, Türkiye",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a8/G%C3%B6bekli_Tepe%2C_Sanliurfa.jpg/1280px-G%C3%B6bekli_Tepe%2C_Sanliurfa.jpg",
+    "author": "Teomancimit",
+    "license": "CC BY-SA 3.0",
+    "source_url": "https://commons.wikimedia.org/wiki/File:G%C3%B6bekli_Tepe,_Sanliurfa.jpg",
+    "unesco": "2018 - Kültürel Miras",
+    "summary": "MÖ 10.000 (yaklaşık 12.000 yıl önce) inşa edilen T biçimli anıtsal sütunlar, insanoğlunun yerleşik hayata geçiş ve inanç tarihi hakkındaki tüm teorileri kökten değiştirmiştir.",
+    "trivia": "Göbeklitepe, Mısır Piramitleri'nden 7.000 yıl, İngiltere'deki Stonehenge'den 6.000 yıl daha eskidir."
+  },
+  {
+    "id": "sumela",
+    "title": "Sümela Manastırı - Kaya Manastırı",
+    "location": "Maçka, Trabzon, Türkiye",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/Sumela_from_across_valley.JPG/1280px-Sumela_from_across_valley.JPG",
+    "author": "Bjørn Christian Tørrissen",
+    "license": "CC BY-SA 3.0",
+    "source_url": "https://commons.wikimedia.org/wiki/File:Sumela_from_across_valley.JPG",
+    "unesco": "2000 - Geçici Miras Listesi",
+    "summary": "Karadağ'ın sarp kayalıklarına deniz seviyesinden 1150 metre yükseklikte oyulmuş olan manastır, vadinin sisleri arasında havada asılı gibi duran eşsiz mimarisi ve freskleriyle tanınır.",
+    "trivia": "Manastırın adı Yunanca 'kara' anlamına gelen 'melas' kelimesinden türemiş olup bulunduğu Karadağ'dan ismini alır."
+  },
+  {
+    "id": "ani",
+    "title": "Ani Harabeleri - 1001 Kiliseli Şehir",
+    "location": "Merkez, Kars, Türkiye",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5a/Ani_Cathedral_2011.jpg/1280px-Ani_Cathedral_2011.jpg",
+    "author": "Gerd Eichmann",
+    "license": "CC BY-SA 4.0",
+    "source_url": "https://commons.wikimedia.org/wiki/File:Ani_Cathedral_2011.jpg",
+    "unesco": "2016 - Kültürel Miras",
+    "summary": "İpek Yolu üzerinde kurulan ve Orta Çağ'ın en büyük ticaret metropollerinden biri olan Ani, Arpaçay Kanyonu kıyısında Türk, Ermeni, Gürcü ve Bizans mimarisinin sentezidir.",
+    "trivia": "Ani'deki Menûçihr Camii, Selçukluların Anadolu'da inşa ettiği ilk Türk camisi olarak kabul edilir."
+  }
+]

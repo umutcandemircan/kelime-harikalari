@@ -1,0 +1,902 @@
+[
+  {
+    "id": 1,
+    "text": "Damlaya damlaya ___ olur.",
+    "answer": "GÖL",
+    "meaning": "Küçük şeyler birike birike büyük varlık oluşturur."
+  },
+  {
+    "id": 2,
+    "text": "Ağaç yaş iken ___.",
+    "answer": "EĞİLİR",
+    "meaning": "İnsanlar küçük yaşta daha kolay eğitilir."
+  },
+  {
+    "id": 3,
+    "text": "Gülme komşuna, gelir ___.",
+    "answer": "BAŞINA",
+    "meaning": "Başkasının başına gelen kötü bir durum bir gün senin de başına gelebilir."
+  },
+  {
+    "id": 4,
+    "text": "Tatlı dil yılanı ___ çıkarır.",
+    "answer": "DELİĞİNDEN",
+    "meaning": "Gönül alıcı, tatlı sözlerle en sert insanlar bile ikna edilebilir."
+  },
+  {
+    "id": 5,
+    "text": "Ak akçe ___ gün içindir.",
+    "answer": "KARA",
+    "meaning": "Alın teriyle kazanılan para, zor zamanlarda imdada yetişir."
+  },
+  {
+    "id": 6,
+    "text": "Sakla samanı, gelir ___.",
+    "answer": "ZAMANI",
+    "meaning": "Değersiz görülen şeyler bile günü gelince işe yarar."
+  },
+  {
+    "id": 7,
+    "text": "Birlikten ___ doğar.",
+    "answer": "KUVVET",
+    "meaning": "Toplu ve beraber hareket etmek başarıyı ve gücü artırır."
+  },
+  {
+    "id": 8,
+    "text": "Vakit ___.",
+    "answer": "NAKİTTİR",
+    "meaning": "Zaman çok değerlidir, boşa harcanmamalıdır."
+  },
+  {
+    "id": 9,
+    "text": "Acele işe ___ karışır.",
+    "answer": "ŞEYTAN",
+    "meaning": "Düşünmeden hızlı yapılan işlerde mutlaka aksilik çıkar."
+  },
+  {
+    "id": 10,
+    "text": "Ev alma, ___ al.",
+    "answer": "KOMŞU",
+    "meaning": "İyi bir çevre ve komşuluk, evin kendisinden çok daha önemlidir."
+  },
+  {
+    "id": 11,
+    "text": "İşleyen demir ___ tutmaz.",
+    "answer": "PAS",
+    "meaning": "Sürekli çalışan insan formunu korur, yetenekleri körelmez."
+  },
+  {
+    "id": 12,
+    "text": "Öfke ile kalkan, ___ ile oturur.",
+    "answer": "ZARAR",
+    "meaning": "Öfkesine yenik düşüp düşüncesizce davranan sonunda pişman olur."
+  },
+  {
+    "id": 13,
+    "text": "Sütten ağzı yanan, yoğurdu ___ yer.",
+    "answer": "ÜFLEYEREK",
+    "meaning": "Bir kez acı tecrübe yaşayan kişi benzer durumlarda aşırı temkinli olur."
+  },
+  {
+    "id": 14,
+    "text": "Ayağını yorganına göre ___.",
+    "answer": "UZAT",
+    "meaning": "Harcamalarını gelirine ve bütçene göre ayarla."
+  },
+  {
+    "id": 15,
+    "text": "Ne ekersen onu ___.",
+    "answer": "BİÇERSİN",
+    "meaning": "Çevrene nasıl davranırsan öyle karşılık görürsün."
+  },
+  {
+    "id": 16,
+    "text": "Dost kara günde ___ olur.",
+    "answer": "BELLİ",
+    "meaning": "Gerçek dostlar insanın zor ve kederli zamanında yanında olanlardır."
+  },
+  {
+    "id": 17,
+    "text": "Güneş girmeyen eve ___ girer.",
+    "answer": "DOKTOR",
+    "meaning": "Güneş ve temiz hava sağlığın temelidir."
+  },
+  {
+    "id": 18,
+    "text": "Bir elin nesi var, iki elin ___ var.",
+    "answer": "SESİ",
+    "meaning": "Dayanışma ve yardımlaşma ile zor işler kolayca başarılır."
+  },
+  {
+    "id": 19,
+    "text": "Bal tutan ___ yalar.",
+    "answer": "PARMAĞINI",
+    "meaning": "Bir nimetin kaynağında bulunan kişi bundan faydalanır."
+  },
+  {
+    "id": 20,
+    "text": "Rüzgâr eken ___ biçer.",
+    "answer": "FIRTINA",
+    "meaning": "Kötülük saçan veya huzursuzluk çıkaran kişi çok daha büyük felaketle karşılaşır."
+  },
+  {
+    "id": 21,
+    "text": "Her yiğidin bir ___ yiyişi vardır.",
+    "answer": "YOĞURT",
+    "meaning": "Herkesin kendine özgü bir çalışma ve iş yapma yöntemi bulunur."
+  },
+  {
+    "id": 22,
+    "text": "Laf ile peynir gemisi ___.",
+    "answer": "YÜRÜMEZ",
+    "meaning": "Yalnızca konuşarak veya boş vaatlerle hiçbir iş başarılamaz."
+  },
+  {
+    "id": 23,
+    "text": "Meyve veren ağaç ___.",
+    "answer": "TAŞLANIR",
+    "meaning": "Başarılı ve faydalı insanlar sık sık eleştiri ve kıskançlığa maruz kalır."
+  },
+  {
+    "id": 24,
+    "text": "Dereyi görmeden paçaları ___.",
+    "answer": "SIVAMA",
+    "meaning": "Vakti gelmeden ve durum netleşmeden hazırlık yapmak veya sevinmek anlamsızdır."
+  },
+  {
+    "id": 25,
+    "text": "Gözden ırak olan, ___ ırak olur.",
+    "answer": "GÖNÜLDEN",
+    "meaning": "Birbirinden uzak kalanların arasındaki sevgi bağı zamanla zayıflayabilir."
+  },
+  {
+    "id": 26,
+    "text": "Zararın neresinden dönülse ___.",
+    "answer": "KÂRDIR",
+    "meaning": "Hatalı bir gidişatı ne kadar erken terk ederseniz o kadar kazançlı çıkarsınız."
+  },
+  {
+    "id": 27,
+    "text": "Sabır acıdır, meyvesi ___.",
+    "answer": "TATLIDIR",
+    "meaning": "Zorluklara göğüs germek güçtür ama sabrın sonundaki başarı mutluluk verir."
+  },
+  {
+    "id": 28,
+    "text": "Körle yatan ___ kalkar.",
+    "answer": "ŞAŞI",
+    "meaning": "Kötü veya kusurlu kimselerle vakit geçiren onlardan olumsuz etkilenir."
+  },
+  {
+    "id": 29,
+    "text": "Taşıma su ile değirmen ___.",
+    "answer": "DÖNMEZ",
+    "meaning": "Dışarıdan gelen geçici yardımlarla sürekli bir iş yürütülemez."
+  },
+  {
+    "id": 30,
+    "text": "İti an, ___ hazırla.",
+    "answer": "ÇOMAĞI",
+    "meaning": "Adı anılan edepsiz veya sevilmeyen kişi aniden çıkagelir."
+  },
+  {
+    "id": 31,
+    "text": "Bülbülü altın kafese koymuşlar, yine de 'ah ___' demiş.",
+    "answer": "VATANIM",
+    "meaning": "İnsan ne kadar bolluk içinde olursa olsun kendi yurdunun özlemini çeker."
+  },
+  {
+    "id": 32,
+    "text": "Çivi çiviyi ___.",
+    "answer": "SÖKER",
+    "meaning": "Zor bir durum benzer güçte bir hamleyle çözülür."
+  },
+  {
+    "id": 33,
+    "text": "Denize düşen yılana ___.",
+    "answer": "SARILIR",
+    "meaning": "Büyük tehlike içinde kalan insan kurtulmak için en sakıncalı yola bile başvurur."
+  },
+  {
+    "id": 34,
+    "text": "Dile kolay, ___ zor.",
+    "answer": "YAPMASI",
+    "meaning": "Söylemesi kolay görünen bir işin uygulaması oldukça zahmetlidir."
+  },
+  {
+    "id": 35,
+    "text": "Doğru söyleyeni dokuz ___ kovarlar.",
+    "answer": "KÖYDEN",
+    "meaning": "Açık sözlü ve samimi doğruları dile getiren insanlar genellikle sevilmez."
+  },
+  {
+    "id": 36,
+    "text": "El elden üstündür, arşa ___.",
+    "answer": "VARINCAYA",
+    "meaning": "Hiç kimse her konuda en yetenekli olduğunu iddia edemez."
+  },
+  {
+    "id": 37,
+    "text": "Görünen köy ___ istemez.",
+    "answer": "KILAVUZ",
+    "meaning": "Açık ve bariz olan durumlar için ek kanıt veya açıklama gerekmez."
+  },
+  {
+    "id": 38,
+    "text": "Gül dikensiz ___.",
+    "answer": "OLMAZ",
+    "meaning": "Güzel ve değerli olan her şeyin ufak tefek zorlukları ve kusurları bulunur."
+  },
+  {
+    "id": 39,
+    "text": "Hamama giren ___.",
+    "answer": "TERLER",
+    "meaning": "Zor veya masraflı bir işe girişen kişi onun zorluklarına katlanmak zorundadır."
+  },
+  {
+    "id": 40,
+    "text": "Harman yel ile, düğün ___ ile olur.",
+    "answer": "EL",
+    "meaning": "Her büyük iş ancak çevrenin ve dostların yardımıyla tamamlanır."
+  },
+  {
+    "id": 41,
+    "text": "Hasta olmayan, sağlığın kadrini ___.",
+    "answer": "BİLMEZ",
+    "meaning": "İnsan sahip olduğu sağlığın değerini ancak onu kaybedince anlar."
+  },
+  {
+    "id": 42,
+    "text": "Haydan gelen ___ gider.",
+    "answer": "HUYA",
+    "meaning": "Kolay ve emeksiz kazanılan kazanç aynı şekilde çabuk tükenir."
+  },
+  {
+    "id": 43,
+    "text": "İki canbaz bir ipte ___.",
+    "answer": "OYNAMAZ",
+    "meaning": "Birbirini kandırmaya çalışan iki hilekar birlikte iş yapamaz."
+  },
+  {
+    "id": 44,
+    "text": "İki karpuz bir koltuğa ___.",
+    "answer": "SIĞMAZ",
+    "meaning": "Aynı anda iki büyük ve dikkat gerektiren iş başarılamaz."
+  },
+  {
+    "id": 45,
+    "text": "İğneyi kendine, çuvaldızı ___ batır.",
+    "answer": "BAŞKASINA",
+    "meaning": "Başkalarını eleştirmeden önce kendi kusurlarına bak."
+  },
+  {
+    "id": 46,
+    "text": "İyilik yap, denize ___.",
+    "answer": "AT",
+    "meaning": "Yaptığın iyiliği karşılık beklemeden yap, kıymetini bilen bilir."
+  },
+  {
+    "id": 47,
+    "text": "Kaçan balık ___ olur.",
+    "answer": "BÜYÜK",
+    "meaning": "Elden kaçırılan fırsatlar insanın gözünde her zaman daha değerli görünür."
+  },
+  {
+    "id": 48,
+    "text": "Kalp kalbe ___.",
+    "answer": "KARŞIDIR",
+    "meaning": "Birbirini seven insanların hisleri ve düşünceleri birbirine yansır."
+  },
+  {
+    "id": 49,
+    "text": "Kaz gelen yerden tavuk ___.",
+    "answer": "ESİRGENMEZ",
+    "meaning": "Büyük kazanç elde edilecek durumlar için ufak masraflardan kaçınılmaz."
+  },
+  {
+    "id": 50,
+    "text": "Keskin sirke küpüne ___ verir.",
+    "answer": "ZARAR",
+    "meaning": "Aşırı öfkeli ve fevri davranan insan en çok kendine zarar verir."
+  },
+  {
+    "id": 51,
+    "text": "Komşu komşunun ___ muhtaçtır.",
+    "answer": "KÜLÜNE",
+    "meaning": "Hayatta en küçük ihtiyaçlarda bile dayanışma önemlidir."
+  },
+  {
+    "id": 52,
+    "text": "Köpeksiz köy bulmuş, ___ geziyor.",
+    "answer": "DEĞNEKSİZ",
+    "meaning": "Engel veya otorite olmayan yerde başına buyruk hareket eden kimse."
+  },
+  {
+    "id": 53,
+    "text": "Körler memleketinde şaşılar ___ olur.",
+    "answer": "PADİŞAH",
+    "meaning": "Cahil veya niteliksiz ortamda azıcık bilgisi olan kişi lider kabul edilir."
+  },
+  {
+    "id": 54,
+    "text": "Kurunun yanında ___ da yanar.",
+    "answer": "YAŞ",
+    "meaning": "Kötülerin cezalandırıldığı ortamda kimi zaman masumlar da zarar görür."
+  },
+  {
+    "id": 55,
+    "text": "Kurt dumanlı ___ sever.",
+    "answer": "HAVAYI",
+    "meaning": "Fırsatçılar karışık ve kriz dönemlerini kendi çıkarları için kullanır."
+  },
+  {
+    "id": 56,
+    "text": "Minareyi çalan ___ hazırlar.",
+    "answer": "KILIFINI",
+    "meaning": "Büyük bir suç veya hırsızlık yapan kişi önceden mazeretini uydurmuştur."
+  },
+  {
+    "id": 57,
+    "text": "Mum dibine ışık ___.",
+    "answer": "VERMEZ",
+    "meaning": "Bir insan başkalarına çok faydalı olsa da en yakınlarına her zaman yetemez."
+  },
+  {
+    "id": 58,
+    "text": "Nerede hareket, orada ___.",
+    "answer": "BEREKET",
+    "meaning": "Çalışmanın, gayretin ve canlılığın olduğu yerde bolluk olur."
+  },
+  {
+    "id": 59,
+    "text": "Otu çek, ___ bak.",
+    "answer": "KÖKÜNE",
+    "meaning": "Bir kimsenin karakterini anlamak için soyuna ve geçmişine bakılır."
+  },
+  {
+    "id": 60,
+    "text": "Pire için yorgan ___.",
+    "answer": "YAKILMAZ",
+    "meaning": "Önemsiz ve ufak bir aksilik için büyük fedakarlık veya yıkım yapılmaz."
+  },
+  {
+    "id": 61,
+    "text": "Perşembenin gelişi çarşambadan ___.",
+    "answer": "BELLİDİR",
+    "meaning": "Bir durumun nasıl sonuçlanacağı daha önceki belirtilerinden anlaşılır."
+  },
+  {
+    "id": 62,
+    "text": "Rüşvet kapıdan girince, iman ___ çıkar.",
+    "answer": "BACADAN",
+    "meaning": "Ahlaksızlık ve rüşvetin olduğu yerde adalet ve vicdan barınamaz."
+  },
+  {
+    "id": 63,
+    "text": "Söz gümüşse, sükut ___.",
+    "answer": "ALTINDIR",
+    "meaning": "Zamanında susmak ve dinlemek çoğu zaman konuşmaktan daha erdemlidir."
+  },
+  {
+    "id": 64,
+    "text": "Su uyur, ___ uyumaz.",
+    "answer": "DÜŞMAN",
+    "meaning": "Tehlikeye karşı her an uyanık ve tedbirli olmak gerekir."
+  },
+  {
+    "id": 65,
+    "text": "Tavşan dağa küsmüş, dağın ___ olmamış.",
+    "answer": "HABERİ",
+    "meaning": "Önemsiz birinin büyük bir kuruma veya kişiye küsmesi karşı tarafa hiç etki etmez."
+  },
+  {
+    "id": 66,
+    "text": "Tencere yuvarlanmış, kapağını ___.",
+    "answer": "BULMUŞ",
+    "meaning": "Huyu suyu birbirine benzeyen kimseler eninde sonunda bir araya gelir."
+  },
+  {
+    "id": 67,
+    "text": "Tok açın halinden ___.",
+    "answer": "ANLAMAZ",
+    "meaning": "Varlıklı kimseler yoksulların çektiği sıkıntıları tam olarak idrak edemez."
+  },
+  {
+    "id": 68,
+    "text": "Topalla gezen ___ öğrenir.",
+    "answer": "AKSAMAYI",
+    "meaning": "Kötü alışkanlıkları olanlarla gezen onlara benzer."
+  },
+  {
+    "id": 69,
+    "text": "Ummadık taş baş ___.",
+    "answer": "YARAR",
+    "meaning": "Hiç hesaba katılmayan önemsiz bir şey bazen büyük zararlar doğurabilir."
+  },
+  {
+    "id": 70,
+    "text": "Üzüm üzüme baka baka ___.",
+    "answer": "KARARIR",
+    "meaning": "İnsanlar birlikte yaşadıkları kişilerin huylarını zamanla benimser."
+  },
+  {
+    "id": 71,
+    "text": "Varlığa darlık ___.",
+    "answer": "YAKIŞMAZ",
+    "meaning": "İmkanı olan kimsenin cimri ve dar fikirli davranması doğru değildir."
+  },
+  {
+    "id": 72,
+    "text": "Yalancının mumu yatsıya kadar ___.",
+    "answer": "YANAR",
+    "meaning": "Söylenen yalan çok geçmeden gün yüzüne çıkar ve foyası anlaşılır."
+  },
+  {
+    "id": 73,
+    "text": "Yalnız taş duvar ___.",
+    "answer": "OLMAZ",
+    "meaning": "Tek başına büyük işler başarılamaz, birliktelik şarttır."
+  },
+  {
+    "id": 74,
+    "text": "Yatan aslandan gezen tilki ___.",
+    "answer": "YEĞDİR",
+    "meaning": "Çalışıp arayan zayıf kimse, oturup pinekleyen güçlü kimseden daha hayırlıdır."
+  },
+  {
+    "id": 75,
+    "text": "Yılanın sevmediği ot, deliğinin ağzında ___.",
+    "answer": "BİTER",
+    "meaning": "İnsanın en çekindiği veya hoşlanmadığı şey sık sık karşısına çıkar."
+  },
+  {
+    "id": 76,
+    "text": "Yiğit lakabıyla ___.",
+    "answer": "ANILIR",
+    "meaning": "Kişi mertliği ve karakteristik özellikleriyle toplumda tanınır."
+  },
+  {
+    "id": 77,
+    "text": "Yuvarlanan taş yosun ___.",
+    "answer": "TUTMAZ",
+    "meaning": "Sürekli iş veya yer değiştiren insan kalıcı bir varlık veya uzmanlık edinemez."
+  },
+  {
+    "id": 78,
+    "text": "Zahmetsiz rahmet ___.",
+    "answer": "OLMAZ",
+    "meaning": "Büyük nimetlere ve başarılara çaba ve sıkıntı çekilmeden ulaşılamaz."
+  },
+  {
+    "id": 79,
+    "text": "Abanın kadri yağmurda ___.",
+    "answer": "BİLİNİR",
+    "meaning": "Bir eşyanın veya insanın değeri ona ihtiyaç duyulduğu an ortaya çıkar."
+  },
+  {
+    "id": 80,
+    "text": "Acemi katır kapı önünde yük ___.",
+    "answer": "İNDİRİR",
+    "meaning": "Bir işin ehli olmayan kimse en can alıcı noktada işi yarım bırakır."
+  },
+  {
+    "id": 81,
+    "text": "Aç doymam, tok ___ sanır.",
+    "answer": "ACIKMAM",
+    "meaning": "Açgözlü olan yetinmez, varlıklı olan ise durumunun hep süreceğini düşünür."
+  },
+  {
+    "id": 82,
+    "text": "Ağaca çıkan keçinin dala bakan ___ olur.",
+    "answer": "OĞLAĞI",
+    "meaning": "Çocuklar anne ve babalarının davranışlarını örnek alarak büyür."
+  },
+  {
+    "id": 83,
+    "text": "Akıl akıldan ___.",
+    "answer": "ÜSTÜNDÜR",
+    "meaning": "Bir konuda farklı insanların görüşlerine başvurmak doğru kararı sağlar."
+  },
+  {
+    "id": 84,
+    "text": "Akıl yaşta değil, ___.",
+    "answer": "BAŞTADIR",
+    "meaning": "Olgunluk ve doğru karar verme yetisi yaşa değil akla bağlıdır."
+  },
+  {
+    "id": 85,
+    "text": "Alma mazlumun ahını, çıkar ___ aheste.",
+    "answer": "AHESTE",
+    "meaning": "Haksızlık yapılan masumun bedduası eninde sonunda zalimi bulur."
+  },
+  {
+    "id": 86,
+    "text": "Altın yere düşmekle pul ___.",
+    "answer": "OLMAZ",
+    "meaning": "Değerli ve erdemli insanlar kötü duruma düşseler bile değerlerini yitirmezler."
+  },
+  {
+    "id": 87,
+    "text": "Araba devrilince yol gösteren çok ___.",
+    "answer": "OLUR",
+    "meaning": "İş işten geçtikten sonra nasihat veren ve akıl öğreten çok çıkar."
+  },
+  {
+    "id": 88,
+    "text": "Aslan yattığı yerden ___ olur.",
+    "answer": "BELLİ",
+    "meaning": "Kişinin yaşadığı yerin temizliği ve düzeni onun karakterini yansıtır."
+  },
+  {
+    "id": 89,
+    "text": "Ateş düştüğü yeri ___.",
+    "answer": "YAKAR",
+    "meaning": "Bir felaketin acısını en derin yaşayanlar doğrudan o felakete uğrayanlardır."
+  },
+  {
+    "id": 90,
+    "text": "Ateş olmayan yerden duman ___.",
+    "answer": "ÇIKMAZ",
+    "meaning": "Bir dedikodu veya söylenti varsa mutlaka ardında ufak da olsa bir gerçek vardır."
+  },
+  {
+    "id": 91,
+    "text": "At ölür meydan kalır, yiğit ölür ___ kalır.",
+    "answer": "ŞAN",
+    "meaning": "İnsan öldükten sonra geride bıraktığı güzel eser ve itibarla anılır."
+  },
+  {
+    "id": 92,
+    "text": "Avcı ne kadar al bilse, ayı o kadar ___ bilir.",
+    "answer": "YOL",
+    "meaning": "Kurnaz biri karşısındakini tuzağa düşürmeye çalışsa da o da kendini korumayı bilir."
+  },
+  {
+    "id": 93,
+    "text": "Bakarsan bağ, bakmazsan ___ olur.",
+    "answer": "DAĞ",
+    "meaning": "Emek ve bakım verilen şeyler güzelleşir ve verim sağlar."
+  },
+  {
+    "id": 94,
+    "text": "Başa gelen çekilir, yazıya ne ___.",
+    "answer": "DENİR",
+    "meaning": "Kaderde olan kaçınılmaz sıkıntılara sabır göstermek gerekir."
+  },
+  {
+    "id": 95,
+    "text": "Besle kargayı, oysun ___.",
+    "answer": "GÖZÜNÜ",
+    "meaning": "Nankör birine yapılan iyilik sonunda fenalık olarak geri dönebilir."
+  },
+  {
+    "id": 96,
+    "text": "Bin bilsen de bir bilene ___.",
+    "answer": "DANIŞ",
+    "meaning": "Ne kadar bilgili olursan ol, konunun uzmanına akıl sormak en doğrusudur."
+  },
+  {
+    "id": 97,
+    "text": "Bir fincan kahvenin kırk yıl ___ vardır.",
+    "answer": "HATIRI",
+    "meaning": "Yapılan küçük bir ikram ve dostluk dahi ömür boyu unutulmaz."
+  },
+  {
+    "id": 98,
+    "text": "Boş çuval ayakta ___.",
+    "answer": "DURMAZ",
+    "meaning": "Bilgisiz ve temelsiz fikirler veya karnı aç insanlar ayakta kalamaz."
+  },
+  {
+    "id": 99,
+    "text": "Can boğazdan ___.",
+    "answer": "GELİR",
+    "meaning": "İnsanın gücünü koruması ve sağlıklı kalması için iyi beslenmesi gerekir."
+  },
+  {
+    "id": 100,
+    "text": "Can çıkmayınca huy ___.",
+    "answer": "ÇIKMAZ",
+    "meaning": "İnsanın temel karakter ve alışkanlıkları ömrünün sonuna kadar kolay değişmez."
+  },
+  {
+    "id": 101,
+    "text": "Cömert derler maldan ederler, yiğit derler ___ ederler.",
+    "answer": "CANDAN",
+    "meaning": "Övgülere kanıp sınırını bilmeyenler büyük kayıplara uğrayabilir."
+  },
+  {
+    "id": 102,
+    "text": "Çirkefe taş atma, üstüne ___.",
+    "answer": "SIÇRAR",
+    "meaning": "Kötü ve ahlaksız insanlarla münakaşa etmekten kaçınmak gerekir."
+  },
+  {
+    "id": 103,
+    "text": "Çok gezen mi bilir, çok ___ mi?",
+    "answer": "OKUYAN",
+    "meaning": "Görerek ve tecrübe ederek öğrenmek ile kitaplardan öğrenmek arasındaki denge."
+  },
+  {
+    "id": 104,
+    "text": "Dağ dağa kavuşmaz, insan insana ___.",
+    "answer": "KAVUŞUR",
+    "meaning": "Hayatta ne kadar uzak düşülse de insanlar bir gün mutlaka karşılaşır."
+  },
+  {
+    "id": 105,
+    "text": "Davulun sesi uzaktan ___ gelir.",
+    "answer": "HOŞ",
+    "meaning": "İç yüzü bilinmeyen uzaktaki işler insana cazip ve kolay görünür."
+  },
+  {
+    "id": 106,
+    "text": "Deliye her gün ___.",
+    "answer": "BAYRAM",
+    "meaning": "Sorumluluğu olmayan veya dertsiz kimseler için her an eğlencelidir."
+  },
+  {
+    "id": 107,
+    "text": "Demir tavında ___.",
+    "answer": "DÖVÜLÜR",
+    "meaning": "Her iş uygun zamanda ve şartlar olgunlaştığında yapılmalıdır."
+  },
+  {
+    "id": 108,
+    "text": "Deniz dalgasız, kapı ___ olmaz.",
+    "answer": "HALKASIZ",
+    "meaning": "Her kurum ve ortamın kendine özgü vazgeçilmez kuralları vardır."
+  },
+  {
+    "id": 109,
+    "text": "Dinsizin hakkından ___ gelir.",
+    "answer": "İMANSIZ",
+    "meaning": "Acımasız ve kuralsız birinin karşısına ondan daha sert biri çıkar."
+  },
+  {
+    "id": 110,
+    "text": "Dost acı ___.",
+    "answer": "SÖYLER",
+    "meaning": "Gerçek dost insanın hatasını yüzüne söyler ki kendini düzeltsin."
+  },
+  {
+    "id": 111,
+    "text": "Dost ile ye, iç; alışveriş ___.",
+    "answer": "ETME",
+    "meaning": "Para ve ticaret ilişkileri samimi dostlukları zedeleyebilir."
+  },
+  {
+    "id": 112,
+    "text": "Düşenin dostu ___.",
+    "answer": "OLMAZ",
+    "meaning": "Mevki ve varlığını kaybeden kimsenin etrafındaki sahte dostlar dağılır."
+  },
+  {
+    "id": 113,
+    "text": "Ecel geldi cihana, baş ağrısı ___.",
+    "answer": "BAHANE",
+    "meaning": "Vakti gelen son için her ufak sebep bir vesile olur."
+  },
+  {
+    "id": 114,
+    "text": "El elin eşeğini türkü söyleyerek ___.",
+    "answer": "ARAR",
+    "meaning": "İnsan başkasının derdine kendi derdi gibi candan üzülemez."
+  },
+  {
+    "id": 115,
+    "text": "Emanete hıyanet ___.",
+    "answer": "OLMAZ",
+    "meaning": "Güvenilip teslim edilen şeye zarar verilmez, özenle korunur."
+  },
+  {
+    "id": 116,
+    "text": "Erken kalkan yol alır, er evlenen ___ alır.",
+    "answer": "DÖL",
+    "meaning": "Zamanında ve erken harekete geçen hedefine daha çabuk ulaşır."
+  },
+  {
+    "id": 117,
+    "text": "Eşeğe altın semer vursalar, eşek yine ___.",
+    "answer": "EŞEKTİR",
+    "meaning": "Dış görünüş ve süs insanın içindeki cehaleti veya kabalığı değiştirmez."
+  },
+  {
+    "id": 118,
+    "text": "Fazla mal göz ___.",
+    "answer": "ÇIKARMAZ",
+    "meaning": "İlerisi için kenarda duran ihtiyaç fazlası şeylerin zararı olmaz."
+  },
+  {
+    "id": 119,
+    "text": "Felek kimine kavun yedirir, kimine ___.",
+    "answer": "KELEK",
+    "meaning": "Hayat piyangosu herkese eşit şans ve talih dağıtmaz."
+  },
+  {
+    "id": 120,
+    "text": "Geç olsun da ___ olmasın.",
+    "answer": "GÜÇ",
+    "meaning": "Bir işin gecikmesi, imkansızlaşmasından veya başarısız olmasından iyidir."
+  },
+  {
+    "id": 121,
+    "text": "Gemisini kurtaran ___.",
+    "answer": "KAPTANDIR",
+    "meaning": "Kriz ve tehlike anında işini başarıyla yönetip kurtaran takdir edilir."
+  },
+  {
+    "id": 122,
+    "text": "Göz görür, gönül ___.",
+    "answer": "KATLANIR",
+    "meaning": "Kişi gördüğü veya aşina olduğu durumlara daha kolay tahammül eder."
+  },
+  {
+    "id": 123,
+    "text": "Gülü seven dikenine ___.",
+    "answer": "KATLANIR",
+    "meaning": "Güzel bir amaca ulaşmak isteyen onun yolundaki zorlukları peşinen kabul eder."
+  },
+  {
+    "id": 124,
+    "text": "Hatasız kul ___.",
+    "answer": "OLMAZ",
+    "meaning": "Her insan bilerek ya da bilmeyerek kusur işleyebilir, affedici olunmalıdır."
+  },
+  {
+    "id": 125,
+    "text": "Hazıra dağlar ___.",
+    "answer": "DAYANMAZ",
+    "meaning": "Sürekli tüketen ve yeni gelir üretmeyen kimsenin büyük serveti bile tükenir."
+  },
+  {
+    "id": 126,
+    "text": "Hem suçlu hem ___.",
+    "answer": "GÜÇLÜ",
+    "meaning": "Kusurlu olduğu halde üste çıkmaya ve karşı tarafı bastırmaya çalışan kişi."
+  },
+  {
+    "id": 127,
+    "text": "Her inişin bir ___ vardır.",
+    "answer": "YOKUŞU",
+    "meaning": "Hayatta kolaylıkların ardından zorluklar, zorlukların ardından kolaylıklar gelir."
+  },
+  {
+    "id": 128,
+    "text": "Her kuşun eti ___.",
+    "answer": "YENMEZ",
+    "meaning": "Her insan kolayca aldatılamaz veya boyun eğdirilemez."
+  },
+  {
+    "id": 129,
+    "text": "Hırsızın hiç mi suçu ___?",
+    "answer": "YOK",
+    "meaning": "Zarara uğrayanı suçlarken asıl kötülüğü yapanı gözden kaçırmamak gerekir."
+  },
+  {
+    "id": 130,
+    "text": "Horozu çok olan köyün sabahı ___ olur.",
+    "answer": "GEÇ",
+    "meaning": "Çok fazla kişinin karışıp karar vermeye çalıştığı işlerde gecikme yaşanır."
+  },
+  {
+    "id": 131,
+    "text": "İki dinle, bir ___.",
+    "answer": "SÖYLE",
+    "meaning": "Konuşmaktan çok dinlemeye ve anlamaya önem vermek gerekir."
+  },
+  {
+    "id": 132,
+    "text": "İki gönül bir olunca samanlık seyran ___.",
+    "answer": "OLUR",
+    "meaning": "Birbirini gerçekten sevenler için maddi darlıklar engel teşkil etmez."
+  },
+  {
+    "id": 133,
+    "text": "İncir çekirdeğini doldurmaz ___.",
+    "answer": "MESELELER",
+    "meaning": "Üzerinde durmaya bile değmeyecek küçücük ve önemsiz konular."
+  },
+  {
+    "id": 134,
+    "text": "İpe un ___.",
+    "answer": "SERMEK",
+    "meaning": "İşi savsaklamak veya yapmamak için olmadık bahaneler öne sürmek."
+  },
+  {
+    "id": 135,
+    "text": "İsteyenin bir yüzü kara, vermeyenin iki ___.",
+    "answer": "YÜZÜ",
+    "meaning": "Bir şey isterken mahcup olunur ama yardım talebini reddetmek daha ayıptır."
+  },
+  {
+    "id": 136,
+    "text": "İt ürür, kervan ___.",
+    "answer": "YÜRÜR",
+    "meaning": "Amacına inanan kimse çevredeki asılsız eleştirilere aldırmadan yoluna devam eder."
+  },
+  {
+    "id": 137,
+    "text": "Kabahat samur kürk olsa kimse üstüne ___.",
+    "answer": "ALMAZ",
+    "meaning": "İnsanlar hatalarını ve kusurlarını kabullenmekten kaçınırlar."
+  },
+  {
+    "id": 138,
+    "text": "Kanadı kırık kuşa gökler ___ gelir.",
+    "answer": "DAR",
+    "meaning": "İmkanını ve sağlığını kaybeden kimse en geniş imkanlarda bile çaresizdir."
+  },
+  {
+    "id": 139,
+    "text": "Kara haber tez ___.",
+    "answer": "DUYULUR",
+    "meaning": "Kötü ve sarsıcı olayların haberi her yere çok hızlı ulaşır."
+  },
+  {
+    "id": 140,
+    "text": "Kedi uzanamadığı ciğere ___ dermiş.",
+    "answer": "MUNDAR",
+    "meaning": "Elde edemediği başarıyı veya değeri küçümseyip karalamaya çalışan kimse."
+  },
+  {
+    "id": 141,
+    "text": "Kendi düşen ___.",
+    "answer": "AĞLAMAZ",
+    "meaning": "Kendi hatası ve inadı yüzünden zarara uğrayan kimsenin şikayet hakkı yoktur."
+  },
+  {
+    "id": 142,
+    "text": "Kıratın yanında duran ya huyundan ya ___.",
+    "answer": "SUYUNDAN",
+    "meaning": "İnsan yakınında bulunduğu kimselerden er ya da geç etkilenir."
+  },
+  {
+    "id": 143,
+    "text": "Kılavuzu karga olanın burnu pislikten ___.",
+    "answer": "KURTULMAZ",
+    "meaning": "Yol göstericisi kötü veya yetersiz olan kimse sürekli felaketle karşılaşır."
+  },
+  {
+    "id": 144,
+    "text": "Köprüyü geçene kadar ayıya ___ de.",
+    "answer": "DAYI",
+    "meaning": "Zor bir işi başarana kadar sakıncalı kişilere alttan almak gerekebilir."
+  },
+  {
+    "id": 145,
+    "text": "Koyun can derdinde, kasap ___ derdinde.",
+    "answer": "ET",
+    "meaning": "Biri canını kurtarmaya çalışırken diğeri menfaat peşinde koşar."
+  },
+  {
+    "id": 146,
+    "text": "Kusursuz dost arayan dostsuz ___.",
+    "answer": "KALIR",
+    "meaning": "İnsanları kusurlarıyla kabul etmeyen kimse yalnız kalmaya mahkumdur."
+  },
+  {
+    "id": 147,
+    "text": "Marifet iltifata ___.",
+    "answer": "TABİDİR",
+    "meaning": "Başarılı çalışmalar ve yetenekler takdir edildikçe daha çok gelişir."
+  },
+  {
+    "id": 148,
+    "text": "Mızrak çuvala ___.",
+    "answer": "SIĞMAZ",
+    "meaning": "Göz önündeki büyük ve bariz gerçekler hiçbir bahaneyle gizlenemez."
+  },
+  {
+    "id": 149,
+    "text": "Nefesine güvenen borazancı ___.",
+    "answer": "BAŞI",
+    "meaning": "Bir sorumluluğu ancak o yükü kaldırabilecek güç ve yeteneği olan almalıdır."
+  },
+  {
+    "id": 150,
+    "text": "Sabreden derviş, muradına ___.",
+    "answer": "ERMİŞ",
+    "meaning": "Zorluklara sabır ve sebatla katlanan insan eninde sonunda arzusuna ulaşır."
+  }
+]

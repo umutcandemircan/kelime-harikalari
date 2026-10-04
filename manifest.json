@@ -1,22 +1,26 @@
 {
-  "name": "Kelime Harikaları - Words of Wonders",
+  "name": "Kelime Harikaları",
   "short_name": "KelimeHarikaları",
-  "description": "Türkiye ve Dünya Harikaları temalı bağımlılık yapan çengel kelime bulmaca oyunu.",
+  "description": "Anadolu ve Dünya Harikaları temalı, Türkçe kelime ve çapraz bulmaca oyunu.",
   "start_url": "./index.html",
   "display": "standalone",
-  "background_color": "#090417",
-  "theme_color": "#ffbe0b",
-  "orientation": "portrait",
+  "background_color": "#020617",
+  "theme_color": "#f59e0b",
+  "orientation": "portrait-primary",
+  "lang": "tr",
+  "categories": ["games", "puzzle", "education"],
   "icons": [
     {
       "src": "icon-192.png",
       "sizes": "192x192",
-      "type": "image/png"
+      "type": "image/png",
+      "purpose": "any maskable"
     },
     {
       "src": "icon-512.png",
       "sizes": "512x512",
-      "type": "image/png"
+      "type": "image/png",
+      "purpose": "any maskable"
     }
   ]
 }

@@ -1,0 +1,4087 @@
+[
+  {
+    "id": 1,
+    "title": "Kapadokya - Bölüm 1",
+    "region": "NEVŞEHİR",
+    "region_id": "kapadokya",
+    "bg": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/Hot_air_balloon_over_Cappadocia.jpg/1280px-Hot_air_balloon_over_Cappadocia.jpg",
+    "wheel": [
+      "K",
+      "A",
+      "T"
+    ],
+    "words": [
+      {
+        "id": "w1",
+        "word": "KAT",
+        "row": 2,
+        "col": 0,
+        "dir": "H"
+      },
+      {
+        "id": "w2",
+        "word": "TAK",
+        "row": 0,
+        "col": 0,
+        "dir": "V"
+      }
+    ],
+    "bonus": [
+      "AK"
+    ]
+  },
+  {
+    "id": 2,
+    "title": "Pamukkale - Bölüm 2",
+    "region": "DENİZLİ",
+    "region_id": "pamukkale",
+    "bg": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/be/Pamukkale_Terraces.jpg/1280px-Pamukkale_Terraces.jpg",
+    "wheel": [
+      "K",
+      "A",
+      "L",
+      "E"
+    ],
+    "words": [
+      {
+        "id": "w1",
+        "word": "KALE",
+        "row": 1,
+        "col": 0,
+        "dir": "H"
+      },
+      {
+        "id": "w2",
+        "word": "KEL",
+        "row": 1,
+        "col": 0,
+        "dir": "V"
+      },
+      {
+        "id": "w3",
+        "word": "ELA",
+        "row": 0,
+        "col": 2,
+        "dir": "V"
+      }
+    ],
+    "bonus": [
+      "LAK",
+      "LAKE"
+    ]
+  },
+  {
+    "id": 3,
+    "title": "Galata Kulesi - Bölüm 3",
+    "region": "İSTANBUL",
+    "region_id": "galata",
+    "bg": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/06/Galata_Tower_Istanbul.jpg/1280px-Galata_Tower_Istanbul.jpg",
+    "wheel": [
+      "M",
+      "A",
+      "A",
+      "S"
+    ],
+    "words": [
+      {
+        "id": "w1",
+        "word": "MASA",
+        "row": 2,
+        "col": 0,
+        "dir": "H"
+      },
+      {
+        "id": "w2",
+        "word": "ASMA",
+        "row": 0,
+        "col": 0,
+        "dir": "V"
+      }
+    ],
+    "bonus": [
+      "AMA",
+      "SAM",
+      "AS"
+    ]
+  },
+  {
+    "id": 4,
+    "title": "Efes Antik Kenti - Bölüm 4",
+    "region": "İZMİR",
+    "region_id": "efes",
+    "bg": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/30/Library_of_Celsus_Ephesus_Turkey.jpg/1280px-Library_of_Celsus_Ephesus_Turkey.jpg",
+    "wheel": [
+      "B",
+      "A",
+      "L",
+      "I",
+      "K"
+    ],
+    "words": [
+      {
+        "id": "w1",
+        "word": "BALIK",
+        "row": 2,
+        "col": 0,
+        "dir": "H"
+      },
+      {
+        "id": "w2",
+        "word": "BAL",
+        "row": 2,
+        "col": 0,
+        "dir": "V"
+      },
+      {
+        "id": "w3",
+        "word": "KIL",
+        "row": 0,
+        "col": 2,
+        "dir": "V"
+      }
+    ],
+    "bonus": [
+      "ALIK",
+      "BAK",
+      "KAL",
+      "AKIL"
+    ]
+  },
+  {
+    "id": 5,
+    "title": "Nemrut Dağı - Bölüm 5",
+    "region": "ADIYAMAN",
+    "region_id": "nemrut",
+    "bg": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/29/Nemrut_Dagi_Heads.jpg/1280px-Nemrut_Dagi_Heads.jpg",
+    "wheel": [
+      "K",
+      "İ",
+      "T",
+      "A",
+      "P"
+    ],
+    "words": [
+      {
+        "id": "w1",
+        "word": "KİTAP",
+        "row": 2,
+        "col": 0,
+        "dir": "H"
+      },
+      {
+        "id": "w2",
+        "word": "TAKİP",
+        "row": 0,
+        "col": 0,
+        "dir": "V"
+      },
+      {
+        "id": "w3",
+        "word": "PAK",
+        "row": 1,
+        "col": 3,
+        "dir": "V"
+      }
+    ],
+    "bonus": [
+      "TİP",
+      "PAT",
+      "KAT",
+      "AİT"
+    ]
+  },
+  {
+    "id": 6,
+    "title": "Göbeklitepe - Bölüm 6",
+    "region": "ŞANLIURFA",
+    "region_id": "gobeklitepe",
+    "bg": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a8/G%C3%B6bekli_Tepe%2C_Sanliurfa.jpg/1280px-G%C3%B6bekli_Tepe%2C_Sanliurfa.jpg",
+    "wheel": [
+      "D",
+      "E",
+      "N",
+      "İ",
+      "Z"
+    ],
+    "words": [
+      {
+        "id": "w1",
+        "word": "DENİZ",
+        "row": 2,
+        "col": 0,
+        "dir": "H"
+      },
+      {
+        "id": "w2",
+        "word": "DİZ",
+        "row": 2,
+        "col": 0,
+        "dir": "V"
+      },
+      {
+        "id": "w3",
+        "word": "DİN",
+        "row": 0,
+        "col": 2,
+        "dir": "V"
+      }
+    ],
+    "bonus": [
+      "DİZE",
+      "İZ",
+      "İN"
+    ]
+  },
+  {
+    "id": 7,
+    "title": "Sümela Manastırı - Bölüm 7",
+    "region": "TRABZON",
+    "region_id": "sumela",
+    "bg": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/Sumela_from_across_valley.JPG/1280px-Sumela_from_across_valley.JPG",
+    "wheel": [
+      "R",
+      "O",
+      "M",
+      "A",
+      "N"
+    ],
+    "words": [
+      {
+        "id": "w1",
+        "word": "ROMA",
+        "row": 2,
+        "col": 0,
+        "dir": "H"
+      },
+      {
+        "id": "w2",
+        "word": "ORAN",
+        "row": 1,
+        "col": 0,
+        "dir": "V"
+      },
+      {
+        "id": "w3",
+        "word": "ROMAN",
+        "row": 0,
+        "col": 2,
+        "dir": "V"
+      }
+    ],
+    "bonus": [
+      "MOR",
+      "ONAR",
+      "ROM"
+    ]
+  },
+  {
+    "id": 8,
+    "title": "Ani Harabeleri - Bölüm 8",
+    "region": "KARS",
+    "region_id": "ani",
+    "bg": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5a/Ani_Cathedral_2011.jpg/1280px-Ani_Cathedral_2011.jpg",
+    "wheel": [
+      "K",
+      "K",
+      "U",
+      "Ş",
+      "A"
+    ],
+    "words": [
+      {
+        "id": "w1",
+        "word": "KUŞAK",
+        "row": 1,
+        "col": 0,
+        "dir": "H"
+      },
+      {
+        "id": "w2",
+        "word": "KUŞ",
+        "row": 1,
+        "col": 0,
+        "dir": "V"
+      },
+      {
+        "id": "w3",
+        "word": "AŞK",
+        "row": 0,
+        "col": 2,
+        "dir": "V"
+      }
+    ],
+    "bonus": [
+      "ŞAK",
+      "KAŞ"
+    ]
+  },
+  {
+    "id": 9,
+    "title": "Kapadokya - Bölüm 9",
+    "region": "NEVŞEHİR",
+    "region_id": "kapadokya",
+    "bg": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/Hot_air_balloon_over_Cappadocia.jpg/1280px-Hot_air_balloon_over_Cappadocia.jpg",
+    "wheel": [
+      "Y",
+      "A",
+      "A",
+      "Z"
+    ],
+    "words": [
+      {
+        "id": "w1",
+        "word": "YAZ",
+        "row": 1,
+        "col": 0,
+        "dir": "H"
+      },
+      {
+        "id": "w2",
+        "word": "AYAZ",
+        "row": 0,
+        "col": 0,
+        "dir": "V"
+      }
+    ],
+    "bonus": [
+      "AY",
+      "AZ"
+    ]
+  },
+  {
+    "id": 10,
+    "title": "Pamukkale - Bölüm 10",
+    "region": "DENİZLİ",
+    "region_id": "pamukkale",
+    "bg": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/be/Pamukkale_Terraces.jpg/1280px-Pamukkale_Terraces.jpg",
+    "wheel": [
+      "K",
+      "O",
+      "R",
+      "U"
+    ],
+    "words": [
+      {
+        "id": "w1",
+        "word": "KOR",
+        "row": 2,
+        "col": 0,
+        "dir": "H"
+      },
+      {
+        "id": "w2",
+        "word": "OKUR",
+        "row": 1,
+        "col": 0,
+        "dir": "V"
+      },
+      {
+        "id": "w3",
+        "word": "KORU",
+        "row": 0,
+        "col": 2,
+        "dir": "V"
+      }
+    ],
+    "bonus": [
+      "KUR",
+      "ROK",
+      "OK"
+    ]
+  },
+  {
+    "id": 11,
+    "title": "Galata Kulesi - Bölüm 1",
+    "region": "İSTANBUL",
+    "region_id": "galata",
+    "bg": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/06/Galata_Tower_Istanbul.jpg/1280px-Galata_Tower_Istanbul.jpg",
+    "wheel": [
+      "T",
+      "A",
+      "A",
+      "R",
+      "İ",
+      "H"
+    ],
+    "words": [
+      {
+        "id": "w1",
+        "word": "TARİH",
+        "row": 3,
+        "col": 0,
+        "dir": "H"
+      },
+      {
+        "id": "w2",
+        "word": "HAT",
+        "row": 1,
+        "col": 0,
+        "dir": "V"
+      },
+      {
+        "id": "w3",
+        "word": "AHİR",
+        "row": 0,
+        "col": 2,
+        "dir": "V"
+      }
+    ],
+    "bonus": [
+      "RAHAT",
+      "HART"
+    ]
+  },
+  {
+    "id": 12,
+    "title": "Efes Antik Kenti - Bölüm 2",
+    "region": "İZMİR",
+    "region_id": "efes",
+    "bg": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/30/Library_of_Celsus_Ephesus_Turkey.jpg/1280px-Library_of_Celsus_Ephesus_Turkey.jpg",
+    "wheel": [
+      "Ç",
+      "I",
+      "N",
+      "A",
+      "R"
+    ],
+    "words": [
+      {
+        "id": "w1",
+        "word": "ÇINAR",
+        "row": 0,
+        "col": 0,
+        "dir": "H"
+      },
+      {
+        "id": "w2",
+        "word": "ÇIN",
+        "row": 0,
+        "col": 0,
+        "dir": "V"
+      },
+      {
+        "id": "w3",
+        "word": "NAR",
+        "row": 0,
+        "col": 2,
+        "dir": "V"
+      }
+    ],
+    "bonus": [
+      "ARI",
+      "IRA",
+      "ANI"
+    ]
+  },
+  {
+    "id": 13,
+    "title": "Nemrut Dağı - Bölüm 3",
+    "region": "ADIYAMAN",
+    "region_id": "nemrut",
+    "bg": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/29/Nemrut_Dagi_Heads.jpg/1280px-Nemrut_Dagi_Heads.jpg",
+    "wheel": [
+      "B",
+      "A",
+      "A",
+      "H",
+      "R"
+    ],
+    "words": [
+      {
+        "id": "w1",
+        "word": "BAHAR",
+        "row": 0,
+        "col": 0,
+        "dir": "H"
+      },
+      {
+        "id": "w2",
+        "word": "BAR",
+        "row": 0,
+        "col": 0,
+        "dir": "V"
+      },
+      {
+        "id": "w3",
+        "word": "ARA",
+        "row": 0,
+        "col": 3,
+        "dir": "V"
+      }
+    ],
+    "bonus": [
+      "HARA",
+      "RAB",
+      "ABA"
+    ]
+  },
+  {
+    "id": 14,
+    "title": "Göbeklitepe - Bölüm 4",
+    "region": "ŞANLIURFA",
+    "region_id": "gobeklitepe",
+    "bg": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a8/G%C3%B6bekli_Tepe%2C_Sanliurfa.jpg/1280px-G%C3%B6bekli_Tepe%2C_Sanliurfa.jpg",
+    "wheel": [
+      "G",
+      "Ü",
+      "N",
+      "E",
+      "Ş"
+    ],
+    "words": [
+      {
+        "id": "w1",
+        "word": "GÜNEŞ",
+        "row": 2,
+        "col": 0,
+        "dir": "H"
+      },
+      {
+        "id": "w2",
+        "word": "GÜN",
+        "row": 2,
+        "col": 0,
+        "dir": "V"
+      },
+      {
+        "id": "w3",
+        "word": "GEN",
+        "row": 0,
+        "col": 2,
+        "dir": "V"
+      }
+    ],
+    "bonus": [
+      "ŞEN"
+    ]
+  },
+  {
+    "id": 15,
+    "title": "Sümela Manastırı - Bölüm 5",
+    "region": "TRABZON",
+    "region_id": "sumela",
+    "bg": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/Sumela_from_across_valley.JPG/1280px-Sumela_from_across_valley.JPG",
+    "wheel": [
+      "Ş",
+      "E",
+      "H",
+      "İ",
+      "İ",
+      "R"
+    ],
+    "words": [
+      {
+        "id": "w1",
+        "word": "ŞEHİR",
+        "row": 0,
+        "col": 0,
+        "dir": "H"
+      },
+      {
+        "id": "w2",
+        "word": "ŞER",
+        "row": 0,
+        "col": 0,
+        "dir": "V"
+      },
+      {
+        "id": "w3",
+        "word": "HER",
+        "row": 0,
+        "col": 2,
+        "dir": "V"
+      }
+    ],
+    "bonus": [
+      "ŞİİR",
+      "ER"
+    ]
+  },
+  {
+    "id": 16,
+    "title": "Ani Harabeleri - Bölüm 6",
+    "region": "KARS",
+    "region_id": "ani",
+    "bg": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5a/Ani_Cathedral_2011.jpg/1280px-Ani_Cathedral_2011.jpg",
+    "wheel": [
+      "O",
+      "R",
+      "M",
+      "A",
+      "N"
+    ],
+    "words": [
+      {
+        "id": "w1",
+        "word": "ORMAN",
+        "row": 2,
+        "col": 0,
+        "dir": "H"
+      },
+      {
+        "id": "w2",
+        "word": "MOR",
+        "row": 1,
+        "col": 0,
+        "dir": "V"
+      },
+      {
+        "id": "w3",
+        "word": "ROMAN",
+        "row": 0,
+        "col": 2,
+        "dir": "V"
+      }
+    ],
+    "bonus": [
+      "NAR",
+      "ON",
+      "ORA"
+    ]
+  },
+  {
+    "id": 17,
+    "title": "Kapadokya - Bölüm 7",
+    "region": "NEVŞEHİR",
+    "region_id": "kapadokya",
+    "bg": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/Hot_air_balloon_over_Cappadocia.jpg/1280px-Hot_air_balloon_over_Cappadocia.jpg",
+    "wheel": [
+      "B",
+      "U",
+      "U",
+      "L",
+      "T",
+      "M"
+    ],
+    "words": [
+      {
+        "id": "w1",
+        "word": "BULUT",
+        "row": 1,
+        "col": 0,
+        "dir": "H"
+      },
+      {
+        "id": "w2",
+        "word": "TULU",
+        "row": 0,
+        "col": 1,
+        "dir": "V"
+      },
+      {
+        "id": "w3",
+        "word": "UMUT",
+        "row": 1,
+        "col": 3,
+        "dir": "V"
+      }
+    ],
+    "bonus": [
+      "ULU",
+      "BUT"
+    ]
+  },
+  {
+    "id": 18,
+    "title": "Pamukkale - Bölüm 8",
+    "region": "DENİZLİ",
+    "region_id": "pamukkale",
+    "bg": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/be/Pamukkale_Terraces.jpg/1280px-Pamukkale_Terraces.jpg",
+    "wheel": [
+      "Ç",
+      "Ç",
+      "İ",
+      "İ",
+      "E",
+      "K"
+    ],
+    "words": [
+      {
+        "id": "w1",
+        "word": "ÇİÇEK",
+        "row": 2,
+        "col": 0,
+        "dir": "H"
+      },
+      {
+        "id": "w2",
+        "word": "ÇEK",
+        "row": 2,
+        "col": 0,
+        "dir": "V"
+      },
+      {
+        "id": "w3",
+        "word": "KEÇİ",
+        "row": 0,
+        "col": 2,
+        "dir": "V"
+      }
+    ],
+    "bonus": [
+      "İKİ",
+      "ÇEÇ"
+    ]
+  },
+  {
+    "id": 19,
+    "title": "Galata Kulesi - Bölüm 9",
+    "region": "İSTANBUL",
+    "region_id": "galata",
+    "bg": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/06/Galata_Tower_Istanbul.jpg/1280px-Galata_Tower_Istanbul.jpg",
+    "wheel": [
+      "S",
+      "E",
+      "E",
+      "V",
+      "G",
+      "İ"
+    ],
+    "words": [
+      {
+        "id": "w1",
+        "word": "SEVGİ",
+        "row": 1,
+        "col": 0,
+        "dir": "H"
+      },
+      {
+        "id": "w2",
+        "word": "SEV",
+        "row": 1,
+        "col": 0,
+        "dir": "V"
+      },
+      {
+        "id": "w3",
+        "word": "EGE",
+        "row": 0,
+        "col": 3,
+        "dir": "V"
+      }
+    ],
+    "bonus": [
+      "EV"
+    ]
+  },
+  {
+    "id": 20,
+    "title": "Efes Antik Kenti - Bölüm 10",
+    "region": "İZMİR",
+    "region_id": "efes",
+    "bg": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/30/Library_of_Celsus_Ephesus_Turkey.jpg/1280px-Library_of_Celsus_Ephesus_Turkey.jpg",
+    "wheel": [
+      "K",
+      "A",
+      "P",
+      "I"
+    ],
+    "words": [
+      {
+        "id": "w1",
+        "word": "KAPI",
+        "row": 0,
+        "col": 0,
+        "dir": "H"
+      },
+      {
+        "id": "w2",
+        "word": "KAP",
+        "row": 0,
+        "col": 0,
+        "dir": "V"
+      },
+      {
+        "id": "w3",
+        "word": "PAK",
+        "row": 0,
+        "col": 2,
+        "dir": "V"
+      }
+    ],
+    "bonus": [
+      "AK"
+    ]
+  },
+  {
+    "id": 21,
+    "title": "Nemrut Dağı - Bölüm 1",
+    "region": "ADIYAMAN",
+    "region_id": "nemrut",
+    "bg": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/29/Nemrut_Dagi_Heads.jpg/1280px-Nemrut_Dagi_Heads.jpg",
+    "wheel": [
+      "D",
+      "O",
+      "S",
+      "T",
+      "K"
+    ],
+    "words": [
+      {
+        "id": "w1",
+        "word": "DOST",
+        "row": 1,
+        "col": 0,
+        "dir": "H"
+      },
+      {
+        "id": "w2",
+        "word": "TOS",
+        "row": 0,
+        "col": 1,
+        "dir": "V"
+      },
+      {
+        "id": "w3",
+        "word": "OT",
+        "row": 0,
+        "col": 3,
+        "dir": "V"
+      }
+    ],
+    "bonus": [
+      "KOD",
+      "TOK"
+    ]
+  },
+  {
+    "id": 22,
+    "title": "Göbeklitepe - Bölüm 2",
+    "region": "ŞANLIURFA",
+    "region_id": "gobeklitepe",
+    "bg": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a8/G%C3%B6bekli_Tepe%2C_Sanliurfa.jpg/1280px-G%C3%B6bekli_Tepe%2C_Sanliurfa.jpg",
+    "wheel": [
+      "İ",
+      "N",
+      "N",
+      "S",
+      "A",
+      "I"
+    ],
+    "words": [
+      {
+        "id": "w1",
+        "word": "İNSAN",
+        "row": 2,
+        "col": 0,
+        "dir": "H"
+      },
+      {
+        "id": "w2",
+        "word": "SAN",
+        "row": 0,
+        "col": 1,
+        "dir": "V"
+      },
+      {
+        "id": "w3",
+        "word": "ANI",
+        "row": 2,
+        "col": 3,
+        "dir": "V"
+      }
+    ],
+    "bonus": [
+      "AN",
+      "AS"
+    ]
+  },
+  {
+    "id": 23,
+    "title": "Sümela Manastırı - Bölüm 3",
+    "region": "TRABZON",
+    "region_id": "sumela",
+    "bg": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/Sumela_from_across_valley.JPG/1280px-Sumela_from_across_valley.JPG",
+    "wheel": [
+      "D",
+      "A",
+      "A",
+      "L",
+      "G",
+      "Ğ"
+    ],
+    "words": [
+      {
+        "id": "w1",
+        "word": "DALGA",
+        "row": 1,
+        "col": 0,
+        "dir": "H"
+      },
+      {
+        "id": "w2",
+        "word": "ADA",
+        "row": 0,
+        "col": 0,
+        "dir": "V"
+      },
+      {
+        "id": "w3",
+        "word": "ALA",
+        "row": 0,
+        "col": 2,
+        "dir": "V"
+      }
+    ],
+    "bonus": [
+      "ALG",
+      "DAĞ"
+    ]
+  },
+  {
+    "id": 24,
+    "title": "Ani Harabeleri - Bölüm 4",
+    "region": "KARS",
+    "region_id": "ani",
+    "bg": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5a/Ani_Cathedral_2011.jpg/1280px-Ani_Cathedral_2011.jpg",
+    "wheel": [
+      "G",
+      "G",
+      "Ö",
+      "L",
+      "E",
+      "E"
+    ],
+    "words": [
+      {
+        "id": "w1",
+        "word": "GÖLGE",
+        "row": 1,
+        "col": 0,
+        "dir": "H"
+      },
+      {
+        "id": "w2",
+        "word": "GÖL",
+        "row": 1,
+        "col": 0,
+        "dir": "V"
+      },
+      {
+        "id": "w3",
+        "word": "EGE",
+        "row": 0,
+        "col": 3,
+        "dir": "V"
+      }
+    ],
+    "bonus": [
+      "ÖGE"
+    ]
+  },
+  {
+    "id": 25,
+    "title": "Kapadokya - Bölüm 5",
+    "region": "NEVŞEHİR",
+    "region_id": "kapadokya",
+    "bg": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/Hot_air_balloon_over_Cappadocia.jpg/1280px-Hot_air_balloon_over_Cappadocia.jpg",
+    "wheel": [
+      "B",
+      "A",
+      "R",
+      "I",
+      "Ş"
+    ],
+    "words": [
+      {
+        "id": "w1",
+        "word": "BARIŞ",
+        "row": 1,
+        "col": 0,
+        "dir": "H"
+      },
+      {
+        "id": "w2",
+        "word": "BAŞ",
+        "row": 1,
+        "col": 0,
+        "dir": "V"
+      },
+      {
+        "id": "w3",
+        "word": "ARI",
+        "row": 0,
+        "col": 2,
+        "dir": "V"
+      }
+    ],
+    "bonus": [
+      "AŞ",
+      "ARŞ"
+    ]
+  },
+  {
+    "id": 26,
+    "title": "Pamukkale - Bölüm 6",
+    "region": "DENİZLİ",
+    "region_id": "pamukkale",
+    "bg": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/be/Pamukkale_Terraces.jpg/1280px-Pamukkale_Terraces.jpg",
+    "wheel": [
+      "M",
+      "U",
+      "U",
+      "T",
+      "L"
+    ],
+    "words": [
+      {
+        "id": "w1",
+        "word": "MUTLU",
+        "row": 1,
+        "col": 0,
+        "dir": "H"
+      },
+      {
+        "id": "w2",
+        "word": "TUL",
+        "row": 0,
+        "col": 1,
+        "dir": "V"
+      },
+      {
+        "id": "w3",
+        "word": "ULU",
+        "row": 0,
+        "col": 3,
+        "dir": "V"
+      }
+    ],
+    "bonus": [
+      "UT"
+    ]
+  },
+  {
+    "id": 27,
+    "title": "Galata Kulesi - Bölüm 7",
+    "region": "İSTANBUL",
+    "region_id": "galata",
+    "bg": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/06/Galata_Tower_Istanbul.jpg/1280px-Galata_Tower_Istanbul.jpg",
+    "wheel": [
+      "U",
+      "U",
+      "U",
+      "M",
+      "T",
+      "T",
+      "L"
+    ],
+    "words": [
+      {
+        "id": "w1",
+        "word": "UMUTLU",
+        "row": 1,
+        "col": 0,
+        "dir": "H"
+      },
+      {
+        "id": "w2",
+        "word": "UMUT",
+        "row": 1,
+        "col": 0,
+        "dir": "V"
+      },
+      {
+        "id": "w3",
+        "word": "TUT",
+        "row": 0,
+        "col": 2,
+        "dir": "V"
+      }
+    ],
+    "bonus": [
+      "MUT"
+    ]
+  },
+  {
+    "id": 28,
+    "title": "Efes Antik Kenti - Bölüm 8",
+    "region": "İZMİR",
+    "region_id": "efes",
+    "bg": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/30/Library_of_Celsus_Ephesus_Turkey.jpg/1280px-Library_of_Celsus_Ephesus_Turkey.jpg",
+    "wheel": [
+      "H",
+      "U",
+      "U",
+      "Z",
+      "R",
+      "O"
+    ],
+    "words": [
+      {
+        "id": "w1",
+        "word": "HUZUR",
+        "row": 2,
+        "col": 0,
+        "dir": "H"
+      },
+      {
+        "id": "w2",
+        "word": "RUH",
+        "row": 0,
+        "col": 0,
+        "dir": "V"
+      },
+      {
+        "id": "w3",
+        "word": "ZOR",
+        "row": 2,
+        "col": 2,
+        "dir": "V"
+      }
+    ],
+    "bonus": [
+      "HUR"
+    ]
+  },
+  {
+    "id": 29,
+    "title": "Nemrut Dağı - Bölüm 9",
+    "region": "ADIYAMAN",
+    "region_id": "nemrut",
+    "bg": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/29/Nemrut_Dagi_Heads.jpg/1280px-Nemrut_Dagi_Heads.jpg",
+    "wheel": [
+      "K",
+      "Ö",
+      "P",
+      "R",
+      "Ü"
+    ],
+    "words": [
+      {
+        "id": "w1",
+        "word": "KÖPRÜ",
+        "row": 1,
+        "col": 0,
+        "dir": "H"
+      },
+      {
+        "id": "w2",
+        "word": "KÖP",
+        "row": 1,
+        "col": 0,
+        "dir": "V"
+      },
+      {
+        "id": "w3",
+        "word": "ÖRK",
+        "row": 0,
+        "col": 3,
+        "dir": "V"
+      }
+    ],
+    "bonus": [
+      "PÜR"
+    ]
+  },
+  {
+    "id": 30,
+    "title": "Göbeklitepe - Bölüm 10",
+    "region": "ŞANLIURFA",
+    "region_id": "gobeklitepe",
+    "bg": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a8/G%C3%B6bekli_Tepe%2C_Sanliurfa.jpg/1280px-G%C3%B6bekli_Tepe%2C_Sanliurfa.jpg",
+    "wheel": [
+      "N",
+      "E",
+      "H",
+      "İ",
+      "İ",
+      "R"
+    ],
+    "words": [
+      {
+        "id": "w1",
+        "word": "NEHİR",
+        "row": 2,
+        "col": 0,
+        "dir": "H"
+      },
+      {
+        "id": "w2",
+        "word": "HER",
+        "row": 1,
+        "col": 1,
+        "dir": "V"
+      },
+      {
+        "id": "w3",
+        "word": "ERİ",
+        "row": 0,
+        "col": 3,
+        "dir": "V"
+      }
+    ],
+    "bonus": [
+      "İRİ",
+      "İN"
+    ]
+  },
+  {
+    "id": 31,
+    "title": "Sümela Manastırı - Bölüm 1",
+    "region": "TRABZON",
+    "region_id": "sumela",
+    "bg": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/Sumela_from_across_valley.JPG/1280px-Sumela_from_across_valley.JPG",
+    "wheel": [
+      "A",
+      "A",
+      "D",
+      "L",
+      "E",
+      "T"
+    ],
+    "words": [
+      {
+        "id": "w1",
+        "word": "ADALET",
+        "row": 2,
+        "col": 0,
+        "dir": "H"
+      },
+      {
+        "id": "w2",
+        "word": "ADA",
+        "row": 2,
+        "col": 0,
+        "dir": "V"
+      },
+      {
+        "id": "w3",
+        "word": "EDA",
+        "row": 0,
+        "col": 2,
+        "dir": "V"
+      }
+    ],
+    "bonus": [
+      "AT"
+    ]
+  },
+  {
+    "id": 32,
+    "title": "Ani Harabeleri - Bölüm 2",
+    "region": "KARS",
+    "region_id": "ani",
+    "bg": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5a/Ani_Cathedral_2011.jpg/1280px-Ani_Cathedral_2011.jpg",
+    "wheel": [
+      "K",
+      "A",
+      "N",
+      "N",
+      "Y",
+      "O"
+    ],
+    "words": [
+      {
+        "id": "w1",
+        "word": "KANYON",
+        "row": 2,
+        "col": 0,
+        "dir": "H"
+      },
+      {
+        "id": "w2",
+        "word": "KAN",
+        "row": 2,
+        "col": 0,
+        "dir": "V"
+      },
+      {
+        "id": "w3",
+        "word": "YAN",
+        "row": 0,
+        "col": 2,
+        "dir": "V"
+      }
+    ],
+    "bonus": [
+      "OYA",
+      "ON"
+    ]
+  },
+  {
+    "id": 33,
+    "title": "Kapadokya - Bölüm 3",
+    "region": "NEVŞEHİR",
+    "region_id": "kapadokya",
+    "bg": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/Hot_air_balloon_over_Cappadocia.jpg/1280px-Hot_air_balloon_over_Cappadocia.jpg",
+    "wheel": [
+      "V",
+      "O",
+      "L",
+      "K",
+      "A",
+      "N"
+    ],
+    "words": [
+      {
+        "id": "w1",
+        "word": "VOLKAN",
+        "row": 2,
+        "col": 0,
+        "dir": "H"
+      },
+      {
+        "id": "w2",
+        "word": "KOL",
+        "row": 1,
+        "col": 1,
+        "dir": "V"
+      },
+      {
+        "id": "w3",
+        "word": "LAK",
+        "row": 0,
+        "col": 3,
+        "dir": "V"
+      }
+    ],
+    "bonus": [
+      "VAN",
+      "OVA"
+    ]
+  },
+  {
+    "id": 34,
+    "title": "Pamukkale - Bölüm 4",
+    "region": "DENİZLİ",
+    "region_id": "pamukkale",
+    "bg": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/be/Pamukkale_Terraces.jpg/1280px-Pamukkale_Terraces.jpg",
+    "wheel": [
+      "Ş",
+      "E",
+      "E",
+      "L",
+      "L",
+      "A"
+    ],
+    "words": [
+      {
+        "id": "w1",
+        "word": "ŞELALE",
+        "row": 3,
+        "col": 0,
+        "dir": "H"
+      },
+      {
+        "id": "w2",
+        "word": "LALE",
+        "row": 0,
+        "col": 1,
+        "dir": "V"
+      },
+      {
+        "id": "w3",
+        "word": "ELA",
+        "row": 1,
+        "col": 3,
+        "dir": "V"
+      }
+    ],
+    "bonus": [
+      "ŞAL"
+    ]
+  },
+  {
+    "id": 35,
+    "title": "Galata Kulesi - Bölüm 5",
+    "region": "İSTANBUL",
+    "region_id": "galata",
+    "bg": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/06/Galata_Tower_Istanbul.jpg/1280px-Galata_Tower_Istanbul.jpg",
+    "wheel": [
+      "G",
+      "U",
+      "U",
+      "R",
+      "R",
+      "H"
+    ],
+    "words": [
+      {
+        "id": "w1",
+        "word": "GURUR",
+        "row": 1,
+        "col": 0,
+        "dir": "H"
+      },
+      {
+        "id": "w2",
+        "word": "GUR",
+        "row": 1,
+        "col": 0,
+        "dir": "V"
+      },
+      {
+        "id": "w3",
+        "word": "UR",
+        "row": 0,
+        "col": 2,
+        "dir": "V"
+      }
+    ],
+    "bonus": [
+      "RUH"
+    ]
+  },
+  {
+    "id": 36,
+    "title": "Efes Antik Kenti - Bölüm 6",
+    "region": "İZMİR",
+    "region_id": "efes",
+    "bg": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/30/Library_of_Celsus_Ephesus_Turkey.jpg/1280px-Library_of_Celsus_Ephesus_Turkey.jpg",
+    "wheel": [
+      "Z",
+      "A",
+      "A",
+      "M",
+      "N"
+    ],
+    "words": [
+      {
+        "id": "w1",
+        "word": "ZAMAN",
+        "row": 2,
+        "col": 0,
+        "dir": "H"
+      },
+      {
+        "id": "w2",
+        "word": "AZAM",
+        "row": 1,
+        "col": 0,
+        "dir": "V"
+      },
+      {
+        "id": "w3",
+        "word": "NAM",
+        "row": 0,
+        "col": 2,
+        "dir": "V"
+      }
+    ],
+    "bonus": [
+      "ZAN",
+      "ANA"
+    ]
+  },
+  {
+    "id": 37,
+    "title": "Nemrut Dağı - Bölüm 7",
+    "region": "ADIYAMAN",
+    "region_id": "nemrut",
+    "bg": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/29/Nemrut_Dagi_Heads.jpg/1280px-Nemrut_Dagi_Heads.jpg",
+    "wheel": [
+      "G",
+      "Ö",
+      "K",
+      "Y",
+      "Ü",
+      "Ü",
+      "Z"
+    ],
+    "words": [
+      {
+        "id": "w1",
+        "word": "GÖKYÜZÜ",
+        "row": 0,
+        "col": 0,
+        "dir": "H"
+      },
+      {
+        "id": "w2",
+        "word": "GÖK",
+        "row": 0,
+        "col": 0,
+        "dir": "V"
+      },
+      {
+        "id": "w3",
+        "word": "YÜZ",
+        "row": 0,
+        "col": 3,
+        "dir": "V"
+      }
+    ],
+    "bonus": [
+      "GÖZ",
+      "ÖZ"
+    ]
+  },
+  {
+    "id": 38,
+    "title": "Göbeklitepe - Bölüm 8",
+    "region": "ŞANLIURFA",
+    "region_id": "gobeklitepe",
+    "bg": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a8/G%C3%B6bekli_Tepe%2C_Sanliurfa.jpg/1280px-G%C3%B6bekli_Tepe%2C_Sanliurfa.jpg",
+    "wheel": [
+      "T",
+      "O",
+      "P",
+      "R",
+      "A",
+      "K"
+    ],
+    "words": [
+      {
+        "id": "w1",
+        "word": "TOPRAK",
+        "row": 2,
+        "col": 0,
+        "dir": "H"
+      },
+      {
+        "id": "w2",
+        "word": "PARK",
+        "row": 2,
+        "col": 2,
+        "dir": "V"
+      },
+      {
+        "id": "w3",
+        "word": "POT",
+        "row": 0,
+        "col": 0,
+        "dir": "V"
+      }
+    ],
+    "bonus": [
+      "KOR",
+      "KOT",
+      "PAK"
+    ]
+  },
+  {
+    "id": 39,
+    "title": "Sümela Manastırı - Bölüm 9",
+    "region": "TRABZON",
+    "region_id": "sumela",
+    "bg": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/Sumela_from_across_valley.JPG/1280px-Sumela_from_across_valley.JPG",
+    "wheel": [
+      "R",
+      "R",
+      "Ü",
+      "Z",
+      "G",
+      "A"
+    ],
+    "words": [
+      {
+        "id": "w1",
+        "word": "RÜZGAR",
+        "row": 2,
+        "col": 0,
+        "dir": "H"
+      },
+      {
+        "id": "w2",
+        "word": "GÜR",
+        "row": 0,
+        "col": 0,
+        "dir": "V"
+      },
+      {
+        "id": "w3",
+        "word": "ZAR",
+        "row": 2,
+        "col": 2,
+        "dir": "V"
+      }
+    ],
+    "bonus": [
+      "GAZ",
+      "ARZ"
+    ]
+  },
+  {
+    "id": 40,
+    "title": "Ani Harabeleri - Bölüm 10",
+    "region": "KARS",
+    "region_id": "ani",
+    "bg": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5a/Ani_Cathedral_2011.jpg/1280px-Ani_Cathedral_2011.jpg",
+    "wheel": [
+      "Y",
+      "I",
+      "I",
+      "L",
+      "D",
+      "Z",
+      "İ"
+    ],
+    "words": [
+      {
+        "id": "w1",
+        "word": "YILDIZ",
+        "row": 2,
+        "col": 0,
+        "dir": "H"
+      },
+      {
+        "id": "w2",
+        "word": "YIL",
+        "row": 2,
+        "col": 0,
+        "dir": "V"
+      },
+      {
+        "id": "w3",
+        "word": "DIL",
+        "row": 0,
+        "col": 2,
+        "dir": "V"
+      }
+    ],
+    "bonus": [
+      "İZ"
+    ]
+  },
+  {
+    "id": 41,
+    "title": "Kapadokya - Bölüm 1",
+    "region": "NEVŞEHİR",
+    "region_id": "kapadokya",
+    "bg": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/Hot_air_balloon_over_Cappadocia.jpg/1280px-Hot_air_balloon_over_Cappadocia.jpg",
+    "wheel": [
+      "C",
+      "Ü",
+      "R",
+      "E",
+      "T"
+    ],
+    "words": [
+      {
+        "id": "w1",
+        "word": "CÜRET",
+        "row": 1,
+        "col": 0,
+        "dir": "H"
+      },
+      {
+        "id": "w2",
+        "word": "TÜRE",
+        "row": 0,
+        "col": 1,
+        "dir": "V"
+      },
+      {
+        "id": "w3",
+        "word": "TÜR",
+        "row": 1,
+        "col": 4,
+        "dir": "V"
+      }
+    ],
+    "bonus": [
+      "ÜRE",
+      "RET"
+    ]
+  },
+  {
+    "id": 42,
+    "title": "Pamukkale - Bölüm 2",
+    "region": "DENİZLİ",
+    "region_id": "pamukkale",
+    "bg": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/be/Pamukkale_Terraces.jpg/1280px-Pamukkale_Terraces.jpg",
+    "wheel": [
+      "S",
+      "A",
+      "B",
+      "I",
+      "R"
+    ],
+    "words": [
+      {
+        "id": "w1",
+        "word": "SABIR",
+        "row": 2,
+        "col": 0,
+        "dir": "H"
+      },
+      {
+        "id": "w2",
+        "word": "BAS",
+        "row": 0,
+        "col": 0,
+        "dir": "V"
+      },
+      {
+        "id": "w3",
+        "word": "BAR",
+        "row": 2,
+        "col": 2,
+        "dir": "V"
+      }
+    ],
+    "bonus": [
+      "ARI",
+      "SIR",
+      "ASIR"
+    ]
+  },
+  {
+    "id": 43,
+    "title": "Galata Kulesi - Bölüm 3",
+    "region": "İSTANBUL",
+    "region_id": "galata",
+    "bg": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/06/Galata_Tower_Istanbul.jpg/1280px-Galata_Tower_Istanbul.jpg",
+    "wheel": [
+      "K",
+      "I",
+      "S",
+      "M",
+      "E",
+      "T",
+      "İ"
+    ],
+    "words": [
+      {
+        "id": "w1",
+        "word": "KISMET",
+        "row": 0,
+        "col": 0,
+        "dir": "H"
+      },
+      {
+        "id": "w2",
+        "word": "KIST",
+        "row": 0,
+        "col": 0,
+        "dir": "V"
+      },
+      {
+        "id": "w3",
+        "word": "SET",
+        "row": 0,
+        "col": 2,
+        "dir": "V"
+      }
+    ],
+    "bonus": [
+      "KİS",
+      "MİT",
+      "TEK"
+    ]
+  },
+  {
+    "id": 44,
+    "title": "Efes Antik Kenti - Bölüm 4",
+    "region": "İZMİR",
+    "region_id": "efes",
+    "bg": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/30/Library_of_Celsus_Ephesus_Turkey.jpg/1280px-Library_of_Celsus_Ephesus_Turkey.jpg",
+    "wheel": [
+      "S",
+      "E",
+      "R",
+      "A",
+      "P"
+    ],
+    "words": [
+      {
+        "id": "w1",
+        "word": "SERAP",
+        "row": 3,
+        "col": 0,
+        "dir": "H"
+      },
+      {
+        "id": "w2",
+        "word": "PARS",
+        "row": 0,
+        "col": 0,
+        "dir": "V"
+      },
+      {
+        "id": "w3",
+        "word": "PAS",
+        "row": 2,
+        "col": 3,
+        "dir": "V"
+      }
+    ],
+    "bonus": [
+      "SARP",
+      "PER"
+    ]
+  },
+  {
+    "id": 45,
+    "title": "Nemrut Dağı - Bölüm 5",
+    "region": "ADIYAMAN",
+    "region_id": "nemrut",
+    "bg": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/29/Nemrut_Dagi_Heads.jpg/1280px-Nemrut_Dagi_Heads.jpg",
+    "wheel": [
+      "G",
+      "Ü",
+      "Z",
+      "E",
+      "L"
+    ],
+    "words": [
+      {
+        "id": "w1",
+        "word": "GÜZEL",
+        "row": 0,
+        "col": 0,
+        "dir": "H"
+      },
+      {
+        "id": "w2",
+        "word": "GÜZ",
+        "row": 0,
+        "col": 0,
+        "dir": "V"
+      },
+      {
+        "id": "w3",
+        "word": "ZEL",
+        "row": 0,
+        "col": 2,
+        "dir": "V"
+      }
+    ],
+    "bonus": [
+      "GEZ"
+    ]
+  },
+  {
+    "id": 46,
+    "title": "Göbeklitepe - Bölüm 6",
+    "region": "ŞANLIURFA",
+    "region_id": "gobeklitepe",
+    "bg": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a8/G%C3%B6bekli_Tepe%2C_Sanliurfa.jpg/1280px-G%C3%B6bekli_Tepe%2C_Sanliurfa.jpg",
+    "wheel": [
+      "D",
+      "Ü",
+      "N",
+      "Y",
+      "A"
+    ],
+    "words": [
+      {
+        "id": "w1",
+        "word": "DÜNYA",
+        "row": 2,
+        "col": 0,
+        "dir": "H"
+      },
+      {
+        "id": "w2",
+        "word": "DÜN",
+        "row": 2,
+        "col": 0,
+        "dir": "V"
+      },
+      {
+        "id": "w3",
+        "word": "YAN",
+        "row": 0,
+        "col": 2,
+        "dir": "V"
+      }
+    ],
+    "bonus": [
+      "ÜN",
+      "AY"
+    ]
+  },
+  {
+    "id": 47,
+    "title": "Sümela Manastırı - Bölüm 7",
+    "region": "TRABZON",
+    "region_id": "sumela",
+    "bg": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/Sumela_from_across_valley.JPG/1280px-Sumela_from_across_valley.JPG",
+    "wheel": [
+      "H",
+      "A",
+      "A",
+      "Y",
+      "T"
+    ],
+    "words": [
+      {
+        "id": "w1",
+        "word": "HAYAT",
+        "row": 2,
+        "col": 0,
+        "dir": "H"
+      },
+      {
+        "id": "w2",
+        "word": "HAY",
+        "row": 2,
+        "col": 0,
+        "dir": "V"
+      },
+      {
+        "id": "w3",
+        "word": "TAY",
+        "row": 0,
+        "col": 2,
+        "dir": "V"
+      }
+    ],
+    "bonus": [
+      "HAT",
+      "AY"
+    ]
+  },
+  {
+    "id": 48,
+    "title": "Ani Harabeleri - Bölüm 8",
+    "region": "KARS",
+    "region_id": "ani",
+    "bg": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5a/Ani_Cathedral_2011.jpg/1280px-Ani_Cathedral_2011.jpg",
+    "wheel": [
+      "S",
+      "E",
+      "V",
+      "İ",
+      "N",
+      "Ç"
+    ],
+    "words": [
+      {
+        "id": "w1",
+        "word": "SEVİNÇ",
+        "row": 0,
+        "col": 0,
+        "dir": "H"
+      },
+      {
+        "id": "w2",
+        "word": "SEV",
+        "row": 0,
+        "col": 0,
+        "dir": "V"
+      },
+      {
+        "id": "w3",
+        "word": "İNÇ",
+        "row": 0,
+        "col": 3,
+        "dir": "V"
+      }
+    ],
+    "bonus": [
+      "EV",
+      "İN"
+    ]
+  },
+  {
+    "id": 49,
+    "title": "Kapadokya - Bölüm 9",
+    "region": "NEVŞEHİR",
+    "region_id": "kapadokya",
+    "bg": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/Hot_air_balloon_over_Cappadocia.jpg/1280px-Hot_air_balloon_over_Cappadocia.jpg",
+    "wheel": [
+      "Y",
+      "U",
+      "R",
+      "T"
+    ],
+    "words": [
+      {
+        "id": "w1",
+        "word": "YURT",
+        "row": 2,
+        "col": 0,
+        "dir": "H"
+      },
+      {
+        "id": "w2",
+        "word": "YUR",
+        "row": 2,
+        "col": 0,
+        "dir": "V"
+      },
+      {
+        "id": "w3",
+        "word": "TUR",
+        "row": 0,
+        "col": 2,
+        "dir": "V"
+      }
+    ],
+    "bonus": [
+      "UR",
+      "UT"
+    ]
+  },
+  {
+    "id": 50,
+    "title": "Pamukkale - Bölüm 10",
+    "region": "DENİZLİ",
+    "region_id": "pamukkale",
+    "bg": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/be/Pamukkale_Terraces.jpg/1280px-Pamukkale_Terraces.jpg",
+    "wheel": [
+      "C",
+      "A",
+      "A",
+      "N",
+      "N",
+      "D"
+    ],
+    "words": [
+      {
+        "id": "w1",
+        "word": "CANDAN",
+        "row": 1,
+        "col": 0,
+        "dir": "H"
+      },
+      {
+        "id": "w2",
+        "word": "CAN",
+        "row": 1,
+        "col": 0,
+        "dir": "V"
+      },
+      {
+        "id": "w3",
+        "word": "ANA",
+        "row": 0,
+        "col": 2,
+        "dir": "V"
+      }
+    ],
+    "bonus": [
+      "ADA",
+      "AN"
+    ]
+  },
+  {
+    "id": 51,
+    "title": "Galata Kulesi - Bölüm 1",
+    "region": "İSTANBUL",
+    "region_id": "galata",
+    "bg": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/06/Galata_Tower_Istanbul.jpg/1280px-Galata_Tower_Istanbul.jpg",
+    "wheel": [
+      "B",
+      "İ",
+      "İ",
+      "L",
+      "G",
+      "K"
+    ],
+    "words": [
+      {
+        "id": "w1",
+        "word": "BİLGİ",
+        "row": 2,
+        "col": 0,
+        "dir": "H"
+      },
+      {
+        "id": "w2",
+        "word": "LİG",
+        "row": 1,
+        "col": 1,
+        "dir": "V"
+      },
+      {
+        "id": "w3",
+        "word": "İLGİ",
+        "row": 0,
+        "col": 3,
+        "dir": "V"
+      }
+    ],
+    "bonus": [
+      "BİL",
+      "İKİ"
+    ]
+  },
+  {
+    "id": 52,
+    "title": "Efes Antik Kenti - Bölüm 2",
+    "region": "İZMİR",
+    "region_id": "efes",
+    "bg": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/30/Library_of_Celsus_Ephesus_Turkey.jpg/1280px-Library_of_Celsus_Ephesus_Turkey.jpg",
+    "wheel": [
+      "S",
+      "A",
+      "A",
+      "N",
+      "T"
+    ],
+    "words": [
+      {
+        "id": "w1",
+        "word": "SANAT",
+        "row": 2,
+        "col": 0,
+        "dir": "H"
+      },
+      {
+        "id": "w2",
+        "word": "TAS",
+        "row": 0,
+        "col": 0,
+        "dir": "V"
+      },
+      {
+        "id": "w3",
+        "word": "ANA",
+        "row": 1,
+        "col": 2,
+        "dir": "V"
+      }
+    ],
+    "bonus": [
+      "SAAT",
+      "AT"
+    ]
+  },
+  {
+    "id": 53,
+    "title": "Nemrut Dağı - Bölüm 3",
+    "region": "ADIYAMAN",
+    "region_id": "nemrut",
+    "bg": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/29/Nemrut_Dagi_Heads.jpg/1280px-Nemrut_Dagi_Heads.jpg",
+    "wheel": [
+      "M",
+      "Ü",
+      "Z",
+      "İ",
+      "İ",
+      "K"
+    ],
+    "words": [
+      {
+        "id": "w1",
+        "word": "MÜZİK",
+        "row": 1,
+        "col": 0,
+        "dir": "H"
+      },
+      {
+        "id": "w2",
+        "word": "MÜZ",
+        "row": 1,
+        "col": 0,
+        "dir": "V"
+      },
+      {
+        "id": "w3",
+        "word": "KİM",
+        "row": 0,
+        "col": 3,
+        "dir": "V"
+      }
+    ],
+    "bonus": [
+      "İKİ"
+    ]
+  },
+  {
+    "id": 54,
+    "title": "Göbeklitepe - Bölüm 4",
+    "region": "ŞANLIURFA",
+    "region_id": "gobeklitepe",
+    "bg": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a8/G%C3%B6bekli_Tepe%2C_Sanliurfa.jpg/1280px-G%C3%B6bekli_Tepe%2C_Sanliurfa.jpg",
+    "wheel": [
+      "R",
+      "E",
+      "S",
+      "İ",
+      "M"
+    ],
+    "words": [
+      {
+        "id": "w1",
+        "word": "RESİM",
+        "row": 2,
+        "col": 0,
+        "dir": "H"
+      },
+      {
+        "id": "w2",
+        "word": "SERİ",
+        "row": 0,
+        "col": 0,
+        "dir": "V"
+      },
+      {
+        "id": "w3",
+        "word": "MİR",
+        "row": 1,
+        "col": 3,
+        "dir": "V"
+      }
+    ],
+    "bonus": [
+      "SİM",
+      "İS"
+    ]
+  },
+  {
+    "id": 55,
+    "title": "Sümela Manastırı - Bölüm 5",
+    "region": "TRABZON",
+    "region_id": "sumela",
+    "bg": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/Sumela_from_across_valley.JPG/1280px-Sumela_from_across_valley.JPG",
+    "wheel": [
+      "Ş",
+      "İ",
+      "İ",
+      "R"
+    ],
+    "words": [
+      {
+        "id": "w1",
+        "word": "ŞİİR",
+        "row": 0,
+        "col": 0,
+        "dir": "H"
+      },
+      {
+        "id": "w2",
+        "word": "ŞİR",
+        "row": 0,
+        "col": 0,
+        "dir": "V"
+      },
+      {
+        "id": "w3",
+        "word": "İRİ",
+        "row": 0,
+        "col": 2,
+        "dir": "V"
+      }
+    ],
+    "bonus": [
+      "İŞ",
+      "İR"
+    ]
+  },
+  {
+    "id": 56,
+    "title": "Ani Harabeleri - Bölüm 6",
+    "region": "KARS",
+    "region_id": "ani",
+    "bg": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5a/Ani_Cathedral_2011.jpg/1280px-Ani_Cathedral_2011.jpg",
+    "wheel": [
+      "M",
+      "A",
+      "A",
+      "S",
+      "L"
+    ],
+    "words": [
+      {
+        "id": "w1",
+        "word": "MASAL",
+        "row": 1,
+        "col": 0,
+        "dir": "H"
+      },
+      {
+        "id": "w2",
+        "word": "ASAL",
+        "row": 1,
+        "col": 1,
+        "dir": "V"
+      },
+      {
+        "id": "w3",
+        "word": "LAM",
+        "row": 0,
+        "col": 3,
+        "dir": "V"
+      }
+    ],
+    "bonus": [
+      "MALA",
+      "SAL"
+    ]
+  },
+  {
+    "id": 57,
+    "title": "Kapadokya - Bölüm 7",
+    "region": "NEVŞEHİR",
+    "region_id": "kapadokya",
+    "bg": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/Hot_air_balloon_over_Cappadocia.jpg/1280px-Hot_air_balloon_over_Cappadocia.jpg",
+    "wheel": [
+      "D",
+      "E",
+      "S",
+      "T",
+      "A",
+      "N"
+    ],
+    "words": [
+      {
+        "id": "w1",
+        "word": "DESTAN",
+        "row": 0,
+        "col": 0,
+        "dir": "H"
+      },
+      {
+        "id": "w2",
+        "word": "DANS",
+        "row": 0,
+        "col": 0,
+        "dir": "V"
+      },
+      {
+        "id": "w3",
+        "word": "SET",
+        "row": 0,
+        "col": 2,
+        "dir": "V"
+      }
+    ],
+    "bonus": [
+      "EDA",
+      "TEN"
+    ]
+  },
+  {
+    "id": 58,
+    "title": "Pamukkale - Bölüm 8",
+    "region": "DENİZLİ",
+    "region_id": "pamukkale",
+    "bg": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/be/Pamukkale_Terraces.jpg/1280px-Pamukkale_Terraces.jpg",
+    "wheel": [
+      "R",
+      "O",
+      "M",
+      "A",
+      "N"
+    ],
+    "words": [
+      {
+        "id": "w1",
+        "word": "ROMAN",
+        "row": 3,
+        "col": 0,
+        "dir": "H"
+      },
+      {
+        "id": "w2",
+        "word": "ONAR",
+        "row": 0,
+        "col": 0,
+        "dir": "V"
+      },
+      {
+        "id": "w3",
+        "word": "MOR",
+        "row": 3,
+        "col": 2,
+        "dir": "V"
+      }
+    ],
+    "bonus": [
+      "ROMA",
+      "ORAN"
+    ]
+  },
+  {
+    "id": 59,
+    "title": "Galata Kulesi - Bölüm 9",
+    "region": "İSTANBUL",
+    "region_id": "galata",
+    "bg": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/06/Galata_Tower_Istanbul.jpg/1280px-Galata_Tower_Istanbul.jpg",
+    "wheel": [
+      "K",
+      "Ü",
+      "Ü",
+      "L",
+      "T",
+      "R"
+    ],
+    "words": [
+      {
+        "id": "w1",
+        "word": "KÜLTÜR",
+        "row": 3,
+        "col": 0,
+        "dir": "H"
+      },
+      {
+        "id": "w2",
+        "word": "TÜRK",
+        "row": 0,
+        "col": 0,
+        "dir": "V"
+      },
+      {
+        "id": "w3",
+        "word": "KÜL",
+        "row": 1,
+        "col": 2,
+        "dir": "V"
+      }
+    ],
+    "bonus": [
+      "TÜR",
+      "KÜT"
+    ]
+  },
+  {
+    "id": 60,
+    "title": "Efes Antik Kenti - Bölüm 10",
+    "region": "İZMİR",
+    "region_id": "efes",
+    "bg": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/30/Library_of_Celsus_Ephesus_Turkey.jpg/1280px-Library_of_Celsus_Ephesus_Turkey.jpg",
+    "wheel": [
+      "M",
+      "İ",
+      "R",
+      "A",
+      "S",
+      "I"
+    ],
+    "words": [
+      {
+        "id": "w1",
+        "word": "MİRAS",
+        "row": 3,
+        "col": 0,
+        "dir": "H"
+      },
+      {
+        "id": "w2",
+        "word": "SİMA",
+        "row": 1,
+        "col": 0,
+        "dir": "V"
+      },
+      {
+        "id": "w3",
+        "word": "ASIR",
+        "row": 0,
+        "col": 2,
+        "dir": "V"
+      }
+    ],
+    "bonus": [
+      "SARI",
+      "RAM"
+    ]
+  },
+  {
+    "id": 61,
+    "title": "Nemrut Dağı - Bölüm 1",
+    "region": "ADIYAMAN",
+    "region_id": "nemrut",
+    "bg": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/29/Nemrut_Dagi_Heads.jpg/1280px-Nemrut_Dagi_Heads.jpg",
+    "wheel": [
+      "Ç",
+      "E",
+      "E",
+      "Ş",
+      "M"
+    ],
+    "words": [
+      {
+        "id": "w1",
+        "word": "ÇEŞME",
+        "row": 1,
+        "col": 0,
+        "dir": "H"
+      },
+      {
+        "id": "w2",
+        "word": "ÇEŞ",
+        "row": 1,
+        "col": 0,
+        "dir": "V"
+      },
+      {
+        "id": "w3",
+        "word": "EŞ",
+        "row": 0,
+        "col": 2,
+        "dir": "V"
+      }
+    ],
+    "bonus": [
+      "MEŞ"
+    ]
+  },
+  {
+    "id": 62,
+    "title": "Göbeklitepe - Bölüm 2",
+    "region": "ŞANLIURFA",
+    "region_id": "gobeklitepe",
+    "bg": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a8/G%C3%B6bekli_Tepe%2C_Sanliurfa.jpg/1280px-G%C3%B6bekli_Tepe%2C_Sanliurfa.jpg",
+    "wheel": [
+      "S",
+      "A",
+      "A",
+      "R",
+      "Y"
+    ],
+    "words": [
+      {
+        "id": "w1",
+        "word": "SARAY",
+        "row": 1,
+        "col": 0,
+        "dir": "H"
+      },
+      {
+        "id": "w2",
+        "word": "YARA",
+        "row": 0,
+        "col": 1,
+        "dir": "V"
+      },
+      {
+        "id": "w3",
+        "word": "RAY",
+        "row": 0,
+        "col": 3,
+        "dir": "V"
+      }
+    ],
+    "bonus": [
+      "SARA",
+      "AY"
+    ]
+  },
+  {
+    "id": 63,
+    "title": "Sümela Manastırı - Bölüm 3",
+    "region": "TRABZON",
+    "region_id": "sumela",
+    "bg": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/Sumela_from_across_valley.JPG/1280px-Sumela_from_across_valley.JPG",
+    "wheel": [
+      "K",
+      "K",
+      "Ö",
+      "Ş"
+    ],
+    "words": [
+      {
+        "id": "w1",
+        "word": "KÖŞK",
+        "row": 0,
+        "col": 0,
+        "dir": "H"
+      },
+      {
+        "id": "w2",
+        "word": "KÖK",
+        "row": 0,
+        "col": 0,
+        "dir": "V"
+      },
+      {
+        "id": "w3",
+        "word": "ŞÖK",
+        "row": 0,
+        "col": 2,
+        "dir": "V"
+      }
+    ],
+    "bonus": [
+      "ÖŞ"
+    ]
+  },
+  {
+    "id": 64,
+    "title": "Ani Harabeleri - Bölüm 4",
+    "region": "KARS",
+    "region_id": "ani",
+    "bg": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5a/Ani_Cathedral_2011.jpg/1280px-Ani_Cathedral_2011.jpg",
+    "wheel": [
+      "Ç",
+      "A",
+      "R",
+      "Ş",
+      "I"
+    ],
+    "words": [
+      {
+        "id": "w1",
+        "word": "ÇARŞI",
+        "row": 1,
+        "col": 0,
+        "dir": "H"
+      },
+      {
+        "id": "w2",
+        "word": "AŞI",
+        "row": 0,
+        "col": 3,
+        "dir": "V"
+      },
+      {
+        "id": "w3",
+        "word": "ÇAR",
+        "row": 1,
+        "col": 0,
+        "dir": "V"
+      }
+    ],
+    "bonus": [
+      "ARI",
+      "ŞAR"
+    ]
+  },
+  {
+    "id": 65,
+    "title": "Kapadokya - Bölüm 5",
+    "region": "NEVŞEHİR",
+    "region_id": "kapadokya",
+    "bg": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/Hot_air_balloon_over_Cappadocia.jpg/1280px-Hot_air_balloon_over_Cappadocia.jpg",
+    "wheel": [
+      "H",
+      "A",
+      "N",
+      "Z"
+    ],
+    "words": [
+      {
+        "id": "w1",
+        "word": "HAN",
+        "row": 0,
+        "col": 0,
+        "dir": "H"
+      },
+      {
+        "id": "w2",
+        "word": "HAZ",
+        "row": 0,
+        "col": 0,
+        "dir": "V"
+      },
+      {
+        "id": "w3",
+        "word": "NAZ",
+        "row": 0,
+        "col": 2,
+        "dir": "V"
+      }
+    ],
+    "bonus": [
+      "AH",
+      "AN"
+    ]
+  },
+  {
+    "id": 66,
+    "title": "Pamukkale - Bölüm 6",
+    "region": "DENİZLİ",
+    "region_id": "pamukkale",
+    "bg": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/be/Pamukkale_Terraces.jpg/1280px-Pamukkale_Terraces.jpg",
+    "wheel": [
+      "H",
+      "A",
+      "A",
+      "M",
+      "M"
+    ],
+    "words": [
+      {
+        "id": "w1",
+        "word": "HAMAM",
+        "row": 1,
+        "col": 0,
+        "dir": "H"
+      },
+      {
+        "id": "w2",
+        "word": "MAMA",
+        "row": 0,
+        "col": 1,
+        "dir": "V"
+      },
+      {
+        "id": "w3",
+        "word": "HAM",
+        "row": 0,
+        "col": 3,
+        "dir": "V"
+      }
+    ],
+    "bonus": [
+      "MAH",
+      "AMA"
+    ]
+  },
+  {
+    "id": 67,
+    "title": "Galata Kulesi - Bölüm 7",
+    "region": "İSTANBUL",
+    "region_id": "galata",
+    "bg": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/06/Galata_Tower_Istanbul.jpg/1280px-Galata_Tower_Istanbul.jpg",
+    "wheel": [
+      "K",
+      "Ö",
+      "P",
+      "R",
+      "Ü"
+    ],
+    "words": [
+      {
+        "id": "w1",
+        "word": "KÖPRÜ",
+        "row": 0,
+        "col": 0,
+        "dir": "H"
+      },
+      {
+        "id": "w2",
+        "word": "PÜR",
+        "row": 0,
+        "col": 2,
+        "dir": "V"
+      },
+      {
+        "id": "w3",
+        "word": "KÜR",
+        "row": 0,
+        "col": 0,
+        "dir": "V"
+      }
+    ],
+    "bonus": [
+      "ÖR"
+    ]
+  },
+  {
+    "id": 68,
+    "title": "Efes Antik Kenti - Bölüm 8",
+    "region": "İZMİR",
+    "region_id": "efes",
+    "bg": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/30/Library_of_Celsus_Ephesus_Turkey.jpg/1280px-Library_of_Celsus_Ephesus_Turkey.jpg",
+    "wheel": [
+      "M",
+      "E",
+      "Y",
+      "D",
+      "A",
+      "N"
+    ],
+    "words": [
+      {
+        "id": "w1",
+        "word": "MEYDAN",
+        "row": 1,
+        "col": 0,
+        "dir": "H"
+      },
+      {
+        "id": "w2",
+        "word": "AYN",
+        "row": 0,
+        "col": 2,
+        "dir": "V"
+      },
+      {
+        "id": "w3",
+        "word": "YAN",
+        "row": 0,
+        "col": 4,
+        "dir": "V"
+      }
+    ],
+    "bonus": [
+      "DAM",
+      "AD"
+    ]
+  },
+  {
+    "id": 69,
+    "title": "Nemrut Dağı - Bölüm 9",
+    "region": "ADIYAMAN",
+    "region_id": "nemrut",
+    "bg": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/29/Nemrut_Dagi_Heads.jpg/1280px-Nemrut_Dagi_Heads.jpg",
+    "wheel": [
+      "S",
+      "O",
+      "K",
+      "K",
+      "A",
+      "Ç"
+    ],
+    "words": [
+      {
+        "id": "w1",
+        "word": "SOKAK",
+        "row": 1,
+        "col": 0,
+        "dir": "H"
+      },
+      {
+        "id": "w2",
+        "word": "KOKA",
+        "row": 0,
+        "col": 1,
+        "dir": "V"
+      },
+      {
+        "id": "w3",
+        "word": "KAS",
+        "row": 0,
+        "col": 3,
+        "dir": "V"
+      }
+    ],
+    "bonus": [
+      "KOÇ",
+      "OK"
+    ]
+  },
+  {
+    "id": 70,
+    "title": "Göbeklitepe - Bölüm 10",
+    "region": "ŞANLIURFA",
+    "region_id": "gobeklitepe",
+    "bg": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a8/G%C3%B6bekli_Tepe%2C_Sanliurfa.jpg/1280px-G%C3%B6bekli_Tepe%2C_Sanliurfa.jpg",
+    "wheel": [
+      "C",
+      "A",
+      "D",
+      "D",
+      "E",
+      "E"
+    ],
+    "words": [
+      {
+        "id": "w1",
+        "word": "CADDE",
+        "row": 0,
+        "col": 0,
+        "dir": "H"
+      },
+      {
+        "id": "w2",
+        "word": "DEDE",
+        "row": 0,
+        "col": 2,
+        "dir": "V"
+      },
+      {
+        "id": "w3",
+        "word": "EDA",
+        "row": 0,
+        "col": 4,
+        "dir": "V"
+      }
+    ],
+    "bonus": [
+      "AD"
+    ]
+  },
+  {
+    "id": 71,
+    "title": "Sümela Manastırı - Bölüm 1",
+    "region": "TRABZON",
+    "region_id": "sumela",
+    "bg": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/Sumela_from_across_valley.JPG/1280px-Sumela_from_across_valley.JPG",
+    "wheel": [
+      "K",
+      "O",
+      "O",
+      "R",
+      "R",
+      "İ",
+      "D"
+    ],
+    "words": [
+      {
+        "id": "w1",
+        "word": "KORİDOR",
+        "row": 0,
+        "col": 0,
+        "dir": "H"
+      },
+      {
+        "id": "w2",
+        "word": "KOR",
+        "row": 0,
+        "col": 0,
+        "dir": "V"
+      },
+      {
+        "id": "w3",
+        "word": "ROD",
+        "row": 0,
+        "col": 2,
+        "dir": "V"
+      }
+    ],
+    "bonus": [
+      "KOD",
+      "DOR"
+    ]
+  },
+  {
+    "id": 72,
+    "title": "Ani Harabeleri - Bölüm 2",
+    "region": "KARS",
+    "region_id": "ani",
+    "bg": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5a/Ani_Cathedral_2011.jpg/1280px-Ani_Cathedral_2011.jpg",
+    "wheel": [
+      "S",
+      "A",
+      "L",
+      "O",
+      "N",
+      "R"
+    ],
+    "words": [
+      {
+        "id": "w1",
+        "word": "SALON",
+        "row": 3,
+        "col": 0,
+        "dir": "H"
+      },
+      {
+        "id": "w2",
+        "word": "ONLAR",
+        "row": 0,
+        "col": 1,
+        "dir": "V"
+      },
+      {
+        "id": "w3",
+        "word": "NAL",
+        "row": 3,
+        "col": 4,
+        "dir": "V"
+      }
+    ],
+    "bonus": [
+      "SON",
+      "SOL"
+    ]
+  },
+  {
+    "id": 73,
+    "title": "Kapadokya - Bölüm 3",
+    "region": "NEVŞEHİR",
+    "region_id": "kapadokya",
+    "bg": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/Hot_air_balloon_over_Cappadocia.jpg/1280px-Hot_air_balloon_over_Cappadocia.jpg",
+    "wheel": [
+      "B",
+      "A",
+      "L",
+      "K",
+      "O",
+      "N"
+    ],
+    "words": [
+      {
+        "id": "w1",
+        "word": "BALKON",
+        "row": 2,
+        "col": 0,
+        "dir": "H"
+      },
+      {
+        "id": "w2",
+        "word": "KOL",
+        "row": 0,
+        "col": 2,
+        "dir": "V"
+      },
+      {
+        "id": "w3",
+        "word": "OBA",
+        "row": 1,
+        "col": 0,
+        "dir": "V"
+      }
+    ],
+    "bonus": [
+      "BOK",
+      "AL"
+    ]
+  },
+  {
+    "id": 74,
+    "title": "Pamukkale - Bölüm 4",
+    "region": "DENİZLİ",
+    "region_id": "pamukkale",
+    "bg": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/be/Pamukkale_Terraces.jpg/1280px-Pamukkale_Terraces.jpg",
+    "wheel": [
+      "M",
+      "U",
+      "T",
+      "F",
+      "A",
+      "K"
+    ],
+    "words": [
+      {
+        "id": "w1",
+        "word": "MUTFAK",
+        "row": 2,
+        "col": 0,
+        "dir": "H"
+      },
+      {
+        "id": "w2",
+        "word": "KAF",
+        "row": 0,
+        "col": 3,
+        "dir": "V"
+      },
+      {
+        "id": "w3",
+        "word": "TAM",
+        "row": 0,
+        "col": 0,
+        "dir": "V"
+      }
+    ],
+    "bonus": [
+      "KAT",
+      "TAK"
+    ]
+  },
+  {
+    "id": 75,
+    "title": "Galata Kulesi - Bölüm 5",
+    "region": "İSTANBUL",
+    "region_id": "galata",
+    "bg": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/06/Galata_Tower_Istanbul.jpg/1280px-Galata_Tower_Istanbul.jpg",
+    "wheel": [
+      "B",
+      "A",
+      "H",
+      "Ç",
+      "E",
+      "C"
+    ],
+    "words": [
+      {
+        "id": "w1",
+        "word": "BAHÇE",
+        "row": 1,
+        "col": 0,
+        "dir": "H"
+      },
+      {
+        "id": "w2",
+        "word": "HAC",
+        "row": 0,
+        "col": 1,
+        "dir": "V"
+      },
+      {
+        "id": "w3",
+        "word": "ÇAH",
+        "row": 1,
+        "col": 3,
+        "dir": "V"
+      }
+    ],
+    "bonus": [
+      "BAH",
+      "AÇ"
+    ]
+  },
+  {
+    "id": 76,
+    "title": "Efes Antik Kenti - Bölüm 6",
+    "region": "İZMİR",
+    "region_id": "efes",
+    "bg": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/30/Library_of_Celsus_Ephesus_Turkey.jpg/1280px-Library_of_Celsus_Ephesus_Turkey.jpg",
+    "wheel": [
+      "H",
+      "A",
+      "V",
+      "U",
+      "Z"
+    ],
+    "words": [
+      {
+        "id": "w1",
+        "word": "HAVUZ",
+        "row": 0,
+        "col": 0,
+        "dir": "H"
+      },
+      {
+        "id": "w2",
+        "word": "HAZ",
+        "row": 0,
+        "col": 0,
+        "dir": "V"
+      },
+      {
+        "id": "w3",
+        "word": "VAZ",
+        "row": 0,
+        "col": 2,
+        "dir": "V"
+      }
+    ],
+    "bonus": [
+      "UZ",
+      "AV"
+    ]
+  },
+  {
+    "id": 77,
+    "title": "Nemrut Dağı - Bölüm 7",
+    "region": "ADIYAMAN",
+    "region_id": "nemrut",
+    "bg": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/29/Nemrut_Dagi_Heads.jpg/1280px-Nemrut_Dagi_Heads.jpg",
+    "wheel": [
+      "O",
+      "R",
+      "M",
+      "A",
+      "N"
+    ],
+    "words": [
+      {
+        "id": "w1",
+        "word": "ORMAN",
+        "row": 2,
+        "col": 0,
+        "dir": "H"
+      },
+      {
+        "id": "w2",
+        "word": "ONAR",
+        "row": 2,
+        "col": 0,
+        "dir": "V"
+      },
+      {
+        "id": "w3",
+        "word": "ROM",
+        "row": 0,
+        "col": 2,
+        "dir": "V"
+      }
+    ],
+    "bonus": [
+      "MAN"
+    ]
+  },
+  {
+    "id": 78,
+    "title": "Göbeklitepe - Bölüm 8",
+    "region": "ŞANLIURFA",
+    "region_id": "gobeklitepe",
+    "bg": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a8/G%C3%B6bekli_Tepe%2C_Sanliurfa.jpg/1280px-G%C3%B6bekli_Tepe%2C_Sanliurfa.jpg",
+    "wheel": [
+      "V",
+      "A",
+      "D",
+      "İ"
+    ],
+    "words": [
+      {
+        "id": "w1",
+        "word": "VADİ",
+        "row": 2,
+        "col": 0,
+        "dir": "H"
+      },
+      {
+        "id": "w2",
+        "word": "DAVİ",
+        "row": 0,
+        "col": 0,
+        "dir": "V"
+      },
+      {
+        "id": "w3",
+        "word": "AİD",
+        "row": 0,
+        "col": 2,
+        "dir": "V"
+      }
+    ],
+    "bonus": [
+      "AD",
+      "AV"
+    ]
+  },
+  {
+    "id": 79,
+    "title": "Sümela Manastırı - Bölüm 9",
+    "region": "TRABZON",
+    "region_id": "sumela",
+    "bg": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/Sumela_from_across_valley.JPG/1280px-Sumela_from_across_valley.JPG",
+    "wheel": [
+      "T",
+      "E",
+      "E",
+      "P"
+    ],
+    "words": [
+      {
+        "id": "w1",
+        "word": "TEPE",
+        "row": 1,
+        "col": 0,
+        "dir": "H"
+      },
+      {
+        "id": "w2",
+        "word": "ETE",
+        "row": 0,
+        "col": 0,
+        "dir": "V"
+      },
+      {
+        "id": "w3",
+        "word": "PET",
+        "row": 1,
+        "col": 2,
+        "dir": "V"
+      }
+    ],
+    "bonus": [
+      "TEP"
+    ]
+  },
+  {
+    "id": 80,
+    "title": "Ani Harabeleri - Bölüm 10",
+    "region": "KARS",
+    "region_id": "ani",
+    "bg": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5a/Ani_Cathedral_2011.jpg/1280px-Ani_Cathedral_2011.jpg",
+    "wheel": [
+      "Y",
+      "Y",
+      "A",
+      "A",
+      "L"
+    ],
+    "words": [
+      {
+        "id": "w1",
+        "word": "YAYLA",
+        "row": 3,
+        "col": 0,
+        "dir": "H"
+      },
+      {
+        "id": "w2",
+        "word": "ALAY",
+        "row": 0,
+        "col": 0,
+        "dir": "V"
+      },
+      {
+        "id": "w3",
+        "word": "YAL",
+        "row": 3,
+        "col": 2,
+        "dir": "V"
+      }
+    ],
+    "bonus": [
+      "AY",
+      "YA"
+    ]
+  },
+  {
+    "id": 81,
+    "title": "Kapadokya - Bölüm 1",
+    "region": "NEVŞEHİR",
+    "region_id": "kapadokya",
+    "bg": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/Hot_air_balloon_over_Cappadocia.jpg/1280px-Hot_air_balloon_over_Cappadocia.jpg",
+    "wheel": [
+      "Z",
+      "İ",
+      "R",
+      "V",
+      "E"
+    ],
+    "words": [
+      {
+        "id": "w1",
+        "word": "ZİRVE",
+        "row": 3,
+        "col": 0,
+        "dir": "H"
+      },
+      {
+        "id": "w2",
+        "word": "REVİ",
+        "row": 0,
+        "col": 1,
+        "dir": "V"
+      },
+      {
+        "id": "w3",
+        "word": "EV",
+        "row": 2,
+        "col": 3,
+        "dir": "V"
+      }
+    ],
+    "bonus": [
+      "VER"
+    ]
+  },
+  {
+    "id": 82,
+    "title": "Pamukkale - Bölüm 2",
+    "region": "DENİZLİ",
+    "region_id": "pamukkale",
+    "bg": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/be/Pamukkale_Terraces.jpg/1280px-Pamukkale_Terraces.jpg",
+    "wheel": [
+      "K",
+      "Ö",
+      "R",
+      "F",
+      "E",
+      "Z"
+    ],
+    "words": [
+      {
+        "id": "w1",
+        "word": "KÖRFEZ",
+        "row": 2,
+        "col": 0,
+        "dir": "H"
+      },
+      {
+        "id": "w2",
+        "word": "FÖZ",
+        "row": 2,
+        "col": 3,
+        "dir": "V"
+      },
+      {
+        "id": "w3",
+        "word": "ÖRK",
+        "row": 0,
+        "col": 0,
+        "dir": "V"
+      }
+    ],
+    "bonus": [
+      "KÖZ"
+    ]
+  },
+  {
+    "id": 83,
+    "title": "Galata Kulesi - Bölüm 3",
+    "region": "İSTANBUL",
+    "region_id": "galata",
+    "bg": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/06/Galata_Tower_Istanbul.jpg/1280px-Galata_Tower_Istanbul.jpg",
+    "wheel": [
+      "B",
+      "O",
+      "Ğ",
+      "A",
+      "Z"
+    ],
+    "words": [
+      {
+        "id": "w1",
+        "word": "BOĞAZ",
+        "row": 2,
+        "col": 0,
+        "dir": "H"
+      },
+      {
+        "id": "w2",
+        "word": "BAĞ",
+        "row": 2,
+        "col": 0,
+        "dir": "V"
+      },
+      {
+        "id": "w3",
+        "word": "BOĞ",
+        "row": 0,
+        "col": 2,
+        "dir": "V"
+      }
+    ],
+    "bonus": [
+      "AĞ",
+      "AZ"
+    ]
+  },
+  {
+    "id": 84,
+    "title": "Efes Antik Kenti - Bölüm 4",
+    "region": "İZMİR",
+    "region_id": "efes",
+    "bg": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/30/Library_of_Celsus_Ephesus_Turkey.jpg/1280px-Library_of_Celsus_Ephesus_Turkey.jpg",
+    "wheel": [
+      "L",
+      "İ",
+      "M",
+      "A",
+      "N"
+    ],
+    "words": [
+      {
+        "id": "w1",
+        "word": "LİMAN",
+        "row": 1,
+        "col": 0,
+        "dir": "H"
+      },
+      {
+        "id": "w2",
+        "word": "ALİM",
+        "row": 0,
+        "col": 0,
+        "dir": "V"
+      },
+      {
+        "id": "w3",
+        "word": "MAL",
+        "row": 1,
+        "col": 2,
+        "dir": "V"
+      }
+    ],
+    "bonus": [
+      "MİNA",
+      "NİL"
+    ]
+  },
+  {
+    "id": 85,
+    "title": "Nemrut Dağı - Bölüm 5",
+    "region": "ADIYAMAN",
+    "region_id": "nemrut",
+    "bg": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/29/Nemrut_Dagi_Heads.jpg/1280px-Nemrut_Dagi_Heads.jpg",
+    "wheel": [
+      "A",
+      "A",
+      "A",
+      "D",
+      "L",
+      "R"
+    ],
+    "words": [
+      {
+        "id": "w1",
+        "word": "ADALAR",
+        "row": 1,
+        "col": 0,
+        "dir": "H"
+      },
+      {
+        "id": "w2",
+        "word": "LARA",
+        "row": 0,
+        "col": 0,
+        "dir": "V"
+      },
+      {
+        "id": "w3",
+        "word": "ADA",
+        "row": 1,
+        "col": 2,
+        "dir": "V"
+      }
+    ],
+    "bonus": [
+      "DAL",
+      "AL"
+    ]
+  },
+  {
+    "id": 86,
+    "title": "Göbeklitepe - Bölüm 6",
+    "region": "ŞANLIURFA",
+    "region_id": "gobeklitepe",
+    "bg": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a8/G%C3%B6bekli_Tepe%2C_Sanliurfa.jpg/1280px-G%C3%B6bekli_Tepe%2C_Sanliurfa.jpg",
+    "wheel": [
+      "K",
+      "U",
+      "M",
+      "S",
+      "A",
+      "L",
+      "H"
+    ],
+    "words": [
+      {
+        "id": "w1",
+        "word": "KUMSAL",
+        "row": 0,
+        "col": 0,
+        "dir": "H"
+      },
+      {
+        "id": "w2",
+        "word": "SULH",
+        "row": 0,
+        "col": 3,
+        "dir": "V"
+      },
+      {
+        "id": "w3",
+        "word": "KUM",
+        "row": 0,
+        "col": 0,
+        "dir": "V"
+      }
+    ],
+    "bonus": [
+      "KUL",
+      "SAL"
+    ]
+  },
+  {
+    "id": 87,
+    "title": "Sümela Manastırı - Bölüm 7",
+    "region": "TRABZON",
+    "region_id": "sumela",
+    "bg": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/Sumela_from_across_valley.JPG/1280px-Sumela_from_across_valley.JPG",
+    "wheel": [
+      "D",
+      "A",
+      "L",
+      "G",
+      "I",
+      "Ç",
+      "K"
+    ],
+    "words": [
+      {
+        "id": "w1",
+        "word": "DALGIÇ",
+        "row": 2,
+        "col": 0,
+        "dir": "H"
+      },
+      {
+        "id": "w2",
+        "word": "AÇIK",
+        "row": 2,
+        "col": 1,
+        "dir": "V"
+      },
+      {
+        "id": "w3",
+        "word": "AÇI",
+        "row": 0,
+        "col": 4,
+        "dir": "V"
+      }
+    ],
+    "bonus": [
+      "DAL",
+      "IÇ"
+    ]
+  },
+  {
+    "id": 88,
+    "title": "Ani Harabeleri - Bölüm 8",
+    "region": "KARS",
+    "region_id": "ani",
+    "bg": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5a/Ani_Cathedral_2011.jpg/1280px-Ani_Cathedral_2011.jpg",
+    "wheel": [
+      "B",
+      "A",
+      "L",
+      "I",
+      "I",
+      "K",
+      "Ç"
+    ],
+    "words": [
+      {
+        "id": "w1",
+        "word": "BALIKÇI",
+        "row": 1,
+        "col": 0,
+        "dir": "H"
+      },
+      {
+        "id": "w2",
+        "word": "AÇIK",
+        "row": 1,
+        "col": 1,
+        "dir": "V"
+      },
+      {
+        "id": "w3",
+        "word": "ÇIL",
+        "row": 0,
+        "col": 3,
+        "dir": "V"
+      }
+    ],
+    "bonus": [
+      "BAL",
+      "KIL"
+    ]
+  },
+  {
+    "id": 89,
+    "title": "Kapadokya - Bölüm 9",
+    "region": "NEVŞEHİR",
+    "region_id": "kapadokya",
+    "bg": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/Hot_air_balloon_over_Cappadocia.jpg/1280px-Hot_air_balloon_over_Cappadocia.jpg",
+    "wheel": [
+      "G",
+      "E",
+      "M",
+      "İ"
+    ],
+    "words": [
+      {
+        "id": "w1",
+        "word": "GEMİ",
+        "row": 1,
+        "col": 0,
+        "dir": "H"
+      },
+      {
+        "id": "w2",
+        "word": "İME",
+        "row": 0,
+        "col": 2,
+        "dir": "V"
+      },
+      {
+        "id": "w3",
+        "word": "GEM",
+        "row": 1,
+        "col": 0,
+        "dir": "V"
+      }
+    ],
+    "bonus": [
+      "MİG"
+    ]
+  },
+  {
+    "id": 90,
+    "title": "Pamukkale - Bölüm 10",
+    "region": "DENİZLİ",
+    "region_id": "pamukkale",
+    "bg": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/be/Pamukkale_Terraces.jpg/1280px-Pamukkale_Terraces.jpg",
+    "wheel": [
+      "Y",
+      "E",
+      "E",
+      "L",
+      "K",
+      "N"
+    ],
+    "words": [
+      {
+        "id": "w1",
+        "word": "YELKEN",
+        "row": 0,
+        "col": 0,
+        "dir": "H"
+      },
+      {
+        "id": "w2",
+        "word": "YELE",
+        "row": 0,
+        "col": 0,
+        "dir": "V"
+      },
+      {
+        "id": "w3",
+        "word": "EN",
+        "row": 0,
+        "col": 4,
+        "dir": "V"
+      }
+    ],
+    "bonus": [
+      "YEN",
+      "KEL"
+    ]
+  },
+  {
+    "id": 91,
+    "title": "Galata Kulesi - Bölüm 1",
+    "region": "İSTANBUL",
+    "region_id": "galata",
+    "bg": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/06/Galata_Tower_Istanbul.jpg/1280px-Galata_Tower_Istanbul.jpg",
+    "wheel": [
+      "K",
+      "A",
+      "T"
+    ],
+    "words": [
+      {
+        "id": "w1",
+        "word": "KAT",
+        "row": 2,
+        "col": 0,
+        "dir": "H"
+      },
+      {
+        "id": "w2",
+        "word": "TAK",
+        "row": 0,
+        "col": 0,
+        "dir": "V"
+      }
+    ],
+    "bonus": [
+      "AK"
+    ]
+  },
+  {
+    "id": 92,
+    "title": "Efes Antik Kenti - Bölüm 2",
+    "region": "İZMİR",
+    "region_id": "efes",
+    "bg": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/30/Library_of_Celsus_Ephesus_Turkey.jpg/1280px-Library_of_Celsus_Ephesus_Turkey.jpg",
+    "wheel": [
+      "K",
+      "A",
+      "L",
+      "E"
+    ],
+    "words": [
+      {
+        "id": "w1",
+        "word": "KALE",
+        "row": 1,
+        "col": 0,
+        "dir": "H"
+      },
+      {
+        "id": "w2",
+        "word": "KEL",
+        "row": 1,
+        "col": 0,
+        "dir": "V"
+      },
+      {
+        "id": "w3",
+        "word": "ELA",
+        "row": 0,
+        "col": 2,
+        "dir": "V"
+      }
+    ],
+    "bonus": [
+      "LAK",
+      "LAKE"
+    ]
+  },
+  {
+    "id": 93,
+    "title": "Nemrut Dağı - Bölüm 3",
+    "region": "ADIYAMAN",
+    "region_id": "nemrut",
+    "bg": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/29/Nemrut_Dagi_Heads.jpg/1280px-Nemrut_Dagi_Heads.jpg",
+    "wheel": [
+      "M",
+      "A",
+      "A",
+      "S"
+    ],
+    "words": [
+      {
+        "id": "w1",
+        "word": "MASA",
+        "row": 2,
+        "col": 0,
+        "dir": "H"
+      },
+      {
+        "id": "w2",
+        "word": "ASMA",
+        "row": 0,
+        "col": 0,
+        "dir": "V"
+      }
+    ],
+    "bonus": [
+      "AMA",
+      "SAM",
+      "AS"
+    ]
+  },
+  {
+    "id": 94,
+    "title": "Göbeklitepe - Bölüm 4",
+    "region": "ŞANLIURFA",
+    "region_id": "gobeklitepe",
+    "bg": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a8/G%C3%B6bekli_Tepe%2C_Sanliurfa.jpg/1280px-G%C3%B6bekli_Tepe%2C_Sanliurfa.jpg",
+    "wheel": [
+      "B",
+      "A",
+      "L",
+      "I",
+      "K"
+    ],
+    "words": [
+      {
+        "id": "w1",
+        "word": "BALIK",
+        "row": 2,
+        "col": 0,
+        "dir": "H"
+      },
+      {
+        "id": "w2",
+        "word": "BAL",
+        "row": 2,
+        "col": 0,
+        "dir": "V"
+      },
+      {
+        "id": "w3",
+        "word": "KIL",
+        "row": 0,
+        "col": 2,
+        "dir": "V"
+      }
+    ],
+    "bonus": [
+      "ALIK",
+      "BAK",
+      "KAL",
+      "AKIL"
+    ]
+  },
+  {
+    "id": 95,
+    "title": "Sümela Manastırı - Bölüm 5",
+    "region": "TRABZON",
+    "region_id": "sumela",
+    "bg": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/Sumela_from_across_valley.JPG/1280px-Sumela_from_across_valley.JPG",
+    "wheel": [
+      "K",
+      "İ",
+      "T",
+      "A",
+      "P"
+    ],
+    "words": [
+      {
+        "id": "w1",
+        "word": "KİTAP",
+        "row": 2,
+        "col": 0,
+        "dir": "H"
+      },
+      {
+        "id": "w2",
+        "word": "TAKİP",
+        "row": 0,
+        "col": 0,
+        "dir": "V"
+      },
+      {
+        "id": "w3",
+        "word": "PAK",
+        "row": 1,
+        "col": 3,
+        "dir": "V"
+      }
+    ],
+    "bonus": [
+      "TİP",
+      "PAT",
+      "KAT",
+      "AİT"
+    ]
+  },
+  {
+    "id": 96,
+    "title": "Ani Harabeleri - Bölüm 6",
+    "region": "KARS",
+    "region_id": "ani",
+    "bg": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5a/Ani_Cathedral_2011.jpg/1280px-Ani_Cathedral_2011.jpg",
+    "wheel": [
+      "D",
+      "E",
+      "N",
+      "İ",
+      "Z"
+    ],
+    "words": [
+      {
+        "id": "w1",
+        "word": "DENİZ",
+        "row": 2,
+        "col": 0,
+        "dir": "H"
+      },
+      {
+        "id": "w2",
+        "word": "DİZ",
+        "row": 2,
+        "col": 0,
+        "dir": "V"
+      },
+      {
+        "id": "w3",
+        "word": "DİN",
+        "row": 0,
+        "col": 2,
+        "dir": "V"
+      }
+    ],
+    "bonus": [
+      "DİZE",
+      "İZ",
+      "İN"
+    ]
+  },
+  {
+    "id": 97,
+    "title": "Kapadokya - Bölüm 7",
+    "region": "NEVŞEHİR",
+    "region_id": "kapadokya",
+    "bg": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/Hot_air_balloon_over_Cappadocia.jpg/1280px-Hot_air_balloon_over_Cappadocia.jpg",
+    "wheel": [
+      "R",
+      "O",
+      "M",
+      "A",
+      "N"
+    ],
+    "words": [
+      {
+        "id": "w1",
+        "word": "ROMA",
+        "row": 2,
+        "col": 0,
+        "dir": "H"
+      },
+      {
+        "id": "w2",
+        "word": "ORAN",
+        "row": 1,
+        "col": 0,
+        "dir": "V"
+      },
+      {
+        "id": "w3",
+        "word": "ROMAN",
+        "row": 0,
+        "col": 2,
+        "dir": "V"
+      }
+    ],
+    "bonus": [
+      "MOR",
+      "ONAR",
+      "ROM"
+    ]
+  },
+  {
+    "id": 98,
+    "title": "Pamukkale - Bölüm 8",
+    "region": "DENİZLİ",
+    "region_id": "pamukkale",
+    "bg": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/be/Pamukkale_Terraces.jpg/1280px-Pamukkale_Terraces.jpg",
+    "wheel": [
+      "K",
+      "K",
+      "U",
+      "Ş",
+      "A"
+    ],
+    "words": [
+      {
+        "id": "w1",
+        "word": "KUŞAK",
+        "row": 1,
+        "col": 0,
+        "dir": "H"
+      },
+      {
+        "id": "w2",
+        "word": "KUŞ",
+        "row": 1,
+        "col": 0,
+        "dir": "V"
+      },
+      {
+        "id": "w3",
+        "word": "AŞK",
+        "row": 0,
+        "col": 2,
+        "dir": "V"
+      }
+    ],
+    "bonus": [
+      "ŞAK",
+      "KAŞ"
+    ]
+  },
+  {
+    "id": 99,
+    "title": "Galata Kulesi - Bölüm 9",
+    "region": "İSTANBUL",
+    "region_id": "galata",
+    "bg": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/06/Galata_Tower_Istanbul.jpg/1280px-Galata_Tower_Istanbul.jpg",
+    "wheel": [
+      "Y",
+      "A",
+      "A",
+      "Z"
+    ],
+    "words": [
+      {
+        "id": "w1",
+        "word": "YAZ",
+        "row": 1,
+        "col": 0,
+        "dir": "H"
+      },
+      {
+        "id": "w2",
+        "word": "AYAZ",
+        "row": 0,
+        "col": 0,
+        "dir": "V"
+      }
+    ],
+    "bonus": [
+      "AY",
+      "AZ"
+    ]
+  },
+  {
+    "id": 100,
+    "title": "Efes Antik Kenti - Bölüm 10",
+    "region": "İZMİR",
+    "region_id": "efes",
+    "bg": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/30/Library_of_Celsus_Ephesus_Turkey.jpg/1280px-Library_of_Celsus_Ephesus_Turkey.jpg",
+    "wheel": [
+      "K",
+      "O",
+      "R",
+      "U"
+    ],
+    "words": [
+      {
+        "id": "w1",
+        "word": "KOR",
+        "row": 2,
+        "col": 0,
+        "dir": "H"
+      },
+      {
+        "id": "w2",
+        "word": "OKUR",
+        "row": 1,
+        "col": 0,
+        "dir": "V"
+      },
+      {
+        "id": "w3",
+        "word": "KORU",
+        "row": 0,
+        "col": 2,
+        "dir": "V"
+      }
+    ],
+    "bonus": [
+      "KUR",
+      "ROK",
+      "OK"
+    ]
+  }
+]

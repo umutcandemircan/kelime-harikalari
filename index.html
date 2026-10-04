@@ -2,38 +2,74 @@
 <html lang="tr">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-  <title>Kelime Harikaları - Words of Wonders</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Kelime Harikaları - Türkçe Çapraz Bulmaca ve Kelime Oyunu</title>
+  <meta name="description" content="Anadolu'nun ve dünyanın kültürel harikalarını keşfederek Türkçe kelime dağarcığını geliştireceğin, adil ve akıcı çapraz bulmaca oyunu.">
+  <meta name="theme-color" content="#020617">
+  
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://umutcandemircan.github.io/kelime-harikalari/">
+  <meta property="og:title" content="Kelime Harikaları - Türkçe Çapraz Bulmaca">
+  <meta property="og:description" content="Harfleri birleştir, gizli kelimeleri çöz, Türkiye'nin kültürel mirasını adım adım keşfet!">
+  <meta property="og:image" content="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/Hot_air_balloon_over_Cappadocia.jpg/1280px-Hot_air_balloon_over_Cappadocia.jpg">
+  
+  <link rel="manifest" href="manifest.json">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@600;700;800;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;600;700;800;900&display=swap" rel="stylesheet">
+  
   <style>
     :root {
       --font-main: 'Outfit', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      --font-dyslexia: 'Comic Sans MS', 'OpenDyslexic', cursive, sans-serif;
+      
       --gold: #f59e0b;
-      --gold-light: #fef3c7;
+      --gold-light: #fef08a;
       --gold-glow: rgba(245, 158, 11, 0.4);
       --green: #22c55e;
       --green-glow: rgba(34, 197, 94, 0.4);
       --cyan: #06b6d4;
       --cyan-glow: rgba(6, 182, 212, 0.4);
-      --navy-900: #0f172a;
-      --navy-800: #1e293b;
-      --navy-700: #334155;
-      --wheel-size: 240px;
-      --node-size: 56px;
+      --purple: #a855f7;
+      --navy-900: #020617;
+      --navy-800: #0f172a;
+      --navy-700: #1e293b;
+      
+      --wheel-size: min(205px, 29vh, 60vw);
+      --node-size: 46px;
     }
 
-    @media (max-height: 750px) {
-      :root {
-        --wheel-size: 210px;
-        --node-size: 50px;
-      }
+    /* Dyslexia Mode */
+    body.dyslexia-font {
+      --font-main: var(--font-dyslexia);
+      letter-spacing: 0.8px;
     }
-    @media (max-height: 650px) {
-      :root {
-        --wheel-size: 180px;
-        --node-size: 44px;
+
+    /* High Contrast Mode */
+    body.high-contrast {
+      --navy-900: #000000;
+      --navy-800: #111111;
+      --gold: #ffff00;
+      --gold-light: #ffffff;
+      --green: #00ff00;
+      --cyan: #00ffff;
+    }
+    body.high-contrast .cell-front {
+      border: 2px solid #ffffff !important;
+      background: rgba(0, 0, 0, 0.9) !important;
+    }
+    body.high-contrast .cell-back {
+      border: 3px solid #ffff00 !important;
+      background: #ffffff !important;
+      color: #000000 !important;
+    }
+
+    /* Reduced Motion */
+    @media (prefers-reduced-motion: reduce) {
+      * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
       }
     }
 
@@ -44,73 +80,73 @@
       user-select: none;
       -webkit-user-select: none;
       -webkit-tap-highlight-color: transparent;
-      touch-action: manipulation;
     }
 
     html, body {
       width: 100%;
       height: 100%;
+      height: 100dvh;
       overflow: hidden;
       font-family: var(--font-main);
       background: #020617;
       color: #fff;
     }
 
-    /* Screen Background with dynamic overlay */
     #bg-layer {
       position: absolute;
       inset: 0;
       background-size: cover;
       background-position: center;
-      filter: brightness(0.65) saturate(1.15);
-      transition: background-image 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+      filter: brightness(0.55) saturate(1.25);
+      transition: background-image 0.7s cubic-bezier(0.4, 0, 0.2, 1);
       z-index: 0;
     }
 
     #bg-gradient {
       position: absolute;
       inset: 0;
-      background: radial-gradient(circle at 50% 30%, rgba(15, 23, 42, 0.3) 0%, rgba(2, 6, 23, 0.85) 100%);
+      background: radial-gradient(circle at 50% 30%, rgba(15, 23, 42, 0.2) 0%, rgba(2, 6, 23, 0.92) 100%);
       z-index: 1;
     }
 
-    /* Game App Container */
     #app-container {
       position: relative;
       z-index: 2;
       width: 100%;
-      max-width: 500px;
+      max-width: 440px;
       height: 100%;
+      height: 100dvh;
       margin: 0 auto;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      padding: env(safe-area-inset-top, 12px) 12px env(safe-area-inset-bottom, 12px) 12px;
+      padding: max(8px, env(safe-area-inset-top)) 8px max(8px, env(safe-area-inset-bottom)) 8px;
     }
 
-    /* Header Bar */
+    /* Top Navigation Bar */
     header {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      height: 52px;
-      padding: 0 4px;
-      gap: 8px;
+      height: 44px;
+      gap: 4px;
+      flex-shrink: 0;
+      width: 100%;
     }
 
     .header-pill {
       display: flex;
       align-items: center;
-      gap: 6px;
-      background: rgba(15, 23, 42, 0.75);
+      gap: 5px;
+      background: rgba(15, 23, 42, 0.88);
       backdrop-filter: blur(12px);
       -webkit-backdrop-filter: blur(12px);
-      padding: 6px 12px;
+      padding: 4px 8px;
       border-radius: 999px;
-      border: 1px solid rgba(255, 255, 255, 0.15);
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
       font-weight: 700;
-      font-size: 13px;
+      font-size: 11.5px;
     }
 
     .level-badge {
@@ -119,55 +155,64 @@
       line-height: 1.1;
     }
     .level-badge .sub-title {
-      font-size: 10px;
+      font-size: 8.5px;
       color: #94a3b8;
       text-transform: uppercase;
       letter-spacing: 0.5px;
     }
     .level-badge .main-title {
-      font-size: 14px;
+      font-size: 12px;
       color: #f8fafc;
       font-weight: 800;
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
-      max-width: 130px;
+      max-width: 80px;
     }
 
     .header-actions {
       display: flex;
       align-items: center;
-      gap: 6px;
+      gap: 4px;
+      flex-shrink: 0;
     }
 
     .btn-header {
       cursor: pointer;
-      display: flex;
+      display: inline-flex;
       align-items: center;
-      gap: 5px;
-      background: rgba(15, 23, 42, 0.75);
+      justify-content: center;
+      gap: 3px;
+      background: rgba(15, 23, 42, 0.88);
       backdrop-filter: blur(12px);
-      border: 1px solid rgba(255, 255, 255, 0.15);
+      border: 1px solid rgba(255, 255, 255, 0.16);
       border-radius: 999px;
-      padding: 6px 10px;
+      padding: 4px 7px;
       color: #fff;
-      font-size: 13px;
+      font-size: 11px;
       font-weight: 800;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.25);
-      transition: transform 0.15s, background-color 0.15s;
+      height: 30px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.25);
+      transition: transform 0.15s;
     }
     .btn-header:active {
       transform: scale(0.92);
     }
     .btn-header.daily-btn {
-      background: linear-gradient(135deg, rgba(245, 158, 11, 0.3), rgba(217, 119, 6, 0.5));
-      border-color: rgba(245, 158, 11, 0.6);
+      background: linear-gradient(135deg, rgba(245, 158, 11, 0.35), rgba(217, 119, 6, 0.55));
+      border-color: rgba(245, 158, 11, 0.7);
       color: #fef08a;
+    }
+    .btn-header.idiom-btn {
+      background: linear-gradient(135deg, rgba(168, 85, 247, 0.35), rgba(126, 34, 206, 0.55));
+      border-color: rgba(168, 85, 247, 0.7);
+      color: #f3e8ff;
     }
 
     .coin-badge {
       color: #fef08a;
-      text-shadow: 0 0 8px var(--gold-glow);
+      text-shadow: 0 0 6px var(--gold-glow);
+      font-weight: 800;
     }
 
     /* Crossword Board Area */
@@ -176,27 +221,27 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      min-height: 160px;
+      min-height: 140px;
       position: relative;
-      padding: 8px;
+      padding: 4px;
+      overflow: hidden;
     }
 
     #crossword-grid {
       display: grid;
-      gap: 6px;
+      gap: 5px;
       position: relative;
       margin: 0 auto;
       transition: transform 0.3s ease;
     }
 
-    /* Grid Cell */
+    /* Crossword Cells */
     .crossword-cell {
       position: relative;
       width: 100%;
       height: 100%;
       perspective: 600px;
     }
-
     .crossword-cell.hidden {
       visibility: hidden;
       pointer-events: none;
@@ -207,7 +252,7 @@
       height: 100%;
       position: relative;
       transform-style: preserve-3d;
-      transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+      transition: transform 0.45s cubic-bezier(0.34, 1.56, 0.64, 1);
       border-radius: 8px;
     }
 
@@ -225,10 +270,9 @@
       justify-content: center;
       border-radius: 8px;
       font-weight: 900;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.35);
+      box-shadow: 0 3px 8px rgba(0, 0, 0, 0.35);
     }
 
-    /* Front (Locked state) */
     .cell-front {
       background: rgba(255, 255, 255, 0.16);
       backdrop-filter: blur(8px);
@@ -236,182 +280,173 @@
       border: 1.5px solid rgba(255, 255, 255, 0.35);
       color: transparent;
       cursor: pointer;
-      transition: border-color 0.2s, box-shadow 0.2s, background-color 0.2s;
+      transition: border-color 0.2s, box-shadow 0.2s, transform 0.2s;
     }
 
-    /* Targeting mode pulse for locked cells */
+    /* Targeting mode pulse */
     body.targeting-mode .cell-front {
       border: 2px solid #38bdf8 !important;
-      box-shadow: 0 0 16px rgba(56, 189, 248, 0.8) !important;
-      animation: pulseTarget 1s infinite alternate;
+      box-shadow: 0 0 14px rgba(56, 189, 248, 0.8) !important;
+      animation: pulseTarget 0.9s infinite alternate;
       cursor: crosshair;
     }
     @keyframes pulseTarget {
-      0% { transform: scale(0.96); background: rgba(56, 189, 248, 0.2); }
-      100% { transform: scale(1.04); background: rgba(56, 189, 248, 0.4); }
+      0% { transform: scale(0.96); background: rgba(56, 189, 248, 0.25); }
+      100% { transform: scale(1.04); background: rgba(56, 189, 248, 0.45); }
     }
 
-    /* Back (Revealed state) */
     .cell-back {
       background: linear-gradient(135deg, #ffffff, #f1f5f9);
       border: 2px solid #fbbf24;
       color: #0f172a;
       transform: rotateY(180deg);
-      font-size: 20px;
-      text-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
-      box-shadow: 0 0 14px rgba(251, 191, 36, 0.5), inset 0 2px 4px rgba(255, 255, 255, 0.8);
+      font-size: 18px;
+      box-shadow: 0 0 12px rgba(251, 191, 36, 0.45), inset 0 2px 4px rgba(255, 255, 255, 0.8);
     }
 
-    /* Star Badge on Daily Challenge Cell */
     .star-badge {
       position: absolute;
-      top: -6px;
-      right: -6px;
-      font-size: 14px;
+      top: -5px;
+      right: -5px;
+      font-size: 13px;
       z-index: 5;
-      animation: floatStar 1.8s ease-in-out infinite alternate;
+      animation: floatStar 1.6s ease-in-out infinite alternate;
       filter: drop-shadow(0 0 6px rgba(245, 158, 11, 0.9));
     }
     @keyframes floatStar {
       0% { transform: translateY(0) scale(1); }
-      100% { transform: translateY(-4px) scale(1.15); }
+      100% { transform: translateY(-3px) scale(1.15); }
     }
 
-    /* Targeting Banner */
+    /* Targeting Banner: Hidden by default, visible only in targeting mode */
     #targeting-banner {
       display: none;
       position: absolute;
-      top: 65px;
+      top: 54px;
       left: 50%;
       transform: translateX(-50%);
-      background: rgba(14, 165, 233, 0.9);
+      background: rgba(14, 165, 233, 0.95);
       backdrop-filter: blur(10px);
-      padding: 6px 16px;
+      padding: 5px 14px;
       border-radius: 999px;
-      font-size: 13px;
+      font-size: 12px;
       font-weight: 800;
       color: #fff;
       box-shadow: 0 4px 16px rgba(14, 165, 233, 0.5);
-      z-index: 20;
-      animation: bounceBanner 0.6s infinite alternate;
+      z-index: 30;
+      animation: bounceBanner 0.5s infinite alternate;
+    }
+    body.targeting-mode #targeting-banner {
+      display: block;
     }
     @keyframes bounceBanner {
       0% { transform: translate(-50%, 0); }
-      100% { transform: translate(-50%, -4px); }
+      100% { transform: translate(-50%, -3px); }
     }
 
-    /* Preview Pill */
+    /* Bottom Section */
+    #bottom-section {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      flex-shrink: 0;
+    }
+
+    /* Word Preview Pill */
     #preview-container {
-      height: 40px;
+      height: 32px;
       display: flex;
       align-items: center;
       justify-content: center;
-      margin-bottom: 4px;
+      margin-bottom: 2px;
     }
 
     #word-preview {
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      min-width: 80px;
-      height: 36px;
-      padding: 0 18px;
+      min-width: 65px;
+      height: 30px;
+      padding: 0 14px;
       border-radius: 999px;
-      background: rgba(15, 23, 42, 0.85);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
+      background: rgba(15, 23, 42, 0.88);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
       border: 1.5px solid rgba(255, 255, 255, 0.2);
-      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
-      font-size: 18px;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.4);
+      font-size: 15px;
       font-weight: 900;
       letter-spacing: 2px;
       color: #f8fafc;
       opacity: 0;
       transform: scale(0.85);
-      transition: opacity 0.2s, transform 0.2s, border-color 0.2s;
+      transition: opacity 0.18s, transform 0.18s, border-color 0.18s;
     }
     #word-preview.active {
       opacity: 1;
       transform: scale(1);
       border-color: #fbbf24;
-      box-shadow: 0 0 20px var(--gold-glow);
+      box-shadow: 0 0 18px var(--gold-glow);
     }
 
     /* Power-ups Toolbar */
     #powerups-toolbar {
       display: flex;
       align-items: center;
-      justify-content: space-around;
+      justify-content: center;
       width: 100%;
-      max-width: 380px;
-      margin: 0 auto 6px auto;
-      padding: 0 10px;
+      max-width: 310px;
+      margin: 0 auto 4px auto;
+      gap: 7px;
     }
 
-    .btn-powerup {
-      cursor: pointer;
-      position: relative;
+    .btn-powerup, .bonus-chest-btn {
+      flex: 0 0 45px;
+      width: 45px;
+      height: 45px;
+      border-radius: 12px;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      width: 52px;
-      height: 52px;
-      border-radius: 50%;
-      background: linear-gradient(135deg, rgba(30, 41, 59, 0.85), rgba(15, 23, 42, 0.95));
-      backdrop-filter: blur(10px);
-      border: 1.5px solid rgba(255, 255, 255, 0.2);
-      box-shadow: 0 6px 14px rgba(0, 0, 0, 0.35);
+      cursor: pointer;
       color: #fff;
-      transition: transform 0.15s, border-color 0.2s, box-shadow 0.2s;
+      border: 1.5px solid rgba(255, 255, 255, 0.2);
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+      padding: 1px;
+      box-sizing: border-box;
+      transition: transform 0.15s, border-color 0.2s;
     }
-    .btn-powerup:active {
-      transform: scale(0.9);
+    .btn-powerup:active, .bonus-chest-btn:active {
+      transform: scale(0.92);
     }
-    .btn-powerup .icon {
-      font-size: 19px;
+    .btn-powerup {
+      background: linear-gradient(135deg, rgba(30, 41, 59, 0.9), rgba(15, 23, 42, 0.96));
+    }
+    .bonus-chest-btn {
+      background: linear-gradient(135deg, rgba(168, 85, 247, 0.4), rgba(126, 34, 206, 0.7));
+      border-color: rgba(216, 180, 254, 0.5) !important;
+    }
+    .btn-powerup .icon, .bonus-chest-btn .icon {
+      font-size: 16px;
       line-height: 1;
     }
-    .btn-powerup .cost {
-      font-size: 9px;
+    .btn-powerup .cost, .bonus-chest-btn .counter {
+      font-size: 8.5px;
       font-weight: 800;
       color: #fef08a;
-      margin-top: 2px;
+      margin-top: 1px;
       display: flex;
       align-items: center;
       gap: 1px;
     }
-    .btn-powerup.active-tool {
-      border-color: #38bdf8;
-      box-shadow: 0 0 16px rgba(56, 189, 248, 0.8);
-      background: rgba(14, 165, 233, 0.3);
-    }
-
-    /* Bonus Chest Badge */
-    .bonus-chest-btn {
-      cursor: pointer;
-      position: relative;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      width: 52px;
-      height: 52px;
-      border-radius: 50%;
-      background: linear-gradient(135deg, rgba(168, 85, 247, 0.35), rgba(126, 34, 206, 0.65));
-      border: 1.5px solid rgba(216, 180, 254, 0.4);
-      box-shadow: 0 6px 14px rgba(0, 0, 0, 0.35);
-      color: #fff;
-      transition: transform 0.15s;
-    }
-    .bonus-chest-btn:active {
-      transform: scale(0.9);
-    }
     .bonus-chest-btn .counter {
-      font-size: 9px;
-      font-weight: 800;
       color: #f3e8ff;
-      margin-top: 2px;
+    }
+    .btn-powerup.active-tool {
+      border-color: #38bdf8 !important;
+      box-shadow: 0 0 14px rgba(56, 189, 248, 0.8) !important;
+      background: rgba(14, 165, 233, 0.35) !important;
     }
 
     /* Wheel Container */
@@ -419,7 +454,7 @@
       position: relative;
       width: var(--wheel-size);
       height: var(--wheel-size);
-      margin: 0 auto 12px auto;
+      margin: 0 auto 4px auto;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -430,15 +465,14 @@
       position: absolute;
       inset: 0;
       border-radius: 50%;
-      background: radial-gradient(circle, rgba(30, 41, 59, 0.5) 0%, rgba(15, 23, 42, 0.8) 100%);
+      background: radial-gradient(circle, rgba(30, 41, 59, 0.5) 0%, rgba(15, 23, 42, 0.85) 100%);
       backdrop-filter: blur(12px);
       -webkit-backdrop-filter: blur(12px);
       border: 2px solid rgba(255, 255, 255, 0.18);
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), inset 0 0 20px rgba(255, 255, 255, 0.05);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5), inset 0 0 16px rgba(255, 255, 255, 0.06);
       pointer-events: none;
     }
 
-    /* SVG Connector Line Layer */
     #wheel-svg {
       position: absolute;
       inset: 0;
@@ -451,14 +485,12 @@
     #connection-line {
       fill: none;
       stroke: #fbbf24;
-      stroke-width: 12;
+      stroke-width: 10;
       stroke-linecap: round;
       stroke-linejoin: round;
       filter: drop-shadow(0 0 8px rgba(251, 191, 36, 0.9));
-      transition: stroke-dashoffset 0.05s linear;
     }
 
-    /* Wheel Letter Nodes */
     .wheel-node {
       position: absolute;
       width: var(--node-size);
@@ -469,24 +501,23 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 24px;
+      font-size: 21px;
       font-weight: 900;
-      box-shadow: 0 6px 14px rgba(0, 0, 0, 0.3), inset 0 2px 4px rgba(255, 255, 255, 0.9);
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3), inset 0 2px 4px rgba(255, 255, 255, 0.9);
       border: 2px solid rgba(255, 255, 255, 0.8);
       z-index: 20;
-      transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1), background 0.2s, box-shadow 0.2s, color 0.2s;
+      transition: transform 0.18s cubic-bezier(0.34, 1.56, 0.64, 1), background 0.18s, box-shadow 0.18s;
       transform: translate(-50%, -50%);
     }
 
     .wheel-node.selected {
       background: linear-gradient(135deg, #fbbf24, #f59e0b);
       color: #ffffff;
-      transform: translate(-50%, -50%) scale(1.18);
-      box-shadow: 0 0 22px rgba(245, 158, 11, 0.9), inset 0 2px 4px rgba(255, 255, 255, 0.5);
+      transform: translate(-50%, -50%) scale(1.15);
+      box-shadow: 0 0 18px rgba(245, 158, 11, 0.9), inset 0 2px 4px rgba(255, 255, 255, 0.5);
       border-color: #fef08a;
     }
 
-    /* Screen Flash Effect for Lightning */
     #screen-flash {
       position: fixed;
       inset: 0;
@@ -500,70 +531,67 @@
       opacity: 0.85;
     }
 
-    /* Flying Spark Projectile */
     .spark-projectile {
       position: fixed;
-      width: 14px;
-      height: 14px;
+      width: 12px;
+      height: 12px;
       border-radius: 50%;
       background: #fbbf24;
-      box-shadow: 0 0 16px #fbbf24, 0 0 28px #f59e0b;
+      box-shadow: 0 0 14px #fbbf24, 0 0 24px #f59e0b;
       pointer-events: none;
       z-index: 1000;
-      transition: all 0.45s cubic-bezier(0.25, 1, 0.5, 1);
+      transition: all 0.42s cubic-bezier(0.25, 1, 0.5, 1);
     }
 
-    /* Flying Star Projectile */
     .star-projectile {
       position: fixed;
-      font-size: 22px;
+      font-size: 20px;
       pointer-events: none;
       z-index: 1001;
       filter: drop-shadow(0 0 10px rgba(245, 158, 11, 0.9));
-      transition: all 0.65s cubic-bezier(0.2, 0.8, 0.2, 1);
+      transition: all 0.60s cubic-bezier(0.2, 0.8, 0.2, 1);
     }
 
-    /* Flying Word Toast */
     .floating-toast {
       position: fixed;
-      bottom: 240px;
+      bottom: 210px;
       left: 50%;
       transform: translateX(-50%) translateY(0);
-      background: rgba(15, 23, 42, 0.9);
+      background: rgba(15, 23, 42, 0.92);
       backdrop-filter: blur(12px);
       border: 1px solid rgba(255, 255, 255, 0.2);
-      padding: 8px 20px;
+      padding: 7px 18px;
       border-radius: 999px;
       font-weight: 800;
-      font-size: 14px;
+      font-size: 13px;
       color: #fef08a;
-      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.45);
       z-index: 2000;
       pointer-events: none;
-      animation: toastAnim 1.6s forwards;
+      animation: toastAnim 1.5s forwards;
     }
     @keyframes toastAnim {
-      0% { opacity: 0; transform: translateX(-50%) translateY(15px); }
+      0% { opacity: 0; transform: translateX(-50%) translateY(12px); }
       15% { opacity: 1; transform: translateX(-50%) translateY(0); }
-      75% { opacity: 1; transform: translateX(-50%) translateY(-5px); }
-      100% { opacity: 0; transform: translateX(-50%) translateY(-25px); }
+      75% { opacity: 1; transform: translateX(-50%) translateY(-4px); }
+      100% { opacity: 0; transform: translateX(-50%) translateY(-22px); }
     }
 
-    /* Modals Glassmorphism */
+    /* Modals System */
     .modal-overlay {
       position: fixed;
       inset: 0;
       background: rgba(2, 6, 23, 0.85);
-      backdrop-filter: blur(14px);
-      -webkit-backdrop-filter: blur(14px);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
       z-index: 5000;
       display: flex;
       align-items: center;
       justify-content: center;
-      padding: 16px;
+      padding: 14px;
       opacity: 0;
       pointer-events: none;
-      transition: opacity 0.3s ease;
+      transition: opacity 0.25s ease;
     }
     .modal-overlay.active {
       opacity: 1;
@@ -573,27 +601,28 @@
     .modal-card {
       width: 100%;
       max-width: 420px;
-      background: linear-gradient(135deg, rgba(30, 41, 59, 0.95), rgba(15, 23, 42, 0.98));
+      max-height: 90vh;
+      overflow-y: auto;
+      background: linear-gradient(135deg, rgba(30, 41, 59, 0.96), rgba(15, 23, 42, 0.98));
       border: 1.5px solid rgba(255, 255, 255, 0.18);
-      border-radius: 24px;
-      padding: 24px;
+      border-radius: 22px;
+      padding: 20px;
       box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6), 0 0 30px rgba(245, 158, 11, 0.2);
       text-align: center;
-      transform: scale(0.9);
-      transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+      transform: scale(0.92);
+      transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
     }
     .modal-overlay.active .modal-card {
       transform: scale(1);
     }
 
-    /* Discovery Card Modal */
     .discovery-img {
       width: 100%;
-      height: 200px;
-      border-radius: 16px;
+      height: 190px;
+      border-radius: 14px;
       object-fit: cover;
-      margin-bottom: 14px;
-      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+      margin-bottom: 12px;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
       border: 1.5px solid rgba(255, 255, 255, 0.2);
     }
     .discovery-badge {
@@ -603,46 +632,46 @@
       color: #fef08a;
       font-size: 11px;
       font-weight: 800;
-      padding: 4px 12px;
+      padding: 3px 10px;
       border-radius: 999px;
       text-transform: uppercase;
-      letter-spacing: 1px;
+      letter-spacing: 0.8px;
       margin-bottom: 6px;
     }
     .discovery-title {
-      font-size: 20px;
+      font-size: 19px;
       font-weight: 900;
       color: #fff;
-      margin-bottom: 10px;
+      margin-bottom: 8px;
     }
     .discovery-trivia {
-      font-size: 13px;
+      font-size: 12.5px;
       line-height: 1.5;
       color: #cbd5e1;
-      margin-bottom: 20px;
+      margin-bottom: 16px;
       background: rgba(15, 23, 42, 0.6);
-      padding: 12px;
+      padding: 10px;
       border-radius: 12px;
       border: 1px solid rgba(255, 255, 255, 0.1);
+      text-align: left;
     }
 
-    /* Buttons */
     .btn-gold {
       cursor: pointer;
       width: 100%;
-      padding: 14px 20px;
+      padding: 13px 18px;
       border-radius: 999px;
       border: none;
       background: linear-gradient(135deg, #fbbf24, #d97706);
       color: #0f172a;
       font-weight: 900;
-      font-size: 16px;
-      box-shadow: 0 8px 20px rgba(245, 158, 11, 0.4);
+      font-size: 15px;
+      box-shadow: 0 6px 18px rgba(245, 158, 11, 0.4);
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 8px;
-      transition: transform 0.15s, box-shadow 0.15s;
+      gap: 6px;
+      transition: transform 0.15s;
     }
     .btn-gold:active {
       transform: scale(0.96);
@@ -651,65 +680,40 @@
     .btn-secondary {
       cursor: pointer;
       width: 100%;
-      padding: 12px 20px;
+      padding: 11px 18px;
       border-radius: 999px;
       border: 1px solid rgba(255, 255, 255, 0.2);
-      background: rgba(30, 41, 59, 0.6);
+      background: rgba(30, 41, 59, 0.65);
       color: #cbd5e1;
       font-weight: 800;
-      font-size: 14px;
-      margin-top: 10px;
-      transition: transform 0.15s, background 0.15s;
+      font-size: 13px;
+      margin-top: 8px;
+      transition: transform 0.15s;
     }
     .btn-secondary:active {
       transform: scale(0.96);
     }
 
-    /* Victory Modal Special */
-    .victory-stars {
-      display: flex;
-      justify-content: center;
-      gap: 12px;
-      font-size: 38px;
-      margin-bottom: 12px;
-      filter: drop-shadow(0 0 14px rgba(245, 158, 11, 0.8));
-    }
-    .reward-box {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-      background: rgba(245, 158, 11, 0.15);
-      border: 1px solid rgba(245, 158, 11, 0.4);
-      padding: 10px;
-      border-radius: 14px;
-      font-weight: 900;
-      font-size: 18px;
-      color: #fef08a;
-      margin-bottom: 18px;
-    }
-
-    /* Calendar Grid */
     .calendar-grid {
       display: grid;
       grid-template-columns: repeat(7, 1fr);
-      gap: 6px;
-      margin: 16px 0;
+      gap: 5px;
+      margin: 14px 0;
     }
     .calendar-day-header {
-      font-size: 11px;
+      font-size: 10px;
       font-weight: 800;
       color: #94a3b8;
       text-transform: uppercase;
     }
     .calendar-day-cell {
-      height: 38px;
-      border-radius: 8px;
+      height: 34px;
+      border-radius: 6px;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      font-size: 12px;
+      font-size: 11px;
       font-weight: 800;
       background: rgba(15, 23, 42, 0.6);
       border: 1px solid rgba(255, 255, 255, 0.08);
@@ -725,42 +729,48 @@
       box-shadow: 0 0 10px rgba(251, 191, 36, 0.5);
     }
     .calendar-day-cell .check {
-      font-size: 10px;
+      font-size: 9px;
       color: #22c55e;
       position: absolute;
-      bottom: 2px;
+      bottom: 1px;
     }
 
-    /* Ad Simulators */
-    .ad-screen {
-      position: fixed;
-      inset: 0;
-      background: #000;
-      z-index: 9000;
-      display: none;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      color: #fff;
-      text-align: center;
-      padding: 24px;
-    }
-    .ad-screen.active {
+    .setting-row {
       display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      font-size: 13px;
+      text-align: left;
     }
-    .ad-countdown {
-      position: absolute;
-      top: 20px;
-      right: 20px;
-      background: rgba(255, 255, 255, 0.2);
-      border: 1px solid rgba(255, 255, 255, 0.4);
-      padding: 6px 14px;
+    .setting-toggle {
+      cursor: pointer;
+      width: 44px;
+      height: 24px;
       border-radius: 999px;
-      font-weight: 800;
-      font-size: 14px;
+      background: rgba(255, 255, 255, 0.2);
+      position: relative;
+      transition: background-color 0.2s;
+    }
+    .setting-toggle::after {
+      content: '';
+      position: absolute;
+      top: 2px;
+      left: 2px;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: #fff;
+      transition: transform 0.2s;
+    }
+    .setting-toggle.active {
+      background: #22c55e;
+    }
+    .setting-toggle.active::after {
+      transform: translateX(20px);
     }
 
-    /* Confetti Canvas */
     #confetti-canvas {
       position: fixed;
       inset: 0;
@@ -771,24 +781,16 @@
 </head>
 <body>
 
-  <!-- Background Layer -->
   <div id="bg-layer"></div>
   <div id="bg-gradient"></div>
-
-  <!-- Screen Flash for Thunder/Lightning -->
   <div id="screen-flash"></div>
-
-  <!-- Confetti Canvas -->
   <canvas id="confetti-canvas"></canvas>
-
-  <!-- Targeting Instruction Banner -->
   <div id="targeting-banner">🎯 Açmak istediğin kutucuğa dokun!</div>
 
-  <!-- Main Game App -->
   <div id="app-container">
 
-    <!-- Top Header -->
-    <header>
+    <!-- Top Navigation Header -->
+        <header>
       <div class="header-pill">
         <div class="level-badge">
           <span class="sub-title" id="region-text">KAPADOKYA</span>
@@ -797,66 +799,67 @@
       </div>
 
       <div class="header-actions">
-        <button class="btn-header daily-btn" id="btn-open-daily">
-          <span>📅</span> Günlük <span id="streak-indicator">🔥 1</span>
+        <button class="btn-header daily-btn" id="btn-open-daily" aria-label="Günlük Bulmaca" title="Günlük Bulmaca">
+          <span>📅</span><span id="streak-indicator">🔥 1</span>
         </button>
-        <button class="btn-header" id="btn-sound-toggle">
+        <button class="btn-header idiom-btn" id="btn-open-idioms" aria-label="Atasözü ve Deyim Modu" title="Atasözü Modu">
+          <span>📜</span><span>Deyim</span>
+        </button>
+        <button class="btn-header" id="btn-sound-toggle" aria-label="Sesi Aç veya Kapat" title="Ses">
           <span id="sound-icon">🔊</span>
         </button>
-        <div class="header-pill coin-badge">
-          <span>🪙</span> <span id="coins-display">200</span>
+        <button class="btn-header" id="btn-open-settings" aria-label="Ayarlar ve Ses" title="Ayarlar">
+          <span>⚙️</span>
+        </button>
+        <div class="header-pill coin-badge" id="btn-coins-info" title="Altın Bakiyesi">
+          <span>🪙</span><span id="coins-display">200</span>
         </div>
       </div>
     </header>
 
-    <!-- Crossword Grid Area -->
+    <!-- Crossword Board Area -->
     <main id="board-area">
-      <div id="crossword-grid"></div>
+      <div id="crossword-grid" role="grid" aria-label="Çapraz Bulmaca Izgarası"></div>
     </main>
 
-    <!-- Bottom Controls & Wheel Area -->
+    <!-- Bottom Controls & Wheel Section -->
     <section id="bottom-section">
 
       <!-- Word Preview Pill -->
       <div id="preview-container">
-        <div id="word-preview">KELİME</div>
+        <div id="word-preview" aria-live="polite">KELİME</div>
       </div>
 
       <!-- Power-ups Toolbar -->
       <div id="powerups-toolbar">
-        <!-- Shuffle -->
-        <button class="btn-powerup" id="btn-shuffle" title="Harfleri Karıştır">
+        <button class="btn-powerup" id="btn-shuffle" title="Harfleri Karıştır" aria-label="Harfleri Karıştır (Ücretsiz)">
           <span class="icon">🔀</span>
           <span class="cost">Ücretsiz</span>
         </button>
 
-        <!-- Bulb Hint (50) -->
-        <button class="btn-powerup" id="btn-hint-bulb" title="Rastgele Harf Aç">
+        <button class="btn-powerup" id="btn-hint-bulb" title="Rastgele 1 Harf Aç" aria-label="Ampul İpucu: 50 Altın">
           <span class="icon">💡</span>
           <span class="cost">🪙 50</span>
         </button>
 
-        <!-- Target Magnifier (100) -->
-        <button class="btn-powerup" id="btn-hint-target" title="Hedef Harfi Aç">
+        <button class="btn-powerup" id="btn-hint-target" title="Hedef Harfi Seçip Aç" aria-label="Hedefçi Büyüteç: 90 Altın">
           <span class="icon">🎯</span>
-          <span class="cost">🪙 100</span>
+          <span class="cost">🪙 90</span>
         </button>
 
-        <!-- Lightning Fireworks (150) -->
-        <button class="btn-powerup" id="btn-hint-lightning" title="3 Harf Patlat">
+        <button class="btn-powerup" id="btn-hint-lightning" title="3-4 Harf Patlat" aria-label="Şimşek: 140 Altın">
           <span class="icon">⚡</span>
-          <span class="cost">🪙 150</span>
+          <span class="cost">🪙 140</span>
         </button>
 
-        <!-- Bonus Words Chest -->
-        <button class="bonus-chest-btn" id="btn-bonus-chest" title="Ekstra Kelime Sandığı">
+        <button class="bonus-chest-btn" id="btn-bonus-chest" title="Kelime Sandığı" aria-label="Bonus Kelime Sandığı">
           <span class="icon">🎁</span>
           <span class="counter" id="bonus-counter">0/5</span>
         </button>
       </div>
 
       <!-- Letter Wheel -->
-      <div id="wheel-wrapper">
+      <div id="wheel-wrapper" role="region" aria-label="Harf Çarkı">
         <div id="wheel-canvas-container"></div>
         <svg id="wheel-svg">
           <polyline id="connection-line" points=""></polyline>
@@ -868,63 +871,60 @@
 
   </div>
 
-  <!-- ==================== MODALS ==================== -->
-
+  <!-- Modals -->
   <!-- 1. Cultural Discovery Card Modal -->
-  <div class="modal-overlay" id="modal-discovery">
+  <div class="modal-overlay" id="modal-discovery" role="dialog" aria-modal="true">
     <div class="modal-card">
-      <img class="discovery-img" id="discovery-img" src="" alt="Landmark">
+      <img class="discovery-img" id="discovery-img" src="" alt="Tarihi ve Doğal Mekan">
       <span class="discovery-badge" id="discovery-region">BÖLGE</span>
-      <h2 class="discovery-title" id="discovery-title">Tarihi Yapı</h2>
-      <p class="discovery-trivia" id="discovery-trivia">Eser hakkında kültürel bilgi burada yer alacak.</p>
+      <h2 class="discovery-title" id="discovery-title">Mekan Adı</h2>
+      <div class="discovery-trivia" id="discovery-trivia">Mekan açıklaması...</div>
       <button class="btn-gold" id="btn-discovery-continue">
         <span>Devam Et</span> ➔
       </button>
     </div>
   </div>
 
-  <!-- 2. Victory Modal with 2X Monetization -->
-  <div class="modal-overlay" id="modal-victory">
+  <!-- 2. Victory Modal with Balanced 2X Bonus -->
+  <div class="modal-overlay" id="modal-victory" role="dialog" aria-modal="true">
     <div class="modal-card">
-      <div class="victory-stars">⭐⭐⭐</div>
-      <h2 style="font-size:26px; font-weight:900; margin-bottom:6px;">Bölüm Tamamlandı!</h2>
-      <p style="color:#94a3b8; font-size:14px; margin-bottom:16px;">Tüm kelimeleri ustalıkla çözdün.</p>
+      <div id="victory-stars-display" style="font-size:36px; margin-bottom:10px; filter: drop-shadow(0 0 12px rgba(245, 158, 11, 0.8));">⭐⭐⭐</div>
+      <h2 style="font-size:24px; font-weight:900; margin-bottom:4px;">Bölüm Tamamlandı!</h2>
+      <p style="color:#94a3b8; font-size:13px; margin-bottom:14px;" id="victory-eval-text">Kusursuz çözüm!</p>
 
-      <div class="reward-box">
+      <div style="background: rgba(245, 158, 11, 0.15); border: 1px solid rgba(245, 158, 11, 0.4); padding: 10px; border-radius: 12px; font-weight: 900; font-size: 16px; color: #fef08a; margin-bottom: 14px;">
         <span>Kazanılan Ödül:</span>
-        <span style="color:#fbbf24;">+25 Altın</span>
+        <span style="color:#fbbf24;" id="victory-coins-earned">+30 Altın</span>
       </div>
 
-      <!-- 2X Rewarded Ad Button -->
-      <button class="btn-gold" id="btn-victory-2x" style="margin-bottom:8px; font-size:15px;">
-        <span>🎁 2 Katı Kazan: +50 Altın</span>
-        <span style="font-size:11px; background:rgba(0,0,0,0.25); padding:2px 6px; border-radius:6px;">Reklam</span>
+      <button class="btn-gold" id="btn-victory-2x" style="margin-bottom:8px; font-size:14px;">
+        <span>🎁 2 Katı Kazan: +60 Altın</span>
       </button>
 
-      <!-- Standard Continue -->
       <button class="btn-secondary" id="btn-victory-normal">
-        Normal Devam (+25 Altın)
+        Normal Devam (+30 Altın)
       </button>
     </div>
   </div>
 
   <!-- 3. Daily Challenge & Calendar Modal -->
-  <div class="modal-overlay" id="modal-calendar">
-    <div class="modal-card" style="max-width: 440px;">
-      <h2 style="font-size:22px; font-weight:900; margin-bottom:4px;">📅 Günlük Bulmaca</h2>
-      <p style="color:#fef08a; font-weight:800; font-size:14px;" id="calendar-streak-text">🔥 1 Günlük Seri</p>
+  <div class="modal-overlay" id="modal-calendar" role="dialog" aria-modal="true">
+    <div class="modal-card">
+      <h2 style="font-size:20px; font-weight:900; margin-bottom:2px;">📅 Günlük Bulmaca</h2>
+      <p style="color:#fef08a; font-weight:800; font-size:13px;" id="calendar-streak-text">🔥 1 Günlük Seri</p>
 
-      <!-- Calendar Month Days -->
-      <div class="calendar-grid" id="calendar-grid-container">
-        <!-- Rendered by JS -->
-      </div>
+      <div class="calendar-grid" id="calendar-grid-container"></div>
 
-      <div style="font-size:12px; color:#94a3b8; margin-bottom:14px;" id="daily-status-desc">
+      <div style="font-size:11.5px; color:#cbd5e1; margin-bottom:12px;" id="daily-status-desc">
         Günün bulmacasında 3 parlayan yıldızı toplayarak serini devam ettir!
       </div>
 
       <button class="btn-gold" id="btn-play-daily">
         <span>Günün Bulmacasını Oyna</span> 🌟
+      </button>
+
+      <button class="btn-secondary" id="btn-share-daily" style="display:none; background: rgba(34, 197, 94, 0.25); border-color: rgba(34, 197, 94, 0.5); color: #86efac;">
+        <span>📋 Sonucu Paylaş</span>
       </button>
 
       <button class="btn-secondary" id="btn-close-calendar">
@@ -933,109 +933,287 @@
     </div>
   </div>
 
-  <!-- 4. Insufficient Coins Modal -->
-  <div class="modal-overlay" id="modal-no-coins">
+  <!-- 4. Proverbs & Idioms Mode Modal -->
+  <div class="modal-overlay" id="modal-idioms" role="dialog" aria-modal="true">
     <div class="modal-card">
-      <div style="font-size:40px; margin-bottom:8px;">🪙</div>
-      <h2 style="font-size:22px; font-weight:900; margin-bottom:6px;">Yetersiz Altın!</h2>
-      <p style="color:#cbd5e1; font-size:13px; margin-bottom:18px;">
-        Bu gücü kullanmak için yeterli altının yok. Kısa bir reklam izleyerek hemen +100 Altın kazanabilirsin!
-      </p>
-      <button class="btn-gold" id="btn-watch-ad-for-coins">
-        <span>🎥 Reklam İzle: +100 Altın</span>
+      <span style="font-size:11px; background: rgba(168, 85, 247, 0.25); border: 1px solid rgba(168, 85, 247, 0.6); color: #f3e8ff; padding: 2px 10px; border-radius: 999px; font-weight: 800;">TÜRKÇE ATASÖZÜ & DEYİM</span>
+      <h2 style="font-size:18px; font-weight:900; margin:10px 0 6px 0;" id="idiom-proverb-text">"Damlaya damlaya ___ olur."</h2>
+      <p style="font-size:12px; color:#cbd5e1; margin-bottom:16px; font-style:italic;" id="idiom-meaning-text">Anlamı yükleniyor...</p>
+
+      <button class="btn-gold" id="btn-start-idiom-puzzle">
+        <span>Eksik Kelimeyi Çöz (+25 🪙)</span>
       </button>
+
+      <button class="btn-secondary" id="btn-close-idioms">
+        Vazgeç
+      </button>
+    </div>
+  </div>
+
+  <!-- 5. Bonus Chest Modal -->
+  <div class="modal-overlay" id="modal-bonus-chest" role="dialog" aria-modal="true">
+    <div class="modal-card">
+      <div style="font-size:36px; margin-bottom:6px;">🎁</div>
+      <h2 style="font-size:20px; font-weight:900; margin-bottom:4px;">Kelime Sandığı</h2>
+      <p style="color:#cbd5e1; font-size:12.5px; line-height:1.4; margin-bottom:14px;">
+        Çapraz bulmacada yer almayan ama Türkçede geçerli olan kelimeleri buldukça bu sandık dolar. Her 5 kelimede bir <strong>+35 Altın</strong> kazanırsın!
+      </p>
+
+      <div style="background: rgba(15, 23, 42, 0.7); padding: 10px; border-radius: 12px; border: 1px solid rgba(255, 255, 255, 0.1); margin-bottom: 14px;">
+        <div style="font-size:13px; font-weight:800; color:#fef08a; margin-bottom:6px;">
+          İlerleme: <span id="modal-chest-progress">0/5</span>
+        </div>
+        <div style="font-size:11.5px; color:#94a3b8;" id="modal-chest-words-list">
+          Bu bölümde henüz bonus kelime bulunmadı.
+        </div>
+      </div>
+
+      <button class="btn-gold" id="btn-close-bonus-chest">
+        Harika, Anladım!
+      </button>
+    </div>
+  </div>
+
+  <!-- 6. Accessibility & Settings Modal -->
+  <div class="modal-overlay" id="modal-settings" role="dialog" aria-modal="true">
+    <div class="modal-card">
+      <h2 style="font-size:20px; font-weight:900; margin-bottom:14px;">⚙️ Ayarlar ve Erişilebilirlik</h2>
+
+      <div class="setting-row">
+        <span>🔊 Ses Efektleri</span>
+        <div class="setting-toggle active" id="toggle-sound"></div>
+      </div>
+
+      <div class="setting-row">
+        <span>📳 Titreşim (Haptic)</span>
+        <div class="setting-toggle active" id="toggle-haptic"></div>
+      </div>
+
+      <div class="setting-row">
+        <span>♿ Disleksi Dostu Yazı Tipi</span>
+        <div class="setting-toggle" id="toggle-dyslexia"></div>
+      </div>
+
+      <div class="setting-row">
+        <span>🎨 Yüksek Kontrast Modu</span>
+        <div class="setting-toggle" id="toggle-contrast"></div>
+      </div>
+
+      <div class="setting-row">
+        <span>⚡ Hareketi Azalt (Reduced Motion)</span>
+        <div class="setting-toggle" id="toggle-motion"></div>
+      </div>
+
+      <button class="btn-secondary" id="btn-open-about-from-settings" style="margin-top:12px; background: rgba(56, 189, 248, 0.15); border-color: rgba(56, 189, 248, 0.4); color: #7dd3fc;">
+        <span>ℹ️ Oyun Hakkında, Kaynaklar ve KVKK</span>
+      </button>
+
+      <button class="btn-gold" id="btn-close-settings" style="margin-top:12px;">
+        Tamam
+      </button>
+    </div>
+  </div>
+
+  <!-- 7. About & Credits Modal -->
+  <div class="modal-overlay" id="modal-about" role="dialog" aria-modal="true">
+    <div class="modal-card" style="text-align: left;">
+      <h2 style="font-size:20px; font-weight:900; margin-bottom:4px; text-align:center;">Kelime Harikaları</h2>
+      <p style="font-size:11.5px; color:#94a3b8; text-align:center; margin-bottom:14px;">Sürüm 2.0.0 • Anadolu & Dünya Kültürel Mirası</p>
+
+      <div style="font-size:12px; color:#cbd5e1; line-height:1.5; margin-bottom:12px;">
+        <strong>Kültürel Görseller ve Lisanslar:</strong>
+        <p style="margin-top:4px;">Oyundaki tüm tarihi mekan görselleri Wikimedia Commons üzerinden Creative Commons (CC BY-SA / CC0) lisanslarıyla temin edilmiştir.</p>
+        <ul style="margin: 6px 0 0 16px; font-size:11px; color:#94a3b8;">
+          <li>Kapadokya: Yusuf Kaya (CC BY-SA 4.0)</li>
+          <li>Pamukkale: Antoine Taveneaux (CC BY-SA 3.0)</li>
+          <li>Galata Kulesi: Arild Vågen (CC BY-SA 4.0)</li>
+          <li>Efes Celsus: Benh LIEU SONG (CC BY-SA 3.0)</li>
+          <li>Nemrut Dağı: Bernard Gagnon (CC BY-SA 3.0)</li>
+          <li>Göbeklitepe: Teomancimit (CC BY-SA 3.0)</li>
+        </ul>
+      </div>
+
+      <div style="font-size:12px; color:#cbd5e1; line-height:1.5; margin-bottom:12px;">
+        <strong>Sözlük & İmla:</strong>
+        <p style="margin-top:4px;">Kelimeler ve atasözleri Türk Dil Kurumu (TDK) güncel yazım kılavuzu esas alınarak derlenmiştir.</p>
+      </div>
+
+      <div style="font-size:11.5px; color:#86efac; background:rgba(34, 197, 94, 0.15); padding:8px; border-radius:8px; border:1px solid rgba(34, 197, 94, 0.4); margin-bottom:14px;">
+        🛡️ <strong>Gizlilik & KVKK:</strong> Kelime Harikaları hiçbir kişisel veri toplamaz, çerez kullanmaz. Tüm oyun kaydınız yalnızca cihazınızda saklanır.
+      </div>
+
+      <button class="btn-gold" id="btn-close-about">
+        Kapat
+      </button>
+    </div>
+  </div>
+
+  <!-- 8. Insufficient Coins Modal -->
+  <div class="modal-overlay" id="modal-no-coins" role="dialog" aria-modal="true">
+    <div class="modal-card">
+      <div style="font-size:36px; margin-bottom:6px;">🪙</div>
+      <h2 style="font-size:20px; font-weight:900; margin-bottom:4px;">Yetersiz Altın</h2>
+      <p style="color:#cbd5e1; font-size:12.5px; margin-bottom:16px;">
+        Bu gücü kullanmak için altının yetersiz. Bugünkü ücretsiz ipucunu kullanabilir veya bonus kelimeler bularak altın kazanabilirsin!
+      </p>
+
+      <button class="btn-gold" id="btn-claim-free-hint" style="margin-bottom:8px;">
+        <span>🎁 Bugünkü Ücretsiz İpucu (1 Adet)</span>
+      </button>
+
       <button class="btn-secondary" id="btn-close-no-coins">
         Vazgeç
       </button>
     </div>
   </div>
 
-  <!-- 5. Simulated Rewarded Ad Overlay -->
-  <div class="ad-screen" id="rewarded-ad-screen">
-    <div class="ad-countdown" id="rewarded-ad-timer">Ödüllü Reklam - 5s</div>
-    <div style="font-size:56px; margin-bottom:16px;">🎮</div>
-    <h2 style="font-size:26px; font-weight:900; margin-bottom:8px;">Kelime Harikaları</h2>
-    <p style="color:#94a3b8; max-width:280px; font-size:14px; margin-bottom:24px;">
-      Harika oyunları keşfetmeye devam et! Sponsor video oynatılıyor...
-    </p>
-    <div style="width:180px; height:8px; background:rgba(255,255,255,0.2); border-radius:999px; overflow:hidden;">
-      <div id="rewarded-ad-progress" style="width:0%; height:100%; background:#fbbf24; transition:width 1s linear;"></div>
-    </div>
-  </div>
-
-  <!-- 6. Simulated Interstitial Ad Overlay -->
-  <div class="ad-screen" id="interstitial-ad-screen">
-    <div class="ad-countdown" id="interstitial-ad-timer">Geçiş Reklamı - 3s</div>
-    <div style="font-size:50px; margin-bottom:14px;">✨</div>
-    <h2 style="font-size:24px; font-weight:900; margin-bottom:6px;">Bölüm Arası Sponsoru</h2>
-    <p style="color:#94a3b8; font-size:13px;">Oyun yükleniyor, lütfen bekleyin...</p>
-  </div>
-
-  <!-- ==================== LOGIC ENGINE ==================== -->
+  <!-- Script Engine Injection -->
   <script>
-    /* GAME DATABASE & SOUND & CORE CONTROLLER */
     
+  // Injected Data Packages
+  const CREDITS_DATA = [{"id": "kapadokya", "title": "Kapadokya - Peri Bacaları ve Balonlar", "location": "Nevşehir, Türkiye", "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/Hot_air_balloon_over_Cappadocia.jpg/1280px-Hot_air_balloon_over_Cappadocia.jpg", "author": "Yusuf Kaya", "license": "CC BY-SA 4.0", "source_url": "https://commons.wikimedia.org/wiki/File:Hot_air_balloon_over_Cappadocia.jpg", "unesco": "1985 - Karma (Doğal ve Kültürel)", "summary": "Milyonlarca yıl önce Erciyes ve Hasandağı'nın püskürttüğü lav ve küllerin rüzgâr ve yağmurla aşınmasıyla oluşan peri bacaları, benzersiz yeraltı şehirleri ve kaya oyma kiliseleriyle dünyanın en büyüleyici açık hava müzelerinden biridir.", "trivia": "Kapadokya adı antik Pers dilinde 'Katpatuka' yani 'Güzel Atlar Ülkesi' anlamına gelmektedir."}, {"id": "pamukkale", "title": "Pamukkale Travertenleri ve Hierapolis", "location": "Denizli, Türkiye", "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/be/Pamukkale_Terraces.jpg/1280px-Pamukkale_Terraces.jpg", "author": "Antoine Taveneaux", "license": "CC BY-SA 3.0", "source_url": "https://commons.wikimedia.org/wiki/File:Pamukkale_Terraces.jpg", "unesco": "1988 - Karma (Doğal ve Kültürel)", "summary": "Termal kaynak sularının havadaki oksijen ile teması sonucu kalsiyum karbonatın çökelmesiyle oluşan bembeyaz pamuksu teraslar, antik Roma döneminden beri şifa arayanlara ev sahipliği yapmaktadır.", "trivia": "Traverten havuzlarının sıcaklığı yıl boyunca 35-36 derece civarında sabit kalır."}, {"id": "galata", "title": "Galata Kulesi", "location": "Beyoğlu, İstanbul, Türkiye", "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/06/Galata_Tower_Istanbul.jpg/1280px-Galata_Tower_Istanbul.jpg", "author": "Arild Vågen", "license": "CC BY-SA 4.0", "source_url": "https://commons.wikimedia.org/wiki/File:Galata_Tower_Istanbul.jpg", "unesco": "2013 - Geçici Miras Listesi", "summary": "1348 yılında Cenevizliler tarafından 'İsa Kulesi' adıyla inşa edilen 67 metre yüksekliğindeki kule, İstanbul Boğazı ve Haliç'in eşsiz panoramik manzarasına hakim tarihi bir fenerdir.", "trivia": "17. yüzyılda Hezarfen Ahmed Çelebi, kollarına taktığı kartal kanatlarıyla kuleden havalanarak Boğaz'ı aşmış ve Üsküdar Doğancılar Meydanı'na inmiştir."}, {"id": "efes", "title": "Efes - Celsus Kütüphanesi", "location": "Selçuk, İzmir, Türkiye", "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/30/Library_of_Celsus_Ephesus_Turkey.jpg/1280px-Library_of_Celsus_Ephesus_Turkey.jpg", "author": "Benh LIEU SONG", "license": "CC BY-SA 3.0", "source_url": "https://commons.wikimedia.org/wiki/File:Library_of_Celsus_Ephesus_Turkey.jpg", "unesco": "2015 - Kültürel Miras", "summary": "Roma İmparatoru Trajan döneminde Tiberius Julius Celsus Polemaeanus onuruna oğlu tarafından yaptırılan kütüphane, antik dünyanın en zengin üçüncü kütüphanesidir.", "trivia": "Kütüphanenin cephesindeki 4 kadın heykeli Sophia (Akıl), Arete (Erdem), Ennoia (Kavrayış) ve Episteme (Bilgi) değerlerini temsil eder."}, {"id": "nemrut", "title": "Nemrut Dağı - Tanrılar Tahtı", "location": "Kahta, Adıyaman, Türkiye", "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/29/Nemrut_Dagi_Heads.jpg/1280px-Nemrut_Dagi_Heads.jpg", "author": "Bernard Gagnon", "license": "CC BY-SA 3.0", "source_url": "https://commons.wikimedia.org/wiki/File:Nemrut_Dagi_Heads.jpg", "unesco": "1987 - Kültürel Miras", "summary": "2150 metre yükseklikte Kommagene Kralı I. Antiochos'un ebedi istirahatgahı olarak inşa ettirdiği devasa kral, aslan, kartal ve tanrı heykelleri doğu ve batı medeniyetlerinin sentezidir.", "trivia": "Nemrut Dağı'ndaki aslan horoskopu kabartması, tarihin bilinen en eski astrolojik takvimidir."}, {"id": "gobeklitepe", "title": "Göbeklitepe - Tarihin Sıfır Noktası", "location": "Haliliye, Şanlıurfa, Türkiye", "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a8/G%C3%B6bekli_Tepe%2C_Sanliurfa.jpg/1280px-G%C3%B6bekli_Tepe%2C_Sanliurfa.jpg", "author": "Teomancimit", "license": "CC BY-SA 3.0", "source_url": "https://commons.wikimedia.org/wiki/File:G%C3%B6bekli_Tepe,_Sanliurfa.jpg", "unesco": "2018 - Kültürel Miras", "summary": "MÖ 10.000 (yaklaşık 12.000 yıl önce) inşa edilen T biçimli anıtsal sütunlar, insanoğlunun yerleşik hayata geçiş ve inanç tarihi hakkındaki tüm teorileri kökten değiştirmiştir.", "trivia": "Göbeklitepe, Mısır Piramitleri'nden 7.000 yıl, İngiltere'deki Stonehenge'den 6.000 yıl daha eskidir."}, {"id": "sumela", "title": "Sümela Manastırı - Kaya Manastırı", "location": "Maçka, Trabzon, Türkiye", "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/Sumela_from_across_valley.JPG/1280px-Sumela_from_across_valley.JPG", "author": "Bjørn Christian Tørrissen", "license": "CC BY-SA 3.0", "source_url": "https://commons.wikimedia.org/wiki/File:Sumela_from_across_valley.JPG", "unesco": "2000 - Geçici Miras Listesi", "summary": "Karadağ'ın sarp kayalıklarına deniz seviyesinden 1150 metre yükseklikte oyulmuş olan manastır, vadinin sisleri arasında havada asılı gibi duran eşsiz mimarisi ve freskleriyle tanınır.", "trivia": "Manastırın adı Yunanca 'kara' anlamına gelen 'melas' kelimesinden türemiş olup bulunduğu Karadağ'dan ismini alır."}, {"id": "ani", "title": "Ani Harabeleri - 1001 Kiliseli Şehir", "location": "Merkez, Kars, Türkiye", "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5a/Ani_Cathedral_2011.jpg/1280px-Ani_Cathedral_2011.jpg", "author": "Gerd Eichmann", "license": "CC BY-SA 4.0", "source_url": "https://commons.wikimedia.org/wiki/File:Ani_Cathedral_2011.jpg", "unesco": "2016 - Kültürel Miras", "summary": "İpek Yolu üzerinde kurulan ve Orta Çağ'ın en büyük ticaret metropollerinden biri olan Ani, Arpaçay Kanyonu kıyısında Türk, Ermeni, Gürcü ve Bizans mimarisinin sentezidir.", "trivia": "Ani'deki Menûçihr Camii, Selçukluların Anadolu'da inşa ettiği ilk Türk camisi olarak kabul edilir."}];
+  const IDIOMS_DATA = [{"id": 1, "text": "Damlaya damlaya ___ olur.", "answer": "GÖL", "meaning": "Küçük şeyler birike birike büyük varlık oluşturur."}, {"id": 2, "text": "Ağaç yaş iken ___.", "answer": "EĞİLİR", "meaning": "İnsanlar küçük yaşta daha kolay eğitilir."}, {"id": 3, "text": "Gülme komşuna, gelir ___.", "answer": "BAŞINA", "meaning": "Başkasının başına gelen kötü bir durum bir gün senin de başına gelebilir."}, {"id": 4, "text": "Tatlı dil yılanı ___ çıkarır.", "answer": "DELİĞİNDEN", "meaning": "Gönül alıcı, tatlı sözlerle en sert insanlar bile ikna edilebilir."}, {"id": 5, "text": "Ak akçe ___ gün içindir.", "answer": "KARA", "meaning": "Alın teriyle kazanılan para, zor zamanlarda imdada yetişir."}, {"id": 6, "text": "Sakla samanı, gelir ___.", "answer": "ZAMANI", "meaning": "Değersiz görülen şeyler bile günü gelince işe yarar."}, {"id": 7, "text": "Birlikten ___ doğar.", "answer": "KUVVET", "meaning": "Toplu ve beraber hareket etmek başarıyı ve gücü artırır."}, {"id": 8, "text": "Vakit ___.", "answer": "NAKİTTİR", "meaning": "Zaman çok değerlidir, boşa harcanmamalıdır."}, {"id": 9, "text": "Acele işe ___ karışır.", "answer": "ŞEYTAN", "meaning": "Düşünmeden hızlı yapılan işlerde mutlaka aksilik çıkar."}, {"id": 10, "text": "Ev alma, ___ al.", "answer": "KOMŞU", "meaning": "İyi bir çevre ve komşuluk, evin kendisinden çok daha önemlidir."}, {"id": 11, "text": "İşleyen demir ___ tutmaz.", "answer": "PAS", "meaning": "Sürekli çalışan insan formunu korur, yetenekleri körelmez."}, {"id": 12, "text": "Öfke ile kalkan, ___ ile oturur.", "answer": "ZARAR", "meaning": "Öfkesine yenik düşüp düşüncesizce davranan sonunda pişman olur."}, {"id": 13, "text": "Sütten ağzı yanan, yoğurdu ___ yer.", "answer": "ÜFLEYEREK", "meaning": "Bir kez acı tecrübe yaşayan kişi benzer durumlarda aşırı temkinli olur."}, {"id": 14, "text": "Ayağını yorganına göre ___.", "answer": "UZAT", "meaning": "Harcamalarını gelirine ve bütçene göre ayarla."}, {"id": 15, "text": "Ne ekersen onu ___.", "answer": "BİÇERSİN", "meaning": "Çevrene nasıl davranırsan öyle karşılık görürsün."}, {"id": 16, "text": "Dost kara günde ___ olur.", "answer": "BELLİ", "meaning": "Gerçek dostlar insanın zor ve kederli zamanında yanında olanlardır."}, {"id": 17, "text": "Güneş girmeyen eve ___ girer.", "answer": "DOKTOR", "meaning": "Güneş ve temiz hava sağlığın temelidir."}, {"id": 18, "text": "Bir elin nesi var, iki elin ___ var.", "answer": "SESİ", "meaning": "Dayanışma ve yardımlaşma ile zor işler kolayca başarılır."}, {"id": 19, "text": "Bal tutan ___ yalar.", "answer": "PARMAĞINI", "meaning": "Bir nimetin kaynağında bulunan kişi bundan faydalanır."}, {"id": 20, "text": "Rüzgâr eken ___ biçer.", "answer": "FIRTINA", "meaning": "Kötülük saçan veya huzursuzluk çıkaran kişi çok daha büyük felaketle karşılaşır."}, {"id": 21, "text": "Her yiğidin bir ___ yiyişi vardır.", "answer": "YOĞURT", "meaning": "Herkesin kendine özgü bir çalışma ve iş yapma yöntemi bulunur."}, {"id": 22, "text": "Laf ile peynir gemisi ___.", "answer": "YÜRÜMEZ", "meaning": "Yalnızca konuşarak veya boş vaatlerle hiçbir iş başarılamaz."}, {"id": 23, "text": "Meyve veren ağaç ___.", "answer": "TAŞLANIR", "meaning": "Başarılı ve faydalı insanlar sık sık eleştiri ve kıskançlığa maruz kalır."}, {"id": 24, "text": "Dereyi görmeden paçaları ___.", "answer": "SIVAMA", "meaning": "Vakti gelmeden ve durum netleşmeden hazırlık yapmak veya sevinmek anlamsızdır."}, {"id": 25, "text": "Gözden ırak olan, ___ ırak olur.", "answer": "GÖNÜLDEN", "meaning": "Birbirinden uzak kalanların arasındaki sevgi bağı zamanla zayıflayabilir."}, {"id": 26, "text": "Zararın neresinden dönülse ___.", "answer": "KÂRDIR", "meaning": "Hatalı bir gidişatı ne kadar erken terk ederseniz o kadar kazançlı çıkarsınız."}, {"id": 27, "text": "Sabır acıdır, meyvesi ___.", "answer": "TATLIDIR", "meaning": "Zorluklara göğüs germek güçtür ama sabrın sonundaki başarı mutluluk verir."}, {"id": 28, "text": "Körle yatan ___ kalkar.", "answer": "ŞAŞI", "meaning": "Kötü veya kusurlu kimselerle vakit geçiren onlardan olumsuz etkilenir."}, {"id": 29, "text": "Taşıma su ile değirmen ___.", "answer": "DÖNMEZ", "meaning": "Dışarıdan gelen geçici yardımlarla sürekli bir iş yürütülemez."}, {"id": 30, "text": "İti an, ___ hazırla.", "answer": "ÇOMAĞI", "meaning": "Adı anılan edepsiz veya sevilmeyen kişi aniden çıkagelir."}, {"id": 31, "text": "Bülbülü altın kafese koymuşlar, yine de 'ah ___' demiş.", "answer": "VATANIM", "meaning": "İnsan ne kadar bolluk içinde olursa olsun kendi yurdunun özlemini çeker."}, {"id": 32, "text": "Çivi çiviyi ___.", "answer": "SÖKER", "meaning": "Zor bir durum benzer güçte bir hamleyle çözülür."}, {"id": 33, "text": "Denize düşen yılana ___.", "answer": "SARILIR", "meaning": "Büyük tehlike içinde kalan insan kurtulmak için en sakıncalı yola bile başvurur."}, {"id": 34, "text": "Dile kolay, ___ zor.", "answer": "YAPMASI", "meaning": "Söylemesi kolay görünen bir işin uygulaması oldukça zahmetlidir."}, {"id": 35, "text": "Doğru söyleyeni dokuz ___ kovarlar.", "answer": "KÖYDEN", "meaning": "Açık sözlü ve samimi doğruları dile getiren insanlar genellikle sevilmez."}, {"id": 36, "text": "El elden üstündür, arşa ___.", "answer": "VARINCAYA", "meaning": "Hiç kimse her konuda en yetenekli olduğunu iddia edemez."}, {"id": 37, "text": "Görünen köy ___ istemez.", "answer": "KILAVUZ", "meaning": "Açık ve bariz olan durumlar için ek kanıt veya açıklama gerekmez."}, {"id": 38, "text": "Gül dikensiz ___.", "answer": "OLMAZ", "meaning": "Güzel ve değerli olan her şeyin ufak tefek zorlukları ve kusurları bulunur."}, {"id": 39, "text": "Hamama giren ___.", "answer": "TERLER", "meaning": "Zor veya masraflı bir işe girişen kişi onun zorluklarına katlanmak zorundadır."}, {"id": 40, "text": "Harman yel ile, düğün ___ ile olur.", "answer": "EL", "meaning": "Her büyük iş ancak çevrenin ve dostların yardımıyla tamamlanır."}, {"id": 41, "text": "Hasta olmayan, sağlığın kadrini ___.", "answer": "BİLMEZ", "meaning": "İnsan sahip olduğu sağlığın değerini ancak onu kaybedince anlar."}, {"id": 42, "text": "Haydan gelen ___ gider.", "answer": "HUYA", "meaning": "Kolay ve emeksiz kazanılan kazanç aynı şekilde çabuk tükenir."}, {"id": 43, "text": "İki canbaz bir ipte ___.", "answer": "OYNAMAZ", "meaning": "Birbirini kandırmaya çalışan iki hilekar birlikte iş yapamaz."}, {"id": 44, "text": "İki karpuz bir koltuğa ___.", "answer": "SIĞMAZ", "meaning": "Aynı anda iki büyük ve dikkat gerektiren iş başarılamaz."}, {"id": 45, "text": "İğneyi kendine, çuvaldızı ___ batır.", "answer": "BAŞKASINA", "meaning": "Başkalarını eleştirmeden önce kendi kusurlarına bak."}, {"id": 46, "text": "İyilik yap, denize ___.", "answer": "AT", "meaning": "Yaptığın iyiliği karşılık beklemeden yap, kıymetini bilen bilir."}, {"id": 47, "text": "Kaçan balık ___ olur.", "answer": "BÜYÜK", "meaning": "Elden kaçırılan fırsatlar insanın gözünde her zaman daha değerli görünür."}, {"id": 48, "text": "Kalp kalbe ___.", "answer": "KARŞIDIR", "meaning": "Birbirini seven insanların hisleri ve düşünceleri birbirine yansır."}, {"id": 49, "text": "Kaz gelen yerden tavuk ___.", "answer": "ESİRGENMEZ", "meaning": "Büyük kazanç elde edilecek durumlar için ufak masraflardan kaçınılmaz."}, {"id": 50, "text": "Keskin sirke küpüne ___ verir.", "answer": "ZARAR", "meaning": "Aşırı öfkeli ve fevri davranan insan en çok kendine zarar verir."}, {"id": 51, "text": "Komşu komşunun ___ muhtaçtır.", "answer": "KÜLÜNE", "meaning": "Hayatta en küçük ihtiyaçlarda bile dayanışma önemlidir."}, {"id": 52, "text": "Köpeksiz köy bulmuş, ___ geziyor.", "answer": "DEĞNEKSİZ", "meaning": "Engel veya otorite olmayan yerde başına buyruk hareket eden kimse."}, {"id": 53, "text": "Körler memleketinde şaşılar ___ olur.", "answer": "PADİŞAH", "meaning": "Cahil veya niteliksiz ortamda azıcık bilgisi olan kişi lider kabul edilir."}, {"id": 54, "text": "Kurunun yanında ___ da yanar.", "answer": "YAŞ", "meaning": "Kötülerin cezalandırıldığı ortamda kimi zaman masumlar da zarar görür."}, {"id": 55, "text": "Kurt dumanlı ___ sever.", "answer": "HAVAYI", "meaning": "Fırsatçılar karışık ve kriz dönemlerini kendi çıkarları için kullanır."}, {"id": 56, "text": "Minareyi çalan ___ hazırlar.", "answer": "KILIFINI", "meaning": "Büyük bir suç veya hırsızlık yapan kişi önceden mazeretini uydurmuştur."}, {"id": 57, "text": "Mum dibine ışık ___.", "answer": "VERMEZ", "meaning": "Bir insan başkalarına çok faydalı olsa da en yakınlarına her zaman yetemez."}, {"id": 58, "text": "Nerede hareket, orada ___.", "answer": "BEREKET", "meaning": "Çalışmanın, gayretin ve canlılığın olduğu yerde bolluk olur."}, {"id": 59, "text": "Otu çek, ___ bak.", "answer": "KÖKÜNE", "meaning": "Bir kimsenin karakterini anlamak için soyuna ve geçmişine bakılır."}, {"id": 60, "text": "Pire için yorgan ___.", "answer": "YAKILMAZ", "meaning": "Önemsiz ve ufak bir aksilik için büyük fedakarlık veya yıkım yapılmaz."}, {"id": 61, "text": "Perşembenin gelişi çarşambadan ___.", "answer": "BELLİDİR", "meaning": "Bir durumun nasıl sonuçlanacağı daha önceki belirtilerinden anlaşılır."}, {"id": 62, "text": "Rüşvet kapıdan girince, iman ___ çıkar.", "answer": "BACADAN", "meaning": "Ahlaksızlık ve rüşvetin olduğu yerde adalet ve vicdan barınamaz."}, {"id": 63, "text": "Söz gümüşse, sükut ___.", "answer": "ALTINDIR", "meaning": "Zamanında susmak ve dinlemek çoğu zaman konuşmaktan daha erdemlidir."}, {"id": 64, "text": "Su uyur, ___ uyumaz.", "answer": "DÜŞMAN", "meaning": "Tehlikeye karşı her an uyanık ve tedbirli olmak gerekir."}, {"id": 65, "text": "Tavşan dağa küsmüş, dağın ___ olmamış.", "answer": "HABERİ", "meaning": "Önemsiz birinin büyük bir kuruma veya kişiye küsmesi karşı tarafa hiç etki etmez."}, {"id": 66, "text": "Tencere yuvarlanmış, kapağını ___.", "answer": "BULMUŞ", "meaning": "Huyu suyu birbirine benzeyen kimseler eninde sonunda bir araya gelir."}, {"id": 67, "text": "Tok açın halinden ___.", "answer": "ANLAMAZ", "meaning": "Varlıklı kimseler yoksulların çektiği sıkıntıları tam olarak idrak edemez."}, {"id": 68, "text": "Topalla gezen ___ öğrenir.", "answer": "AKSAMAYI", "meaning": "Kötü alışkanlıkları olanlarla gezen onlara benzer."}, {"id": 69, "text": "Ummadık taş baş ___.", "answer": "YARAR", "meaning": "Hiç hesaba katılmayan önemsiz bir şey bazen büyük zararlar doğurabilir."}, {"id": 70, "text": "Üzüm üzüme baka baka ___.", "answer": "KARARIR", "meaning": "İnsanlar birlikte yaşadıkları kişilerin huylarını zamanla benimser."}, {"id": 71, "text": "Varlığa darlık ___.", "answer": "YAKIŞMAZ", "meaning": "İmkanı olan kimsenin cimri ve dar fikirli davranması doğru değildir."}, {"id": 72, "text": "Yalancının mumu yatsıya kadar ___.", "answer": "YANAR", "meaning": "Söylenen yalan çok geçmeden gün yüzüne çıkar ve foyası anlaşılır."}, {"id": 73, "text": "Yalnız taş duvar ___.", "answer": "OLMAZ", "meaning": "Tek başına büyük işler başarılamaz, birliktelik şarttır."}, {"id": 74, "text": "Yatan aslandan gezen tilki ___.", "answer": "YEĞDİR", "meaning": "Çalışıp arayan zayıf kimse, oturup pinekleyen güçlü kimseden daha hayırlıdır."}, {"id": 75, "text": "Yılanın sevmediği ot, deliğinin ağzında ___.", "answer": "BİTER", "meaning": "İnsanın en çekindiği veya hoşlanmadığı şey sık sık karşısına çıkar."}, {"id": 76, "text": "Yiğit lakabıyla ___.", "answer": "ANILIR", "meaning": "Kişi mertliği ve karakteristik özellikleriyle toplumda tanınır."}, {"id": 77, "text": "Yuvarlanan taş yosun ___.", "answer": "TUTMAZ", "meaning": "Sürekli iş veya yer değiştiren insan kalıcı bir varlık veya uzmanlık edinemez."}, {"id": 78, "text": "Zahmetsiz rahmet ___.", "answer": "OLMAZ", "meaning": "Büyük nimetlere ve başarılara çaba ve sıkıntı çekilmeden ulaşılamaz."}, {"id": 79, "text": "Abanın kadri yağmurda ___.", "answer": "BİLİNİR", "meaning": "Bir eşyanın veya insanın değeri ona ihtiyaç duyulduğu an ortaya çıkar."}, {"id": 80, "text": "Acemi katır kapı önünde yük ___.", "answer": "İNDİRİR", "meaning": "Bir işin ehli olmayan kimse en can alıcı noktada işi yarım bırakır."}, {"id": 81, "text": "Aç doymam, tok ___ sanır.", "answer": "ACIKMAM", "meaning": "Açgözlü olan yetinmez, varlıklı olan ise durumunun hep süreceğini düşünür."}, {"id": 82, "text": "Ağaca çıkan keçinin dala bakan ___ olur.", "answer": "OĞLAĞI", "meaning": "Çocuklar anne ve babalarının davranışlarını örnek alarak büyür."}, {"id": 83, "text": "Akıl akıldan ___.", "answer": "ÜSTÜNDÜR", "meaning": "Bir konuda farklı insanların görüşlerine başvurmak doğru kararı sağlar."}, {"id": 84, "text": "Akıl yaşta değil, ___.", "answer": "BAŞTADIR", "meaning": "Olgunluk ve doğru karar verme yetisi yaşa değil akla bağlıdır."}, {"id": 85, "text": "Alma mazlumun ahını, çıkar ___ aheste.", "answer": "AHESTE", "meaning": "Haksızlık yapılan masumun bedduası eninde sonunda zalimi bulur."}, {"id": 86, "text": "Altın yere düşmekle pul ___.", "answer": "OLMAZ", "meaning": "Değerli ve erdemli insanlar kötü duruma düşseler bile değerlerini yitirmezler."}, {"id": 87, "text": "Araba devrilince yol gösteren çok ___.", "answer": "OLUR", "meaning": "İş işten geçtikten sonra nasihat veren ve akıl öğreten çok çıkar."}, {"id": 88, "text": "Aslan yattığı yerden ___ olur.", "answer": "BELLİ", "meaning": "Kişinin yaşadığı yerin temizliği ve düzeni onun karakterini yansıtır."}, {"id": 89, "text": "Ateş düştüğü yeri ___.", "answer": "YAKAR", "meaning": "Bir felaketin acısını en derin yaşayanlar doğrudan o felakete uğrayanlardır."}, {"id": 90, "text": "Ateş olmayan yerden duman ___.", "answer": "ÇIKMAZ", "meaning": "Bir dedikodu veya söylenti varsa mutlaka ardında ufak da olsa bir gerçek vardır."}, {"id": 91, "text": "At ölür meydan kalır, yiğit ölür ___ kalır.", "answer": "ŞAN", "meaning": "İnsan öldükten sonra geride bıraktığı güzel eser ve itibarla anılır."}, {"id": 92, "text": "Avcı ne kadar al bilse, ayı o kadar ___ bilir.", "answer": "YOL", "meaning": "Kurnaz biri karşısındakini tuzağa düşürmeye çalışsa da o da kendini korumayı bilir."}, {"id": 93, "text": "Bakarsan bağ, bakmazsan ___ olur.", "answer": "DAĞ", "meaning": "Emek ve bakım verilen şeyler güzelleşir ve verim sağlar."}, {"id": 94, "text": "Başa gelen çekilir, yazıya ne ___.", "answer": "DENİR", "meaning": "Kaderde olan kaçınılmaz sıkıntılara sabır göstermek gerekir."}, {"id": 95, "text": "Besle kargayı, oysun ___.", "answer": "GÖZÜNÜ", "meaning": "Nankör birine yapılan iyilik sonunda fenalık olarak geri dönebilir."}, {"id": 96, "text": "Bin bilsen de bir bilene ___.", "answer": "DANIŞ", "meaning": "Ne kadar bilgili olursan ol, konunun uzmanına akıl sormak en doğrusudur."}, {"id": 97, "text": "Bir fincan kahvenin kırk yıl ___ vardır.", "answer": "HATIRI", "meaning": "Yapılan küçük bir ikram ve dostluk dahi ömür boyu unutulmaz."}, {"id": 98, "text": "Boş çuval ayakta ___.", "answer": "DURMAZ", "meaning": "Bilgisiz ve temelsiz fikirler veya karnı aç insanlar ayakta kalamaz."}, {"id": 99, "text": "Can boğazdan ___.", "answer": "GELİR", "meaning": "İnsanın gücünü koruması ve sağlıklı kalması için iyi beslenmesi gerekir."}, {"id": 100, "text": "Can çıkmayınca huy ___.", "answer": "ÇIKMAZ", "meaning": "İnsanın temel karakter ve alışkanlıkları ömrünün sonuna kadar kolay değişmez."}, {"id": 101, "text": "Cömert derler maldan ederler, yiğit derler ___ ederler.", "answer": "CANDAN", "meaning": "Övgülere kanıp sınırını bilmeyenler büyük kayıplara uğrayabilir."}, {"id": 102, "text": "Çirkefe taş atma, üstüne ___.", "answer": "SIÇRAR", "meaning": "Kötü ve ahlaksız insanlarla münakaşa etmekten kaçınmak gerekir."}, {"id": 103, "text": "Çok gezen mi bilir, çok ___ mi?", "answer": "OKUYAN", "meaning": "Görerek ve tecrübe ederek öğrenmek ile kitaplardan öğrenmek arasındaki denge."}, {"id": 104, "text": "Dağ dağa kavuşmaz, insan insana ___.", "answer": "KAVUŞUR", "meaning": "Hayatta ne kadar uzak düşülse de insanlar bir gün mutlaka karşılaşır."}, {"id": 105, "text": "Davulun sesi uzaktan ___ gelir.", "answer": "HOŞ", "meaning": "İç yüzü bilinmeyen uzaktaki işler insana cazip ve kolay görünür."}, {"id": 106, "text": "Deliye her gün ___.", "answer": "BAYRAM", "meaning": "Sorumluluğu olmayan veya dertsiz kimseler için her an eğlencelidir."}, {"id": 107, "text": "Demir tavında ___.", "answer": "DÖVÜLÜR", "meaning": "Her iş uygun zamanda ve şartlar olgunlaştığında yapılmalıdır."}, {"id": 108, "text": "Deniz dalgasız, kapı ___ olmaz.", "answer": "HALKASIZ", "meaning": "Her kurum ve ortamın kendine özgü vazgeçilmez kuralları vardır."}, {"id": 109, "text": "Dinsizin hakkından ___ gelir.", "answer": "İMANSIZ", "meaning": "Acımasız ve kuralsız birinin karşısına ondan daha sert biri çıkar."}, {"id": 110, "text": "Dost acı ___.", "answer": "SÖYLER", "meaning": "Gerçek dost insanın hatasını yüzüne söyler ki kendini düzeltsin."}, {"id": 111, "text": "Dost ile ye, iç; alışveriş ___.", "answer": "ETME", "meaning": "Para ve ticaret ilişkileri samimi dostlukları zedeleyebilir."}, {"id": 112, "text": "Düşenin dostu ___.", "answer": "OLMAZ", "meaning": "Mevki ve varlığını kaybeden kimsenin etrafındaki sahte dostlar dağılır."}, {"id": 113, "text": "Ecel geldi cihana, baş ağrısı ___.", "answer": "BAHANE", "meaning": "Vakti gelen son için her ufak sebep bir vesile olur."}, {"id": 114, "text": "El elin eşeğini türkü söyleyerek ___.", "answer": "ARAR", "meaning": "İnsan başkasının derdine kendi derdi gibi candan üzülemez."}, {"id": 115, "text": "Emanete hıyanet ___.", "answer": "OLMAZ", "meaning": "Güvenilip teslim edilen şeye zarar verilmez, özenle korunur."}, {"id": 116, "text": "Erken kalkan yol alır, er evlenen ___ alır.", "answer": "DÖL", "meaning": "Zamanında ve erken harekete geçen hedefine daha çabuk ulaşır."}, {"id": 117, "text": "Eşeğe altın semer vursalar, eşek yine ___.", "answer": "EŞEKTİR", "meaning": "Dış görünüş ve süs insanın içindeki cehaleti veya kabalığı değiştirmez."}, {"id": 118, "text": "Fazla mal göz ___.", "answer": "ÇIKARMAZ", "meaning": "İlerisi için kenarda duran ihtiyaç fazlası şeylerin zararı olmaz."}, {"id": 119, "text": "Felek kimine kavun yedirir, kimine ___.", "answer": "KELEK", "meaning": "Hayat piyangosu herkese eşit şans ve talih dağıtmaz."}, {"id": 120, "text": "Geç olsun da ___ olmasın.", "answer": "GÜÇ", "meaning": "Bir işin gecikmesi, imkansızlaşmasından veya başarısız olmasından iyidir."}, {"id": 121, "text": "Gemisini kurtaran ___.", "answer": "KAPTANDIR", "meaning": "Kriz ve tehlike anında işini başarıyla yönetip kurtaran takdir edilir."}, {"id": 122, "text": "Göz görür, gönül ___.", "answer": "KATLANIR", "meaning": "Kişi gördüğü veya aşina olduğu durumlara daha kolay tahammül eder."}, {"id": 123, "text": "Gülü seven dikenine ___.", "answer": "KATLANIR", "meaning": "Güzel bir amaca ulaşmak isteyen onun yolundaki zorlukları peşinen kabul eder."}, {"id": 124, "text": "Hatasız kul ___.", "answer": "OLMAZ", "meaning": "Her insan bilerek ya da bilmeyerek kusur işleyebilir, affedici olunmalıdır."}, {"id": 125, "text": "Hazıra dağlar ___.", "answer": "DAYANMAZ", "meaning": "Sürekli tüketen ve yeni gelir üretmeyen kimsenin büyük serveti bile tükenir."}, {"id": 126, "text": "Hem suçlu hem ___.", "answer": "GÜÇLÜ", "meaning": "Kusurlu olduğu halde üste çıkmaya ve karşı tarafı bastırmaya çalışan kişi."}, {"id": 127, "text": "Her inişin bir ___ vardır.", "answer": "YOKUŞU", "meaning": "Hayatta kolaylıkların ardından zorluklar, zorlukların ardından kolaylıklar gelir."}, {"id": 128, "text": "Her kuşun eti ___.", "answer": "YENMEZ", "meaning": "Her insan kolayca aldatılamaz veya boyun eğdirilemez."}, {"id": 129, "text": "Hırsızın hiç mi suçu ___?", "answer": "YOK", "meaning": "Zarara uğrayanı suçlarken asıl kötülüğü yapanı gözden kaçırmamak gerekir."}, {"id": 130, "text": "Horozu çok olan köyün sabahı ___ olur.", "answer": "GEÇ", "meaning": "Çok fazla kişinin karışıp karar vermeye çalıştığı işlerde gecikme yaşanır."}, {"id": 131, "text": "İki dinle, bir ___.", "answer": "SÖYLE", "meaning": "Konuşmaktan çok dinlemeye ve anlamaya önem vermek gerekir."}, {"id": 132, "text": "İki gönül bir olunca samanlık seyran ___.", "answer": "OLUR", "meaning": "Birbirini gerçekten sevenler için maddi darlıklar engel teşkil etmez."}, {"id": 133, "text": "İncir çekirdeğini doldurmaz ___.", "answer": "MESELELER", "meaning": "Üzerinde durmaya bile değmeyecek küçücük ve önemsiz konular."}, {"id": 134, "text": "İpe un ___.", "answer": "SERMEK", "meaning": "İşi savsaklamak veya yapmamak için olmadık bahaneler öne sürmek."}, {"id": 135, "text": "İsteyenin bir yüzü kara, vermeyenin iki ___.", "answer": "YÜZÜ", "meaning": "Bir şey isterken mahcup olunur ama yardım talebini reddetmek daha ayıptır."}, {"id": 136, "text": "İt ürür, kervan ___.", "answer": "YÜRÜR", "meaning": "Amacına inanan kimse çevredeki asılsız eleştirilere aldırmadan yoluna devam eder."}, {"id": 137, "text": "Kabahat samur kürk olsa kimse üstüne ___.", "answer": "ALMAZ", "meaning": "İnsanlar hatalarını ve kusurlarını kabullenmekten kaçınırlar."}, {"id": 138, "text": "Kanadı kırık kuşa gökler ___ gelir.", "answer": "DAR", "meaning": "İmkanını ve sağlığını kaybeden kimse en geniş imkanlarda bile çaresizdir."}, {"id": 139, "text": "Kara haber tez ___.", "answer": "DUYULUR", "meaning": "Kötü ve sarsıcı olayların haberi her yere çok hızlı ulaşır."}, {"id": 140, "text": "Kedi uzanamadığı ciğere ___ dermiş.", "answer": "MUNDAR", "meaning": "Elde edemediği başarıyı veya değeri küçümseyip karalamaya çalışan kimse."}, {"id": 141, "text": "Kendi düşen ___.", "answer": "AĞLAMAZ", "meaning": "Kendi hatası ve inadı yüzünden zarara uğrayan kimsenin şikayet hakkı yoktur."}, {"id": 142, "text": "Kıratın yanında duran ya huyundan ya ___.", "answer": "SUYUNDAN", "meaning": "İnsan yakınında bulunduğu kimselerden er ya da geç etkilenir."}, {"id": 143, "text": "Kılavuzu karga olanın burnu pislikten ___.", "answer": "KURTULMAZ", "meaning": "Yol göstericisi kötü veya yetersiz olan kimse sürekli felaketle karşılaşır."}, {"id": 144, "text": "Köprüyü geçene kadar ayıya ___ de.", "answer": "DAYI", "meaning": "Zor bir işi başarana kadar sakıncalı kişilere alttan almak gerekebilir."}, {"id": 145, "text": "Koyun can derdinde, kasap ___ derdinde.", "answer": "ET", "meaning": "Biri canını kurtarmaya çalışırken diğeri menfaat peşinde koşar."}, {"id": 146, "text": "Kusursuz dost arayan dostsuz ___.", "answer": "KALIR", "meaning": "İnsanları kusurlarıyla kabul etmeyen kimse yalnız kalmaya mahkumdur."}, {"id": 147, "text": "Marifet iltifata ___.", "answer": "TABİDİR", "meaning": "Başarılı çalışmalar ve yetenekler takdir edildikçe daha çok gelişir."}, {"id": 148, "text": "Mızrak çuvala ___.", "answer": "SIĞMAZ", "meaning": "Göz önündeki büyük ve bariz gerçekler hiçbir bahaneyle gizlenemez."}, {"id": 149, "text": "Nefesine güvenen borazancı ___.", "answer": "BAŞI", "meaning": "Bir sorumluluğu ancak o yükü kaldırabilecek güç ve yeteneği olan almalıdır."}, {"id": 150, "text": "Sabreden derviş, muradına ___.", "answer": "ERMİŞ", "meaning": "Zorluklara sabır ve sebatla katlanan insan eninde sonunda arzusuna ulaşır."}];
+  const LEVELS_DATA = [{"id": 1, "title": "Kapadokya - Bölüm 1", "region": "NEVŞEHİR", "region_id": "kapadokya", "bg": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/Hot_air_balloon_over_Cappadocia.jpg/1280px-Hot_air_balloon_over_Cappadocia.jpg", "wheel": ["K", "A", "T"], "words": [{"id": "w1", "word": "KAT", "row": 2, "col": 0, "dir": "H"}, {"id": "w2", "word": "TAK", "row": 0, "col": 0, "dir": "V"}], "bonus": ["AK"]}, {"id": 2, "title": "Pamukkale - Bölüm 2", "region": "DENİZLİ", "region_id": "pamukkale", "bg": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/be/Pamukkale_Terraces.jpg/1280px-Pamukkale_Terraces.jpg", "wheel": ["K", "A", "L", "E"], "words": [{"id": "w1", "word": "KALE", "row": 1, "col": 0, "dir": "H"}, {"id": "w2", "word": "KEL", "row": 1, "col": 0, "dir": "V"}, {"id": "w3", "word": "ELA", "row": 0, "col": 2, "dir": "V"}], "bonus": ["LAK", "LAKE"]}, {"id": 3, "title": "Galata Kulesi - Bölüm 3", "region": "İSTANBUL", "region_id": "galata", "bg": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/06/Galata_Tower_Istanbul.jpg/1280px-Galata_Tower_Istanbul.jpg", "wheel": ["M", "A", "A", "S"], "words": [{"id": "w1", "word": "MASA", "row": 2, "col": 0, "dir": "H"}, {"id": "w2", "word": "ASMA", "row": 0, "col": 0, "dir": "V"}], "bonus": ["AMA", "SAM", "AS"]}, {"id": 4, "title": "Efes Antik Kenti - Bölüm 4", "region": "İZMİR", "region_id": "efes", "bg": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/30/Library_of_Celsus_Ephesus_Turkey.jpg/1280px-Library_of_Celsus_Ephesus_Turkey.jpg", "wheel": ["B", "A", "L", "I", "K"], "words": [{"id": "w1", "word": "BALIK", "row": 2, "col": 0, "dir": "H"}, {"id": "w2", "word": "BAL", "row": 2, "col": 0, "dir": "V"}, {"id": "w3", "word": "KIL", "row": 0, "col": 2, "dir": "V"}], "bonus": ["ALIK", "BAK", "KAL", "AKIL"]}, {"id": 5, "title": "Nemrut Dağı - Bölüm 5", "region": "ADIYAMAN", "region_id": "nemrut", "bg": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/29/Nemrut_Dagi_Heads.jpg/1280px-Nemrut_Dagi_Heads.jpg", "wheel": ["K", "İ", "T", "A", "P"], "words": [{"id": "w1", "word": "KİTAP", "row": 2, "col": 0, "dir": "H"}, {"id": "w2", "word": "TAKİP", "row": 0, "col": 0, "dir": "V"}, {"id": "w3", "word": "PAK", "row": 1, "col": 3, "dir": "V"}], "bonus": ["TİP", "PAT", "KAT", "AİT"]}, {"id": 6, "title": "Göbeklitepe - Bölüm 6", "region": "ŞANLIURFA", "region_id": "gobeklitepe", "bg": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a8/G%C3%B6bekli_Tepe%2C_Sanliurfa.jpg/1280px-G%C3%B6bekli_Tepe%2C_Sanliurfa.jpg", "wheel": ["D", "E", "N", "İ", "Z"], "words": [{"id": "w1", "word": "DENİZ", "row": 2, "col": 0, "dir": "H"}, {"id": "w2", "word": "DİZ", "row": 2, "col": 0, "dir": "V"}, {"id": "w3", "word": "DİN", "row": 0, "col": 2, "dir": "V"}], "bonus": ["DİZE", "İZ", "İN"]}, {"id": 7, "title": "Sümela Manastırı - Bölüm 7", "region": "TRABZON", "region_id": "sumela", "bg": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/Sumela_from_across_valley.JPG/1280px-Sumela_from_across_valley.JPG", "wheel": ["R", "O", "M", "A", "N"], "words": [{"id": "w1", "word": "ROMA", "row": 2, "col": 0, "dir": "H"}, {"id": "w2", "word": "ORAN", "row": 1, "col": 0, "dir": "V"}, {"id": "w3", "word": "ROMAN", "row": 0, "col": 2, "dir": "V"}], "bonus": ["MOR", "ONAR", "ROM"]}, {"id": 8, "title": "Ani Harabeleri - Bölüm 8", "region": "KARS", "region_id": "ani", "bg": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5a/Ani_Cathedral_2011.jpg/1280px-Ani_Cathedral_2011.jpg", "wheel": ["K", "K", "U", "Ş", "A"], "words": [{"id": "w1", "word": "KUŞAK", "row": 1, "col": 0, "dir": "H"}, {"id": "w2", "word": "KUŞ", "row": 1, "col": 0, "dir": "V"}, {"id": "w3", "word": "AŞK", "row": 0, "col": 2, "dir": "V"}], "bonus": ["ŞAK", "KAŞ"]}, {"id": 9, "title": "Kapadokya - Bölüm 9", "region": "NEVŞEHİR", "region_id": "kapadokya", "bg": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/Hot_air_balloon_over_Cappadocia.jpg/1280px-Hot_air_balloon_over_Cappadocia.jpg", "wheel": ["Y", "A", "A", "Z"], "words": [{"id": "w1", "word": "YAZ", "row": 1, "col": 0, "dir": "H"}, {"id": "w2", "word": "AYAZ", "row": 0, "col": 0, "dir": "V"}], "bonus": ["AY", "AZ"]}, {"id": 10, "title": "Pamukkale - Bölüm 10", "region": "DENİZLİ", "region_id": "pamukkale", "bg": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/be/Pamukkale_Terraces.jpg/1280px-Pamukkale_Terraces.jpg", "wheel": ["K", "O", "R", "U"], "words": [{"id": "w1", "word": "KOR", "row": 2, "col": 0, "dir": "H"}, {"id": "w2", "word": "OKUR", "row": 1, "col": 0, "dir": "V"}, {"id": "w3", "word": "KORU", "row": 0, "col": 2, "dir": "V"}], "bonus": ["KUR", "ROK", "OK"]}, {"id": 11, "title": "Galata Kulesi - Bölüm 1", "region": "İSTANBUL", "region_id": "galata", "bg": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/06/Galata_Tower_Istanbul.jpg/1280px-Galata_Tower_Istanbul.jpg", "wheel": ["T", "A", "A", "R", "İ", "H"], "words": [{"id": "w1", "word": "TARİH", "row": 3, "col": 0, "dir": "H"}, {"id": "w2", "word": "HAT", "row": 1, "col": 0, "dir": "V"}, {"id": "w3", "word": "AHİR", "row": 0, "col": 2, "dir": "V"}], "bonus": ["RAHAT", "HART"]}, {"id": 12, "title": "Efes Antik Kenti - Bölüm 2", "region": "İZMİR", "region_id": "efes", "bg": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/30/Library_of_Celsus_Ephesus_Turkey.jpg/1280px-Library_of_Celsus_Ephesus_Turkey.jpg", "wheel": ["Ç", "I", "N", "A", "R"], "words": [{"id": "w1", "word": "ÇINAR", "row": 0, "col": 0, "dir": "H"}, {"id": "w2", "word": "ÇIN", "row": 0, "col": 0, "dir": "V"}, {"id": "w3", "word": "NAR", "row": 0, "col": 2, "dir": "V"}], "bonus": ["ARI", "IRA", "ANI"]}, {"id": 13, "title": "Nemrut Dağı - Bölüm 3", "region": "ADIYAMAN", "region_id": "nemrut", "bg": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/29/Nemrut_Dagi_Heads.jpg/1280px-Nemrut_Dagi_Heads.jpg", "wheel": ["B", "A", "A", "H", "R"], "words": [{"id": "w1", "word": "BAHAR", "row": 0, "col": 0, "dir": "H"}, {"id": "w2", "word": "BAR", "row": 0, "col": 0, "dir": "V"}, {"id": "w3", "word": "ARA", "row": 0, "col": 3, "dir": "V"}], "bonus": ["HARA", "RAB", "ABA"]}, {"id": 14, "title": "Göbeklitepe - Bölüm 4", "region": "ŞANLIURFA", "region_id": "gobeklitepe", "bg": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a8/G%C3%B6bekli_Tepe%2C_Sanliurfa.jpg/1280px-G%C3%B6bekli_Tepe%2C_Sanliurfa.jpg", "wheel": ["G", "Ü", "N", "E", "Ş"], "words": [{"id": "w1", "word": "GÜNEŞ", "row": 2, "col": 0, "dir": "H"}, {"id": "w2", "word": "GÜN", "row": 2, "col": 0, "dir": "V"}, {"id": "w3", "word": "GEN", "row": 0, "col": 2, "dir": "V"}], "bonus": ["ŞEN"]}, {"id": 15, "title": "Sümela Manastırı - Bölüm 5", "region": "TRABZON", "region_id": "sumela", "bg": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/Sumela_from_across_valley.JPG/1280px-Sumela_from_across_valley.JPG", "wheel": ["Ş", "E", "H", "İ", "İ", "R"], "words": [{"id": "w1", "word": "ŞEHİR", "row": 0, "col": 0, "dir": "H"}, {"id": "w2", "word": "ŞER", "row": 0, "col": 0, "dir": "V"}, {"id": "w3", "word": "HER", "row": 0, "col": 2, "dir": "V"}], "bonus": ["ŞİİR", "ER"]}, {"id": 16, "title": "Ani Harabeleri - Bölüm 6", "region": "KARS", "region_id": "ani", "bg": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5a/Ani_Cathedral_2011.jpg/1280px-Ani_Cathedral_2011.jpg", "wheel": ["O", "R", "M", "A", "N"], "words": [{"id": "w1", "word": "ORMAN", "row": 2, "col": 0, "dir": "H"}, {"id": "w2", "word": "MOR", "row": 1, "col": 0, "dir": "V"}, {"id": "w3", "word": "ROMAN", "row": 0, "col": 2, "dir": "V"}], "bonus": ["NAR", "ON", "ORA"]}, {"id": 17, "title": "Kapadokya - Bölüm 7", "region": "NEVŞEHİR", "region_id": "kapadokya", "bg": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/Hot_air_balloon_over_Cappadocia.jpg/1280px-Hot_air_balloon_over_Cappadocia.jpg", "wheel": ["B", "U", "U", "L", "T", "M"], "words": [{"id": "w1", "word": "BULUT", "row": 1, "col": 0, "dir": "H"}, {"id": "w2", "word": "TULU", "row": 0, "col": 1, "dir": "V"}, {"id": "w3", "word": "UMUT", "row": 1, "col": 3, "dir": "V"}], "bonus": ["ULU", "BUT"]}, {"id": 18, "title": "Pamukkale - Bölüm 8", "region": "DENİZLİ", "region_id": "pamukkale", "bg": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/be/Pamukkale_Terraces.jpg/1280px-Pamukkale_Terraces.jpg", "wheel": ["Ç", "Ç", "İ", "İ", "E", "K"], "words": [{"id": "w1", "word": "ÇİÇEK", "row": 2, "col": 0, "dir": "H"}, {"id": "w2", "word": "ÇEK", "row": 2, "col": 0, "dir": "V"}, {"id": "w3", "word": "KEÇİ", "row": 0, "col": 2, "dir": "V"}], "bonus": ["İKİ", "ÇEÇ"]}, {"id": 19, "title": "Galata Kulesi - Bölüm 9", "region": "İSTANBUL", "region_id": "galata", "bg": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/06/Galata_Tower_Istanbul.jpg/1280px-Galata_Tower_Istanbul.jpg", "wheel": ["S", "E", "E", "V", "G", "İ"], "words": [{"id": "w1", "word": "SEVGİ", "row": 1, "col": 0, "dir": "H"}, {"id": "w2", "word": "SEV", "row": 1, "col": 0, "dir": "V"}, {"id": "w3", "word": "EGE", "row": 0, "col": 3, "dir": "V"}], "bonus": ["EV"]}, {"id": 20, "title": "Efes Antik Kenti - Bölüm 10", "region": "İZMİR", "region_id": "efes", "bg": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/30/Library_of_Celsus_Ephesus_Turkey.jpg/1280px-Library_of_Celsus_Ephesus_Turkey.jpg", "wheel": ["K", "A", "P", "I"], "words": [{"id": "w1", "word": "KAPI", "row": 0, "col": 0, "dir": "H"}, {"id": "w2", "word": "KAP", "row": 0, "col": 0, "dir": "V"}, {"id": "w3", "word": "PAK", "row": 0, "col": 2, "dir": "V"}], "bonus": ["AK"]}, {"id": 21, "title": "Nemrut Dağı - Bölüm 1", "region": "ADIYAMAN", "region_id": "nemrut", "bg": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/29/Nemrut_Dagi_Heads.jpg/1280px-Nemrut_Dagi_Heads.jpg", "wheel": ["D", "O", "S", "T", "K"], "words": [{"id": "w1", "word": "DOST", "row": 1, "col": 0, "dir": "H"}, {"id": "w2", "word": "TOS", "row": 0, "col": 1, "dir": "V"}, {"id": "w3", "word": "OT", "row": 0, "col": 3, "dir": "V"}], "bonus": ["KOD", "TOK"]}, {"id": 22, "title": "Göbeklitepe - Bölüm 2", "region": "ŞANLIURFA", "region_id": "gobeklitepe", "bg": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a8/G%C3%B6bekli_Tepe%2C_Sanliurfa.jpg/1280px-G%C3%B6bekli_Tepe%2C_Sanliurfa.jpg", "wheel": ["İ", "N", "N", "S", "A", "I"], "words": [{"id": "w1", "word": "İNSAN", "row": 2, "col": 0, "dir": "H"}, {"id": "w2", "word": "SAN", "row": 0, "col": 1, "dir": "V"}, {"id": "w3", "word": "ANI", "row": 2, "col": 3, "dir": "V"}], "bonus": ["AN", "AS"]}, {"id": 23, "title": "Sümela Manastırı - Bölüm 3", "region": "TRABZON", "region_id": "sumela", "bg": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/Sumela_from_across_valley.JPG/1280px-Sumela_from_across_valley.JPG", "wheel": ["D", "A", "A", "L", "G", "Ğ"], "words": [{"id": "w1", "word": "DALGA", "row": 1, "col": 0, "dir": "H"}, {"id": "w2", "word": "ADA", "row": 0, "col": 0, "dir": "V"}, {"id": "w3", "word": "ALA", "row": 0, "col": 2, "dir": "V"}], "bonus": ["ALG", "DAĞ"]}, {"id": 24, "title": "Ani Harabeleri - Bölüm 4", "region": "KARS", "region_id": "ani", "bg": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5a/Ani_Cathedral_2011.jpg/1280px-Ani_Cathedral_2011.jpg", "wheel": ["G", "G", "Ö", "L", "E", "E"], "words": [{"id": "w1", "word": "GÖLGE", "row": 1, "col": 0, "dir": "H"}, {"id": "w2", "word": "GÖL", "row": 1, "col": 0, "dir": "V"}, {"id": "w3", "word": "EGE", "row": 0, "col": 3, "dir": "V"}], "bonus": ["ÖGE"]}, {"id": 25, "title": "Kapadokya - Bölüm 5", "region": "NEVŞEHİR", "region_id": "kapadokya", "bg": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/Hot_air_balloon_over_Cappadocia.jpg/1280px-Hot_air_balloon_over_Cappadocia.jpg", "wheel": ["B", "A", "R", "I", "Ş"], "words": [{"id": "w1", "word": "BARIŞ", "row": 1, "col": 0, "dir": "H"}, {"id": "w2", "word": "BAŞ", "row": 1, "col": 0, "dir": "V"}, {"id": "w3", "word": "ARI", "row": 0, "col": 2, "dir": "V"}], "bonus": ["AŞ", "ARŞ"]}, {"id": 26, "title": "Pamukkale - Bölüm 6", "region": "DENİZLİ", "region_id": "pamukkale", "bg": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/be/Pamukkale_Terraces.jpg/1280px-Pamukkale_Terraces.jpg", "wheel": ["M", "U", "U", "T", "L"], "words": [{"id": "w1", "word": "MUTLU", "row": 1, "col": 0, "dir": "H"}, {"id": "w2", "word": "TUL", "row": 0, "col": 1, "dir": "V"}, {"id": "w3", "word": "ULU", "row": 0, "col": 3, "dir": "V"}], "bonus": ["UT"]}, {"id": 27, "title": "Galata Kulesi - Bölüm 7", "region": "İSTANBUL", "region_id": "galata", "bg": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/06/Galata_Tower_Istanbul.jpg/1280px-Galata_Tower_Istanbul.jpg", "wheel": ["U", "U", "U", "M", "T", "T", "L"], "words": [{"id": "w1", "word": "UMUTLU", "row": 1, "col": 0, "dir": "H"}, {"id": "w2", "word": "UMUT", "row": 1, "col": 0, "dir": "V"}, {"id": "w3", "word": "TUT", "row": 0, "col": 2, "dir": "V"}], "bonus": ["MUT"]}, {"id": 28, "title": "Efes Antik Kenti - Bölüm 8", "region": "İZMİR", "region_id": "efes", "bg": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/30/Library_of_Celsus_Ephesus_Turkey.jpg/1280px-Library_of_Celsus_Ephesus_Turkey.jpg", "wheel": ["H", "U", "U", "Z", "R", "O"], "words": [{"id": "w1", "word": "HUZUR", "row": 2, "col": 0, "dir": "H"}, {"id": "w2", "word": "RUH", "row": 0, "col": 0, "dir": "V"}, {"id": "w3", "word": "ZOR", "row": 2, "col": 2, "dir": "V"}], "bonus": ["HUR"]}, {"id": 29, "title": "Nemrut Dağı - Bölüm 9", "region": "ADIYAMAN", "region_id": "nemrut", "bg": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/29/Nemrut_Dagi_Heads.jpg/1280px-Nemrut_Dagi_Heads.jpg", "wheel": ["K", "Ö", "P", "R", "Ü"], "words": [{"id": "w1", "word": "KÖPRÜ", "row": 1, "col": 0, "dir": "H"}, {"id": "w2", "word": "KÖP", "row": 1, "col": 0, "dir": "V"}, {"id": "w3", "word": "ÖRK", "row": 0, "col": 3, "dir": "V"}], "bonus": ["PÜR"]}, {"id": 30, "title": "Göbeklitepe - Bölüm 10", "region": "ŞANLIURFA", "region_id": "gobeklitepe", "bg": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a8/G%C3%B6bekli_Tepe%2C_Sanliurfa.jpg/1280px-G%C3%B6bekli_Tepe%2C_Sanliurfa.jpg", "wheel": ["N", "E", "H", "İ", "İ", "R"], "words": [{"id": "w1", "word": "NEHİR", "row": 2, "col": 0, "dir": "H"}, {"id": "w2", "word": "HER", "row": 1, "col": 1, "dir": "V"}, {"id": "w3", "word": "ERİ", "row": 0, "col": 3, "dir": "V"}], "bonus": ["İRİ", "İN"]}, {"id": 31, "title": "Sümela Manastırı - Bölüm 1", "region": "TRABZON", "region_id": "sumela", "bg": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/Sumela_from_across_valley.JPG/1280px-Sumela_from_across_valley.JPG", "wheel": ["A", "A", "D", "L", "E", "T"], "words": [{"id": "w1", "word": "ADALET", "row": 2, "col": 0, "dir": "H"}, {"id": "w2", "word": "ADA", "row": 2, "col": 0, "dir": "V"}, {"id": "w3", "word": "EDA", "row": 0, "col": 2, "dir": "V"}], "bonus": ["AT"]}, {"id": 32, "title": "Ani Harabeleri - Bölüm 2", "region": "KARS", "region_id": "ani", "bg": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5a/Ani_Cathedral_2011.jpg/1280px-Ani_Cathedral_2011.jpg", "wheel": ["K", "A", "N", "N", "Y", "O"], "words": [{"id": "w1", "word": "KANYON", "row": 2, "col": 0, "dir": "H"}, {"id": "w2", "word": "KAN", "row": 2, "col": 0, "dir": "V"}, {"id": "w3", "word": "YAN", "row": 0, "col": 2, "dir": "V"}], "bonus": ["OYA", "ON"]}, {"id": 33, "title": "Kapadokya - Bölüm 3", "region": "NEVŞEHİR", "region_id": "kapadokya", "bg": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/Hot_air_balloon_over_Cappadocia.jpg/1280px-Hot_air_balloon_over_Cappadocia.jpg", "wheel": ["V", "O", "L", "K", "A", "N"], "words": [{"id": "w1", "word": "VOLKAN", "row": 2, "col": 0, "dir": "H"}, {"id": "w2", "word": "KOL", "row": 1, "col": 1, "dir": "V"}, {"id": "w3", "word": "LAK", "row": 0, "col": 3, "dir": "V"}], "bonus": ["VAN", "OVA"]}, {"id": 34, "title": "Pamukkale - Bölüm 4", "region": "DENİZLİ", "region_id": "pamukkale", "bg": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/be/Pamukkale_Terraces.jpg/1280px-Pamukkale_Terraces.jpg", "wheel": ["Ş", "E", "E", "L", "L", "A"], "words": [{"id": "w1", "word": "ŞELALE", "row": 3, "col": 0, "dir": "H"}, {"id": "w2", "word": "LALE", "row": 0, "col": 1, "dir": "V"}, {"id": "w3", "word": "ELA", "row": 1, "col": 3, "dir": "V"}], "bonus": ["ŞAL"]}, {"id": 35, "title": "Galata Kulesi - Bölüm 5", "region": "İSTANBUL", "region_id": "galata", "bg": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/06/Galata_Tower_Istanbul.jpg/1280px-Galata_Tower_Istanbul.jpg", "wheel": ["G", "U", "U", "R", "R", "H"], "words": [{"id": "w1", "word": "GURUR", "row": 1, "col": 0, "dir": "H"}, {"id": "w2", "word": "GUR", "row": 1, "col": 0, "dir": "V"}, {"id": "w3", "word": "UR", "row": 0, "col": 2, "dir": "V"}], "bonus": ["RUH"]}, {"id": 36, "title": "Efes Antik Kenti - Bölüm 6", "region": "İZMİR", "region_id": "efes", "bg": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/30/Library_of_Celsus_Ephesus_Turkey.jpg/1280px-Library_of_Celsus_Ephesus_Turkey.jpg", "wheel": ["Z", "A", "A", "M", "N"], "words": [{"id": "w1", "word": "ZAMAN", "row": 2, "col": 0, "dir": "H"}, {"id": "w2", "word": "AZAM", "row": 1, "col": 0, "dir": "V"}, {"id": "w3", "word": "NAM", "row": 0, "col": 2, "dir": "V"}], "bonus": ["ZAN", "ANA"]}, {"id": 37, "title": "Nemrut Dağı - Bölüm 7", "region": "ADIYAMAN", "region_id": "nemrut", "bg": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/29/Nemrut_Dagi_Heads.jpg/1280px-Nemrut_Dagi_Heads.jpg", "wheel": ["G", "Ö", "K", "Y", "Ü", "Ü", "Z"], "words": [{"id": "w1", "word": "GÖKYÜZÜ", "row": 0, "col": 0, "dir": "H"}, {"id": "w2", "word": "GÖK", "row": 0, "col": 0, "dir": "V"}, {"id": "w3", "word": "YÜZ", "row": 0, "col": 3, "dir": "V"}], "bonus": ["GÖZ", "ÖZ"]}, {"id": 38, "title": "Göbeklitepe - Bölüm 8", "region": "ŞANLIURFA", "region_id": "gobeklitepe", "bg": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a8/G%C3%B6bekli_Tepe%2C_Sanliurfa.jpg/1280px-G%C3%B6bekli_Tepe%2C_Sanliurfa.jpg", "wheel": ["T", "O", "P", "R", "A", "K"], "words": [{"id": "w1", "word": "TOPRAK", "row": 2, "col": 0, "dir": "H"}, {"id": "w2", "word": "PARK", "row": 2, "col": 2, "dir": "V"}, {"id": "w3", "word": "POT", "row": 0, "col": 0, "dir": "V"}], "bonus": ["KOR", "KOT", "PAK"]}, {"id": 39, "title": "Sümela Manastırı - Bölüm 9", "region": "TRABZON", "region_id": "sumela", "bg": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/Sumela_from_across_valley.JPG/1280px-Sumela_from_across_valley.JPG", "wheel": ["R", "R", "Ü", "Z", "G", "A"], "words": [{"id": "w1", "word": "RÜZGAR", "row": 2, "col": 0, "dir": "H"}, {"id": "w2", "word": "GÜR", "row": 0, "col": 0, "dir": "V"}, {"id": "w3", "word": "ZAR", "row": 2, "col": 2, "dir": "V"}], "bonus": ["GAZ", "ARZ"]}, {"id": 40, "title": "Ani Harabeleri - Bölüm 10", "region": "KARS", "region_id": "ani", "bg": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5a/Ani_Cathedral_2011.jpg/1280px-Ani_Cathedral_2011.jpg", "wheel": ["Y", "I", "I", "L", "D", "Z", "İ"], "words": [{"id": "w1", "word": "YILDIZ", "row": 2, "col": 0, "dir": "H"}, {"id": "w2", "word": "YIL", "row": 2, "col": 0, "dir": "V"}, {"id": "w3", "word": "DIL", "row": 0, "col": 2, "dir": "V"}], "bonus": ["İZ"]}, {"id": 41, "title": "Kapadokya - Bölüm 1", "region": "NEVŞEHİR", "region_id": "kapadokya", "bg": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/Hot_air_balloon_over_Cappadocia.jpg/1280px-Hot_air_balloon_over_Cappadocia.jpg", "wheel": ["C", "Ü", "R", "E", "T"], "words": [{"id": "w1", "word": "CÜRET", "row": 1, "col": 0, "dir": "H"}, {"id": "w2", "word": "TÜRE", "row": 0, "col": 1, "dir": "V"}, {"id": "w3", "word": "TÜR", "row": 1, "col": 4, "dir": "V"}], "bonus": ["ÜRE", "RET"]}, {"id": 42, "title": "Pamukkale - Bölüm 2", "region": "DENİZLİ", "region_id": "pamukkale", "bg": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/be/Pamukkale_Terraces.jpg/1280px-Pamukkale_Terraces.jpg", "wheel": ["S", "A", "B", "I", "R"], "words": [{"id": "w1", "word": "SABIR", "row": 2, "col": 0, "dir": "H"}, {"id": "w2", "word": "BAS", "row": 0, "col": 0, "dir": "V"}, {"id": "w3", "word": "BAR", "row": 2, "col": 2, "dir": "V"}], "bonus": ["ARI", "SIR", "ASIR"]}, {"id": 43, "title": "Galata Kulesi - Bölüm 3", "region": "İSTANBUL", "region_id": "galata", "bg": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/06/Galata_Tower_Istanbul.jpg/1280px-Galata_Tower_Istanbul.jpg", "wheel": ["K", "I", "S", "M", "E", "T", "İ"], "words": [{"id": "w1", "word": "KISMET", "row": 0, "col": 0, "dir": "H"}, {"id": "w2", "word": "KIST", "row": 0, "col": 0, "dir": "V"}, {"id": "w3", "word": "SET", "row": 0, "col": 2, "dir": "V"}], "bonus": ["KİS", "MİT", "TEK"]}, {"id": 44, "title": "Efes Antik Kenti - Bölüm 4", "region": "İZMİR", "region_id": "efes", "bg": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/30/Library_of_Celsus_Ephesus_Turkey.jpg/1280px-Library_of_Celsus_Ephesus_Turkey.jpg", "wheel": ["S", "E", "R", "A", "P"], "words": [{"id": "w1", "word": "SERAP", "row": 3, "col": 0, "dir": "H"}, {"id": "w2", "word": "PARS", "row": 0, "col": 0, "dir": "V"}, {"id": "w3", "word": "PAS", "row": 2, "col": 3, "dir": "V"}], "bonus": ["SARP", "PER"]}, {"id": 45, "title": "Nemrut Dağı - Bölüm 5", "region": "ADIYAMAN", "region_id": "nemrut", "bg": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/29/Nemrut_Dagi_Heads.jpg/1280px-Nemrut_Dagi_Heads.jpg", "wheel": ["G", "Ü", "Z", "E", "L"], "words": [{"id": "w1", "word": "GÜZEL", "row": 0, "col": 0, "dir": "H"}, {"id": "w2", "word": "GÜZ", "row": 0, "col": 0, "dir": "V"}, {"id": "w3", "word": "ZEL", "row": 0, "col": 2, "dir": "V"}], "bonus": ["GEZ"]}, {"id": 46, "title": "Göbeklitepe - Bölüm 6", "region": "ŞANLIURFA", "region_id": "gobeklitepe", "bg": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a8/G%C3%B6bekli_Tepe%2C_Sanliurfa.jpg/1280px-G%C3%B6bekli_Tepe%2C_Sanliurfa.jpg", "wheel": ["D", "Ü", "N", "Y", "A"], "words": [{"id": "w1", "word": "DÜNYA", "row": 2, "col": 0, "dir": "H"}, {"id": "w2", "word": "DÜN", "row": 2, "col": 0, "dir": "V"}, {"id": "w3", "word": "YAN", "row": 0, "col": 2, "dir": "V"}], "bonus": ["ÜN", "AY"]}, {"id": 47, "title": "Sümela Manastırı - Bölüm 7", "region": "TRABZON", "region_id": "sumela", "bg": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/Sumela_from_across_valley.JPG/1280px-Sumela_from_across_valley.JPG", "wheel": ["H", "A", "A", "Y", "T"], "words": [{"id": "w1", "word": "HAYAT", "row": 2, "col": 0, "dir": "H"}, {"id": "w2", "word": "HAY", "row": 2, "col": 0, "dir": "V"}, {"id": "w3", "word": "TAY", "row": 0, "col": 2, "dir": "V"}], "bonus": ["HAT", "AY"]}, {"id": 48, "title": "Ani Harabeleri - Bölüm 8", "region": "KARS", "region_id": "ani", "bg": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5a/Ani_Cathedral_2011.jpg/1280px-Ani_Cathedral_2011.jpg", "wheel": ["S", "E", "V", "İ", "N", "Ç"], "words": [{"id": "w1", "word": "SEVİNÇ", "row": 0, "col": 0, "dir": "H"}, {"id": "w2", "word": "SEV", "row": 0, "col": 0, "dir": "V"}, {"id": "w3", "word": "İNÇ", "row": 0, "col": 3, "dir": "V"}], "bonus": ["EV", "İN"]}, {"id": 49, "title": "Kapadokya - Bölüm 9", "region": "NEVŞEHİR", "region_id": "kapadokya", "bg": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/Hot_air_balloon_over_Cappadocia.jpg/1280px-Hot_air_balloon_over_Cappadocia.jpg", "wheel": ["Y", "U", "R", "T"], "words": [{"id": "w1", "word": "YURT", "row": 2, "col": 0, "dir": "H"}, {"id": "w2", "word": "YUR", "row": 2, "col": 0, "dir": "V"}, {"id": "w3", "word": "TUR", "row": 0, "col": 2, "dir": "V"}], "bonus": ["UR", "UT"]}, {"id": 50, "title": "Pamukkale - Bölüm 10", "region": "DENİZLİ", "region_id": "pamukkale", "bg": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/be/Pamukkale_Terraces.jpg/1280px-Pamukkale_Terraces.jpg", "wheel": ["C", "A", "A", "N", "N", "D"], "words": [{"id": "w1", "word": "CANDAN", "row": 1, "col": 0, "dir": "H"}, {"id": "w2", "word": "CAN", "row": 1, "col": 0, "dir": "V"}, {"id": "w3", "word": "ANA", "row": 0, "col": 2, "dir": "V"}], "bonus": ["ADA", "AN"]}, {"id": 51, "title": "Galata Kulesi - Bölüm 1", "region": "İSTANBUL", "region_id": "galata", "bg": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/06/Galata_Tower_Istanbul.jpg/1280px-Galata_Tower_Istanbul.jpg", "wheel": ["B", "İ", "İ", "L", "G", "K"], "words": [{"id": "w1", "word": "BİLGİ", "row": 2, "col": 0, "dir": "H"}, {"id": "w2", "word": "LİG", "row": 1, "col": 1, "dir": "V"}, {"id": "w3", "word": "İLGİ", "row": 0, "col": 3, "dir": "V"}], "bonus": ["BİL", "İKİ"]}, {"id": 52, "title": "Efes Antik Kenti - Bölüm 2", "region": "İZMİR", "region_id": "efes", "bg": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/30/Library_of_Celsus_Ephesus_Turkey.jpg/1280px-Library_of_Celsus_Ephesus_Turkey.jpg", "wheel": ["S", "A", "A", "N", "T"], "words": [{"id": "w1", "word": "SANAT", "row": 2, "col": 0, "dir": "H"}, {"id": "w2", "word": "TAS", "row": 0, "col": 0, "dir": "V"}, {"id": "w3", "word": "ANA", "row": 1, "col": 2, "dir": "V"}], "bonus": ["SAAT", "AT"]}, {"id": 53, "title": "Nemrut Dağı - Bölüm 3", "region": "ADIYAMAN", "region_id": "nemrut", "bg": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/29/Nemrut_Dagi_Heads.jpg/1280px-Nemrut_Dagi_Heads.jpg", "wheel": ["M", "Ü", "Z", "İ", "İ", "K"], "words": [{"id": "w1", "word": "MÜZİK", "row": 1, "col": 0, "dir": "H"}, {"id": "w2", "word": "MÜZ", "row": 1, "col": 0, "dir": "V"}, {"id": "w3", "word": "KİM", "row": 0, "col": 3, "dir": "V"}], "bonus": ["İKİ"]}, {"id": 54, "title": "Göbeklitepe - Bölüm 4", "region": "ŞANLIURFA", "region_id": "gobeklitepe", "bg": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a8/G%C3%B6bekli_Tepe%2C_Sanliurfa.jpg/1280px-G%C3%B6bekli_Tepe%2C_Sanliurfa.jpg", "wheel": ["R", "E", "S", "İ", "M"], "words": [{"id": "w1", "word": "RESİM", "row": 2, "col": 0, "dir": "H"}, {"id": "w2", "word": "SERİ", "row": 0, "col": 0, "dir": "V"}, {"id": "w3", "word": "MİR", "row": 1, "col": 3, "dir": "V"}], "bonus": ["SİM", "İS"]}, {"id": 55, "title": "Sümela Manastırı - Bölüm 5", "region": "TRABZON", "region_id": "sumela", "bg": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/Sumela_from_across_valley.JPG/1280px-Sumela_from_across_valley.JPG", "wheel": ["Ş", "İ", "İ", "R"], "words": [{"id": "w1", "word": "ŞİİR", "row": 0, "col": 0, "dir": "H"}, {"id": "w2", "word": "ŞİR", "row": 0, "col": 0, "dir": "V"}, {"id": "w3", "word": "İRİ", "row": 0, "col": 2, "dir": "V"}], "bonus": ["İŞ", "İR"]}, {"id": 56, "title": "Ani Harabeleri - Bölüm 6", "region": "KARS", "region_id": "ani", "bg": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5a/Ani_Cathedral_2011.jpg/1280px-Ani_Cathedral_2011.jpg", "wheel": ["M", "A", "A", "S", "L"], "words": [{"id": "w1", "word": "MASAL", "row": 1, "col": 0, "dir": "H"}, {"id": "w2", "word": "ASAL", "row": 1, "col": 1, "dir": "V"}, {"id": "w3", "word": "LAM", "row": 0, "col": 3, "dir": "V"}], "bonus": ["MALA", "SAL"]}, {"id": 57, "title": "Kapadokya - Bölüm 7", "region": "NEVŞEHİR", "region_id": "kapadokya", "bg": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/Hot_air_balloon_over_Cappadocia.jpg/1280px-Hot_air_balloon_over_Cappadocia.jpg", "wheel": ["D", "E", "S", "T", "A", "N"], "words": [{"id": "w1", "word": "DESTAN", "row": 0, "col": 0, "dir": "H"}, {"id": "w2", "word": "DANS", "row": 0, "col": 0, "dir": "V"}, {"id": "w3", "word": "SET", "row": 0, "col": 2, "dir": "V"}], "bonus": ["EDA", "TEN"]}, {"id": 58, "title": "Pamukkale - Bölüm 8", "region": "DENİZLİ", "region_id": "pamukkale", "bg": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/be/Pamukkale_Terraces.jpg/1280px-Pamukkale_Terraces.jpg", "wheel": ["R", "O", "M", "A", "N"], "words": [{"id": "w1", "word": "ROMAN", "row": 3, "col": 0, "dir": "H"}, {"id": "w2", "word": "ONAR", "row": 0, "col": 0, "dir": "V"}, {"id": "w3", "word": "MOR", "row": 3, "col": 2, "dir": "V"}], "bonus": ["ROMA", "ORAN"]}, {"id": 59, "title": "Galata Kulesi - Bölüm 9", "region": "İSTANBUL", "region_id": "galata", "bg": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/06/Galata_Tower_Istanbul.jpg/1280px-Galata_Tower_Istanbul.jpg", "wheel": ["K", "Ü", "Ü", "L", "T", "R"], "words": [{"id": "w1", "word": "KÜLTÜR", "row": 3, "col": 0, "dir": "H"}, {"id": "w2", "word": "TÜRK", "row": 0, "col": 0, "dir": "V"}, {"id": "w3", "word": "KÜL", "row": 1, "col": 2, "dir": "V"}], "bonus": ["TÜR", "KÜT"]}, {"id": 60, "title": "Efes Antik Kenti - Bölüm 10", "region": "İZMİR", "region_id": "efes", "bg": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/30/Library_of_Celsus_Ephesus_Turkey.jpg/1280px-Library_of_Celsus_Ephesus_Turkey.jpg", "wheel": ["M", "İ", "R", "A", "S", "I"], "words": [{"id": "w1", "word": "MİRAS", "row": 3, "col": 0, "dir": "H"}, {"id": "w2", "word": "SİMA", "row": 1, "col": 0, "dir": "V"}, {"id": "w3", "word": "ASIR", "row": 0, "col": 2, "dir": "V"}], "bonus": ["SARI", "RAM"]}, {"id": 61, "title": "Nemrut Dağı - Bölüm 1", "region": "ADIYAMAN", "region_id": "nemrut", "bg": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/29/Nemrut_Dagi_Heads.jpg/1280px-Nemrut_Dagi_Heads.jpg", "wheel": ["Ç", "E", "E", "Ş", "M"], "words": [{"id": "w1", "word": "ÇEŞME", "row": 1, "col": 0, "dir": "H"}, {"id": "w2", "word": "ÇEŞ", "row": 1, "col": 0, "dir": "V"}, {"id": "w3", "word": "EŞ", "row": 0, "col": 2, "dir": "V"}], "bonus": ["MEŞ"]}, {"id": 62, "title": "Göbeklitepe - Bölüm 2", "region": "ŞANLIURFA", "region_id": "gobeklitepe", "bg": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a8/G%C3%B6bekli_Tepe%2C_Sanliurfa.jpg/1280px-G%C3%B6bekli_Tepe%2C_Sanliurfa.jpg", "wheel": ["S", "A", "A", "R", "Y"], "words": [{"id": "w1", "word": "SARAY", "row": 1, "col": 0, "dir": "H"}, {"id": "w2", "word": "YARA", "row": 0, "col": 1, "dir": "V"}, {"id": "w3", "word": "RAY", "row": 0, "col": 3, "dir": "V"}], "bonus": ["SARA", "AY"]}, {"id": 63, "title": "Sümela Manastırı - Bölüm 3", "region": "TRABZON", "region_id": "sumela", "bg": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/Sumela_from_across_valley.JPG/1280px-Sumela_from_across_valley.JPG", "wheel": ["K", "K", "Ö", "Ş"], "words": [{"id": "w1", "word": "KÖŞK", "row": 0, "col": 0, "dir": "H"}, {"id": "w2", "word": "KÖK", "row": 0, "col": 0, "dir": "V"}, {"id": "w3", "word": "ŞÖK", "row": 0, "col": 2, "dir": "V"}], "bonus": ["ÖŞ"]}, {"id": 64, "title": "Ani Harabeleri - Bölüm 4", "region": "KARS", "region_id": "ani", "bg": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5a/Ani_Cathedral_2011.jpg/1280px-Ani_Cathedral_2011.jpg", "wheel": ["Ç", "A", "R", "Ş", "I"], "words": [{"id": "w1", "word": "ÇARŞI", "row": 1, "col": 0, "dir": "H"}, {"id": "w2", "word": "AŞI", "row": 0, "col": 3, "dir": "V"}, {"id": "w3", "word": "ÇAR", "row": 1, "col": 0, "dir": "V"}], "bonus": ["ARI", "ŞAR"]}, {"id": 65, "title": "Kapadokya - Bölüm 5", "region": "NEVŞEHİR", "region_id": "kapadokya", "bg": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/Hot_air_balloon_over_Cappadocia.jpg/1280px-Hot_air_balloon_over_Cappadocia.jpg", "wheel": ["H", "A", "N", "Z"], "words": [{"id": "w1", "word": "HAN", "row": 0, "col": 0, "dir": "H"}, {"id": "w2", "word": "HAZ", "row": 0, "col": 0, "dir": "V"}, {"id": "w3", "word": "NAZ", "row": 0, "col": 2, "dir": "V"}], "bonus": ["AH", "AN"]}, {"id": 66, "title": "Pamukkale - Bölüm 6", "region": "DENİZLİ", "region_id": "pamukkale", "bg": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/be/Pamukkale_Terraces.jpg/1280px-Pamukkale_Terraces.jpg", "wheel": ["H", "A", "A", "M", "M"], "words": [{"id": "w1", "word": "HAMAM", "row": 1, "col": 0, "dir": "H"}, {"id": "w2", "word": "MAMA", "row": 0, "col": 1, "dir": "V"}, {"id": "w3", "word": "HAM", "row": 0, "col": 3, "dir": "V"}], "bonus": ["MAH", "AMA"]}, {"id": 67, "title": "Galata Kulesi - Bölüm 7", "region": "İSTANBUL", "region_id": "galata", "bg": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/06/Galata_Tower_Istanbul.jpg/1280px-Galata_Tower_Istanbul.jpg", "wheel": ["K", "Ö", "P", "R", "Ü"], "words": [{"id": "w1", "word": "KÖPRÜ", "row": 0, "col": 0, "dir": "H"}, {"id": "w2", "word": "PÜR", "row": 0, "col": 2, "dir": "V"}, {"id": "w3", "word": "KÜR", "row": 0, "col": 0, "dir": "V"}], "bonus": ["ÖR"]}, {"id": 68, "title": "Efes Antik Kenti - Bölüm 8", "region": "İZMİR", "region_id": "efes", "bg": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/30/Library_of_Celsus_Ephesus_Turkey.jpg/1280px-Library_of_Celsus_Ephesus_Turkey.jpg", "wheel": ["M", "E", "Y", "D", "A", "N"], "words": [{"id": "w1", "word": "MEYDAN", "row": 1, "col": 0, "dir": "H"}, {"id": "w2", "word": "AYN", "row": 0, "col": 2, "dir": "V"}, {"id": "w3", "word": "YAN", "row": 0, "col": 4, "dir": "V"}], "bonus": ["DAM", "AD"]}, {"id": 69, "title": "Nemrut Dağı - Bölüm 9", "region": "ADIYAMAN", "region_id": "nemrut", "bg": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/29/Nemrut_Dagi_Heads.jpg/1280px-Nemrut_Dagi_Heads.jpg", "wheel": ["S", "O", "K", "K", "A", "Ç"], "words": [{"id": "w1", "word": "SOKAK", "row": 1, "col": 0, "dir": "H"}, {"id": "w2", "word": "KOKA", "row": 0, "col": 1, "dir": "V"}, {"id": "w3", "word": "KAS", "row": 0, "col": 3, "dir": "V"}], "bonus": ["KOÇ", "OK"]}, {"id": 70, "title": "Göbeklitepe - Bölüm 10", "region": "ŞANLIURFA", "region_id": "gobeklitepe", "bg": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a8/G%C3%B6bekli_Tepe%2C_Sanliurfa.jpg/1280px-G%C3%B6bekli_Tepe%2C_Sanliurfa.jpg", "wheel": ["C", "A", "D", "D", "E", "E"], "words": [{"id": "w1", "word": "CADDE", "row": 0, "col": 0, "dir": "H"}, {"id": "w2", "word": "DEDE", "row": 0, "col": 2, "dir": "V"}, {"id": "w3", "word": "EDA", "row": 0, "col": 4, "dir": "V"}], "bonus": ["AD"]}, {"id": 71, "title": "Sümela Manastırı - Bölüm 1", "region": "TRABZON", "region_id": "sumela", "bg": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/Sumela_from_across_valley.JPG/1280px-Sumela_from_across_valley.JPG", "wheel": ["K", "O", "O", "R", "R", "İ", "D"], "words": [{"id": "w1", "word": "KORİDOR", "row": 0, "col": 0, "dir": "H"}, {"id": "w2", "word": "KOR", "row": 0, "col": 0, "dir": "V"}, {"id": "w3", "word": "ROD", "row": 0, "col": 2, "dir": "V"}], "bonus": ["KOD", "DOR"]}, {"id": 72, "title": "Ani Harabeleri - Bölüm 2", "region": "KARS", "region_id": "ani", "bg": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5a/Ani_Cathedral_2011.jpg/1280px-Ani_Cathedral_2011.jpg", "wheel": ["S", "A", "L", "O", "N", "R"], "words": [{"id": "w1", "word": "SALON", "row": 3, "col": 0, "dir": "H"}, {"id": "w2", "word": "ONLAR", "row": 0, "col": 1, "dir": "V"}, {"id": "w3", "word": "NAL", "row": 3, "col": 4, "dir": "V"}], "bonus": ["SON", "SOL"]}, {"id": 73, "title": "Kapadokya - Bölüm 3", "region": "NEVŞEHİR", "region_id": "kapadokya", "bg": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/Hot_air_balloon_over_Cappadocia.jpg/1280px-Hot_air_balloon_over_Cappadocia.jpg", "wheel": ["B", "A", "L", "K", "O", "N"], "words": [{"id": "w1", "word": "BALKON", "row": 2, "col": 0, "dir": "H"}, {"id": "w2", "word": "KOL", "row": 0, "col": 2, "dir": "V"}, {"id": "w3", "word": "OBA", "row": 1, "col": 0, "dir": "V"}], "bonus": ["BOK", "AL"]}, {"id": 74, "title": "Pamukkale - Bölüm 4", "region": "DENİZLİ", "region_id": "pamukkale", "bg": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/be/Pamukkale_Terraces.jpg/1280px-Pamukkale_Terraces.jpg", "wheel": ["M", "U", "T", "F", "A", "K"], "words": [{"id": "w1", "word": "MUTFAK", "row": 2, "col": 0, "dir": "H"}, {"id": "w2", "word": "KAF", "row": 0, "col": 3, "dir": "V"}, {"id": "w3", "word": "TAM", "row": 0, "col": 0, "dir": "V"}], "bonus": ["KAT", "TAK"]}, {"id": 75, "title": "Galata Kulesi - Bölüm 5", "region": "İSTANBUL", "region_id": "galata", "bg": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/06/Galata_Tower_Istanbul.jpg/1280px-Galata_Tower_Istanbul.jpg", "wheel": ["B", "A", "H", "Ç", "E", "C"], "words": [{"id": "w1", "word": "BAHÇE", "row": 1, "col": 0, "dir": "H"}, {"id": "w2", "word": "HAC", "row": 0, "col": 1, "dir": "V"}, {"id": "w3", "word": "ÇAH", "row": 1, "col": 3, "dir": "V"}], "bonus": ["BAH", "AÇ"]}, {"id": 76, "title": "Efes Antik Kenti - Bölüm 6", "region": "İZMİR", "region_id": "efes", "bg": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/30/Library_of_Celsus_Ephesus_Turkey.jpg/1280px-Library_of_Celsus_Ephesus_Turkey.jpg", "wheel": ["H", "A", "V", "U", "Z"], "words": [{"id": "w1", "word": "HAVUZ", "row": 0, "col": 0, "dir": "H"}, {"id": "w2", "word": "HAZ", "row": 0, "col": 0, "dir": "V"}, {"id": "w3", "word": "VAZ", "row": 0, "col": 2, "dir": "V"}], "bonus": ["UZ", "AV"]}, {"id": 77, "title": "Nemrut Dağı - Bölüm 7", "region": "ADIYAMAN", "region_id": "nemrut", "bg": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/29/Nemrut_Dagi_Heads.jpg/1280px-Nemrut_Dagi_Heads.jpg", "wheel": ["O", "R", "M", "A", "N"], "words": [{"id": "w1", "word": "ORMAN", "row": 2, "col": 0, "dir": "H"}, {"id": "w2", "word": "ONAR", "row": 2, "col": 0, "dir": "V"}, {"id": "w3", "word": "ROM", "row": 0, "col": 2, "dir": "V"}], "bonus": ["MAN"]}, {"id": 78, "title": "Göbeklitepe - Bölüm 8", "region": "ŞANLIURFA", "region_id": "gobeklitepe", "bg": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a8/G%C3%B6bekli_Tepe%2C_Sanliurfa.jpg/1280px-G%C3%B6bekli_Tepe%2C_Sanliurfa.jpg", "wheel": ["V", "A", "D", "İ"], "words": [{"id": "w1", "word": "VADİ", "row": 2, "col": 0, "dir": "H"}, {"id": "w2", "word": "DAVİ", "row": 0, "col": 0, "dir": "V"}, {"id": "w3", "word": "AİD", "row": 0, "col": 2, "dir": "V"}], "bonus": ["AD", "AV"]}, {"id": 79, "title": "Sümela Manastırı - Bölüm 9", "region": "TRABZON", "region_id": "sumela", "bg": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/Sumela_from_across_valley.JPG/1280px-Sumela_from_across_valley.JPG", "wheel": ["T", "E", "E", "P"], "words": [{"id": "w1", "word": "TEPE", "row": 1, "col": 0, "dir": "H"}, {"id": "w2", "word": "ETE", "row": 0, "col": 0, "dir": "V"}, {"id": "w3", "word": "PET", "row": 1, "col": 2, "dir": "V"}], "bonus": ["TEP"]}, {"id": 80, "title": "Ani Harabeleri - Bölüm 10", "region": "KARS", "region_id": "ani", "bg": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5a/Ani_Cathedral_2011.jpg/1280px-Ani_Cathedral_2011.jpg", "wheel": ["Y", "Y", "A", "A", "L"], "words": [{"id": "w1", "word": "YAYLA", "row": 3, "col": 0, "dir": "H"}, {"id": "w2", "word": "ALAY", "row": 0, "col": 0, "dir": "V"}, {"id": "w3", "word": "YAL", "row": 3, "col": 2, "dir": "V"}], "bonus": ["AY", "YA"]}, {"id": 81, "title": "Kapadokya - Bölüm 1", "region": "NEVŞEHİR", "region_id": "kapadokya", "bg": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/Hot_air_balloon_over_Cappadocia.jpg/1280px-Hot_air_balloon_over_Cappadocia.jpg", "wheel": ["Z", "İ", "R", "V", "E"], "words": [{"id": "w1", "word": "ZİRVE", "row": 3, "col": 0, "dir": "H"}, {"id": "w2", "word": "REVİ", "row": 0, "col": 1, "dir": "V"}, {"id": "w3", "word": "EV", "row": 2, "col": 3, "dir": "V"}], "bonus": ["VER"]}, {"id": 82, "title": "Pamukkale - Bölüm 2", "region": "DENİZLİ", "region_id": "pamukkale", "bg": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/be/Pamukkale_Terraces.jpg/1280px-Pamukkale_Terraces.jpg", "wheel": ["K", "Ö", "R", "F", "E", "Z"], "words": [{"id": "w1", "word": "KÖRFEZ", "row": 2, "col": 0, "dir": "H"}, {"id": "w2", "word": "FÖZ", "row": 2, "col": 3, "dir": "V"}, {"id": "w3", "word": "ÖRK", "row": 0, "col": 0, "dir": "V"}], "bonus": ["KÖZ"]}, {"id": 83, "title": "Galata Kulesi - Bölüm 3", "region": "İSTANBUL", "region_id": "galata", "bg": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/06/Galata_Tower_Istanbul.jpg/1280px-Galata_Tower_Istanbul.jpg", "wheel": ["B", "O", "Ğ", "A", "Z"], "words": [{"id": "w1", "word": "BOĞAZ", "row": 2, "col": 0, "dir": "H"}, {"id": "w2", "word": "BAĞ", "row": 2, "col": 0, "dir": "V"}, {"id": "w3", "word": "BOĞ", "row": 0, "col": 2, "dir": "V"}], "bonus": ["AĞ", "AZ"]}, {"id": 84, "title": "Efes Antik Kenti - Bölüm 4", "region": "İZMİR", "region_id": "efes", "bg": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/30/Library_of_Celsus_Ephesus_Turkey.jpg/1280px-Library_of_Celsus_Ephesus_Turkey.jpg", "wheel": ["L", "İ", "M", "A", "N"], "words": [{"id": "w1", "word": "LİMAN", "row": 1, "col": 0, "dir": "H"}, {"id": "w2", "word": "ALİM", "row": 0, "col": 0, "dir": "V"}, {"id": "w3", "word": "MAL", "row": 1, "col": 2, "dir": "V"}], "bonus": ["MİNA", "NİL"]}, {"id": 85, "title": "Nemrut Dağı - Bölüm 5", "region": "ADIYAMAN", "region_id": "nemrut", "bg": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/29/Nemrut_Dagi_Heads.jpg/1280px-Nemrut_Dagi_Heads.jpg", "wheel": ["A", "A", "A", "D", "L", "R"], "words": [{"id": "w1", "word": "ADALAR", "row": 1, "col": 0, "dir": "H"}, {"id": "w2", "word": "LARA", "row": 0, "col": 0, "dir": "V"}, {"id": "w3", "word": "ADA", "row": 1, "col": 2, "dir": "V"}], "bonus": ["DAL", "AL"]}, {"id": 86, "title": "Göbeklitepe - Bölüm 6", "region": "ŞANLIURFA", "region_id": "gobeklitepe", "bg": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a8/G%C3%B6bekli_Tepe%2C_Sanliurfa.jpg/1280px-G%C3%B6bekli_Tepe%2C_Sanliurfa.jpg", "wheel": ["K", "U", "M", "S", "A", "L", "H"], "words": [{"id": "w1", "word": "KUMSAL", "row": 0, "col": 0, "dir": "H"}, {"id": "w2", "word": "SULH", "row": 0, "col": 3, "dir": "V"}, {"id": "w3", "word": "KUM", "row": 0, "col": 0, "dir": "V"}], "bonus": ["KUL", "SAL"]}, {"id": 87, "title": "Sümela Manastırı - Bölüm 7", "region": "TRABZON", "region_id": "sumela", "bg": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/Sumela_from_across_valley.JPG/1280px-Sumela_from_across_valley.JPG", "wheel": ["D", "A", "L", "G", "I", "Ç", "K"], "words": [{"id": "w1", "word": "DALGIÇ", "row": 2, "col": 0, "dir": "H"}, {"id": "w2", "word": "AÇIK", "row": 2, "col": 1, "dir": "V"}, {"id": "w3", "word": "AÇI", "row": 0, "col": 4, "dir": "V"}], "bonus": ["DAL", "IÇ"]}, {"id": 88, "title": "Ani Harabeleri - Bölüm 8", "region": "KARS", "region_id": "ani", "bg": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5a/Ani_Cathedral_2011.jpg/1280px-Ani_Cathedral_2011.jpg", "wheel": ["B", "A", "L", "I", "I", "K", "Ç"], "words": [{"id": "w1", "word": "BALIKÇI", "row": 1, "col": 0, "dir": "H"}, {"id": "w2", "word": "AÇIK", "row": 1, "col": 1, "dir": "V"}, {"id": "w3", "word": "ÇIL", "row": 0, "col": 3, "dir": "V"}], "bonus": ["BAL", "KIL"]}, {"id": 89, "title": "Kapadokya - Bölüm 9", "region": "NEVŞEHİR", "region_id": "kapadokya", "bg": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/Hot_air_balloon_over_Cappadocia.jpg/1280px-Hot_air_balloon_over_Cappadocia.jpg", "wheel": ["G", "E", "M", "İ"], "words": [{"id": "w1", "word": "GEMİ", "row": 1, "col": 0, "dir": "H"}, {"id": "w2", "word": "İME", "row": 0, "col": 2, "dir": "V"}, {"id": "w3", "word": "GEM", "row": 1, "col": 0, "dir": "V"}], "bonus": ["MİG"]}, {"id": 90, "title": "Pamukkale - Bölüm 10", "region": "DENİZLİ", "region_id": "pamukkale", "bg": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/be/Pamukkale_Terraces.jpg/1280px-Pamukkale_Terraces.jpg", "wheel": ["Y", "E", "E", "L", "K", "N"], "words": [{"id": "w1", "word": "YELKEN", "row": 0, "col": 0, "dir": "H"}, {"id": "w2", "word": "YELE", "row": 0, "col": 0, "dir": "V"}, {"id": "w3", "word": "EN", "row": 0, "col": 4, "dir": "V"}], "bonus": ["YEN", "KEL"]}, {"id": 91, "title": "Galata Kulesi - Bölüm 1", "region": "İSTANBUL", "region_id": "galata", "bg": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/06/Galata_Tower_Istanbul.jpg/1280px-Galata_Tower_Istanbul.jpg", "wheel": ["K", "A", "T"], "words": [{"id": "w1", "word": "KAT", "row": 2, "col": 0, "dir": "H"}, {"id": "w2", "word": "TAK", "row": 0, "col": 0, "dir": "V"}], "bonus": ["AK"]}, {"id": 92, "title": "Efes Antik Kenti - Bölüm 2", "region": "İZMİR", "region_id": "efes", "bg": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/30/Library_of_Celsus_Ephesus_Turkey.jpg/1280px-Library_of_Celsus_Ephesus_Turkey.jpg", "wheel": ["K", "A", "L", "E"], "words": [{"id": "w1", "word": "KALE", "row": 1, "col": 0, "dir": "H"}, {"id": "w2", "word": "KEL", "row": 1, "col": 0, "dir": "V"}, {"id": "w3", "word": "ELA", "row": 0, "col": 2, "dir": "V"}], "bonus": ["LAK", "LAKE"]}, {"id": 93, "title": "Nemrut Dağı - Bölüm 3", "region": "ADIYAMAN", "region_id": "nemrut", "bg": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/29/Nemrut_Dagi_Heads.jpg/1280px-Nemrut_Dagi_Heads.jpg", "wheel": ["M", "A", "A", "S"], "words": [{"id": "w1", "word": "MASA", "row": 2, "col": 0, "dir": "H"}, {"id": "w2", "word": "ASMA", "row": 0, "col": 0, "dir": "V"}], "bonus": ["AMA", "SAM", "AS"]}, {"id": 94, "title": "Göbeklitepe - Bölüm 4", "region": "ŞANLIURFA", "region_id": "gobeklitepe", "bg": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a8/G%C3%B6bekli_Tepe%2C_Sanliurfa.jpg/1280px-G%C3%B6bekli_Tepe%2C_Sanliurfa.jpg", "wheel": ["B", "A", "L", "I", "K"], "words": [{"id": "w1", "word": "BALIK", "row": 2, "col": 0, "dir": "H"}, {"id": "w2", "word": "BAL", "row": 2, "col": 0, "dir": "V"}, {"id": "w3", "word": "KIL", "row": 0, "col": 2, "dir": "V"}], "bonus": ["ALIK", "BAK", "KAL", "AKIL"]}, {"id": 95, "title": "Sümela Manastırı - Bölüm 5", "region": "TRABZON", "region_id": "sumela", "bg": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/Sumela_from_across_valley.JPG/1280px-Sumela_from_across_valley.JPG", "wheel": ["K", "İ", "T", "A", "P"], "words": [{"id": "w1", "word": "KİTAP", "row": 2, "col": 0, "dir": "H"}, {"id": "w2", "word": "TAKİP", "row": 0, "col": 0, "dir": "V"}, {"id": "w3", "word": "PAK", "row": 1, "col": 3, "dir": "V"}], "bonus": ["TİP", "PAT", "KAT", "AİT"]}, {"id": 96, "title": "Ani Harabeleri - Bölüm 6", "region": "KARS", "region_id": "ani", "bg": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5a/Ani_Cathedral_2011.jpg/1280px-Ani_Cathedral_2011.jpg", "wheel": ["D", "E", "N", "İ", "Z"], "words": [{"id": "w1", "word": "DENİZ", "row": 2, "col": 0, "dir": "H"}, {"id": "w2", "word": "DİZ", "row": 2, "col": 0, "dir": "V"}, {"id": "w3", "word": "DİN", "row": 0, "col": 2, "dir": "V"}], "bonus": ["DİZE", "İZ", "İN"]}, {"id": 97, "title": "Kapadokya - Bölüm 7", "region": "NEVŞEHİR", "region_id": "kapadokya", "bg": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/Hot_air_balloon_over_Cappadocia.jpg/1280px-Hot_air_balloon_over_Cappadocia.jpg", "wheel": ["R", "O", "M", "A", "N"], "words": [{"id": "w1", "word": "ROMA", "row": 2, "col": 0, "dir": "H"}, {"id": "w2", "word": "ORAN", "row": 1, "col": 0, "dir": "V"}, {"id": "w3", "word": "ROMAN", "row": 0, "col": 2, "dir": "V"}], "bonus": ["MOR", "ONAR", "ROM"]}, {"id": 98, "title": "Pamukkale - Bölüm 8", "region": "DENİZLİ", "region_id": "pamukkale", "bg": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/be/Pamukkale_Terraces.jpg/1280px-Pamukkale_Terraces.jpg", "wheel": ["K", "K", "U", "Ş", "A"], "words": [{"id": "w1", "word": "KUŞAK", "row": 1, "col": 0, "dir": "H"}, {"id": "w2", "word": "KUŞ", "row": 1, "col": 0, "dir": "V"}, {"id": "w3", "word": "AŞK", "row": 0, "col": 2, "dir": "V"}], "bonus": ["ŞAK", "KAŞ"]}, {"id": 99, "title": "Galata Kulesi - Bölüm 9", "region": "İSTANBUL", "region_id": "galata", "bg": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/06/Galata_Tower_Istanbul.jpg/1280px-Galata_Tower_Istanbul.jpg", "wheel": ["Y", "A", "A", "Z"], "words": [{"id": "w1", "word": "YAZ", "row": 1, "col": 0, "dir": "H"}, {"id": "w2", "word": "AYAZ", "row": 0, "col": 0, "dir": "V"}], "bonus": ["AY", "AZ"]}, {"id": 100, "title": "Efes Antik Kenti - Bölüm 10", "region": "İZMİR", "region_id": "efes", "bg": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/30/Library_of_Celsus_Ephesus_Turkey.jpg/1280px-Library_of_Celsus_Ephesus_Turkey.jpg", "wheel": ["K", "O", "R", "U"], "words": [{"id": "w1", "word": "KOR", "row": 2, "col": 0, "dir": "H"}, {"id": "w2", "word": "OKUR", "row": 1, "col": 0, "dir": "V"}, {"id": "w3", "word": "KORU", "row": 0, "col": 2, "dir": "V"}], "bonus": ["KUR", "ROK", "OK"]}];
+
   /* ==========================================================================
-     1. PROCEDURAL SOUND SYNTHESIS (WEB AUDIO API - ZERO EXTERNAL ASSETS)
+     1. STORAGE SERVICE (FAIL-SAFE, VERSIONED, MIGRATION SUPPORT)
+     ========================================================================== */
+  class StorageService {
+    constructor() {
+      this.prefix = 'kh_';
+      this.memoryFallback = {};
+      this.init();
+    }
+
+    init() {
+      // Migrate legacy 'wow_' keys to 'kh_' keys if they exist
+      try {
+        const legacyKeys = ['coins', 'level_idx', 'streak', 'daily_dates', 'stars', 'bonus_chest', 'sound_muted'];
+        legacyKeys.forEach(k => {
+          const oldVal = localStorage.getItem('wow_' + k);
+          if (oldVal !== null && localStorage.getItem(this.prefix + k) === null) {
+            localStorage.setItem(this.prefix + k, oldVal);
+          }
+        });
+      } catch (e) {
+        console.warn('Storage migration fallback active');
+      }
+    }
+
+    get(key, defaultValue) {
+      try {
+        const val = localStorage.getItem(this.prefix + key);
+        if (val === null || val === undefined) return defaultValue;
+        return JSON.parse(val);
+      } catch (e) {
+        return this.memoryFallback[key] !== undefined ? this.memoryFallback[key] : defaultValue;
+      }
+    }
+
+    set(key, value) {
+      try {
+        localStorage.setItem(this.prefix + key, JSON.stringify(value));
+      } catch (e) {
+        this.memoryFallback[key] = value;
+      }
+    }
+  }
+
+  /* ==========================================================================
+     2. PROCEDURAL WEB AUDIO SYNTHESIZER
      ========================================================================== */
   class SoundEngine {
-    constructor() {
+    constructor(storage) {
+      this.storage = storage;
       this.ctx = null;
-      this.muted = localStorage.getItem('wow_sound_muted') === 'true';
+      this.muted = this.storage.get('sound_muted', false);
     }
 
     init() {
       if (!this.ctx) {
         const AudioCtx = window.AudioContext || window.webkitAudioContext;
-        this.ctx = new AudioCtx();
+        if (AudioCtx) this.ctx = new AudioCtx();
       }
-      if (this.ctx.state === 'suspended') {
+      if (this.ctx && this.ctx.state === 'suspended') {
         this.ctx.resume();
       }
     }
 
     toggleMute() {
       this.muted = !this.muted;
-      localStorage.setItem('wow_sound_muted', this.muted);
+      this.storage.set('sound_muted', this.muted);
       return this.muted;
     }
 
-    // Incremental note frequencies for dragging letters (Pentatonic scale)
     playLetterNote(index) {
       if (this.muted) return;
       this.init();
-      const freqs = [261.63, 293.66, 329.63, 392.00, 440.00, 523.25, 659.25, 783.99]; // C4, D4, E4, G4, A4, C5, E5, G5
+      if (!this.ctx) return;
+      const freqs = [261.63, 293.66, 329.63, 392.00, 440.00, 523.25, 659.25, 783.99];
       const freq = freqs[Math.min(index, freqs.length - 1)];
 
       const osc = this.ctx.createOscillator();
       const gain = this.ctx.createGain();
       osc.type = 'sine';
       osc.frequency.setValueAtTime(freq, this.ctx.currentTime);
-
       gain.gain.setValueAtTime(0.2, this.ctx.currentTime);
-      gain.gain.exponentialRampToValueAtTime(0.001, this.ctx.currentTime + 0.25);
-
+      gain.gain.exponentialRampToValueAtTime(0.001, this.ctx.currentTime + 0.22);
       osc.connect(gain);
       gain.connect(this.ctx.destination);
       osc.start();
-      osc.stop(this.ctx.currentTime + 0.25);
+      osc.stop(this.ctx.currentTime + 0.22);
     }
 
-    // Success chord arpeggio for word solved
     playWordSuccess() {
       if (this.muted) return;
       this.init();
-      const notes = [523.25, 659.25, 783.99, 1046.50]; // C5, E5, G5, C6
+      if (!this.ctx) return;
+      const notes = [523.25, 659.25, 783.99, 1046.50];
       notes.forEach((freq, idx) => {
         const osc = this.ctx.createOscillator();
         const gain = this.ctx.createGain();
         osc.type = 'triangle';
-        osc.frequency.setValueAtTime(freq, this.ctx.currentTime + idx * 0.07);
+        const startTime = this.ctx.currentTime + idx * 0.06;
+        osc.frequency.setValueAtTime(freq, startTime);
+        gain.gain.setValueAtTime(0.2, startTime);
+        gain.gain.exponentialRampToValueAtTime(0.001, startTime + 0.4);
+        osc.connect(gain);
+        gain.connect(this.ctx.destination);
+        osc.start(startTime);
+        osc.stop(startTime + 0.4);
+      });
+    }
 
+    playErrorBuzz() {
+      if (this.muted) return;
+      this.init();
+      if (!this.ctx) return;
+      const osc = this.ctx.createOscillator();
+      const gain = this.ctx.createGain();
+      osc.type = 'sawtooth';
+      osc.frequency.setValueAtTime(130, this.ctx.currentTime);
+      osc.frequency.exponentialRampToValueAtTime(75, this.ctx.currentTime + 0.2);
+      gain.gain.setValueAtTime(0.18, this.ctx.currentTime);
+      gain.gain.exponentialRampToValueAtTime(0.001, this.ctx.currentTime + 0.2);
+      osc.connect(gain);
+      gain.connect(this.ctx.destination);
+      osc.start();
+      osc.stop(this.ctx.currentTime + 0.2);
+    }
+
+    playHint() {
+      if (this.muted) return;
+      this.init();
+      if (!this.ctx) return;
+      const freqs = [659.25, 830.61, 987.77];
+      freqs.forEach((freq, idx) => {
+        const osc = this.ctx.createOscillator();
+        const gain = this.ctx.createGain();
+        osc.type = 'sine';
         const startTime = this.ctx.currentTime + idx * 0.07;
+        osc.frequency.setValueAtTime(freq, startTime);
         gain.gain.setValueAtTime(0.22, startTime);
         gain.gain.exponentialRampToValueAtTime(0.001, startTime + 0.45);
-
         osc.connect(gain);
         gain.connect(this.ctx.destination);
         osc.start(startTime);
@@ -1043,126 +1221,61 @@
       });
     }
 
-    // Error boop on invalid word
-    playErrorBuzz() {
-      if (this.muted) return;
-      this.init();
-      const osc = this.ctx.createOscillator();
-      const gain = this.ctx.createGain();
-      osc.type = 'sawtooth';
-      osc.frequency.setValueAtTime(140, this.ctx.currentTime);
-      osc.frequency.exponentialRampToValueAtTime(80, this.ctx.currentTime + 0.22);
-
-      gain.gain.setValueAtTime(0.18, this.ctx.currentTime);
-      gain.gain.exponentialRampToValueAtTime(0.001, this.ctx.currentTime + 0.22);
-
-      osc.connect(gain);
-      gain.connect(this.ctx.destination);
-      osc.start();
-      osc.stop(this.ctx.currentTime + 0.22);
-    }
-
-    // Hint chime
-    playHint() {
-      if (this.muted) return;
-      this.init();
-      const freqs = [659.25, 830.61, 987.77]; // E5, G#5, B5
-      freqs.forEach((freq, idx) => {
-        const osc = this.ctx.createOscillator();
-        const gain = this.ctx.createGain();
-        osc.type = 'sine';
-        osc.frequency.setValueAtTime(freq, this.ctx.currentTime + idx * 0.08);
-
-        const startTime = this.ctx.currentTime + idx * 0.08;
-        gain.gain.setValueAtTime(0.25, startTime);
-        gain.gain.exponentialRampToValueAtTime(0.001, startTime + 0.5);
-
-        osc.connect(gain);
-        gain.connect(this.ctx.destination);
-        osc.start(startTime);
-        osc.stop(startTime + 0.5);
-      });
-    }
-
-    // Lightning blast with rumble
     playLightning() {
       if (this.muted) return;
       this.init();
-      // Low Saw rumble
+      if (!this.ctx) return;
       const osc = this.ctx.createOscillator();
       const gain = this.ctx.createGain();
       osc.type = 'sawtooth';
-      osc.frequency.setValueAtTime(100, this.ctx.currentTime);
-      osc.frequency.exponentialRampToValueAtTime(30, this.ctx.currentTime + 0.6);
-
-      gain.gain.setValueAtTime(0.35, this.ctx.currentTime);
-      gain.gain.exponentialRampToValueAtTime(0.001, this.ctx.currentTime + 0.6);
-
+      osc.frequency.setValueAtTime(90, this.ctx.currentTime);
+      osc.frequency.exponentialRampToValueAtTime(25, this.ctx.currentTime + 0.55);
+      gain.gain.setValueAtTime(0.3, this.ctx.currentTime);
+      gain.gain.exponentialRampToValueAtTime(0.001, this.ctx.currentTime + 0.55);
       osc.connect(gain);
       gain.connect(this.ctx.destination);
       osc.start();
-      osc.stop(this.ctx.currentTime + 0.6);
-
-      // White noise blast
-      const bufferSize = this.ctx.sampleRate * 0.35;
-      const buffer = this.ctx.createBuffer(1, bufferSize, this.ctx.sampleRate);
-      const output = buffer.getChannelData(0);
-      for (let i = 0; i < bufferSize; i++) {
-        output[i] = Math.random() * 2 - 1;
-      }
-      const whiteNoise = this.ctx.createBufferSource();
-      whiteNoise.buffer = buffer;
-      const noiseGain = this.ctx.createGain();
-      noiseGain.gain.setValueAtTime(0.25, this.ctx.currentTime);
-      noiseGain.gain.exponentialRampToValueAtTime(0.001, this.ctx.currentTime + 0.35);
-
-      whiteNoise.connect(noiseGain);
-      noiseGain.connect(this.ctx.destination);
-      whiteNoise.start();
+      osc.stop(this.ctx.currentTime + 0.55);
     }
 
-    // Coin shower ping
     playCoinShower() {
       if (this.muted) return;
       this.init();
+      if (!this.ctx) return;
       const pings = [880, 1174, 1318, 1760];
       pings.forEach((freq, i) => {
         const osc = this.ctx.createOscillator();
         const gain = this.ctx.createGain();
         osc.type = 'sine';
-        osc.frequency.setValueAtTime(freq, this.ctx.currentTime + i * 0.06);
-
-        const startTime = this.ctx.currentTime + i * 0.06;
-        gain.gain.setValueAtTime(0.2, startTime);
-        gain.gain.exponentialRampToValueAtTime(0.001, startTime + 0.3);
-
+        const startTime = this.ctx.currentTime + i * 0.05;
+        osc.frequency.setValueAtTime(freq, startTime);
+        gain.gain.setValueAtTime(0.18, startTime);
+        gain.gain.exponentialRampToValueAtTime(0.001, startTime + 0.28);
         osc.connect(gain);
         gain.connect(this.ctx.destination);
         osc.start(startTime);
-        osc.stop(startTime + 0.3);
+        osc.stop(startTime + 0.28);
       });
     }
 
-    // Fanfare victory
     playFanfare() {
       if (this.muted) return;
       this.init();
+      if (!this.ctx) return;
       const motif = [
-        { f: 523.25, t: 0.0, d: 0.15 },
-        { f: 659.25, t: 0.15, d: 0.15 },
-        { f: 783.99, t: 0.30, d: 0.2 },
-        { f: 1046.50, t: 0.50, d: 0.6 }
+        { f: 523.25, t: 0.0, d: 0.14 },
+        { f: 659.25, t: 0.14, d: 0.14 },
+        { f: 783.99, t: 0.28, d: 0.18 },
+        { f: 1046.50, t: 0.46, d: 0.55 }
       ];
       motif.forEach(m => {
         const osc = this.ctx.createOscillator();
         const gain = this.ctx.createGain();
         osc.type = 'triangle';
-        osc.frequency.setValueAtTime(m.f, this.ctx.currentTime + m.t);
-
         const startTime = this.ctx.currentTime + m.t;
-        gain.gain.setValueAtTime(0.25, startTime);
+        osc.frequency.setValueAtTime(m.f, startTime);
+        gain.gain.setValueAtTime(0.22, startTime);
         gain.gain.exponentialRampToValueAtTime(0.001, startTime + m.d);
-
         osc.connect(gain);
         gain.connect(this.ctx.destination);
         osc.start(startTime);
@@ -1172,173 +1285,143 @@
   }
 
   /* ==========================================================================
-     2. CURATED LEVEL DATABASE (STRICT 90° CROSSWORD + CULTURAL TRIVIA)
+     3. TURKISH LANGUAGE & HELPER UTILITIES
      ========================================================================== */
-  const LEVELS_DATA = [
-    {
-      id: 1,
-      title: "Kapadokya - Peri Bacaları",
-      region: "NEVŞEHİR",
-      bg: "https://images.unsplash.com/photo-1570939274717-7eda259b50ed?auto=format&fit=crop&w=1200&q=80",
-      trivia: "Milyonlarca yıl önce yanardağ küllerinin rüzgâr ve yağmurla aşınmasıyla oluşan peri bacaları, yüzlerce yıldır yeraltı şehirlerine ve gökyüzünü süsleyen rengarenk sıcak hava balonlarına ev sahipliği yapar.",
-      wheel: ["A", "K", "T"],
-      words: [
-        { id: "w1", word: "KAT", row: 2, col: 0, dir: "H" },
-        { id: "w2", word: "TAK", row: 0, col: 0, dir: "V" }
-      ],
-      bonus: ["AK"]
+  const Turkish = {
+    toUpper(str) {
+      return (str || '').toLocaleUpperCase('tr-TR');
     },
-    {
-      id: 2,
-      title: "Pamukkale - Travertenler",
-      region: "DENİZLİ",
-      bg: "https://images.unsplash.com/photo-1549880338-65ddcdfd017b?auto=format&fit=crop&w=1200&q=80",
-      trivia: "Termal suların içerisindeki kalsiyum karbonatın binlerce yılda çökelmesiyle oluşan bembeyaz traverten terasları, antik Hierapolis kentinin şifalı suları ile UNESCO Dünya Mirası listesindedir.",
-      wheel: ["E", "K", "A", "L"],
-      words: [
-        { id: "w1", word: "KALE", row: 1, col: 0, dir: "H" },
-        { id: "w2", word: "KEL", row: 1, col: 0, dir: "V" },
-        { id: "w3", word: "ELA", row: 0, col: 2, dir: "V" }
-      ],
-      bonus: ["LAK", "LAKE"]
+    toLower(str) {
+      return (str || '').toLocaleLowerCase('tr-TR');
     },
-    {
-      id: 3,
-      title: "Galata Kulesi - İstanbul",
-      region: "İSTANBUL",
-      bg: "https://images.unsplash.com/photo-1527838832700-5059252407fa?auto=format&fit=crop&w=1200&q=80",
-      trivia: "1348 yılında Cenevizliler tarafından inşa edilen kule, 17. yüzyılda Hezarfen Ahmed Çelebi'nin tahta kanatlarla Boğaz'ı aşarak Üsküdar'a uçtuğu efsanevi kuledir.",
-      wheel: ["S", "M", "A", "A"],
-      words: [
-        { id: "w1", word: "MASA", row: 2, "col": 0, "dir": "H" },
-        { id: "w2", word: "ASMA", row: 0, "col": 0, "dir": "V" }
-      ],
-      bonus: ["AMA", "SAM", "AS"]
+    // Istanbul Date YYYY-MM-DD
+    getIstanbulDateString(d = new Date()) {
+      try {
+        const formatter = new Intl.DateTimeFormat('en-CA', {
+          timeZone: 'Europe/Istanbul',
+          year: 'numeric',
+          month: '2-digit',
+          day: '2-digit'
+        });
+        return formatter.format(d);
+      } catch (e) {
+        return d.toISOString().split('T')[0];
+      }
     },
-    {
-      id: 4,
-      title: "Efes - Celsus Kütüphanesi",
-      region: "İZMİR",
-      bg: "https://images.unsplash.com/photo-1564507592333-c60657eea523?auto=format&fit=crop&w=1200&q=80",
-      trivia: "Antik dünyanın en büyük üçüncü kütüphanesi olan Celsus Kütüphanesi, 12 binden fazla parşömen rulosuna ev sahipliği yapmış ve antik felsefenin beşiği olmuştur.",
-      wheel: ["I", "B", "K", "A", "L"],
-      words: [
-        { id: "w1", word: "BALIK", row: 2, col: 0, dir: "H" },
-        { id: "w2", word: "BAL", row: 2, col: 0, dir: "V" },
-        { id: "w3", word: "KIL", row: 0, col: 2, dir: "V" }
-      ],
-      bonus: ["ALIK", "BAK", "KAL", "LAK", "AKIL"]
+    getYesterdayIstanbulString() {
+      const d = new Date();
+      d.setDate(d.getDate() - 1);
+      return this.getIstanbulDateString(d);
     },
-    {
-      id: 5,
-      title: "Nemrut Dağı - Tanrılar Tahtı",
-      region: "ADIYAMAN",
-      bg: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1200&q=80",
-      trivia: "2150 metre yükseklikte Kommagene Kralı I. Antiochos tarafından yaptırılan devasa kral ve tanrı heykelleri, dünyanın en büyüleyici gün doğumu ve gün batımına tanıklık eder.",
-      wheel: ["T", "P", "İ", "K", "A"],
-      words: [
-        { id: "w1", word: "KİTAP", row: 2, col: 0, dir: "H" },
-        { id: "w2", word: "TAKİP", row: 0, col: 0, dir: "V" },
-        { id: "w3", word: "PAK", row: 1, col: 3, dir: "V" }
-      ],
-      bonus: ["TİP", "PAT", "KAT", "AİT", "PATİK"]
-    },
-    {
-      id: 6,
-      title: "Göbeklitepe - Tarihin Sıfırı",
-      region: "ŞANLIURFA",
-      bg: "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=1200&q=80",
-      trivia: "Yaklaşık 12.000 yıl öncesine dayanan T biçimli devasa kireçtaşı sütunlarıyla Göbeklitepe, insanlık tarihinin bilinen en eski anıtsal tapınak kompleksidir.",
-      wheel: ["N", "Z", "E", "D", "İ"],
-      words: [
-        { id: "w1", word: "DENİZ", row: 2, col: 0, dir: "H" },
-        { id: "w2", word: "DİZ", row: 2, col: 0, dir: "V" },
-        { id: "w3", word: "DİN", row: 0, col: 2, dir: "V" }
-      ],
-      bonus: ["DİZE", "İZ", "İN", "ZİN"]
-    },
-    {
-      id: 7,
-      title: "Kolezyum - Gladyatörler Arenası",
-      region: "ROMA, İTALYA",
-      bg: "https://images.unsplash.com/photo-1552832230-c0197dd311b5?auto=format&fit=crop&w=1200&q=80",
-      trivia: "İmparator Vespasianus tarafından MS 80 yılında tamamlanan 50.000 kişilik dev amfitiyatro, Roma İmparatorluğu'nun mühendislik harikası ve antik gladyatör dövüşlerinin merkezidir.",
-      wheel: ["M", "N", "A", "R", "O"],
-      words: [
-        { id: "w1", word: "ROMA", row: 2, col: 0, dir: "H" },
-        { id: "w2", word: "ORAN", row: 1, col: 0, dir: "V" },
-        { id: "w3", word: "ROMAN", row: 0, col: 2, dir: "V" }
-      ],
-      bonus: ["MOR", "ONAR", "ROM"]
-    },
-    {
-      id: 8,
-      title: "Tac Mahal - Aşkın Mermer Anıtı",
-      region: "AGRA, HİNDİSTAN",
-      bg: "https://images.unsplash.com/photo-1564507592333-c60657eea523?auto=format&fit=crop&w=1200&q=80",
-      trivia: "Şah Cihan'ın sevgili eşi Mümtaz Mahal anısına beyaz mermerden yaptırdığı bu kusursuz simetrik anıt mezar, dünyanın yeni 7 harikasından biri olarak kabul edilir.",
-      wheel: ["Ş", "A", "K", "U", "K"],
-      words: [
-        { id: "w1", word: "AŞK", row: 6, col: 0, dir: "H" },
-        { id: "w2", word: "ŞAK", row: 4, col: 2, dir: "V" },
-        { id: "w3", word: "KUŞ", row: 4, col: 0, dir: "H" },
-        { id: "w4", word: "KUŞAK", row: 0, col: 0, dir: "V" }
-      ],
-      bonus: ["KAŞ"]
+    // Turkish Suffix Pattern Matching (Kök-Ek engine)
+    isRootSuffixPair(base, target) {
+      if (!target.startsWith(base) || target === base) return false;
+      const suffix = target.slice(base.length);
+      const commonSuffixes = ['LER', 'LAR', 'Cİ', 'CÜ', 'ÇI', 'Çİ', 'ÇU', 'ÇÜ', 'LİK', 'LUK', 'LÜK', 'Lİ', 'LI', 'LU', 'LÜ', 'SİZ', 'SIZ', 'SUZ', 'SÜZ', 'DE', 'DA', 'DEN', 'DAN', 'E', 'A', 'İ', 'I', 'İM', 'İN', 'İK'];
+      return commonSuffixes.includes(suffix);
     }
-  ];
-
-  const DAILY_LEVEL_DATA = {
-    id: "daily",
-    title: "Günün Özel Meydan Okuması",
-    region: "GÜNLÜK GÖREV",
-    bg: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=80",
-    trivia: "Tebrikler! Bugünkü günlük bulmacayı başarıyla tamamladın ve 3 parlayan yıldızı koleksiyonuna kattın! Serini korumak için yarın tekrar gelmeyi unutma.",
-    wheel: ["R", "H", "A", "B", "A"],
-    words: [
-      { id: "dw1", word: "BAHAR", row: 1, col: 1, dir: "H" },
-      { id: "dw2", word: "HARA", row: 0, col: 2, dir: "V" },
-      { id: "dw3", word: "BAR", row: 0, col: 4, dir: "V" },
-      { id: "dw4", word: "ARA", row: 3, col: 0, dir: "H" }
-    ],
-    bonus: ["RAB", "ABA", "AHA"]
   };
 
   /* ==========================================================================
-     3. CORE GAME CONTROLLER
+     4. HONEST AD PROVIDER (NO DECEPTIVE FAKE ADS IN PROD)
      ========================================================================== */
-  class WoWGame {
+  class AdProvider {
     constructor() {
-      this.sound = new SoundEngine();
+      const params = new URLSearchParams(window.location.search);
+      this.isDevMode = params.get('dev') === '1';
+    }
 
-      // Persistent Game State
-      this.coins = parseInt(localStorage.getItem('wow_coins') || '250', 10);
-      this.stars = parseInt(localStorage.getItem('wow_stars') || '0', 10);
-      this.currentLevelIdx = parseInt(localStorage.getItem('wow_level_idx') || '0', 10);
-      this.completedDailyDates = JSON.parse(localStorage.getItem('wow_daily_dates') || '[]');
-      this.streak = parseInt(localStorage.getItem('wow_streak') || '1', 10);
-      this.bonusChestCount = parseInt(localStorage.getItem('wow_bonus_chest') || '0', 10);
+    async showRewarded(reason = "Ödüllü Reklam") {
+      if (this.isDevMode) {
+        return new Promise((resolve) => {
+          const banner = document.createElement('div');
+          banner.style.cssText = 'position:fixed;inset:0;background:rgba(0,0,0,0.92);color:#fff;z-index:99999;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:20px;';
+          banner.innerHTML = `
+            <div style="font-size:44px;margin-bottom:12px;">🎮</div>
+            <h2 style="font-size:22px;margin-bottom:8px;">TEST REKLAMI (Geliştirici Modu)</h2>
+            <p style="color:#94a3b8;font-size:13px;margin-bottom:18px;">Sebep: ${reason}</p>
+            <div id="test-ad-countdown" style="font-size:18px;font-weight:900;color:#fbbf24;">4s...</div>
+          `;
+          document.body.appendChild(banner);
 
-      this.levelsCompletedCount = 0;
+          let sec = 4;
+          const interval = setInterval(() => {
+            sec--;
+            const timer = document.getElementById('test-ad-countdown');
+            if (timer) timer.textContent = `${sec}s...`;
+            if (sec <= 0) {
+              clearInterval(interval);
+              banner.remove();
+              resolve(true);
+            }
+          }, 1000);
+        });
+      }
+      // In production mode, grant reward directly without showing deceptive fake video countdowns!
+      return true;
+    }
+  }
+
+  /* ==========================================================================
+     5. MASTER GAME CONTROLLER
+     ========================================================================== */
+  class KelimeHarikalariGame {
+    constructor() {
+      this.storage = new StorageService();
+      this.sound = new SoundEngine(this.storage);
+      this.adProvider = new AdProvider();
+
+      // State
+      this.coins = this.storage.get('coins', 200);
+      this.stars = this.storage.get('stars', 0);
+      this.levelIdx = this.storage.get('level_idx', 0);
+      this.streak = this.storage.get('streak', 1);
+      this.completedDailyDates = this.storage.get('daily_dates', []);
+      this.bonusChestCount = this.storage.get('bonus_chest', 0);
+
+      // Settings
+      this.hapticEnabled = this.storage.get('haptic_enabled', true);
+      this.dyslexiaFont = this.storage.get('dyslexia_font', false);
+      this.highContrast = this.storage.get('high_contrast', false);
+      this.reducedMotion = this.storage.get('reduced_motion', false);
+
+      // Runtime level tracking
+      this.currentLevel = null;
       this.isDailyMode = false;
+      this.isIdiomMode = false;
       this.isTargetingMode = false;
+      this.levelRewardClaimed = false;
+      this.levelErrorCount = 0;
+      this.levelHintsUsed = 0;
 
-      // Active level state
-      this.level = null;
-      this.unlockedWords = new Set();
-      this.revealedCells = new Set();
+      this.unlockedWordIds = new Set();
+      this.revealedCellKeys = new Set();
       this.foundBonusWords = new Set();
-      this.dailyStarCells = new Set();
+      this.dailyStarKeys = new Set();
       this.dailyStarsCollected = new Set();
 
-      // Wheel touch state
+      // Wheel touch geometry
       this.isDragging = false;
       this.selectedNodeIndices = [];
       this.currentLetters = [];
       this.wheelNodePositions = [];
       this.currentWheelLetters = [];
 
-      // DOM Elements
+      this.initDom();
+      this.applySettings();
+      this.initEvents();
+      this.updateTopbar();
+      this.loadLevel(this.levelIdx);
+
+      // Register PWA Service Worker
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('./sw.js').catch(() => {});
+        });
+      }
+    }
+
+    initDom() {
       this.dom = {
         bgLayer: document.getElementById('bg-layer'),
         regionText: document.getElementById('region-text'),
@@ -1362,118 +1445,60 @@
         discoveryTitle: document.getElementById('discovery-title'),
         discoveryTrivia: document.getElementById('discovery-trivia'),
         modalVictory: document.getElementById('modal-victory'),
+        victoryStarsDisplay: document.getElementById('victory-stars-display'),
+        victoryEvalText: document.getElementById('victory-eval-text'),
+        victoryCoinsEarned: document.getElementById('victory-coins-earned'),
         modalCalendar: document.getElementById('modal-calendar'),
         calendarStreakText: document.getElementById('calendar-streak-text'),
         calendarGridContainer: document.getElementById('calendar-grid-container'),
-        modalNoCoins: document.getElementById('modal-no-coins'),
-        rewardedAdScreen: document.getElementById('rewarded-ad-screen'),
-        rewardedAdTimer: document.getElementById('rewarded-ad-timer'),
-        rewardedAdProgress: document.getElementById('rewarded-ad-progress'),
-        interstitialAdScreen: document.getElementById('interstitial-ad-screen'),
-        interstitialAdTimer: document.getElementById('interstitial-ad-timer')
+        btnShareDaily: document.getElementById('btn-share-daily'),
+        modalIdioms: document.getElementById('modal-idioms'),
+        idiomProverbText: document.getElementById('idiom-proverb-text'),
+        idiomMeaningText: document.getElementById('idiom-meaning-text'),
+        modalBonusChest: document.getElementById('modal-bonus-chest'),
+        modalChestProgress: document.getElementById('modal-chest-progress'),
+        modalChestWordsList: document.getElementById('modal-chest-words-list'),
+        modalSettings: document.getElementById('modal-settings'),
+        modalAbout: document.getElementById('modal-about'),
+        modalNoCoins: document.getElementById('modal-no-coins')
       };
 
-      // Confetti Setup
       this.ctxConfetti = this.dom.confettiCanvas.getContext('2d');
       this.confettiParticles = [];
       this.confettiAnimId = null;
-
-      this.initEvents();
-      this.updateTopbar();
-      this.loadLevel(this.currentLevelIdx);
     }
 
-    /* ---------------- Event Listeners ---------------- */
-    initEvents() {
-      // Sound Toggle
-      document.getElementById('btn-sound-toggle').addEventListener('click', () => {
-        const isMuted = this.sound.toggleMute();
-        this.dom.soundIcon.textContent = isMuted ? '🔇' : '🔊';
-      });
-      this.dom.soundIcon.textContent = this.sound.muted ? '🔇' : '🔊';
+    applySettings() {
+      document.body.classList.toggle('dyslexia-font', this.dyslexiaFont);
+      document.body.classList.toggle('high-contrast', this.highContrast);
+      if (this.reducedMotion) {
+        document.body.classList.add('reduced-motion');
+      }
 
-      // Daily Calendar Modal
-      document.getElementById('btn-open-daily').addEventListener('click', () => {
-        this.openCalendarModal();
-      });
-      document.getElementById('btn-close-calendar').addEventListener('click', () => {
-        this.dom.modalCalendar.classList.remove('active');
-      });
-      document.getElementById('btn-play-daily').addEventListener('click', () => {
-        this.dom.modalCalendar.classList.remove('active');
-        this.startDailyChallenge();
-      });
-
-      // Power-ups
-      document.getElementById('btn-shuffle').addEventListener('click', () => this.handleShuffle());
-      document.getElementById('btn-hint-bulb').addEventListener('click', () => this.handleBulbHint());
-      document.getElementById('btn-hint-target').addEventListener('click', () => this.handleTargetMagnifier());
-      document.getElementById('btn-hint-lightning').addEventListener('click', () => this.handleLightning());
-      document.getElementById('btn-bonus-chest').addEventListener('click', () => {
-        this.showToast(`🎁 Bonus Sandık: ${this.bonusChestCount}/5 kelime`);
-      });
-
-      // Modals
-      document.getElementById('btn-discovery-continue').addEventListener('click', () => {
-        this.dom.modalDiscovery.classList.remove('active');
-        this.openVictoryModal();
-      });
-
-      // Victory Modals
-      document.getElementById('btn-victory-normal').addEventListener('click', () => {
-        this.dom.modalVictory.classList.remove('active');
-        this.addCoins(25);
-        this.advanceAfterVictory();
-      });
-      document.getElementById('btn-victory-2x').addEventListener('click', () => {
-        this.dom.modalVictory.classList.remove('active');
-        this.showRewardedAd(50, () => {
-          this.advanceAfterVictory();
-        });
-      });
-
-      // Insufficient Coins
-      document.getElementById('btn-close-no-coins').addEventListener('click', () => {
-        this.dom.modalNoCoins.classList.remove('active');
-      });
-      document.getElementById('btn-watch-ad-for-coins').addEventListener('click', () => {
-        this.dom.modalNoCoins.classList.remove('active');
-        this.showRewardedAd(100, () => {
-          this.showToast("🎉 +100 Altın hesabına eklendi!");
-        });
-      });
-
-      // Resize
-      window.addEventListener('resize', () => {
-        this.cacheWheelGeometry();
-        this.resizeCrosswordBoard();
-      });
-
-      // Wheel Pointer Drag Engine
-      const wrapper = this.dom.wheelWrapper;
-      wrapper.addEventListener('pointerdown', (e) => this.onPointerDown(e));
-      wrapper.addEventListener('pointermove', (e) => this.onPointerMove(e));
-      wrapper.addEventListener('pointerup', (e) => this.onPointerUp(e));
-      wrapper.addEventListener('pointercancel', (e) => this.onPointerUp(e));
-
-      // Haptic Helper
-      this.vibrate = (ms = 15) => {
-        if ('vibrate' in navigator) {
-          try { navigator.vibrate(ms); } catch (err) {}
-        }
-      };
+      // Toggle buttons
+      document.getElementById('toggle-sound').classList.toggle('active', !this.sound.muted);
+      document.getElementById('toggle-haptic').classList.toggle('active', this.hapticEnabled);
+      document.getElementById('toggle-dyslexia').classList.toggle('active', this.dyslexiaFont);
+      document.getElementById('toggle-contrast').classList.toggle('active', this.highContrast);
+      document.getElementById('toggle-motion').classList.toggle('active', this.reducedMotion);
     }
 
-    /* ---------------- UI Updates ---------------- */
+    vibrate(pattern = 15) {
+      if (this.hapticEnabled && 'vibrate' in navigator) {
+        try { navigator.vibrate(pattern); } catch (e) {}
+      }
+    }
+
     updateTopbar() {
       this.dom.coinsDisplay.textContent = this.coins;
       this.dom.streakIndicator.textContent = `🔥 ${this.streak}`;
       this.dom.bonusCounter.textContent = `${this.bonusChestCount}/5`;
+      if (this.dom.soundIcon) this.dom.soundIcon.textContent = this.sound.muted ? '🔇' : '🔊';
     }
 
     addCoins(amount) {
-      this.coins += amount;
-      localStorage.setItem('wow_coins', this.coins);
+      this.coins = Math.max(0, this.coins + amount);
+      this.storage.set('coins', this.coins);
       this.sound.playCoinShower();
       this.updateTopbar();
     }
@@ -1483,17 +1508,151 @@
       toast.className = 'floating-toast';
       toast.textContent = message;
       document.body.appendChild(toast);
-      setTimeout(() => toast.remove(), 1600);
+      setTimeout(() => toast.remove(), 1500);
     }
 
-    /* ---------------- Crossword Layout Engine ---------------- */
+    /* ---------------- Events Setup ---------------- */
+        initEvents() {
+      const bind = (id, event, handler) => {
+        const el = document.getElementById(id);
+        if (el) el.addEventListener(event, handler);
+      };
+
+      // Sound Toggle
+      bind('btn-sound-toggle', 'click', () => {
+        this.sound.init();
+        const isMuted = this.sound.toggleMute();
+        if (this.dom.soundIcon) this.dom.soundIcon.textContent = isMuted ? '🔇' : '🔊';
+        const toggleSound = document.getElementById('toggle-sound');
+        if (toggleSound) toggleSound.classList.toggle('active', !isMuted);
+      });
+
+      // Topbar Modals
+      bind('btn-open-daily', 'click', () => this.openCalendarModal());
+      bind('btn-open-idioms', 'click', () => this.openIdiomsModal());
+      bind('btn-open-settings', 'click', () => this.openSettingsModal());
+      bind('btn-open-about', 'click', () => this.dom.modalAbout.classList.add('active'));
+      bind('btn-open-about-from-settings', 'click', () => {
+        this.dom.modalSettings.classList.remove('active');
+        this.dom.modalAbout.classList.add('active');
+      });
+      bind('btn-close-about', 'click', () => this.dom.modalAbout.classList.remove('active'));
+
+      // Power-up Buttons
+      bind('btn-shuffle', 'click', () => this.handleShuffle());
+      bind('btn-hint-bulb', 'click', () => this.handleBulbHint());
+      bind('btn-hint-target', 'click', () => this.handleTargetMagnifier());
+      bind('btn-hint-lightning', 'click', () => this.handleLightning());
+      bind('btn-bonus-chest', 'click', () => this.openBonusChestModal());
+      bind('btn-close-bonus-chest', 'click', () => this.dom.modalBonusChest.classList.remove('active'));
+
+      // Discovery & Victory
+      bind('btn-discovery-continue', 'click', () => {
+        this.dom.modalDiscovery.classList.remove('active');
+        this.openVictoryModal();
+      });
+
+      bind('btn-victory-normal', 'click', () => {
+        if (this.levelRewardClaimed) return;
+        this.levelRewardClaimed = true;
+        this.dom.modalVictory.classList.remove('active');
+        this.addCoins(30);
+        this.proceedToNextLevel();
+      });
+
+      bind('btn-victory-2x', 'click', async () => {
+        if (this.levelRewardClaimed) return;
+        this.levelRewardClaimed = true;
+        this.dom.modalVictory.classList.remove('active');
+        await this.adProvider.showRewarded("2X Bölüm Zafer Bonusu");
+        this.addCoins(60);
+        this.proceedToNextLevel();
+      });
+
+      // Calendar Play & Share
+      bind('btn-close-calendar', 'click', () => this.dom.modalCalendar.classList.remove('active'));
+      bind('btn-play-daily', 'click', () => {
+        this.dom.modalCalendar.classList.remove('active');
+        this.startDailyChallenge();
+      });
+      bind('btn-share-daily', 'click', () => this.shareDailyResult());
+
+      // Idiom Game
+      bind('btn-close-idioms', 'click', () => this.dom.modalIdioms.classList.remove('active'));
+      bind('btn-start-idiom-puzzle', 'click', () => {
+        this.dom.modalIdioms.classList.remove('active');
+        this.startIdiomLevel();
+      });
+
+      // Settings Toggles
+      bind('btn-close-settings', 'click', () => this.dom.modalSettings.classList.remove('active'));
+      bind('toggle-sound', 'click', () => {
+        const isMuted = this.sound.toggleMute();
+        const toggleSound = document.getElementById('toggle-sound');
+        if (toggleSound) toggleSound.classList.toggle('active', !isMuted);
+        if (this.dom.soundIcon) this.dom.soundIcon.textContent = isMuted ? '🔇' : '🔊';
+      });
+      bind('toggle-haptic', 'click', () => {
+        this.hapticEnabled = !this.hapticEnabled;
+        this.storage.set('haptic_enabled', this.hapticEnabled);
+        const toggleHaptic = document.getElementById('toggle-haptic');
+        if (toggleHaptic) toggleHaptic.classList.toggle('active', this.hapticEnabled);
+      });
+      bind('toggle-dyslexia', 'click', () => {
+        this.dyslexiaFont = !this.dyslexiaFont;
+        this.storage.set('dyslexia_font', this.dyslexiaFont);
+        this.applySettings();
+      });
+      bind('toggle-contrast', 'click', () => {
+        this.highContrast = !this.highContrast;
+        this.storage.set('high_contrast', this.highContrast);
+        this.applySettings();
+      });
+      bind('toggle-motion', 'click', () => {
+        this.reducedMotion = !this.reducedMotion;
+        this.storage.set('reduced_motion', this.reducedMotion);
+        this.applySettings();
+      });
+
+      // No Coins Modal
+      bind('btn-close-no-coins', 'click', () => this.dom.modalNoCoins.classList.remove('active'));
+      bind('btn-claim-free-hint', 'click', () => {
+        this.dom.modalNoCoins.classList.remove('active');
+        this.showToast("🎁 Günlük ücretsiz ipucun tahtada açıldı!");
+        this.sound.playHint();
+        this.revealRandomCell();
+      });
+
+      // Pointer Wheel Interaction
+      const wrapper = this.dom.wheelWrapper;
+      if (wrapper) {
+        wrapper.addEventListener('pointerdown', (e) => this.onPointerDown(e));
+        wrapper.addEventListener('pointermove', (e) => this.onPointerMove(e));
+        wrapper.addEventListener('pointerup', (e) => this.onPointerUp(e));
+        wrapper.addEventListener('pointercancel', (e) => this.onPointerUp(e));
+      }
+
+      // Resize
+      window.addEventListener('resize', () => {
+        this.cacheWheelGeometry();
+        this.resizeCrosswordBoard();
+      });
+    }
+
+    /* ---------------- Level Management ---------------- */
     loadLevel(levelIndex) {
       this.isDailyMode = false;
-      this.level = LEVELS_DATA[levelIndex % LEVELS_DATA.length];
-      this.unlockedWords.clear();
-      this.revealedCells.clear();
+      this.isIdiomMode = false;
+      this.levelRewardClaimed = false;
+      this.levelErrorCount = 0;
+      this.levelHintsUsed = 0;
+
+      const idx = levelIndex % LEVELS_DATA.length;
+      this.currentLevel = LEVELS_DATA[idx];
+      this.unlockedWordIds.clear();
+      this.revealedCellKeys.clear();
       this.foundBonusWords.clear();
-      this.dailyStarCells.clear();
+      this.dailyStarKeys.clear();
       this.dailyStarsCollected.clear();
 
       this.setupLevelUI();
@@ -1501,36 +1660,74 @@
 
     startDailyChallenge() {
       this.isDailyMode = true;
-      this.level = DAILY_LEVEL_DATA;
-      this.unlockedWords.clear();
-      this.revealedCells.clear();
+      this.isIdiomMode = false;
+      this.levelRewardClaimed = false;
+      this.levelErrorCount = 0;
+      this.levelHintsUsed = 0;
+
+      // Seed daily level deterministically from Istanbul date
+      const dateStr = Turkish.getIstanbulDateString();
+      let seedVal = 0;
+      for (let i = 0; i < dateStr.length; i++) {
+        seedVal = (seedVal * 31 + dateStr.charCodeAt(i)) >>> 0;
+      }
+      const dailyLevelIndex = seedVal % LEVELS_DATA.length;
+      this.currentLevel = JSON.parse(JSON.stringify(LEVELS_DATA[dailyLevelIndex]));
+      this.currentLevel.title = "Günün Özel Bulmacası";
+      this.currentLevel.region = "GÜNLÜK GÖREV";
+
+      this.unlockedWordIds.clear();
+      this.revealedCellKeys.clear();
       this.foundBonusWords.clear();
-      this.dailyStarCells.clear();
+      this.dailyStarKeys.clear();
       this.dailyStarsCollected.clear();
 
       this.setupLevelUI();
     }
 
+    startIdiomLevel() {
+      if (!this.selectedIdiom) return;
+      this.isDailyMode = false;
+      this.isIdiomMode = true;
+      this.levelRewardClaimed = false;
+      this.levelErrorCount = 0;
+      this.levelHintsUsed = 0;
+
+      const word = Turkish.toUpper(this.selectedIdiom.answer);
+      const wheelLetters = word.split('').sort(() => 0.5 - Math.random());
+
+      this.currentLevel = {
+        id: "idiom",
+        title: "Atasözü Tamamlama",
+        region: "TÜRKÇE KÜLTÜR",
+        bg: "https://upload.wikimedia.org/wikipedia/commons/thumb/0/06/Galata_Tower_Istanbul.jpg/1280px-Galata_Tower_Istanbul.jpg",
+        wheel: wheelLetters,
+        words: [{ id: "iw1", word: word, row: 0, col: 0, dir: "H" }],
+        bonus: []
+      };
+
+      this.unlockedWordIds.clear();
+      this.revealedCellKeys.clear();
+      this.foundBonusWords.clear();
+
+      this.setupLevelUI();
+      this.showToast(`📜 Eksik kelimeyi kur: ${word.length} harf!`);
+    }
+
     setupLevelUI() {
-      // Background Image
-      this.dom.bgLayer.style.backgroundImage = `url('${this.level.bg}')`;
+      this.dom.bgLayer.style.backgroundImage = `url('${this.currentLevel.bg}')`;
+      this.dom.regionText.textContent = this.currentLevel.region;
+      this.dom.levelTitleText.textContent = this.isDailyMode ? "Günün Bulmacası" : (this.isIdiomMode ? "Atasözü Modu" : `Bölüm ${this.currentLevel.id}`);
 
-      // Header Info
-      this.dom.regionText.textContent = this.level.region;
-      this.dom.levelTitleText.textContent = this.isDailyMode ? "Günün Bulmacası" : `Bölüm ${this.level.id}`;
-
-      // Build Crossword Board
       this.renderCrosswordGrid();
-
-      // Render Wheel
-      this.currentWheelLetters = [...this.level.wheel];
+      this.currentWheelLetters = [...this.currentLevel.wheel];
       this.renderWheel();
     }
 
+    /* ---------------- Crossword Grid Engine ---------------- */
     renderCrosswordGrid() {
-      const words = this.level.words;
+      const words = this.currentLevel.words;
 
-      // 1. Calculate Bounding Box
       let minR = Infinity, maxR = -Infinity;
       let minC = Infinity, maxC = -Infinity;
 
@@ -1538,18 +1735,18 @@
         const len = w.word.length;
         const endR = w.dir === 'V' ? w.row + len - 1 : w.row;
         const endC = w.dir === 'H' ? w.col + len - 1 : w.col;
-
         minR = Math.min(minR, w.row);
         maxR = Math.max(maxR, endR);
         minC = Math.min(minC, w.col);
         maxC = Math.max(maxC, endC);
       });
 
-      const totalRows = maxR - minR + 1;
-      const totalCols = maxC - minC + 1;
+      this.normMinR = minR;
+      this.normMinC = minC;
+      this.gridRows = maxR - minR + 1;
+      this.gridCols = maxC - minC + 1;
 
-      // 2. Map coordinates (normalized) to letters & words
-      this.gridLetterMap = new Map(); // key: "r_c" -> { char, wordIds: [] }
+      this.gridLetterMap = new Map();
       words.forEach(w => {
         const normR = w.row - minR;
         const normC = w.col - minC;
@@ -1557,7 +1754,7 @@
           const r = normR + (w.dir === 'V' ? i : 0);
           const c = normC + (w.dir === 'H' ? i : 0);
           const key = `${r}_${c}`;
-          const ch = w.word[i].toLocaleUpperCase('tr-TR');
+          const ch = Turkish.toUpper(w.word[i]);
 
           if (!this.gridLetterMap.has(key)) {
             this.gridLetterMap.set(key, { char: ch, wordIds: [w.id], r, c });
@@ -1567,39 +1764,30 @@
         }
       });
 
-      // 3. For Daily Mode: assign 3 stars to 3 random distinct cells
       if (this.isDailyMode) {
-        const allKeys = Array.from(this.gridLetterMap.keys());
-        // shuffle keys and pick 3
-        const shuffled = [...allKeys].sort(() => 0.5 - Math.random());
-        const starKeys = shuffled.slice(0, Math.min(3, shuffled.length));
-        starKeys.forEach(k => this.dailyStarCells.add(k));
+        const keys = Array.from(this.gridLetterMap.keys()).sort(() => 0.5 - Math.random());
+        keys.slice(0, Math.min(3, keys.length)).forEach(k => this.dailyStarKeys.add(k));
       }
-
-      // 4. Determine Dynamic Responsive Cell Size
-      this.gridRows = totalRows;
-      this.gridCols = totalCols;
 
       this.resizeCrosswordBoard();
     }
 
     resizeCrosswordBoard() {
       if (!this.gridRows || !this.gridCols) return;
-      const boardArea = document.getElementById('board-area');
-      const maxW = boardArea.clientWidth - 24;
-      const maxH = boardArea.clientHeight - 24;
+      const board = document.getElementById('board-area');
+      const maxW = board.clientWidth - 16;
+      const maxH = board.clientHeight - 16;
 
       const cellW = Math.floor(maxW / this.gridCols);
       const cellH = Math.floor(maxH / this.gridRows);
       let cellSize = Math.min(cellW, cellH);
-      cellSize = Math.max(34, Math.min(cellSize, 60)); // Clamp 34px - 60px
+      cellSize = Math.max(30, Math.min(cellSize, 54));
 
       const gridEl = this.dom.crosswordGrid;
       gridEl.style.gridTemplateColumns = `repeat(${this.gridCols}, ${cellSize}px)`;
       gridEl.style.gridTemplateRows = `repeat(${this.gridRows}, ${cellSize}px)`;
       gridEl.innerHTML = '';
 
-      // Create cells
       for (let r = 0; r < this.gridRows; r++) {
         for (let c = 0; c < this.gridCols; c++) {
           const key = `${r}_${c}`;
@@ -1609,7 +1797,7 @@
 
           if (this.gridLetterMap.has(key)) {
             const cellData = this.gridLetterMap.get(key);
-            const isRevealed = this.revealedCells.has(key);
+            const isRevealed = this.revealedCellKeys.has(key);
 
             cellEl.innerHTML = `
               <div class="cell-inner">
@@ -1622,17 +1810,14 @@
               cellEl.classList.add('revealed');
             }
 
-            // Daily Challenge Star Badge
-            if (this.isDailyMode && this.dailyStarCells.has(key) && !this.dailyStarsCollected.has(key)) {
+            if (this.isDailyMode && this.dailyStarKeys.has(key) && !this.dailyStarsCollected.has(key)) {
               const starEl = document.createElement('div');
               starEl.className = 'star-badge';
               starEl.textContent = '⭐';
               cellEl.appendChild(starEl);
             }
 
-            // Target click handler
             cellEl.addEventListener('click', () => this.onCellClicked(key));
-
           } else {
             cellEl.classList.add('hidden');
           }
@@ -1649,13 +1834,12 @@
 
       const letters = this.currentWheelLetters;
       const count = letters.length;
-      const radius = (this.dom.wheelWrapper.clientWidth / 2) - 34;
+      const radius = (this.dom.wheelWrapper.clientWidth / 2) - 30;
       const center = this.dom.wheelWrapper.clientWidth / 2;
 
       this.wheelNodePositions = [];
 
       letters.forEach((char, idx) => {
-        // Angle in radians (starting from top -pi/2)
         const angle = (idx * (2 * Math.PI / count)) - (Math.PI / 2);
         const x = center + radius * Math.cos(angle);
         const y = center + radius * Math.sin(angle);
@@ -1668,14 +1852,7 @@
         node.dataset.index = idx;
 
         container.appendChild(node);
-
-        this.wheelNodePositions.push({
-          index: idx,
-          char: char,
-          x: x,
-          y: y,
-          element: node
-        });
+        this.wheelNodePositions.push({ index: idx, char: char, x: x, y: y, element: node });
       });
     }
 
@@ -1686,27 +1863,23 @@
 
     handleShuffle() {
       this.vibrate(20);
-      // Circular rotation animation
-      this.dom.wheelNodesContainer.style.transition = 'transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1)';
+      this.dom.wheelNodesContainer.style.transition = 'transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1)';
       this.dom.wheelNodesContainer.style.transform = 'rotate(360deg)';
 
       setTimeout(() => {
-        // Shuffle letters
         this.currentWheelLetters.sort(() => 0.5 - Math.random());
         this.dom.wheelNodesContainer.style.transition = 'none';
         this.dom.wheelNodesContainer.style.transform = 'rotate(0deg)';
         this.renderWheel();
-      }, 400);
+      }, 350);
     }
 
-    /* ---------------- Pointer Drag Handling ---------------- */
     onPointerDown(e) {
       this.sound.init();
       this.isDragging = true;
       this.selectedNodeIndices = [];
       this.currentLetters = [];
       this.dom.wheelWrapper.setPointerCapture(e.pointerId);
-
       this.checkPointerCollision(e.clientX, e.clientY);
     }
 
@@ -1720,13 +1893,11 @@
       if (!this.isDragging) return;
       this.isDragging = false;
 
-      // Submit Word
       if (this.currentLetters.length > 0) {
-        const formed = this.currentLetters.join('').toLocaleUpperCase('tr-TR');
+        const formed = Turkish.toUpper(this.currentLetters.join(''));
         this.submitWord(formed);
       }
 
-      // Reset Wheel & Line
       this.selectedNodeIndices = [];
       this.currentLetters = [];
       this.dom.connectionLine.setAttribute('points', '');
@@ -1738,9 +1909,7 @@
       const rect = this.dom.wheelWrapper.getBoundingClientRect();
       const relX = clientX - rect.left;
       const relY = clientY - rect.top;
-
-      // Hit radius for wheel nodes
-      const hitRadius = 36;
+      const hitRadius = 34;
 
       for (let i = 0; i < this.wheelNodePositions.length; i++) {
         const node = this.wheelNodePositions[i];
@@ -1749,7 +1918,6 @@
         const dist = Math.sqrt(dx * dx + dy * dy);
 
         if (dist <= hitRadius) {
-          // If not already in current sequence
           if (!this.selectedNodeIndices.includes(i)) {
             this.selectedNodeIndices.push(i);
             this.currentLetters.push(node.char);
@@ -1758,14 +1926,11 @@
             this.vibrate(15);
             this.sound.playLetterNote(this.selectedNodeIndices.length - 1);
 
-            // Update Preview Pill
             const word = this.currentLetters.join('');
             this.dom.wordPreview.textContent = word;
             this.dom.wordPreview.classList.add('active');
-
           } else if (this.selectedNodeIndices.length > 1 &&
                      this.selectedNodeIndices[this.selectedNodeIndices.length - 2] === i) {
-            // Undo last selected letter if dragging back
             const popped = this.selectedNodeIndices.pop();
             this.currentLetters.pop();
             this.wheelNodePositions[popped].element.classList.remove('selected');
@@ -1787,7 +1952,6 @@
         this.dom.connectionLine.setAttribute('points', '');
         return;
       }
-
       const rect = this.dom.wheelWrapper.getBoundingClientRect();
       const relX = pointerClientX - rect.left;
       const relY = pointerClientY - rect.top;
@@ -1797,66 +1961,67 @@
         const node = this.wheelNodePositions[idx];
         pointsStr += `${node.x},${node.y} `;
       });
-
-      // Add dynamic point trailing mouse/finger
       pointsStr += `${relX},${relY}`;
       this.dom.connectionLine.setAttribute('points', pointsStr);
     }
 
-    /* ---------------- Word Submission & Mechanics ---------------- */
+    /* ---------------- Word Submission ---------------- */
     submitWord(word) {
-      const matchLevelWord = this.level.words.find(w => w.word === word);
+      const matchLevelWord = this.currentLevel.words.find(w => Turkish.toUpper(w.word) === word);
 
       if (matchLevelWord) {
-        if (this.unlockedWords.has(matchLevelWord.id)) {
-          this.showToast("Bu kelime zaten açıldı!");
+        if (this.unlockedWordIds.has(matchLevelWord.id)) {
+          this.showToast("Bu kelime zaten açık!");
           this.sound.playErrorBuzz();
         } else {
-          // Word Solved!
           this.unlockCrosswordWord(matchLevelWord);
         }
-      } else if (this.level.bonus && this.level.bonus.includes(word)) {
-        // Bonus Word!
+      } else if (this.currentLevel.bonus && this.currentLevel.bonus.map(b => Turkish.toUpper(b)).includes(word)) {
         if (this.foundBonusWords.has(word)) {
           this.showToast("Bu bonus kelime zaten bulundu!");
           this.sound.playErrorBuzz();
         } else {
           this.foundBonusWords.add(word);
           this.sound.playWordSuccess();
-          this.showToast(`✨ Bonus Kelime Bulundu: ${word}`);
+          this.showToast(`✨ Bonus Kelime: ${word}`);
+
+          // Kök-Ek Bonusu Check: Did user discover a suffix of an unlocked word?
+          this.checkRootSuffixBonus(word);
 
           this.bonusChestCount++;
           if (this.bonusChestCount >= 5) {
             this.bonusChestCount = 0;
-            this.addCoins(30);
-            this.showToast("🎁 Sandık Açıldı! +30 Altın!");
+            this.addCoins(35);
+            this.showToast("🎁 Kelime Sandığı Patladı! +35 Altın!");
           }
-          localStorage.setItem('wow_bonus_chest', this.bonusChestCount);
+          this.storage.set('bonus_chest', this.bonusChestCount);
           this.updateTopbar();
         }
       } else {
-        // Invalid Word
+        this.levelErrorCount++;
         this.sound.playErrorBuzz();
         this.vibrate([20, 40, 20]);
       }
     }
 
+    checkRootSuffixBonus(bonusWord) {
+      this.currentLevel.words.forEach(w => {
+        const base = Turkish.toUpper(w.word);
+        if (Turkish.isRootSuffixPair(base, bonusWord)) {
+          this.addCoins(15);
+          this.showToast(`🌟 Kök-Ek Bonusu: ${base} ➔ ${bonusWord} (+15 🪙)!`);
+        }
+      });
+    }
+
     unlockCrosswordWord(wordObj) {
-      this.unlockedWords.add(wordObj.id);
+      this.unlockedWordIds.add(wordObj.id);
       this.sound.playWordSuccess();
       this.vibrate(30);
 
-      // Determine bounding box normalization minR, minC
-      let minR = Infinity, minC = Infinity;
-      this.level.words.forEach(w => {
-        minR = Math.min(minR, w.row);
-        minC = Math.min(minC, w.col);
-      });
+      const normR = wordObj.row - this.normMinR;
+      const normC = wordObj.col - this.normMinC;
 
-      const normR = wordObj.row - minR;
-      const normC = wordObj.col - minC;
-
-      // Launch Flying Sparks from Preview Pill to each Cell
       const previewRect = this.dom.wordPreview.getBoundingClientRect();
       const originX = previewRect.left + previewRect.width / 2;
       const originY = previewRect.top + previewRect.height / 2;
@@ -1872,16 +2037,14 @@
           const targetX = cellRect.left + cellRect.width / 2;
           const targetY = cellRect.top + cellRect.height / 2;
 
-          this.spawnSpark(originX, originY, targetX, targetY, i * 80, () => {
+          this.spawnSpark(originX, originY, targetX, targetY, i * 70, () => {
             cellEl.classList.add('revealed');
-            this.revealedCells.add(key);
+            this.revealedCellKeys.add(key);
 
-            // Collect Star if in Daily Mode
-            if (this.isDailyMode && this.dailyStarCells.has(key) && !this.dailyStarsCollected.has(key)) {
+            if (this.isDailyMode && this.dailyStarKeys.has(key) && !this.dailyStarsCollected.has(key)) {
               this.collectDailyStar(key, cellEl);
             }
 
-            // Check if all words completed
             this.checkLevelCompletion();
           });
         }
@@ -1895,16 +2058,13 @@
         spark.style.left = `${startX}px`;
         spark.style.top = `${startY}px`;
         document.body.appendChild(spark);
-
-        // Force reflow
         spark.getBoundingClientRect();
-
-        spark.style.transform = `translate(${endX - startX}px, ${endY - startY}px) scale(1.6)`;
+        spark.style.transform = `translate(${endX - startX}px, ${endY - startY}px) scale(1.5)`;
 
         setTimeout(() => {
           spark.remove();
           if (onArrive) onArrive();
-        }, 450);
+        }, 420);
       }, delayMs);
     }
 
@@ -1913,7 +2073,6 @@
       const starBadge = cellEl.querySelector('.star-badge');
       if (starBadge) starBadge.remove();
 
-      // Flying Star animation to Topbar
       const rect = cellEl.getBoundingClientRect();
       const star = document.createElement('div');
       star.className = 'star-projectile';
@@ -1924,24 +2083,20 @@
 
       const targetEl = document.getElementById('btn-open-daily');
       const targetRect = targetEl.getBoundingClientRect();
-
       star.getBoundingClientRect();
       star.style.transform = `translate(${targetRect.left - rect.left}px, ${targetRect.top - rect.top}px) scale(0.6)`;
 
       setTimeout(() => {
         star.remove();
         this.stars++;
-        localStorage.setItem('wow_stars', this.stars);
-        this.showToast("⭐ 1 Yıldız Toplandı!");
-      }, 650);
+        this.storage.set('stars', this.stars);
+        this.showToast("⭐ Parlayan Yıldız Koleksiyona Eklendi!");
+      }, 600);
     }
 
     checkLevelCompletion() {
-      // If all words are unlocked
-      if (this.unlockedWords.size === this.level.words.length) {
-        setTimeout(() => {
-          this.triggerVictory();
-        }, 600);
+      if (this.unlockedWordIds.size === this.currentLevel.words.length) {
+        setTimeout(() => this.triggerVictory(), 500);
       }
     }
 
@@ -1949,27 +2104,55 @@
       this.sound.playFanfare();
       this.startConfetti();
 
+      // Daily streak management
       if (this.isDailyMode) {
-        const todayStr = new Date().toISOString().split('T')[0];
+        const todayStr = Turkish.getIstanbulDateString();
+        const yesterdayStr = Turkish.getYesterdayIstanbulString();
+
         if (!this.completedDailyDates.includes(todayStr)) {
+          if (this.completedDailyDates.includes(yesterdayStr)) {
+            this.streak++;
+          } else {
+            this.streak = 1; // reset streak if a day was missed!
+          }
           this.completedDailyDates.push(todayStr);
-          this.streak++;
-          localStorage.setItem('wow_daily_dates', JSON.stringify(this.completedDailyDates));
-          localStorage.setItem('wow_streak', this.streak);
+          this.storage.set('daily_dates', this.completedDailyDates);
+          this.storage.set('streak', this.streak);
           this.updateTopbar();
         }
       }
 
-      // Show Discovery Card first
-      this.openDiscoveryCard();
+      // Calculate Stars based on hints & errors
+      let starCount = 3;
+      let evalText = "Harika! Sıfır ipucu ile kusursuz tamamladın.";
+      if (this.levelHintsUsed > 1 || this.levelErrorCount > 4) {
+        starCount = 1;
+        evalText = "Zorlu bir mücadeleydi, tebrikler!";
+      } else if (this.levelHintsUsed > 0 || this.levelErrorCount > 1) {
+        starCount = 2;
+        evalText = "Çok iyi performans!";
+      }
+      this.dom.victoryStarsDisplay.textContent = '⭐'.repeat(starCount) + '☆'.repeat(3 - starCount);
+      this.dom.victoryEvalText.textContent = evalText;
+
+      // Pop Discovery Card if regular level with registered credit
+      const credit = CREDITS_DATA.find(c => c.id === this.currentLevel.region_id);
+      if (credit && !this.isDailyMode && !this.isIdiomMode) {
+        this.openDiscoveryCard(credit);
+      } else {
+        this.openVictoryModal();
+      }
     }
 
-    openDiscoveryCard() {
-      this.dom.discoveryImg.src = this.level.bg;
-      this.dom.discoveryRegion.textContent = this.level.region;
-      this.dom.discoveryTitle.textContent = this.level.title;
-      this.dom.discoveryTrivia.textContent = this.level.trivia;
-
+    openDiscoveryCard(credit) {
+      this.dom.discoveryImg.src = credit.image_url;
+      this.dom.discoveryRegion.textContent = credit.location;
+      this.dom.discoveryTitle.textContent = credit.title;
+      this.dom.discoveryTrivia.innerHTML = `
+        <p style="margin-bottom:6px;">${credit.summary}</p>
+        <p style="color:#fef08a;font-weight:700;">💡 Biliyor muydunuz? ${credit.trivia}</p>
+        <p style="font-size:10.5px;color:#94a3b8;margin-top:6px;">Fotoğraf: ${credit.author} (${credit.license})</p>
+      `;
       this.dom.modalDiscovery.classList.add('active');
     }
 
@@ -1977,27 +2160,14 @@
       this.dom.modalVictory.classList.add('active');
     }
 
-    advanceAfterVictory() {
-      this.stopConfetti();
-      this.levelsCompletedCount++;
-
-      // Check Interstitial Ad Hook (Every 3 levels)
-      if (this.levelsCompletedCount % 3 === 0) {
-        this.showInterstitialAd(() => {
-          this.proceedToNextLevel();
-        });
-      } else {
-        this.proceedToNextLevel();
-      }
-    }
-
     proceedToNextLevel() {
-      if (this.isDailyMode) {
-        this.loadLevel(this.currentLevelIdx);
+      this.stopConfetti();
+      if (this.isDailyMode || this.isIdiomMode) {
+        this.loadLevel(this.levelIdx);
       } else {
-        this.currentLevelIdx = (this.currentLevelIdx + 1) % LEVELS_DATA.length;
-        localStorage.setItem('wow_level_idx', this.currentLevelIdx);
-        this.loadLevel(this.currentLevelIdx);
+        this.levelIdx = (this.levelIdx + 1) % LEVELS_DATA.length;
+        this.storage.set('level_idx', this.levelIdx);
+        this.loadLevel(this.levelIdx);
       }
     }
 
@@ -2007,31 +2177,19 @@
         this.dom.modalNoCoins.classList.add('active');
         return;
       }
-
-      // Find all unrevealed cells
-      const unrevealedKeys = [];
-      this.gridLetterMap.forEach((val, key) => {
-        if (!this.revealedCells.has(key)) unrevealedKeys.push(key);
-      });
-
-      if (unrevealedKeys.length === 0) return;
-
       this.coins -= 50;
-      localStorage.setItem('wow_coins', this.coins);
+      this.storage.set('coins', this.coins);
       this.updateTopbar();
       this.sound.playHint();
-
-      // Pick 1 random cell
-      const randomKey = unrevealedKeys[Math.floor(Math.random() * unrevealedKeys.length)];
-      this.revealSingleCell(randomKey);
+      this.levelHintsUsed++;
+      this.revealRandomCell();
     }
 
     handleTargetMagnifier() {
-      if (this.coins < 100) {
+      if (this.coins < 90) {
         this.dom.modalNoCoins.classList.add('active');
         return;
       }
-
       this.isTargetingMode = !this.isTargetingMode;
       const btn = document.getElementById('btn-hint-target');
 
@@ -2039,7 +2197,7 @@
         btn.classList.add('active-tool');
         document.body.classList.add('targeting-mode');
         this.dom.targetingBanner.style.display = 'block';
-        this.showToast("🎯 Açmak istediğin kutucuğa tıkla!");
+        this.showToast("🎯 Açmak istediğin kutucuğa dokun!");
       } else {
         btn.classList.remove('active-tool');
         document.body.classList.remove('targeting-mode');
@@ -2049,18 +2207,17 @@
 
     onCellClicked(cellKey) {
       if (!this.isTargetingMode) return;
-      if (this.revealedCells.has(cellKey)) {
+      if (this.revealedCellKeys.has(cellKey)) {
         this.showToast("Bu kutucuk zaten açık!");
         return;
       }
 
-      // Consume 100 coins
-      this.coins -= 100;
-      localStorage.setItem('wow_coins', this.coins);
+      this.coins -= 90;
+      this.storage.set('coins', this.coins);
       this.updateTopbar();
       this.sound.playHint();
+      this.levelHintsUsed++;
 
-      // Deactivate targeting mode
       this.isTargetingMode = false;
       document.getElementById('btn-hint-target').classList.remove('active-tool');
       document.body.classList.remove('targeting-mode');
@@ -2070,39 +2227,36 @@
     }
 
     handleLightning() {
-      if (this.coins < 150) {
+      if (this.coins < 140) {
         this.dom.modalNoCoins.classList.add('active');
         return;
       }
+      const unrevealed = Array.from(this.gridLetterMap.keys()).filter(k => !this.revealedCellKeys.has(k));
+      if (unrevealed.length === 0) return;
 
-      // Find all unrevealed cells
-      const unrevealedKeys = [];
-      this.gridLetterMap.forEach((val, key) => {
-        if (!this.revealedCells.has(key)) unrevealedKeys.push(key);
-      });
-
-      if (unrevealedKeys.length === 0) return;
-
-      this.coins -= 150;
-      localStorage.setItem('wow_coins', this.coins);
+      this.coins -= 140;
+      this.storage.set('coins', this.coins);
       this.updateTopbar();
+      this.levelHintsUsed += 2;
 
-      // Screen Flash & Thunder
       this.dom.screenFlash.classList.add('flash');
-      setTimeout(() => this.dom.screenFlash.classList.remove('flash'), 180);
+      setTimeout(() => this.dom.screenFlash.classList.remove('flash'), 160);
       this.sound.playLightning();
-      this.vibrate([40, 60, 40]);
+      this.vibrate([40, 50, 40]);
 
-      // Pick 3-4 random unrevealed cells
-      const countToReveal = Math.min(unrevealedKeys.length, Math.floor(Math.random() * 2) + 3);
-      const shuffled = [...unrevealedKeys].sort(() => 0.5 - Math.random());
-      const selected = shuffled.slice(0, countToReveal);
+      const count = Math.min(unrevealed.length, Math.floor(Math.random() * 2) + 3);
+      const chosen = unrevealed.sort(() => 0.5 - Math.random()).slice(0, count);
 
-      selected.forEach((key, idx) => {
-        setTimeout(() => {
-          this.revealSingleCell(key);
-        }, idx * 120);
+      chosen.forEach((key, idx) => {
+        setTimeout(() => this.revealSingleCell(key), idx * 110);
       });
+    }
+
+    revealRandomCell() {
+      const unrevealed = Array.from(this.gridLetterMap.keys()).filter(k => !this.revealedCellKeys.has(k));
+      if (unrevealed.length === 0) return;
+      const randomKey = unrevealed[Math.floor(Math.random() * unrevealed.length)];
+      this.revealSingleCell(randomKey);
     }
 
     revealSingleCell(cellKey) {
@@ -2110,35 +2264,28 @@
       if (!cellEl) return;
 
       cellEl.classList.add('revealed');
-      this.revealedCells.add(cellKey);
+      this.revealedCellKeys.add(cellKey);
 
-      if (this.isDailyMode && this.dailyStarCells.has(cellKey) && !this.dailyStarsCollected.has(cellKey)) {
+      if (this.isDailyMode && this.dailyStarKeys.has(cellKey) && !this.dailyStarsCollected.has(cellKey)) {
         this.collectDailyStar(cellKey, cellEl);
       }
 
-      // Check if all cells of any word are revealed
-      this.level.words.forEach(w => {
-        if (!this.unlockedWords.has(w.id)) {
-          let minR = Infinity, minC = Infinity;
-          this.level.words.forEach(item => {
-            minR = Math.min(minR, item.row);
-            minC = Math.min(minC, item.col);
-          });
-          const normR = w.row - minR;
-          const normC = w.col - minC;
-
-          let allCellsOpen = true;
+      // Check word unlock
+      this.currentLevel.words.forEach(w => {
+        if (!this.unlockedWordIds.has(w.id)) {
+          const normR = w.row - this.normMinR;
+          const normC = w.col - this.normMinC;
+          let allOpen = true;
           for (let i = 0; i < w.word.length; i++) {
             const r = normR + (w.dir === 'V' ? i : 0);
             const c = normC + (w.dir === 'H' ? i : 0);
-            if (!this.revealedCells.has(`${r}_${c}`)) {
-              allCellsOpen = false;
+            if (!this.revealedCellKeys.has(`${r}_${c}`)) {
+              allOpen = false;
               break;
             }
           }
-
-          if (allCellsOpen) {
-            this.unlockedWords.add(w.id);
+          if (allOpen) {
+            this.unlockedWordIds.add(w.id);
           }
         }
       });
@@ -2146,46 +2293,40 @@
       this.checkLevelCompletion();
     }
 
-    /* ---------------- Calendar Modal & Daily Challenge ---------------- */
+    /* ---------------- Calendar & Daily ---------------- */
     openCalendarModal() {
       const now = new Date();
       const currentYear = now.getFullYear();
-      const currentMonth = now.getMonth(); // 0-indexed
-      const todayDate = now.getDate();
-      const todayStr = now.toISOString().split('T')[0];
+      const currentMonth = now.getMonth();
+      const todayStr = Turkish.getIstanbulDateString();
+      const todayDate = parseInt(todayStr.split('-')[2], 10);
 
       this.dom.calendarStreakText.textContent = `🔥 ${this.streak} Günlük Seri`;
 
       const daysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate();
-      const firstDayIndex = new Date(currentYear, currentMonth, 1).getDay(); // 0: Sun, 1: Mon...
-      const startCol = (firstDayIndex + 6) % 7; // Convert to Mon:0, Sun:6
+      const firstDayIndex = new Date(currentYear, currentMonth, 1).getDay();
+      const startCol = (firstDayIndex + 6) % 7;
 
       const container = this.dom.calendarGridContainer;
       container.innerHTML = '';
 
-      // Day headers
-      const dayHeaders = ['Pzt', 'Sal', 'Çar', 'Per', 'Cum', 'Cmt', 'Paz'];
-      dayHeaders.forEach(dh => {
+      ['Pzt', 'Sal', 'Çar', 'Per', 'Cum', 'Cmt', 'Paz'].forEach(dh => {
         const headerCell = document.createElement('div');
         headerCell.className = 'calendar-day-header';
         headerCell.textContent = dh;
         container.appendChild(headerCell);
       });
 
-      // Blank slots before 1st of month
       for (let i = 0; i < startCol; i++) {
-        const blank = document.createElement('div');
-        container.appendChild(blank);
+        container.appendChild(document.createElement('div'));
       }
 
-      // Days 1..daysInMonth
       for (let day = 1; day <= daysInMonth; day++) {
         const dayCell = document.createElement('div');
         dayCell.className = 'calendar-day-cell';
         dayCell.textContent = day;
 
         const dateStr = `${currentYear}-${String(currentMonth + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
-
         if (this.completedDailyDates.includes(dateStr)) {
           dayCell.classList.add('completed');
           const check = document.createElement('span');
@@ -2203,87 +2344,69 @@
 
       const isTodayCompleted = this.completedDailyDates.includes(todayStr);
       const playBtn = document.getElementById('btn-play-daily');
-      const statusDesc = document.getElementById('daily-status-desc');
-
       if (isTodayCompleted) {
-        playBtn.textContent = "Bugünün Bulmacası Tamamlandı!";
+        playBtn.textContent = "Bugünkü Görev Tamamlandı!";
         playBtn.disabled = true;
         playBtn.style.opacity = '0.6';
-        statusDesc.textContent = "Harika! Bugünün görevini tamamladın. Yarın serini devam ettirmek için tekrar gel.";
+        this.dom.btnShareDaily.style.display = 'block';
       } else {
         playBtn.textContent = "Günün Bulmacasını Oyna (3 ⭐)";
         playBtn.disabled = false;
         playBtn.style.opacity = '1';
-        statusDesc.textContent = "Günün bulmacasında 3 parlayan yıldızı toplayarak serini devam ettir!";
+        this.dom.btnShareDaily.style.display = 'none';
       }
 
       this.dom.modalCalendar.classList.add('active');
     }
 
-    /* ---------------- Simulated Ads Engine (CrazyGames / Poki standard) ---------------- */
-    showRewardedAd(rewardCoins, onReward) {
-      const adScreen = this.dom.rewardedAdScreen;
-      const timerEl = this.dom.rewardedAdTimer;
-      const progressEl = this.dom.rewardedAdProgress;
+    shareDailyResult() {
+      const todayStr = Turkish.getIstanbulDateString();
+      const shareText = `Kelime Harikaları Günlük #${todayStr}\n⭐ 3/3 Yıldız Toplandı\n🔥 ${this.streak} Günlük Seri\n🟩🟩🟩\n🟩⭐🟩\n🟩🟩🟩\nOyna: https://umutcandemircan.github.io/kelime-harikalari/`;
 
-      adScreen.classList.add('active');
-      progressEl.style.width = '0%';
-
-      let timeLeft = 5;
-      timerEl.textContent = `Ödüllü Reklam - ${timeLeft}s`;
-
-      const interval = setInterval(() => {
-        timeLeft--;
-        timerEl.textContent = `Ödüllü Reklam - ${timeLeft}s`;
-        progressEl.style.width = `${((5 - timeLeft) / 5) * 100}%`;
-
-        if (timeLeft <= 0) {
-          clearInterval(interval);
-          setTimeout(() => {
-            adScreen.classList.remove('active');
-            this.addCoins(rewardCoins);
-            if (onReward) onReward();
-          }, 400);
-        }
-      }, 1000);
+      if (navigator.share) {
+        navigator.share({ title: "Kelime Harikaları", text: shareText }).catch(() => {});
+      } else if (navigator.clipboard) {
+        navigator.clipboard.writeText(shareText).then(() => {
+          this.showToast("📋 Günlük sonuç panoya kopyalandı!");
+        });
+      }
     }
 
-    showInterstitialAd(onComplete) {
-      const adScreen = this.dom.interstitialAdScreen;
-      const timerEl = this.dom.interstitialAdTimer;
-
-      adScreen.classList.add('active');
-      let timeLeft = 3;
-      timerEl.textContent = `Geçiş Reklamı - ${timeLeft}s`;
-
-      const interval = setInterval(() => {
-        timeLeft--;
-        timerEl.textContent = `Geçiş Reklamı - ${timeLeft}s`;
-
-        if (timeLeft <= 0) {
-          clearInterval(interval);
-          setTimeout(() => {
-            adScreen.classList.remove('active');
-            if (onComplete) onComplete();
-          }, 300);
-        }
-      }, 1000);
+    /* ---------------- Idioms & Bonus Chest Modals ---------------- */
+    openIdiomsModal() {
+      this.selectedIdiom = IDIOMS_DATA[Math.floor(Math.random() * IDIOMS_DATA.length)];
+      this.dom.idiomProverbText.textContent = `"${this.selectedIdiom.text}"`;
+      this.dom.idiomMeaningText.textContent = `Anlamı: ${this.selectedIdiom.meaning}`;
+      this.dom.modalIdioms.classList.add('active');
     }
 
-    /* ---------------- Confetti Particles System ---------------- */
+    openBonusChestModal() {
+      this.dom.modalChestProgress.textContent = `${this.bonusChestCount}/5`;
+      if (this.foundBonusWords.size > 0) {
+        this.dom.modalChestWordsList.textContent = `Bulunanlar: ${Array.from(this.foundBonusWords).join(', ')}`;
+      } else {
+        this.dom.modalChestWordsList.textContent = "Bu bölümde henüz bonus kelime bulunmadı.";
+      }
+      this.dom.modalBonusChest.classList.add('active');
+    }
+
+    openSettingsModal() {
+      this.dom.modalSettings.classList.add('active');
+    }
+
+    /* ---------------- Confetti Particles ---------------- */
     startConfetti() {
       const canvas = this.dom.confettiCanvas;
       canvas.width = window.innerWidth;
       canvas.height = window.innerHeight;
-
-      const colors = ['#f59e0b', '#fbbf24', '#22c55e', '#38bdf8', '#ec4899', '#a855f7'];
+      const colors = ['#f59e0b', '#fbbf24', '#22c55e', '#38bdf8', '#a855f7', '#ec4899'];
       this.confettiParticles = [];
 
-      for (let i = 0; i < 90; i++) {
+      for (let i = 0; i < 80; i++) {
         this.confettiParticles.push({
           x: Math.random() * canvas.width,
           y: Math.random() * -canvas.height,
-          size: Math.random() * 8 + 6,
+          size: Math.random() * 7 + 5,
           color: colors[Math.floor(Math.random() * colors.length)],
           vx: Math.random() * 4 - 2,
           vy: Math.random() * 5 + 3,
@@ -2294,12 +2417,10 @@
 
       const animate = () => {
         this.ctxConfetti.clearRect(0, 0, canvas.width, canvas.height);
-
         this.confettiParticles.forEach(p => {
           p.x += p.vx;
           p.y += p.vy;
           p.rot += p.vRot;
-
           this.ctxConfetti.save();
           this.ctxConfetti.translate(p.x, p.y);
           this.ctxConfetti.rotate((p.rot * Math.PI) / 180);
@@ -2312,10 +2433,8 @@
             p.x = Math.random() * canvas.width;
           }
         });
-
         this.confettiAnimId = requestAnimationFrame(animate);
       };
-
       animate();
     }
 
@@ -2326,9 +2445,8 @@
     }
   }
 
-  /* Bootstrap Application */
   window.addEventListener('DOMContentLoaded', () => {
-    window.game = new WoWGame();
+    window.game = new KelimeHarikalariGame();
   });
 
   </script>

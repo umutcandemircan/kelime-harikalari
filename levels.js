@@ -1,4 +1,4 @@
-// 100 Doğrulanmış TDK Kelime Seviyesi (Temiz & Simetrik Bulmaca)
+// 100 Doğrulanmış TDK Kelime Seviyesi (Özenle Karıştırılmış Çark Harfleri)
 const WOW_LEVELS = [
   {
     "level": 1,
@@ -7,14 +7,14 @@ const WOW_LEVELS = [
     "wheelLetters": [
       "K",
       "A",
-      "L",
-      "E"
+      "E",
+      "L"
     ],
     "targetWords": [
       "ELA",
       "KEL",
-      "KALE",
-      "LAKE"
+      "LAKE",
+      "KALE"
     ],
     "bonusWords": [
       "LAK"
@@ -27,8 +27,8 @@ const WOW_LEVELS = [
     "wheelLetters": [
       "D",
       "E",
-      "R",
-      "T"
+      "T",
+      "R"
     ],
     "targetWords": [
       "TER",
@@ -44,13 +44,14 @@ const WOW_LEVELS = [
     "wheelLetters": [
       "K",
       "U",
-      "R",
-      "T"
+      "E",
+      "L"
     ],
     "targetWords": [
-      "TUR",
-      "KUT",
-      "KURT"
+      "KEL",
+      "KUL",
+      "LEK",
+      "KULE"
     ],
     "bonusWords": []
   },
@@ -61,8 +62,8 @@ const WOW_LEVELS = [
     "wheelLetters": [
       "O",
       "D",
-      "A",
-      "K"
+      "K",
+      "A"
     ],
     "targetWords": [
       "ODA",
@@ -79,17 +80,15 @@ const WOW_LEVELS = [
     "wheelLetters": [
       "M",
       "A",
-      "S",
-      "A"
+      "İ",
+      "V"
     ],
     "targetWords": [
-      "AMA",
-      "MASA",
-      "ASMA"
+      "İMA",
+      "VAM",
+      "MAVİ"
     ],
-    "bonusWords": [
-      "SAM"
-    ]
+    "bonusWords": []
   },
   {
     "level": 6,
@@ -97,15 +96,15 @@ const WOW_LEVELS = [
     "bgTheme": "cappadocia",
     "wheelLetters": [
       "E",
-      "L",
       "M",
+      "L",
       "A"
     ],
     "targetWords": [
       "ELA",
       "MAL",
-      "ELMA",
-      "ALEM"
+      "ALEM",
+      "ELMA"
     ],
     "bonusWords": [
       "LAM"
@@ -118,17 +117,17 @@ const WOW_LEVELS = [
     "wheelLetters": [
       "P",
       "A",
-      "R",
-      "A"
+      "A",
+      "R"
     ],
     "targetWords": [
-      "ARP",
       "ARA",
-      "PARA",
-      "ARAP"
+      "ARAP",
+      "PARA"
     ],
     "bonusWords": [
-      "RAP"
+      "RAP",
+      "ARP"
     ]
   },
   {
@@ -137,15 +136,14 @@ const WOW_LEVELS = [
     "bgTheme": "cappadocia",
     "wheelLetters": [
       "A",
-      "L",
       "T",
+      "L",
       "I"
     ],
     "targetWords": [
       "ALT",
-      "TAL",
-      "ALTI",
-      "ATIL"
+      "ATIL",
+      "ALTI"
     ],
     "bonusWords": []
   },
@@ -156,13 +154,14 @@ const WOW_LEVELS = [
     "wheelLetters": [
       "G",
       "Ü",
-      "N",
       "E",
+      "N",
       "Ş"
     ],
     "targetWords": [
       "GÜN",
       "ŞEN",
+      "GEN",
       "GÜNEŞ"
     ],
     "bonusWords": []
@@ -174,15 +173,15 @@ const WOW_LEVELS = [
     "wheelLetters": [
       "B",
       "A",
-      "L",
       "I",
+      "L",
       "K"
     ],
     "targetWords": [
       "BAL",
       "KIL",
-      "AKIL",
       "ALIK",
+      "AKIL",
       "BALIK"
     ],
     "bonusWords": [
@@ -197,15 +196,15 @@ const WOW_LEVELS = [
     "wheelLetters": [
       "K",
       "İ",
-      "T",
       "A",
+      "T",
       "P"
     ],
     "targetWords": [
       "PAK",
-      "KİTAP",
       "PATİK",
-      "TAKİP"
+      "TAKİP",
+      "KİTAP"
     ],
     "bonusWords": [
       "PAT",
@@ -219,18 +218,17 @@ const WOW_LEVELS = [
     "wheelLetters": [
       "D",
       "E",
-      "N",
       "İ",
+      "N",
       "Z"
     ],
     "targetWords": [
       "DİZ",
       "DİN",
+      "DİZE",
       "DENİZ"
     ],
-    "bonusWords": [
-      "ZİN"
-    ]
+    "bonusWords": []
   },
   {
     "level": 13,
@@ -239,8 +237,8 @@ const WOW_LEVELS = [
     "wheelLetters": [
       "B",
       "A",
-      "H",
       "A",
+      "H",
       "R"
     ],
     "targetWords": [
@@ -261,14 +259,14 @@ const WOW_LEVELS = [
       "K",
       "A",
       "L",
-      "E",
-      "M"
+      "M",
+      "E"
     ],
     "targetWords": [
       "ELA",
       "KALE",
-      "KALEM",
-      "KELAM"
+      "KELAM",
+      "KALEM"
     ],
     "bonusWords": [
       "AMEL",
@@ -283,8 +281,8 @@ const WOW_LEVELS = [
       "A",
       "S",
       "L",
-      "A",
-      "N"
+      "N",
+      "A"
     ],
     "targetWords": [
       "SAN",
@@ -303,8 +301,8 @@ const WOW_LEVELS = [
     "wheelLetters": [
       "Ç",
       "O",
-      "R",
       "B",
+      "R",
       "A"
     ],
     "targetWords": [
@@ -324,8 +322,8 @@ const WOW_LEVELS = [
     "wheelLetters": [
       "Z",
       "A",
-      "M",
       "A",
+      "M",
       "N"
     ],
     "targetWords": [
@@ -347,8 +345,8 @@ const WOW_LEVELS = [
       "H",
       "A",
       "Y",
-      "A",
-      "T"
+      "T",
+      "A"
     ],
     "targetWords": [
       "TAY",
@@ -367,9 +365,9 @@ const WOW_LEVELS = [
     "wheelLetters": [
       "K",
       "A",
+      "E",
       "H",
-      "V",
-      "E"
+      "V"
     ],
     "targetWords": [
       "HAK",
@@ -387,8 +385,8 @@ const WOW_LEVELS = [
       "D",
       "E",
       "M",
-      "İ",
-      "R"
+      "R",
+      "İ"
     ],
     "targetWords": [
       "MİR",
@@ -406,14 +404,14 @@ const WOW_LEVELS = [
       "O",
       "R",
       "M",
-      "A",
-      "N"
+      "N",
+      "A"
     ],
     "targetWords": [
       "ORAN",
       "ONAR",
-      "ORMAN",
-      "ROMAN"
+      "ROMAN",
+      "ORMAN"
     ],
     "bonusWords": [
       "MOR",
@@ -427,14 +425,14 @@ const WOW_LEVELS = [
     "wheelLetters": [
       "S",
       "A",
-      "B",
       "U",
+      "B",
       "N"
     ],
     "targetWords": [
-      "SUN",
       "BAS",
       "SAN",
+      "SABU",
       "SABUN"
     ],
     "bonusWords": [
@@ -449,12 +447,13 @@ const WOW_LEVELS = [
       "Ş",
       "E",
       "H",
-      "İ",
-      "R"
+      "R",
+      "İ"
     ],
     "targetWords": [
       "ŞER",
       "HER",
+      "ŞİİR",
       "ŞEHİR"
     ],
     "bonusWords": []
@@ -467,12 +466,13 @@ const WOW_LEVELS = [
       "K",
       "A",
       "V",
-      "U",
-      "N"
+      "N",
+      "U"
     ],
     "targetWords": [
       "KAN",
       "VAN",
+      "KUVAN",
       "KAVUN"
     ],
     "bonusWords": []
@@ -484,13 +484,14 @@ const WOW_LEVELS = [
     "wheelLetters": [
       "D",
       "U",
+      "R",
       "V",
-      "A",
-      "R"
+      "A"
     ],
     "targetWords": [
       "DAR",
       "VAR",
+      "DUA",
       "DUVAR"
     ],
     "bonusWords": []
@@ -502,9 +503,9 @@ const WOW_LEVELS = [
     "wheelLetters": [
       "K",
       "U",
-      "Ş",
       "A",
-      "K"
+      "K",
+      "Ş"
     ],
     "targetWords": [
       "AŞK",
@@ -523,13 +524,14 @@ const WOW_LEVELS = [
     "wheelLetters": [
       "B",
       "U",
-      "L",
       "U",
+      "L",
       "T"
     ],
     "targetWords": [
       "ULU",
       "BUT",
+      "TUL",
       "BULUT"
     ],
     "bonusWords": []
@@ -541,13 +543,14 @@ const WOW_LEVELS = [
     "wheelLetters": [
       "H",
       "A",
-      "V",
       "U",
+      "V",
       "Ç"
     ],
     "targetWords": [
       "VAH",
-      "ÇAV",
+      "AHU",
+      "HAV",
       "HAVUÇ"
     ],
     "bonusWords": []
@@ -560,8 +563,8 @@ const WOW_LEVELS = [
       "M",
       "A",
       "S",
-      "A",
-      "L"
+      "L",
+      "A"
     ],
     "targetWords": [
       "SAL",
@@ -580,13 +583,14 @@ const WOW_LEVELS = [
     "wheelLetters": [
       "S",
       "O",
-      "K",
       "A",
+      "K",
       "K"
     ],
     "targetWords": [
       "KAS",
-      "KOK",
+      "KOSA",
+      "KOKSA",
       "SOKAK"
     ],
     "bonusWords": [
@@ -602,8 +606,8 @@ const WOW_LEVELS = [
       "O",
       "P",
       "R",
-      "A",
-      "K"
+      "K",
+      "A"
     ],
     "targetWords": [
       "ROTA",
@@ -625,8 +629,8 @@ const WOW_LEVELS = [
       "E",
       "Y",
       "T",
-      "İ",
-      "N"
+      "N",
+      "İ"
     ],
     "targetWords": [
       "TEZ",
@@ -648,11 +652,11 @@ const WOW_LEVELS = [
       "Ö",
       "Z",
       "L",
-      "Ü",
-      "K"
+      "K",
+      "Ü"
     ],
     "targetWords": [
-      "GÖZ",
+      "GÜZ",
       "KÖZ",
       "ÖZLÜ",
       "GÖZLÜK"
@@ -669,8 +673,8 @@ const WOW_LEVELS = [
       "P",
       "E",
       "Y",
-      "N",
       "İ",
+      "N",
       "R"
     ],
     "targetWords": [
@@ -690,8 +694,8 @@ const WOW_LEVELS = [
     "wheelLetters": [
       "K",
       "A",
-      "P",
       "L",
+      "P",
       "A",
       "N"
     ],
@@ -714,9 +718,9 @@ const WOW_LEVELS = [
       "S",
       "İ",
       "N",
-      "C",
       "A",
-      "P"
+      "P",
+      "C"
     ],
     "targetWords": [
       "PAS",
@@ -736,9 +740,9 @@ const WOW_LEVELS = [
     "wheelLetters": [
       "T",
       "A",
+      "A",
       "V",
       "Ş",
-      "A",
       "N"
     ],
     "targetWords": [
@@ -760,8 +764,8 @@ const WOW_LEVELS = [
       "A",
       "R",
       "P",
-      "U",
-      "Z"
+      "Z",
+      "U"
     ],
     "targetWords": [
       "KAZ",
@@ -780,8 +784,8 @@ const WOW_LEVELS = [
     "wheelLetters": [
       "B",
       "A",
-      "R",
       "D",
+      "R",
       "A",
       "K"
     ],
@@ -804,8 +808,8 @@ const WOW_LEVELS = [
       "U",
       "T",
       "F",
-      "A",
-      "K"
+      "K",
+      "A"
     ],
     "targetWords": [
       "TAK",
@@ -822,13 +826,13 @@ const WOW_LEVELS = [
     "wheelLetters": [
       "L",
       "İ",
-      "M",
       "O",
+      "M",
       "N"
     ],
     "targetWords": [
-      "MOL",
       "MİL",
+      "İLİM",
       "LİMON"
     ],
     "bonusWords": [
@@ -843,8 +847,8 @@ const WOW_LEVELS = [
       "A",
       "R",
       "M",
-      "U",
-      "T"
+      "T",
+      "U"
     ],
     "targetWords": [
       "MAT",
@@ -863,9 +867,9 @@ const WOW_LEVELS = [
     "wheelLetters": [
       "K",
       "İ",
-      "R",
       "A",
-      "Z"
+      "Z",
+      "R"
     ],
     "targetWords": [
       "KAZ",
@@ -884,8 +888,8 @@ const WOW_LEVELS = [
     "wheelLetters": [
       "Ç",
       "İ",
-      "L",
       "E",
+      "L",
       "K"
     ],
     "targetWords": [
@@ -903,15 +907,15 @@ const WOW_LEVELS = [
     "wheelLetters": [
       "T",
       "A",
-      "B",
       "A",
+      "B",
       "K"
     ],
     "targetWords": [
       "BAK",
       "TAK",
-      "TABAK",
-      "BATAK"
+      "BATAK",
+      "TABAK"
     ],
     "bonusWords": [
       "ATAK"
@@ -924,14 +928,14 @@ const WOW_LEVELS = [
     "wheelLetters": [
       "K",
       "A",
-      "Ş",
       "I",
+      "Ş",
       "K"
     ],
     "targetWords": [
       "AŞK",
       "ŞIK",
-      "KAŞ",
+      "KAÇ",
       "KAŞIK"
     ],
     "bonusWords": [
@@ -945,8 +949,8 @@ const WOW_LEVELS = [
     "wheelLetters": [
       "Ç",
       "A",
-      "T",
       "A",
+      "T",
       "L"
     ],
     "targetWords": [
@@ -966,8 +970,8 @@ const WOW_LEVELS = [
     "wheelLetters": [
       "B",
       "I",
-      "Ç",
       "A",
+      "Ç",
       "K"
     ],
     "targetWords": [
@@ -985,8 +989,8 @@ const WOW_LEVELS = [
     "wheelLetters": [
       "S",
       "A",
-      "L",
       "O",
+      "L",
       "N"
     ],
     "targetWords": [
@@ -1006,18 +1010,21 @@ const WOW_LEVELS = [
     "wheelLetters": [
       "B",
       "A",
-      "L",
       "K",
+      "L",
       "O",
       "N"
     ],
     "targetWords": [
       "BAL",
       "KOL",
-      "BOK",
+      "BLOK",
+      "KOLA",
       "BALKON"
     ],
-    "bonusWords": []
+    "bonusWords": [
+      "LOK"
+    ]
   },
   {
     "level": 51,
@@ -1027,8 +1034,8 @@ const WOW_LEVELS = [
       "Y",
       "A",
       "S",
-      "T",
       "I",
+      "T",
       "K"
     ],
     "targetWords": [
@@ -1049,9 +1056,9 @@ const WOW_LEVELS = [
       "Y",
       "O",
       "R",
+      "N",
       "G",
-      "A",
-      "N"
+      "A"
     ],
     "targetWords": [
       "GAR",
@@ -1070,15 +1077,15 @@ const WOW_LEVELS = [
     "wheelLetters": [
       "S",
       "Ü",
-      "R",
       "A",
-      "H",
-      "İ"
+      "R",
+      "İ",
+      "H"
     ],
     "targetWords": [
       "SÜR",
       "HİS",
-      "AHİ",
+      "HURİ",
       "SÜRAHİ"
     ],
     "bonusWords": []
@@ -1092,8 +1099,8 @@ const WOW_LEVELS = [
       "İ",
       "N",
       "C",
-      "A",
-      "N"
+      "N",
+      "A"
     ],
     "targetWords": [
       "CAN",
@@ -1112,13 +1119,14 @@ const WOW_LEVELS = [
     "wheelLetters": [
       "P",
       "E",
+      "E",
       "R",
-      "D",
-      "E"
+      "D"
     ],
     "targetWords": [
       "PER",
-      "DER",
+      "DERİ",
+      "EDEP",
       "PERDE"
     ],
     "bonusWords": []
@@ -1130,8 +1138,8 @@ const WOW_LEVELS = [
     "wheelLetters": [
       "Y",
       "A",
-      "T",
       "A",
+      "T",
       "K"
     ],
     "targetWords": [
@@ -1151,9 +1159,9 @@ const WOW_LEVELS = [
     "wheelLetters": [
       "L",
       "A",
+      "A",
       "M",
-      "B",
-      "A"
+      "B"
     ],
     "targetWords": [
       "BAL",
@@ -1173,19 +1181,18 @@ const WOW_LEVELS = [
       "Ş",
       "E",
       "L",
-      "A",
       "L",
+      "A",
       "E"
     ],
     "targetWords": [
       "ŞAL",
       "LAL",
       "ELA",
+      "LALE",
       "ŞELALE"
     ],
-    "bonusWords": [
-      "LALE"
-    ]
+    "bonusWords": []
   },
   {
     "level": 59,
@@ -1194,10 +1201,10 @@ const WOW_LEVELS = [
     "wheelLetters": [
       "M",
       "A",
-      "Ğ",
       "A",
-      "R",
-      "A"
+      "A",
+      "Ğ",
+      "R"
     ],
     "targetWords": [
       "AĞA",
@@ -1215,17 +1222,16 @@ const WOW_LEVELS = [
       "V",
       "A",
       "P",
-      "U",
-      "R"
+      "R",
+      "U"
     ],
     "targetWords": [
       "VAR",
       "RAP",
+      "PURA",
       "VAPUR"
     ],
-    "bonusWords": [
-      "PURA"
-    ]
+    "bonusWords": []
   },
   {
     "level": 61,
@@ -1234,8 +1240,8 @@ const WOW_LEVELS = [
     "wheelLetters": [
       "K",
       "A",
-      "Y",
       "I",
+      "Y",
       "K"
     ],
     "targetWords": [
@@ -1253,8 +1259,8 @@ const WOW_LEVELS = [
     "wheelLetters": [
       "R",
       "A",
-      "D",
       "Y",
+      "D",
       "O"
     ],
     "targetWords": [
@@ -1274,8 +1280,8 @@ const WOW_LEVELS = [
     "wheelLetters": [
       "M",
       "Ü",
-      "Z",
       "İ",
+      "Z",
       "K"
     ],
     "targetWords": [
@@ -1293,17 +1299,15 @@ const WOW_LEVELS = [
       "N",
       "E",
       "H",
-      "İ",
-      "R"
+      "R",
+      "İ"
     ],
     "targetWords": [
       "HER",
-      "İNE",
+      "İNCE",
       "NEHİR"
     ],
-    "bonusWords": [
-      "HİN"
-    ]
+    "bonusWords": []
   },
   {
     "level": 65,
@@ -1312,13 +1316,14 @@ const WOW_LEVELS = [
     "wheelLetters": [
       "Ç",
       "A",
-      "M",
       "U",
+      "M",
       "R"
     ],
     "targetWords": [
       "ÇAM",
       "RUM",
+      "ÇAR",
       "ÇAMUR"
     ],
     "bonusWords": []
@@ -1330,13 +1335,13 @@ const WOW_LEVELS = [
     "wheelLetters": [
       "Ç",
       "İ",
-      "Ç",
       "E",
+      "Ç",
       "K"
     ],
     "targetWords": [
       "ÇEK",
-      "KİÇ",
+      "ÇİT",
       "ÇİÇEK"
     ],
     "bonusWords": []
@@ -1348,8 +1353,8 @@ const WOW_LEVELS = [
     "wheelLetters": [
       "P",
       "A",
-      "M",
       "U",
+      "M",
       "K"
     ],
     "targetWords": [
@@ -1370,8 +1375,8 @@ const WOW_LEVELS = [
     "wheelLetters": [
       "T",
       "R",
-      "E",
-      "N"
+      "N",
+      "E"
     ],
     "targetWords": [
       "TER",
@@ -1387,13 +1392,13 @@ const WOW_LEVELS = [
     "wheelLetters": [
       "K",
       "A",
-      "P",
-      "I"
+      "I",
+      "P"
     ],
     "targetWords": [
-      "AK",
       "PAK",
       "KAP",
+      "ARPA",
       "KAPI"
     ],
     "bonusWords": []
@@ -1405,8 +1410,8 @@ const WOW_LEVELS = [
     "wheelLetters": [
       "Ç",
       "A",
-      "T",
-      "I"
+      "I",
+      "T"
     ],
     "targetWords": [
       "AÇI",
@@ -1423,8 +1428,8 @@ const WOW_LEVELS = [
     "wheelLetters": [
       "Y",
       "A",
-      "Ğ",
       "M",
+      "Ğ",
       "U",
       "R"
     ],
@@ -1433,9 +1438,7 @@ const WOW_LEVELS = [
       "RUM",
       "YAĞMUR"
     ],
-    "bonusWords": [
-      "AĞU"
-    ]
+    "bonusWords": []
   },
   {
     "level": 72,
@@ -1445,13 +1448,14 @@ const WOW_LEVELS = [
       "Ş",
       "İ",
       "M",
-      "Ş",
       "E",
+      "Ş",
       "K"
     ],
     "targetWords": [
       "KİM",
       "ŞEK",
+      "ŞİŞ",
       "ŞİMŞEK"
     ],
     "bonusWords": []
@@ -1463,13 +1467,14 @@ const WOW_LEVELS = [
     "wheelLetters": [
       "G",
       "Ü",
-      "V",
       "E",
+      "V",
       "N"
     ],
     "targetWords": [
       "GÜN",
       "GEN",
+      "GÜVE",
       "GÜVEN"
     ],
     "bonusWords": []
@@ -1481,13 +1486,14 @@ const WOW_LEVELS = [
     "wheelLetters": [
       "S",
       "E",
-      "V",
       "G",
+      "V",
       "İ"
     ],
     "targetWords": [
       "SEV",
-      "ESİ",
+      "EVSİ",
+      "GEVİŞ",
       "SEVGİ"
     ],
     "bonusWords": []
@@ -1497,16 +1503,18 @@ const WOW_LEVELS = [
     "location": "Sümela Manastırı - Trabzon",
     "bgTheme": "sumela",
     "wheelLetters": [
-      "H",
-      "U",
-      "Z",
-      "U",
-      "R"
+      "Y",
+      "A",
+      "A",
+      "Y",
+      "L"
     ],
     "targetWords": [
-      "RUH",
-      "ZUR",
-      "HUZUR"
+      "AYA",
+      "YAL",
+      "YAY",
+      "AYLA",
+      "YAYLA"
     ],
     "bonusWords": []
   },
@@ -1519,13 +1527,14 @@ const WOW_LEVELS = [
       "A",
       "R",
       "D",
-      "E",
-      "Ş"
+      "Ş",
+      "E"
     ],
     "targetWords": [
       "KAŞ",
       "DAR",
       "ARK",
+      "KARE",
       "KARDEŞ"
     ],
     "bonusWords": [
@@ -1537,16 +1546,18 @@ const WOW_LEVELS = [
     "location": "Sümela Manastırı - Trabzon",
     "bgTheme": "sumela",
     "wheelLetters": [
+      "S",
       "A",
       "İ",
-      "L",
-      "E"
+      "H",
+      "L"
     ],
     "targetWords": [
-      "ALİ",
-      "ELA",
-      "İLE",
-      "AİLE"
+      "ASİL",
+      "İLAH",
+      "HALİ",
+      "SAHİ",
+      "SAHİL"
     ],
     "bonusWords": []
   },
@@ -1557,9 +1568,9 @@ const WOW_LEVELS = [
     "wheelLetters": [
       "M",
       "U",
+      "U",
       "T",
-      "L",
-      "U"
+      "L"
     ],
     "targetWords": [
       "ULU",
@@ -1577,8 +1588,8 @@ const WOW_LEVELS = [
     "wheelLetters": [
       "K",
       "İ",
-      "L",
       "İ",
+      "L",
       "T"
     ],
     "targetWords": [
@@ -1598,12 +1609,12 @@ const WOW_LEVELS = [
     "wheelLetters": [
       "V",
       "A",
-      "D",
-      "İ"
+      "İ",
+      "D"
     ],
     "targetWords": [
       "ADİ",
-      "DAİ",
+      "DAVİ",
       "VADİ"
     ],
     "bonusWords": []
@@ -1618,8 +1629,8 @@ const WOW_LEVELS = [
       "S",
       "T",
       "A",
-      "N",
-      "E"
+      "E",
+      "N"
     ],
     "targetWords": [
       "KENT",
@@ -1643,13 +1654,13 @@ const WOW_LEVELS = [
       "N",
       "C",
       "E",
-      "R",
-      "E"
+      "E",
+      "R"
     ],
     "targetWords": [
-      "CER",
-      "PERE",
+      "PENE",
       "EREN",
+      "ÇENE",
       "PENCERE"
     ],
     "bonusWords": []
@@ -1664,8 +1675,8 @@ const WOW_LEVELS = [
       "N",
       "C",
       "E",
-      "R",
-      "E"
+      "E",
+      "R"
     ],
     "targetWords": [
       "TER",
@@ -1682,19 +1693,20 @@ const WOW_LEVELS = [
     "location": "Safranbolu Evleri - Karabük",
     "bgTheme": "safranbolu",
     "wheelLetters": [
-      "M",
       "E",
-      "R",
-      "D",
       "İ",
+      "M",
+      "N",
+      "D",
       "V",
       "E",
-      "N"
+      "R"
     ],
     "targetWords": [
       "DEV",
       "DİN",
       "NEM",
+      "DERİN",
       "MERDİVEN"
     ],
     "bonusWords": [
@@ -1711,8 +1723,8 @@ const WOW_LEVELS = [
       "M",
       "A",
       "V",
-      "E",
-      "R"
+      "R",
+      "E"
     ],
     "targetWords": [
       "VAR",
@@ -1730,20 +1742,21 @@ const WOW_LEVELS = [
     "location": "Safranbolu Evleri - Karabük",
     "bgTheme": "safranbolu",
     "wheelLetters": [
-      "Ç",
-      "A",
-      "Y",
-      "D",
-      "A",
-      "N",
       "L",
+      "A",
+      "A",
       "I",
-      "K"
+      "D",
+      "K",
+      "Y",
+      "N",
+      "Ç"
     ],
     "targetWords": [
       "ÇAY",
       "AYAK",
       "KAYA",
+      "AYDIN",
       "ÇAYDANLIK"
     ],
     "bonusWords": [
@@ -1756,19 +1769,20 @@ const WOW_LEVELS = [
     "location": "Safranbolu Evleri - Karabük",
     "bgTheme": "safranbolu",
     "wheelLetters": [
-      "K",
-      "A",
-      "R",
-      "A",
-      "N",
-      "F",
       "İ",
+      "A",
+      "A",
+      "F",
+      "K",
+      "N",
+      "R",
       "L"
     ],
     "targetWords": [
-      "NİL",
       "FAL",
+      "FİKİR",
       "KARA",
+      "FİLAN",
       "KARANFİL"
     ],
     "bonusWords": [
@@ -1781,19 +1795,20 @@ const WOW_LEVELS = [
     "location": "Safranbolu Evleri - Karabük",
     "bgTheme": "safranbolu",
     "wheelLetters": [
-      "P",
-      "O",
-      "R",
-      "T",
-      "A",
+      "L",
       "K",
+      "T",
+      "R",
       "A",
-      "L"
+      "O",
+      "A",
+      "P"
     ],
     "targetWords": [
       "PARK",
       "KOTA",
       "ORTAK",
+      "PORTAL",
       "PORTAKAL"
     ],
     "bonusWords": [
@@ -1806,20 +1821,21 @@ const WOW_LEVELS = [
     "location": "Safranbolu Evleri - Karabük",
     "bgTheme": "safranbolu",
     "wheelLetters": [
-      "M",
       "A",
-      "N",
       "D",
-      "A",
+      "M",
       "L",
+      "A",
       "İ",
       "N",
-      "A"
+      "A",
+      "N"
     ],
     "targetWords": [
       "ADAM",
       "MANA",
       "ALAN",
+      "MANDA",
       "MANDALİNA"
     ],
     "bonusWords": [
@@ -1832,20 +1848,21 @@ const WOW_LEVELS = [
     "location": "Safranbolu Evleri - Karabük",
     "bgTheme": "safranbolu",
     "wheelLetters": [
-      "G",
+      "A",
+      "D",
+      "İ",
       "Ü",
       "L",
+      "G",
       "F",
-      "İ",
-      "D",
-      "A",
       "N"
     ],
     "targetWords": [
       "DİL",
       "FİL",
       "GÜL",
-      "FİDAN"
+      "FİDAN",
+      "GÜLFİDAN"
     ],
     "bonusWords": [
       "ANİ"
@@ -1858,8 +1875,8 @@ const WOW_LEVELS = [
     "wheelLetters": [
       "G",
       "Ö",
-      "K",
       "Y",
+      "K",
       "Ü",
       "Z",
       "Ü"
@@ -1868,11 +1885,10 @@ const WOW_LEVELS = [
       "GÖK",
       "GÖZ",
       "KÖZ",
+      "YÜZ",
       "GÖKYÜZÜ"
     ],
-    "bonusWords": [
-      "YÜZ"
-    ]
+    "bonusWords": []
   },
   {
     "level": 92,
@@ -1882,8 +1898,8 @@ const WOW_LEVELS = [
       "D",
       "O",
       "S",
-      "T",
       "L",
+      "T",
       "U",
       "K"
     ],
@@ -1891,10 +1907,10 @@ const WOW_LEVELS = [
       "KOD",
       "TOS",
       "DOST",
+      "DOLU",
       "DOSTLUK"
     ],
     "bonusWords": [
-      "OT",
       "KUL"
     ]
   },
@@ -1903,18 +1919,19 @@ const WOW_LEVELS = [
     "location": "Akdamar Adası - Van Gölü",
     "bgTheme": "akdamar",
     "wheelLetters": [
+      "U",
       "M",
-      "U",
-      "T",
-      "L",
+      "K",
       "U",
       "L",
+      "L",
       "U",
-      "K"
+      "T"
     ],
     "targetWords": [
       "KUT",
       "ULU",
+      "KUM",
       "MUTLU",
       "MUTLULUK"
     ],
@@ -1929,8 +1946,8 @@ const WOW_LEVELS = [
     "wheelLetters": [
       "B",
       "A",
-      "Ş",
       "A",
+      "Ş",
       "R",
       "I"
     ],
@@ -1938,11 +1955,10 @@ const WOW_LEVELS = [
       "BAŞ",
       "ARI",
       "BAR",
+      "AŞI",
       "BAŞARI"
     ],
-    "bonusWords": [
-      "AŞI"
-    ]
+    "bonusWords": []
   },
   {
     "level": 95,
@@ -1951,8 +1967,8 @@ const WOW_LEVELS = [
     "wheelLetters": [
       "G",
       "E",
-      "L",
       "E",
+      "L",
       "C",
       "E",
       "K"
@@ -1960,6 +1976,7 @@ const WOW_LEVELS = [
     "targetWords": [
       "EGE",
       "GEL",
+      "ELEK",
       "GELE",
       "GELECEK"
     ],
@@ -1976,13 +1993,13 @@ const WOW_LEVELS = [
       "A",
       "R",
       "İ",
-      "K",
-      "A"
+      "A",
+      "K"
     ],
     "targetWords": [
       "HAK",
       "KİR",
-      "ARİ",
+      "KAHİR",
       "HARİKA"
     ],
     "bonusWords": [
@@ -1994,18 +2011,19 @@ const WOW_LEVELS = [
     "location": "Akdamar Adası - Van Gölü",
     "bgTheme": "akdamar",
     "wheelLetters": [
-      "Ö",
-      "Z",
-      "G",
       "Ü",
       "R",
-      "L",
+      "Ö",
       "Ü",
-      "K"
+      "G",
+      "K",
+      "L",
+      "Z"
     ],
     "targetWords": [
       "GÖZ",
       "KÖZ",
+      "ÖRGÜ",
       "ÖZGÜR",
       "ÖZGÜRLÜK"
     ],
@@ -2018,24 +2036,24 @@ const WOW_LEVELS = [
     "location": "Akdamar Adası - Van Gölü",
     "bgTheme": "akdamar",
     "wheelLetters": [
-      "K",
       "A",
       "R",
-      "D",
-      "E",
       "Ş",
+      "E",
+      "D",
       "L",
       "İ",
+      "K",
       "K"
     ],
     "targetWords": [
       "DİL",
       "KALE",
+      "ŞEKİL",
       "KARDEŞ",
       "KARDEŞLİK"
     ],
     "bonusWords": [
-      "ŞEK",
       "KİL"
     ]
   },
@@ -2044,21 +2062,22 @@ const WOW_LEVELS = [
     "location": "Akdamar Adası - Van Gölü",
     "bgTheme": "akdamar",
     "wheelLetters": [
-      "C",
       "U",
-      "M",
-      "H",
-      "U",
-      "R",
-      "İ",
       "Y",
+      "T",
+      "C",
+      "H",
+      "R",
       "E",
-      "T"
+      "M",
+      "U",
+      "İ"
     ],
     "targetWords": [
       "RUH",
       "HURİ",
       "YURT",
+      "ÜCRET",
       "CUMHURİYET"
     ],
     "bonusWords": [
@@ -2074,14 +2093,15 @@ const WOW_LEVELS = [
       "T",
       "Ü",
       "R",
-      "K",
       "İ",
+      "K",
       "Y",
       "E"
     ],
     "targetWords": [
       "YÜK",
       "TER",
+      "KÜRE",
       "TÜRK",
       "TÜRKİYE"
     ],

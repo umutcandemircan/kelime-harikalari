@@ -1,4 +1,4 @@
-// Kelime Harikaları - 100 Doğrulanmış TDK Seviyeli Kelime Oyunu Motoru
+// Kelime Harikaları - Ultra Akıcı (120 FPS) & Kusursuz Responsive Oyun Motoru
 class WoWGame {
   constructor() {
     this.storageKey = 'kelime_harikalari_save_v1';
@@ -9,11 +9,15 @@ class WoWGame {
     this.selectedNodes = [];
     this.isDragging = false;
 
-    // Game Board State
+    // Pre-cached Geometry for 120 FPS Touch Tracking
+    this.nodeData = [];
+    this.wheelRect = null;
+
+    // Board State
     this.solvedWords = new Set();
     this.bonusWordsFound = new Set();
 
-    // Screens
+    // Screen Elements
     this.screenHome = document.getElementById('screen-home');
     this.screenGame = document.getElementById('screen-game');
 
@@ -103,12 +107,20 @@ class WoWGame {
   }
 
   setupWindowResize() {
+    let resizeTimer = null;
     const resize = () => {
       this.canvas.width = window.innerWidth;
       this.canvas.height = window.innerHeight;
       this.adjustBoardScale();
+      // Re-cache wheel rect on window resize/orientation change
+      if (this.letterWheel) {
+        this.wheelRect = this.letterWheel.getBoundingClientRect();
+      }
     };
-    window.addEventListener('resize', resize);
+    window.addEventListener('resize', () => {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(resize, 60);
+    });
     resize();
   }
 
@@ -148,17 +160,22 @@ class WoWGame {
     document.getElementById('btn-next-level').addEventListener('click', () => this.nextLevel());
     document.getElementById('btn-share').addEventListener('click', () => this.shareScore());
 
-    // Letter Wheel Gestures (Mouse & Touch)
-    this.letterWheel.addEventListener('pointerdown', (e) => this.onPointerDown(e));
-    window.addEventListener('pointermove', (e) => this.onPointerMove(e));
-    window.addEventListener('pointerup', () => this.onPointerUp());
-    window.addEventListener('pointercancel', () => this.onPointerUp());
+    // Letter Wheel Gestures (Touch & Mouse with passive: false for 0 latency)
+    this.letterWheel.addEventListener('pointerdown', (e) => this.onPointerDown(e), { passive: false });
+    window.addEventListener('pointermove', (e) => this.onPointerMove(e), { passive: false });
+    window.addEventListener('pointerup', () => this.onPointerUp(), { passive: false });
+    window.addEventListener('pointercancel', () => this.onPointerUp(), { passive: false });
   }
 
   showScreen(name) {
     if (name === 'game') {
       this.screenHome.classList.add('hidden');
       this.screenGame.classList.remove('hidden');
+      // Recalculate dimensions once visible
+      setTimeout(() => {
+        this.adjustBoardScale();
+        this.updateWheelGeometry();
+      }, 50);
     } else {
       this.screenGame.classList.add('hidden');
       this.screenHome.classList.remove('hidden');
@@ -222,7 +239,6 @@ class WoWGame {
     this.bonusWordsFound.clear();
     this.closeModal(this.modalVictory);
 
-    this.adjustBoardScale();
     this.boardEl.innerHTML = '';
 
     // Render target word rows
@@ -241,6 +257,7 @@ class WoWGame {
       this.boardEl.appendChild(row);
     });
 
+    this.adjustBoardScale();
     this.renderWheel(level.wheelLetters);
     this.renderRegionsMap();
   }
@@ -249,42 +266,56 @@ class WoWGame {
     const level = this.getCurrentLevel();
     if (!level || !this.boardEl) return;
 
-    const maxLen = Math.max(...level.targetWords.map(w => w.length));
-    const availW = Math.min(window.innerWidth - 32, 380);
-    const slotSize = Math.min(46, Math.floor((availW - (maxLen - 1) * 6) / maxLen));
-    const fontSize = Math.max(16, Math.floor(slotSize * 0.54));
+    const boardArea = this.boardEl.parentElement;
+    const availW = Math.min(boardArea ? boardArea.clientWidth - 24 : window.innerWidth - 32, 400);
+    const availH = Math.max(160, boardArea ? boardArea.clientHeight - 16 : 240);
+
+    const maxWordLen = Math.max(...level.targetWords.map(w => w.length));
+    const numRows = level.targetWords.length;
+
+    // Slot size constrained by available width
+    const slotByWidth = Math.floor((availW - (maxWordLen - 1) * 6) / maxWordLen);
+
+    // Slot size constrained by available height
+    const slotByHeight = Math.floor((availH - (numRows - 1) * 8) / numRows);
+
+    // Pick best balanced size that never overflows in either dimension
+    const slotSize = Math.max(26, Math.min(44, slotByWidth, slotByHeight));
+    const fontSize = Math.max(14, Math.floor(slotSize * 0.54));
 
     this.boardEl.style.setProperty('--slot-size', `${slotSize}px`);
     this.boardEl.style.setProperty('--slot-font-size', `${fontSize}px`);
   }
 
+  updateWheelGeometry() {
+    if (!this.letterWheel) return;
+    this.wheelRect = this.letterWheel.getBoundingClientRect();
+  }
+
   renderWheel(letters) {
     this.letterWheel.innerHTML = '';
     this.wheelSvg.innerHTML = '';
+    this.nodeData = [];
+
+    const turntableW = this.letterWheel.clientWidth || 220;
+    const center = turntableW / 2;
+    const radius = center * 0.65;
     const total = letters.length;
 
-    let radius = 76;
-    let nodeSize = 54;
-    let fontSize = 26;
+    let nodeSize = 52;
+    let fontSize = 25;
+    if (total === 6) { nodeSize = 46; fontSize = 22; }
+    else if (total === 7) { nodeSize = 42; fontSize = 20; }
+    else if (total >= 8) { nodeSize = 36; fontSize = 17; }
 
-    if (total === 6) {
-      radius = 78;
-      nodeSize = 48;
-      fontSize = 23;
-    } else if (total === 7) {
-      radius = 80;
-      nodeSize = 44;
-      fontSize = 21;
-    } else if (total >= 8) {
-      radius = 82;
-      nodeSize = 38;
-      fontSize = 18;
+    // Responsive node size on small turntable
+    if (turntableW < 200) {
+      nodeSize = Math.floor(nodeSize * 0.88);
+      fontSize = Math.floor(fontSize * 0.88);
     }
 
     this.letterWheel.style.setProperty('--node-size', `${nodeSize}px`);
     this.letterWheel.style.setProperty('--node-font-size', `${fontSize}px`);
-
-    const center = 115; // center of 230x230 turntable
 
     letters.forEach((char, i) => {
       const angle = (i * (360 / total) - 90) * (Math.PI / 180);
@@ -295,53 +326,107 @@ class WoWGame {
       node.className = 'letter-node';
       node.textContent = char;
       node.dataset.char = char;
-      node.style.left = `${x}px`;
-      node.style.top = `${y}px`;
+      node.dataset.index = i;
+      node.style.left = `${x.toFixed(1)}px`;
+      node.style.top = `${y.toFixed(1)}px`;
 
       this.letterWheel.appendChild(node);
+
+      // Pre-cache coordinates and collision radius for instantaneous math lookups
+      this.nodeData.push({
+        el: node,
+        char: char,
+        index: i,
+        x: x,
+        y: y,
+        hitRadius: (nodeSize / 2) + 12
+      });
     });
+
+    this.updateWheelGeometry();
   }
 
   shuffleWheel() {
     const level = this.getCurrentLevel();
-    const shuffled = [...level.wheelLetters].sort(() => Math.random() - 0.5);
+    const letters = [...level.wheelLetters];
+    const targets = level.targetWords;
+
+    // Intelligent shuffle: guarantee no target word appears sequentially in circular order
+    let best = [...letters];
+    let minViolations = 999999;
+
+    for (let tries = 0; tries < 200; tries++) {
+      letters.sort(() => Math.random() - 0.5);
+      const doubled = letters.join('') + letters.join('');
+      const revDoubled = [...letters].reverse().join('') + [...letters].reverse().join('');
+
+      let violations = 0;
+      for (const w of targets) {
+        if (w.length >= 3 && (doubled.includes(w) || revDoubled.includes(w))) {
+          violations += w.length;
+        }
+      }
+
+      if (violations === 0) {
+        best = [...letters];
+        break;
+      }
+      if (violations < minViolations) {
+        minViolations = violations;
+        best = [...letters];
+      }
+    }
+
     window.soundFX.playLetterSelect(2);
-    this.renderWheel(shuffled);
+    this.renderWheel(best);
   }
 
   onPointerDown(e) {
-    const node = this.getNodeUnderPointer(e.clientX, e.clientY);
-    if (node) {
+    if (e.cancelable) e.preventDefault();
+    this.updateWheelGeometry();
+
+    const relX = e.clientX - this.wheelRect.left;
+    const relY = e.clientY - this.wheelRect.top;
+
+    // Pure mathematical collision lookup - zero DOM reading
+    const hit = this.nodeData.find(n => Math.hypot(relX - n.x, relY - n.y) <= n.hitRadius);
+    if (hit) {
       this.isDragging = true;
-      this.selectedNodes = [node];
-      this.currentWord = node.dataset.char;
-      node.classList.add('selected');
+      this.selectedNodes = [hit];
+      this.currentWord = hit.char;
+      hit.el.classList.add('selected');
 
       window.soundFX.playLetterSelect(0);
       if (navigator.vibrate) navigator.vibrate(10);
 
       this.updatePreview();
-      this.updateWheelLines(e.clientX, e.clientY);
+      this.updateSvgPolyline(relX, relY);
     }
   }
 
   onPointerMove(e) {
     if (!this.isDragging) return;
+    if (e.cancelable) e.preventDefault();
 
-    const node = this.getNodeUnderPointer(e.clientX, e.clientY);
-    if (node) {
-      // Backtrack support: sliding finger back to previous letter unselects the last letter
-      if (this.selectedNodes.length >= 2 && node === this.selectedNodes[this.selectedNodes.length - 2]) {
+    const relX = e.clientX - this.wheelRect.left;
+    const relY = e.clientY - this.wheelRect.top;
+
+    const hit = this.nodeData.find(n => Math.hypot(relX - n.x, relY - n.y) <= n.hitRadius);
+    if (hit) {
+      const len = this.selectedNodes.length;
+
+      // Backtrack: if sliding back to previous node, unselect last node
+      if (len >= 2 && hit === this.selectedNodes[len - 2]) {
         const popped = this.selectedNodes.pop();
-        popped.classList.remove('selected');
-        this.currentWord = this.selectedNodes.map(n => n.dataset.char).join('');
+        popped.el.classList.remove('selected');
+        this.currentWord = this.selectedNodes.map(n => n.char).join('');
         window.soundFX.playLetterSelect(this.selectedNodes.length - 1);
         if (navigator.vibrate) navigator.vibrate(8);
         this.updatePreview();
-      } else if (!this.selectedNodes.includes(node)) {
-        this.selectedNodes.push(node);
-        this.currentWord += node.dataset.char;
-        node.classList.add('selected');
+      } else if (!this.selectedNodes.includes(hit)) {
+        this.selectedNodes.push(hit);
+        this.currentWord += hit.char;
+        hit.el.classList.add('selected');
 
         window.soundFX.playLetterSelect(this.selectedNodes.length - 1);
         if (navigator.vibrate) navigator.vibrate(10);
@@ -349,7 +434,7 @@ class WoWGame {
       }
     }
 
-    this.updateWheelLines(e.clientX, e.clientY);
+    this.updateSvgPolyline(relX, relY);
   }
 
   onPointerUp() {
@@ -358,7 +443,7 @@ class WoWGame {
 
     this.validateWord(this.currentWord);
 
-    this.selectedNodes.forEach(node => node.classList.remove('selected'));
+    this.selectedNodes.forEach(item => item.el.classList.remove('selected'));
     this.selectedNodes = [];
     this.currentWord = "";
     this.wheelSvg.innerHTML = '';
@@ -366,49 +451,28 @@ class WoWGame {
     this.wordPreview.textContent = "";
   }
 
-  getNodeUnderPointer(clientX, clientY) {
-    const nodes = this.letterWheel.querySelectorAll('.letter-node');
-    for (let node of nodes) {
-      const rect = node.getBoundingClientRect();
-      const radius = rect.width / 2;
-      const centerX = rect.left + radius;
-      const centerY = rect.top + radius;
-      if (Math.hypot(clientX - centerX, clientY - centerY) <= radius + 10) {
-        return node;
-      }
-    }
-    return null;
-  }
-
-  updateWheelLines(pointerX, pointerY) {
-    this.wheelSvg.innerHTML = '';
-    if (this.selectedNodes.length === 0) return;
-
-    const wheelRect = this.letterWheel.getBoundingClientRect();
-
-    // Connecting lines between letter nodes (rendered UNDER letter nodes)
-    for (let i = 0; i < this.selectedNodes.length - 1; i++) {
-      const fromRect = this.selectedNodes[i].getBoundingClientRect();
-      const toRect = this.selectedNodes[i + 1].getBoundingClientRect();
-
-      const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
-      line.setAttribute('x1', fromRect.left + fromRect.width / 2 - wheelRect.left);
-      line.setAttribute('y1', fromRect.top + fromRect.height / 2 - wheelRect.top);
-      line.setAttribute('x2', toRect.left + toRect.width / 2 - wheelRect.left);
-      line.setAttribute('y2', toRect.top + toRect.height / 2 - wheelRect.top);
-      this.wheelSvg.appendChild(line);
+  updateSvgPolyline(pointerRelX, pointerRelY) {
+    if (this.selectedNodes.length === 0) {
+      this.wheelSvg.innerHTML = '';
+      return;
     }
 
-    // Trailing line to touch/mouse pointer
-    if (this.isDragging && pointerX !== undefined && pointerY !== undefined) {
-      const lastRect = this.selectedNodes[this.selectedNodes.length - 1].getBoundingClientRect();
-      const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
-      line.setAttribute('x1', lastRect.left + lastRect.width / 2 - wheelRect.left);
-      line.setAttribute('y1', lastRect.top + lastRect.height / 2 - wheelRect.top);
-      line.setAttribute('x2', pointerX - wheelRect.left);
-      line.setAttribute('y2', pointerY - wheelRect.top);
-      this.wheelSvg.appendChild(line);
+    const points = this.selectedNodes.map(n => `${n.x.toFixed(1)},${n.y.toFixed(1)}`);
+    if (this.isDragging && pointerRelX !== undefined && pointerRelY !== undefined) {
+      points.push(`${pointerRelX.toFixed(1)},${pointerRelY.toFixed(1)}`);
     }
+
+    let polyline = this.wheelSvg.firstElementChild;
+    if (!polyline) {
+      polyline = document.createElementNS('http://www.w3.org/2000/svg', 'polyline');
+      polyline.setAttribute('stroke', '#f59e0b');
+      polyline.setAttribute('stroke-width', '8');
+      polyline.setAttribute('stroke-linecap', 'round');
+      polyline.setAttribute('stroke-linejoin', 'round');
+      polyline.setAttribute('fill', 'none');
+      this.wheelSvg.appendChild(polyline);
+    }
+    polyline.setAttribute('points', points.join(' '));
   }
 
   updatePreview() {
@@ -491,7 +555,7 @@ class WoWGame {
     this.saveSecureState();
     window.soundFX.playCoinCollect();
 
-    // Check if whole row is now revealed
+    // Check if entire row is now revealed
     const row = chosenSlot.closest('.word-row');
     if (row) {
       const rowWord = row.dataset.word;

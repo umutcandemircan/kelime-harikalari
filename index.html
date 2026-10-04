@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-  <title>Kelime Harikaları - Türkiye Çengel Bulmaca</title>
+  <title>Kelime Harikaları - Türkiye Turu (100 Bölüm)</title>
   <link rel="stylesheet" href="style.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -24,7 +24,7 @@
         
         <!-- Game Logo & Header -->
         <div class="home-logo-box">
-          <span class="home-badge">🏛️ TÜRKİYE ÇENGEL BULMACA</span>
+          <span class="home-badge">🏛️ TÜRKİYE KELİME TURU</span>
           <h1 class="home-title">KELİME<br><span class="highlight">HARİKALARI</span></h1>
           <p class="home-desc">100 Bölüm • 10 Tarihi Bölge • Zengin TDK Kelimeleri</p>
         </div>
@@ -58,7 +58,7 @@
 
         <!-- Bottom Link / Credits -->
         <div class="home-footer">
-          <span>Harfleri birleştir, Türkiye'nin harikalarını keşfet!</span>
+          <span>Harfleri birleştir, gizli kelimeleri keşfet!</span>
         </div>
       </div>
     </div>
@@ -90,19 +90,19 @@
         </div>
       </header>
 
-      <!-- Crossword Matrix Area -->
+      <!-- Clean Word Grid Area (Düzgün & Dengeli Kelime Tablosu) -->
       <main class="board-area">
-        <div id="crossword-board" class="crossword-matrix">
-          <!-- Javascript dinamik 2D çengel matrisi -->
+        <div id="word-board" class="word-board">
+          <!-- Javascript fills target word rows cleanly -->
         </div>
       </main>
 
-      <!-- Current Word Preview Pill -->
+      <!-- Word Preview Pill -->
       <div class="word-preview-zone">
         <div id="current-word-preview" class="word-preview-pill"></div>
       </div>
 
-      <!-- Letter Wheel & Iconic Side Buttons -->
+      <!-- Letter Wheel with Underground Connecting Lines -->
       <footer class="wheel-zone">
         <button id="btn-shuffle" class="side-action-btn left" title="Harfleri Karıştır">
           <svg class="side-icon" viewBox="0 0 24 24" fill="currentColor">
@@ -111,9 +111,10 @@
         </button>
 
         <div class="wheel-turntable">
+          <!-- SVG line layer stays STRICTLY UNDER the letter nodes -->
           <svg id="wheel-lines" class="wheel-svg-layer"></svg>
           <div id="letter-wheel" class="letter-disc-container">
-            <!-- 3D Ivory letter stones -->
+            <!-- 3D Ivory letter stones in front -->
           </div>
         </div>
 
@@ -127,7 +128,7 @@
     </div>
   </div>
 
-  <!-- BÖLÜM HARİTASI MODAL (MAP / LEVEL SELECT) -->
+  <!-- BÖLÜM HARİTASI MODAL -->
   <div id="modal-map" class="modal-backdrop hidden">
     <div class="modal-card map-card">
       <div class="card-head">
@@ -146,7 +147,7 @@
   <div id="modal-victory" class="modal-backdrop hidden">
     <div class="modal-card">
       <div class="trophy-badge">🏆</div>
-      <span class="eyebrow">TEBRİKLER!</span>
+      <span class="eyebrow">BÖLÜM GEÇİLDİ!</span>
       <h2 id="victory-title" class="modal-title">Bölüm 1 Tamamlandı</h2>
       <p class="modal-subtitle">Tüm kelimeleri ustalıkla çözdün.</p>
       

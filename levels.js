@@ -1,4 +1,4 @@
-// 100 Zengin TDK Çengel Seviyesi (4-7 Harfli Gelişmiş Kelimeler)
+// 100 Doğrulanmış TDK Kelime Seviyesi (Temiz & Simetrik Bulmaca)
 const WOW_LEVELS = [
   {
     "level": 1,
@@ -10,35 +10,11 @@ const WOW_LEVELS = [
       "L",
       "E"
     ],
-    "words": [
-      {
-        "id": "w1",
-        "word": "KALE",
-        "row": 2,
-        "col": 0,
-        "dir": "H"
-      },
-      {
-        "id": "w2",
-        "word": "ELA",
-        "row": 0,
-        "col": 1,
-        "dir": "V"
-      },
-      {
-        "id": "w3",
-        "word": "KEL",
-        "row": 2,
-        "col": 0,
-        "dir": "V"
-      },
-      {
-        "id": "w4",
-        "word": "LAKE",
-        "row": 0,
-        "col": 0,
-        "dir": "V"
-      }
+    "targetWords": [
+      "ELA",
+      "KEL",
+      "KALE",
+      "LAKE"
     ],
     "bonusWords": [
       "LAK"
@@ -54,35 +30,10 @@ const WOW_LEVELS = [
       "R",
       "T"
     ],
-    "words": [
-      {
-        "id": "w1",
-        "word": "DERT",
-        "row": 1,
-        "col": 0,
-        "dir": "H"
-      },
-      {
-        "id": "w2",
-        "word": "TER",
-        "row": 0,
-        "col": 1,
-        "dir": "V"
-      },
-      {
-        "id": "w3",
-        "word": "RET",
-        "row": 1,
-        "col": 2,
-        "dir": "V"
-      },
-      {
-        "id": "w4",
-        "word": "ERT",
-        "row": 1,
-        "col": 1,
-        "dir": "V"
-      }
+    "targetWords": [
+      "TER",
+      "RET",
+      "DERT"
     ],
     "bonusWords": []
   },
@@ -96,28 +47,10 @@ const WOW_LEVELS = [
       "R",
       "T"
     ],
-    "words": [
-      {
-        "id": "w1",
-        "word": "KURT",
-        "row": 1,
-        "col": 0,
-        "dir": "H"
-      },
-      {
-        "id": "w2",
-        "word": "TUR",
-        "row": 0,
-        "col": 1,
-        "dir": "V"
-      },
-      {
-        "id": "w3",
-        "word": "KUT",
-        "row": 1,
-        "col": 0,
-        "dir": "V"
-      }
+    "targetWords": [
+      "TUR",
+      "KUT",
+      "KURT"
     ],
     "bonusWords": []
   },
@@ -131,35 +64,11 @@ const WOW_LEVELS = [
       "A",
       "K"
     ],
-    "words": [
-      {
-        "id": "w1",
-        "word": "ODAK",
-        "row": 1,
-        "col": 0,
-        "dir": "H"
-      },
-      {
-        "id": "w2",
-        "word": "ODA",
-        "row": 1,
-        "col": 0,
-        "dir": "V"
-      },
-      {
-        "id": "w3",
-        "word": "KOD",
-        "row": 0,
-        "col": 0,
-        "dir": "V"
-      },
-      {
-        "id": "w4",
-        "word": "DOK",
-        "row": 1,
-        "col": 1,
-        "dir": "V"
-      }
+    "targetWords": [
+      "ODA",
+      "KOD",
+      "DOK",
+      "ODAK"
     ],
     "bonusWords": []
   },
@@ -173,28 +82,10 @@ const WOW_LEVELS = [
       "S",
       "A"
     ],
-    "words": [
-      {
-        "id": "w1",
-        "word": "MASA",
-        "row": 2,
-        "col": 0,
-        "dir": "H"
-      },
-      {
-        "id": "w2",
-        "word": "ASMA",
-        "row": 0,
-        "col": 0,
-        "dir": "V"
-      },
-      {
-        "id": "w3",
-        "word": "AMA",
-        "row": 2,
-        "col": 1,
-        "dir": "V"
-      }
+    "targetWords": [
+      "AMA",
+      "MASA",
+      "ASMA"
     ],
     "bonusWords": [
       "SAM"
@@ -210,35 +101,11 @@ const WOW_LEVELS = [
       "M",
       "A"
     ],
-    "words": [
-      {
-        "id": "w1",
-        "word": "ELMA",
-        "row": 2,
-        "col": 0,
-        "dir": "H"
-      },
-      {
-        "id": "w2",
-        "word": "ALEM",
-        "row": 0,
-        "col": 0,
-        "dir": "V"
-      },
-      {
-        "id": "w3",
-        "word": "ELA",
-        "row": 1,
-        "col": 1,
-        "dir": "V"
-      },
-      {
-        "id": "w4",
-        "word": "MAL",
-        "row": 2,
-        "col": 2,
-        "dir": "V"
-      }
+    "targetWords": [
+      "ELA",
+      "MAL",
+      "ELMA",
+      "ALEM"
     ],
     "bonusWords": [
       "LAM"
@@ -254,35 +121,11 @@ const WOW_LEVELS = [
       "R",
       "A"
     ],
-    "words": [
-      {
-        "id": "w1",
-        "word": "PARA",
-        "row": 3,
-        "col": 0,
-        "dir": "H"
-      },
-      {
-        "id": "w2",
-        "word": "ARAP",
-        "row": 0,
-        "col": 0,
-        "dir": "V"
-      },
-      {
-        "id": "w3",
-        "word": "ARP",
-        "row": 3,
-        "col": 1,
-        "dir": "V"
-      },
-      {
-        "id": "w4",
-        "word": "ARA",
-        "row": 1,
-        "col": 1,
-        "dir": "V"
-      }
+    "targetWords": [
+      "ARP",
+      "ARA",
+      "PARA",
+      "ARAP"
     ],
     "bonusWords": [
       "RAP"
@@ -298,35 +141,11 @@ const WOW_LEVELS = [
       "T",
       "I"
     ],
-    "words": [
-      {
-        "id": "w1",
-        "word": "ALTI",
-        "row": 2,
-        "col": 0,
-        "dir": "H"
-      },
-      {
-        "id": "w2",
-        "word": "ATIL",
-        "row": 2,
-        "col": 0,
-        "dir": "V"
-      },
-      {
-        "id": "w3",
-        "word": "ALT",
-        "row": 1,
-        "col": 1,
-        "dir": "V"
-      },
-      {
-        "id": "w4",
-        "word": "TAL",
-        "row": 0,
-        "col": 1,
-        "dir": "V"
-      }
+    "targetWords": [
+      "ALT",
+      "TAL",
+      "ALTI",
+      "ATIL"
     ],
     "bonusWords": []
   },
@@ -341,28 +160,10 @@ const WOW_LEVELS = [
       "E",
       "Ş"
     ],
-    "words": [
-      {
-        "id": "w1",
-        "word": "GÜNEŞ",
-        "row": 2,
-        "col": 0,
-        "dir": "H"
-      },
-      {
-        "id": "w2",
-        "word": "GÜN",
-        "row": 2,
-        "col": 0,
-        "dir": "V"
-      },
-      {
-        "id": "w3",
-        "word": "ŞEN",
-        "row": 0,
-        "col": 2,
-        "dir": "V"
-      }
+    "targetWords": [
+      "GÜN",
+      "ŞEN",
+      "GÜNEŞ"
     ],
     "bonusWords": []
   },
@@ -377,42 +178,12 @@ const WOW_LEVELS = [
       "I",
       "K"
     ],
-    "words": [
-      {
-        "id": "w1",
-        "word": "BALIK",
-        "row": 1,
-        "col": 0,
-        "dir": "H"
-      },
-      {
-        "id": "w2",
-        "word": "AKIL",
-        "row": 1,
-        "col": 1,
-        "dir": "V"
-      },
-      {
-        "id": "w3",
-        "word": "ALIK",
-        "row": 0,
-        "col": 2,
-        "dir": "V"
-      },
-      {
-        "id": "w4",
-        "word": "BAL",
-        "row": 1,
-        "col": 0,
-        "dir": "V"
-      },
-      {
-        "id": "w5",
-        "word": "KIL",
-        "row": 0,
-        "col": 3,
-        "dir": "V"
-      }
+    "targetWords": [
+      "BAL",
+      "KIL",
+      "AKIL",
+      "ALIK",
+      "BALIK"
     ],
     "bonusWords": [
       "BAK",
@@ -430,35 +201,11 @@ const WOW_LEVELS = [
       "A",
       "P"
     ],
-    "words": [
-      {
-        "id": "w1",
-        "word": "KİTAP",
-        "row": 4,
-        "col": 0,
-        "dir": "H"
-      },
-      {
-        "id": "w2",
-        "word": "PATİK",
-        "row": 0,
-        "col": 0,
-        "dir": "V"
-      },
-      {
-        "id": "w3",
-        "word": "TAKİP",
-        "row": 1,
-        "col": 1,
-        "dir": "V"
-      },
-      {
-        "id": "w4",
-        "word": "PAK",
-        "row": 3,
-        "col": 3,
-        "dir": "V"
-      }
+    "targetWords": [
+      "PAK",
+      "KİTAP",
+      "PATİK",
+      "TAKİP"
     ],
     "bonusWords": [
       "PAT",
@@ -476,38 +223,13 @@ const WOW_LEVELS = [
       "İ",
       "Z"
     ],
-    "words": [
-      {
-        "id": "w1",
-        "word": "DENİZ",
-        "row": 2,
-        "col": 0,
-        "dir": "H"
-      },
-      {
-        "id": "w2",
-        "word": "DİZ",
-        "row": 2,
-        "col": 0,
-        "dir": "V"
-      },
-      {
-        "id": "w3",
-        "word": "DİN",
-        "row": 0,
-        "col": 2,
-        "dir": "V"
-      },
-      {
-        "id": "w4",
-        "word": "DİZ",
-        "row": 2,
-        "col": 0,
-        "dir": "V"
-      }
+    "targetWords": [
+      "DİZ",
+      "DİN",
+      "DENİZ"
     ],
     "bonusWords": [
-      "EZAN"
+      "ZİN"
     ]
   },
   {
@@ -521,35 +243,11 @@ const WOW_LEVELS = [
       "A",
       "R"
     ],
-    "words": [
-      {
-        "id": "w1",
-        "word": "BAHAR",
-        "row": 1,
-        "col": 0,
-        "dir": "H"
-      },
-      {
-        "id": "w2",
-        "word": "BAR",
-        "row": 1,
-        "col": 0,
-        "dir": "V"
-      },
-      {
-        "id": "w3",
-        "word": "ARA",
-        "row": 1,
-        "col": 1,
-        "dir": "V"
-      },
-      {
-        "id": "w4",
-        "word": "HARA",
-        "row": 0,
-        "col": 1,
-        "dir": "V"
-      }
+    "targetWords": [
+      "BAR",
+      "ARA",
+      "HARA",
+      "BAHAR"
     ],
     "bonusWords": [
       "RAB"
@@ -566,35 +264,11 @@ const WOW_LEVELS = [
       "E",
       "M"
     ],
-    "words": [
-      {
-        "id": "w1",
-        "word": "KALEM",
-        "row": 1,
-        "col": 0,
-        "dir": "H"
-      },
-      {
-        "id": "w2",
-        "word": "KELAM",
-        "row": 1,
-        "col": 0,
-        "dir": "V"
-      },
-      {
-        "id": "w3",
-        "word": "KALE",
-        "row": 0,
-        "col": 1,
-        "dir": "V"
-      },
-      {
-        "id": "w4",
-        "word": "ELA",
-        "row": 0,
-        "col": 2,
-        "dir": "V"
-      }
+    "targetWords": [
+      "ELA",
+      "KALE",
+      "KALEM",
+      "KELAM"
     ],
     "bonusWords": [
       "AMEL",
@@ -612,35 +286,11 @@ const WOW_LEVELS = [
       "A",
       "N"
     ],
-    "words": [
-      {
-        "id": "w1",
-        "word": "ASLAN",
-        "row": 2,
-        "col": 0,
-        "dir": "H"
-      },
-      {
-        "id": "w2",
-        "word": "SAN",
-        "row": 1,
-        "col": 0,
-        "dir": "V"
-      },
-      {
-        "id": "w3",
-        "word": "NAL",
-        "row": 0,
-        "col": 2,
-        "dir": "V"
-      },
-      {
-        "id": "w4",
-        "word": "ALA",
-        "row": 1,
-        "col": 2,
-        "dir": "V"
-      }
+    "targetWords": [
+      "SAN",
+      "NAL",
+      "ALA",
+      "ASLAN"
     ],
     "bonusWords": [
       "ANA"
@@ -657,35 +307,11 @@ const WOW_LEVELS = [
       "B",
       "A"
     ],
-    "words": [
-      {
-        "id": "w1",
-        "word": "ÇORBA",
-        "row": 2,
-        "col": 0,
-        "dir": "H"
-      },
-      {
-        "id": "w2",
-        "word": "BAR",
-        "row": 0,
-        "col": 2,
-        "dir": "V"
-      },
-      {
-        "id": "w3",
-        "word": "BOR",
-        "row": 1,
-        "col": 1,
-        "dir": "V"
-      },
-      {
-        "id": "w4",
-        "word": "OBA",
-        "row": 1,
-        "col": 3,
-        "dir": "V"
-      }
+    "targetWords": [
+      "BAR",
+      "BOR",
+      "OBA",
+      "ÇORBA"
     ],
     "bonusWords": [
       "RAB"
@@ -702,35 +328,11 @@ const WOW_LEVELS = [
       "A",
       "N"
     ],
-    "words": [
-      {
-        "id": "w1",
-        "word": "ZAMAN",
-        "row": 1,
-        "col": 0,
-        "dir": "H"
-      },
-      {
-        "id": "w2",
-        "word": "AZAM",
-        "row": 0,
-        "col": 0,
-        "dir": "V"
-      },
-      {
-        "id": "w3",
-        "word": "ANAM",
-        "row": 1,
-        "col": 1,
-        "dir": "V"
-      },
-      {
-        "id": "w4",
-        "word": "ANA",
-        "row": 1,
-        "col": 1,
-        "dir": "V"
-      }
+    "targetWords": [
+      "ANA",
+      "AZAM",
+      "ANAM",
+      "ZAMAN"
     ],
     "bonusWords": [
       "AMA",
@@ -748,35 +350,11 @@ const WOW_LEVELS = [
       "A",
       "T"
     ],
-    "words": [
-      {
-        "id": "w1",
-        "word": "HAYAT",
-        "row": 1,
-        "col": 0,
-        "dir": "H"
-      },
-      {
-        "id": "w2",
-        "word": "HATA",
-        "row": 1,
-        "col": 0,
-        "dir": "V"
-      },
-      {
-        "id": "w3",
-        "word": "TAY",
-        "row": 0,
-        "col": 1,
-        "dir": "V"
-      },
-      {
-        "id": "w4",
-        "word": "YAT",
-        "row": 1,
-        "col": 2,
-        "dir": "V"
-      }
+    "targetWords": [
+      "TAY",
+      "YAT",
+      "HATA",
+      "HAYAT"
     ],
     "bonusWords": [
       "HAT"
@@ -793,35 +371,11 @@ const WOW_LEVELS = [
       "V",
       "E"
     ],
-    "words": [
-      {
-        "id": "w1",
-        "word": "KAHVE",
-        "row": 2,
-        "col": 0,
-        "dir": "H"
-      },
-      {
-        "id": "w2",
-        "word": "HAK",
-        "row": 0,
-        "col": 0,
-        "dir": "V"
-      },
-      {
-        "id": "w3",
-        "word": "VAH",
-        "row": 1,
-        "col": 1,
-        "dir": "V"
-      },
-      {
-        "id": "w4",
-        "word": "KAV",
-        "row": 2,
-        "col": 0,
-        "dir": "V"
-      }
+    "targetWords": [
+      "HAK",
+      "VAH",
+      "KAV",
+      "KAHVE"
     ],
     "bonusWords": []
   },
@@ -836,35 +390,11 @@ const WOW_LEVELS = [
       "İ",
       "R"
     ],
-    "words": [
-      {
-        "id": "w1",
-        "word": "DEMİR",
-        "row": 0,
-        "col": 0,
-        "dir": "H"
-      },
-      {
-        "id": "w2",
-        "word": "DERİ",
-        "row": 0,
-        "col": 0,
-        "dir": "V"
-      },
-      {
-        "id": "w3",
-        "word": "MİR",
-        "row": 0,
-        "col": 2,
-        "dir": "V"
-      },
-      {
-        "id": "w4",
-        "word": "EMİR",
-        "row": 0,
-        "col": 1,
-        "dir": "V"
-      }
+    "targetWords": [
+      "MİR",
+      "DERİ",
+      "EMİR",
+      "DEMİR"
     ],
     "bonusWords": []
   },
@@ -879,35 +409,11 @@ const WOW_LEVELS = [
       "A",
       "N"
     ],
-    "words": [
-      {
-        "id": "w1",
-        "word": "ORMAN",
-        "row": 2,
-        "col": 0,
-        "dir": "H"
-      },
-      {
-        "id": "w2",
-        "word": "ROMAN",
-        "row": 1,
-        "col": 0,
-        "dir": "V"
-      },
-      {
-        "id": "w3",
-        "word": "ORAN",
-        "row": 1,
-        "col": 1,
-        "dir": "V"
-      },
-      {
-        "id": "w4",
-        "word": "ONAR",
-        "row": 0,
-        "col": 3,
-        "dir": "V"
-      }
+    "targetWords": [
+      "ORAN",
+      "ONAR",
+      "ORMAN",
+      "ROMAN"
     ],
     "bonusWords": [
       "MOR",
@@ -925,35 +431,11 @@ const WOW_LEVELS = [
       "U",
       "N"
     ],
-    "words": [
-      {
-        "id": "w1",
-        "word": "SABUN",
-        "row": 2,
-        "col": 0,
-        "dir": "H"
-      },
-      {
-        "id": "w2",
-        "word": "SUN",
-        "row": 2,
-        "col": 0,
-        "dir": "V"
-      },
-      {
-        "id": "w3",
-        "word": "BAS",
-        "row": 0,
-        "col": 0,
-        "dir": "V"
-      },
-      {
-        "id": "w4",
-        "word": "SAN",
-        "row": 1,
-        "col": 1,
-        "dir": "V"
-      }
+    "targetWords": [
+      "SUN",
+      "BAS",
+      "SAN",
+      "SABUN"
     ],
     "bonusWords": [
       "BAN"
@@ -970,35 +452,10 @@ const WOW_LEVELS = [
       "İ",
       "R"
     ],
-    "words": [
-      {
-        "id": "w1",
-        "word": "ŞEHİR",
-        "row": 1,
-        "col": 0,
-        "dir": "H"
-      },
-      {
-        "id": "w2",
-        "word": "ŞER",
-        "row": 1,
-        "col": 0,
-        "dir": "V"
-      },
-      {
-        "id": "w3",
-        "word": "HER",
-        "row": 0,
-        "col": 1,
-        "dir": "V"
-      },
-      {
-        "id": "w4",
-        "word": "HER",
-        "row": 0,
-        "col": 1,
-        "dir": "V"
-      }
+    "targetWords": [
+      "ŞER",
+      "HER",
+      "ŞEHİR"
     ],
     "bonusWords": []
   },
@@ -1013,28 +470,10 @@ const WOW_LEVELS = [
       "U",
       "N"
     ],
-    "words": [
-      {
-        "id": "w1",
-        "word": "KAVUN",
-        "row": 1,
-        "col": 0,
-        "dir": "H"
-      },
-      {
-        "id": "w2",
-        "word": "KAN",
-        "row": 1,
-        "col": 0,
-        "dir": "V"
-      },
-      {
-        "id": "w3",
-        "word": "VAN",
-        "row": 0,
-        "col": 1,
-        "dir": "V"
-      }
+    "targetWords": [
+      "KAN",
+      "VAN",
+      "KAVUN"
     ],
     "bonusWords": []
   },
@@ -1049,28 +488,10 @@ const WOW_LEVELS = [
       "A",
       "R"
     ],
-    "words": [
-      {
-        "id": "w1",
-        "word": "DUVAR",
-        "row": 0,
-        "col": 0,
-        "dir": "H"
-      },
-      {
-        "id": "w2",
-        "word": "DAR",
-        "row": 0,
-        "col": 0,
-        "dir": "V"
-      },
-      {
-        "id": "w3",
-        "word": "VAR",
-        "row": 0,
-        "col": 2,
-        "dir": "V"
-      }
+    "targetWords": [
+      "DAR",
+      "VAR",
+      "DUVAR"
     ],
     "bonusWords": []
   },
@@ -1085,38 +506,14 @@ const WOW_LEVELS = [
       "A",
       "K"
     ],
-    "words": [
-      {
-        "id": "w1",
-        "word": "KUŞAK",
-        "row": 2,
-        "col": 0,
-        "dir": "H"
-      },
-      {
-        "id": "w2",
-        "word": "AŞK",
-        "row": 0,
-        "col": 0,
-        "dir": "V"
-      },
-      {
-        "id": "w3",
-        "word": "ŞAK",
-        "row": 2,
-        "col": 2,
-        "dir": "V"
-      },
-      {
-        "id": "w4",
-        "word": "KUŞ",
-        "row": 2,
-        "col": 0,
-        "dir": "V"
-      }
+    "targetWords": [
+      "AŞK",
+      "ŞAK",
+      "KUŞ",
+      "KUŞAK"
     ],
     "bonusWords": [
-      "HAK"
+      "KAŞ"
     ]
   },
   {
@@ -1130,28 +527,10 @@ const WOW_LEVELS = [
       "U",
       "T"
     ],
-    "words": [
-      {
-        "id": "w1",
-        "word": "BULUT",
-        "row": 0,
-        "col": 0,
-        "dir": "H"
-      },
-      {
-        "id": "w2",
-        "word": "ULU",
-        "row": 0,
-        "col": 1,
-        "dir": "V"
-      },
-      {
-        "id": "w3",
-        "word": "BUT",
-        "row": 0,
-        "col": 0,
-        "dir": "V"
-      }
+    "targetWords": [
+      "ULU",
+      "BUT",
+      "BULUT"
     ],
     "bonusWords": []
   },
@@ -1166,28 +545,10 @@ const WOW_LEVELS = [
       "U",
       "Ç"
     ],
-    "words": [
-      {
-        "id": "w1",
-        "word": "HAVUÇ",
-        "row": 2,
-        "col": 0,
-        "dir": "H"
-      },
-      {
-        "id": "w2",
-        "word": "VAH",
-        "row": 0,
-        "col": 0,
-        "dir": "V"
-      },
-      {
-        "id": "w3",
-        "word": "ÇAV",
-        "row": 1,
-        "col": 1,
-        "dir": "V"
-      }
+    "targetWords": [
+      "VAH",
+      "ÇAV",
+      "HAVUÇ"
     ],
     "bonusWords": []
   },
@@ -1202,35 +563,11 @@ const WOW_LEVELS = [
       "A",
       "L"
     ],
-    "words": [
-      {
-        "id": "w1",
-        "word": "MASAL",
-        "row": 2,
-        "col": 0,
-        "dir": "H"
-      },
-      {
-        "id": "w2",
-        "word": "MASA",
-        "row": 2,
-        "col": 0,
-        "dir": "V"
-      },
-      {
-        "id": "w3",
-        "word": "SAL",
-        "row": 1,
-        "col": 1,
-        "dir": "V"
-      },
-      {
-        "id": "w4",
-        "word": "ASMA",
-        "row": 0,
-        "col": 0,
-        "dir": "V"
-      }
+    "targetWords": [
+      "SAL",
+      "MASA",
+      "ASMA",
+      "MASAL"
     ],
     "bonusWords": [
       "MAL"
@@ -1247,28 +584,10 @@ const WOW_LEVELS = [
       "A",
       "K"
     ],
-    "words": [
-      {
-        "id": "w1",
-        "word": "SOKAK",
-        "row": 2,
-        "col": 0,
-        "dir": "H"
-      },
-      {
-        "id": "w2",
-        "word": "KAS",
-        "row": 0,
-        "col": 0,
-        "dir": "V"
-      },
-      {
-        "id": "w3",
-        "word": "KOK",
-        "row": 1,
-        "col": 1,
-        "dir": "V"
-      }
+    "targetWords": [
+      "KAS",
+      "KOK",
+      "SOKAK"
     ],
     "bonusWords": [
       "SAK"
@@ -1286,35 +605,11 @@ const WOW_LEVELS = [
       "A",
       "K"
     ],
-    "words": [
-      {
-        "id": "w1",
-        "word": "TOPRAK",
-        "row": 2,
-        "col": 0,
-        "dir": "H"
-      },
-      {
-        "id": "w2",
-        "word": "ORTAK",
-        "row": 0,
-        "col": 0,
-        "dir": "V"
-      },
-      {
-        "id": "w3",
-        "word": "ROTA",
-        "row": 1,
-        "col": 1,
-        "dir": "V"
-      },
-      {
-        "id": "w4",
-        "word": "PARK",
-        "row": 2,
-        "col": 2,
-        "dir": "V"
-      }
+    "targetWords": [
+      "ROTA",
+      "PARK",
+      "ORTAK",
+      "TOPRAK"
     ],
     "bonusWords": [
       "POT",
@@ -1333,35 +628,11 @@ const WOW_LEVELS = [
       "İ",
       "N"
     ],
-    "words": [
-      {
-        "id": "w1",
-        "word": "ZEYTİN",
-        "row": 3,
-        "col": 0,
-        "dir": "H"
-      },
-      {
-        "id": "w2",
-        "word": "NİYET",
-        "row": 0,
-        "col": 1,
-        "dir": "V"
-      },
-      {
-        "id": "w3",
-        "word": "YETİ",
-        "row": 2,
-        "col": 1,
-        "dir": "V"
-      },
-      {
-        "id": "w4",
-        "word": "TEZ",
-        "row": 1,
-        "col": 0,
-        "dir": "V"
-      }
+    "targetWords": [
+      "TEZ",
+      "YETİ",
+      "NİYET",
+      "ZEYTİN"
     ],
     "bonusWords": [
       "NET",
@@ -1380,35 +651,11 @@ const WOW_LEVELS = [
       "Ü",
       "K"
     ],
-    "words": [
-      {
-        "id": "w1",
-        "word": "GÖZLÜK",
-        "row": 1,
-        "col": 0,
-        "dir": "H"
-      },
-      {
-        "id": "w2",
-        "word": "ÖZLÜ",
-        "row": 1,
-        "col": 1,
-        "dir": "V"
-      },
-      {
-        "id": "w3",
-        "word": "GÖZ",
-        "row": 1,
-        "col": 0,
-        "dir": "V"
-      },
-      {
-        "id": "w4",
-        "word": "KÖZ",
-        "row": 0,
-        "col": 1,
-        "dir": "V"
-      }
+    "targetWords": [
+      "GÖZ",
+      "KÖZ",
+      "ÖZLÜ",
+      "GÖZLÜK"
     ],
     "bonusWords": [
       "KÜL"
@@ -1426,35 +673,11 @@ const WOW_LEVELS = [
       "İ",
       "R"
     ],
-    "words": [
-      {
-        "id": "w1",
-        "word": "PEYNİR",
-        "row": 1,
-        "col": 0,
-        "dir": "H"
-      },
-      {
-        "id": "w2",
-        "word": "PERİ",
-        "row": 1,
-        "col": 0,
-        "dir": "V"
-      },
-      {
-        "id": "w3",
-        "word": "YEN",
-        "row": 0,
-        "col": 1,
-        "dir": "V"
-      },
-      {
-        "id": "w4",
-        "word": "PİR",
-        "row": 0,
-        "col": 4,
-        "dir": "V"
-      }
+    "targetWords": [
+      "YEN",
+      "PİR",
+      "PERİ",
+      "PEYNİR"
     ],
     "bonusWords": [
       "REY"
@@ -1472,35 +695,11 @@ const WOW_LEVELS = [
       "A",
       "N"
     ],
-    "words": [
-      {
-        "id": "w1",
-        "word": "KAPLAN",
-        "row": 2,
-        "col": 0,
-        "dir": "H"
-      },
-      {
-        "id": "w2",
-        "word": "PLAN",
-        "row": 0,
-        "col": 1,
-        "dir": "V"
-      },
-      {
-        "id": "w3",
-        "word": "PAK",
-        "row": 0,
-        "col": 0,
-        "dir": "V"
-      },
-      {
-        "id": "w4",
-        "word": "KAN",
-        "row": 2,
-        "col": 0,
-        "dir": "V"
-      }
+    "targetWords": [
+      "PAK",
+      "KAN",
+      "PLAN",
+      "KAPLAN"
     ],
     "bonusWords": [
       "ALP",
@@ -1519,35 +718,11 @@ const WOW_LEVELS = [
       "A",
       "P"
     ],
-    "words": [
-      {
-        "id": "w1",
-        "word": "SİNCAP",
-        "row": 3,
-        "col": 0,
-        "dir": "H"
-      },
-      {
-        "id": "w2",
-        "word": "CİNS",
-        "row": 0,
-        "col": 0,
-        "dir": "V"
-      },
-      {
-        "id": "w3",
-        "word": "PAS",
-        "row": 2,
-        "col": 4,
-        "dir": "V"
-      },
-      {
-        "id": "w4",
-        "word": "CAN",
-        "row": 1,
-        "col": 2,
-        "dir": "V"
-      }
+    "targetWords": [
+      "PAS",
+      "CAN",
+      "CİNS",
+      "SİNCAP"
     ],
     "bonusWords": [
       "PİS",
@@ -1566,35 +741,11 @@ const WOW_LEVELS = [
       "A",
       "N"
     ],
-    "words": [
-      {
-        "id": "w1",
-        "word": "TAVŞAN",
-        "row": 2,
-        "col": 0,
-        "dir": "H"
-      },
-      {
-        "id": "w2",
-        "word": "TAŞ",
-        "row": 2,
-        "col": 0,
-        "dir": "V"
-      },
-      {
-        "id": "w3",
-        "word": "VAN",
-        "row": 1,
-        "col": 1,
-        "dir": "V"
-      },
-      {
-        "id": "w4",
-        "word": "TAV",
-        "row": 0,
-        "col": 2,
-        "dir": "V"
-      }
+    "targetWords": [
+      "TAŞ",
+      "VAN",
+      "TAV",
+      "TAVŞAN"
     ],
     "bonusWords": [
       "ŞAN"
@@ -1612,35 +763,11 @@ const WOW_LEVELS = [
       "U",
       "Z"
     ],
-    "words": [
-      {
-        "id": "w1",
-        "word": "KARPUZ",
-        "row": 2,
-        "col": 0,
-        "dir": "H"
-      },
-      {
-        "id": "w2",
-        "word": "KAZ",
-        "row": 2,
-        "col": 0,
-        "dir": "V"
-      },
-      {
-        "id": "w3",
-        "word": "PAK",
-        "row": 0,
-        "col": 0,
-        "dir": "V"
-      },
-      {
-        "id": "w4",
-        "word": "KAP",
-        "row": 1,
-        "col": 1,
-        "dir": "V"
-      }
+    "targetWords": [
+      "KAZ",
+      "PAK",
+      "KAP",
+      "KARPUZ"
     ],
     "bonusWords": [
       "ARZ"
@@ -1658,35 +785,11 @@ const WOW_LEVELS = [
       "A",
       "K"
     ],
-    "words": [
-      {
-        "id": "w1",
-        "word": "BARDAK",
-        "row": 1,
-        "col": 0,
-        "dir": "H"
-      },
-      {
-        "id": "w2",
-        "word": "BAR",
-        "row": 1,
-        "col": 0,
-        "dir": "V"
-      },
-      {
-        "id": "w3",
-        "word": "DAR",
-        "row": 0,
-        "col": 1,
-        "dir": "V"
-      },
-      {
-        "id": "w4",
-        "word": "ARK",
-        "row": 1,
-        "col": 1,
-        "dir": "V"
-      }
+    "targetWords": [
+      "BAR",
+      "DAR",
+      "ARK",
+      "BARDAK"
     ],
     "bonusWords": [
       "ARA"
@@ -1704,35 +807,11 @@ const WOW_LEVELS = [
       "A",
       "K"
     ],
-    "words": [
-      {
-        "id": "w1",
-        "word": "MUTFAK",
-        "row": 2,
-        "col": 0,
-        "dir": "H"
-      },
-      {
-        "id": "w2",
-        "word": "TAK",
-        "row": 2,
-        "col": 2,
-        "dir": "V"
-      },
-      {
-        "id": "w3",
-        "word": "TAM",
-        "row": 0,
-        "col": 0,
-        "dir": "V"
-      },
-      {
-        "id": "w4",
-        "word": "KUT",
-        "row": 1,
-        "col": 1,
-        "dir": "V"
-      }
+    "targetWords": [
+      "TAK",
+      "TAM",
+      "KUT",
+      "MUTFAK"
     ],
     "bonusWords": []
   },
@@ -1747,28 +826,10 @@ const WOW_LEVELS = [
       "O",
       "N"
     ],
-    "words": [
-      {
-        "id": "w1",
-        "word": "LİMON",
-        "row": 2,
-        "col": 0,
-        "dir": "H"
-      },
-      {
-        "id": "w2",
-        "word": "MOL",
-        "row": 0,
-        "col": 0,
-        "dir": "V"
-      },
-      {
-        "id": "w3",
-        "word": "MİL",
-        "row": 1,
-        "col": 1,
-        "dir": "V"
-      }
+    "targetWords": [
+      "MOL",
+      "MİL",
+      "LİMON"
     ],
     "bonusWords": [
       "NİM"
@@ -1785,35 +846,11 @@ const WOW_LEVELS = [
       "U",
       "T"
     ],
-    "words": [
-      {
-        "id": "w1",
-        "word": "ARMUT",
-        "row": 2,
-        "col": 0,
-        "dir": "H"
-      },
-      {
-        "id": "w2",
-        "word": "MAT",
-        "row": 1,
-        "col": 0,
-        "dir": "V"
-      },
-      {
-        "id": "w3",
-        "word": "TAM",
-        "row": 0,
-        "col": 2,
-        "dir": "V"
-      },
-      {
-        "id": "w4",
-        "word": "TUR",
-        "row": 0,
-        "col": 1,
-        "dir": "V"
-      }
+    "targetWords": [
+      "MAT",
+      "TAM",
+      "TUR",
+      "ARMUT"
     ],
     "bonusWords": [
       "RUM"
@@ -1830,35 +867,11 @@ const WOW_LEVELS = [
       "A",
       "Z"
     ],
-    "words": [
-      {
-        "id": "w1",
-        "word": "KİRAZ",
-        "row": 1,
-        "col": 0,
-        "dir": "H"
-      },
-      {
-        "id": "w2",
-        "word": "KAZ",
-        "row": 1,
-        "col": 0,
-        "dir": "V"
-      },
-      {
-        "id": "w3",
-        "word": "ARZ",
-        "row": 0,
-        "col": 2,
-        "dir": "V"
-      },
-      {
-        "id": "w4",
-        "word": "KİR",
-        "row": 0,
-        "col": 1,
-        "dir": "V"
-      }
+    "targetWords": [
+      "KAZ",
+      "ARZ",
+      "KİR",
+      "KİRAZ"
     ],
     "bonusWords": [
       "ZAR"
@@ -1875,35 +888,11 @@ const WOW_LEVELS = [
       "E",
       "K"
     ],
-    "words": [
-      {
-        "id": "w1",
-        "word": "ÇİLEK",
-        "row": 1,
-        "col": 0,
-        "dir": "H"
-      },
-      {
-        "id": "w2",
-        "word": "ÇEK",
-        "row": 1,
-        "col": 0,
-        "dir": "V"
-      },
-      {
-        "id": "w3",
-        "word": "KİL",
-        "row": 0,
-        "col": 1,
-        "dir": "V"
-      },
-      {
-        "id": "w4",
-        "word": "İLK",
-        "row": 1,
-        "col": 1,
-        "dir": "V"
-      }
+    "targetWords": [
+      "ÇEK",
+      "KİL",
+      "İLK",
+      "ÇİLEK"
     ],
     "bonusWords": []
   },
@@ -1918,35 +907,11 @@ const WOW_LEVELS = [
       "A",
       "K"
     ],
-    "words": [
-      {
-        "id": "w1",
-        "word": "TABAK",
-        "row": 2,
-        "col": 0,
-        "dir": "H"
-      },
-      {
-        "id": "w2",
-        "word": "BATAK",
-        "row": 0,
-        "col": 0,
-        "dir": "V"
-      },
-      {
-        "id": "w3",
-        "word": "BAK",
-        "row": 1,
-        "col": 1,
-        "dir": "V"
-      },
-      {
-        "id": "w4",
-        "word": "TAK",
-        "row": 2,
-        "col": 0,
-        "dir": "V"
-      }
+    "targetWords": [
+      "BAK",
+      "TAK",
+      "TABAK",
+      "BATAK"
     ],
     "bonusWords": [
       "ATAK"
@@ -1963,35 +928,11 @@ const WOW_LEVELS = [
       "I",
       "K"
     ],
-    "words": [
-      {
-        "id": "w1",
-        "word": "KAŞIK",
-        "row": 2,
-        "col": 0,
-        "dir": "H"
-      },
-      {
-        "id": "w2",
-        "word": "AŞK",
-        "row": 0,
-        "col": 0,
-        "dir": "V"
-      },
-      {
-        "id": "w3",
-        "word": "ŞIK",
-        "row": 2,
-        "col": 2,
-        "dir": "V"
-      },
-      {
-        "id": "w4",
-        "word": "KAŞ",
-        "row": 2,
-        "col": 0,
-        "dir": "V"
-      }
+    "targetWords": [
+      "AŞK",
+      "ŞIK",
+      "KAŞ",
+      "KAŞIK"
     ],
     "bonusWords": [
       "ŞAK"
@@ -2008,35 +949,11 @@ const WOW_LEVELS = [
       "A",
       "L"
     ],
-    "words": [
-      {
-        "id": "w1",
-        "word": "ÇATAL",
-        "row": 2,
-        "col": 0,
-        "dir": "H"
-      },
-      {
-        "id": "w2",
-        "word": "ÇAT",
-        "row": 2,
-        "col": 0,
-        "dir": "V"
-      },
-      {
-        "id": "w3",
-        "word": "ALA",
-        "row": 2,
-        "col": 1,
-        "dir": "V"
-      },
-      {
-        "id": "w4",
-        "word": "TAÇ",
-        "row": 0,
-        "col": 0,
-        "dir": "V"
-      }
+    "targetWords": [
+      "ÇAT",
+      "ALA",
+      "TAÇ",
+      "ÇATAL"
     ],
     "bonusWords": [
       "ALT"
@@ -2053,35 +970,11 @@ const WOW_LEVELS = [
       "A",
       "K"
     ],
-    "words": [
-      {
-        "id": "w1",
-        "word": "BIÇAK",
-        "row": 2,
-        "col": 0,
-        "dir": "H"
-      },
-      {
-        "id": "w2",
-        "word": "BAK",
-        "row": 2,
-        "col": 0,
-        "dir": "V"
-      },
-      {
-        "id": "w3",
-        "word": "KAÇ",
-        "row": 0,
-        "col": 2,
-        "dir": "V"
-      },
-      {
-        "id": "w4",
-        "word": "ÇAK",
-        "row": 2,
-        "col": 2,
-        "dir": "V"
-      }
+    "targetWords": [
+      "BAK",
+      "KAÇ",
+      "ÇAK",
+      "BIÇAK"
     ],
     "bonusWords": []
   },
@@ -2096,35 +989,11 @@ const WOW_LEVELS = [
       "O",
       "N"
     ],
-    "words": [
-      {
-        "id": "w1",
-        "word": "SALON",
-        "row": 1,
-        "col": 0,
-        "dir": "H"
-      },
-      {
-        "id": "w2",
-        "word": "SOL",
-        "row": 1,
-        "col": 0,
-        "dir": "V"
-      },
-      {
-        "id": "w3",
-        "word": "NAL",
-        "row": 0,
-        "col": 1,
-        "dir": "V"
-      },
-      {
-        "id": "w4",
-        "word": "SON",
-        "row": 0,
-        "col": 3,
-        "dir": "V"
-      }
+    "targetWords": [
+      "SOL",
+      "NAL",
+      "SON",
+      "SALON"
     ],
     "bonusWords": [
       "ALO"
@@ -2142,35 +1011,11 @@ const WOW_LEVELS = [
       "O",
       "N"
     ],
-    "words": [
-      {
-        "id": "w1",
-        "word": "BALKON",
-        "row": 2,
-        "col": 0,
-        "dir": "H"
-      },
-      {
-        "id": "w2",
-        "word": "BAL",
-        "row": 2,
-        "col": 0,
-        "dir": "V"
-      },
-      {
-        "id": "w3",
-        "word": "KOL",
-        "row": 0,
-        "col": 2,
-        "dir": "V"
-      },
-      {
-        "id": "w4",
-        "word": "BOK",
-        "row": 0,
-        "col": 3,
-        "dir": "V"
-      }
+    "targetWords": [
+      "BAL",
+      "KOL",
+      "BOK",
+      "BALKON"
     ],
     "bonusWords": []
   },
@@ -2186,35 +1031,11 @@ const WOW_LEVELS = [
       "I",
       "K"
     ],
-    "words": [
-      {
-        "id": "w1",
-        "word": "YASTIK",
-        "row": 2,
-        "col": 0,
-        "dir": "H"
-      },
-      {
-        "id": "w2",
-        "word": "KAS",
-        "row": 1,
-        "col": 1,
-        "dir": "V"
-      },
-      {
-        "id": "w3",
-        "word": "YAT",
-        "row": 2,
-        "col": 0,
-        "dir": "V"
-      },
-      {
-        "id": "w4",
-        "word": "AYI",
-        "row": 0,
-        "col": 4,
-        "dir": "V"
-      }
+    "targetWords": [
+      "KAS",
+      "YAT",
+      "AYI",
+      "YASTIK"
     ],
     "bonusWords": [
       "TIK"
@@ -2232,35 +1053,11 @@ const WOW_LEVELS = [
       "A",
       "N"
     ],
-    "words": [
-      {
-        "id": "w1",
-        "word": "YORGAN",
-        "row": 2,
-        "col": 0,
-        "dir": "H"
-      },
-      {
-        "id": "w2",
-        "word": "GAR",
-        "row": 0,
-        "col": 2,
-        "dir": "V"
-      },
-      {
-        "id": "w3",
-        "word": "ORG",
-        "row": 2,
-        "col": 1,
-        "dir": "V"
-      },
-      {
-        "id": "w4",
-        "word": "ORAN",
-        "row": 0,
-        "col": 4,
-        "dir": "V"
-      }
+    "targetWords": [
+      "GAR",
+      "ORG",
+      "ORAN",
+      "YORGAN"
     ],
     "bonusWords": [
       "ONAR"
@@ -2278,35 +1075,11 @@ const WOW_LEVELS = [
       "H",
       "İ"
     ],
-    "words": [
-      {
-        "id": "w1",
-        "word": "SÜRAHİ",
-        "row": 2,
-        "col": 0,
-        "dir": "H"
-      },
-      {
-        "id": "w2",
-        "word": "SÜR",
-        "row": 2,
-        "col": 0,
-        "dir": "V"
-      },
-      {
-        "id": "w3",
-        "word": "HİS",
-        "row": 0,
-        "col": 0,
-        "dir": "V"
-      },
-      {
-        "id": "w4",
-        "word": "AHİ",
-        "row": 2,
-        "col": 3,
-        "dir": "V"
-      }
+    "targetWords": [
+      "SÜR",
+      "HİS",
+      "AHİ",
+      "SÜRAHİ"
     ],
     "bonusWords": []
   },
@@ -2322,35 +1095,11 @@ const WOW_LEVELS = [
       "A",
       "N"
     ],
-    "words": [
-      {
-        "id": "w1",
-        "word": "FİNCAN",
-        "row": 2,
-        "col": 0,
-        "dir": "H"
-      },
-      {
-        "id": "w2",
-        "word": "CAN",
-        "row": 0,
-        "col": 2,
-        "dir": "V"
-      },
-      {
-        "id": "w3",
-        "word": "ANİ",
-        "row": 0,
-        "col": 1,
-        "dir": "V"
-      },
-      {
-        "id": "w4",
-        "word": "CİN",
-        "row": 2,
-        "col": 3,
-        "dir": "V"
-      }
+    "targetWords": [
+      "CAN",
+      "ANİ",
+      "CİN",
+      "FİNCAN"
     ],
     "bonusWords": [
       "FAN"
@@ -2367,28 +1116,10 @@ const WOW_LEVELS = [
       "D",
       "E"
     ],
-    "words": [
-      {
-        "id": "w1",
-        "word": "PERDE",
-        "row": 1,
-        "col": 0,
-        "dir": "H"
-      },
-      {
-        "id": "w2",
-        "word": "PER",
-        "row": 1,
-        "col": 0,
-        "dir": "V"
-      },
-      {
-        "id": "w3",
-        "word": "DER",
-        "row": 0,
-        "col": 1,
-        "dir": "V"
-      }
+    "targetWords": [
+      "PER",
+      "DER",
+      "PERDE"
     ],
     "bonusWords": []
   },
@@ -2403,35 +1134,11 @@ const WOW_LEVELS = [
       "A",
       "K"
     ],
-    "words": [
-      {
-        "id": "w1",
-        "word": "YATAK",
-        "row": 1,
-        "col": 0,
-        "dir": "H"
-      },
-      {
-        "id": "w2",
-        "word": "YAT",
-        "row": 1,
-        "col": 0,
-        "dir": "V"
-      },
-      {
-        "id": "w3",
-        "word": "KAT",
-        "row": 0,
-        "col": 1,
-        "dir": "V"
-      },
-      {
-        "id": "w4",
-        "word": "ATAK",
-        "row": 1,
-        "col": 1,
-        "dir": "V"
-      }
+    "targetWords": [
+      "YAT",
+      "KAT",
+      "ATAK",
+      "YATAK"
     ],
     "bonusWords": [
       "TAK"
@@ -2448,35 +1155,11 @@ const WOW_LEVELS = [
       "B",
       "A"
     ],
-    "words": [
-      {
-        "id": "w1",
-        "word": "LAMBA",
-        "row": 2,
-        "col": 0,
-        "dir": "H"
-      },
-      {
-        "id": "w2",
-        "word": "BAL",
-        "row": 0,
-        "col": 0,
-        "dir": "V"
-      },
-      {
-        "id": "w3",
-        "word": "MAL",
-        "row": 1,
-        "col": 1,
-        "dir": "V"
-      },
-      {
-        "id": "w4",
-        "word": "AMA",
-        "row": 0,
-        "col": 1,
-        "dir": "V"
-      }
+    "targetWords": [
+      "BAL",
+      "MAL",
+      "AMA",
+      "LAMBA"
     ],
     "bonusWords": [
       "ALA"
@@ -2494,35 +1177,11 @@ const WOW_LEVELS = [
       "L",
       "E"
     ],
-    "words": [
-      {
-        "id": "w1",
-        "word": "ŞELALE",
-        "row": 0,
-        "col": 0,
-        "dir": "H"
-      },
-      {
-        "id": "w2",
-        "word": "ŞAL",
-        "row": 0,
-        "col": 0,
-        "dir": "V"
-      },
-      {
-        "id": "w3",
-        "word": "LAL",
-        "row": 0,
-        "col": 2,
-        "dir": "V"
-      },
-      {
-        "id": "w4",
-        "word": "ELA",
-        "row": 0,
-        "col": 1,
-        "dir": "V"
-      }
+    "targetWords": [
+      "ŞAL",
+      "LAL",
+      "ELA",
+      "ŞELALE"
     ],
     "bonusWords": [
       "LALE"
@@ -2540,35 +1199,11 @@ const WOW_LEVELS = [
       "R",
       "A"
     ],
-    "words": [
-      {
-        "id": "w1",
-        "word": "MAĞARA",
-        "row": 2,
-        "col": 0,
-        "dir": "H"
-      },
-      {
-        "id": "w2",
-        "word": "AĞA",
-        "row": 2,
-        "col": 1,
-        "dir": "V"
-      },
-      {
-        "id": "w3",
-        "word": "ARA",
-        "row": 0,
-        "col": 1,
-        "dir": "V"
-      },
-      {
-        "id": "w4",
-        "word": "AMA",
-        "row": 1,
-        "col": 0,
-        "dir": "V"
-      }
+    "targetWords": [
+      "AĞA",
+      "ARA",
+      "AMA",
+      "MAĞARA"
     ],
     "bonusWords": []
   },
@@ -2583,28 +1218,10 @@ const WOW_LEVELS = [
       "U",
       "R"
     ],
-    "words": [
-      {
-        "id": "w1",
-        "word": "VAPUR",
-        "row": 1,
-        "col": 0,
-        "dir": "H"
-      },
-      {
-        "id": "w2",
-        "word": "VAR",
-        "row": 1,
-        "col": 0,
-        "dir": "V"
-      },
-      {
-        "id": "w3",
-        "word": "RAP",
-        "row": 0,
-        "col": 1,
-        "dir": "V"
-      }
+    "targetWords": [
+      "VAR",
+      "RAP",
+      "VAPUR"
     ],
     "bonusWords": [
       "PURA"
@@ -2621,35 +1238,11 @@ const WOW_LEVELS = [
       "I",
       "K"
     ],
-    "words": [
-      {
-        "id": "w1",
-        "word": "KAYIK",
-        "row": 2,
-        "col": 0,
-        "dir": "H"
-      },
-      {
-        "id": "w2",
-        "word": "AYI",
-        "row": 2,
-        "col": 1,
-        "dir": "V"
-      },
-      {
-        "id": "w3",
-        "word": "KAY",
-        "row": 2,
-        "col": 0,
-        "dir": "V"
-      },
-      {
-        "id": "w4",
-        "word": "YIK",
-        "row": 0,
-        "col": 0,
-        "dir": "V"
-      }
+    "targetWords": [
+      "AYI",
+      "KAY",
+      "YIK",
+      "KAYIK"
     ],
     "bonusWords": []
   },
@@ -2664,35 +1257,11 @@ const WOW_LEVELS = [
       "Y",
       "O"
     ],
-    "words": [
-      {
-        "id": "w1",
-        "word": "RADYO",
-        "row": 2,
-        "col": 0,
-        "dir": "H"
-      },
-      {
-        "id": "w2",
-        "word": "DAR",
-        "row": 0,
-        "col": 0,
-        "dir": "V"
-      },
-      {
-        "id": "w3",
-        "word": "ODA",
-        "row": 0,
-        "col": 1,
-        "dir": "V"
-      },
-      {
-        "id": "w4",
-        "word": "OYA",
-        "row": 1,
-        "col": 3,
-        "dir": "V"
-      }
+    "targetWords": [
+      "DAR",
+      "ODA",
+      "OYA",
+      "RADYO"
     ],
     "bonusWords": [
       "RAY"
@@ -2709,28 +1278,10 @@ const WOW_LEVELS = [
       "İ",
       "K"
     ],
-    "words": [
-      {
-        "id": "w1",
-        "word": "MÜZİK",
-        "row": 2,
-        "col": 0,
-        "dir": "H"
-      },
-      {
-        "id": "w2",
-        "word": "KİM",
-        "row": 0,
-        "col": 0,
-        "dir": "V"
-      },
-      {
-        "id": "w3",
-        "word": "KÜZ",
-        "row": 1,
-        "col": 1,
-        "dir": "V"
-      }
+    "targetWords": [
+      "KİM",
+      "KÜZ",
+      "MÜZİK"
     ],
     "bonusWords": []
   },
@@ -2745,28 +1296,10 @@ const WOW_LEVELS = [
       "İ",
       "R"
     ],
-    "words": [
-      {
-        "id": "w1",
-        "word": "NEHİR",
-        "row": 1,
-        "col": 0,
-        "dir": "H"
-      },
-      {
-        "id": "w2",
-        "word": "HER",
-        "row": 0,
-        "col": 1,
-        "dir": "V"
-      },
-      {
-        "id": "w3",
-        "word": "İNE",
-        "row": 0,
-        "col": 0,
-        "dir": "V"
-      }
+    "targetWords": [
+      "HER",
+      "İNE",
+      "NEHİR"
     ],
     "bonusWords": [
       "HİN"
@@ -2783,28 +1316,10 @@ const WOW_LEVELS = [
       "U",
       "R"
     ],
-    "words": [
-      {
-        "id": "w1",
-        "word": "ÇAMUR",
-        "row": 2,
-        "col": 0,
-        "dir": "H"
-      },
-      {
-        "id": "w2",
-        "word": "ÇAM",
-        "row": 2,
-        "col": 0,
-        "dir": "V"
-      },
-      {
-        "id": "w3",
-        "word": "RUM",
-        "row": 0,
-        "col": 2,
-        "dir": "V"
-      }
+    "targetWords": [
+      "ÇAM",
+      "RUM",
+      "ÇAMUR"
     ],
     "bonusWords": []
   },
@@ -2819,28 +1334,10 @@ const WOW_LEVELS = [
       "E",
       "K"
     ],
-    "words": [
-      {
-        "id": "w1",
-        "word": "ÇİÇEK",
-        "row": 2,
-        "col": 0,
-        "dir": "H"
-      },
-      {
-        "id": "w2",
-        "word": "ÇEK",
-        "row": 2,
-        "col": 0,
-        "dir": "V"
-      },
-      {
-        "id": "w3",
-        "word": "KİÇ",
-        "row": 0,
-        "col": 0,
-        "dir": "V"
-      }
+    "targetWords": [
+      "ÇEK",
+      "KİÇ",
+      "ÇİÇEK"
     ],
     "bonusWords": []
   },
@@ -2855,35 +1352,11 @@ const WOW_LEVELS = [
       "U",
       "K"
     ],
-    "words": [
-      {
-        "id": "w1",
-        "word": "PAMUK",
-        "row": 2,
-        "col": 0,
-        "dir": "H"
-      },
-      {
-        "id": "w2",
-        "word": "KUPA",
-        "row": 0,
-        "col": 0,
-        "dir": "V"
-      },
-      {
-        "id": "w3",
-        "word": "KAP",
-        "row": 1,
-        "col": 1,
-        "dir": "V"
-      },
-      {
-        "id": "w4",
-        "word": "KAMU",
-        "row": 0,
-        "col": 2,
-        "dir": "V"
-      }
+    "targetWords": [
+      "KAP",
+      "KUPA",
+      "KAMU",
+      "PAMUK"
     ],
     "bonusWords": [
       "PAK",
@@ -2900,28 +1373,10 @@ const WOW_LEVELS = [
       "E",
       "N"
     ],
-    "words": [
-      {
-        "id": "w1",
-        "word": "TREN",
-        "row": 2,
-        "col": 0,
-        "dir": "H"
-      },
-      {
-        "id": "w2",
-        "word": "TER",
-        "row": 2,
-        "col": 0,
-        "dir": "V"
-      },
-      {
-        "id": "w3",
-        "word": "RET",
-        "row": 0,
-        "col": 0,
-        "dir": "V"
-      }
+    "targetWords": [
+      "TER",
+      "RET",
+      "TREN"
     ],
     "bonusWords": []
   },
@@ -2935,35 +1390,11 @@ const WOW_LEVELS = [
       "P",
       "I"
     ],
-    "words": [
-      {
-        "id": "w1",
-        "word": "KAPI",
-        "row": 2,
-        "col": 0,
-        "dir": "H"
-      },
-      {
-        "id": "w2",
-        "word": "PAK",
-        "row": 0,
-        "col": 0,
-        "dir": "V"
-      },
-      {
-        "id": "w3",
-        "word": "KAP",
-        "row": 2,
-        "col": 0,
-        "dir": "V"
-      },
-      {
-        "id": "w4",
-        "word": "AK",
-        "row": 1,
-        "col": 0,
-        "dir": "V"
-      }
+    "targetWords": [
+      "AK",
+      "PAK",
+      "KAP",
+      "KAPI"
     ],
     "bonusWords": []
   },
@@ -2977,35 +1408,11 @@ const WOW_LEVELS = [
       "T",
       "I"
     ],
-    "words": [
-      {
-        "id": "w1",
-        "word": "ÇATI",
-        "row": 2,
-        "col": 0,
-        "dir": "H"
-      },
-      {
-        "id": "w2",
-        "word": "AÇI",
-        "row": 1,
-        "col": 0,
-        "dir": "V"
-      },
-      {
-        "id": "w3",
-        "word": "TAÇ",
-        "row": 0,
-        "col": 0,
-        "dir": "V"
-      },
-      {
-        "id": "w4",
-        "word": "ÇAT",
-        "row": 1,
-        "col": 1,
-        "dir": "V"
-      }
+    "targetWords": [
+      "AÇI",
+      "TAÇ",
+      "ÇAT",
+      "ÇATI"
     ],
     "bonusWords": []
   },
@@ -3021,28 +1428,10 @@ const WOW_LEVELS = [
       "U",
       "R"
     ],
-    "words": [
-      {
-        "id": "w1",
-        "word": "YAĞMUR",
-        "row": 2,
-        "col": 0,
-        "dir": "H"
-      },
-      {
-        "id": "w2",
-        "word": "YAĞ",
-        "row": 2,
-        "col": 0,
-        "dir": "V"
-      },
-      {
-        "id": "w3",
-        "word": "RUM",
-        "row": 0,
-        "col": 3,
-        "dir": "V"
-      }
+    "targetWords": [
+      "YAĞ",
+      "RUM",
+      "YAĞMUR"
     ],
     "bonusWords": [
       "AĞU"
@@ -3060,28 +1449,10 @@ const WOW_LEVELS = [
       "E",
       "K"
     ],
-    "words": [
-      {
-        "id": "w1",
-        "word": "ŞİMŞEK",
-        "row": 1,
-        "col": 0,
-        "dir": "H"
-      },
-      {
-        "id": "w2",
-        "word": "KİM",
-        "row": 0,
-        "col": 1,
-        "dir": "V"
-      },
-      {
-        "id": "w3",
-        "word": "ŞEK",
-        "row": 1,
-        "col": 0,
-        "dir": "V"
-      }
+    "targetWords": [
+      "KİM",
+      "ŞEK",
+      "ŞİMŞEK"
     ],
     "bonusWords": []
   },
@@ -3096,28 +1467,10 @@ const WOW_LEVELS = [
       "E",
       "N"
     ],
-    "words": [
-      {
-        "id": "w1",
-        "word": "GÜVEN",
-        "row": 1,
-        "col": 0,
-        "dir": "H"
-      },
-      {
-        "id": "w2",
-        "word": "GÜN",
-        "row": 1,
-        "col": 0,
-        "dir": "V"
-      },
-      {
-        "id": "w3",
-        "word": "GEN",
-        "row": 0,
-        "col": 3,
-        "dir": "V"
-      }
+    "targetWords": [
+      "GÜN",
+      "GEN",
+      "GÜVEN"
     ],
     "bonusWords": []
   },
@@ -3132,28 +1485,10 @@ const WOW_LEVELS = [
       "G",
       "İ"
     ],
-    "words": [
-      {
-        "id": "w1",
-        "word": "SEVGİ",
-        "row": 0,
-        "col": 0,
-        "dir": "H"
-      },
-      {
-        "id": "w2",
-        "word": "SEV",
-        "row": 0,
-        "col": 0,
-        "dir": "V"
-      },
-      {
-        "id": "w3",
-        "word": "ESİ",
-        "row": 0,
-        "col": 1,
-        "dir": "V"
-      }
+    "targetWords": [
+      "SEV",
+      "ESİ",
+      "SEVGİ"
     ],
     "bonusWords": []
   },
@@ -3168,28 +1503,10 @@ const WOW_LEVELS = [
       "U",
       "R"
     ],
-    "words": [
-      {
-        "id": "w1",
-        "word": "HUZUR",
-        "row": 2,
-        "col": 0,
-        "dir": "H"
-      },
-      {
-        "id": "w2",
-        "word": "RUH",
-        "row": 0,
-        "col": 0,
-        "dir": "V"
-      },
-      {
-        "id": "w3",
-        "word": "ZUR",
-        "row": 1,
-        "col": 1,
-        "dir": "V"
-      }
+    "targetWords": [
+      "RUH",
+      "ZUR",
+      "HUZUR"
     ],
     "bonusWords": []
   },
@@ -3205,35 +1522,11 @@ const WOW_LEVELS = [
       "E",
       "Ş"
     ],
-    "words": [
-      {
-        "id": "w1",
-        "word": "KARDEŞ",
-        "row": 2,
-        "col": 0,
-        "dir": "H"
-      },
-      {
-        "id": "w2",
-        "word": "KAŞ",
-        "row": 2,
-        "col": 0,
-        "dir": "V"
-      },
-      {
-        "id": "w3",
-        "word": "DAR",
-        "row": 1,
-        "col": 1,
-        "dir": "V"
-      },
-      {
-        "id": "w4",
-        "word": "ARK",
-        "row": 0,
-        "col": 0,
-        "dir": "V"
-      }
+    "targetWords": [
+      "KAŞ",
+      "DAR",
+      "ARK",
+      "KARDEŞ"
     ],
     "bonusWords": [
       "ŞEK"
@@ -3249,35 +1542,11 @@ const WOW_LEVELS = [
       "L",
       "E"
     ],
-    "words": [
-      {
-        "id": "w1",
-        "word": "AİLE",
-        "row": 2,
-        "col": 0,
-        "dir": "H"
-      },
-      {
-        "id": "w2",
-        "word": "ALİ",
-        "row": 2,
-        "col": 0,
-        "dir": "V"
-      },
-      {
-        "id": "w3",
-        "word": "ELA",
-        "row": 0,
-        "col": 0,
-        "dir": "V"
-      },
-      {
-        "id": "w4",
-        "word": "İLE",
-        "row": 2,
-        "col": 1,
-        "dir": "V"
-      }
+    "targetWords": [
+      "ALİ",
+      "ELA",
+      "İLE",
+      "AİLE"
     ],
     "bonusWords": []
   },
@@ -3292,31 +1561,13 @@ const WOW_LEVELS = [
       "L",
       "U"
     ],
-    "words": [
-      {
-        "id": "w1",
-        "word": "MUTLU",
-        "row": 1,
-        "col": 0,
-        "dir": "H"
-      },
-      {
-        "id": "w2",
-        "word": "ULU",
-        "row": 1,
-        "col": 1,
-        "dir": "V"
-      },
-      {
-        "id": "w3",
-        "word": "TUL",
-        "row": 0,
-        "col": 1,
-        "dir": "V"
-      }
+    "targetWords": [
+      "ULU",
+      "TUL",
+      "MUTLU"
     ],
     "bonusWords": [
-      "KUM"
+      "MUT"
     ]
   },
   {
@@ -3330,35 +1581,11 @@ const WOW_LEVELS = [
       "İ",
       "T"
     ],
-    "words": [
-      {
-        "id": "w1",
-        "word": "KİLİT",
-        "row": 2,
-        "col": 0,
-        "dir": "H"
-      },
-      {
-        "id": "w2",
-        "word": "KİL",
-        "row": 2,
-        "col": 0,
-        "dir": "V"
-      },
-      {
-        "id": "w3",
-        "word": "İKİ",
-        "row": 1,
-        "col": 0,
-        "dir": "V"
-      },
-      {
-        "id": "w4",
-        "word": "TİK",
-        "row": 0,
-        "col": 0,
-        "dir": "V"
-      }
+    "targetWords": [
+      "KİL",
+      "İKİ",
+      "TİK",
+      "KİLİT"
     ],
     "bonusWords": [
       "İLK"
@@ -3374,28 +1601,10 @@ const WOW_LEVELS = [
       "D",
       "İ"
     ],
-    "words": [
-      {
-        "id": "w1",
-        "word": "VADİ",
-        "row": 0,
-        "col": 0,
-        "dir": "H"
-      },
-      {
-        "id": "w2",
-        "word": "ADİ",
-        "row": 0,
-        "col": 1,
-        "dir": "V"
-      },
-      {
-        "id": "w3",
-        "word": "DAİ",
-        "row": 0,
-        "col": 2,
-        "dir": "V"
-      }
+    "targetWords": [
+      "ADİ",
+      "DAİ",
+      "VADİ"
     ],
     "bonusWords": []
   },
@@ -3412,35 +1621,11 @@ const WOW_LEVELS = [
       "N",
       "E"
     ],
-    "words": [
-      {
-        "id": "w1",
-        "word": "KESTANE",
-        "row": 3,
-        "col": 0,
-        "dir": "H"
-      },
-      {
-        "id": "w2",
-        "word": "KENT",
-        "row": 3,
-        "col": 0,
-        "dir": "V"
-      },
-      {
-        "id": "w3",
-        "word": "TANE",
-        "row": 0,
-        "col": 1,
-        "dir": "V"
-      },
-      {
-        "id": "w4",
-        "word": "KAST",
-        "row": 1,
-        "col": 2,
-        "dir": "V"
-      }
+    "targetWords": [
+      "KENT",
+      "TANE",
+      "KAST",
+      "KESTANE"
     ],
     "bonusWords": [
       "KAS",
@@ -3461,35 +1646,11 @@ const WOW_LEVELS = [
       "R",
       "E"
     ],
-    "words": [
-      {
-        "id": "w1",
-        "word": "PENCERE",
-        "row": 1,
-        "col": 0,
-        "dir": "H"
-      },
-      {
-        "id": "w2",
-        "word": "PERE",
-        "row": 1,
-        "col": 0,
-        "dir": "V"
-      },
-      {
-        "id": "w3",
-        "word": "EREN",
-        "row": 1,
-        "col": 1,
-        "dir": "V"
-      },
-      {
-        "id": "w4",
-        "word": "CER",
-        "row": 0,
-        "col": 1,
-        "dir": "V"
-      }
+    "targetWords": [
+      "CER",
+      "PERE",
+      "EREN",
+      "PENCERE"
     ],
     "bonusWords": []
   },
@@ -3506,35 +1667,11 @@ const WOW_LEVELS = [
       "R",
       "E"
     ],
-    "words": [
-      {
-        "id": "w1",
-        "word": "TENCERE",
-        "row": 0,
-        "col": 0,
-        "dir": "H"
-      },
-      {
-        "id": "w2",
-        "word": "TERE",
-        "row": 0,
-        "col": 0,
-        "dir": "V"
-      },
-      {
-        "id": "w3",
-        "word": "EREN",
-        "row": 0,
-        "col": 1,
-        "dir": "V"
-      },
-      {
-        "id": "w4",
-        "word": "TER",
-        "row": 0,
-        "col": 0,
-        "dir": "V"
-      }
+    "targetWords": [
+      "TER",
+      "TERE",
+      "EREN",
+      "TENCERE"
     ],
     "bonusWords": [
       "NET"
@@ -3554,35 +1691,11 @@ const WOW_LEVELS = [
       "E",
       "N"
     ],
-    "words": [
-      {
-        "id": "w1",
-        "word": "MERDİVEN",
-        "row": 2,
-        "col": 0,
-        "dir": "H"
-      },
-      {
-        "id": "w2",
-        "word": "DEV",
-        "row": 1,
-        "col": 1,
-        "dir": "V"
-      },
-      {
-        "id": "w3",
-        "word": "DİN",
-        "row": 2,
-        "col": 3,
-        "dir": "V"
-      },
-      {
-        "id": "w4",
-        "word": "NEM",
-        "row": 0,
-        "col": 0,
-        "dir": "V"
-      }
+    "targetWords": [
+      "DEV",
+      "DİN",
+      "NEM",
+      "MERDİVEN"
     ],
     "bonusWords": [
       "DEM"
@@ -3601,35 +1714,11 @@ const WOW_LEVELS = [
       "E",
       "R"
     ],
-    "words": [
-      {
-        "id": "w1",
-        "word": "SEMAVER",
-        "row": 1,
-        "col": 0,
-        "dir": "H"
-      },
-      {
-        "id": "w2",
-        "word": "SEVER",
-        "row": 1,
-        "col": 0,
-        "dir": "V"
-      },
-      {
-        "id": "w3",
-        "word": "SERA",
-        "row": 0,
-        "col": 1,
-        "dir": "V"
-      },
-      {
-        "id": "w4",
-        "word": "VAR",
-        "row": 0,
-        "col": 3,
-        "dir": "V"
-      }
+    "targetWords": [
+      "VAR",
+      "SERA",
+      "SEVER",
+      "SEMAVER"
     ],
     "bonusWords": [
       "MAS",
@@ -3651,35 +1740,11 @@ const WOW_LEVELS = [
       "I",
       "K"
     ],
-    "words": [
-      {
-        "id": "w1",
-        "word": "ÇAYDANLIK",
-        "row": 1,
-        "col": 0,
-        "dir": "H"
-      },
-      {
-        "id": "w2",
-        "word": "AYAK",
-        "row": 1,
-        "col": 1,
-        "dir": "V"
-      },
-      {
-        "id": "w3",
-        "word": "KAYA",
-        "row": 0,
-        "col": 1,
-        "dir": "V"
-      },
-      {
-        "id": "w4",
-        "word": "ÇAY",
-        "row": 1,
-        "col": 0,
-        "dir": "V"
-      }
+    "targetWords": [
+      "ÇAY",
+      "AYAK",
+      "KAYA",
+      "ÇAYDANLIK"
     ],
     "bonusWords": [
       "DAL",
@@ -3700,35 +1765,11 @@ const WOW_LEVELS = [
       "İ",
       "L"
     ],
-    "words": [
-      {
-        "id": "w1",
-        "word": "KARANFİL",
-        "row": 1,
-        "col": 0,
-        "dir": "H"
-      },
-      {
-        "id": "w2",
-        "word": "KARA",
-        "row": 1,
-        "col": 0,
-        "dir": "V"
-      },
-      {
-        "id": "w3",
-        "word": "NİL",
-        "row": 1,
-        "col": 4,
-        "dir": "V"
-      },
-      {
-        "id": "w4",
-        "word": "FAL",
-        "row": 0,
-        "col": 1,
-        "dir": "V"
-      }
+    "targetWords": [
+      "NİL",
+      "FAL",
+      "KARA",
+      "KARANFİL"
     ],
     "bonusWords": [
       "FAR",
@@ -3749,35 +1790,11 @@ const WOW_LEVELS = [
       "A",
       "L"
     ],
-    "words": [
-      {
-        "id": "w1",
-        "word": "PORTAKAL",
-        "row": 2,
-        "col": 0,
-        "dir": "H"
-      },
-      {
-        "id": "w2",
-        "word": "ORTAK",
-        "row": 2,
-        "col": 1,
-        "dir": "V"
-      },
-      {
-        "id": "w3",
-        "word": "PARK",
-        "row": 2,
-        "col": 0,
-        "dir": "V"
-      },
-      {
-        "id": "w4",
-        "word": "KOTA",
-        "row": 0,
-        "col": 3,
-        "dir": "V"
-      }
+    "targetWords": [
+      "PARK",
+      "KOTA",
+      "ORTAK",
+      "PORTAKAL"
     ],
     "bonusWords": [
       "POT",
@@ -3799,35 +1816,11 @@ const WOW_LEVELS = [
       "N",
       "A"
     ],
-    "words": [
-      {
-        "id": "w1",
-        "word": "MANDALİNA",
-        "row": 3,
-        "col": 0,
-        "dir": "H"
-      },
-      {
-        "id": "w2",
-        "word": "ADAM",
-        "row": 0,
-        "col": 0,
-        "dir": "V"
-      },
-      {
-        "id": "w3",
-        "word": "MANA",
-        "row": 3,
-        "col": 0,
-        "dir": "V"
-      },
-      {
-        "id": "w4",
-        "word": "ALAN",
-        "row": 3,
-        "col": 1,
-        "dir": "V"
-      }
+    "targetWords": [
+      "ADAM",
+      "MANA",
+      "ALAN",
+      "MANDALİNA"
     ],
     "bonusWords": [
       "DAL",
@@ -3848,35 +1841,11 @@ const WOW_LEVELS = [
       "A",
       "N"
     ],
-    "words": [
-      {
-        "id": "w1",
-        "word": "FİDAN",
-        "row": 1,
-        "col": 2,
-        "dir": "H"
-      },
-      {
-        "id": "w2",
-        "word": "DİL",
-        "row": 0,
-        "col": 3,
-        "dir": "V"
-      },
-      {
-        "id": "w3",
-        "word": "FİL",
-        "row": 1,
-        "col": 2,
-        "dir": "V"
-      },
-      {
-        "id": "w4",
-        "word": "GÜL",
-        "row": 3,
-        "col": 0,
-        "dir": "H"
-      }
+    "targetWords": [
+      "DİL",
+      "FİL",
+      "GÜL",
+      "FİDAN"
     ],
     "bonusWords": [
       "ANİ"
@@ -3895,35 +1864,11 @@ const WOW_LEVELS = [
       "Z",
       "Ü"
     ],
-    "words": [
-      {
-        "id": "w1",
-        "word": "GÖKYÜZÜ",
-        "row": 1,
-        "col": 0,
-        "dir": "H"
-      },
-      {
-        "id": "w2",
-        "word": "GÖK",
-        "row": 1,
-        "col": 0,
-        "dir": "V"
-      },
-      {
-        "id": "w3",
-        "word": "GÖZ",
-        "row": 0,
-        "col": 1,
-        "dir": "V"
-      },
-      {
-        "id": "w4",
-        "word": "KÖZ",
-        "row": 1,
-        "col": 2,
-        "dir": "V"
-      }
+    "targetWords": [
+      "GÖK",
+      "GÖZ",
+      "KÖZ",
+      "GÖKYÜZÜ"
     ],
     "bonusWords": [
       "YÜZ"
@@ -3942,35 +1887,11 @@ const WOW_LEVELS = [
       "U",
       "K"
     ],
-    "words": [
-      {
-        "id": "w1",
-        "word": "DOSTLUK",
-        "row": 2,
-        "col": 0,
-        "dir": "H"
-      },
-      {
-        "id": "w2",
-        "word": "DOST",
-        "row": 2,
-        "col": 0,
-        "dir": "V"
-      },
-      {
-        "id": "w3",
-        "word": "KOD",
-        "row": 0,
-        "col": 0,
-        "dir": "V"
-      },
-      {
-        "id": "w4",
-        "word": "TOS",
-        "row": 1,
-        "col": 1,
-        "dir": "V"
-      }
+    "targetWords": [
+      "KOD",
+      "TOS",
+      "DOST",
+      "DOSTLUK"
     ],
     "bonusWords": [
       "OT",
@@ -3991,39 +1912,14 @@ const WOW_LEVELS = [
       "U",
       "K"
     ],
-    "words": [
-      {
-        "id": "w1",
-        "word": "MUTLULUK",
-        "row": 1,
-        "col": 0,
-        "dir": "H"
-      },
-      {
-        "id": "w2",
-        "word": "MUTLU",
-        "row": 1,
-        "col": 0,
-        "dir": "V"
-      },
-      {
-        "id": "w3",
-        "word": "KUT",
-        "row": 0,
-        "col": 1,
-        "dir": "V"
-      },
-      {
-        "id": "w4",
-        "word": "ULU",
-        "row": 0,
-        "col": 3,
-        "dir": "V"
-      }
+    "targetWords": [
+      "KUT",
+      "ULU",
+      "MUTLU",
+      "MUTLULUK"
     ],
     "bonusWords": [
-      "TUL",
-      "KUM"
+      "TUL"
     ]
   },
   {
@@ -4038,35 +1934,11 @@ const WOW_LEVELS = [
       "R",
       "I"
     ],
-    "words": [
-      {
-        "id": "w1",
-        "word": "BAŞARI",
-        "row": 1,
-        "col": 0,
-        "dir": "H"
-      },
-      {
-        "id": "w2",
-        "word": "BAŞ",
-        "row": 1,
-        "col": 0,
-        "dir": "V"
-      },
-      {
-        "id": "w3",
-        "word": "ARI",
-        "row": 1,
-        "col": 1,
-        "dir": "V"
-      },
-      {
-        "id": "w4",
-        "word": "BAR",
-        "row": 0,
-        "col": 1,
-        "dir": "V"
-      }
+    "targetWords": [
+      "BAŞ",
+      "ARI",
+      "BAR",
+      "BAŞARI"
     ],
     "bonusWords": [
       "AŞI"
@@ -4085,35 +1957,11 @@ const WOW_LEVELS = [
       "E",
       "K"
     ],
-    "words": [
-      {
-        "id": "w1",
-        "word": "GELECEK",
-        "row": 1,
-        "col": 0,
-        "dir": "H"
-      },
-      {
-        "id": "w2",
-        "word": "GELE",
-        "row": 1,
-        "col": 0,
-        "dir": "V"
-      },
-      {
-        "id": "w3",
-        "word": "EGE",
-        "row": 0,
-        "col": 0,
-        "dir": "V"
-      },
-      {
-        "id": "w4",
-        "word": "GEL",
-        "row": 1,
-        "col": 0,
-        "dir": "V"
-      }
+    "targetWords": [
+      "EGE",
+      "GEL",
+      "GELE",
+      "GELECEK"
     ],
     "bonusWords": [
       "LEK"
@@ -4131,35 +1979,11 @@ const WOW_LEVELS = [
       "K",
       "A"
     ],
-    "words": [
-      {
-        "id": "w1",
-        "word": "HARİKA",
-        "row": 2,
-        "col": 0,
-        "dir": "H"
-      },
-      {
-        "id": "w2",
-        "word": "HAK",
-        "row": 2,
-        "col": 0,
-        "dir": "V"
-      },
-      {
-        "id": "w3",
-        "word": "KİR",
-        "row": 0,
-        "col": 2,
-        "dir": "V"
-      },
-      {
-        "id": "w4",
-        "word": "ARİ",
-        "row": 2,
-        "col": 1,
-        "dir": "V"
-      }
+    "targetWords": [
+      "HAK",
+      "KİR",
+      "ARİ",
+      "HARİKA"
     ],
     "bonusWords": [
       "ARA"
@@ -4179,35 +2003,11 @@ const WOW_LEVELS = [
       "Ü",
       "K"
     ],
-    "words": [
-      {
-        "id": "w1",
-        "word": "ÖZGÜRLÜK",
-        "row": 2,
-        "col": 0,
-        "dir": "H"
-      },
-      {
-        "id": "w2",
-        "word": "ÖZGÜR",
-        "row": 2,
-        "col": 0,
-        "dir": "V"
-      },
-      {
-        "id": "w3",
-        "word": "GÖZ",
-        "row": 1,
-        "col": 0,
-        "dir": "V"
-      },
-      {
-        "id": "w4",
-        "word": "KÖZ",
-        "row": 0,
-        "col": 1,
-        "dir": "V"
-      }
+    "targetWords": [
+      "GÖZ",
+      "KÖZ",
+      "ÖZGÜR",
+      "ÖZGÜRLÜK"
     ],
     "bonusWords": [
       "KÜL"
@@ -4228,35 +2028,11 @@ const WOW_LEVELS = [
       "İ",
       "K"
     ],
-    "words": [
-      {
-        "id": "w1",
-        "word": "KARDEŞLİK",
-        "row": 1,
-        "col": 0,
-        "dir": "H"
-      },
-      {
-        "id": "w2",
-        "word": "KARDEŞ",
-        "row": 1,
-        "col": 0,
-        "dir": "V"
-      },
-      {
-        "id": "w3",
-        "word": "KALE",
-        "row": 0,
-        "col": 1,
-        "dir": "V"
-      },
-      {
-        "id": "w4",
-        "word": "DİL",
-        "row": 1,
-        "col": 3,
-        "dir": "V"
-      }
+    "targetWords": [
+      "DİL",
+      "KALE",
+      "KARDEŞ",
+      "KARDEŞLİK"
     ],
     "bonusWords": [
       "ŞEK",
@@ -4279,35 +2055,11 @@ const WOW_LEVELS = [
       "E",
       "T"
     ],
-    "words": [
-      {
-        "id": "w1",
-        "word": "CUMHURİYET",
-        "row": 2,
-        "col": 0,
-        "dir": "H"
-      },
-      {
-        "id": "w2",
-        "word": "HURİ",
-        "row": 1,
-        "col": 1,
-        "dir": "V"
-      },
-      {
-        "id": "w3",
-        "word": "YURT",
-        "row": 1,
-        "col": 4,
-        "dir": "V"
-      },
-      {
-        "id": "w4",
-        "word": "RUH",
-        "row": 0,
-        "col": 3,
-        "dir": "V"
-      }
+    "targetWords": [
+      "RUH",
+      "HURİ",
+      "YURT",
+      "CUMHURİYET"
     ],
     "bonusWords": [
       "MİR",
@@ -4327,38 +2079,13 @@ const WOW_LEVELS = [
       "Y",
       "E"
     ],
-    "words": [
-      {
-        "id": "w1",
-        "word": "TÜRKİYE",
-        "row": 2,
-        "col": 0,
-        "dir": "H"
-      },
-      {
-        "id": "w2",
-        "word": "TÜRK",
-        "row": 2,
-        "col": 0,
-        "dir": "V"
-      },
-      {
-        "id": "w3",
-        "word": "YÜK",
-        "row": 1,
-        "col": 1,
-        "dir": "V"
-      },
-      {
-        "id": "w4",
-        "word": "TER",
-        "row": 0,
-        "col": 2,
-        "dir": "V"
-      }
+    "targetWords": [
+      "YÜK",
+      "TER",
+      "TÜRK",
+      "TÜRKİYE"
     ],
     "bonusWords": [
-      "İYİ",
       "TİK"
     ]
   }

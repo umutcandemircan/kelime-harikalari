@@ -1,16 +1,15 @@
-// Words of Wonders (WoW) - Authentic 100 TDK Levels Engine
+// Kelime Harikaları - 100 Doğrulanmış TDK Seviyeli Kelime Oyunu Motoru
 class WoWGame {
   constructor() {
-    this.storageKey = 'wow_official_save_v4';
-    this.secretSalt = 'wow_pure_tdk_100_rich';
+    this.storageKey = 'kelime_harikalari_save_v1';
+    this.secretSalt = 'kelime_harikalari_tdk_100';
 
     this.state = this.loadSecureState();
     this.currentWord = "";
     this.selectedNodes = [];
     this.isDragging = false;
 
-    // Crossword Grid State
-    this.cellMap = new Map();
+    // Game Board State
     this.solvedWords = new Set();
     this.bonusWordsFound = new Set();
 
@@ -24,7 +23,7 @@ class WoWGame {
     this.homeCoins = document.getElementById('home-coins');
 
     // Game Elements
-    this.boardEl = document.getElementById('crossword-board');
+    this.boardEl = document.getElementById('word-board');
     this.letterWheel = document.getElementById('letter-wheel');
     this.wheelSvg = document.getElementById('wheel-lines');
     this.wordPreview = document.getElementById('current-word-preview');
@@ -38,7 +37,7 @@ class WoWGame {
     this.modalMap = document.getElementById('modal-map');
     this.regionsGrid = document.getElementById('regions-grid');
 
-    // Confetti
+    // Confetti Canvas
     this.canvas = document.getElementById('confetti-canvas');
     this.ctx = this.canvas.getContext('2d');
     this.confettiParticles = [];
@@ -76,12 +75,14 @@ class WoWGame {
       ...this.state,
       checksum
     }));
-    this.coinCount.textContent = this.state.coins;
-    this.homeCoins.textContent = this.state.coins;
+    if (this.coinCount) this.coinCount.textContent = this.state.coins;
+    if (this.homeCoins) this.homeCoins.textContent = this.state.coins;
 
     const currentLvl = this.getCurrentLevel();
-    this.homeLoc.textContent = currentLvl.location;
-    this.homeLvl.textContent = `Bölüm ${currentLvl.level} / 100`;
+    if (currentLvl) {
+      if (this.homeLoc) this.homeLoc.textContent = currentLvl.location.split(' - ')[0];
+      if (this.homeLvl) this.homeLvl.textContent = `Bölüm ${currentLvl.level} / 100`;
+    }
   }
 
   computeHash(lvl, coins) {
@@ -105,7 +106,7 @@ class WoWGame {
     const resize = () => {
       this.canvas.width = window.innerWidth;
       this.canvas.height = window.innerHeight;
-      this.adjustCrosswordScale();
+      this.adjustBoardScale();
     };
     window.addEventListener('resize', resize);
     resize();
@@ -128,7 +129,7 @@ class WoWGame {
     document.getElementById('btn-level-pill').addEventListener('click', () => this.openModal(this.modalMap));
     document.getElementById('btn-close-map').addEventListener('click', () => this.closeModal(this.modalMap));
 
-    // Sound
+    // Sound Toggle
     document.getElementById('btn-sound').addEventListener('click', (e) => {
       const isMuted = !window.soundFX.toggle();
       e.target.textContent = isMuted ? '🔇' : '🔊';
@@ -139,7 +140,7 @@ class WoWGame {
     document.getElementById('btn-shop').addEventListener('click', () => this.openModal(this.modalShop));
     document.getElementById('btn-close-shop').addEventListener('click', () => this.closeModal(this.modalShop));
 
-    // Powerups (WoW Minimal Setup)
+    // Controls
     document.getElementById('btn-shuffle').addEventListener('click', () => this.shuffleWheel());
     document.getElementById('btn-hint').addEventListener('click', () => this.useRandomHint());
 
@@ -147,7 +148,7 @@ class WoWGame {
     document.getElementById('btn-next-level').addEventListener('click', () => this.nextLevel());
     document.getElementById('btn-share').addEventListener('click', () => this.shareScore());
 
-    // Pointer Gestures on Turntable
+    // Letter Wheel Gestures (Mouse & Touch)
     this.letterWheel.addEventListener('pointerdown', (e) => this.onPointerDown(e));
     window.addEventListener('pointermove', (e) => this.onPointerMove(e));
     window.addEventListener('pointerup', () => this.onPointerUp());
@@ -183,7 +184,7 @@ class WoWGame {
     ];
 
     this.regionsGrid.innerHTML = '';
-    regions.forEach((reg, idx) => {
+    regions.forEach((reg) => {
       const btn = document.createElement('div');
       btn.className = 'region-item-btn';
       if (this.state.levelIndex >= reg.startLvl - 1 && this.state.levelIndex < reg.startLvl + 9) {
@@ -214,107 +215,76 @@ class WoWGame {
 
     const level = this.getCurrentLevel();
     this.levelDisplay.textContent = level.level;
-    this.locationBadge.textContent = level.location.toUpperCase();
+    this.locationBadge.textContent = level.location.split(' - ')[0].toUpperCase();
     document.body.className = `theme-${level.bgTheme || 'cappadocia'}`;
 
     this.solvedWords.clear();
     this.bonusWordsFound.clear();
-    this.cellMap.clear();
     this.closeModal(this.modalVictory);
 
-    // Compute bounds
-    let maxR = 0, maxC = 0;
-    level.words.forEach(w => {
-      const endR = w.dir === 'V' ? w.row + w.word.length - 1 : w.row;
-      const endC = w.dir === 'H' ? w.col + w.word.length - 1 : w.col;
-      if (endR > maxR) maxR = endR;
-      if (endC > maxC) maxC = endC;
-    });
-
-    const rows = maxR + 1;
-    const cols = maxC + 1;
-
-    // Responsive cell size
-    const availW = Math.min(window.innerWidth - 32, 380);
-    const availH = Math.min(window.innerHeight * 0.42, 320);
-    const cellSize = Math.min(50, Math.floor(Math.min(availW / (cols + 0.2), availH / (rows + 0.2))));
-
-    this.boardEl.style.setProperty('--cell-size', `${cellSize}px`);
-    this.boardEl.style.gridTemplateColumns = `repeat(${cols}, ${cellSize}px)`;
-    this.boardEl.style.gridTemplateRows = `repeat(${rows}, ${cellSize}px)`;
+    this.adjustBoardScale();
     this.boardEl.innerHTML = '';
 
-    // Map letters
-    const gridData = {};
-    level.words.forEach(wObj => {
-      for (let i = 0; i < wObj.word.length; i++) {
-        const r = wObj.dir === 'V' ? wObj.row + i : wObj.row;
-        const c = wObj.dir === 'H' ? wObj.col + i : wObj.col;
-        const key = `${r},${c}`;
-        if (!gridData[key]) {
-          gridData[key] = { char: wObj.word[i], wordIds: [wObj.id] };
-        } else {
-          gridData[key].wordIds.push(wObj.id);
-        }
+    // Render target word rows
+    level.targetWords.forEach(word => {
+      const row = document.createElement('div');
+      row.className = 'word-row';
+      row.dataset.word = word;
+
+      for (let i = 0; i < word.length; i++) {
+        const slot = document.createElement('div');
+        slot.className = 'letter-slot';
+        slot.dataset.char = word[i];
+        row.appendChild(slot);
       }
+
+      this.boardEl.appendChild(row);
     });
-
-    // Render cells
-    for (let r = 0; r < rows; r++) {
-      for (let c = 0; c < cols; c++) {
-        const key = `${r},${c}`;
-        const cell = document.createElement('div');
-        cell.className = 'cw-cell';
-        cell.dataset.r = r;
-        cell.dataset.c = c;
-
-        if (gridData[key]) {
-          cell.classList.add('slot');
-          cell.dataset.char = gridData[key].char;
-          this.cellMap.set(key, {
-            el: cell,
-            char: gridData[key].char,
-            wordIds: gridData[key].wordIds,
-            revealed: false
-          });
-        } else {
-          cell.classList.add('empty');
-        }
-
-        this.boardEl.appendChild(cell);
-      }
-    }
 
     this.renderWheel(level.wheelLetters);
     this.renderRegionsMap();
   }
 
-  adjustCrosswordScale() {
+  adjustBoardScale() {
     const level = this.getCurrentLevel();
-    if (!level) return;
-    let maxR = 0, maxC = 0;
-    level.words.forEach(w => {
-      const endR = w.dir === 'V' ? w.row + w.word.length - 1 : w.row;
-      const endC = w.dir === 'H' ? w.col + w.word.length - 1 : w.col;
-      if (endR > maxR) maxR = endR;
-      if (endC > maxC) maxC = endC;
-    });
-    const rows = maxR + 1;
-    const cols = maxC + 1;
+    if (!level || !this.boardEl) return;
+
+    const maxLen = Math.max(...level.targetWords.map(w => w.length));
     const availW = Math.min(window.innerWidth - 32, 380);
-    const availH = Math.min(window.innerHeight * 0.42, 320);
-    const cellSize = Math.min(50, Math.floor(Math.min(availW / (cols + 0.2), availH / (rows + 0.2))));
-    this.boardEl.style.setProperty('--cell-size', `${cellSize}px`);
-    this.boardEl.style.gridTemplateColumns = `repeat(${cols}, ${cellSize}px)`;
-    this.boardEl.style.gridTemplateRows = `repeat(${rows}, ${cellSize}px)`;
+    const slotSize = Math.min(46, Math.floor((availW - (maxLen - 1) * 6) / maxLen));
+    const fontSize = Math.max(16, Math.floor(slotSize * 0.54));
+
+    this.boardEl.style.setProperty('--slot-size', `${slotSize}px`);
+    this.boardEl.style.setProperty('--slot-font-size', `${fontSize}px`);
   }
 
   renderWheel(letters) {
     this.letterWheel.innerHTML = '';
     this.wheelSvg.innerHTML = '';
-    const radius = 76;
-    const center = 115;
     const total = letters.length;
+
+    let radius = 76;
+    let nodeSize = 54;
+    let fontSize = 26;
+
+    if (total === 6) {
+      radius = 78;
+      nodeSize = 48;
+      fontSize = 23;
+    } else if (total === 7) {
+      radius = 80;
+      nodeSize = 44;
+      fontSize = 21;
+    } else if (total >= 8) {
+      radius = 82;
+      nodeSize = 38;
+      fontSize = 18;
+    }
+
+    this.letterWheel.style.setProperty('--node-size', `${nodeSize}px`);
+    this.letterWheel.style.setProperty('--node-font-size', `${fontSize}px`);
+
+    const center = 115; // center of 230x230 turntable
 
     letters.forEach((char, i) => {
       const angle = (i * (360 / total) - 90) * (Math.PI / 180);
@@ -359,15 +329,24 @@ class WoWGame {
     if (!this.isDragging) return;
 
     const node = this.getNodeUnderPointer(e.clientX, e.clientY);
-    if (node && !this.selectedNodes.includes(node)) {
-      this.selectedNodes.push(node);
-      this.currentWord += node.dataset.char;
-      node.classList.add('selected');
+    if (node) {
+      // Backtrack support: sliding finger back to previous letter unselects the last letter
+      if (this.selectedNodes.length >= 2 && node === this.selectedNodes[this.selectedNodes.length - 2]) {
+        const popped = this.selectedNodes.pop();
+        popped.classList.remove('selected');
+        this.currentWord = this.selectedNodes.map(n => n.dataset.char).join('');
+        window.soundFX.playLetterSelect(this.selectedNodes.length - 1);
+        if (navigator.vibrate) navigator.vibrate(8);
+        this.updatePreview();
+      } else if (!this.selectedNodes.includes(node)) {
+        this.selectedNodes.push(node);
+        this.currentWord += node.dataset.char;
+        node.classList.add('selected');
 
-      window.soundFX.playLetterSelect(this.selectedNodes.length - 1);
-      if (navigator.vibrate) navigator.vibrate(10);
-
-      this.updatePreview();
+        window.soundFX.playLetterSelect(this.selectedNodes.length - 1);
+        if (navigator.vibrate) navigator.vibrate(10);
+        this.updatePreview();
+      }
     }
 
     this.updateWheelLines(e.clientX, e.clientY);
@@ -394,7 +373,7 @@ class WoWGame {
       const radius = rect.width / 2;
       const centerX = rect.left + radius;
       const centerY = rect.top + radius;
-      if (Math.hypot(clientX - centerX, clientY - centerY) <= radius + 8) {
+      if (Math.hypot(clientX - centerX, clientY - centerY) <= radius + 10) {
         return node;
       }
     }
@@ -407,6 +386,7 @@ class WoWGame {
 
     const wheelRect = this.letterWheel.getBoundingClientRect();
 
+    // Connecting lines between letter nodes (rendered UNDER letter nodes)
     for (let i = 0; i < this.selectedNodes.length - 1; i++) {
       const fromRect = this.selectedNodes[i].getBoundingClientRect();
       const toRect = this.selectedNodes[i + 1].getBoundingClientRect();
@@ -419,6 +399,7 @@ class WoWGame {
       this.wheelSvg.appendChild(line);
     }
 
+    // Trailing line to touch/mouse pointer
     if (this.isDragging && pointerX !== undefined && pointerY !== undefined) {
       const lastRect = this.selectedNodes[this.selectedNodes.length - 1].getBoundingClientRect();
       const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
@@ -440,22 +421,22 @@ class WoWGame {
   }
 
   validateWord(word) {
+    if (!word || word.length < 2) return;
     const level = this.getCurrentLevel();
-    const matchedWordObj = level.words.find(w => w.word === word);
 
-    if (matchedWordObj) {
-      if (this.solvedWords.has(matchedWordObj.id)) {
+    if (level.targetWords.includes(word)) {
+      if (this.solvedWords.has(word)) {
         this.flashToast("Bu kelimeyi zaten buldun!");
         window.soundFX.playInvalid();
         return;
       }
 
-      this.solvedWords.add(matchedWordObj.id);
-      this.revealWordOnCrossword(matchedWordObj);
+      this.solvedWords.add(word);
+      this.revealWordOnBoard(word);
       window.soundFX.playWordSuccess();
 
-      if (this.solvedWords.size === level.words.length) {
-        setTimeout(() => this.triggerVictory(), 500);
+      if (this.solvedWords.size === level.targetWords.length) {
+        setTimeout(() => this.triggerVictory(), 600);
       }
     } else if (level.bonusWords && level.bonusWords.includes(word)) {
       if (this.bonusWordsFound.has(word)) {
@@ -468,25 +449,23 @@ class WoWGame {
         this.flashToast(`Bonus Kelime: ${word}! (+5 🪙)`);
       }
     } else {
-      if (word.length >= 2) window.soundFX.playInvalid();
+      window.soundFX.playInvalid();
+      this.wordPreview.classList.add('shake');
+      setTimeout(() => this.wordPreview.classList.remove('shake'), 400);
     }
   }
 
-  revealWordOnCrossword(wordObj) {
-    for (let i = 0; i < wordObj.word.length; i++) {
-      const r = wordObj.dir === 'V' ? wordObj.row + i : wordObj.row;
-      const c = wordObj.dir === 'H' ? wordObj.col + i : wordObj.col;
-      const key = `${r},${c}`;
-      const cellData = this.cellMap.get(key);
+  revealWordOnBoard(word) {
+    const row = this.boardEl.querySelector(`[data-word="${word}"]`);
+    if (!row) return;
 
-      if (cellData) {
-        setTimeout(() => {
-          cellData.revealed = true;
-          cellData.el.textContent = cellData.char;
-          cellData.el.classList.add('revealed');
-        }, i * 65);
-      }
-    }
+    const slots = row.querySelectorAll('.letter-slot');
+    slots.forEach((slot, i) => {
+      setTimeout(() => {
+        slot.textContent = slot.dataset.char;
+        slot.classList.add('revealed');
+      }, i * 65);
+    });
   }
 
   useRandomHint() {
@@ -497,42 +476,34 @@ class WoWGame {
       return;
     }
 
-    const unrevealed = [];
-    this.cellMap.forEach((val) => {
-      if (!val.revealed) unrevealed.push(val);
-    });
-
-    if (unrevealed.length === 0) {
+    const unrevealedSlots = Array.from(this.boardEl.querySelectorAll('.letter-slot:not(.revealed)'));
+    if (unrevealedSlots.length === 0) {
       this.flashToast("Açılacak harf kalmadı!");
       return;
     }
 
-    const chosen = unrevealed[Math.floor(Math.random() * unrevealed.length)];
-    chosen.revealed = true;
-    chosen.el.textContent = chosen.char;
-    chosen.el.classList.add('revealed');
+    const chosenSlot = unrevealedSlots[Math.floor(Math.random() * unrevealedSlots.length)];
+    chosenSlot.textContent = chosenSlot.dataset.char;
+    chosenSlot.classList.add('revealed');
+    chosenSlot.classList.add('hinted');
 
     this.state.coins -= cost;
     this.saveSecureState();
     window.soundFX.playCoinCollect();
 
-    // Check completion
-    const level = this.getCurrentLevel();
-    level.words.forEach(wObj => {
-      if (!this.solvedWords.has(wObj.id)) {
-        let allRev = true;
-        for (let i = 0; i < wObj.word.length; i++) {
-          const r = wObj.dir === 'V' ? wObj.row + i : wObj.row;
-          const c = wObj.dir === 'H' ? wObj.col + i : wObj.col;
-          const d = this.cellMap.get(`${r},${c}`);
-          if (!d || !d.revealed) { allRev = false; break; }
-        }
-        if (allRev) this.solvedWords.add(wObj.id);
+    // Check if whole row is now revealed
+    const row = chosenSlot.closest('.word-row');
+    if (row) {
+      const rowWord = row.dataset.word;
+      const allRevealed = Array.from(row.querySelectorAll('.letter-slot')).every(s => s.classList.contains('revealed'));
+      if (allRevealed && !this.solvedWords.has(rowWord)) {
+        this.solvedWords.add(rowWord);
       }
-    });
+    }
 
-    if (this.solvedWords.size === level.words.length) {
-      setTimeout(() => this.triggerVictory(), 500);
+    const level = this.getCurrentLevel();
+    if (this.solvedWords.size === level.targetWords.length) {
+      setTimeout(() => this.triggerVictory(), 600);
     }
   }
 
@@ -558,17 +529,17 @@ class WoWGame {
 
   nextLevel() {
     this.stopConfetti();
-    this.loadLevel(this.state.levelIndex + 1);
+    this.loadLevel((this.state.levelIndex + 1) % WOW_LEVELS.length);
   }
 
   shareScore() {
     const lvl = this.getCurrentLevel();
-    const text = `🏆 Kelime Harikaları'nda ${lvl.location} (Bölüm ${lvl.level}/100) çengel bulmacasını bitirdim! Sen de oyna: https://umutcandemircan.github.io/kelime-harikalari/`;
+    const text = `🏆 Kelime Harikaları'nda ${lvl.location} (Bölüm ${lvl.level}/100) tamamladım! Sen de hemen oyna: https://umutcandemircan.github.io/kelime-harikalari/`;
     if (navigator.share) {
-      navigator.share({ title: 'Kelime Harikaları', text });
+      navigator.share({ title: 'Kelime Harikaları', text }).catch(() => {});
     } else {
       navigator.clipboard.writeText(text);
-      this.flashToast("Meydan okuma panoya kopyalandı!");
+      this.flashToast("Meydan okuma linki kopyalandı!");
     }
   }
 
@@ -594,6 +565,7 @@ class WoWGame {
         z-index: 9999;
         box-shadow: 0 4px 20px rgba(0,0,0,0.5);
         border: 1px solid rgba(255,255,255,0.2);
+        pointer-events: none;
       `;
       document.body.appendChild(toast);
     }

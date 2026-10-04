@@ -6,14 +6,6 @@
   --green: #22c55e;
   --green-shadow: #15803d;
   --navy: #0f172a;
-  
-  --tile-unsolved-bg: rgba(255, 255, 255, 0.24);
-  --tile-unsolved-border: rgba(255, 255, 255, 0.5);
-  --tile-solved-bg: #ffffff;
-  --tile-solved-shadow: #cbd5e1;
-  --tile-solved-text: #0f172a;
-  
-  --cell-size: 46px;
 }
 
 * {
@@ -75,7 +67,6 @@ body {
   width: 100%;
   height: 100%;
   z-index: 0;
-  transition: opacity 0.4s ease;
 }
 
 .scenic-tint {
@@ -194,7 +185,7 @@ body {
   margin-top: 8px;
 }
 
-/* Progress Card */
+/* Status Card */
 .home-status-card {
   width: 100%;
   max-width: 330px;
@@ -418,7 +409,9 @@ body {
   margin-left: 2px;
 }
 
-/* CROSSWORD MATRIX (True Words of Wonders) */
+/* ========================================= */
+/* BALANCED WORD BOARD (Kelime Gezmece / WoW)*/
+/* ========================================= */
 .board-area {
   position: relative;
   z-index: 5;
@@ -427,49 +420,55 @@ body {
   align-items: center;
   justify-content: center;
   padding: 10px 16px;
-  overflow: hidden;
+  overflow-y: auto;
 }
 
-.crossword-matrix {
-  display: grid;
+.word-board {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  width: 100%;
+}
+
+.word-row {
+  display: flex;
   gap: 6px;
   justify-content: center;
-  align-content: center;
 }
 
-.cw-cell {
-  width: var(--cell-size, 46px);
-  height: var(--cell-size, 46px);
+.letter-slot {
+  width: var(--slot-size, 44px);
+  height: calc(var(--slot-size, 44px) + 2px);
   border-radius: 10px;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: calc(var(--cell-size, 46px) * 0.55);
+  font-size: var(--slot-font-size, 24px);
   font-weight: 900;
-  transition: all 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-}
-
-.cw-cell.empty {
-  visibility: hidden;
-  pointer-events: none;
-}
-
-/* Frosted glass slot */
-.cw-cell.slot {
-  background: var(--tile-unsolved-bg);
-  border: 1.5px solid var(--tile-unsolved-border);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2), inset 0 1px 2px rgba(255, 255, 255, 0.2);
+  transition: all 0.28s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  
+  /* Unsolved Frosted Ivory Slot */
+  background: rgba(255, 255, 255, 0.22);
+  border: 1.5px solid rgba(255, 255, 255, 0.45);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2), inset 0 1px 2px rgba(255, 255, 255, 0.2);
   backdrop-filter: blur(4px);
   color: transparent;
 }
 
 /* Solved Solid 3D White Tile */
-.cw-cell.slot.revealed {
-  background: var(--tile-solved-bg);
+.letter-slot.revealed {
+  background: #ffffff;
   border: 1.5px solid #ffffff;
-  color: var(--tile-solved-text);
-  box-shadow: 0 4px 0 var(--tile-solved-shadow), 0 8px 20px rgba(0, 0, 0, 0.35);
-  animation: tileFlip 0.38s cubic-bezier(0.34, 1.56, 0.64, 1);
+  color: #0f172a;
+  box-shadow: 0 4px 0 #cbd5e1, 0 8px 18px rgba(0, 0, 0, 0.35);
+  animation: tileFlip 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.letter-slot.revealed.hinted {
+  border-color: var(--gold);
+  box-shadow: 0 4px 0 var(--gold-shadow), 0 0 14px rgba(245, 158, 11, 0.6);
 }
 
 @keyframes tileFlip {
@@ -507,7 +506,21 @@ body {
   transform: translateY(0);
 }
 
-/* TURNTABLE & SIDE BUTTONS */
+.word-preview-pill.shake {
+  animation: shakePill 0.35s ease;
+  background: #ef4444;
+  color: #ffffff;
+}
+
+@keyframes shakePill {
+  0%, 100% { transform: translateX(0); }
+  20%, 60% { transform: translateX(-6px); }
+  40%, 80% { transform: translateX(6px); }
+}
+
+/* ========================================= */
+/* TURNTABLE (Çizgi Asla Harfi Kapatmaz!)    */
+/* ========================================= */
 .wheel-zone {
   position: relative;
   z-index: 10;
@@ -561,8 +574,14 @@ body {
   position: relative;
   width: 230px;
   height: 230px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.14) 0%, rgba(15, 23, 42, 0.65) 100%);
+  border: 2px solid rgba(255, 255, 255, 0.25);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), inset 0 2px 4px rgba(255, 255, 255, 0.2);
 }
 
+/* SVG Line Layer: STRICTLY UNDER LETTER NODES (z-index: 1) */
 .wheel-svg-layer {
   position: absolute;
   top: 0;
@@ -575,32 +594,33 @@ body {
 
 .wheel-svg-layer line {
   stroke: var(--gold);
-  stroke-width: 9;
+  stroke-width: 8;
   stroke-linecap: round;
-  filter: drop-shadow(0 2px 8px rgba(245, 158, 11, 0.7));
+  filter: drop-shadow(0 2px 8px rgba(245, 158, 11, 0.8));
 }
 
 .letter-disc-container {
-  position: relative;
+  position: absolute;
+  top: 0;
+  left: 0;
   width: 100%;
   height: 100%;
-  border-radius: 50%;
-  background: radial-gradient(circle, rgba(255, 255, 255, 0.14) 0%, rgba(15, 23, 42, 0.45) 100%);
-  border: 2px solid rgba(255, 255, 255, 0.22);
-  backdrop-filter: blur(10px);
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
   touch-action: none;
+  z-index: 2;
+  background: transparent;
+  border: none;
 }
 
+/* Solid Opaque 3D Ivory Letter Chips (z-index: 10 - ALWAYS IN FRONT) */
 .letter-node {
   position: absolute;
-  width: 52px;
-  height: 52px;
+  width: var(--node-size, 54px);
+  height: var(--node-size, 54px);
   border-radius: 50%;
-  background: #ffffff;
-  border: 2px solid #ffffff;
+  background: #ffffff; /* 100% Solid Opaque Ivory so lines never cross through letter */
+  border: 2.5px solid #ffffff;
   color: #0f172a;
-  font-size: 25px;
+  font-size: var(--node-font-size, 26px);
   font-weight: 900;
   display: flex;
   align-items: center;
@@ -609,7 +629,7 @@ body {
   box-shadow: 0 4px 0 #94a3b8, 0 8px 16px rgba(0, 0, 0, 0.4);
   transform: translate(-50%, -50%);
   transition: transform 0.1s, background 0.15s, box-shadow 0.15s;
-  z-index: 2;
+  z-index: 10;
 }
 
 .letter-node.selected {
@@ -617,7 +637,7 @@ body {
   color: #ffffff;
   border-color: #fef3c7;
   transform: translate(-50%, -50%) scale(1.15);
-  box-shadow: 0 2px 0 var(--gold-shadow), 0 0 20px rgba(245, 158, 11, 0.6);
+  box-shadow: 0 2px 0 var(--gold-shadow), 0 0 20px rgba(245, 158, 11, 0.7);
 }
 
 /* ========================================= */

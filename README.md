@@ -28,23 +28,28 @@
 - **Seri (Streak) ve Ay Takvimi:** Çözülen günlerin yeşil tikle kaydedildiği etkileşimli aylık takvim.
 - **Wordle Tarzı Paylaşım Kartı:** Emoji tabanlı skor ve seri paylaşım panosu (`navigator.share` / `navigator.clipboard`).
 
-### 4. 🎵 Prosedürel Web Audio API Ses Sentezleyici
+### 4. 📖 İnteraktif TDK Anlam Kartı
+- Izgarada açılan herhangi bir kelimenin üzerine dokunulduğunda, o kelimenin **Türk Dil Kurumu (TDK)** Güncel Türkçe Sözlük standartlarındaki türü (İsim/Sıfat/Zarf vb.) ve kapsamlı tanımını gösteren şık bir anlam kartı açılır.
+
+### 5. 🎵 Prosedürel Web Audio API & Akıcı Seviye Akışı
 - **Sıfır Harici Ses Dosyası:** Hiçbir harici MP3 veya WAV indirilmez; tüm tonlar, akorlar ve melodiler Web Audio API ile gerçek zamanlı sentezlenir.
-- **Doğal Tizleşen Çark Tonları:** 1. harften son harfe C4 (261 Hz) -> E4 (329 Hz) -> G4 (392 Hz) -> C5 (523 Hz) armonik akış.
-- **Kullanıcı Etkileşimi Koruması:** `AudioContext` autoplay kısıtlamalarını aşan güvenli başlatma mekanizması.
+- **Doğal Tizleşen Çark Tonları:** Harf çarkında gezinirken pentatonik ton akışı (C4, D4, E4, G4, A4, C5).
+- **Kesintisiz Bölüm İlerlemesi:** Normal bölümlerde (1, 2, 3, 4...) oyuncuyu yoran popup modal yerine yumuşak arp tınısı, altın ışıltı ve otomatik akıcı geçiş (`+25 🪙`).
+- **5 Bölümde Bir Keşif Kartı (Milestone):** Her 5 bölümde bir (bölge tamamlandığında) yüksek çözünürlüklü tarihi mekan fotoğrafı, kültürel bilgi ve 2X ödül seçeneği içeren Keşif Kartı modalı.
 - **Haptic Titreşim:** Mobil dokunmatik cihazlar için `navigator.vibrate` geri bildirimi.
 
-### 5. 🪙 Dengelenmiş Ekonomi ve İpuçları
-- **Hile ve Sömürü Engeli:** Bölüm tamamlama ödülü (+30 Altın) ve adil ipucu fiyatlandırması:
-  - 🔀 **Karıştır:** Ücretsiz
+### 6. 🪙 Dengelenmiş Ekonomi ve İpuçları
+- **Hile ve Sömürü Engeli:** Bölüm tamamlama ödülü (+25 Altın) ve adil ipucu fiyatlandırması:
+  - 🔀 **Karıştır:** Ücretsiz (360° animasyon)
   - 💡 **Ampul:** 50 Altın (Rastgele 1 harf açar)
   - 🎯 **Hedefçi:** 90 Altın (İstenen hücreye dokunarak o harfi açar)
   - ⚡ **Şimşek:** 140 Altın (Izgaradaki 3-4 harfi aynı anda patlatır)
-  - 🎁 **Bonus Sandığı:** Izgara dışındaki her 5 geçerli Türkçe kelimede +25 Altın ödül.
+  - 🎁 **Bonus Sandığı:** Izgara dışındaki her 5 geçerli Türkçe kelimede +30 Altın ödül.
   - 🧪 **Ekonomi Simülasyonu:** 50 bölümlük Monte Carlo simülasyonu (`simulate_economy.py`) ile oyuncunun asla iflas etmeden adil biçimde ilerleyebildiği kanıtlanmıştır.
 
-### 6. 📱 PWA & %100 Mobil Uyumluluk
+### 7. 📱 PWA & %100 Mobil Uyumluluk
 - **Kusursuz Görünüm (360x800'den 4K'ya):** Sıfır yatay taşma (`0px overflow`), dinamik bounding box grid ölçeklemesi.
+- **Tam Ekran Arka Plan:** Gerçek tarihi mekanların yüksek çözünürlüklü panoramik fotoğrafları ekrana tam oturur.
 - **PWA (Progressive Web App):** `manifest.json` ve `sw.js` (Service Worker) ile internet bağlantısı olmasa bile çevrimdışı oynanabilir ve ana ekrana yüklenebilir.
 - **Erişilebilirlik (a11y):**
   - 📖 OpenDyslexic yazı tipi desteği

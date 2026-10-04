@@ -1,0 +1,970 @@
+{
+  "ADA": {
+    "type": "İsim",
+    "meaning": "Deniz veya göl sularıyla çevrilmiş küçük kara parçası, cezire."
+  },
+  "ADALAR": {
+    "type": "İsim",
+    "meaning": "Birbirine yakın birden çok ada grubu; takımada."
+  },
+  "ADALET": {
+    "type": "İsim",
+    "meaning": "Hak ve hukuka uygunluk; herkese hakkı olanı verme ilkesi."
+  },
+  "AHİR": {
+    "type": "Sıfat",
+    "meaning": "Son, sonraki; bir durumun nihai evresi."
+  },
+  "ALA": {
+    "type": "Sıfat",
+    "meaning": "Alacalı, karışık renkli; iyi, pekiyi."
+  },
+  "ALAY": {
+    "type": "İsim",
+    "meaning": "Genellikle aynı amaçla toplanmış kalabalık; üç veya dört taburdan oluşan askeri birlik."
+  },
+  "ALİM": {
+    "type": "İsim",
+    "meaning": "Bilim insanı, ilim sahibi kimse, bilgin."
+  },
+  "ANA": {
+    "type": "İsim",
+    "meaning": "Anne, bir çocuğu doğuran kadın; temel, esas olan şey."
+  },
+  "ANI": {
+    "type": "İsim",
+    "meaning": "Geçmişte yaşanmış olayların hafızada saklanan izi, hatıra."
+  },
+  "ARA": {
+    "type": "İsim",
+    "meaning": "İki nesne veya olgu arasındaki boşluk, fasıla, mola."
+  },
+  "ARI": {
+    "type": "İsim",
+    "meaning": "Zar kanatlılardan, çiçek nektarından bal ve bal mumu üreten çalışkan böcek."
+  },
+  "ASAL": {
+    "type": "Sıfat",
+    "meaning": "Yalnızca kendisine ve 1'e bölünebilen (sayı); birincil, esas, temel."
+  },
+  "ASIR": {
+    "type": "İsim",
+    "meaning": "Yüz yıllık zaman dilimi, çağ, yüzyıl."
+  },
+  "ASMA": {
+    "type": "İsim",
+    "meaning": "Üzüm veren, dalları çardaklara sarılan odunsu sarılıcı bitki."
+  },
+  "AYAZ": {
+    "type": "İsim",
+    "meaning": "Duru, bulutsuz ve dondurucu derecede soğuk kış havası."
+  },
+  "AYN": {
+    "type": "İsim",
+    "meaning": "Aynısı, tıpkısı; göz, pınar."
+  },
+  "AZAM": {
+    "type": "Sıfat",
+    "meaning": "En büyük, en ulu; azami derece."
+  },
+  "AÇI": {
+    "type": "İsim",
+    "meaning": "Başlangıç noktaları ortak iki ışının oluşturduğu geometrik açıklık."
+  },
+  "AÇIK": {
+    "type": "Sıfat",
+    "meaning": "Kapalı veya örtülü olmayan; anlaşılır, aşikâr."
+  },
+  "AİD": {
+    "type": "TDK Güncel Sözlük",
+    "meaning": "Türk Dil Kurumu Güncel Türkçe Sözlük standartlarına uygun, Türkçe kökenli veya dilimize yerleşmiş geçerli sözcük."
+  },
+  "AŞI": {
+    "type": "İsim",
+    "meaning": "Bulaşıcı hastalıklara karşı bağışıklık sağlamak için organizmaya verilen madde."
+  },
+  "AŞK": {
+    "type": "İsim",
+    "meaning": "Bir kimseye veya bir ideale karşı duyulan derin sevgi, bağlılık ve muhabbet."
+  },
+  "BAHAR": {
+    "type": "İsim",
+    "meaning": "Kış ile yaz arasındaki doğanın uyandığı ılık mevsim; ilkyaz."
+  },
+  "BAHÇE": {
+    "type": "İsim",
+    "meaning": "Çiçek, meyve veya sebze yetiştirilen çevrili toprak parçası."
+  },
+  "BAL": {
+    "type": "İsim",
+    "meaning": "Arıların çiçek nektarını işleyerek ürettikleri tatlı, koyu kıvamlı şifalı besin."
+  },
+  "BALIK": {
+    "type": "İsim",
+    "meaning": "Suda yaşayan, solungaçla nefes alan, yüzgeçli omurgalı hayvan."
+  },
+  "BALIKÇI": {
+    "type": "İsim",
+    "meaning": "Balık tutan veya balık satan kimse."
+  },
+  "BALKON": {
+    "type": "İsim",
+    "meaning": "Bir yapının dış duvarından taşan, etrafı parmaklıkla çevrili açık alan."
+  },
+  "BAR": {
+    "type": "İsim",
+    "meaning": "Doğu Anadolu'da el ele tutuşularak oynanan geleneksel halk oyunu; ayaküstü içki içilen mekan."
+  },
+  "BARIŞ": {
+    "type": "İsim",
+    "meaning": "Savaş ve çatışmanın olmama durumu; uyum, karşılıklı anlayış ve dirlik."
+  },
+  "BAS": {
+    "type": "TDK Güncel Sözlük",
+    "meaning": "Türk Dil Kurumu Güncel Türkçe Sözlük standartlarına uygun, Türkçe kökenli veya dilimize yerleşmiş geçerli sözcük."
+  },
+  "BAĞ": {
+    "type": "TDK Güncel Sözlük",
+    "meaning": "Türk Dil Kurumu Güncel Türkçe Sözlük standartlarına uygun, Türkçe kökenli veya dilimize yerleşmiş geçerli sözcük."
+  },
+  "BAŞ": {
+    "type": "İsim",
+    "meaning": "İnsan ve hayvanlarda beyin, göz, kulak ve ağzın bulunduğu en üst bölüm; lider, önder."
+  },
+  "BOĞ": {
+    "type": "TDK Güncel Sözlük",
+    "meaning": "Türk Dil Kurumu Güncel Türkçe Sözlük standartlarına uygun, Türkçe kökenli veya dilimize yerleşmiş geçerli sözcük."
+  },
+  "BOĞAZ": {
+    "type": "TDK Güncel Sözlük",
+    "meaning": "Türk Dil Kurumu Güncel Türkçe Sözlük standartlarına uygun, Türkçe kökenli veya dilimize yerleşmiş geçerli sözcük."
+  },
+  "BULUT": {
+    "type": "İsim",
+    "meaning": "Atmosferdeki su buharının yoğunlaşmasıyla gökyüzünde oluşan beyaz veya gri kütle."
+  },
+  "BİLGİ": {
+    "type": "İsim",
+    "meaning": "Öğrenme, araştırma veya gözlem yoluyla elde edilen gerçekler ve ilkeler bütünü."
+  },
+  "CADDE": {
+    "type": "TDK Güncel Sözlük",
+    "meaning": "Türk Dil Kurumu Güncel Türkçe Sözlük standartlarına uygun, Türkçe kökenli veya dilimize yerleşmiş geçerli sözcük."
+  },
+  "CAN": {
+    "type": "İsim",
+    "meaning": "Yaşamı sağlayan güç, ruh; varlık, insan; çok sevilen kimse."
+  },
+  "CANDAN": {
+    "type": "TDK Güncel Sözlük",
+    "meaning": "Türk Dil Kurumu Güncel Türkçe Sözlük standartlarına uygun, Türkçe kökenli veya dilimize yerleşmiş geçerli sözcük."
+  },
+  "CÜRET": {
+    "type": "TDK Güncel Sözlük",
+    "meaning": "Türk Dil Kurumu Güncel Türkçe Sözlük standartlarına uygun, Türkçe kökenli veya dilimize yerleşmiş geçerli sözcük."
+  },
+  "DALGA": {
+    "type": "İsim",
+    "meaning": "Rüzgâr veya sarsıntıyla su yüzeyinde oluşan salınım ve kıvrım."
+  },
+  "DALGIÇ": {
+    "type": "TDK Güncel Sözlük",
+    "meaning": "Türk Dil Kurumu Güncel Türkçe Sözlük standartlarına uygun, Türkçe kökenli veya dilimize yerleşmiş geçerli sözcük."
+  },
+  "DANS": {
+    "type": "TDK Güncel Sözlük",
+    "meaning": "Türk Dil Kurumu Güncel Türkçe Sözlük standartlarına uygun, Türkçe kökenli veya dilimize yerleşmiş geçerli sözcük."
+  },
+  "DAVİ": {
+    "type": "TDK Güncel Sözlük",
+    "meaning": "Türk Dil Kurumu Güncel Türkçe Sözlük standartlarına uygun, Türkçe kökenli veya dilimize yerleşmiş geçerli sözcük."
+  },
+  "DEDE": {
+    "type": "TDK Güncel Sözlük",
+    "meaning": "Türk Dil Kurumu Güncel Türkçe Sözlük standartlarına uygun, Türkçe kökenli veya dilimize yerleşmiş geçerli sözcük."
+  },
+  "DENİZ": {
+    "type": "İsim",
+    "meaning": "Yer kabuğunun çukur yerlerini dolduran engin ve tuzlu su kütlesi."
+  },
+  "DESTAN": {
+    "type": "TDK Güncel Sözlük",
+    "meaning": "Türk Dil Kurumu Güncel Türkçe Sözlük standartlarına uygun, Türkçe kökenli veya dilimize yerleşmiş geçerli sözcük."
+  },
+  "DIL": {
+    "type": "TDK Güncel Sözlük",
+    "meaning": "Türk Dil Kurumu Güncel Türkçe Sözlük standartlarına uygun, Türkçe kökenli veya dilimize yerleşmiş geçerli sözcük."
+  },
+  "DOST": {
+    "type": "İsim",
+    "meaning": "İyi ve kötü günde daima sevgiyle yanında olan samimi arkadaş."
+  },
+  "DÜN": {
+    "type": "TDK Güncel Sözlük",
+    "meaning": "Türk Dil Kurumu Güncel Türkçe Sözlük standartlarına uygun, Türkçe kökenli veya dilimize yerleşmiş geçerli sözcük."
+  },
+  "DÜNYA": {
+    "type": "TDK Güncel Sözlük",
+    "meaning": "Türk Dil Kurumu Güncel Türkçe Sözlük standartlarına uygun, Türkçe kökenli veya dilimize yerleşmiş geçerli sözcük."
+  },
+  "DİN": {
+    "type": "İsim",
+    "meaning": "Tanrı'ya, doğaüstü güçlere inanmayı ve ibadet etmeyi emreden inanç sistemi."
+  },
+  "DİZ": {
+    "type": "İsim",
+    "meaning": "Uyluk ile bacak kemiğinin birleştiği mafsallı eklem yeri."
+  },
+  "EDA": {
+    "type": "İsim",
+    "meaning": "Davranış, tavır, naz; bir borcu veya görevi yerine getirme."
+  },
+  "EGE": {
+    "type": "Özel İsim",
+    "meaning": "Anadolu ile Yunanistan arasındaki deniz ve bu denize kıyısı olan batı bölgesi."
+  },
+  "ELA": {
+    "type": "Sıfat",
+    "meaning": "Sarıya çalan kestane rengi göz rengi."
+  },
+  "EN": {
+    "type": "TDK Güncel Sözlük",
+    "meaning": "Türk Dil Kurumu Güncel Türkçe Sözlük standartlarına uygun, Türkçe kökenli veya dilimize yerleşmiş geçerli sözcük."
+  },
+  "ERİ": {
+    "type": "TDK Güncel Sözlük",
+    "meaning": "Türk Dil Kurumu Güncel Türkçe Sözlük standartlarına uygun, Türkçe kökenli veya dilimize yerleşmiş geçerli sözcük."
+  },
+  "ETE": {
+    "type": "TDK Güncel Sözlük",
+    "meaning": "Türk Dil Kurumu Güncel Türkçe Sözlük standartlarına uygun, Türkçe kökenli veya dilimize yerleşmiş geçerli sözcük."
+  },
+  "EV": {
+    "type": "İsim",
+    "meaning": "İnsanların içinde barındığı, sığındığı ve ailece yaşadığı konut, yuva."
+  },
+  "EŞ": {
+    "type": "TDK Güncel Sözlük",
+    "meaning": "Türk Dil Kurumu Güncel Türkçe Sözlük standartlarına uygun, Türkçe kökenli veya dilimize yerleşmiş geçerli sözcük."
+  },
+  "FÖZ": {
+    "type": "TDK Güncel Sözlük",
+    "meaning": "Türk Dil Kurumu Güncel Türkçe Sözlük standartlarına uygun, Türkçe kökenli veya dilimize yerleşmiş geçerli sözcük."
+  },
+  "GEM": {
+    "type": "TDK Güncel Sözlük",
+    "meaning": "Türk Dil Kurumu Güncel Türkçe Sözlük standartlarına uygun, Türkçe kökenli veya dilimize yerleşmiş geçerli sözcük."
+  },
+  "GEMİ": {
+    "type": "İsim",
+    "meaning": "Su üstünde yük ve yolcu taşıyan büyük deniz taşıtı."
+  },
+  "GEN": {
+    "type": "TDK Güncel Sözlük",
+    "meaning": "Türk Dil Kurumu Güncel Türkçe Sözlük standartlarına uygun, Türkçe kökenli veya dilimize yerleşmiş geçerli sözcük."
+  },
+  "GUR": {
+    "type": "TDK Güncel Sözlük",
+    "meaning": "Türk Dil Kurumu Güncel Türkçe Sözlük standartlarına uygun, Türkçe kökenli veya dilimize yerleşmiş geçerli sözcük."
+  },
+  "GURUR": {
+    "type": "TDK Güncel Sözlük",
+    "meaning": "Türk Dil Kurumu Güncel Türkçe Sözlük standartlarına uygun, Türkçe kökenli veya dilimize yerleşmiş geçerli sözcük."
+  },
+  "GÖK": {
+    "type": "TDK Güncel Sözlük",
+    "meaning": "Türk Dil Kurumu Güncel Türkçe Sözlük standartlarına uygun, Türkçe kökenli veya dilimize yerleşmiş geçerli sözcük."
+  },
+  "GÖKYÜZÜ": {
+    "type": "TDK Güncel Sözlük",
+    "meaning": "Türk Dil Kurumu Güncel Türkçe Sözlük standartlarına uygun, Türkçe kökenli veya dilimize yerleşmiş geçerli sözcük."
+  },
+  "GÖL": {
+    "type": "İsim",
+    "meaning": "Karalar üzerinde oluşmuş derin ve geniş durgun su kütlesi."
+  },
+  "GÖLGE": {
+    "type": "İsim",
+    "meaning": "Işık almayan bir cismin arkasında oluşturduğu karanlık alan."
+  },
+  "GÜN": {
+    "type": "İsim",
+    "meaning": "Dünya'nın kendi ekseni etrafında bir tam dönüş süresi olan 24 saatlik zaman dilimi."
+  },
+  "GÜNEŞ": {
+    "type": "İsim",
+    "meaning": "Sistemimizin merkezinde yer alan ışık ve ısı kaynağı devasa gök cismi."
+  },
+  "GÜR": {
+    "type": "TDK Güncel Sözlük",
+    "meaning": "Türk Dil Kurumu Güncel Türkçe Sözlük standartlarına uygun, Türkçe kökenli veya dilimize yerleşmiş geçerli sözcük."
+  },
+  "GÜZ": {
+    "type": "TDK Güncel Sözlük",
+    "meaning": "Türk Dil Kurumu Güncel Türkçe Sözlük standartlarına uygun, Türkçe kökenli veya dilimize yerleşmiş geçerli sözcük."
+  },
+  "GÜZEL": {
+    "type": "TDK Güncel Sözlük",
+    "meaning": "Türk Dil Kurumu Güncel Türkçe Sözlük standartlarına uygun, Türkçe kökenli veya dilimize yerleşmiş geçerli sözcük."
+  },
+  "HAC": {
+    "type": "TDK Güncel Sözlük",
+    "meaning": "Türk Dil Kurumu Güncel Türkçe Sözlük standartlarına uygun, Türkçe kökenli veya dilimize yerleşmiş geçerli sözcük."
+  },
+  "HAM": {
+    "type": "TDK Güncel Sözlük",
+    "meaning": "Türk Dil Kurumu Güncel Türkçe Sözlük standartlarına uygun, Türkçe kökenli veya dilimize yerleşmiş geçerli sözcük."
+  },
+  "HAMAM": {
+    "type": "TDK Güncel Sözlük",
+    "meaning": "Türk Dil Kurumu Güncel Türkçe Sözlük standartlarına uygun, Türkçe kökenli veya dilimize yerleşmiş geçerli sözcük."
+  },
+  "HAN": {
+    "type": "TDK Güncel Sözlük",
+    "meaning": "Türk Dil Kurumu Güncel Türkçe Sözlük standartlarına uygun, Türkçe kökenli veya dilimize yerleşmiş geçerli sözcük."
+  },
+  "HAT": {
+    "type": "İsim",
+    "meaning": "Çizgi; ulaşım veya haberleşme yolu; güzel yazı sanatı (hüsn-i hat)."
+  },
+  "HAVUZ": {
+    "type": "TDK Güncel Sözlük",
+    "meaning": "Türk Dil Kurumu Güncel Türkçe Sözlük standartlarına uygun, Türkçe kökenli veya dilimize yerleşmiş geçerli sözcük."
+  },
+  "HAY": {
+    "type": "TDK Güncel Sözlük",
+    "meaning": "Türk Dil Kurumu Güncel Türkçe Sözlük standartlarına uygun, Türkçe kökenli veya dilimize yerleşmiş geçerli sözcük."
+  },
+  "HAYAT": {
+    "type": "TDK Güncel Sözlük",
+    "meaning": "Türk Dil Kurumu Güncel Türkçe Sözlük standartlarına uygun, Türkçe kökenli veya dilimize yerleşmiş geçerli sözcük."
+  },
+  "HAZ": {
+    "type": "TDK Güncel Sözlük",
+    "meaning": "Türk Dil Kurumu Güncel Türkçe Sözlük standartlarına uygun, Türkçe kökenli veya dilimize yerleşmiş geçerli sözcük."
+  },
+  "HER": {
+    "type": "TDK Güncel Sözlük",
+    "meaning": "Türk Dil Kurumu Güncel Türkçe Sözlük standartlarına uygun, Türkçe kökenli veya dilimize yerleşmiş geçerli sözcük."
+  },
+  "HUZUR": {
+    "type": "İsim",
+    "meaning": "Gönül rahatlığı, dirlik, baş dinçliği ve içsel dinginlik."
+  },
+  "KAF": {
+    "type": "TDK Güncel Sözlük",
+    "meaning": "Türk Dil Kurumu Güncel Türkçe Sözlük standartlarına uygun, Türkçe kökenli veya dilimize yerleşmiş geçerli sözcük."
+  },
+  "KALE": {
+    "type": "İsim",
+    "meaning": "Düşman saldırılarını durdurmak için yapılmış kalın duvarlı tarihi askeri yapı."
+  },
+  "KAN": {
+    "type": "TDK Güncel Sözlük",
+    "meaning": "Türk Dil Kurumu Güncel Türkçe Sözlük standartlarına uygun, Türkçe kökenli veya dilimize yerleşmiş geçerli sözcük."
+  },
+  "KANYON": {
+    "type": "TDK Güncel Sözlük",
+    "meaning": "Türk Dil Kurumu Güncel Türkçe Sözlük standartlarına uygun, Türkçe kökenli veya dilimize yerleşmiş geçerli sözcük."
+  },
+  "KAP": {
+    "type": "TDK Güncel Sözlük",
+    "meaning": "Türk Dil Kurumu Güncel Türkçe Sözlük standartlarına uygun, Türkçe kökenli veya dilimize yerleşmiş geçerli sözcük."
+  },
+  "KAPI": {
+    "type": "İsim",
+    "meaning": "Bir odaya veya mekana girip çıkmayı sağlayan açılır kapanır geçit kanadı."
+  },
+  "KAS": {
+    "type": "TDK Güncel Sözlük",
+    "meaning": "Türk Dil Kurumu Güncel Türkçe Sözlük standartlarına uygun, Türkçe kökenli veya dilimize yerleşmiş geçerli sözcük."
+  },
+  "KAT": {
+    "type": "İsim",
+    "meaning": "Bir yapıda iki döşeme arasındaki her bir bölüm; tabaka, düzey."
+  },
+  "KEL": {
+    "type": "TDK Güncel Sözlük",
+    "meaning": "Türk Dil Kurumu Güncel Türkçe Sözlük standartlarına uygun, Türkçe kökenli veya dilimize yerleşmiş geçerli sözcük."
+  },
+  "KEÇİ": {
+    "type": "TDK Güncel Sözlük",
+    "meaning": "Türk Dil Kurumu Güncel Türkçe Sözlük standartlarına uygun, Türkçe kökenli veya dilimize yerleşmiş geçerli sözcük."
+  },
+  "KIL": {
+    "type": "TDK Güncel Sözlük",
+    "meaning": "Türk Dil Kurumu Güncel Türkçe Sözlük standartlarına uygun, Türkçe kökenli veya dilimize yerleşmiş geçerli sözcük."
+  },
+  "KISMET": {
+    "type": "TDK Güncel Sözlük",
+    "meaning": "Türk Dil Kurumu Güncel Türkçe Sözlük standartlarına uygun, Türkçe kökenli veya dilimize yerleşmiş geçerli sözcük."
+  },
+  "KIST": {
+    "type": "TDK Güncel Sözlük",
+    "meaning": "Türk Dil Kurumu Güncel Türkçe Sözlük standartlarına uygun, Türkçe kökenli veya dilimize yerleşmiş geçerli sözcük."
+  },
+  "KOKA": {
+    "type": "TDK Güncel Sözlük",
+    "meaning": "Türk Dil Kurumu Güncel Türkçe Sözlük standartlarına uygun, Türkçe kökenli veya dilimize yerleşmiş geçerli sözcük."
+  },
+  "KOL": {
+    "type": "TDK Güncel Sözlük",
+    "meaning": "Türk Dil Kurumu Güncel Türkçe Sözlük standartlarına uygun, Türkçe kökenli veya dilimize yerleşmiş geçerli sözcük."
+  },
+  "KOR": {
+    "type": "TDK Güncel Sözlük",
+    "meaning": "Türk Dil Kurumu Güncel Türkçe Sözlük standartlarına uygun, Türkçe kökenli veya dilimize yerleşmiş geçerli sözcük."
+  },
+  "KORU": {
+    "type": "TDK Güncel Sözlük",
+    "meaning": "Türk Dil Kurumu Güncel Türkçe Sözlük standartlarına uygun, Türkçe kökenli veya dilimize yerleşmiş geçerli sözcük."
+  },
+  "KORİDOR": {
+    "type": "TDK Güncel Sözlük",
+    "meaning": "Türk Dil Kurumu Güncel Türkçe Sözlük standartlarına uygun, Türkçe kökenli veya dilimize yerleşmiş geçerli sözcük."
+  },
+  "KUM": {
+    "type": "TDK Güncel Sözlük",
+    "meaning": "Türk Dil Kurumu Güncel Türkçe Sözlük standartlarına uygun, Türkçe kökenli veya dilimize yerleşmiş geçerli sözcük."
+  },
+  "KUMSAL": {
+    "type": "TDK Güncel Sözlük",
+    "meaning": "Türk Dil Kurumu Güncel Türkçe Sözlük standartlarına uygun, Türkçe kökenli veya dilimize yerleşmiş geçerli sözcük."
+  },
+  "KUŞ": {
+    "type": "İsim",
+    "meaning": "Tüylü, iki ayaklı, gagalı ve kanatlı sıcakkanlı omurgalı hayvan."
+  },
+  "KUŞAK": {
+    "type": "İsim",
+    "meaning": "Bele sarılan şerit; yaklaşık aynı yıllarda doğmuş olan nesil."
+  },
+  "KÖK": {
+    "type": "TDK Güncel Sözlük",
+    "meaning": "Türk Dil Kurumu Güncel Türkçe Sözlük standartlarına uygun, Türkçe kökenli veya dilimize yerleşmiş geçerli sözcük."
+  },
+  "KÖP": {
+    "type": "TDK Güncel Sözlük",
+    "meaning": "Türk Dil Kurumu Güncel Türkçe Sözlük standartlarına uygun, Türkçe kökenli veya dilimize yerleşmiş geçerli sözcük."
+  },
+  "KÖPRÜ": {
+    "type": "İsim",
+    "meaning": "İki yakayı birbirine bağlayan, altından su veya yol geçen mimari yapı."
+  },
+  "KÖRFEZ": {
+    "type": "TDK Güncel Sözlük",
+    "meaning": "Türk Dil Kurumu Güncel Türkçe Sözlük standartlarına uygun, Türkçe kökenli veya dilimize yerleşmiş geçerli sözcük."
+  },
+  "KÖŞK": {
+    "type": "TDK Güncel Sözlük",
+    "meaning": "Türk Dil Kurumu Güncel Türkçe Sözlük standartlarına uygun, Türkçe kökenli veya dilimize yerleşmiş geçerli sözcük."
+  },
+  "KÜL": {
+    "type": "TDK Güncel Sözlük",
+    "meaning": "Türk Dil Kurumu Güncel Türkçe Sözlük standartlarına uygun, Türkçe kökenli veya dilimize yerleşmiş geçerli sözcük."
+  },
+  "KÜLTÜR": {
+    "type": "TDK Güncel Sözlük",
+    "meaning": "Türk Dil Kurumu Güncel Türkçe Sözlük standartlarına uygun, Türkçe kökenli veya dilimize yerleşmiş geçerli sözcük."
+  },
+  "KÜR": {
+    "type": "TDK Güncel Sözlük",
+    "meaning": "Türk Dil Kurumu Güncel Türkçe Sözlük standartlarına uygun, Türkçe kökenli veya dilimize yerleşmiş geçerli sözcük."
+  },
+  "KİM": {
+    "type": "TDK Güncel Sözlük",
+    "meaning": "Türk Dil Kurumu Güncel Türkçe Sözlük standartlarına uygun, Türkçe kökenli veya dilimize yerleşmiş geçerli sözcük."
+  },
+  "KİTAP": {
+    "type": "İsim",
+    "meaning": "Ciltli veya ciltsiz olarak bir araya getirilmiş basılı yapraklar bütünü."
+  },
+  "LAK": {
+    "type": "TDK Güncel Sözlük",
+    "meaning": "Türk Dil Kurumu Güncel Türkçe Sözlük standartlarına uygun, Türkçe kökenli veya dilimize yerleşmiş geçerli sözcük."
+  },
+  "LALE": {
+    "type": "TDK Güncel Sözlük",
+    "meaning": "Türk Dil Kurumu Güncel Türkçe Sözlük standartlarına uygun, Türkçe kökenli veya dilimize yerleşmiş geçerli sözcük."
+  },
+  "LAM": {
+    "type": "TDK Güncel Sözlük",
+    "meaning": "Türk Dil Kurumu Güncel Türkçe Sözlük standartlarına uygun, Türkçe kökenli veya dilimize yerleşmiş geçerli sözcük."
+  },
+  "LARA": {
+    "type": "TDK Güncel Sözlük",
+    "meaning": "Türk Dil Kurumu Güncel Türkçe Sözlük standartlarına uygun, Türkçe kökenli veya dilimize yerleşmiş geçerli sözcük."
+  },
+  "LİG": {
+    "type": "TDK Güncel Sözlük",
+    "meaning": "Türk Dil Kurumu Güncel Türkçe Sözlük standartlarına uygun, Türkçe kökenli veya dilimize yerleşmiş geçerli sözcük."
+  },
+  "LİMAN": {
+    "type": "TDK Güncel Sözlük",
+    "meaning": "Türk Dil Kurumu Güncel Türkçe Sözlük standartlarına uygun, Türkçe kökenli veya dilimize yerleşmiş geçerli sözcük."
+  },
+  "MAL": {
+    "type": "TDK Güncel Sözlük",
+    "meaning": "Türk Dil Kurumu Güncel Türkçe Sözlük standartlarına uygun, Türkçe kökenli veya dilimize yerleşmiş geçerli sözcük."
+  },
+  "MAMA": {
+    "type": "TDK Güncel Sözlük",
+    "meaning": "Türk Dil Kurumu Güncel Türkçe Sözlük standartlarına uygun, Türkçe kökenli veya dilimize yerleşmiş geçerli sözcük."
+  },
+  "MASA": {
+    "type": "İsim",
+    "meaning": "Ayaklar üzerine oturtulmuş, üzerinde çalışılan veya yemek yenilen düz tabla."
+  },
+  "MASAL": {
+    "type": "TDK Güncel Sözlük",
+    "meaning": "Türk Dil Kurumu Güncel Türkçe Sözlük standartlarına uygun, Türkçe kökenli veya dilimize yerleşmiş geçerli sözcük."
+  },
+  "MEYDAN": {
+    "type": "TDK Güncel Sözlük",
+    "meaning": "Türk Dil Kurumu Güncel Türkçe Sözlük standartlarına uygun, Türkçe kökenli veya dilimize yerleşmiş geçerli sözcük."
+  },
+  "MOR": {
+    "type": "TDK Güncel Sözlük",
+    "meaning": "Türk Dil Kurumu Güncel Türkçe Sözlük standartlarına uygun, Türkçe kökenli veya dilimize yerleşmiş geçerli sözcük."
+  },
+  "MUTFAK": {
+    "type": "TDK Güncel Sözlük",
+    "meaning": "Türk Dil Kurumu Güncel Türkçe Sözlük standartlarına uygun, Türkçe kökenli veya dilimize yerleşmiş geçerli sözcük."
+  },
+  "MUTLU": {
+    "type": "Sıfat",
+    "meaning": "Gönlü ferah, neşeli ve saadet dolu olan kimse, bahtiyar."
+  },
+  "MÜZ": {
+    "type": "TDK Güncel Sözlük",
+    "meaning": "Türk Dil Kurumu Güncel Türkçe Sözlük standartlarına uygun, Türkçe kökenli veya dilimize yerleşmiş geçerli sözcük."
+  },
+  "MÜZİK": {
+    "type": "TDK Güncel Sözlük",
+    "meaning": "Türk Dil Kurumu Güncel Türkçe Sözlük standartlarına uygun, Türkçe kökenli veya dilimize yerleşmiş geçerli sözcük."
+  },
+  "MİR": {
+    "type": "TDK Güncel Sözlük",
+    "meaning": "Türk Dil Kurumu Güncel Türkçe Sözlük standartlarına uygun, Türkçe kökenli veya dilimize yerleşmiş geçerli sözcük."
+  },
+  "MİRAS": {
+    "type": "TDK Güncel Sözlük",
+    "meaning": "Türk Dil Kurumu Güncel Türkçe Sözlük standartlarına uygun, Türkçe kökenli veya dilimize yerleşmiş geçerli sözcük."
+  },
+  "NAL": {
+    "type": "TDK Güncel Sözlük",
+    "meaning": "Türk Dil Kurumu Güncel Türkçe Sözlük standartlarına uygun, Türkçe kökenli veya dilimize yerleşmiş geçerli sözcük."
+  },
+  "NAM": {
+    "type": "TDK Güncel Sözlük",
+    "meaning": "Türk Dil Kurumu Güncel Türkçe Sözlük standartlarına uygun, Türkçe kökenli veya dilimize yerleşmiş geçerli sözcük."
+  },
+  "NAR": {
+    "type": "TDK Güncel Sözlük",
+    "meaning": "Türk Dil Kurumu Güncel Türkçe Sözlük standartlarına uygun, Türkçe kökenli veya dilimize yerleşmiş geçerli sözcük."
+  },
+  "NAZ": {
+    "type": "TDK Güncel Sözlük",
+    "meaning": "Türk Dil Kurumu Güncel Türkçe Sözlük standartlarına uygun, Türkçe kökenli veya dilimize yerleşmiş geçerli sözcük."
+  },
+  "NEHİR": {
+    "type": "İsim",
+    "meaning": "Genellikle denize veya göle dökülen büyük ve coşkun akar su, ırmak."
+  },
+  "OBA": {
+    "type": "TDK Güncel Sözlük",
+    "meaning": "Türk Dil Kurumu Güncel Türkçe Sözlük standartlarına uygun, Türkçe kökenli veya dilimize yerleşmiş geçerli sözcük."
+  },
+  "OKUR": {
+    "type": "İsim",
+    "meaning": "Kitap, gazete veya dergi okuyan kimse; kâri."
+  },
+  "ONAR": {
+    "type": "TDK Güncel Sözlük",
+    "meaning": "Türk Dil Kurumu Güncel Türkçe Sözlük standartlarına uygun, Türkçe kökenli veya dilimize yerleşmiş geçerli sözcük."
+  },
+  "ONLAR": {
+    "type": "TDK Güncel Sözlük",
+    "meaning": "Türk Dil Kurumu Güncel Türkçe Sözlük standartlarına uygun, Türkçe kökenli veya dilimize yerleşmiş geçerli sözcük."
+  },
+  "ORAN": {
+    "type": "TDK Güncel Sözlük",
+    "meaning": "Türk Dil Kurumu Güncel Türkçe Sözlük standartlarına uygun, Türkçe kökenli veya dilimize yerleşmiş geçerli sözcük."
+  },
+  "ORMAN": {
+    "type": "İsim",
+    "meaning": "Ağaçlarla kaplı geniş arazi, yaban hayatın ve temiz havanın kaynağı."
+  },
+  "OT": {
+    "type": "TDK Güncel Sözlük",
+    "meaning": "Türk Dil Kurumu Güncel Türkçe Sözlük standartlarına uygun, Türkçe kökenli veya dilimize yerleşmiş geçerli sözcük."
+  },
+  "PAK": {
+    "type": "Sıfat",
+    "meaning": "Temiz, saf, lekesiz, arı."
+  },
+  "PARK": {
+    "type": "TDK Güncel Sözlük",
+    "meaning": "Türk Dil Kurumu Güncel Türkçe Sözlük standartlarına uygun, Türkçe kökenli veya dilimize yerleşmiş geçerli sözcük."
+  },
+  "PARS": {
+    "type": "TDK Güncel Sözlük",
+    "meaning": "Türk Dil Kurumu Güncel Türkçe Sözlük standartlarına uygun, Türkçe kökenli veya dilimize yerleşmiş geçerli sözcük."
+  },
+  "PAS": {
+    "type": "TDK Güncel Sözlük",
+    "meaning": "Türk Dil Kurumu Güncel Türkçe Sözlük standartlarına uygun, Türkçe kökenli veya dilimize yerleşmiş geçerli sözcük."
+  },
+  "PET": {
+    "type": "TDK Güncel Sözlük",
+    "meaning": "Türk Dil Kurumu Güncel Türkçe Sözlük standartlarına uygun, Türkçe kökenli veya dilimize yerleşmiş geçerli sözcük."
+  },
+  "POT": {
+    "type": "TDK Güncel Sözlük",
+    "meaning": "Türk Dil Kurumu Güncel Türkçe Sözlük standartlarına uygun, Türkçe kökenli veya dilimize yerleşmiş geçerli sözcük."
+  },
+  "PÜR": {
+    "type": "TDK Güncel Sözlük",
+    "meaning": "Türk Dil Kurumu Güncel Türkçe Sözlük standartlarına uygun, Türkçe kökenli veya dilimize yerleşmiş geçerli sözcük."
+  },
+  "RAY": {
+    "type": "TDK Güncel Sözlük",
+    "meaning": "Türk Dil Kurumu Güncel Türkçe Sözlük standartlarına uygun, Türkçe kökenli veya dilimize yerleşmiş geçerli sözcük."
+  },
+  "RESİM": {
+    "type": "TDK Güncel Sözlük",
+    "meaning": "Türk Dil Kurumu Güncel Türkçe Sözlük standartlarına uygun, Türkçe kökenli veya dilimize yerleşmiş geçerli sözcük."
+  },
+  "REVİ": {
+    "type": "TDK Güncel Sözlük",
+    "meaning": "Türk Dil Kurumu Güncel Türkçe Sözlük standartlarına uygun, Türkçe kökenli veya dilimize yerleşmiş geçerli sözcük."
+  },
+  "ROD": {
+    "type": "TDK Güncel Sözlük",
+    "meaning": "Türk Dil Kurumu Güncel Türkçe Sözlük standartlarına uygun, Türkçe kökenli veya dilimize yerleşmiş geçerli sözcük."
+  },
+  "ROM": {
+    "type": "TDK Güncel Sözlük",
+    "meaning": "Türk Dil Kurumu Güncel Türkçe Sözlük standartlarına uygun, Türkçe kökenli veya dilimize yerleşmiş geçerli sözcük."
+  },
+  "ROMA": {
+    "type": "Özel İsim",
+    "meaning": "İtalya'nın başkenti ve antik medeniyetlerin beşiği tarihi şehir."
+  },
+  "ROMAN": {
+    "type": "İsim",
+    "meaning": "İnsanların maceralarını, iç dünyalarını ve toplumları anlatan uzun edebi anlatı."
+  },
+  "RUH": {
+    "type": "TDK Güncel Sözlük",
+    "meaning": "Türk Dil Kurumu Güncel Türkçe Sözlük standartlarına uygun, Türkçe kökenli veya dilimize yerleşmiş geçerli sözcük."
+  },
+  "RÜZGAR": {
+    "type": "TDK Güncel Sözlük",
+    "meaning": "Türk Dil Kurumu Güncel Türkçe Sözlük standartlarına uygun, Türkçe kökenli veya dilimize yerleşmiş geçerli sözcük."
+  },
+  "SABIR": {
+    "type": "TDK Güncel Sözlük",
+    "meaning": "Türk Dil Kurumu Güncel Türkçe Sözlük standartlarına uygun, Türkçe kökenli veya dilimize yerleşmiş geçerli sözcük."
+  },
+  "SALON": {
+    "type": "TDK Güncel Sözlük",
+    "meaning": "Türk Dil Kurumu Güncel Türkçe Sözlük standartlarına uygun, Türkçe kökenli veya dilimize yerleşmiş geçerli sözcük."
+  },
+  "SAN": {
+    "type": "TDK Güncel Sözlük",
+    "meaning": "Türk Dil Kurumu Güncel Türkçe Sözlük standartlarına uygun, Türkçe kökenli veya dilimize yerleşmiş geçerli sözcük."
+  },
+  "SANAT": {
+    "type": "TDK Güncel Sözlük",
+    "meaning": "Türk Dil Kurumu Güncel Türkçe Sözlük standartlarına uygun, Türkçe kökenli veya dilimize yerleşmiş geçerli sözcük."
+  },
+  "SARAY": {
+    "type": "TDK Güncel Sözlük",
+    "meaning": "Türk Dil Kurumu Güncel Türkçe Sözlük standartlarına uygun, Türkçe kökenli veya dilimize yerleşmiş geçerli sözcük."
+  },
+  "SERAP": {
+    "type": "TDK Güncel Sözlük",
+    "meaning": "Türk Dil Kurumu Güncel Türkçe Sözlük standartlarına uygun, Türkçe kökenli veya dilimize yerleşmiş geçerli sözcük."
+  },
+  "SERİ": {
+    "type": "TDK Güncel Sözlük",
+    "meaning": "Türk Dil Kurumu Güncel Türkçe Sözlük standartlarına uygun, Türkçe kökenli veya dilimize yerleşmiş geçerli sözcük."
+  },
+  "SET": {
+    "type": "TDK Güncel Sözlük",
+    "meaning": "Türk Dil Kurumu Güncel Türkçe Sözlük standartlarına uygun, Türkçe kökenli veya dilimize yerleşmiş geçerli sözcük."
+  },
+  "SEV": {
+    "type": "TDK Güncel Sözlük",
+    "meaning": "Türk Dil Kurumu Güncel Türkçe Sözlük standartlarına uygun, Türkçe kökenli veya dilimize yerleşmiş geçerli sözcük."
+  },
+  "SEVGİ": {
+    "type": "İsim",
+    "meaning": "İnsanı bir kimseye veya bir şeye karşı yakın ilgi duymaya yönelten içten duygu."
+  },
+  "SEVİNÇ": {
+    "type": "TDK Güncel Sözlük",
+    "meaning": "Türk Dil Kurumu Güncel Türkçe Sözlük standartlarına uygun, Türkçe kökenli veya dilimize yerleşmiş geçerli sözcük."
+  },
+  "SOKAK": {
+    "type": "TDK Güncel Sözlük",
+    "meaning": "Türk Dil Kurumu Güncel Türkçe Sözlük standartlarına uygun, Türkçe kökenli veya dilimize yerleşmiş geçerli sözcük."
+  },
+  "SULH": {
+    "type": "TDK Güncel Sözlük",
+    "meaning": "Türk Dil Kurumu Güncel Türkçe Sözlük standartlarına uygun, Türkçe kökenli veya dilimize yerleşmiş geçerli sözcük."
+  },
+  "SİMA": {
+    "type": "TDK Güncel Sözlük",
+    "meaning": "Türk Dil Kurumu Güncel Türkçe Sözlük standartlarına uygun, Türkçe kökenli veya dilimize yerleşmiş geçerli sözcük."
+  },
+  "TAK": {
+    "type": "İsim",
+    "meaning": "Bayramlarda veya zafer günlerinde caddelere kurulan süslü zafer kemeri."
+  },
+  "TAKİP": {
+    "type": "İsim",
+    "meaning": "Bir şeyin veya kimsenin ardından gitme, izleme."
+  },
+  "TAM": {
+    "type": "TDK Güncel Sözlük",
+    "meaning": "Türk Dil Kurumu Güncel Türkçe Sözlük standartlarına uygun, Türkçe kökenli veya dilimize yerleşmiş geçerli sözcük."
+  },
+  "TARİH": {
+    "type": "İsim",
+    "meaning": "Toplumların geçmişteki yaşayışlarını yer ve zaman belirterek inceleyen bilim dalı."
+  },
+  "TAS": {
+    "type": "TDK Güncel Sözlük",
+    "meaning": "Türk Dil Kurumu Güncel Türkçe Sözlük standartlarına uygun, Türkçe kökenli veya dilimize yerleşmiş geçerli sözcük."
+  },
+  "TAY": {
+    "type": "TDK Güncel Sözlük",
+    "meaning": "Türk Dil Kurumu Güncel Türkçe Sözlük standartlarına uygun, Türkçe kökenli veya dilimize yerleşmiş geçerli sözcük."
+  },
+  "TEPE": {
+    "type": "TDK Güncel Sözlük",
+    "meaning": "Türk Dil Kurumu Güncel Türkçe Sözlük standartlarına uygun, Türkçe kökenli veya dilimize yerleşmiş geçerli sözcük."
+  },
+  "TOPRAK": {
+    "type": "TDK Güncel Sözlük",
+    "meaning": "Türk Dil Kurumu Güncel Türkçe Sözlük standartlarına uygun, Türkçe kökenli veya dilimize yerleşmiş geçerli sözcük."
+  },
+  "TOS": {
+    "type": "TDK Güncel Sözlük",
+    "meaning": "Türk Dil Kurumu Güncel Türkçe Sözlük standartlarına uygun, Türkçe kökenli veya dilimize yerleşmiş geçerli sözcük."
+  },
+  "TUL": {
+    "type": "TDK Güncel Sözlük",
+    "meaning": "Türk Dil Kurumu Güncel Türkçe Sözlük standartlarına uygun, Türkçe kökenli veya dilimize yerleşmiş geçerli sözcük."
+  },
+  "TULU": {
+    "type": "TDK Güncel Sözlük",
+    "meaning": "Türk Dil Kurumu Güncel Türkçe Sözlük standartlarına uygun, Türkçe kökenli veya dilimize yerleşmiş geçerli sözcük."
+  },
+  "TUR": {
+    "type": "TDK Güncel Sözlük",
+    "meaning": "Türk Dil Kurumu Güncel Türkçe Sözlük standartlarına uygun, Türkçe kökenli veya dilimize yerleşmiş geçerli sözcük."
+  },
+  "TUT": {
+    "type": "TDK Güncel Sözlük",
+    "meaning": "Türk Dil Kurumu Güncel Türkçe Sözlük standartlarına uygun, Türkçe kökenli veya dilimize yerleşmiş geçerli sözcük."
+  },
+  "TÜR": {
+    "type": "TDK Güncel Sözlük",
+    "meaning": "Türk Dil Kurumu Güncel Türkçe Sözlük standartlarına uygun, Türkçe kökenli veya dilimize yerleşmiş geçerli sözcük."
+  },
+  "TÜRE": {
+    "type": "TDK Güncel Sözlük",
+    "meaning": "Türk Dil Kurumu Güncel Türkçe Sözlük standartlarına uygun, Türkçe kökenli veya dilimize yerleşmiş geçerli sözcük."
+  },
+  "TÜRK": {
+    "type": "TDK Güncel Sözlük",
+    "meaning": "Türk Dil Kurumu Güncel Türkçe Sözlük standartlarına uygun, Türkçe kökenli veya dilimize yerleşmiş geçerli sözcük."
+  },
+  "ULU": {
+    "type": "TDK Güncel Sözlük",
+    "meaning": "Türk Dil Kurumu Güncel Türkçe Sözlük standartlarına uygun, Türkçe kökenli veya dilimize yerleşmiş geçerli sözcük."
+  },
+  "UMUT": {
+    "type": "İsim",
+    "meaning": "Bir arzunun gerçekleşmesini güvenle ve istekle bekleme hissi, ümit."
+  },
+  "UMUTLU": {
+    "type": "TDK Güncel Sözlük",
+    "meaning": "Türk Dil Kurumu Güncel Türkçe Sözlük standartlarına uygun, Türkçe kökenli veya dilimize yerleşmiş geçerli sözcük."
+  },
+  "UR": {
+    "type": "TDK Güncel Sözlük",
+    "meaning": "Türk Dil Kurumu Güncel Türkçe Sözlük standartlarına uygun, Türkçe kökenli veya dilimize yerleşmiş geçerli sözcük."
+  },
+  "VADİ": {
+    "type": "TDK Güncel Sözlük",
+    "meaning": "Türk Dil Kurumu Güncel Türkçe Sözlük standartlarına uygun, Türkçe kökenli veya dilimize yerleşmiş geçerli sözcük."
+  },
+  "VAZ": {
+    "type": "TDK Güncel Sözlük",
+    "meaning": "Türk Dil Kurumu Güncel Türkçe Sözlük standartlarına uygun, Türkçe kökenli veya dilimize yerleşmiş geçerli sözcük."
+  },
+  "VOLKAN": {
+    "type": "TDK Güncel Sözlük",
+    "meaning": "Türk Dil Kurumu Güncel Türkçe Sözlük standartlarına uygun, Türkçe kökenli veya dilimize yerleşmiş geçerli sözcük."
+  },
+  "YAL": {
+    "type": "TDK Güncel Sözlük",
+    "meaning": "Türk Dil Kurumu Güncel Türkçe Sözlük standartlarına uygun, Türkçe kökenli veya dilimize yerleşmiş geçerli sözcük."
+  },
+  "YAN": {
+    "type": "TDK Güncel Sözlük",
+    "meaning": "Türk Dil Kurumu Güncel Türkçe Sözlük standartlarına uygun, Türkçe kökenli veya dilimize yerleşmiş geçerli sözcük."
+  },
+  "YARA": {
+    "type": "TDK Güncel Sözlük",
+    "meaning": "Türk Dil Kurumu Güncel Türkçe Sözlük standartlarına uygun, Türkçe kökenli veya dilimize yerleşmiş geçerli sözcük."
+  },
+  "YAYLA": {
+    "type": "TDK Güncel Sözlük",
+    "meaning": "Türk Dil Kurumu Güncel Türkçe Sözlük standartlarına uygun, Türkçe kökenli veya dilimize yerleşmiş geçerli sözcük."
+  },
+  "YAZ": {
+    "type": "İsim",
+    "meaning": "Kuzey yarımkürede doğanın en verimli ve havaların en sıcak olduğu mevsim."
+  },
+  "YELE": {
+    "type": "TDK Güncel Sözlük",
+    "meaning": "Türk Dil Kurumu Güncel Türkçe Sözlük standartlarına uygun, Türkçe kökenli veya dilimize yerleşmiş geçerli sözcük."
+  },
+  "YELKEN": {
+    "type": "İsim",
+    "meaning": "Rüzgâr gücüyle gemiyi veya tekneyi yürütmek için direğe gerilen kalın kumaş."
+  },
+  "YIL": {
+    "type": "TDK Güncel Sözlük",
+    "meaning": "Türk Dil Kurumu Güncel Türkçe Sözlük standartlarına uygun, Türkçe kökenli veya dilimize yerleşmiş geçerli sözcük."
+  },
+  "YILDIZ": {
+    "type": "TDK Güncel Sözlük",
+    "meaning": "Türk Dil Kurumu Güncel Türkçe Sözlük standartlarına uygun, Türkçe kökenli veya dilimize yerleşmiş geçerli sözcük."
+  },
+  "YUR": {
+    "type": "TDK Güncel Sözlük",
+    "meaning": "Türk Dil Kurumu Güncel Türkçe Sözlük standartlarına uygun, Türkçe kökenli veya dilimize yerleşmiş geçerli sözcük."
+  },
+  "YURT": {
+    "type": "TDK Güncel Sözlük",
+    "meaning": "Türk Dil Kurumu Güncel Türkçe Sözlük standartlarına uygun, Türkçe kökenli veya dilimize yerleşmiş geçerli sözcük."
+  },
+  "YÜZ": {
+    "type": "TDK Güncel Sözlük",
+    "meaning": "Türk Dil Kurumu Güncel Türkçe Sözlük standartlarına uygun, Türkçe kökenli veya dilimize yerleşmiş geçerli sözcük."
+  },
+  "ZAMAN": {
+    "type": "TDK Güncel Sözlük",
+    "meaning": "Türk Dil Kurumu Güncel Türkçe Sözlük standartlarına uygun, Türkçe kökenli veya dilimize yerleşmiş geçerli sözcük."
+  },
+  "ZAR": {
+    "type": "TDK Güncel Sözlük",
+    "meaning": "Türk Dil Kurumu Güncel Türkçe Sözlük standartlarına uygun, Türkçe kökenli veya dilimize yerleşmiş geçerli sözcük."
+  },
+  "ZEL": {
+    "type": "TDK Güncel Sözlük",
+    "meaning": "Türk Dil Kurumu Güncel Türkçe Sözlük standartlarına uygun, Türkçe kökenli veya dilimize yerleşmiş geçerli sözcük."
+  },
+  "ZOR": {
+    "type": "TDK Güncel Sözlük",
+    "meaning": "Türk Dil Kurumu Güncel Türkçe Sözlük standartlarına uygun, Türkçe kökenli veya dilimize yerleşmiş geçerli sözcük."
+  },
+  "ZİRVE": {
+    "type": "TDK Güncel Sözlük",
+    "meaning": "Türk Dil Kurumu Güncel Türkçe Sözlük standartlarına uygun, Türkçe kökenli veya dilimize yerleşmiş geçerli sözcük."
+  },
+  "ÇAH": {
+    "type": "TDK Güncel Sözlük",
+    "meaning": "Türk Dil Kurumu Güncel Türkçe Sözlük standartlarına uygun, Türkçe kökenli veya dilimize yerleşmiş geçerli sözcük."
+  },
+  "ÇAR": {
+    "type": "TDK Güncel Sözlük",
+    "meaning": "Türk Dil Kurumu Güncel Türkçe Sözlük standartlarına uygun, Türkçe kökenli veya dilimize yerleşmiş geçerli sözcük."
+  },
+  "ÇARŞI": {
+    "type": "TDK Güncel Sözlük",
+    "meaning": "Türk Dil Kurumu Güncel Türkçe Sözlük standartlarına uygun, Türkçe kökenli veya dilimize yerleşmiş geçerli sözcük."
+  },
+  "ÇEK": {
+    "type": "İsim",
+    "meaning": "Bankaya hitaben yazılmış ödeme emri belgesi."
+  },
+  "ÇEŞ": {
+    "type": "TDK Güncel Sözlük",
+    "meaning": "Türk Dil Kurumu Güncel Türkçe Sözlük standartlarına uygun, Türkçe kökenli veya dilimize yerleşmiş geçerli sözcük."
+  },
+  "ÇEŞME": {
+    "type": "TDK Güncel Sözlük",
+    "meaning": "Türk Dil Kurumu Güncel Türkçe Sözlük standartlarına uygun, Türkçe kökenli veya dilimize yerleşmiş geçerli sözcük."
+  },
+  "ÇIL": {
+    "type": "TDK Güncel Sözlük",
+    "meaning": "Türk Dil Kurumu Güncel Türkçe Sözlük standartlarına uygun, Türkçe kökenli veya dilimize yerleşmiş geçerli sözcük."
+  },
+  "ÇIN": {
+    "type": "İsim",
+    "meaning": "Yüksek ve keskin çınlama sesi; doğru, gerçek."
+  },
+  "ÇINAR": {
+    "type": "İsim",
+    "meaning": "Geniş yapraklı, kalın gövdeli, yüzlerce yıl yaşayabilen ulu ağaç."
+  },
+  "ÇİÇEK": {
+    "type": "İsim",
+    "meaning": "Bitkilerin renkli ve kokulu üreme organı; sevindirici güzel varlık."
+  },
+  "ÖRK": {
+    "type": "TDK Güncel Sözlük",
+    "meaning": "Türk Dil Kurumu Güncel Türkçe Sözlük standartlarına uygun, Türkçe kökenli veya dilimize yerleşmiş geçerli sözcük."
+  },
+  "İLGİ": {
+    "type": "TDK Güncel Sözlük",
+    "meaning": "Türk Dil Kurumu Güncel Türkçe Sözlük standartlarına uygun, Türkçe kökenli veya dilimize yerleşmiş geçerli sözcük."
+  },
+  "İME": {
+    "type": "TDK Güncel Sözlük",
+    "meaning": "Türk Dil Kurumu Güncel Türkçe Sözlük standartlarına uygun, Türkçe kökenli veya dilimize yerleşmiş geçerli sözcük."
+  },
+  "İNSAN": {
+    "type": "İsim",
+    "meaning": "Düşünme, konuşma ve alet yapma yeteneğiyle donatılmış en gelişmiş canlı varlık."
+  },
+  "İNÇ": {
+    "type": "TDK Güncel Sözlük",
+    "meaning": "Türk Dil Kurumu Güncel Türkçe Sözlük standartlarına uygun, Türkçe kökenli veya dilimize yerleşmiş geçerli sözcük."
+  },
+  "İRİ": {
+    "type": "TDK Güncel Sözlük",
+    "meaning": "Türk Dil Kurumu Güncel Türkçe Sözlük standartlarına uygun, Türkçe kökenli veya dilimize yerleşmiş geçerli sözcük."
+  },
+  "ŞEHİR": {
+    "type": "İsim",
+    "meaning": "Nüfusun yoğun olduğu, ticaret, kültür ve sanatın geliştiği büyük kent."
+  },
+  "ŞELALE": {
+    "type": "TDK Güncel Sözlük",
+    "meaning": "Türk Dil Kurumu Güncel Türkçe Sözlük standartlarına uygun, Türkçe kökenli veya dilimize yerleşmiş geçerli sözcük."
+  },
+  "ŞER": {
+    "type": "TDK Güncel Sözlük",
+    "meaning": "Türk Dil Kurumu Güncel Türkçe Sözlük standartlarına uygun, Türkçe kökenli veya dilimize yerleşmiş geçerli sözcük."
+  },
+  "ŞÖK": {
+    "type": "TDK Güncel Sözlük",
+    "meaning": "Türk Dil Kurumu Güncel Türkçe Sözlük standartlarına uygun, Türkçe kökenli veya dilimize yerleşmiş geçerli sözcük."
+  },
+  "ŞİR": {
+    "type": "TDK Güncel Sözlük",
+    "meaning": "Türk Dil Kurumu Güncel Türkçe Sözlük standartlarına uygun, Türkçe kökenli veya dilimize yerleşmiş geçerli sözcük."
+  },
+  "ŞİİR": {
+    "type": "TDK Güncel Sözlük",
+    "meaning": "Türk Dil Kurumu Güncel Türkçe Sözlük standartlarına uygun, Türkçe kökenli veya dilimize yerleşmiş geçerli sözcük."
+  }
+}

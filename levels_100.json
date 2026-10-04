@@ -4,7 +4,7 @@
     "title": "Kapadokya - Bölüm 1",
     "region": "NEVŞEHİR",
     "region_id": "kapadokya",
-    "bg": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/Hot_air_balloon_over_Cappadocia.jpg/1280px-Hot_air_balloon_over_Cappadocia.jpg",
+    "bg": "https://images.unsplash.com/photo-1641128324972-af3212f0f6bd?auto=format&fit=crop&w=1280&q=85",
     "wheel": [
       "K",
       "A",
@@ -35,7 +35,7 @@
     "title": "Pamukkale - Bölüm 2",
     "region": "DENİZLİ",
     "region_id": "pamukkale",
-    "bg": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/be/Pamukkale_Terraces.jpg/1280px-Pamukkale_Terraces.jpg",
+    "bg": "https://images.unsplash.com/photo-1527838832700-5059252407fa?auto=format&fit=crop&w=1280&q=85",
     "wheel": [
       "K",
       "A",
@@ -75,7 +75,7 @@
     "title": "Galata Kulesi - Bölüm 3",
     "region": "İSTANBUL",
     "region_id": "galata",
-    "bg": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/06/Galata_Tower_Istanbul.jpg/1280px-Galata_Tower_Istanbul.jpg",
+    "bg": "https://images.unsplash.com/photo-1524231757912-21f4fe3a7200?auto=format&fit=crop&w=1280&q=85",
     "wheel": [
       "M",
       "A",
@@ -109,7 +109,7 @@
     "title": "Efes Antik Kenti - Bölüm 4",
     "region": "İZMİR",
     "region_id": "efes",
-    "bg": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/30/Library_of_Celsus_Ephesus_Turkey.jpg/1280px-Library_of_Celsus_Ephesus_Turkey.jpg",
+    "bg": "https://images.unsplash.com/photo-1596422846543-75c6fc197f07?auto=format&fit=crop&w=1280&q=85",
     "wheel": [
       "B",
       "A",
@@ -152,7 +152,7 @@
     "title": "Nemrut Dağı - Bölüm 5",
     "region": "ADIYAMAN",
     "region_id": "nemrut",
-    "bg": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/29/Nemrut_Dagi_Heads.jpg/1280px-Nemrut_Dagi_Heads.jpg",
+    "bg": "https://images.unsplash.com/photo-1578328819058-b69f3a3b0f6b?auto=format&fit=crop&w=1280&q=85",
     "wheel": [
       "K",
       "İ",
@@ -195,7 +195,7 @@
     "title": "Göbeklitepe - Bölüm 6",
     "region": "ŞANLIURFA",
     "region_id": "gobeklitepe",
-    "bg": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a8/G%C3%B6bekli_Tepe%2C_Sanliurfa.jpg/1280px-G%C3%B6bekli_Tepe%2C_Sanliurfa.jpg",
+    "bg": "https://images.unsplash.com/photo-1570168007204-dfb528c6958f?auto=format&fit=crop&w=1280&q=85",
     "wheel": [
       "D",
       "E",
@@ -237,7 +237,7 @@
     "title": "Sümela Manastırı - Bölüm 7",
     "region": "TRABZON",
     "region_id": "sumela",
-    "bg": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/Sumela_from_across_valley.JPG/1280px-Sumela_from_across_valley.JPG",
+    "bg": "https://images.unsplash.com/photo-1589308078059-be1415eab4c3?auto=format&fit=crop&w=1280&q=85",
     "wheel": [
       "R",
       "O",
@@ -279,7 +279,7 @@
     "title": "Ani Harabeleri - Bölüm 8",
     "region": "KARS",
     "region_id": "ani",
-    "bg": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5a/Ani_Cathedral_2011.jpg/1280px-Ani_Cathedral_2011.jpg",
+    "bg": "https://images.unsplash.com/photo-1565008447742-97f6f38c985c?auto=format&fit=crop&w=1280&q=85",
     "wheel": [
       "K",
       "K",
@@ -320,7 +320,7 @@
     "title": "Kapadokya - Bölüm 9",
     "region": "NEVŞEHİR",
     "region_id": "kapadokya",
-    "bg": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/Hot_air_balloon_over_Cappadocia.jpg/1280px-Hot_air_balloon_over_Cappadocia.jpg",
+    "bg": "https://images.unsplash.com/photo-1641128324972-af3212f0f6bd?auto=format&fit=crop&w=1280&q=85",
     "wheel": [
       "Y",
       "A",
@@ -353,7 +353,7 @@
     "title": "Pamukkale - Bölüm 10",
     "region": "DENİZLİ",
     "region_id": "pamukkale",
-    "bg": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/be/Pamukkale_Terraces.jpg/1280px-Pamukkale_Terraces.jpg",
+    "bg": "https://images.unsplash.com/photo-1527838832700-5059252407fa?auto=format&fit=crop&w=1280&q=85",
     "wheel": [
       "K",
       "O",
@@ -394,7 +394,7 @@
     "title": "Galata Kulesi - Bölüm 1",
     "region": "İSTANBUL",
     "region_id": "galata",
-    "bg": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/06/Galata_Tower_Istanbul.jpg/1280px-Galata_Tower_Istanbul.jpg",
+    "bg": "https://images.unsplash.com/photo-1524231757912-21f4fe3a7200?auto=format&fit=crop&w=1280&q=85",
     "wheel": [
       "T",
       "A",
@@ -436,7 +436,7 @@
     "title": "Efes Antik Kenti - Bölüm 2",
     "region": "İZMİR",
     "region_id": "efes",
-    "bg": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/30/Library_of_Celsus_Ephesus_Turkey.jpg/1280px-Library_of_Celsus_Ephesus_Turkey.jpg",
+    "bg": "https://images.unsplash.com/photo-1596422846543-75c6fc197f07?auto=format&fit=crop&w=1280&q=85",
     "wheel": [
       "Ç",
       "I",
@@ -478,7 +478,7 @@
     "title": "Nemrut Dağı - Bölüm 3",
     "region": "ADIYAMAN",
     "region_id": "nemrut",
-    "bg": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/29/Nemrut_Dagi_Heads.jpg/1280px-Nemrut_Dagi_Heads.jpg",
+    "bg": "https://images.unsplash.com/photo-1578328819058-b69f3a3b0f6b?auto=format&fit=crop&w=1280&q=85",
     "wheel": [
       "B",
       "A",
@@ -520,7 +520,7 @@
     "title": "Göbeklitepe - Bölüm 4",
     "region": "ŞANLIURFA",
     "region_id": "gobeklitepe",
-    "bg": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a8/G%C3%B6bekli_Tepe%2C_Sanliurfa.jpg/1280px-G%C3%B6bekli_Tepe%2C_Sanliurfa.jpg",
+    "bg": "https://images.unsplash.com/photo-1570168007204-dfb528c6958f?auto=format&fit=crop&w=1280&q=85",
     "wheel": [
       "G",
       "Ü",
@@ -560,7 +560,7 @@
     "title": "Sümela Manastırı - Bölüm 5",
     "region": "TRABZON",
     "region_id": "sumela",
-    "bg": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/Sumela_from_across_valley.JPG/1280px-Sumela_from_across_valley.JPG",
+    "bg": "https://images.unsplash.com/photo-1589308078059-be1415eab4c3?auto=format&fit=crop&w=1280&q=85",
     "wheel": [
       "Ş",
       "E",
@@ -602,7 +602,7 @@
     "title": "Ani Harabeleri - Bölüm 6",
     "region": "KARS",
     "region_id": "ani",
-    "bg": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5a/Ani_Cathedral_2011.jpg/1280px-Ani_Cathedral_2011.jpg",
+    "bg": "https://images.unsplash.com/photo-1565008447742-97f6f38c985c?auto=format&fit=crop&w=1280&q=85",
     "wheel": [
       "O",
       "R",
@@ -644,7 +644,7 @@
     "title": "Kapadokya - Bölüm 7",
     "region": "NEVŞEHİR",
     "region_id": "kapadokya",
-    "bg": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/Hot_air_balloon_over_Cappadocia.jpg/1280px-Hot_air_balloon_over_Cappadocia.jpg",
+    "bg": "https://images.unsplash.com/photo-1641128324972-af3212f0f6bd?auto=format&fit=crop&w=1280&q=85",
     "wheel": [
       "B",
       "U",
@@ -686,7 +686,7 @@
     "title": "Pamukkale - Bölüm 8",
     "region": "DENİZLİ",
     "region_id": "pamukkale",
-    "bg": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/be/Pamukkale_Terraces.jpg/1280px-Pamukkale_Terraces.jpg",
+    "bg": "https://images.unsplash.com/photo-1527838832700-5059252407fa?auto=format&fit=crop&w=1280&q=85",
     "wheel": [
       "Ç",
       "Ç",
@@ -728,7 +728,7 @@
     "title": "Galata Kulesi - Bölüm 9",
     "region": "İSTANBUL",
     "region_id": "galata",
-    "bg": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/06/Galata_Tower_Istanbul.jpg/1280px-Galata_Tower_Istanbul.jpg",
+    "bg": "https://images.unsplash.com/photo-1524231757912-21f4fe3a7200?auto=format&fit=crop&w=1280&q=85",
     "wheel": [
       "S",
       "E",
@@ -769,7 +769,7 @@
     "title": "Efes Antik Kenti - Bölüm 10",
     "region": "İZMİR",
     "region_id": "efes",
-    "bg": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/30/Library_of_Celsus_Ephesus_Turkey.jpg/1280px-Library_of_Celsus_Ephesus_Turkey.jpg",
+    "bg": "https://images.unsplash.com/photo-1596422846543-75c6fc197f07?auto=format&fit=crop&w=1280&q=85",
     "wheel": [
       "K",
       "A",
@@ -808,7 +808,7 @@
     "title": "Nemrut Dağı - Bölüm 1",
     "region": "ADIYAMAN",
     "region_id": "nemrut",
-    "bg": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/29/Nemrut_Dagi_Heads.jpg/1280px-Nemrut_Dagi_Heads.jpg",
+    "bg": "https://images.unsplash.com/photo-1578328819058-b69f3a3b0f6b?auto=format&fit=crop&w=1280&q=85",
     "wheel": [
       "D",
       "O",
@@ -849,7 +849,7 @@
     "title": "Göbeklitepe - Bölüm 2",
     "region": "ŞANLIURFA",
     "region_id": "gobeklitepe",
-    "bg": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a8/G%C3%B6bekli_Tepe%2C_Sanliurfa.jpg/1280px-G%C3%B6bekli_Tepe%2C_Sanliurfa.jpg",
+    "bg": "https://images.unsplash.com/photo-1570168007204-dfb528c6958f?auto=format&fit=crop&w=1280&q=85",
     "wheel": [
       "İ",
       "N",
@@ -891,7 +891,7 @@
     "title": "Sümela Manastırı - Bölüm 3",
     "region": "TRABZON",
     "region_id": "sumela",
-    "bg": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/Sumela_from_across_valley.JPG/1280px-Sumela_from_across_valley.JPG",
+    "bg": "https://images.unsplash.com/photo-1589308078059-be1415eab4c3?auto=format&fit=crop&w=1280&q=85",
     "wheel": [
       "D",
       "A",
@@ -933,7 +933,7 @@
     "title": "Ani Harabeleri - Bölüm 4",
     "region": "KARS",
     "region_id": "ani",
-    "bg": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5a/Ani_Cathedral_2011.jpg/1280px-Ani_Cathedral_2011.jpg",
+    "bg": "https://images.unsplash.com/photo-1565008447742-97f6f38c985c?auto=format&fit=crop&w=1280&q=85",
     "wheel": [
       "G",
       "G",
@@ -974,7 +974,7 @@
     "title": "Kapadokya - Bölüm 5",
     "region": "NEVŞEHİR",
     "region_id": "kapadokya",
-    "bg": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/Hot_air_balloon_over_Cappadocia.jpg/1280px-Hot_air_balloon_over_Cappadocia.jpg",
+    "bg": "https://images.unsplash.com/photo-1641128324972-af3212f0f6bd?auto=format&fit=crop&w=1280&q=85",
     "wheel": [
       "B",
       "A",
@@ -1015,7 +1015,7 @@
     "title": "Pamukkale - Bölüm 6",
     "region": "DENİZLİ",
     "region_id": "pamukkale",
-    "bg": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/be/Pamukkale_Terraces.jpg/1280px-Pamukkale_Terraces.jpg",
+    "bg": "https://images.unsplash.com/photo-1527838832700-5059252407fa?auto=format&fit=crop&w=1280&q=85",
     "wheel": [
       "M",
       "U",
@@ -1055,7 +1055,7 @@
     "title": "Galata Kulesi - Bölüm 7",
     "region": "İSTANBUL",
     "region_id": "galata",
-    "bg": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/06/Galata_Tower_Istanbul.jpg/1280px-Galata_Tower_Istanbul.jpg",
+    "bg": "https://images.unsplash.com/photo-1524231757912-21f4fe3a7200?auto=format&fit=crop&w=1280&q=85",
     "wheel": [
       "U",
       "U",
@@ -1097,7 +1097,7 @@
     "title": "Efes Antik Kenti - Bölüm 8",
     "region": "İZMİR",
     "region_id": "efes",
-    "bg": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/30/Library_of_Celsus_Ephesus_Turkey.jpg/1280px-Library_of_Celsus_Ephesus_Turkey.jpg",
+    "bg": "https://images.unsplash.com/photo-1596422846543-75c6fc197f07?auto=format&fit=crop&w=1280&q=85",
     "wheel": [
       "H",
       "U",
@@ -1138,7 +1138,7 @@
     "title": "Nemrut Dağı - Bölüm 9",
     "region": "ADIYAMAN",
     "region_id": "nemrut",
-    "bg": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/29/Nemrut_Dagi_Heads.jpg/1280px-Nemrut_Dagi_Heads.jpg",
+    "bg": "https://images.unsplash.com/photo-1578328819058-b69f3a3b0f6b?auto=format&fit=crop&w=1280&q=85",
     "wheel": [
       "K",
       "Ö",
@@ -1178,7 +1178,7 @@
     "title": "Göbeklitepe - Bölüm 10",
     "region": "ŞANLIURFA",
     "region_id": "gobeklitepe",
-    "bg": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a8/G%C3%B6bekli_Tepe%2C_Sanliurfa.jpg/1280px-G%C3%B6bekli_Tepe%2C_Sanliurfa.jpg",
+    "bg": "https://images.unsplash.com/photo-1570168007204-dfb528c6958f?auto=format&fit=crop&w=1280&q=85",
     "wheel": [
       "N",
       "E",
@@ -1220,7 +1220,7 @@
     "title": "Sümela Manastırı - Bölüm 1",
     "region": "TRABZON",
     "region_id": "sumela",
-    "bg": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/Sumela_from_across_valley.JPG/1280px-Sumela_from_across_valley.JPG",
+    "bg": "https://images.unsplash.com/photo-1589308078059-be1415eab4c3?auto=format&fit=crop&w=1280&q=85",
     "wheel": [
       "A",
       "A",
@@ -1261,7 +1261,7 @@
     "title": "Ani Harabeleri - Bölüm 2",
     "region": "KARS",
     "region_id": "ani",
-    "bg": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5a/Ani_Cathedral_2011.jpg/1280px-Ani_Cathedral_2011.jpg",
+    "bg": "https://images.unsplash.com/photo-1565008447742-97f6f38c985c?auto=format&fit=crop&w=1280&q=85",
     "wheel": [
       "K",
       "A",
@@ -1303,7 +1303,7 @@
     "title": "Kapadokya - Bölüm 3",
     "region": "NEVŞEHİR",
     "region_id": "kapadokya",
-    "bg": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/Hot_air_balloon_over_Cappadocia.jpg/1280px-Hot_air_balloon_over_Cappadocia.jpg",
+    "bg": "https://images.unsplash.com/photo-1641128324972-af3212f0f6bd?auto=format&fit=crop&w=1280&q=85",
     "wheel": [
       "V",
       "O",
@@ -1345,7 +1345,7 @@
     "title": "Pamukkale - Bölüm 4",
     "region": "DENİZLİ",
     "region_id": "pamukkale",
-    "bg": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/be/Pamukkale_Terraces.jpg/1280px-Pamukkale_Terraces.jpg",
+    "bg": "https://images.unsplash.com/photo-1527838832700-5059252407fa?auto=format&fit=crop&w=1280&q=85",
     "wheel": [
       "Ş",
       "E",
@@ -1386,7 +1386,7 @@
     "title": "Galata Kulesi - Bölüm 5",
     "region": "İSTANBUL",
     "region_id": "galata",
-    "bg": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/06/Galata_Tower_Istanbul.jpg/1280px-Galata_Tower_Istanbul.jpg",
+    "bg": "https://images.unsplash.com/photo-1524231757912-21f4fe3a7200?auto=format&fit=crop&w=1280&q=85",
     "wheel": [
       "G",
       "U",
@@ -1427,7 +1427,7 @@
     "title": "Efes Antik Kenti - Bölüm 6",
     "region": "İZMİR",
     "region_id": "efes",
-    "bg": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/30/Library_of_Celsus_Ephesus_Turkey.jpg/1280px-Library_of_Celsus_Ephesus_Turkey.jpg",
+    "bg": "https://images.unsplash.com/photo-1596422846543-75c6fc197f07?auto=format&fit=crop&w=1280&q=85",
     "wheel": [
       "Z",
       "A",
@@ -1468,7 +1468,7 @@
     "title": "Nemrut Dağı - Bölüm 7",
     "region": "ADIYAMAN",
     "region_id": "nemrut",
-    "bg": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/29/Nemrut_Dagi_Heads.jpg/1280px-Nemrut_Dagi_Heads.jpg",
+    "bg": "https://images.unsplash.com/photo-1578328819058-b69f3a3b0f6b?auto=format&fit=crop&w=1280&q=85",
     "wheel": [
       "G",
       "Ö",
@@ -1511,7 +1511,7 @@
     "title": "Göbeklitepe - Bölüm 8",
     "region": "ŞANLIURFA",
     "region_id": "gobeklitepe",
-    "bg": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a8/G%C3%B6bekli_Tepe%2C_Sanliurfa.jpg/1280px-G%C3%B6bekli_Tepe%2C_Sanliurfa.jpg",
+    "bg": "https://images.unsplash.com/photo-1570168007204-dfb528c6958f?auto=format&fit=crop&w=1280&q=85",
     "wheel": [
       "T",
       "O",
@@ -1554,7 +1554,7 @@
     "title": "Sümela Manastırı - Bölüm 9",
     "region": "TRABZON",
     "region_id": "sumela",
-    "bg": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/Sumela_from_across_valley.JPG/1280px-Sumela_from_across_valley.JPG",
+    "bg": "https://images.unsplash.com/photo-1589308078059-be1415eab4c3?auto=format&fit=crop&w=1280&q=85",
     "wheel": [
       "R",
       "R",
@@ -1596,7 +1596,7 @@
     "title": "Ani Harabeleri - Bölüm 10",
     "region": "KARS",
     "region_id": "ani",
-    "bg": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5a/Ani_Cathedral_2011.jpg/1280px-Ani_Cathedral_2011.jpg",
+    "bg": "https://images.unsplash.com/photo-1565008447742-97f6f38c985c?auto=format&fit=crop&w=1280&q=85",
     "wheel": [
       "Y",
       "I",
@@ -1638,7 +1638,7 @@
     "title": "Kapadokya - Bölüm 1",
     "region": "NEVŞEHİR",
     "region_id": "kapadokya",
-    "bg": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/Hot_air_balloon_over_Cappadocia.jpg/1280px-Hot_air_balloon_over_Cappadocia.jpg",
+    "bg": "https://images.unsplash.com/photo-1641128324972-af3212f0f6bd?auto=format&fit=crop&w=1280&q=85",
     "wheel": [
       "C",
       "Ü",
@@ -1679,7 +1679,7 @@
     "title": "Pamukkale - Bölüm 2",
     "region": "DENİZLİ",
     "region_id": "pamukkale",
-    "bg": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/be/Pamukkale_Terraces.jpg/1280px-Pamukkale_Terraces.jpg",
+    "bg": "https://images.unsplash.com/photo-1527838832700-5059252407fa?auto=format&fit=crop&w=1280&q=85",
     "wheel": [
       "S",
       "A",
@@ -1721,7 +1721,7 @@
     "title": "Galata Kulesi - Bölüm 3",
     "region": "İSTANBUL",
     "region_id": "galata",
-    "bg": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/06/Galata_Tower_Istanbul.jpg/1280px-Galata_Tower_Istanbul.jpg",
+    "bg": "https://images.unsplash.com/photo-1524231757912-21f4fe3a7200?auto=format&fit=crop&w=1280&q=85",
     "wheel": [
       "K",
       "I",
@@ -1765,7 +1765,7 @@
     "title": "Efes Antik Kenti - Bölüm 4",
     "region": "İZMİR",
     "region_id": "efes",
-    "bg": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/30/Library_of_Celsus_Ephesus_Turkey.jpg/1280px-Library_of_Celsus_Ephesus_Turkey.jpg",
+    "bg": "https://images.unsplash.com/photo-1596422846543-75c6fc197f07?auto=format&fit=crop&w=1280&q=85",
     "wheel": [
       "S",
       "E",
@@ -1806,7 +1806,7 @@
     "title": "Nemrut Dağı - Bölüm 5",
     "region": "ADIYAMAN",
     "region_id": "nemrut",
-    "bg": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/29/Nemrut_Dagi_Heads.jpg/1280px-Nemrut_Dagi_Heads.jpg",
+    "bg": "https://images.unsplash.com/photo-1578328819058-b69f3a3b0f6b?auto=format&fit=crop&w=1280&q=85",
     "wheel": [
       "G",
       "Ü",
@@ -1846,7 +1846,7 @@
     "title": "Göbeklitepe - Bölüm 6",
     "region": "ŞANLIURFA",
     "region_id": "gobeklitepe",
-    "bg": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a8/G%C3%B6bekli_Tepe%2C_Sanliurfa.jpg/1280px-G%C3%B6bekli_Tepe%2C_Sanliurfa.jpg",
+    "bg": "https://images.unsplash.com/photo-1570168007204-dfb528c6958f?auto=format&fit=crop&w=1280&q=85",
     "wheel": [
       "D",
       "Ü",
@@ -1887,7 +1887,7 @@
     "title": "Sümela Manastırı - Bölüm 7",
     "region": "TRABZON",
     "region_id": "sumela",
-    "bg": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/Sumela_from_across_valley.JPG/1280px-Sumela_from_across_valley.JPG",
+    "bg": "https://images.unsplash.com/photo-1589308078059-be1415eab4c3?auto=format&fit=crop&w=1280&q=85",
     "wheel": [
       "H",
       "A",
@@ -1928,7 +1928,7 @@
     "title": "Ani Harabeleri - Bölüm 8",
     "region": "KARS",
     "region_id": "ani",
-    "bg": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5a/Ani_Cathedral_2011.jpg/1280px-Ani_Cathedral_2011.jpg",
+    "bg": "https://images.unsplash.com/photo-1565008447742-97f6f38c985c?auto=format&fit=crop&w=1280&q=85",
     "wheel": [
       "S",
       "E",
@@ -1970,7 +1970,7 @@
     "title": "Kapadokya - Bölüm 9",
     "region": "NEVŞEHİR",
     "region_id": "kapadokya",
-    "bg": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/Hot_air_balloon_over_Cappadocia.jpg/1280px-Hot_air_balloon_over_Cappadocia.jpg",
+    "bg": "https://images.unsplash.com/photo-1641128324972-af3212f0f6bd?auto=format&fit=crop&w=1280&q=85",
     "wheel": [
       "Y",
       "U",
@@ -2010,7 +2010,7 @@
     "title": "Pamukkale - Bölüm 10",
     "region": "DENİZLİ",
     "region_id": "pamukkale",
-    "bg": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/be/Pamukkale_Terraces.jpg/1280px-Pamukkale_Terraces.jpg",
+    "bg": "https://images.unsplash.com/photo-1527838832700-5059252407fa?auto=format&fit=crop&w=1280&q=85",
     "wheel": [
       "C",
       "A",
@@ -2052,7 +2052,7 @@
     "title": "Galata Kulesi - Bölüm 1",
     "region": "İSTANBUL",
     "region_id": "galata",
-    "bg": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/06/Galata_Tower_Istanbul.jpg/1280px-Galata_Tower_Istanbul.jpg",
+    "bg": "https://images.unsplash.com/photo-1524231757912-21f4fe3a7200?auto=format&fit=crop&w=1280&q=85",
     "wheel": [
       "B",
       "İ",
@@ -2094,7 +2094,7 @@
     "title": "Efes Antik Kenti - Bölüm 2",
     "region": "İZMİR",
     "region_id": "efes",
-    "bg": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/30/Library_of_Celsus_Ephesus_Turkey.jpg/1280px-Library_of_Celsus_Ephesus_Turkey.jpg",
+    "bg": "https://images.unsplash.com/photo-1596422846543-75c6fc197f07?auto=format&fit=crop&w=1280&q=85",
     "wheel": [
       "S",
       "A",
@@ -2135,7 +2135,7 @@
     "title": "Nemrut Dağı - Bölüm 3",
     "region": "ADIYAMAN",
     "region_id": "nemrut",
-    "bg": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/29/Nemrut_Dagi_Heads.jpg/1280px-Nemrut_Dagi_Heads.jpg",
+    "bg": "https://images.unsplash.com/photo-1578328819058-b69f3a3b0f6b?auto=format&fit=crop&w=1280&q=85",
     "wheel": [
       "M",
       "Ü",
@@ -2176,7 +2176,7 @@
     "title": "Göbeklitepe - Bölüm 4",
     "region": "ŞANLIURFA",
     "region_id": "gobeklitepe",
-    "bg": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a8/G%C3%B6bekli_Tepe%2C_Sanliurfa.jpg/1280px-G%C3%B6bekli_Tepe%2C_Sanliurfa.jpg",
+    "bg": "https://images.unsplash.com/photo-1570168007204-dfb528c6958f?auto=format&fit=crop&w=1280&q=85",
     "wheel": [
       "R",
       "E",
@@ -2217,7 +2217,7 @@
     "title": "Sümela Manastırı - Bölüm 5",
     "region": "TRABZON",
     "region_id": "sumela",
-    "bg": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/Sumela_from_across_valley.JPG/1280px-Sumela_from_across_valley.JPG",
+    "bg": "https://images.unsplash.com/photo-1589308078059-be1415eab4c3?auto=format&fit=crop&w=1280&q=85",
     "wheel": [
       "Ş",
       "İ",
@@ -2257,7 +2257,7 @@
     "title": "Ani Harabeleri - Bölüm 6",
     "region": "KARS",
     "region_id": "ani",
-    "bg": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5a/Ani_Cathedral_2011.jpg/1280px-Ani_Cathedral_2011.jpg",
+    "bg": "https://images.unsplash.com/photo-1565008447742-97f6f38c985c?auto=format&fit=crop&w=1280&q=85",
     "wheel": [
       "M",
       "A",
@@ -2298,7 +2298,7 @@
     "title": "Kapadokya - Bölüm 7",
     "region": "NEVŞEHİR",
     "region_id": "kapadokya",
-    "bg": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/Hot_air_balloon_over_Cappadocia.jpg/1280px-Hot_air_balloon_over_Cappadocia.jpg",
+    "bg": "https://images.unsplash.com/photo-1641128324972-af3212f0f6bd?auto=format&fit=crop&w=1280&q=85",
     "wheel": [
       "D",
       "E",
@@ -2340,7 +2340,7 @@
     "title": "Pamukkale - Bölüm 8",
     "region": "DENİZLİ",
     "region_id": "pamukkale",
-    "bg": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/be/Pamukkale_Terraces.jpg/1280px-Pamukkale_Terraces.jpg",
+    "bg": "https://images.unsplash.com/photo-1527838832700-5059252407fa?auto=format&fit=crop&w=1280&q=85",
     "wheel": [
       "R",
       "O",
@@ -2381,7 +2381,7 @@
     "title": "Galata Kulesi - Bölüm 9",
     "region": "İSTANBUL",
     "region_id": "galata",
-    "bg": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/06/Galata_Tower_Istanbul.jpg/1280px-Galata_Tower_Istanbul.jpg",
+    "bg": "https://images.unsplash.com/photo-1524231757912-21f4fe3a7200?auto=format&fit=crop&w=1280&q=85",
     "wheel": [
       "K",
       "Ü",
@@ -2423,7 +2423,7 @@
     "title": "Efes Antik Kenti - Bölüm 10",
     "region": "İZMİR",
     "region_id": "efes",
-    "bg": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/30/Library_of_Celsus_Ephesus_Turkey.jpg/1280px-Library_of_Celsus_Ephesus_Turkey.jpg",
+    "bg": "https://images.unsplash.com/photo-1596422846543-75c6fc197f07?auto=format&fit=crop&w=1280&q=85",
     "wheel": [
       "M",
       "İ",
@@ -2465,7 +2465,7 @@
     "title": "Nemrut Dağı - Bölüm 1",
     "region": "ADIYAMAN",
     "region_id": "nemrut",
-    "bg": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/29/Nemrut_Dagi_Heads.jpg/1280px-Nemrut_Dagi_Heads.jpg",
+    "bg": "https://images.unsplash.com/photo-1578328819058-b69f3a3b0f6b?auto=format&fit=crop&w=1280&q=85",
     "wheel": [
       "Ç",
       "E",
@@ -2505,7 +2505,7 @@
     "title": "Göbeklitepe - Bölüm 2",
     "region": "ŞANLIURFA",
     "region_id": "gobeklitepe",
-    "bg": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a8/G%C3%B6bekli_Tepe%2C_Sanliurfa.jpg/1280px-G%C3%B6bekli_Tepe%2C_Sanliurfa.jpg",
+    "bg": "https://images.unsplash.com/photo-1570168007204-dfb528c6958f?auto=format&fit=crop&w=1280&q=85",
     "wheel": [
       "S",
       "A",
@@ -2546,7 +2546,7 @@
     "title": "Sümela Manastırı - Bölüm 3",
     "region": "TRABZON",
     "region_id": "sumela",
-    "bg": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/Sumela_from_across_valley.JPG/1280px-Sumela_from_across_valley.JPG",
+    "bg": "https://images.unsplash.com/photo-1589308078059-be1415eab4c3?auto=format&fit=crop&w=1280&q=85",
     "wheel": [
       "K",
       "K",
@@ -2585,7 +2585,7 @@
     "title": "Ani Harabeleri - Bölüm 4",
     "region": "KARS",
     "region_id": "ani",
-    "bg": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5a/Ani_Cathedral_2011.jpg/1280px-Ani_Cathedral_2011.jpg",
+    "bg": "https://images.unsplash.com/photo-1565008447742-97f6f38c985c?auto=format&fit=crop&w=1280&q=85",
     "wheel": [
       "Ç",
       "A",
@@ -2626,7 +2626,7 @@
     "title": "Kapadokya - Bölüm 5",
     "region": "NEVŞEHİR",
     "region_id": "kapadokya",
-    "bg": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/Hot_air_balloon_over_Cappadocia.jpg/1280px-Hot_air_balloon_over_Cappadocia.jpg",
+    "bg": "https://images.unsplash.com/photo-1641128324972-af3212f0f6bd?auto=format&fit=crop&w=1280&q=85",
     "wheel": [
       "H",
       "A",
@@ -2666,7 +2666,7 @@
     "title": "Pamukkale - Bölüm 6",
     "region": "DENİZLİ",
     "region_id": "pamukkale",
-    "bg": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/be/Pamukkale_Terraces.jpg/1280px-Pamukkale_Terraces.jpg",
+    "bg": "https://images.unsplash.com/photo-1527838832700-5059252407fa?auto=format&fit=crop&w=1280&q=85",
     "wheel": [
       "H",
       "A",
@@ -2707,7 +2707,7 @@
     "title": "Galata Kulesi - Bölüm 7",
     "region": "İSTANBUL",
     "region_id": "galata",
-    "bg": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/06/Galata_Tower_Istanbul.jpg/1280px-Galata_Tower_Istanbul.jpg",
+    "bg": "https://images.unsplash.com/photo-1524231757912-21f4fe3a7200?auto=format&fit=crop&w=1280&q=85",
     "wheel": [
       "K",
       "Ö",
@@ -2747,7 +2747,7 @@
     "title": "Efes Antik Kenti - Bölüm 8",
     "region": "İZMİR",
     "region_id": "efes",
-    "bg": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/30/Library_of_Celsus_Ephesus_Turkey.jpg/1280px-Library_of_Celsus_Ephesus_Turkey.jpg",
+    "bg": "https://images.unsplash.com/photo-1596422846543-75c6fc197f07?auto=format&fit=crop&w=1280&q=85",
     "wheel": [
       "M",
       "E",
@@ -2789,7 +2789,7 @@
     "title": "Nemrut Dağı - Bölüm 9",
     "region": "ADIYAMAN",
     "region_id": "nemrut",
-    "bg": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/29/Nemrut_Dagi_Heads.jpg/1280px-Nemrut_Dagi_Heads.jpg",
+    "bg": "https://images.unsplash.com/photo-1578328819058-b69f3a3b0f6b?auto=format&fit=crop&w=1280&q=85",
     "wheel": [
       "S",
       "O",
@@ -2831,7 +2831,7 @@
     "title": "Göbeklitepe - Bölüm 10",
     "region": "ŞANLIURFA",
     "region_id": "gobeklitepe",
-    "bg": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a8/G%C3%B6bekli_Tepe%2C_Sanliurfa.jpg/1280px-G%C3%B6bekli_Tepe%2C_Sanliurfa.jpg",
+    "bg": "https://images.unsplash.com/photo-1570168007204-dfb528c6958f?auto=format&fit=crop&w=1280&q=85",
     "wheel": [
       "C",
       "A",
@@ -2872,7 +2872,7 @@
     "title": "Sümela Manastırı - Bölüm 1",
     "region": "TRABZON",
     "region_id": "sumela",
-    "bg": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/Sumela_from_across_valley.JPG/1280px-Sumela_from_across_valley.JPG",
+    "bg": "https://images.unsplash.com/photo-1589308078059-be1415eab4c3?auto=format&fit=crop&w=1280&q=85",
     "wheel": [
       "K",
       "O",
@@ -2915,7 +2915,7 @@
     "title": "Ani Harabeleri - Bölüm 2",
     "region": "KARS",
     "region_id": "ani",
-    "bg": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5a/Ani_Cathedral_2011.jpg/1280px-Ani_Cathedral_2011.jpg",
+    "bg": "https://images.unsplash.com/photo-1565008447742-97f6f38c985c?auto=format&fit=crop&w=1280&q=85",
     "wheel": [
       "S",
       "A",
@@ -2957,7 +2957,7 @@
     "title": "Kapadokya - Bölüm 3",
     "region": "NEVŞEHİR",
     "region_id": "kapadokya",
-    "bg": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/Hot_air_balloon_over_Cappadocia.jpg/1280px-Hot_air_balloon_over_Cappadocia.jpg",
+    "bg": "https://images.unsplash.com/photo-1641128324972-af3212f0f6bd?auto=format&fit=crop&w=1280&q=85",
     "wheel": [
       "B",
       "A",
@@ -2999,7 +2999,7 @@
     "title": "Pamukkale - Bölüm 4",
     "region": "DENİZLİ",
     "region_id": "pamukkale",
-    "bg": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/be/Pamukkale_Terraces.jpg/1280px-Pamukkale_Terraces.jpg",
+    "bg": "https://images.unsplash.com/photo-1527838832700-5059252407fa?auto=format&fit=crop&w=1280&q=85",
     "wheel": [
       "M",
       "U",
@@ -3041,7 +3041,7 @@
     "title": "Galata Kulesi - Bölüm 5",
     "region": "İSTANBUL",
     "region_id": "galata",
-    "bg": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/06/Galata_Tower_Istanbul.jpg/1280px-Galata_Tower_Istanbul.jpg",
+    "bg": "https://images.unsplash.com/photo-1524231757912-21f4fe3a7200?auto=format&fit=crop&w=1280&q=85",
     "wheel": [
       "B",
       "A",
@@ -3083,7 +3083,7 @@
     "title": "Efes Antik Kenti - Bölüm 6",
     "region": "İZMİR",
     "region_id": "efes",
-    "bg": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/30/Library_of_Celsus_Ephesus_Turkey.jpg/1280px-Library_of_Celsus_Ephesus_Turkey.jpg",
+    "bg": "https://images.unsplash.com/photo-1596422846543-75c6fc197f07?auto=format&fit=crop&w=1280&q=85",
     "wheel": [
       "H",
       "A",
@@ -3124,7 +3124,7 @@
     "title": "Nemrut Dağı - Bölüm 7",
     "region": "ADIYAMAN",
     "region_id": "nemrut",
-    "bg": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/29/Nemrut_Dagi_Heads.jpg/1280px-Nemrut_Dagi_Heads.jpg",
+    "bg": "https://images.unsplash.com/photo-1578328819058-b69f3a3b0f6b?auto=format&fit=crop&w=1280&q=85",
     "wheel": [
       "O",
       "R",
@@ -3164,7 +3164,7 @@
     "title": "Göbeklitepe - Bölüm 8",
     "region": "ŞANLIURFA",
     "region_id": "gobeklitepe",
-    "bg": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a8/G%C3%B6bekli_Tepe%2C_Sanliurfa.jpg/1280px-G%C3%B6bekli_Tepe%2C_Sanliurfa.jpg",
+    "bg": "https://images.unsplash.com/photo-1570168007204-dfb528c6958f?auto=format&fit=crop&w=1280&q=85",
     "wheel": [
       "V",
       "A",
@@ -3204,7 +3204,7 @@
     "title": "Sümela Manastırı - Bölüm 9",
     "region": "TRABZON",
     "region_id": "sumela",
-    "bg": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/Sumela_from_across_valley.JPG/1280px-Sumela_from_across_valley.JPG",
+    "bg": "https://images.unsplash.com/photo-1589308078059-be1415eab4c3?auto=format&fit=crop&w=1280&q=85",
     "wheel": [
       "T",
       "E",
@@ -3243,7 +3243,7 @@
     "title": "Ani Harabeleri - Bölüm 10",
     "region": "KARS",
     "region_id": "ani",
-    "bg": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5a/Ani_Cathedral_2011.jpg/1280px-Ani_Cathedral_2011.jpg",
+    "bg": "https://images.unsplash.com/photo-1565008447742-97f6f38c985c?auto=format&fit=crop&w=1280&q=85",
     "wheel": [
       "Y",
       "Y",
@@ -3284,7 +3284,7 @@
     "title": "Kapadokya - Bölüm 1",
     "region": "NEVŞEHİR",
     "region_id": "kapadokya",
-    "bg": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/Hot_air_balloon_over_Cappadocia.jpg/1280px-Hot_air_balloon_over_Cappadocia.jpg",
+    "bg": "https://images.unsplash.com/photo-1641128324972-af3212f0f6bd?auto=format&fit=crop&w=1280&q=85",
     "wheel": [
       "Z",
       "İ",
@@ -3324,7 +3324,7 @@
     "title": "Pamukkale - Bölüm 2",
     "region": "DENİZLİ",
     "region_id": "pamukkale",
-    "bg": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/be/Pamukkale_Terraces.jpg/1280px-Pamukkale_Terraces.jpg",
+    "bg": "https://images.unsplash.com/photo-1527838832700-5059252407fa?auto=format&fit=crop&w=1280&q=85",
     "wheel": [
       "K",
       "Ö",
@@ -3365,7 +3365,7 @@
     "title": "Galata Kulesi - Bölüm 3",
     "region": "İSTANBUL",
     "region_id": "galata",
-    "bg": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/06/Galata_Tower_Istanbul.jpg/1280px-Galata_Tower_Istanbul.jpg",
+    "bg": "https://images.unsplash.com/photo-1524231757912-21f4fe3a7200?auto=format&fit=crop&w=1280&q=85",
     "wheel": [
       "B",
       "O",
@@ -3406,7 +3406,7 @@
     "title": "Efes Antik Kenti - Bölüm 4",
     "region": "İZMİR",
     "region_id": "efes",
-    "bg": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/30/Library_of_Celsus_Ephesus_Turkey.jpg/1280px-Library_of_Celsus_Ephesus_Turkey.jpg",
+    "bg": "https://images.unsplash.com/photo-1596422846543-75c6fc197f07?auto=format&fit=crop&w=1280&q=85",
     "wheel": [
       "L",
       "İ",
@@ -3447,7 +3447,7 @@
     "title": "Nemrut Dağı - Bölüm 5",
     "region": "ADIYAMAN",
     "region_id": "nemrut",
-    "bg": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/29/Nemrut_Dagi_Heads.jpg/1280px-Nemrut_Dagi_Heads.jpg",
+    "bg": "https://images.unsplash.com/photo-1578328819058-b69f3a3b0f6b?auto=format&fit=crop&w=1280&q=85",
     "wheel": [
       "A",
       "A",
@@ -3489,7 +3489,7 @@
     "title": "Göbeklitepe - Bölüm 6",
     "region": "ŞANLIURFA",
     "region_id": "gobeklitepe",
-    "bg": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a8/G%C3%B6bekli_Tepe%2C_Sanliurfa.jpg/1280px-G%C3%B6bekli_Tepe%2C_Sanliurfa.jpg",
+    "bg": "https://images.unsplash.com/photo-1570168007204-dfb528c6958f?auto=format&fit=crop&w=1280&q=85",
     "wheel": [
       "K",
       "U",
@@ -3532,7 +3532,7 @@
     "title": "Sümela Manastırı - Bölüm 7",
     "region": "TRABZON",
     "region_id": "sumela",
-    "bg": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/Sumela_from_across_valley.JPG/1280px-Sumela_from_across_valley.JPG",
+    "bg": "https://images.unsplash.com/photo-1589308078059-be1415eab4c3?auto=format&fit=crop&w=1280&q=85",
     "wheel": [
       "D",
       "A",
@@ -3575,7 +3575,7 @@
     "title": "Ani Harabeleri - Bölüm 8",
     "region": "KARS",
     "region_id": "ani",
-    "bg": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5a/Ani_Cathedral_2011.jpg/1280px-Ani_Cathedral_2011.jpg",
+    "bg": "https://images.unsplash.com/photo-1565008447742-97f6f38c985c?auto=format&fit=crop&w=1280&q=85",
     "wheel": [
       "B",
       "A",
@@ -3618,7 +3618,7 @@
     "title": "Kapadokya - Bölüm 9",
     "region": "NEVŞEHİR",
     "region_id": "kapadokya",
-    "bg": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/Hot_air_balloon_over_Cappadocia.jpg/1280px-Hot_air_balloon_over_Cappadocia.jpg",
+    "bg": "https://images.unsplash.com/photo-1641128324972-af3212f0f6bd?auto=format&fit=crop&w=1280&q=85",
     "wheel": [
       "G",
       "E",
@@ -3657,7 +3657,7 @@
     "title": "Pamukkale - Bölüm 10",
     "region": "DENİZLİ",
     "region_id": "pamukkale",
-    "bg": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/be/Pamukkale_Terraces.jpg/1280px-Pamukkale_Terraces.jpg",
+    "bg": "https://images.unsplash.com/photo-1527838832700-5059252407fa?auto=format&fit=crop&w=1280&q=85",
     "wheel": [
       "Y",
       "E",
@@ -3699,7 +3699,7 @@
     "title": "Galata Kulesi - Bölüm 1",
     "region": "İSTANBUL",
     "region_id": "galata",
-    "bg": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/06/Galata_Tower_Istanbul.jpg/1280px-Galata_Tower_Istanbul.jpg",
+    "bg": "https://images.unsplash.com/photo-1524231757912-21f4fe3a7200?auto=format&fit=crop&w=1280&q=85",
     "wheel": [
       "K",
       "A",
@@ -3730,7 +3730,7 @@
     "title": "Efes Antik Kenti - Bölüm 2",
     "region": "İZMİR",
     "region_id": "efes",
-    "bg": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/30/Library_of_Celsus_Ephesus_Turkey.jpg/1280px-Library_of_Celsus_Ephesus_Turkey.jpg",
+    "bg": "https://images.unsplash.com/photo-1596422846543-75c6fc197f07?auto=format&fit=crop&w=1280&q=85",
     "wheel": [
       "K",
       "A",
@@ -3770,7 +3770,7 @@
     "title": "Nemrut Dağı - Bölüm 3",
     "region": "ADIYAMAN",
     "region_id": "nemrut",
-    "bg": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/29/Nemrut_Dagi_Heads.jpg/1280px-Nemrut_Dagi_Heads.jpg",
+    "bg": "https://images.unsplash.com/photo-1578328819058-b69f3a3b0f6b?auto=format&fit=crop&w=1280&q=85",
     "wheel": [
       "M",
       "A",
@@ -3804,7 +3804,7 @@
     "title": "Göbeklitepe - Bölüm 4",
     "region": "ŞANLIURFA",
     "region_id": "gobeklitepe",
-    "bg": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a8/G%C3%B6bekli_Tepe%2C_Sanliurfa.jpg/1280px-G%C3%B6bekli_Tepe%2C_Sanliurfa.jpg",
+    "bg": "https://images.unsplash.com/photo-1570168007204-dfb528c6958f?auto=format&fit=crop&w=1280&q=85",
     "wheel": [
       "B",
       "A",
@@ -3847,7 +3847,7 @@
     "title": "Sümela Manastırı - Bölüm 5",
     "region": "TRABZON",
     "region_id": "sumela",
-    "bg": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/Sumela_from_across_valley.JPG/1280px-Sumela_from_across_valley.JPG",
+    "bg": "https://images.unsplash.com/photo-1589308078059-be1415eab4c3?auto=format&fit=crop&w=1280&q=85",
     "wheel": [
       "K",
       "İ",
@@ -3890,7 +3890,7 @@
     "title": "Ani Harabeleri - Bölüm 6",
     "region": "KARS",
     "region_id": "ani",
-    "bg": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5a/Ani_Cathedral_2011.jpg/1280px-Ani_Cathedral_2011.jpg",
+    "bg": "https://images.unsplash.com/photo-1565008447742-97f6f38c985c?auto=format&fit=crop&w=1280&q=85",
     "wheel": [
       "D",
       "E",
@@ -3932,7 +3932,7 @@
     "title": "Kapadokya - Bölüm 7",
     "region": "NEVŞEHİR",
     "region_id": "kapadokya",
-    "bg": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/Hot_air_balloon_over_Cappadocia.jpg/1280px-Hot_air_balloon_over_Cappadocia.jpg",
+    "bg": "https://images.unsplash.com/photo-1641128324972-af3212f0f6bd?auto=format&fit=crop&w=1280&q=85",
     "wheel": [
       "R",
       "O",
@@ -3974,7 +3974,7 @@
     "title": "Pamukkale - Bölüm 8",
     "region": "DENİZLİ",
     "region_id": "pamukkale",
-    "bg": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/be/Pamukkale_Terraces.jpg/1280px-Pamukkale_Terraces.jpg",
+    "bg": "https://images.unsplash.com/photo-1527838832700-5059252407fa?auto=format&fit=crop&w=1280&q=85",
     "wheel": [
       "K",
       "K",
@@ -4015,7 +4015,7 @@
     "title": "Galata Kulesi - Bölüm 9",
     "region": "İSTANBUL",
     "region_id": "galata",
-    "bg": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/06/Galata_Tower_Istanbul.jpg/1280px-Galata_Tower_Istanbul.jpg",
+    "bg": "https://images.unsplash.com/photo-1524231757912-21f4fe3a7200?auto=format&fit=crop&w=1280&q=85",
     "wheel": [
       "Y",
       "A",
@@ -4048,7 +4048,7 @@
     "title": "Efes Antik Kenti - Bölüm 10",
     "region": "İZMİR",
     "region_id": "efes",
-    "bg": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/30/Library_of_Celsus_Ephesus_Turkey.jpg/1280px-Library_of_Celsus_Ephesus_Turkey.jpg",
+    "bg": "https://images.unsplash.com/photo-1596422846543-75c6fc197f07?auto=format&fit=crop&w=1280&q=85",
     "wheel": [
       "K",
       "O",

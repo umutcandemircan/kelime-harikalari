@@ -1,100 +1,7 @@
-// 100 Doğrulanmış TDK Çengel Bulmaca Seviyesi (Words of Wonders Türkiye)
+// 100 Zengin TDK Çengel Seviyesi (4-7 Harfli Gelişmiş Kelimeler)
 const WOW_LEVELS = [
   {
     "level": 1,
-    "location": "Kapadokya - Peri Bacaları",
-    "bgTheme": "cappadocia",
-    "wheelLetters": [
-      "B",
-      "A",
-      "L"
-    ],
-    "words": [
-      {
-        "id": "w1",
-        "word": "BAL",
-        "row": 0,
-        "col": 0,
-        "dir": "H"
-      },
-      {
-        "id": "w2",
-        "word": "AL",
-        "row": 0,
-        "col": 1,
-        "dir": "V"
-      }
-    ],
-    "bonusWords": [
-      "LAB"
-    ]
-  },
-  {
-    "level": 2,
-    "location": "Kapadokya - Peri Bacaları",
-    "bgTheme": "cappadocia",
-    "wheelLetters": [
-      "K",
-      "A",
-      "P"
-    ],
-    "words": [
-      {
-        "id": "w1",
-        "word": "KAP",
-        "row": 2,
-        "col": 0,
-        "dir": "H"
-      },
-      {
-        "id": "w2",
-        "word": "PAK",
-        "row": 0,
-        "col": 0,
-        "dir": "V"
-      }
-    ],
-    "bonusWords": [
-      "AK"
-    ]
-  },
-  {
-    "level": 3,
-    "location": "Kapadokya - Peri Bacaları",
-    "bgTheme": "cappadocia",
-    "wheelLetters": [
-      "D",
-      "E",
-      "R",
-      "T"
-    ],
-    "words": [
-      {
-        "id": "w1",
-        "word": "DERT",
-        "row": 1,
-        "col": 0,
-        "dir": "H"
-      },
-      {
-        "id": "w2",
-        "word": "TER",
-        "row": 0,
-        "col": 1,
-        "dir": "V"
-      },
-      {
-        "id": "w3",
-        "word": "RET",
-        "row": 1,
-        "col": 2,
-        "dir": "V"
-      }
-    ],
-    "bonusWords": []
-  },
-  {
-    "level": 4,
     "location": "Kapadokya - Peri Bacaları",
     "bgTheme": "cappadocia",
     "wheelLetters": [
@@ -124,15 +31,63 @@ const WOW_LEVELS = [
         "row": 2,
         "col": 0,
         "dir": "V"
+      },
+      {
+        "id": "w4",
+        "word": "LAKE",
+        "row": 0,
+        "col": 0,
+        "dir": "V"
       }
     ],
     "bonusWords": [
-      "LAKE",
       "LAK"
     ]
   },
   {
-    "level": 5,
+    "level": 2,
+    "location": "Kapadokya - Peri Bacaları",
+    "bgTheme": "cappadocia",
+    "wheelLetters": [
+      "D",
+      "E",
+      "R",
+      "T"
+    ],
+    "words": [
+      {
+        "id": "w1",
+        "word": "DERT",
+        "row": 1,
+        "col": 0,
+        "dir": "H"
+      },
+      {
+        "id": "w2",
+        "word": "TER",
+        "row": 0,
+        "col": 1,
+        "dir": "V"
+      },
+      {
+        "id": "w3",
+        "word": "RET",
+        "row": 1,
+        "col": 2,
+        "dir": "V"
+      },
+      {
+        "id": "w4",
+        "word": "ERT",
+        "row": 1,
+        "col": 1,
+        "dir": "V"
+      }
+    ],
+    "bonusWords": []
+  },
+  {
+    "level": 3,
     "location": "Kapadokya - Peri Bacaları",
     "bgTheme": "cappadocia",
     "wheelLetters": [
@@ -167,44 +122,7 @@ const WOW_LEVELS = [
     "bonusWords": []
   },
   {
-    "level": 6,
-    "location": "Kapadokya - Peri Bacaları",
-    "bgTheme": "cappadocia",
-    "wheelLetters": [
-      "K",
-      "A",
-      "R",
-      "A"
-    ],
-    "words": [
-      {
-        "id": "w1",
-        "word": "KARA",
-        "row": 2,
-        "col": 0,
-        "dir": "H"
-      },
-      {
-        "id": "w2",
-        "word": "ARK",
-        "row": 0,
-        "col": 0,
-        "dir": "V"
-      },
-      {
-        "id": "w3",
-        "word": "ARA",
-        "row": 2,
-        "col": 1,
-        "dir": "V"
-      }
-    ],
-    "bonusWords": [
-      "AKA"
-    ]
-  },
-  {
-    "level": 7,
+    "level": 4,
     "location": "Kapadokya - Peri Bacaları",
     "bgTheme": "cappadocia",
     "wheelLetters": [
@@ -234,113 +152,11 @@ const WOW_LEVELS = [
         "row": 0,
         "col": 0,
         "dir": "V"
-      }
-    ],
-    "bonusWords": [
-      "DOK"
-    ]
-  },
-  {
-    "level": 8,
-    "location": "Kapadokya - Peri Bacaları",
-    "bgTheme": "cappadocia",
-    "wheelLetters": [
-      "S",
-      "O",
-      "B",
-      "A"
-    ],
-    "words": [
-      {
-        "id": "w1",
-        "word": "SOBA",
-        "row": 2,
-        "col": 0,
-        "dir": "H"
       },
       {
-        "id": "w2",
-        "word": "OBA",
-        "row": 2,
-        "col": 1,
-        "dir": "V"
-      },
-      {
-        "id": "w3",
-        "word": "BAS",
-        "row": 0,
-        "col": 0,
-        "dir": "V"
-      }
-    ],
-    "bonusWords": []
-  },
-  {
-    "level": 9,
-    "location": "Kapadokya - Peri Bacaları",
-    "bgTheme": "cappadocia",
-    "wheelLetters": [
-      "T",
-      "A",
-      "K",
-      "A"
-    ],
-    "words": [
-      {
-        "id": "w1",
-        "word": "TAKA",
-        "row": 2,
-        "col": 0,
-        "dir": "H"
-      },
-      {
-        "id": "w2",
-        "word": "ATA",
+        "id": "w4",
+        "word": "DOK",
         "row": 1,
-        "col": 0,
-        "dir": "V"
-      },
-      {
-        "id": "w3",
-        "word": "KAT",
-        "row": 0,
-        "col": 0,
-        "dir": "V"
-      }
-    ],
-    "bonusWords": [
-      "TAK"
-    ]
-  },
-  {
-    "level": 10,
-    "location": "Kapadokya - Peri Bacaları",
-    "bgTheme": "cappadocia",
-    "wheelLetters": [
-      "U",
-      "Ç",
-      "A",
-      "K"
-    ],
-    "words": [
-      {
-        "id": "w1",
-        "word": "UÇAK",
-        "row": 2,
-        "col": 0,
-        "dir": "H"
-      },
-      {
-        "id": "w2",
-        "word": "ÇAK",
-        "row": 2,
-        "col": 1,
-        "dir": "V"
-      },
-      {
-        "id": "w3",
-        "word": "KAÇ",
-        "row": 0,
         "col": 1,
         "dir": "V"
       }
@@ -348,9 +164,46 @@ const WOW_LEVELS = [
     "bonusWords": []
   },
   {
-    "level": 11,
-    "location": "Pamukkale - Travertenler",
-    "bgTheme": "pamukkale",
+    "level": 5,
+    "location": "Kapadokya - Peri Bacaları",
+    "bgTheme": "cappadocia",
+    "wheelLetters": [
+      "M",
+      "A",
+      "S",
+      "A"
+    ],
+    "words": [
+      {
+        "id": "w1",
+        "word": "MASA",
+        "row": 2,
+        "col": 0,
+        "dir": "H"
+      },
+      {
+        "id": "w2",
+        "word": "ASMA",
+        "row": 0,
+        "col": 0,
+        "dir": "V"
+      },
+      {
+        "id": "w3",
+        "word": "AMA",
+        "row": 2,
+        "col": 1,
+        "dir": "V"
+      }
+    ],
+    "bonusWords": [
+      "SAM"
+    ]
+  },
+  {
+    "level": 6,
+    "location": "Kapadokya - Peri Bacaları",
+    "bgTheme": "cappadocia",
     "wheelLetters": [
       "E",
       "L",
@@ -367,173 +220,34 @@ const WOW_LEVELS = [
       },
       {
         "id": "w2",
-        "word": "ELA",
-        "row": 2,
+        "word": "ALEM",
+        "row": 0,
         "col": 0,
         "dir": "V"
       },
       {
         "id": "w3",
-        "word": "MAL",
-        "row": 0,
+        "word": "ELA",
+        "row": 1,
         "col": 1,
+        "dir": "V"
+      },
+      {
+        "id": "w4",
+        "word": "MAL",
+        "row": 2,
+        "col": 2,
         "dir": "V"
       }
     ],
     "bonusWords": [
-      "ALEM",
       "LAM"
     ]
   },
   {
-    "level": 12,
-    "location": "Pamukkale - Travertenler",
-    "bgTheme": "pamukkale",
-    "wheelLetters": [
-      "K",
-      "A",
-      "S",
-      "A"
-    ],
-    "words": [
-      {
-        "id": "w1",
-        "word": "KASA",
-        "row": 2,
-        "col": 0,
-        "dir": "H"
-      },
-      {
-        "id": "w2",
-        "word": "KAS",
-        "row": 2,
-        "col": 0,
-        "dir": "V"
-      },
-      {
-        "id": "w3",
-        "word": "SAK",
-        "row": 0,
-        "col": 0,
-        "dir": "V"
-      }
-    ],
-    "bonusWords": [
-      "ASK",
-      "AKA"
-    ]
-  },
-  {
-    "level": 13,
-    "location": "Pamukkale - Travertenler",
-    "bgTheme": "pamukkale",
-    "wheelLetters": [
-      "M",
-      "A",
-      "R",
-      "T"
-    ],
-    "words": [
-      {
-        "id": "w1",
-        "word": "MART",
-        "row": 1,
-        "col": 0,
-        "dir": "H"
-      },
-      {
-        "id": "w2",
-        "word": "MAT",
-        "row": 1,
-        "col": 0,
-        "dir": "V"
-      },
-      {
-        "id": "w3",
-        "word": "TAR",
-        "row": 0,
-        "col": 1,
-        "dir": "V"
-      }
-    ],
-    "bonusWords": [
-      "TAM"
-    ]
-  },
-  {
-    "level": 14,
-    "location": "Pamukkale - Travertenler",
-    "bgTheme": "pamukkale",
-    "wheelLetters": [
-      "D",
-      "E",
-      "V",
-      "E"
-    ],
-    "words": [
-      {
-        "id": "w1",
-        "word": "DEVE",
-        "row": 0,
-        "col": 0,
-        "dir": "H"
-      },
-      {
-        "id": "w2",
-        "word": "DEV",
-        "row": 0,
-        "col": 0,
-        "dir": "V"
-      },
-      {
-        "id": "w3",
-        "word": "EVE",
-        "row": 0,
-        "col": 1,
-        "dir": "V"
-      }
-    ],
-    "bonusWords": []
-  },
-  {
-    "level": 15,
-    "location": "Pamukkale - Travertenler",
-    "bgTheme": "pamukkale",
-    "wheelLetters": [
-      "C",
-      "A",
-      "M",
-      "İ"
-    ],
-    "words": [
-      {
-        "id": "w1",
-        "word": "CAMİ",
-        "row": 2,
-        "col": 0,
-        "dir": "H"
-      },
-      {
-        "id": "w2",
-        "word": "CAM",
-        "row": 2,
-        "col": 0,
-        "dir": "V"
-      },
-      {
-        "id": "w3",
-        "word": "İMA",
-        "row": 0,
-        "col": 1,
-        "dir": "V"
-      }
-    ],
-    "bonusWords": []
-  },
-  {
-    "level": 16,
-    "location": "Pamukkale - Travertenler",
-    "bgTheme": "pamukkale",
+    "level": 7,
+    "location": "Kapadokya - Peri Bacaları",
+    "bgTheme": "cappadocia",
     "wheelLetters": [
       "P",
       "A",
@@ -561,17 +275,23 @@ const WOW_LEVELS = [
         "row": 3,
         "col": 1,
         "dir": "V"
+      },
+      {
+        "id": "w4",
+        "word": "ARA",
+        "row": 1,
+        "col": 1,
+        "dir": "V"
       }
     ],
     "bonusWords": [
-      "RAP",
-      "ARA"
+      "RAP"
     ]
   },
   {
-    "level": 17,
-    "location": "Pamukkale - Travertenler",
-    "bgTheme": "pamukkale",
+    "level": 8,
+    "location": "Kapadokya - Peri Bacaları",
+    "bgTheme": "cappadocia",
     "wheelLetters": [
       "A",
       "L",
@@ -582,142 +302,38 @@ const WOW_LEVELS = [
       {
         "id": "w1",
         "word": "ALTI",
-        "row": 1,
-        "col": 0,
-        "dir": "H"
-      },
-      {
-        "id": "w2",
-        "word": "ALT",
-        "row": 1,
-        "col": 0,
-        "dir": "V"
-      },
-      {
-        "id": "w3",
-        "word": "TAL",
-        "row": 0,
-        "col": 0,
-        "dir": "V"
-      }
-    ],
-    "bonusWords": [
-      "ATIL"
-    ]
-  },
-  {
-    "level": 18,
-    "location": "Pamukkale - Travertenler",
-    "bgTheme": "pamukkale",
-    "wheelLetters": [
-      "O",
-      "Y",
-      "U",
-      "N"
-    ],
-    "words": [
-      {
-        "id": "w1",
-        "word": "OYUN",
-        "row": 1,
-        "col": 0,
-        "dir": "H"
-      },
-      {
-        "id": "w2",
-        "word": "YON",
-        "row": 0,
-        "col": 0,
-        "dir": "V"
-      },
-      {
-        "id": "w3",
-        "word": "ONU",
-        "row": 1,
-        "col": 0,
-        "dir": "V"
-      }
-    ],
-    "bonusWords": [
-      "ON"
-    ]
-  },
-  {
-    "level": 19,
-    "location": "Pamukkale - Travertenler",
-    "bgTheme": "pamukkale",
-    "wheelLetters": [
-      "R",
-      "E",
-      "N",
-      "K"
-    ],
-    "words": [
-      {
-        "id": "w1",
-        "word": "RENK",
         "row": 2,
         "col": 0,
         "dir": "H"
       },
       {
         "id": "w2",
-        "word": "ERK",
-        "row": 1,
+        "word": "ATIL",
+        "row": 2,
         "col": 0,
         "dir": "V"
       },
       {
         "id": "w3",
-        "word": "KER",
+        "word": "ALT",
+        "row": 1,
+        "col": 1,
+        "dir": "V"
+      },
+      {
+        "id": "w4",
+        "word": "TAL",
         "row": 0,
-        "col": 0,
+        "col": 1,
         "dir": "V"
       }
     ],
     "bonusWords": []
   },
   {
-    "level": 20,
-    "location": "Pamukkale - Travertenler",
-    "bgTheme": "pamukkale",
-    "wheelLetters": [
-      "İ",
-      "P",
-      "E",
-      "K"
-    ],
-    "words": [
-      {
-        "id": "w1",
-        "word": "İPEK",
-        "row": 1,
-        "col": 0,
-        "dir": "H"
-      },
-      {
-        "id": "w2",
-        "word": "PEK",
-        "row": 1,
-        "col": 1,
-        "dir": "V"
-      },
-      {
-        "id": "w3",
-        "word": "PİK",
-        "row": 0,
-        "col": 0,
-        "dir": "V"
-      }
-    ],
-    "bonusWords": [
-      "KİP"
-    ]
-  },
-  {
-    "level": 21,
-    "location": "Galata Kulesi - İstanbul",
-    "bgTheme": "galata",
+    "level": 9,
+    "location": "Kapadokya - Peri Bacaları",
+    "bgTheme": "cappadocia",
     "wheelLetters": [
       "G",
       "Ü",
@@ -751,9 +367,9 @@ const WOW_LEVELS = [
     "bonusWords": []
   },
   {
-    "level": 22,
-    "location": "Galata Kulesi - İstanbul",
-    "bgTheme": "galata",
+    "level": 10,
+    "location": "Kapadokya - Peri Bacaları",
+    "bgTheme": "cappadocia",
     "wheelLetters": [
       "B",
       "A",
@@ -765,79 +381,586 @@ const WOW_LEVELS = [
       {
         "id": "w1",
         "word": "BALIK",
-        "row": 2,
+        "row": 1,
         "col": 0,
         "dir": "H"
       },
       {
         "id": "w2",
         "word": "AKIL",
-        "row": 2,
+        "row": 1,
         "col": 1,
         "dir": "V"
       },
       {
         "id": "w3",
-        "word": "BAL",
-        "row": 2,
-        "col": 0,
+        "word": "ALIK",
+        "row": 0,
+        "col": 2,
         "dir": "V"
       },
       {
         "id": "w4",
+        "word": "BAL",
+        "row": 1,
+        "col": 0,
+        "dir": "V"
+      },
+      {
+        "id": "w5",
         "word": "KIL",
         "row": 0,
-        "col": 2,
+        "col": 3,
         "dir": "V"
       }
     ],
     "bonusWords": [
-      "ALIK",
       "BAK",
       "KAL"
     ]
   },
   {
-    "level": 23,
-    "location": "Galata Kulesi - İstanbul",
-    "bgTheme": "galata",
+    "level": 11,
+    "location": "Pamukkale - Travertenler",
+    "bgTheme": "pamukkale",
     "wheelLetters": [
-      "M",
+      "K",
+      "İ",
+      "T",
       "A",
-      "S",
-      "A",
-      "L"
+      "P"
     ],
     "words": [
       {
         "id": "w1",
-        "word": "MASAL",
+        "word": "KİTAP",
+        "row": 4,
+        "col": 0,
+        "dir": "H"
+      },
+      {
+        "id": "w2",
+        "word": "PATİK",
+        "row": 0,
+        "col": 0,
+        "dir": "V"
+      },
+      {
+        "id": "w3",
+        "word": "TAKİP",
+        "row": 1,
+        "col": 1,
+        "dir": "V"
+      },
+      {
+        "id": "w4",
+        "word": "PAK",
+        "row": 3,
+        "col": 3,
+        "dir": "V"
+      }
+    ],
+    "bonusWords": [
+      "PAT",
+      "TİP"
+    ]
+  },
+  {
+    "level": 12,
+    "location": "Pamukkale - Travertenler",
+    "bgTheme": "pamukkale",
+    "wheelLetters": [
+      "D",
+      "E",
+      "N",
+      "İ",
+      "Z"
+    ],
+    "words": [
+      {
+        "id": "w1",
+        "word": "DENİZ",
+        "row": 2,
+        "col": 0,
+        "dir": "H"
+      },
+      {
+        "id": "w2",
+        "word": "DİZ",
+        "row": 2,
+        "col": 0,
+        "dir": "V"
+      },
+      {
+        "id": "w3",
+        "word": "DİN",
+        "row": 0,
+        "col": 2,
+        "dir": "V"
+      },
+      {
+        "id": "w4",
+        "word": "DİZ",
+        "row": 2,
+        "col": 0,
+        "dir": "V"
+      }
+    ],
+    "bonusWords": [
+      "EZAN"
+    ]
+  },
+  {
+    "level": 13,
+    "location": "Pamukkale - Travertenler",
+    "bgTheme": "pamukkale",
+    "wheelLetters": [
+      "B",
+      "A",
+      "H",
+      "A",
+      "R"
+    ],
+    "words": [
+      {
+        "id": "w1",
+        "word": "BAHAR",
         "row": 1,
         "col": 0,
         "dir": "H"
       },
       {
         "id": "w2",
-        "word": "MASA",
+        "word": "BAR",
         "row": 1,
         "col": 0,
         "dir": "V"
       },
       {
         "id": "w3",
-        "word": "SAL",
+        "word": "ARA",
+        "row": 1,
+        "col": 1,
+        "dir": "V"
+      },
+      {
+        "id": "w4",
+        "word": "HARA",
         "row": 0,
         "col": 1,
         "dir": "V"
       }
     ],
     "bonusWords": [
-      "ASMA",
-      "MAL"
+      "RAB"
     ]
   },
   {
-    "level": 24,
+    "level": 14,
+    "location": "Pamukkale - Travertenler",
+    "bgTheme": "pamukkale",
+    "wheelLetters": [
+      "K",
+      "A",
+      "L",
+      "E",
+      "M"
+    ],
+    "words": [
+      {
+        "id": "w1",
+        "word": "KALEM",
+        "row": 1,
+        "col": 0,
+        "dir": "H"
+      },
+      {
+        "id": "w2",
+        "word": "KELAM",
+        "row": 1,
+        "col": 0,
+        "dir": "V"
+      },
+      {
+        "id": "w3",
+        "word": "KALE",
+        "row": 0,
+        "col": 1,
+        "dir": "V"
+      },
+      {
+        "id": "w4",
+        "word": "ELA",
+        "row": 0,
+        "col": 2,
+        "dir": "V"
+      }
+    ],
+    "bonusWords": [
+      "AMEL",
+      "LAM"
+    ]
+  },
+  {
+    "level": 15,
+    "location": "Pamukkale - Travertenler",
+    "bgTheme": "pamukkale",
+    "wheelLetters": [
+      "A",
+      "S",
+      "L",
+      "A",
+      "N"
+    ],
+    "words": [
+      {
+        "id": "w1",
+        "word": "ASLAN",
+        "row": 2,
+        "col": 0,
+        "dir": "H"
+      },
+      {
+        "id": "w2",
+        "word": "SAN",
+        "row": 1,
+        "col": 0,
+        "dir": "V"
+      },
+      {
+        "id": "w3",
+        "word": "NAL",
+        "row": 0,
+        "col": 2,
+        "dir": "V"
+      },
+      {
+        "id": "w4",
+        "word": "ALA",
+        "row": 1,
+        "col": 2,
+        "dir": "V"
+      }
+    ],
+    "bonusWords": [
+      "ANA"
+    ]
+  },
+  {
+    "level": 16,
+    "location": "Pamukkale - Travertenler",
+    "bgTheme": "pamukkale",
+    "wheelLetters": [
+      "Ç",
+      "O",
+      "R",
+      "B",
+      "A"
+    ],
+    "words": [
+      {
+        "id": "w1",
+        "word": "ÇORBA",
+        "row": 2,
+        "col": 0,
+        "dir": "H"
+      },
+      {
+        "id": "w2",
+        "word": "BAR",
+        "row": 0,
+        "col": 2,
+        "dir": "V"
+      },
+      {
+        "id": "w3",
+        "word": "BOR",
+        "row": 1,
+        "col": 1,
+        "dir": "V"
+      },
+      {
+        "id": "w4",
+        "word": "OBA",
+        "row": 1,
+        "col": 3,
+        "dir": "V"
+      }
+    ],
+    "bonusWords": [
+      "RAB"
+    ]
+  },
+  {
+    "level": 17,
+    "location": "Pamukkale - Travertenler",
+    "bgTheme": "pamukkale",
+    "wheelLetters": [
+      "Z",
+      "A",
+      "M",
+      "A",
+      "N"
+    ],
+    "words": [
+      {
+        "id": "w1",
+        "word": "ZAMAN",
+        "row": 1,
+        "col": 0,
+        "dir": "H"
+      },
+      {
+        "id": "w2",
+        "word": "AZAM",
+        "row": 0,
+        "col": 0,
+        "dir": "V"
+      },
+      {
+        "id": "w3",
+        "word": "ANAM",
+        "row": 1,
+        "col": 1,
+        "dir": "V"
+      },
+      {
+        "id": "w4",
+        "word": "ANA",
+        "row": 1,
+        "col": 1,
+        "dir": "V"
+      }
+    ],
+    "bonusWords": [
+      "AMA",
+      "ZAN"
+    ]
+  },
+  {
+    "level": 18,
+    "location": "Pamukkale - Travertenler",
+    "bgTheme": "pamukkale",
+    "wheelLetters": [
+      "H",
+      "A",
+      "Y",
+      "A",
+      "T"
+    ],
+    "words": [
+      {
+        "id": "w1",
+        "word": "HAYAT",
+        "row": 1,
+        "col": 0,
+        "dir": "H"
+      },
+      {
+        "id": "w2",
+        "word": "HATA",
+        "row": 1,
+        "col": 0,
+        "dir": "V"
+      },
+      {
+        "id": "w3",
+        "word": "TAY",
+        "row": 0,
+        "col": 1,
+        "dir": "V"
+      },
+      {
+        "id": "w4",
+        "word": "YAT",
+        "row": 1,
+        "col": 2,
+        "dir": "V"
+      }
+    ],
+    "bonusWords": [
+      "HAT"
+    ]
+  },
+  {
+    "level": 19,
+    "location": "Pamukkale - Travertenler",
+    "bgTheme": "pamukkale",
+    "wheelLetters": [
+      "K",
+      "A",
+      "H",
+      "V",
+      "E"
+    ],
+    "words": [
+      {
+        "id": "w1",
+        "word": "KAHVE",
+        "row": 2,
+        "col": 0,
+        "dir": "H"
+      },
+      {
+        "id": "w2",
+        "word": "HAK",
+        "row": 0,
+        "col": 0,
+        "dir": "V"
+      },
+      {
+        "id": "w3",
+        "word": "VAH",
+        "row": 1,
+        "col": 1,
+        "dir": "V"
+      },
+      {
+        "id": "w4",
+        "word": "KAV",
+        "row": 2,
+        "col": 0,
+        "dir": "V"
+      }
+    ],
+    "bonusWords": []
+  },
+  {
+    "level": 20,
+    "location": "Pamukkale - Travertenler",
+    "bgTheme": "pamukkale",
+    "wheelLetters": [
+      "D",
+      "E",
+      "M",
+      "İ",
+      "R"
+    ],
+    "words": [
+      {
+        "id": "w1",
+        "word": "DEMİR",
+        "row": 0,
+        "col": 0,
+        "dir": "H"
+      },
+      {
+        "id": "w2",
+        "word": "DERİ",
+        "row": 0,
+        "col": 0,
+        "dir": "V"
+      },
+      {
+        "id": "w3",
+        "word": "MİR",
+        "row": 0,
+        "col": 2,
+        "dir": "V"
+      },
+      {
+        "id": "w4",
+        "word": "EMİR",
+        "row": 0,
+        "col": 1,
+        "dir": "V"
+      }
+    ],
+    "bonusWords": []
+  },
+  {
+    "level": 21,
+    "location": "Galata Kulesi - İstanbul",
+    "bgTheme": "galata",
+    "wheelLetters": [
+      "O",
+      "R",
+      "M",
+      "A",
+      "N"
+    ],
+    "words": [
+      {
+        "id": "w1",
+        "word": "ORMAN",
+        "row": 2,
+        "col": 0,
+        "dir": "H"
+      },
+      {
+        "id": "w2",
+        "word": "ROMAN",
+        "row": 1,
+        "col": 0,
+        "dir": "V"
+      },
+      {
+        "id": "w3",
+        "word": "ORAN",
+        "row": 1,
+        "col": 1,
+        "dir": "V"
+      },
+      {
+        "id": "w4",
+        "word": "ONAR",
+        "row": 0,
+        "col": 3,
+        "dir": "V"
+      }
+    ],
+    "bonusWords": [
+      "MOR",
+      "NAM"
+    ]
+  },
+  {
+    "level": 22,
+    "location": "Galata Kulesi - İstanbul",
+    "bgTheme": "galata",
+    "wheelLetters": [
+      "S",
+      "A",
+      "B",
+      "U",
+      "N"
+    ],
+    "words": [
+      {
+        "id": "w1",
+        "word": "SABUN",
+        "row": 2,
+        "col": 0,
+        "dir": "H"
+      },
+      {
+        "id": "w2",
+        "word": "SUN",
+        "row": 2,
+        "col": 0,
+        "dir": "V"
+      },
+      {
+        "id": "w3",
+        "word": "BAS",
+        "row": 0,
+        "col": 0,
+        "dir": "V"
+      },
+      {
+        "id": "w4",
+        "word": "SAN",
+        "row": 1,
+        "col": 1,
+        "dir": "V"
+      }
+    ],
+    "bonusWords": [
+      "BAN"
+    ]
+  },
+  {
+    "level": 23,
     "location": "Galata Kulesi - İstanbul",
     "bgTheme": "galata",
     "wheelLetters": [
@@ -868,12 +991,19 @@ const WOW_LEVELS = [
         "row": 0,
         "col": 1,
         "dir": "V"
+      },
+      {
+        "id": "w4",
+        "word": "HER",
+        "row": 0,
+        "col": 1,
+        "dir": "V"
       }
     ],
     "bonusWords": []
   },
   {
-    "level": 25,
+    "level": 24,
     "location": "Galata Kulesi - İstanbul",
     "bgTheme": "galata",
     "wheelLetters": [
@@ -909,7 +1039,7 @@ const WOW_LEVELS = [
     "bonusWords": []
   },
   {
-    "level": 26,
+    "level": 25,
     "location": "Galata Kulesi - İstanbul",
     "bgTheme": "galata",
     "wheelLetters": [
@@ -945,7 +1075,7 @@ const WOW_LEVELS = [
     "bonusWords": []
   },
   {
-    "level": 27,
+    "level": 26,
     "location": "Galata Kulesi - İstanbul",
     "bgTheme": "galata",
     "wheelLetters": [
@@ -976,6 +1106,13 @@ const WOW_LEVELS = [
         "row": 2,
         "col": 2,
         "dir": "V"
+      },
+      {
+        "id": "w4",
+        "word": "KUŞ",
+        "row": 2,
+        "col": 0,
+        "dir": "V"
       }
     ],
     "bonusWords": [
@@ -983,7 +1120,7 @@ const WOW_LEVELS = [
     ]
   },
   {
-    "level": 28,
+    "level": 27,
     "location": "Galata Kulesi - İstanbul",
     "bgTheme": "galata",
     "wheelLetters": [
@@ -1019,7 +1156,7 @@ const WOW_LEVELS = [
     "bonusWords": []
   },
   {
-    "level": 29,
+    "level": 28,
     "location": "Galata Kulesi - İstanbul",
     "bgTheme": "galata",
     "wheelLetters": [
@@ -1053,6 +1190,51 @@ const WOW_LEVELS = [
       }
     ],
     "bonusWords": []
+  },
+  {
+    "level": 29,
+    "location": "Galata Kulesi - İstanbul",
+    "bgTheme": "galata",
+    "wheelLetters": [
+      "M",
+      "A",
+      "S",
+      "A",
+      "L"
+    ],
+    "words": [
+      {
+        "id": "w1",
+        "word": "MASAL",
+        "row": 2,
+        "col": 0,
+        "dir": "H"
+      },
+      {
+        "id": "w2",
+        "word": "MASA",
+        "row": 2,
+        "col": 0,
+        "dir": "V"
+      },
+      {
+        "id": "w3",
+        "word": "SAL",
+        "row": 1,
+        "col": 1,
+        "dir": "V"
+      },
+      {
+        "id": "w4",
+        "word": "ASMA",
+        "row": 0,
+        "col": 0,
+        "dir": "V"
+      }
+    ],
+    "bonusWords": [
+      "MAL"
+    ]
   },
   {
     "level": 30,
@@ -1097,394 +1279,6 @@ const WOW_LEVELS = [
     "location": "Nemrut Dağı - Gün Doğumu",
     "bgTheme": "nemrut",
     "wheelLetters": [
-      "K",
-      "İ",
-      "T",
-      "A",
-      "P"
-    ],
-    "words": [
-      {
-        "id": "w1",
-        "word": "KİTAP",
-        "row": 4,
-        "col": 0,
-        "dir": "H"
-      },
-      {
-        "id": "w2",
-        "word": "PATİK",
-        "row": 0,
-        "col": 0,
-        "dir": "V"
-      },
-      {
-        "id": "w3",
-        "word": "PAK",
-        "row": 3,
-        "col": 3,
-        "dir": "V"
-      }
-    ],
-    "bonusWords": [
-      "PAT",
-      "TAKİP",
-      "TİP"
-    ]
-  },
-  {
-    "level": 32,
-    "location": "Nemrut Dağı - Gün Doğumu",
-    "bgTheme": "nemrut",
-    "wheelLetters": [
-      "G",
-      "Ö",
-      "Z",
-      "L",
-      "Ü",
-      "K"
-    ],
-    "words": [
-      {
-        "id": "w1",
-        "word": "GÖZLÜK",
-        "row": 1,
-        "col": 0,
-        "dir": "H"
-      },
-      {
-        "id": "w2",
-        "word": "GÖZ",
-        "row": 1,
-        "col": 0,
-        "dir": "V"
-      },
-      {
-        "id": "w3",
-        "word": "KÖZ",
-        "row": 0,
-        "col": 1,
-        "dir": "V"
-      }
-    ],
-    "bonusWords": [
-      "ÖZLÜ",
-      "KÜL"
-    ]
-  },
-  {
-    "level": 33,
-    "location": "Nemrut Dağı - Gün Doğumu",
-    "bgTheme": "nemrut",
-    "wheelLetters": [
-      "K",
-      "A",
-      "H",
-      "V",
-      "E"
-    ],
-    "words": [
-      {
-        "id": "w1",
-        "word": "KAHVE",
-        "row": 2,
-        "col": 0,
-        "dir": "H"
-      },
-      {
-        "id": "w2",
-        "word": "HAK",
-        "row": 0,
-        "col": 0,
-        "dir": "V"
-      },
-      {
-        "id": "w3",
-        "word": "VAH",
-        "row": 1,
-        "col": 1,
-        "dir": "V"
-      }
-    ],
-    "bonusWords": [
-      "KAV"
-    ]
-  },
-  {
-    "level": 34,
-    "location": "Nemrut Dağı - Gün Doğumu",
-    "bgTheme": "nemrut",
-    "wheelLetters": [
-      "Z",
-      "E",
-      "Y",
-      "T",
-      "İ",
-      "N"
-    ],
-    "words": [
-      {
-        "id": "w1",
-        "word": "ZEYTİN",
-        "row": 2,
-        "col": 0,
-        "dir": "H"
-      },
-      {
-        "id": "w2",
-        "word": "YETİ",
-        "row": 1,
-        "col": 1,
-        "dir": "V"
-      },
-      {
-        "id": "w3",
-        "word": "NET",
-        "row": 0,
-        "col": 3,
-        "dir": "V"
-      }
-    ],
-    "bonusWords": [
-      "TEZ",
-      "YEN",
-      "NİYET"
-    ]
-  },
-  {
-    "level": 35,
-    "location": "Nemrut Dağı - Gün Doğumu",
-    "bgTheme": "nemrut",
-    "wheelLetters": [
-      "O",
-      "R",
-      "M",
-      "A",
-      "N"
-    ],
-    "words": [
-      {
-        "id": "w1",
-        "word": "ORMAN",
-        "row": 1,
-        "col": 0,
-        "dir": "H"
-      },
-      {
-        "id": "w2",
-        "word": "ROMAN",
-        "row": 0,
-        "col": 0,
-        "dir": "V"
-      },
-      {
-        "id": "w3",
-        "word": "ORAN",
-        "row": 0,
-        "col": 1,
-        "dir": "V"
-      }
-    ],
-    "bonusWords": [
-      "MOR",
-      "ONAR",
-      "NORMA"
-    ]
-  },
-  {
-    "level": 36,
-    "location": "Nemrut Dağı - Gün Doğumu",
-    "bgTheme": "nemrut",
-    "wheelLetters": [
-      "S",
-      "A",
-      "B",
-      "U",
-      "N"
-    ],
-    "words": [
-      {
-        "id": "w1",
-        "word": "SABUN",
-        "row": 2,
-        "col": 0,
-        "dir": "H"
-      },
-      {
-        "id": "w2",
-        "word": "SUN",
-        "row": 2,
-        "col": 0,
-        "dir": "V"
-      },
-      {
-        "id": "w3",
-        "word": "BAS",
-        "row": 0,
-        "col": 0,
-        "dir": "V"
-      }
-    ],
-    "bonusWords": [
-      "SAN",
-      "BAN"
-    ]
-  },
-  {
-    "level": 37,
-    "location": "Nemrut Dağı - Gün Doğumu",
-    "bgTheme": "nemrut",
-    "wheelLetters": [
-      "D",
-      "E",
-      "M",
-      "İ",
-      "R"
-    ],
-    "words": [
-      {
-        "id": "w1",
-        "word": "DEMİR",
-        "row": 0,
-        "col": 0,
-        "dir": "H"
-      },
-      {
-        "id": "w2",
-        "word": "DERİ",
-        "row": 0,
-        "col": 0,
-        "dir": "V"
-      },
-      {
-        "id": "w3",
-        "word": "MİR",
-        "row": 0,
-        "col": 2,
-        "dir": "V"
-      }
-    ],
-    "bonusWords": [
-      "EMİR"
-    ]
-  },
-  {
-    "level": 38,
-    "location": "Nemrut Dağı - Gün Doğumu",
-    "bgTheme": "nemrut",
-    "wheelLetters": [
-      "Ç",
-      "A",
-      "M",
-      "U",
-      "R"
-    ],
-    "words": [
-      {
-        "id": "w1",
-        "word": "ÇAMUR",
-        "row": 2,
-        "col": 0,
-        "dir": "H"
-      },
-      {
-        "id": "w2",
-        "word": "ÇAM",
-        "row": 2,
-        "col": 0,
-        "dir": "V"
-      },
-      {
-        "id": "w3",
-        "word": "RUM",
-        "row": 0,
-        "col": 2,
-        "dir": "V"
-      }
-    ],
-    "bonusWords": []
-  },
-  {
-    "level": 39,
-    "location": "Nemrut Dağı - Gün Doğumu",
-    "bgTheme": "nemrut",
-    "wheelLetters": [
-      "Ç",
-      "İ",
-      "Ç",
-      "E",
-      "K"
-    ],
-    "words": [
-      {
-        "id": "w1",
-        "word": "ÇİÇEK",
-        "row": 2,
-        "col": 0,
-        "dir": "H"
-      },
-      {
-        "id": "w2",
-        "word": "ÇEK",
-        "row": 2,
-        "col": 0,
-        "dir": "V"
-      },
-      {
-        "id": "w3",
-        "word": "KİÇ",
-        "row": 0,
-        "col": 0,
-        "dir": "V"
-      }
-    ],
-    "bonusWords": []
-  },
-  {
-    "level": 40,
-    "location": "Nemrut Dağı - Gün Doğumu",
-    "bgTheme": "nemrut",
-    "wheelLetters": [
-      "P",
-      "A",
-      "M",
-      "U",
-      "K"
-    ],
-    "words": [
-      {
-        "id": "w1",
-        "word": "PAMUK",
-        "row": 2,
-        "col": 0,
-        "dir": "H"
-      },
-      {
-        "id": "w2",
-        "word": "KUPA",
-        "row": 0,
-        "col": 0,
-        "dir": "V"
-      },
-      {
-        "id": "w3",
-        "word": "KAP",
-        "row": 1,
-        "col": 1,
-        "dir": "V"
-      }
-    ],
-    "bonusWords": [
-      "KAMU",
-      "PAK",
-      "KUM"
-    ]
-  },
-  {
-    "level": 41,
-    "location": "Efes Antik Kenti - İzmir",
-    "bgTheme": "ephesus",
-    "wheelLetters": [
       "T",
       "O",
       "P",
@@ -1513,248 +1307,117 @@ const WOW_LEVELS = [
         "row": 1,
         "col": 1,
         "dir": "V"
+      },
+      {
+        "id": "w4",
+        "word": "PARK",
+        "row": 2,
+        "col": 2,
+        "dir": "V"
       }
     ],
     "bonusWords": [
-      "PARK",
       "POT",
       "KOT"
     ]
   },
   {
-    "level": 42,
-    "location": "Efes Antik Kenti - İzmir",
-    "bgTheme": "ephesus",
+    "level": 32,
+    "location": "Nemrut Dağı - Gün Doğumu",
+    "bgTheme": "nemrut",
     "wheelLetters": [
-      "D",
+      "Z",
       "E",
-      "N",
+      "Y",
+      "T",
       "İ",
-      "Z"
-    ],
-    "words": [
-      {
-        "id": "w1",
-        "word": "DENİZ",
-        "row": 2,
-        "col": 0,
-        "dir": "H"
-      },
-      {
-        "id": "w2",
-        "word": "DİZ",
-        "row": 2,
-        "col": 0,
-        "dir": "V"
-      },
-      {
-        "id": "w3",
-        "word": "DİN",
-        "row": 0,
-        "col": 2,
-        "dir": "V"
-      }
-    ],
-    "bonusWords": [
-      "EZAN"
-    ]
-  },
-  {
-    "level": 43,
-    "location": "Efes Antik Kenti - İzmir",
-    "bgTheme": "ephesus",
-    "wheelLetters": [
-      "B",
-      "A",
-      "H",
-      "A",
-      "R"
-    ],
-    "words": [
-      {
-        "id": "w1",
-        "word": "BAHAR",
-        "row": 0,
-        "col": 0,
-        "dir": "H"
-      },
-      {
-        "id": "w2",
-        "word": "BAR",
-        "row": 0,
-        "col": 0,
-        "dir": "V"
-      },
-      {
-        "id": "w3",
-        "word": "ARA",
-        "row": 0,
-        "col": 1,
-        "dir": "V"
-      }
-    ],
-    "bonusWords": [
-      "HARA",
-      "RAB"
-    ]
-  },
-  {
-    "level": 44,
-    "location": "Efes Antik Kenti - İzmir",
-    "bgTheme": "ephesus",
-    "wheelLetters": [
-      "K",
-      "A",
-      "L",
-      "E",
-      "M"
-    ],
-    "words": [
-      {
-        "id": "w1",
-        "word": "KALEM",
-        "row": 2,
-        "col": 0,
-        "dir": "H"
-      },
-      {
-        "id": "w2",
-        "word": "KELAM",
-        "row": 2,
-        "col": 0,
-        "dir": "V"
-      },
-      {
-        "id": "w3",
-        "word": "ELA",
-        "row": 0,
-        "col": 1,
-        "dir": "V"
-      }
-    ],
-    "bonusWords": [
-      "KALE",
-      "AMEL"
-    ]
-  },
-  {
-    "level": 45,
-    "location": "Efes Antik Kenti - İzmir",
-    "bgTheme": "ephesus",
-    "wheelLetters": [
-      "A",
-      "S",
-      "L",
-      "A",
       "N"
     ],
     "words": [
       {
         "id": "w1",
-        "word": "ASLAN",
-        "row": 2,
+        "word": "ZEYTİN",
+        "row": 3,
         "col": 0,
         "dir": "H"
       },
       {
         "id": "w2",
-        "word": "SAN",
-        "row": 1,
-        "col": 0,
+        "word": "NİYET",
+        "row": 0,
+        "col": 1,
         "dir": "V"
       },
       {
         "id": "w3",
-        "word": "NAL",
-        "row": 0,
-        "col": 2,
-        "dir": "V"
-      }
-    ],
-    "bonusWords": [
-      "ALA",
-      "ANA"
-    ]
-  },
-  {
-    "level": 46,
-    "location": "Efes Antik Kenti - İzmir",
-    "bgTheme": "ephesus",
-    "wheelLetters": [
-      "Ç",
-      "O",
-      "R",
-      "B",
-      "A"
-    ],
-    "words": [
-      {
-        "id": "w1",
-        "word": "ÇORBA",
-        "row": 2,
-        "col": 0,
-        "dir": "H"
-      },
-      {
-        "id": "w2",
-        "word": "BAR",
-        "row": 0,
-        "col": 2,
-        "dir": "V"
-      },
-      {
-        "id": "w3",
-        "word": "OBA",
+        "word": "YETİ",
         "row": 2,
         "col": 1,
         "dir": "V"
+      },
+      {
+        "id": "w4",
+        "word": "TEZ",
+        "row": 1,
+        "col": 0,
+        "dir": "V"
       }
     ],
     "bonusWords": [
-      "BOR",
-      "RAB"
+      "NET",
+      "YEN"
     ]
   },
   {
-    "level": 47,
-    "location": "Efes Antik Kenti - İzmir",
-    "bgTheme": "ephesus",
+    "level": 33,
+    "location": "Nemrut Dağı - Gün Doğumu",
+    "bgTheme": "nemrut",
     "wheelLetters": [
-      "E",
-      "K",
-      "M",
-      "E",
+      "G",
+      "Ö",
+      "Z",
+      "L",
+      "Ü",
       "K"
     ],
     "words": [
       {
         "id": "w1",
-        "word": "EKMEK",
+        "word": "GÖZLÜK",
         "row": 1,
         "col": 0,
         "dir": "H"
       },
       {
         "id": "w2",
-        "word": "KEK",
-        "row": 0,
-        "col": 0,
+        "word": "ÖZLÜ",
+        "row": 1,
+        "col": 1,
         "dir": "V"
       },
       {
         "id": "w3",
-        "word": "KEM",
+        "word": "GÖZ",
         "row": 1,
+        "col": 0,
+        "dir": "V"
+      },
+      {
+        "id": "w4",
+        "word": "KÖZ",
+        "row": 0,
         "col": 1,
         "dir": "V"
       }
     ],
-    "bonusWords": []
+    "bonusWords": [
+      "KÜL"
+    ]
   },
   {
-    "level": 48,
-    "location": "Efes Antik Kenti - İzmir",
-    "bgTheme": "ephesus",
+    "level": 34,
+    "location": "Nemrut Dağı - Gün Doğumu",
+    "bgTheme": "nemrut",
     "wheelLetters": [
       "P",
       "E",
@@ -1784,95 +1447,23 @@ const WOW_LEVELS = [
         "row": 0,
         "col": 1,
         "dir": "V"
+      },
+      {
+        "id": "w4",
+        "word": "PİR",
+        "row": 0,
+        "col": 4,
+        "dir": "V"
       }
     ],
     "bonusWords": [
-      "PİR",
       "REY"
     ]
   },
   {
-    "level": 49,
-    "location": "Efes Antik Kenti - İzmir",
-    "bgTheme": "ephesus",
-    "wheelLetters": [
-      "Z",
-      "A",
-      "M",
-      "A",
-      "N"
-    ],
-    "words": [
-      {
-        "id": "w1",
-        "word": "ZAMAN",
-        "row": 1,
-        "col": 0,
-        "dir": "H"
-      },
-      {
-        "id": "w2",
-        "word": "AZAM",
-        "row": 0,
-        "col": 0,
-        "dir": "V"
-      },
-      {
-        "id": "w3",
-        "word": "ANA",
-        "row": 1,
-        "col": 1,
-        "dir": "V"
-      }
-    ],
-    "bonusWords": [
-      "AMA",
-      "ZAN"
-    ]
-  },
-  {
-    "level": 50,
-    "location": "Efes Antik Kenti - İzmir",
-    "bgTheme": "ephesus",
-    "wheelLetters": [
-      "H",
-      "A",
-      "Y",
-      "A",
-      "T"
-    ],
-    "words": [
-      {
-        "id": "w1",
-        "word": "HAYAT",
-        "row": 1,
-        "col": 0,
-        "dir": "H"
-      },
-      {
-        "id": "w2",
-        "word": "HATA",
-        "row": 1,
-        "col": 0,
-        "dir": "V"
-      },
-      {
-        "id": "w3",
-        "word": "TAY",
-        "row": 0,
-        "col": 1,
-        "dir": "V"
-      }
-    ],
-    "bonusWords": [
-      "YAT",
-      "HAT"
-    ]
-  },
-  {
-    "level": 51,
-    "location": "Göbeklitepe - Şanlıurfa",
-    "bgTheme": "gobeklitepe",
+    "level": 35,
+    "location": "Nemrut Dağı - Gün Doğumu",
+    "bgTheme": "nemrut",
     "wheelLetters": [
       "K",
       "A",
@@ -1902,18 +1493,24 @@ const WOW_LEVELS = [
         "row": 0,
         "col": 0,
         "dir": "V"
+      },
+      {
+        "id": "w4",
+        "word": "KAN",
+        "row": 2,
+        "col": 0,
+        "dir": "V"
       }
     ],
     "bonusWords": [
       "ALP",
-      "KAN",
       "KAL"
     ]
   },
   {
-    "level": 52,
-    "location": "Göbeklitepe - Şanlıurfa",
-    "bgTheme": "gobeklitepe",
+    "level": 36,
+    "location": "Nemrut Dağı - Gün Doğumu",
+    "bgTheme": "nemrut",
     "wheelLetters": [
       "S",
       "İ",
@@ -1943,18 +1540,24 @@ const WOW_LEVELS = [
         "row": 2,
         "col": 4,
         "dir": "V"
+      },
+      {
+        "id": "w4",
+        "word": "CAN",
+        "row": 1,
+        "col": 2,
+        "dir": "V"
       }
     ],
     "bonusWords": [
       "PİS",
-      "CAN",
       "SAP"
     ]
   },
   {
-    "level": 53,
-    "location": "Göbeklitepe - Şanlıurfa",
-    "bgTheme": "gobeklitepe",
+    "level": 37,
+    "location": "Nemrut Dağı - Gün Doğumu",
+    "bgTheme": "nemrut",
     "wheelLetters": [
       "T",
       "A",
@@ -1967,110 +1570,176 @@ const WOW_LEVELS = [
       {
         "id": "w1",
         "word": "TAVŞAN",
-        "row": 1,
+        "row": 2,
         "col": 0,
         "dir": "H"
       },
       {
         "id": "w2",
         "word": "TAŞ",
-        "row": 1,
+        "row": 2,
         "col": 0,
         "dir": "V"
       },
       {
         "id": "w3",
         "word": "VAN",
-        "row": 0,
+        "row": 1,
         "col": 1,
+        "dir": "V"
+      },
+      {
+        "id": "w4",
+        "word": "TAV",
+        "row": 0,
+        "col": 2,
         "dir": "V"
       }
     ],
     "bonusWords": [
-      "TAV",
       "ŞAN"
     ]
   },
   {
-    "level": 54,
-    "location": "Göbeklitepe - Şanlıurfa",
-    "bgTheme": "gobeklitepe",
+    "level": 38,
+    "location": "Nemrut Dağı - Gün Doğumu",
+    "bgTheme": "nemrut",
     "wheelLetters": [
-      "T",
-      "İ",
-      "L",
       "K",
-      "İ"
-    ],
-    "words": [
-      {
-        "id": "w1",
-        "word": "TİLKİ",
-        "row": 1,
-        "col": 0,
-        "dir": "H"
-      },
-      {
-        "id": "w2",
-        "word": "İLK",
-        "row": 1,
-        "col": 1,
-        "dir": "V"
-      },
-      {
-        "id": "w3",
-        "word": "KİL",
-        "row": 0,
-        "col": 1,
-        "dir": "V"
-      }
-    ],
-    "bonusWords": [
-      "TİK"
-    ]
-  },
-  {
-    "level": 55,
-    "location": "Göbeklitepe - Şanlıurfa",
-    "bgTheme": "gobeklitepe",
-    "wheelLetters": [
-      "Ş",
       "A",
-      "H",
-      "İ",
-      "N"
+      "R",
+      "P",
+      "U",
+      "Z"
     ],
     "words": [
       {
         "id": "w1",
-        "word": "ŞAHİN",
+        "word": "KARPUZ",
+        "row": 2,
+        "col": 0,
+        "dir": "H"
+      },
+      {
+        "id": "w2",
+        "word": "KAZ",
+        "row": 2,
+        "col": 0,
+        "dir": "V"
+      },
+      {
+        "id": "w3",
+        "word": "PAK",
+        "row": 0,
+        "col": 0,
+        "dir": "V"
+      },
+      {
+        "id": "w4",
+        "word": "KAP",
+        "row": 1,
+        "col": 1,
+        "dir": "V"
+      }
+    ],
+    "bonusWords": [
+      "ARZ"
+    ]
+  },
+  {
+    "level": 39,
+    "location": "Nemrut Dağı - Gün Doğumu",
+    "bgTheme": "nemrut",
+    "wheelLetters": [
+      "B",
+      "A",
+      "R",
+      "D",
+      "A",
+      "K"
+    ],
+    "words": [
+      {
+        "id": "w1",
+        "word": "BARDAK",
         "row": 1,
         "col": 0,
         "dir": "H"
       },
       {
         "id": "w2",
-        "word": "ŞAN",
+        "word": "BAR",
         "row": 1,
         "col": 0,
         "dir": "V"
       },
       {
         "id": "w3",
-        "word": "HAN",
+        "word": "DAR",
         "row": 0,
+        "col": 1,
+        "dir": "V"
+      },
+      {
+        "id": "w4",
+        "word": "ARK",
+        "row": 1,
         "col": 1,
         "dir": "V"
       }
     ],
     "bonusWords": [
-      "AHİ"
+      "ARA"
     ]
   },
   {
-    "level": 56,
-    "location": "Göbeklitepe - Şanlıurfa",
-    "bgTheme": "gobeklitepe",
+    "level": 40,
+    "location": "Nemrut Dağı - Gün Doğumu",
+    "bgTheme": "nemrut",
+    "wheelLetters": [
+      "M",
+      "U",
+      "T",
+      "F",
+      "A",
+      "K"
+    ],
+    "words": [
+      {
+        "id": "w1",
+        "word": "MUTFAK",
+        "row": 2,
+        "col": 0,
+        "dir": "H"
+      },
+      {
+        "id": "w2",
+        "word": "TAK",
+        "row": 2,
+        "col": 2,
+        "dir": "V"
+      },
+      {
+        "id": "w3",
+        "word": "TAM",
+        "row": 0,
+        "col": 0,
+        "dir": "V"
+      },
+      {
+        "id": "w4",
+        "word": "KUT",
+        "row": 1,
+        "col": 1,
+        "dir": "V"
+      }
+    ],
+    "bonusWords": []
+  },
+  {
+    "level": 41,
+    "location": "Efes Antik Kenti - İzmir",
+    "bgTheme": "ephesus",
     "wheelLetters": [
       "L",
       "İ",
@@ -2106,9 +1775,9 @@ const WOW_LEVELS = [
     ]
   },
   {
-    "level": 57,
-    "location": "Göbeklitepe - Şanlıurfa",
-    "bgTheme": "gobeklitepe",
+    "level": 42,
+    "location": "Efes Antik Kenti - İzmir",
+    "bgTheme": "ephesus",
     "wheelLetters": [
       "A",
       "R",
@@ -2137,17 +1806,23 @@ const WOW_LEVELS = [
         "row": 0,
         "col": 2,
         "dir": "V"
+      },
+      {
+        "id": "w4",
+        "word": "TUR",
+        "row": 0,
+        "col": 1,
+        "dir": "V"
       }
     ],
     "bonusWords": [
-      "RUM",
-      "TUR"
+      "RUM"
     ]
   },
   {
-    "level": 58,
-    "location": "Göbeklitepe - Şanlıurfa",
-    "bgTheme": "gobeklitepe",
+    "level": 43,
+    "location": "Efes Antik Kenti - İzmir",
+    "bgTheme": "ephesus",
     "wheelLetters": [
       "K",
       "İ",
@@ -2176,17 +1851,23 @@ const WOW_LEVELS = [
         "row": 0,
         "col": 2,
         "dir": "V"
+      },
+      {
+        "id": "w4",
+        "word": "KİR",
+        "row": 0,
+        "col": 1,
+        "dir": "V"
       }
     ],
     "bonusWords": [
-      "KİR",
       "ZAR"
     ]
   },
   {
-    "level": 59,
-    "location": "Göbeklitepe - Şanlıurfa",
-    "bgTheme": "gobeklitepe",
+    "level": 44,
+    "location": "Efes Antik Kenti - İzmir",
+    "bgTheme": "ephesus",
     "wheelLetters": [
       "Ç",
       "İ",
@@ -2215,56 +1896,21 @@ const WOW_LEVELS = [
         "row": 0,
         "col": 1,
         "dir": "V"
-      }
-    ],
-    "bonusWords": [
-      "İLK"
-    ]
-  },
-  {
-    "level": 60,
-    "location": "Göbeklitepe - Şanlıurfa",
-    "bgTheme": "gobeklitepe",
-    "wheelLetters": [
-      "K",
-      "A",
-      "R",
-      "P",
-      "U",
-      "Z"
-    ],
-    "words": [
-      {
-        "id": "w1",
-        "word": "KARPUZ",
-        "row": 2,
-        "col": 0,
-        "dir": "H"
       },
       {
-        "id": "w2",
-        "word": "KAZ",
-        "row": 2,
-        "col": 0,
-        "dir": "V"
-      },
-      {
-        "id": "w3",
-        "word": "PAK",
-        "row": 0,
-        "col": 0,
+        "id": "w4",
+        "word": "İLK",
+        "row": 1,
+        "col": 1,
         "dir": "V"
       }
     ],
-    "bonusWords": [
-      "KAP",
-      "ARZ"
-    ]
+    "bonusWords": []
   },
   {
-    "level": 61,
-    "location": "Ölüdeniz - Fethiye",
-    "bgTheme": "oludeniz",
+    "level": 45,
+    "location": "Efes Antik Kenti - İzmir",
+    "bgTheme": "ephesus",
     "wheelLetters": [
       "T",
       "A",
@@ -2293,17 +1939,23 @@ const WOW_LEVELS = [
         "row": 1,
         "col": 1,
         "dir": "V"
+      },
+      {
+        "id": "w4",
+        "word": "TAK",
+        "row": 2,
+        "col": 0,
+        "dir": "V"
       }
     ],
     "bonusWords": [
-      "ATAK",
-      "TAK"
+      "ATAK"
     ]
   },
   {
-    "level": 62,
-    "location": "Ölüdeniz - Fethiye",
-    "bgTheme": "oludeniz",
+    "level": 46,
+    "location": "Efes Antik Kenti - İzmir",
+    "bgTheme": "ephesus",
     "wheelLetters": [
       "K",
       "A",
@@ -2332,17 +1984,23 @@ const WOW_LEVELS = [
         "row": 2,
         "col": 2,
         "dir": "V"
+      },
+      {
+        "id": "w4",
+        "word": "KAŞ",
+        "row": 2,
+        "col": 0,
+        "dir": "V"
       }
     ],
     "bonusWords": [
-      "KAŞ",
       "ŞAK"
     ]
   },
   {
-    "level": 63,
-    "location": "Ölüdeniz - Fethiye",
-    "bgTheme": "oludeniz",
+    "level": 47,
+    "location": "Efes Antik Kenti - İzmir",
+    "bgTheme": "ephesus",
     "wheelLetters": [
       "Ç",
       "A",
@@ -2354,34 +2012,40 @@ const WOW_LEVELS = [
       {
         "id": "w1",
         "word": "ÇATAL",
-        "row": 0,
+        "row": 2,
         "col": 0,
         "dir": "H"
       },
       {
         "id": "w2",
         "word": "ÇAT",
-        "row": 0,
+        "row": 2,
         "col": 0,
         "dir": "V"
       },
       {
         "id": "w3",
         "word": "ALA",
-        "row": 0,
+        "row": 2,
         "col": 1,
+        "dir": "V"
+      },
+      {
+        "id": "w4",
+        "word": "TAÇ",
+        "row": 0,
+        "col": 0,
         "dir": "V"
       }
     ],
     "bonusWords": [
-      "TAÇ",
       "ALT"
     ]
   },
   {
-    "level": 64,
-    "location": "Ölüdeniz - Fethiye",
-    "bgTheme": "oludeniz",
+    "level": 48,
+    "location": "Efes Antik Kenti - İzmir",
+    "bgTheme": "ephesus",
     "wheelLetters": [
       "B",
       "I",
@@ -2410,211 +2074,66 @@ const WOW_LEVELS = [
         "row": 0,
         "col": 2,
         "dir": "V"
-      }
-    ],
-    "bonusWords": [
-      "ÇAK"
-    ]
-  },
-  {
-    "level": 65,
-    "location": "Ölüdeniz - Fethiye",
-    "bgTheme": "oludeniz",
-    "wheelLetters": [
-      "B",
-      "A",
-      "R",
-      "D",
-      "A",
-      "K"
-    ],
-    "words": [
-      {
-        "id": "w1",
-        "word": "BARDAK",
-        "row": 1,
-        "col": 0,
-        "dir": "H"
       },
       {
-        "id": "w2",
-        "word": "BAR",
-        "row": 1,
-        "col": 0,
-        "dir": "V"
-      },
-      {
-        "id": "w3",
-        "word": "DAR",
-        "row": 0,
-        "col": 1,
+        "id": "w4",
+        "word": "ÇAK",
+        "row": 2,
+        "col": 2,
         "dir": "V"
       }
     ],
-    "bonusWords": [
-      "ARK",
-      "ARA"
-    ]
+    "bonusWords": []
   },
   {
-    "level": 66,
-    "location": "Ölüdeniz - Fethiye",
-    "bgTheme": "oludeniz",
+    "level": 49,
+    "location": "Efes Antik Kenti - İzmir",
+    "bgTheme": "ephesus",
     "wheelLetters": [
       "S",
-      "Ü",
-      "R",
       "A",
-      "H",
-      "İ"
-    ],
-    "words": [
-      {
-        "id": "w1",
-        "word": "SÜRAHİ",
-        "row": 2,
-        "col": 0,
-        "dir": "H"
-      },
-      {
-        "id": "w2",
-        "word": "SÜR",
-        "row": 2,
-        "col": 0,
-        "dir": "V"
-      },
-      {
-        "id": "w3",
-        "word": "HİS",
-        "row": 0,
-        "col": 0,
-        "dir": "V"
-      }
-    ],
-    "bonusWords": [
-      "AHİ"
-    ]
-  },
-  {
-    "level": 67,
-    "location": "Ölüdeniz - Fethiye",
-    "bgTheme": "oludeniz",
-    "wheelLetters": [
-      "F",
-      "İ",
-      "N",
-      "C",
-      "A",
+      "L",
+      "O",
       "N"
     ],
     "words": [
       {
         "id": "w1",
-        "word": "FİNCAN",
-        "row": 2,
+        "word": "SALON",
+        "row": 1,
         "col": 0,
         "dir": "H"
       },
       {
         "id": "w2",
-        "word": "CAN",
-        "row": 0,
-        "col": 2,
+        "word": "SOL",
+        "row": 1,
+        "col": 0,
         "dir": "V"
       },
       {
         "id": "w3",
-        "word": "ANİ",
+        "word": "NAL",
         "row": 0,
         "col": 1,
         "dir": "V"
-      }
-    ],
-    "bonusWords": [
-      "CİN",
-      "FAN"
-    ]
-  },
-  {
-    "level": 68,
-    "location": "Ölüdeniz - Fethiye",
-    "bgTheme": "oludeniz",
-    "wheelLetters": [
-      "K",
-      "A",
-      "P",
-      "I"
-    ],
-    "words": [
-      {
-        "id": "w1",
-        "word": "KAPI",
-        "row": 2,
-        "col": 0,
-        "dir": "H"
       },
       {
-        "id": "w2",
-        "word": "PAK",
+        "id": "w4",
+        "word": "SON",
         "row": 0,
-        "col": 0,
-        "dir": "V"
-      },
-      {
-        "id": "w3",
-        "word": "KAP",
-        "row": 2,
-        "col": 0,
+        "col": 3,
         "dir": "V"
       }
     ],
     "bonusWords": [
-      "AK"
+      "ALO"
     ]
   },
   {
-    "level": 69,
-    "location": "Ölüdeniz - Fethiye",
-    "bgTheme": "oludeniz",
-    "wheelLetters": [
-      "M",
-      "U",
-      "T",
-      "F",
-      "A",
-      "K"
-    ],
-    "words": [
-      {
-        "id": "w1",
-        "word": "MUTFAK",
-        "row": 2,
-        "col": 0,
-        "dir": "H"
-      },
-      {
-        "id": "w2",
-        "word": "TAK",
-        "row": 2,
-        "col": 2,
-        "dir": "V"
-      },
-      {
-        "id": "w3",
-        "word": "TAM",
-        "row": 0,
-        "col": 0,
-        "dir": "V"
-      }
-    ],
-    "bonusWords": [
-      "KUT"
-    ]
-  },
-  {
-    "level": 70,
-    "location": "Ölüdeniz - Fethiye",
-    "bgTheme": "oludeniz",
+    "level": 50,
+    "location": "Efes Antik Kenti - İzmir",
+    "bgTheme": "ephesus",
     "wheelLetters": [
       "B",
       "A",
@@ -2644,204 +2163,329 @@ const WOW_LEVELS = [
         "row": 0,
         "col": 2,
         "dir": "V"
-      }
-    ],
-    "bonusWords": [
-      "BOK"
-    ]
-  },
-  {
-    "level": 71,
-    "location": "Sümela Manastırı - Trabzon",
-    "bgTheme": "sumela",
-    "wheelLetters": [
-      "S",
-      "A",
-      "L",
-      "O",
-      "N"
-    ],
-    "words": [
-      {
-        "id": "w1",
-        "word": "SALON",
-        "row": 1,
-        "col": 0,
-        "dir": "H"
       },
       {
-        "id": "w2",
-        "word": "SOL",
-        "row": 1,
-        "col": 0,
-        "dir": "V"
-      },
-      {
-        "id": "w3",
-        "word": "NAL",
+        "id": "w4",
+        "word": "BOK",
         "row": 0,
-        "col": 1,
-        "dir": "V"
-      }
-    ],
-    "bonusWords": [
-      "SON",
-      "ALO"
-    ]
-  },
-  {
-    "level": 72,
-    "location": "Sümela Manastırı - Trabzon",
-    "bgTheme": "sumela",
-    "wheelLetters": [
-      "Ç",
-      "A",
-      "T",
-      "I"
-    ],
-    "words": [
-      {
-        "id": "w1",
-        "word": "ÇATI",
-        "row": 2,
-        "col": 0,
-        "dir": "H"
-      },
-      {
-        "id": "w2",
-        "word": "AÇI",
-        "row": 1,
-        "col": 0,
-        "dir": "V"
-      },
-      {
-        "id": "w3",
-        "word": "TAÇ",
-        "row": 0,
-        "col": 0,
-        "dir": "V"
-      }
-    ],
-    "bonusWords": [
-      "ÇAT"
-    ]
-  },
-  {
-    "level": 73,
-    "location": "Sümela Manastırı - Trabzon",
-    "bgTheme": "sumela",
-    "wheelLetters": [
-      "K",
-      "İ",
-      "L",
-      "İ",
-      "T"
-    ],
-    "words": [
-      {
-        "id": "w1",
-        "word": "KİLİT",
-        "row": 1,
-        "col": 0,
-        "dir": "H"
-      },
-      {
-        "id": "w2",
-        "word": "KİL",
-        "row": 1,
-        "col": 0,
-        "dir": "V"
-      },
-      {
-        "id": "w3",
-        "word": "İKİ",
-        "row": 0,
-        "col": 0,
-        "dir": "V"
-      }
-    ],
-    "bonusWords": [
-      "TİK",
-      "İLK"
-    ]
-  },
-  {
-    "level": 74,
-    "location": "Sümela Manastırı - Trabzon",
-    "bgTheme": "sumela",
-    "wheelLetters": [
-      "N",
-      "E",
-      "H",
-      "İ",
-      "R"
-    ],
-    "words": [
-      {
-        "id": "w1",
-        "word": "NEHİR",
-        "row": 1,
-        "col": 0,
-        "dir": "H"
-      },
-      {
-        "id": "w2",
-        "word": "HER",
-        "row": 0,
-        "col": 1,
-        "dir": "V"
-      },
-      {
-        "id": "w3",
-        "word": "İNE",
-        "row": 0,
-        "col": 0,
-        "dir": "V"
-      }
-    ],
-    "bonusWords": [
-      "HİN"
-    ]
-  },
-  {
-    "level": 75,
-    "location": "Sümela Manastırı - Trabzon",
-    "bgTheme": "sumela",
-    "wheelLetters": [
-      "V",
-      "A",
-      "D",
-      "İ"
-    ],
-    "words": [
-      {
-        "id": "w1",
-        "word": "VADİ",
-        "row": 0,
-        "col": 0,
-        "dir": "H"
-      },
-      {
-        "id": "w2",
-        "word": "ADİ",
-        "row": 0,
-        "col": 1,
-        "dir": "V"
-      },
-      {
-        "id": "w3",
-        "word": "DAİ",
-        "row": 0,
-        "col": 2,
+        "col": 3,
         "dir": "V"
       }
     ],
     "bonusWords": []
   },
   {
-    "level": 76,
-    "location": "Sümela Manastırı - Trabzon",
-    "bgTheme": "sumela",
+    "level": 51,
+    "location": "Göbeklitepe - Şanlıurfa",
+    "bgTheme": "gobeklitepe",
+    "wheelLetters": [
+      "Y",
+      "A",
+      "S",
+      "T",
+      "I",
+      "K"
+    ],
+    "words": [
+      {
+        "id": "w1",
+        "word": "YASTIK",
+        "row": 2,
+        "col": 0,
+        "dir": "H"
+      },
+      {
+        "id": "w2",
+        "word": "KAS",
+        "row": 1,
+        "col": 1,
+        "dir": "V"
+      },
+      {
+        "id": "w3",
+        "word": "YAT",
+        "row": 2,
+        "col": 0,
+        "dir": "V"
+      },
+      {
+        "id": "w4",
+        "word": "AYI",
+        "row": 0,
+        "col": 4,
+        "dir": "V"
+      }
+    ],
+    "bonusWords": [
+      "TIK"
+    ]
+  },
+  {
+    "level": 52,
+    "location": "Göbeklitepe - Şanlıurfa",
+    "bgTheme": "gobeklitepe",
+    "wheelLetters": [
+      "Y",
+      "O",
+      "R",
+      "G",
+      "A",
+      "N"
+    ],
+    "words": [
+      {
+        "id": "w1",
+        "word": "YORGAN",
+        "row": 2,
+        "col": 0,
+        "dir": "H"
+      },
+      {
+        "id": "w2",
+        "word": "GAR",
+        "row": 0,
+        "col": 2,
+        "dir": "V"
+      },
+      {
+        "id": "w3",
+        "word": "ORG",
+        "row": 2,
+        "col": 1,
+        "dir": "V"
+      },
+      {
+        "id": "w4",
+        "word": "ORAN",
+        "row": 0,
+        "col": 4,
+        "dir": "V"
+      }
+    ],
+    "bonusWords": [
+      "ONAR"
+    ]
+  },
+  {
+    "level": 53,
+    "location": "Göbeklitepe - Şanlıurfa",
+    "bgTheme": "gobeklitepe",
+    "wheelLetters": [
+      "S",
+      "Ü",
+      "R",
+      "A",
+      "H",
+      "İ"
+    ],
+    "words": [
+      {
+        "id": "w1",
+        "word": "SÜRAHİ",
+        "row": 2,
+        "col": 0,
+        "dir": "H"
+      },
+      {
+        "id": "w2",
+        "word": "SÜR",
+        "row": 2,
+        "col": 0,
+        "dir": "V"
+      },
+      {
+        "id": "w3",
+        "word": "HİS",
+        "row": 0,
+        "col": 0,
+        "dir": "V"
+      },
+      {
+        "id": "w4",
+        "word": "AHİ",
+        "row": 2,
+        "col": 3,
+        "dir": "V"
+      }
+    ],
+    "bonusWords": []
+  },
+  {
+    "level": 54,
+    "location": "Göbeklitepe - Şanlıurfa",
+    "bgTheme": "gobeklitepe",
+    "wheelLetters": [
+      "F",
+      "İ",
+      "N",
+      "C",
+      "A",
+      "N"
+    ],
+    "words": [
+      {
+        "id": "w1",
+        "word": "FİNCAN",
+        "row": 2,
+        "col": 0,
+        "dir": "H"
+      },
+      {
+        "id": "w2",
+        "word": "CAN",
+        "row": 0,
+        "col": 2,
+        "dir": "V"
+      },
+      {
+        "id": "w3",
+        "word": "ANİ",
+        "row": 0,
+        "col": 1,
+        "dir": "V"
+      },
+      {
+        "id": "w4",
+        "word": "CİN",
+        "row": 2,
+        "col": 3,
+        "dir": "V"
+      }
+    ],
+    "bonusWords": [
+      "FAN"
+    ]
+  },
+  {
+    "level": 55,
+    "location": "Göbeklitepe - Şanlıurfa",
+    "bgTheme": "gobeklitepe",
+    "wheelLetters": [
+      "P",
+      "E",
+      "R",
+      "D",
+      "E"
+    ],
+    "words": [
+      {
+        "id": "w1",
+        "word": "PERDE",
+        "row": 1,
+        "col": 0,
+        "dir": "H"
+      },
+      {
+        "id": "w2",
+        "word": "PER",
+        "row": 1,
+        "col": 0,
+        "dir": "V"
+      },
+      {
+        "id": "w3",
+        "word": "DER",
+        "row": 0,
+        "col": 1,
+        "dir": "V"
+      }
+    ],
+    "bonusWords": []
+  },
+  {
+    "level": 56,
+    "location": "Göbeklitepe - Şanlıurfa",
+    "bgTheme": "gobeklitepe",
+    "wheelLetters": [
+      "Y",
+      "A",
+      "T",
+      "A",
+      "K"
+    ],
+    "words": [
+      {
+        "id": "w1",
+        "word": "YATAK",
+        "row": 1,
+        "col": 0,
+        "dir": "H"
+      },
+      {
+        "id": "w2",
+        "word": "YAT",
+        "row": 1,
+        "col": 0,
+        "dir": "V"
+      },
+      {
+        "id": "w3",
+        "word": "KAT",
+        "row": 0,
+        "col": 1,
+        "dir": "V"
+      },
+      {
+        "id": "w4",
+        "word": "ATAK",
+        "row": 1,
+        "col": 1,
+        "dir": "V"
+      }
+    ],
+    "bonusWords": [
+      "TAK"
+    ]
+  },
+  {
+    "level": 57,
+    "location": "Göbeklitepe - Şanlıurfa",
+    "bgTheme": "gobeklitepe",
+    "wheelLetters": [
+      "L",
+      "A",
+      "M",
+      "B",
+      "A"
+    ],
+    "words": [
+      {
+        "id": "w1",
+        "word": "LAMBA",
+        "row": 2,
+        "col": 0,
+        "dir": "H"
+      },
+      {
+        "id": "w2",
+        "word": "BAL",
+        "row": 0,
+        "col": 0,
+        "dir": "V"
+      },
+      {
+        "id": "w3",
+        "word": "MAL",
+        "row": 1,
+        "col": 1,
+        "dir": "V"
+      },
+      {
+        "id": "w4",
+        "word": "AMA",
+        "row": 0,
+        "col": 1,
+        "dir": "V"
+      }
+    ],
+    "bonusWords": [
+      "ALA"
+    ]
+  },
+  {
+    "level": 58,
+    "location": "Göbeklitepe - Şanlıurfa",
+    "bgTheme": "gobeklitepe",
     "wheelLetters": [
       "Ş",
       "E",
@@ -2871,17 +2515,23 @@ const WOW_LEVELS = [
         "row": 0,
         "col": 2,
         "dir": "V"
+      },
+      {
+        "id": "w4",
+        "word": "ELA",
+        "row": 0,
+        "col": 1,
+        "dir": "V"
       }
     ],
     "bonusWords": [
-      "ELA",
       "LALE"
     ]
   },
   {
-    "level": 77,
-    "location": "Sümela Manastırı - Trabzon",
-    "bgTheme": "sumela",
+    "level": 59,
+    "location": "Göbeklitepe - Şanlıurfa",
+    "bgTheme": "gobeklitepe",
     "wheelLetters": [
       "M",
       "A",
@@ -2911,16 +2561,21 @@ const WOW_LEVELS = [
         "row": 0,
         "col": 1,
         "dir": "V"
+      },
+      {
+        "id": "w4",
+        "word": "AMA",
+        "row": 1,
+        "col": 0,
+        "dir": "V"
       }
     ],
-    "bonusWords": [
-      "AMA"
-    ]
+    "bonusWords": []
   },
   {
-    "level": 78,
-    "location": "Sümela Manastırı - Trabzon",
-    "bgTheme": "sumela",
+    "level": 60,
+    "location": "Göbeklitepe - Şanlıurfa",
+    "bgTheme": "gobeklitepe",
     "wheelLetters": [
       "V",
       "A",
@@ -2956,44 +2611,9 @@ const WOW_LEVELS = [
     ]
   },
   {
-    "level": 79,
-    "location": "Sümela Manastırı - Trabzon",
-    "bgTheme": "sumela",
-    "wheelLetters": [
-      "T",
-      "R",
-      "E",
-      "N"
-    ],
-    "words": [
-      {
-        "id": "w1",
-        "word": "TREN",
-        "row": 2,
-        "col": 0,
-        "dir": "H"
-      },
-      {
-        "id": "w2",
-        "word": "TER",
-        "row": 2,
-        "col": 0,
-        "dir": "V"
-      },
-      {
-        "id": "w3",
-        "word": "RET",
-        "row": 0,
-        "col": 0,
-        "dir": "V"
-      }
-    ],
-    "bonusWords": []
-  },
-  {
-    "level": 80,
-    "location": "Sümela Manastırı - Trabzon",
-    "bgTheme": "sumela",
+    "level": 61,
+    "location": "Ölüdeniz - Fethiye",
+    "bgTheme": "oludeniz",
     "wheelLetters": [
       "K",
       "A",
@@ -3005,33 +2625,38 @@ const WOW_LEVELS = [
       {
         "id": "w1",
         "word": "KAYIK",
-        "row": 0,
+        "row": 2,
         "col": 0,
         "dir": "H"
       },
       {
         "id": "w2",
         "word": "AYI",
-        "row": 0,
+        "row": 2,
         "col": 1,
         "dir": "V"
       },
       {
         "id": "w3",
         "word": "KAY",
+        "row": 2,
+        "col": 0,
+        "dir": "V"
+      },
+      {
+        "id": "w4",
+        "word": "YIK",
         "row": 0,
         "col": 0,
         "dir": "V"
       }
     ],
-    "bonusWords": [
-      "YIK"
-    ]
+    "bonusWords": []
   },
   {
-    "level": 81,
-    "location": "Safranbolu Evleri - Karabük",
-    "bgTheme": "safranbolu",
+    "level": 62,
+    "location": "Ölüdeniz - Fethiye",
+    "bgTheme": "oludeniz",
     "wheelLetters": [
       "R",
       "A",
@@ -3060,17 +2685,23 @@ const WOW_LEVELS = [
         "row": 0,
         "col": 1,
         "dir": "V"
+      },
+      {
+        "id": "w4",
+        "word": "OYA",
+        "row": 1,
+        "col": 3,
+        "dir": "V"
       }
     ],
     "bonusWords": [
-      "OYA",
       "RAY"
     ]
   },
   {
-    "level": 82,
-    "location": "Safranbolu Evleri - Karabük",
-    "bgTheme": "safranbolu",
+    "level": 63,
+    "location": "Ölüdeniz - Fethiye",
+    "bgTheme": "oludeniz",
     "wheelLetters": [
       "M",
       "Ü",
@@ -3104,353 +2735,284 @@ const WOW_LEVELS = [
     "bonusWords": []
   },
   {
-    "level": 83,
-    "location": "Safranbolu Evleri - Karabük",
-    "bgTheme": "safranbolu",
+    "level": 64,
+    "location": "Ölüdeniz - Fethiye",
+    "bgTheme": "oludeniz",
     "wheelLetters": [
-      "S",
-      "A",
-      "A",
-      "T"
+      "N",
+      "E",
+      "H",
+      "İ",
+      "R"
     ],
     "words": [
       {
         "id": "w1",
-        "word": "SAAT",
+        "word": "NEHİR",
         "row": 1,
         "col": 0,
         "dir": "H"
       },
       {
         "id": "w2",
-        "word": "ASA",
+        "word": "HER",
         "row": 0,
-        "col": 0,
-        "dir": "V"
-      },
-      {
-        "id": "w3",
-        "word": "ATA",
-        "row": 1,
         "col": 1,
         "dir": "V"
-      }
-    ],
-    "bonusWords": [
-      "TAS"
-    ]
-  },
-  {
-    "level": 84,
-    "location": "Safranbolu Evleri - Karabük",
-    "bgTheme": "safranbolu",
-    "wheelLetters": [
-      "A",
-      "Y",
-      "N",
-      "A"
-    ],
-    "words": [
-      {
-        "id": "w1",
-        "word": "AYNA",
-        "row": 2,
-        "col": 0,
-        "dir": "H"
-      },
-      {
-        "id": "w2",
-        "word": "AYN",
-        "row": 2,
-        "col": 0,
-        "dir": "V"
       },
       {
         "id": "w3",
-        "word": "AYA",
+        "word": "İNE",
         "row": 0,
         "col": 0,
         "dir": "V"
       }
     ],
     "bonusWords": [
-      "ANA"
+      "HİN"
     ]
   },
   {
-    "level": 85,
-    "location": "Safranbolu Evleri - Karabük",
-    "bgTheme": "safranbolu",
+    "level": 65,
+    "location": "Ölüdeniz - Fethiye",
+    "bgTheme": "oludeniz",
     "wheelLetters": [
-      "L",
+      "Ç",
       "A",
       "M",
-      "B",
-      "A"
+      "U",
+      "R"
     ],
     "words": [
       {
         "id": "w1",
-        "word": "LAMBA",
+        "word": "ÇAMUR",
         "row": 2,
         "col": 0,
         "dir": "H"
       },
       {
         "id": "w2",
-        "word": "BAL",
-        "row": 0,
+        "word": "ÇAM",
+        "row": 2,
         "col": 0,
         "dir": "V"
       },
       {
         "id": "w3",
-        "word": "MAL",
-        "row": 1,
-        "col": 1,
-        "dir": "V"
-      }
-    ],
-    "bonusWords": [
-      "AMA",
-      "ALA"
-    ]
-  },
-  {
-    "level": 86,
-    "location": "Safranbolu Evleri - Karabük",
-    "bgTheme": "safranbolu",
-    "wheelLetters": [
-      "H",
-      "A",
-      "L",
-      "I"
-    ],
-    "words": [
-      {
-        "id": "w1",
-        "word": "HALI",
+        "word": "RUM",
         "row": 0,
-        "col": 0,
-        "dir": "H"
-      },
-      {
-        "id": "w2",
-        "word": "HAL",
-        "row": 0,
-        "col": 0,
-        "dir": "V"
-      },
-      {
-        "id": "w3",
-        "word": "ALI",
-        "row": 0,
-        "col": 1,
+        "col": 2,
         "dir": "V"
       }
     ],
     "bonusWords": []
   },
   {
-    "level": 87,
-    "location": "Safranbolu Evleri - Karabük",
-    "bgTheme": "safranbolu",
+    "level": 66,
+    "location": "Ölüdeniz - Fethiye",
+    "bgTheme": "oludeniz",
+    "wheelLetters": [
+      "Ç",
+      "İ",
+      "Ç",
+      "E",
+      "K"
+    ],
+    "words": [
+      {
+        "id": "w1",
+        "word": "ÇİÇEK",
+        "row": 2,
+        "col": 0,
+        "dir": "H"
+      },
+      {
+        "id": "w2",
+        "word": "ÇEK",
+        "row": 2,
+        "col": 0,
+        "dir": "V"
+      },
+      {
+        "id": "w3",
+        "word": "KİÇ",
+        "row": 0,
+        "col": 0,
+        "dir": "V"
+      }
+    ],
+    "bonusWords": []
+  },
+  {
+    "level": 67,
+    "location": "Ölüdeniz - Fethiye",
+    "bgTheme": "oludeniz",
     "wheelLetters": [
       "P",
+      "A",
+      "M",
+      "U",
+      "K"
+    ],
+    "words": [
+      {
+        "id": "w1",
+        "word": "PAMUK",
+        "row": 2,
+        "col": 0,
+        "dir": "H"
+      },
+      {
+        "id": "w2",
+        "word": "KUPA",
+        "row": 0,
+        "col": 0,
+        "dir": "V"
+      },
+      {
+        "id": "w3",
+        "word": "KAP",
+        "row": 1,
+        "col": 1,
+        "dir": "V"
+      },
+      {
+        "id": "w4",
+        "word": "KAMU",
+        "row": 0,
+        "col": 2,
+        "dir": "V"
+      }
+    ],
+    "bonusWords": [
+      "PAK",
+      "KUM"
+    ]
+  },
+  {
+    "level": 68,
+    "location": "Ölüdeniz - Fethiye",
+    "bgTheme": "oludeniz",
+    "wheelLetters": [
+      "T",
+      "R",
       "E",
-      "R",
-      "D",
-      "E"
-    ],
-    "words": [
-      {
-        "id": "w1",
-        "word": "PERDE",
-        "row": 1,
-        "col": 0,
-        "dir": "H"
-      },
-      {
-        "id": "w2",
-        "word": "PER",
-        "row": 1,
-        "col": 0,
-        "dir": "V"
-      },
-      {
-        "id": "w3",
-        "word": "DER",
-        "row": 0,
-        "col": 1,
-        "dir": "V"
-      }
-    ],
-    "bonusWords": []
-  },
-  {
-    "level": 88,
-    "location": "Safranbolu Evleri - Karabük",
-    "bgTheme": "safranbolu",
-    "wheelLetters": [
-      "Y",
-      "A",
-      "T",
-      "A",
-      "K"
-    ],
-    "words": [
-      {
-        "id": "w1",
-        "word": "YATAK",
-        "row": 1,
-        "col": 0,
-        "dir": "H"
-      },
-      {
-        "id": "w2",
-        "word": "YAT",
-        "row": 1,
-        "col": 0,
-        "dir": "V"
-      },
-      {
-        "id": "w3",
-        "word": "KAT",
-        "row": 0,
-        "col": 1,
-        "dir": "V"
-      }
-    ],
-    "bonusWords": [
-      "ATAK",
-      "TAK"
-    ]
-  },
-  {
-    "level": 89,
-    "location": "Safranbolu Evleri - Karabük",
-    "bgTheme": "safranbolu",
-    "wheelLetters": [
-      "Y",
-      "A",
-      "S",
-      "T",
-      "I",
-      "K"
-    ],
-    "words": [
-      {
-        "id": "w1",
-        "word": "YASTIK",
-        "row": 1,
-        "col": 0,
-        "dir": "H"
-      },
-      {
-        "id": "w2",
-        "word": "KAS",
-        "row": 0,
-        "col": 1,
-        "dir": "V"
-      },
-      {
-        "id": "w3",
-        "word": "YAT",
-        "row": 1,
-        "col": 0,
-        "dir": "V"
-      }
-    ],
-    "bonusWords": [
-      "AYI",
-      "TIK"
-    ]
-  },
-  {
-    "level": 90,
-    "location": "Safranbolu Evleri - Karabük",
-    "bgTheme": "safranbolu",
-    "wheelLetters": [
-      "Y",
-      "O",
-      "R",
-      "G",
-      "A",
       "N"
     ],
     "words": [
       {
         "id": "w1",
-        "word": "YORGAN",
+        "word": "TREN",
         "row": 2,
         "col": 0,
         "dir": "H"
       },
       {
         "id": "w2",
-        "word": "GAR",
-        "row": 0,
-        "col": 2,
+        "word": "TER",
+        "row": 2,
+        "col": 0,
         "dir": "V"
       },
       {
         "id": "w3",
-        "word": "ORG",
-        "row": 2,
-        "col": 1,
+        "word": "RET",
+        "row": 0,
+        "col": 0,
         "dir": "V"
       }
     ],
-    "bonusWords": [
-      "ORAN",
-      "ONAR"
-    ]
+    "bonusWords": []
   },
   {
-    "level": 91,
-    "location": "Akdamar Adası - Van Gölü",
-    "bgTheme": "akdamar",
+    "level": 69,
+    "location": "Ölüdeniz - Fethiye",
+    "bgTheme": "oludeniz",
     "wheelLetters": [
-      "G",
-      "Ö",
       "K",
-      "Y",
-      "Ü",
-      "Z",
-      "Ü"
+      "A",
+      "P",
+      "I"
     ],
     "words": [
       {
         "id": "w1",
-        "word": "GÖKYÜZÜ",
-        "row": 1,
+        "word": "KAPI",
+        "row": 2,
         "col": 0,
         "dir": "H"
       },
       {
         "id": "w2",
-        "word": "GÖZ",
+        "word": "PAK",
+        "row": 0,
+        "col": 0,
+        "dir": "V"
+      },
+      {
+        "id": "w3",
+        "word": "KAP",
+        "row": 2,
+        "col": 0,
+        "dir": "V"
+      },
+      {
+        "id": "w4",
+        "word": "AK",
+        "row": 1,
+        "col": 0,
+        "dir": "V"
+      }
+    ],
+    "bonusWords": []
+  },
+  {
+    "level": 70,
+    "location": "Ölüdeniz - Fethiye",
+    "bgTheme": "oludeniz",
+    "wheelLetters": [
+      "Ç",
+      "A",
+      "T",
+      "I"
+    ],
+    "words": [
+      {
+        "id": "w1",
+        "word": "ÇATI",
+        "row": 2,
+        "col": 0,
+        "dir": "H"
+      },
+      {
+        "id": "w2",
+        "word": "AÇI",
         "row": 1,
         "col": 0,
         "dir": "V"
       },
       {
         "id": "w3",
-        "word": "KÖZ",
+        "word": "TAÇ",
         "row": 0,
+        "col": 0,
+        "dir": "V"
+      },
+      {
+        "id": "w4",
+        "word": "ÇAT",
+        "row": 1,
         "col": 1,
         "dir": "V"
       }
     ],
-    "bonusWords": [
-      "YÜZ",
-      "GÖK"
-    ]
+    "bonusWords": []
   },
   {
-    "level": 92,
-    "location": "Akdamar Adası - Van Gölü",
-    "bgTheme": "akdamar",
+    "level": 71,
+    "location": "Sümela Manastırı - Trabzon",
+    "bgTheme": "sumela",
     "wheelLetters": [
       "Y",
       "A",
@@ -3487,9 +3049,9 @@ const WOW_LEVELS = [
     ]
   },
   {
-    "level": 93,
-    "location": "Akdamar Adası - Van Gölü",
-    "bgTheme": "akdamar",
+    "level": 72,
+    "location": "Sümela Manastırı - Trabzon",
+    "bgTheme": "sumela",
     "wheelLetters": [
       "Ş",
       "İ",
@@ -3524,9 +3086,9 @@ const WOW_LEVELS = [
     "bonusWords": []
   },
   {
-    "level": 94,
-    "location": "Akdamar Adası - Van Gölü",
-    "bgTheme": "akdamar",
+    "level": 73,
+    "location": "Sümela Manastırı - Trabzon",
+    "bgTheme": "sumela",
     "wheelLetters": [
       "G",
       "Ü",
@@ -3560,9 +3122,9 @@ const WOW_LEVELS = [
     "bonusWords": []
   },
   {
-    "level": 95,
-    "location": "Akdamar Adası - Van Gölü",
-    "bgTheme": "akdamar",
+    "level": 74,
+    "location": "Sümela Manastırı - Trabzon",
+    "bgTheme": "sumela",
     "wheelLetters": [
       "S",
       "E",
@@ -3596,9 +3158,9 @@ const WOW_LEVELS = [
     "bonusWords": []
   },
   {
-    "level": 96,
-    "location": "Akdamar Adası - Van Gölü",
-    "bgTheme": "akdamar",
+    "level": 75,
+    "location": "Sümela Manastırı - Trabzon",
+    "bgTheme": "sumela",
     "wheelLetters": [
       "H",
       "U",
@@ -3632,46 +3194,9 @@ const WOW_LEVELS = [
     "bonusWords": []
   },
   {
-    "level": 97,
-    "location": "Akdamar Adası - Van Gölü",
-    "bgTheme": "akdamar",
-    "wheelLetters": [
-      "D",
-      "O",
-      "S",
-      "T"
-    ],
-    "words": [
-      {
-        "id": "w1",
-        "word": "DOST",
-        "row": 1,
-        "col": 0,
-        "dir": "H"
-      },
-      {
-        "id": "w2",
-        "word": "TOS",
-        "row": 0,
-        "col": 1,
-        "dir": "V"
-      },
-      {
-        "id": "w3",
-        "word": "OT",
-        "row": 0,
-        "col": 3,
-        "dir": "V"
-      }
-    ],
-    "bonusWords": [
-      "SOD"
-    ]
-  },
-  {
-    "level": 98,
-    "location": "Akdamar Adası - Van Gölü",
-    "bgTheme": "akdamar",
+    "level": 76,
+    "location": "Sümela Manastırı - Trabzon",
+    "bgTheme": "sumela",
     "wheelLetters": [
       "K",
       "A",
@@ -3684,34 +3209,40 @@ const WOW_LEVELS = [
       {
         "id": "w1",
         "word": "KARDEŞ",
-        "row": 1,
+        "row": 2,
         "col": 0,
         "dir": "H"
       },
       {
         "id": "w2",
         "word": "KAŞ",
-        "row": 1,
+        "row": 2,
         "col": 0,
         "dir": "V"
       },
       {
         "id": "w3",
         "word": "DAR",
-        "row": 0,
+        "row": 1,
         "col": 1,
+        "dir": "V"
+      },
+      {
+        "id": "w4",
+        "word": "ARK",
+        "row": 0,
+        "col": 0,
         "dir": "V"
       }
     ],
     "bonusWords": [
-      "ŞEK",
-      "ARK"
+      "ŞEK"
     ]
   },
   {
-    "level": 99,
-    "location": "Akdamar Adası - Van Gölü",
-    "bgTheme": "akdamar",
+    "level": 77,
+    "location": "Sümela Manastırı - Trabzon",
+    "bgTheme": "sumela",
     "wheelLetters": [
       "A",
       "İ",
@@ -3739,16 +3270,21 @@ const WOW_LEVELS = [
         "row": 0,
         "col": 0,
         "dir": "V"
+      },
+      {
+        "id": "w4",
+        "word": "İLE",
+        "row": 2,
+        "col": 1,
+        "dir": "V"
       }
     ],
-    "bonusWords": [
-      "AİT"
-    ]
+    "bonusWords": []
   },
   {
-    "level": 100,
-    "location": "Akdamar Adası - Van Gölü",
-    "bgTheme": "akdamar",
+    "level": 78,
+    "location": "Sümela Manastırı - Trabzon",
+    "bgTheme": "sumela",
     "wheelLetters": [
       "M",
       "U",
@@ -3781,6 +3317,1049 @@ const WOW_LEVELS = [
     ],
     "bonusWords": [
       "KUM"
+    ]
+  },
+  {
+    "level": 79,
+    "location": "Sümela Manastırı - Trabzon",
+    "bgTheme": "sumela",
+    "wheelLetters": [
+      "K",
+      "İ",
+      "L",
+      "İ",
+      "T"
+    ],
+    "words": [
+      {
+        "id": "w1",
+        "word": "KİLİT",
+        "row": 2,
+        "col": 0,
+        "dir": "H"
+      },
+      {
+        "id": "w2",
+        "word": "KİL",
+        "row": 2,
+        "col": 0,
+        "dir": "V"
+      },
+      {
+        "id": "w3",
+        "word": "İKİ",
+        "row": 1,
+        "col": 0,
+        "dir": "V"
+      },
+      {
+        "id": "w4",
+        "word": "TİK",
+        "row": 0,
+        "col": 0,
+        "dir": "V"
+      }
+    ],
+    "bonusWords": [
+      "İLK"
+    ]
+  },
+  {
+    "level": 80,
+    "location": "Sümela Manastırı - Trabzon",
+    "bgTheme": "sumela",
+    "wheelLetters": [
+      "V",
+      "A",
+      "D",
+      "İ"
+    ],
+    "words": [
+      {
+        "id": "w1",
+        "word": "VADİ",
+        "row": 0,
+        "col": 0,
+        "dir": "H"
+      },
+      {
+        "id": "w2",
+        "word": "ADİ",
+        "row": 0,
+        "col": 1,
+        "dir": "V"
+      },
+      {
+        "id": "w3",
+        "word": "DAİ",
+        "row": 0,
+        "col": 2,
+        "dir": "V"
+      }
+    ],
+    "bonusWords": []
+  },
+  {
+    "level": 81,
+    "location": "Safranbolu Evleri - Karabük",
+    "bgTheme": "safranbolu",
+    "wheelLetters": [
+      "K",
+      "E",
+      "S",
+      "T",
+      "A",
+      "N",
+      "E"
+    ],
+    "words": [
+      {
+        "id": "w1",
+        "word": "KESTANE",
+        "row": 3,
+        "col": 0,
+        "dir": "H"
+      },
+      {
+        "id": "w2",
+        "word": "KENT",
+        "row": 3,
+        "col": 0,
+        "dir": "V"
+      },
+      {
+        "id": "w3",
+        "word": "TANE",
+        "row": 0,
+        "col": 1,
+        "dir": "V"
+      },
+      {
+        "id": "w4",
+        "word": "KAST",
+        "row": 1,
+        "col": 2,
+        "dir": "V"
+      }
+    ],
+    "bonusWords": [
+      "KAS",
+      "NET",
+      "TEK"
+    ]
+  },
+  {
+    "level": 82,
+    "location": "Safranbolu Evleri - Karabük",
+    "bgTheme": "safranbolu",
+    "wheelLetters": [
+      "P",
+      "E",
+      "N",
+      "C",
+      "E",
+      "R",
+      "E"
+    ],
+    "words": [
+      {
+        "id": "w1",
+        "word": "PENCERE",
+        "row": 1,
+        "col": 0,
+        "dir": "H"
+      },
+      {
+        "id": "w2",
+        "word": "PERE",
+        "row": 1,
+        "col": 0,
+        "dir": "V"
+      },
+      {
+        "id": "w3",
+        "word": "EREN",
+        "row": 1,
+        "col": 1,
+        "dir": "V"
+      },
+      {
+        "id": "w4",
+        "word": "CER",
+        "row": 0,
+        "col": 1,
+        "dir": "V"
+      }
+    ],
+    "bonusWords": []
+  },
+  {
+    "level": 83,
+    "location": "Safranbolu Evleri - Karabük",
+    "bgTheme": "safranbolu",
+    "wheelLetters": [
+      "T",
+      "E",
+      "N",
+      "C",
+      "E",
+      "R",
+      "E"
+    ],
+    "words": [
+      {
+        "id": "w1",
+        "word": "TENCERE",
+        "row": 0,
+        "col": 0,
+        "dir": "H"
+      },
+      {
+        "id": "w2",
+        "word": "TERE",
+        "row": 0,
+        "col": 0,
+        "dir": "V"
+      },
+      {
+        "id": "w3",
+        "word": "EREN",
+        "row": 0,
+        "col": 1,
+        "dir": "V"
+      },
+      {
+        "id": "w4",
+        "word": "TER",
+        "row": 0,
+        "col": 0,
+        "dir": "V"
+      }
+    ],
+    "bonusWords": [
+      "NET"
+    ]
+  },
+  {
+    "level": 84,
+    "location": "Safranbolu Evleri - Karabük",
+    "bgTheme": "safranbolu",
+    "wheelLetters": [
+      "M",
+      "E",
+      "R",
+      "D",
+      "İ",
+      "V",
+      "E",
+      "N"
+    ],
+    "words": [
+      {
+        "id": "w1",
+        "word": "MERDİVEN",
+        "row": 2,
+        "col": 0,
+        "dir": "H"
+      },
+      {
+        "id": "w2",
+        "word": "DEV",
+        "row": 1,
+        "col": 1,
+        "dir": "V"
+      },
+      {
+        "id": "w3",
+        "word": "DİN",
+        "row": 2,
+        "col": 3,
+        "dir": "V"
+      },
+      {
+        "id": "w4",
+        "word": "NEM",
+        "row": 0,
+        "col": 0,
+        "dir": "V"
+      }
+    ],
+    "bonusWords": [
+      "DEM"
+    ]
+  },
+  {
+    "level": 85,
+    "location": "Safranbolu Evleri - Karabük",
+    "bgTheme": "safranbolu",
+    "wheelLetters": [
+      "S",
+      "E",
+      "M",
+      "A",
+      "V",
+      "E",
+      "R"
+    ],
+    "words": [
+      {
+        "id": "w1",
+        "word": "SEMAVER",
+        "row": 1,
+        "col": 0,
+        "dir": "H"
+      },
+      {
+        "id": "w2",
+        "word": "SEVER",
+        "row": 1,
+        "col": 0,
+        "dir": "V"
+      },
+      {
+        "id": "w3",
+        "word": "SERA",
+        "row": 0,
+        "col": 1,
+        "dir": "V"
+      },
+      {
+        "id": "w4",
+        "word": "VAR",
+        "row": 0,
+        "col": 3,
+        "dir": "V"
+      }
+    ],
+    "bonusWords": [
+      "MAS",
+      "SER"
+    ]
+  },
+  {
+    "level": 86,
+    "location": "Safranbolu Evleri - Karabük",
+    "bgTheme": "safranbolu",
+    "wheelLetters": [
+      "Ç",
+      "A",
+      "Y",
+      "D",
+      "A",
+      "N",
+      "L",
+      "I",
+      "K"
+    ],
+    "words": [
+      {
+        "id": "w1",
+        "word": "ÇAYDANLIK",
+        "row": 1,
+        "col": 0,
+        "dir": "H"
+      },
+      {
+        "id": "w2",
+        "word": "AYAK",
+        "row": 1,
+        "col": 1,
+        "dir": "V"
+      },
+      {
+        "id": "w3",
+        "word": "KAYA",
+        "row": 0,
+        "col": 1,
+        "dir": "V"
+      },
+      {
+        "id": "w4",
+        "word": "ÇAY",
+        "row": 1,
+        "col": 0,
+        "dir": "V"
+      }
+    ],
+    "bonusWords": [
+      "DAL",
+      "KIL"
+    ]
+  },
+  {
+    "level": 87,
+    "location": "Safranbolu Evleri - Karabük",
+    "bgTheme": "safranbolu",
+    "wheelLetters": [
+      "K",
+      "A",
+      "R",
+      "A",
+      "N",
+      "F",
+      "İ",
+      "L"
+    ],
+    "words": [
+      {
+        "id": "w1",
+        "word": "KARANFİL",
+        "row": 1,
+        "col": 0,
+        "dir": "H"
+      },
+      {
+        "id": "w2",
+        "word": "KARA",
+        "row": 1,
+        "col": 0,
+        "dir": "V"
+      },
+      {
+        "id": "w3",
+        "word": "NİL",
+        "row": 1,
+        "col": 4,
+        "dir": "V"
+      },
+      {
+        "id": "w4",
+        "word": "FAL",
+        "row": 0,
+        "col": 1,
+        "dir": "V"
+      }
+    ],
+    "bonusWords": [
+      "FAR",
+      "LAK"
+    ]
+  },
+  {
+    "level": 88,
+    "location": "Safranbolu Evleri - Karabük",
+    "bgTheme": "safranbolu",
+    "wheelLetters": [
+      "P",
+      "O",
+      "R",
+      "T",
+      "A",
+      "K",
+      "A",
+      "L"
+    ],
+    "words": [
+      {
+        "id": "w1",
+        "word": "PORTAKAL",
+        "row": 2,
+        "col": 0,
+        "dir": "H"
+      },
+      {
+        "id": "w2",
+        "word": "ORTAK",
+        "row": 2,
+        "col": 1,
+        "dir": "V"
+      },
+      {
+        "id": "w3",
+        "word": "PARK",
+        "row": 2,
+        "col": 0,
+        "dir": "V"
+      },
+      {
+        "id": "w4",
+        "word": "KOTA",
+        "row": 0,
+        "col": 3,
+        "dir": "V"
+      }
+    ],
+    "bonusWords": [
+      "POT",
+      "KOT"
+    ]
+  },
+  {
+    "level": 89,
+    "location": "Safranbolu Evleri - Karabük",
+    "bgTheme": "safranbolu",
+    "wheelLetters": [
+      "M",
+      "A",
+      "N",
+      "D",
+      "A",
+      "L",
+      "İ",
+      "N",
+      "A"
+    ],
+    "words": [
+      {
+        "id": "w1",
+        "word": "MANDALİNA",
+        "row": 3,
+        "col": 0,
+        "dir": "H"
+      },
+      {
+        "id": "w2",
+        "word": "ADAM",
+        "row": 0,
+        "col": 0,
+        "dir": "V"
+      },
+      {
+        "id": "w3",
+        "word": "MANA",
+        "row": 3,
+        "col": 0,
+        "dir": "V"
+      },
+      {
+        "id": "w4",
+        "word": "ALAN",
+        "row": 3,
+        "col": 1,
+        "dir": "V"
+      }
+    ],
+    "bonusWords": [
+      "DAL",
+      "MAL"
+    ]
+  },
+  {
+    "level": 90,
+    "location": "Safranbolu Evleri - Karabük",
+    "bgTheme": "safranbolu",
+    "wheelLetters": [
+      "G",
+      "Ü",
+      "L",
+      "F",
+      "İ",
+      "D",
+      "A",
+      "N"
+    ],
+    "words": [
+      {
+        "id": "w1",
+        "word": "FİDAN",
+        "row": 1,
+        "col": 2,
+        "dir": "H"
+      },
+      {
+        "id": "w2",
+        "word": "DİL",
+        "row": 0,
+        "col": 3,
+        "dir": "V"
+      },
+      {
+        "id": "w3",
+        "word": "FİL",
+        "row": 1,
+        "col": 2,
+        "dir": "V"
+      },
+      {
+        "id": "w4",
+        "word": "GÜL",
+        "row": 3,
+        "col": 0,
+        "dir": "H"
+      }
+    ],
+    "bonusWords": [
+      "ANİ"
+    ]
+  },
+  {
+    "level": 91,
+    "location": "Akdamar Adası - Van Gölü",
+    "bgTheme": "akdamar",
+    "wheelLetters": [
+      "G",
+      "Ö",
+      "K",
+      "Y",
+      "Ü",
+      "Z",
+      "Ü"
+    ],
+    "words": [
+      {
+        "id": "w1",
+        "word": "GÖKYÜZÜ",
+        "row": 1,
+        "col": 0,
+        "dir": "H"
+      },
+      {
+        "id": "w2",
+        "word": "GÖK",
+        "row": 1,
+        "col": 0,
+        "dir": "V"
+      },
+      {
+        "id": "w3",
+        "word": "GÖZ",
+        "row": 0,
+        "col": 1,
+        "dir": "V"
+      },
+      {
+        "id": "w4",
+        "word": "KÖZ",
+        "row": 1,
+        "col": 2,
+        "dir": "V"
+      }
+    ],
+    "bonusWords": [
+      "YÜZ"
+    ]
+  },
+  {
+    "level": 92,
+    "location": "Akdamar Adası - Van Gölü",
+    "bgTheme": "akdamar",
+    "wheelLetters": [
+      "D",
+      "O",
+      "S",
+      "T",
+      "L",
+      "U",
+      "K"
+    ],
+    "words": [
+      {
+        "id": "w1",
+        "word": "DOSTLUK",
+        "row": 2,
+        "col": 0,
+        "dir": "H"
+      },
+      {
+        "id": "w2",
+        "word": "DOST",
+        "row": 2,
+        "col": 0,
+        "dir": "V"
+      },
+      {
+        "id": "w3",
+        "word": "KOD",
+        "row": 0,
+        "col": 0,
+        "dir": "V"
+      },
+      {
+        "id": "w4",
+        "word": "TOS",
+        "row": 1,
+        "col": 1,
+        "dir": "V"
+      }
+    ],
+    "bonusWords": [
+      "OT",
+      "KUL"
+    ]
+  },
+  {
+    "level": 93,
+    "location": "Akdamar Adası - Van Gölü",
+    "bgTheme": "akdamar",
+    "wheelLetters": [
+      "M",
+      "U",
+      "T",
+      "L",
+      "U",
+      "L",
+      "U",
+      "K"
+    ],
+    "words": [
+      {
+        "id": "w1",
+        "word": "MUTLULUK",
+        "row": 1,
+        "col": 0,
+        "dir": "H"
+      },
+      {
+        "id": "w2",
+        "word": "MUTLU",
+        "row": 1,
+        "col": 0,
+        "dir": "V"
+      },
+      {
+        "id": "w3",
+        "word": "KUT",
+        "row": 0,
+        "col": 1,
+        "dir": "V"
+      },
+      {
+        "id": "w4",
+        "word": "ULU",
+        "row": 0,
+        "col": 3,
+        "dir": "V"
+      }
+    ],
+    "bonusWords": [
+      "TUL",
+      "KUM"
+    ]
+  },
+  {
+    "level": 94,
+    "location": "Akdamar Adası - Van Gölü",
+    "bgTheme": "akdamar",
+    "wheelLetters": [
+      "B",
+      "A",
+      "Ş",
+      "A",
+      "R",
+      "I"
+    ],
+    "words": [
+      {
+        "id": "w1",
+        "word": "BAŞARI",
+        "row": 1,
+        "col": 0,
+        "dir": "H"
+      },
+      {
+        "id": "w2",
+        "word": "BAŞ",
+        "row": 1,
+        "col": 0,
+        "dir": "V"
+      },
+      {
+        "id": "w3",
+        "word": "ARI",
+        "row": 1,
+        "col": 1,
+        "dir": "V"
+      },
+      {
+        "id": "w4",
+        "word": "BAR",
+        "row": 0,
+        "col": 1,
+        "dir": "V"
+      }
+    ],
+    "bonusWords": [
+      "AŞI"
+    ]
+  },
+  {
+    "level": 95,
+    "location": "Akdamar Adası - Van Gölü",
+    "bgTheme": "akdamar",
+    "wheelLetters": [
+      "G",
+      "E",
+      "L",
+      "E",
+      "C",
+      "E",
+      "K"
+    ],
+    "words": [
+      {
+        "id": "w1",
+        "word": "GELECEK",
+        "row": 1,
+        "col": 0,
+        "dir": "H"
+      },
+      {
+        "id": "w2",
+        "word": "GELE",
+        "row": 1,
+        "col": 0,
+        "dir": "V"
+      },
+      {
+        "id": "w3",
+        "word": "EGE",
+        "row": 0,
+        "col": 0,
+        "dir": "V"
+      },
+      {
+        "id": "w4",
+        "word": "GEL",
+        "row": 1,
+        "col": 0,
+        "dir": "V"
+      }
+    ],
+    "bonusWords": [
+      "LEK"
+    ]
+  },
+  {
+    "level": 96,
+    "location": "Akdamar Adası - Van Gölü",
+    "bgTheme": "akdamar",
+    "wheelLetters": [
+      "H",
+      "A",
+      "R",
+      "İ",
+      "K",
+      "A"
+    ],
+    "words": [
+      {
+        "id": "w1",
+        "word": "HARİKA",
+        "row": 2,
+        "col": 0,
+        "dir": "H"
+      },
+      {
+        "id": "w2",
+        "word": "HAK",
+        "row": 2,
+        "col": 0,
+        "dir": "V"
+      },
+      {
+        "id": "w3",
+        "word": "KİR",
+        "row": 0,
+        "col": 2,
+        "dir": "V"
+      },
+      {
+        "id": "w4",
+        "word": "ARİ",
+        "row": 2,
+        "col": 1,
+        "dir": "V"
+      }
+    ],
+    "bonusWords": [
+      "ARA"
+    ]
+  },
+  {
+    "level": 97,
+    "location": "Akdamar Adası - Van Gölü",
+    "bgTheme": "akdamar",
+    "wheelLetters": [
+      "Ö",
+      "Z",
+      "G",
+      "Ü",
+      "R",
+      "L",
+      "Ü",
+      "K"
+    ],
+    "words": [
+      {
+        "id": "w1",
+        "word": "ÖZGÜRLÜK",
+        "row": 2,
+        "col": 0,
+        "dir": "H"
+      },
+      {
+        "id": "w2",
+        "word": "ÖZGÜR",
+        "row": 2,
+        "col": 0,
+        "dir": "V"
+      },
+      {
+        "id": "w3",
+        "word": "GÖZ",
+        "row": 1,
+        "col": 0,
+        "dir": "V"
+      },
+      {
+        "id": "w4",
+        "word": "KÖZ",
+        "row": 0,
+        "col": 1,
+        "dir": "V"
+      }
+    ],
+    "bonusWords": [
+      "KÜL"
+    ]
+  },
+  {
+    "level": 98,
+    "location": "Akdamar Adası - Van Gölü",
+    "bgTheme": "akdamar",
+    "wheelLetters": [
+      "K",
+      "A",
+      "R",
+      "D",
+      "E",
+      "Ş",
+      "L",
+      "İ",
+      "K"
+    ],
+    "words": [
+      {
+        "id": "w1",
+        "word": "KARDEŞLİK",
+        "row": 1,
+        "col": 0,
+        "dir": "H"
+      },
+      {
+        "id": "w2",
+        "word": "KARDEŞ",
+        "row": 1,
+        "col": 0,
+        "dir": "V"
+      },
+      {
+        "id": "w3",
+        "word": "KALE",
+        "row": 0,
+        "col": 1,
+        "dir": "V"
+      },
+      {
+        "id": "w4",
+        "word": "DİL",
+        "row": 1,
+        "col": 3,
+        "dir": "V"
+      }
+    ],
+    "bonusWords": [
+      "ŞEK",
+      "KİL"
+    ]
+  },
+  {
+    "level": 99,
+    "location": "Akdamar Adası - Van Gölü",
+    "bgTheme": "akdamar",
+    "wheelLetters": [
+      "C",
+      "U",
+      "M",
+      "H",
+      "U",
+      "R",
+      "İ",
+      "Y",
+      "E",
+      "T"
+    ],
+    "words": [
+      {
+        "id": "w1",
+        "word": "CUMHURİYET",
+        "row": 2,
+        "col": 0,
+        "dir": "H"
+      },
+      {
+        "id": "w2",
+        "word": "HURİ",
+        "row": 1,
+        "col": 1,
+        "dir": "V"
+      },
+      {
+        "id": "w3",
+        "word": "YURT",
+        "row": 1,
+        "col": 4,
+        "dir": "V"
+      },
+      {
+        "id": "w4",
+        "word": "RUH",
+        "row": 0,
+        "col": 3,
+        "dir": "V"
+      }
+    ],
+    "bonusWords": [
+      "MİR",
+      "YER"
+    ]
+  },
+  {
+    "level": 100,
+    "location": "Akdamar Adası - Van Gölü",
+    "bgTheme": "akdamar",
+    "wheelLetters": [
+      "T",
+      "Ü",
+      "R",
+      "K",
+      "İ",
+      "Y",
+      "E"
+    ],
+    "words": [
+      {
+        "id": "w1",
+        "word": "TÜRKİYE",
+        "row": 2,
+        "col": 0,
+        "dir": "H"
+      },
+      {
+        "id": "w2",
+        "word": "TÜRK",
+        "row": 2,
+        "col": 0,
+        "dir": "V"
+      },
+      {
+        "id": "w3",
+        "word": "YÜK",
+        "row": 1,
+        "col": 1,
+        "dir": "V"
+      },
+      {
+        "id": "w4",
+        "word": "TER",
+        "row": 0,
+        "col": 2,
+        "dir": "V"
+      }
+    ],
+    "bonusWords": [
+      "İYİ",
+      "TİK"
     ]
   }
 ];

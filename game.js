@@ -1,8 +1,8 @@
 // Words of Wonders (WoW) - Authentic 100 TDK Levels Engine
 class WoWGame {
   constructor() {
-    this.storageKey = 'wow_official_save_v3';
-    this.secretSalt = 'wow_pure_tdk_100_levels';
+    this.storageKey = 'wow_official_save_v4';
+    this.secretSalt = 'wow_pure_tdk_100_rich';
 
     this.state = this.loadSecureState();
     this.currentWord = "";
@@ -14,7 +14,16 @@ class WoWGame {
     this.solvedWords = new Set();
     this.bonusWordsFound = new Set();
 
-    // Elements
+    // Screens
+    this.screenHome = document.getElementById('screen-home');
+    this.screenGame = document.getElementById('screen-game');
+
+    // Home Elements
+    this.homeLoc = document.getElementById('home-current-loc');
+    this.homeLvl = document.getElementById('home-current-lvl');
+    this.homeCoins = document.getElementById('home-coins');
+
+    // Game Elements
     this.boardEl = document.getElementById('crossword-board');
     this.letterWheel = document.getElementById('letter-wheel');
     this.wheelSvg = document.getElementById('wheel-lines');
@@ -26,6 +35,8 @@ class WoWGame {
     // Modals
     this.modalVictory = document.getElementById('modal-victory');
     this.modalShop = document.getElementById('modal-shop');
+    this.modalMap = document.getElementById('modal-map');
+    this.regionsGrid = document.getElementById('regions-grid');
 
     // Confetti
     this.canvas = document.getElementById('confetti-canvas');
@@ -66,6 +77,11 @@ class WoWGame {
       checksum
     }));
     this.coinCount.textContent = this.state.coins;
+    this.homeCoins.textContent = this.state.coins;
+
+    const currentLvl = this.getCurrentLevel();
+    this.homeLoc.textContent = currentLvl.location;
+    this.homeLvl.textContent = `Bölüm ${currentLvl.level} / 100`;
   }
 
   computeHash(lvl, coins) {
@@ -81,7 +97,7 @@ class WoWGame {
   init() {
     this.setupWindowResize();
     this.setupEventListeners();
-    this.loadLevel(this.state.levelIndex);
+    this.renderRegionsMap();
     this.saveSecureState();
   }
 
@@ -96,6 +112,22 @@ class WoWGame {
   }
 
   setupEventListeners() {
+    // Screen Navigation
+    document.getElementById('btn-home-play').addEventListener('click', () => {
+      this.showScreen('game');
+      this.loadLevel(this.state.levelIndex);
+    });
+
+    document.getElementById('btn-back-home').addEventListener('click', () => {
+      this.showScreen('home');
+      this.saveSecureState();
+    });
+
+    // Level Map Modal
+    document.getElementById('btn-home-map').addEventListener('click', () => this.openModal(this.modalMap));
+    document.getElementById('btn-level-pill').addEventListener('click', () => this.openModal(this.modalMap));
+    document.getElementById('btn-close-map').addEventListener('click', () => this.closeModal(this.modalMap));
+
     // Sound
     document.getElementById('btn-sound').addEventListener('click', (e) => {
       const isMuted = !window.soundFX.toggle();
@@ -115,15 +147,65 @@ class WoWGame {
     document.getElementById('btn-next-level').addEventListener('click', () => this.nextLevel());
     document.getElementById('btn-share').addEventListener('click', () => this.shareScore());
 
-    // Pointer Gestures
+    // Pointer Gestures on Turntable
     this.letterWheel.addEventListener('pointerdown', (e) => this.onPointerDown(e));
     window.addEventListener('pointermove', (e) => this.onPointerMove(e));
     window.addEventListener('pointerup', () => this.onPointerUp());
     window.addEventListener('pointercancel', () => this.onPointerUp());
   }
 
+  showScreen(name) {
+    if (name === 'game') {
+      this.screenHome.classList.add('hidden');
+      this.screenGame.classList.remove('hidden');
+    } else {
+      this.screenGame.classList.add('hidden');
+      this.screenHome.classList.remove('hidden');
+    }
+  }
+
   getCurrentLevel() {
     return WOW_LEVELS[this.state.levelIndex % WOW_LEVELS.length];
+  }
+
+  renderRegionsMap() {
+    const regions = [
+      { name: "Kapadokya - Peri Bacaları", startLvl: 1 },
+      { name: "Pamukkale - Travertenler", startLvl: 11 },
+      { name: "Galata Kulesi - İstanbul", startLvl: 21 },
+      { name: "Nemrut Dağı - Gün Doğumu", startLvl: 31 },
+      { name: "Efes Antik Kenti - İzmir", startLvl: 41 },
+      { name: "Göbeklitepe - Şanlıurfa", startLvl: 51 },
+      { name: "Ölüdeniz - Fethiye", startLvl: 61 },
+      { name: "Sümela Manastırı - Trabzon", startLvl: 71 },
+      { name: "Safranbolu Evleri - Karabük", startLvl: 81 },
+      { name: "Akdamar Adası - Van Gölü", startLvl: 91 },
+    ];
+
+    this.regionsGrid.innerHTML = '';
+    regions.forEach((reg, idx) => {
+      const btn = document.createElement('div');
+      btn.className = 'region-item-btn';
+      if (this.state.levelIndex >= reg.startLvl - 1 && this.state.levelIndex < reg.startLvl + 9) {
+        btn.classList.add('active');
+      }
+
+      btn.innerHTML = `
+        <div class="region-item-left">
+          <span class="region-item-name">${reg.name}</span>
+          <span class="region-item-range">Bölüm ${reg.startLvl} - ${reg.startLvl + 9}</span>
+        </div>
+        <span class="region-item-status">Oyna ➔</span>
+      `;
+
+      btn.addEventListener('click', () => {
+        this.closeModal(this.modalMap);
+        this.showScreen('game');
+        this.loadLevel(reg.startLvl - 1);
+      });
+
+      this.regionsGrid.appendChild(btn);
+    });
   }
 
   loadLevel(index) {
@@ -152,7 +234,7 @@ class WoWGame {
     const rows = maxR + 1;
     const cols = maxC + 1;
 
-    // Sizing
+    // Responsive cell size
     const availW = Math.min(window.innerWidth - 32, 380);
     const availH = Math.min(window.innerHeight * 0.42, 320);
     const cellSize = Math.min(50, Math.floor(Math.min(availW / (cols + 0.2), availH / (rows + 0.2))));
@@ -204,6 +286,7 @@ class WoWGame {
     }
 
     this.renderWheel(level.wheelLetters);
+    this.renderRegionsMap();
   }
 
   adjustCrosswordScale() {
@@ -410,7 +493,7 @@ class WoWGame {
     const cost = 25;
     if (this.state.coins < cost) {
       this.openModal(this.modalShop);
-      this.flashToast("Yetersiz Altın! Mağazadan alabilirsin.");
+      this.flashToast("Yetersiz Altın!");
       return;
     }
 
@@ -480,7 +563,7 @@ class WoWGame {
 
   shareScore() {
     const lvl = this.getCurrentLevel();
-    const text = `🏆 Kelime Harikaları'nda ${lvl.location} (Bölüm ${lvl.level}/100) çengel bulmacasını bitirdim! Hadi sen de oyna: https://umutcandemircan.github.io/kelime-harikalari/`;
+    const text = `🏆 Kelime Harikaları'nda ${lvl.location} (Bölüm ${lvl.level}/100) çengel bulmacasını bitirdim! Sen de oyna: https://umutcandemircan.github.io/kelime-harikalari/`;
     if (navigator.share) {
       navigator.share({ title: 'Kelime Harikaları', text });
     } else {

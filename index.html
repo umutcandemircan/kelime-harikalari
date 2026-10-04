@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-  <title>Kelime Harikaları - 100 Bölüm Türkçe</title>
+  <title>Kelime Harikaları - Türkiye Çengel Bulmaca</title>
   <link rel="stylesheet" href="style.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -11,67 +11,135 @@
 </head>
 <body class="theme-cappadocia">
 
-  <div class="game-stage">
+  <div class="game-viewport">
     <!-- Scenic Photography Background -->
     <div class="scenic-bg" id="scenic-bg"></div>
     <div class="scenic-tint"></div>
 
-    <!-- Minimal Native Game Header -->
-    <header class="game-topbar">
-      <div class="top-col left">
-        <button id="btn-sound" class="circle-btn" title="Ses">🔊</button>
-      </div>
+    <!-- ============================================== -->
+    <!-- 1. GİRİŞ EKRANI (TITLE / HOME SCREEN)          -->
+    <!-- ============================================== -->
+    <div id="screen-home" class="screen screen-home">
+      <div class="home-content">
+        
+        <!-- Game Logo & Header -->
+        <div class="home-logo-box">
+          <span class="home-badge">🏛️ TÜRKİYE ÇENGEL BULMACA</span>
+          <h1 class="home-title">KELİME<br><span class="highlight">HARİKALARI</span></h1>
+          <p class="home-desc">100 Bölüm • 10 Tarihi Bölge • Zengin TDK Kelimeleri</p>
+        </div>
 
-      <div class="top-col center">
-        <div class="level-pill">
-          <span class="region-txt" id="location-badge">KAPADOKYA</span>
-          <div class="level-num">BÖLÜM <span id="level-display">1</span></div>
+        <!-- Player Journey Status Card -->
+        <div class="home-status-card">
+          <div class="status-left">
+            <span class="current-loc" id="home-current-loc">Kapadokya</span>
+            <strong class="current-lvl" id="home-current-lvl">Bölüm 1 / 100</strong>
+          </div>
+          <div class="status-right">
+            <div class="home-coin-badge">
+              <span>🪙</span>
+              <strong id="home-coins">100</strong>
+            </div>
+          </div>
+        </div>
+
+        <!-- Big 3D Play Button -->
+        <div class="home-actions">
+          <button id="btn-home-play" class="btn-big-play">
+            <span class="play-icon">▶</span>
+            <span>OYNA</span>
+          </button>
+
+          <button id="btn-home-map" class="btn-secondary-home">
+            <span>🗺️</span>
+            <span>Bölüm Haritası</span>
+          </button>
+        </div>
+
+        <!-- Bottom Link / Credits -->
+        <div class="home-footer">
+          <span>Harfleri birleştir, Türkiye'nin harikalarını keşfet!</span>
         </div>
       </div>
-
-      <div class="top-col right">
-        <button id="btn-shop" class="coin-capsule" title="Altın">
-          <span class="coin-icon">🪙</span>
-          <span id="coin-count" class="coin-val">120</span>
-          <span class="coin-plus">+</span>
-        </button>
-      </div>
-    </header>
-
-    <!-- Crossword Matrix Area -->
-    <main class="board-area">
-      <div id="crossword-board" class="crossword-matrix">
-        <!-- Javascript 2D çengel matrisi -->
-      </div>
-    </main>
-
-    <!-- Current Word Preview Pill -->
-    <div class="word-preview-zone">
-      <div id="current-word-preview" class="word-preview-pill"></div>
     </div>
 
-    <!-- Letter Wheel & Iconic Side Buttons (Classic WoW Setup) -->
-    <footer class="wheel-zone">
-      <button id="btn-shuffle" class="side-action-btn left" title="Karıştır">
-        <svg class="side-icon" viewBox="0 0 24 24" fill="currentColor">
-          <path d="M10.59 9.17L5.41 4 4 5.41l5.17 5.17 1.42-1.41zM14.5 4l2.04 2.04L4 18.59 5.41 20 17.96 7.46 20 9.5V4h-5.5zm.33 9.41l-1.41 1.41 3.13 3.13L14.5 20H20v-5.5l-2.04 2.04-3.13-3.13z"/>
-        </svg>
-      </button>
-
-      <div class="wheel-turntable">
-        <svg id="wheel-lines" class="wheel-svg-layer"></svg>
-        <div id="letter-wheel" class="letter-disc-container">
-          <!-- 3D Ivory letter stones -->
+    <!-- ============================================== -->
+    <!-- 2. OYUN EKRANI (ACTIVE GAME SCREEN)            -->
+    <!-- ============================================== -->
+    <div id="screen-game" class="screen screen-game hidden">
+      <!-- Minimal Header -->
+      <header class="game-topbar">
+        <div class="top-col left">
+          <button id="btn-back-home" class="circle-btn" title="Ana Menü">🏠</button>
+          <button id="btn-sound" class="circle-btn" title="Ses">🔊</button>
         </div>
+
+        <div class="top-col center">
+          <div class="level-pill" id="btn-level-pill" title="Bölüm Haritasını Aç">
+            <span class="region-txt" id="location-badge">KAPADOKYA</span>
+            <div class="level-num">BÖLÜM <span id="level-display">1</span></div>
+          </div>
+        </div>
+
+        <div class="top-col right">
+          <button id="btn-shop" class="coin-capsule" title="Altın Mağazası">
+            <span class="coin-icon">🪙</span>
+            <span id="coin-count" class="coin-val">100</span>
+            <span class="coin-plus">+</span>
+          </button>
+        </div>
+      </header>
+
+      <!-- Crossword Matrix Area -->
+      <main class="board-area">
+        <div id="crossword-board" class="crossword-matrix">
+          <!-- Javascript dinamik 2D çengel matrisi -->
+        </div>
+      </main>
+
+      <!-- Current Word Preview Pill -->
+      <div class="word-preview-zone">
+        <div id="current-word-preview" class="word-preview-pill"></div>
       </div>
 
-      <button id="btn-hint" class="side-action-btn right" title="İpucu">
-        <svg class="side-icon" viewBox="0 0 24 24" fill="currentColor">
-          <path d="M9 21c0 .55.45 1 1 1h4c.55 0 1-.45 1-1v-1H9v1zm3-19C8.14 2 5 5.14 5 9c0 2.38 1.19 4.47 3 5.74V17c0 .55.45 1 1 1h6c.55 0 1-.45 1-1v-2.26c1.81-1.27 3-3.36 3-5.74 0-3.86-3.14-7-7-7z"/>
-        </svg>
-        <span class="hint-price">25</span>
-      </button>
-    </footer>
+      <!-- Letter Wheel & Iconic Side Buttons -->
+      <footer class="wheel-zone">
+        <button id="btn-shuffle" class="side-action-btn left" title="Harfleri Karıştır">
+          <svg class="side-icon" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M10.59 9.17L5.41 4 4 5.41l5.17 5.17 1.42-1.41zM14.5 4l2.04 2.04L4 18.59 5.41 20 17.96 7.46 20 9.5V4h-5.5zm.33 9.41l-1.41 1.41 3.13 3.13L14.5 20H20v-5.5l-2.04 2.04-3.13-3.13z"/>
+          </svg>
+        </button>
+
+        <div class="wheel-turntable">
+          <svg id="wheel-lines" class="wheel-svg-layer"></svg>
+          <div id="letter-wheel" class="letter-disc-container">
+            <!-- 3D Ivory letter stones -->
+          </div>
+        </div>
+
+        <button id="btn-hint" class="side-action-btn right" title="İpucu Al (25 Altın)">
+          <svg class="side-icon" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M9 21c0 .55.45 1 1 1h4c.55 0 1-.45 1-1v-1H9v1zm3-19C8.14 2 5 5.14 5 9c0 2.38 1.19 4.47 3 5.74V17c0 .55.45 1 1 1h6c.55 0 1-.45 1-1v-2.26c1.81-1.27 3-3.36 3-5.74 0-3.86-3.14-7-7-7z"/>
+          </svg>
+          <span class="hint-price">25</span>
+        </button>
+      </footer>
+    </div>
+  </div>
+
+  <!-- BÖLÜM HARİTASI MODAL (MAP / LEVEL SELECT) -->
+  <div id="modal-map" class="modal-backdrop hidden">
+    <div class="modal-card map-card">
+      <div class="card-head">
+        <h3>🗺️ Bölüm Haritası</h3>
+        <button id="btn-close-map" class="btn-close">&times;</button>
+      </div>
+      <p class="card-sub">Türkiye'nin 10 Harikası arasından dilediğin bölüme atla:</p>
+
+      <div class="regions-grid" id="regions-grid">
+        <!-- Javascript fills regions dynamically -->
+      </div>
+    </div>
   </div>
 
   <!-- VICTORY MODAL -->
@@ -83,13 +151,13 @@
       <p class="modal-subtitle">Tüm kelimeleri ustalıkla çözdün.</p>
       
       <div class="reward-capsule">
-        <span class="reward-lbl">Ödül</span>
+        <span class="reward-lbl">Bölüm Ödülü</span>
         <span class="reward-val">+30 🪙</span>
       </div>
 
       <div class="modal-btns">
         <button id="btn-next-level" class="btn-success">Sonraki Bölüm ➔</button>
-        <button id="btn-share" class="btn-ghost">Arkadaşınla Paylaş 📲</button>
+        <button id="btn-share" class="btn-ghost">Arkadaşına Gönder 📲</button>
       </div>
     </div>
   </div>
@@ -98,17 +166,17 @@
   <div id="modal-shop" class="modal-backdrop hidden">
     <div class="modal-card shop-modal">
       <div class="card-head">
-        <h3>Altın Mağazası</h3>
+        <h3>🪙 Altın Mağazası</h3>
         <button id="btn-close-shop" class="btn-close">&times;</button>
       </div>
-      <p class="card-sub">Takıldığın kelimelerde ipucu alarak devam et!</p>
+      <p class="card-sub">İpuçları alarak zorlu kelimeleri rahatça çöz!</p>
 
       <div class="shop-pack-list">
         <div class="shop-pack featured">
           <span class="ribbon">Fırsat</span>
           <div class="pack-meta">
             <strong>🚫 Reklamları Kaldır</strong>
-            <small>Ömür boyu kesintisiz oyun</small>
+            <small>Ömür boyu kesintisiz oyun keyfi</small>
           </div>
           <button class="pack-buy-btn" onclick="game.fakePurchase('Reklamları Kaldır', '29.99 TL')">29.99 TL</button>
         </div>
@@ -116,7 +184,7 @@
         <div class="shop-pack">
           <div class="pack-meta">
             <strong>🪙 300 Altın Paketi</strong>
-            <small>12 adet harf ipucu</small>
+            <small>12 adet harf ipucu hakkı</small>
           </div>
           <button class="pack-buy-btn" onclick="game.fakePurchase('300 Altın', '19.99 TL', 300)">19.99 TL</button>
         </div>

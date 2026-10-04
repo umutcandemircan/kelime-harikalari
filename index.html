@@ -12,18 +12,29 @@
       --font-main: 'Outfit', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
       --gold: #f59e0b;
       --gold-light: #fef3c7;
-      --gold-shadow: #b45309;
+      --gold-glow: rgba(245, 158, 11, 0.4);
       --green: #22c55e;
-      --green-shadow: #15803d;
-      --navy: #0f172a;
-      --wheel-size: 220px;
+      --green-glow: rgba(34, 197, 94, 0.4);
+      --cyan: #06b6d4;
+      --cyan-glow: rgba(6, 182, 212, 0.4);
+      --navy-900: #0f172a;
+      --navy-800: #1e293b;
+      --navy-700: #334155;
+      --wheel-size: 240px;
+      --node-size: 56px;
     }
 
-    @media (max-height: 740px) {
-      :root { --wheel-size: 195px; }
+    @media (max-height: 750px) {
+      :root {
+        --wheel-size: 210px;
+        --node-size: 50px;
+      }
     }
-    @media (max-height: 640px) {
-      :root { --wheel-size: 170px; }
+    @media (max-height: 650px) {
+      :root {
+        --wheel-size: 180px;
+        --node-size: 44px;
+      }
     }
 
     * {
@@ -33,2192 +44,2293 @@
       user-select: none;
       -webkit-user-select: none;
       -webkit-tap-highlight-color: transparent;
+      touch-action: manipulation;
     }
 
     html, body {
       width: 100%;
       height: 100%;
       overflow: hidden;
-      position: fixed;
-      touch-action: none;
-      -webkit-overflow-scrolling: touch;
       font-family: var(--font-main);
-      background: #090d16;
-      color: #ffffff;
-      display: flex;
-      justify-content: center;
-      align-items: center;
+      background: #020617;
+      color: #fff;
     }
 
-    /* SCENIC BACKGROUND */
-    .scenic-bg {
+    /* Screen Background with dynamic overlay */
+    #bg-layer {
       position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
+      inset: 0;
       background-size: cover;
       background-position: center;
-      transition: background-image 0.6s ease;
+      filter: brightness(0.65) saturate(1.15);
+      transition: background-image 0.8s cubic-bezier(0.4, 0, 0.2, 1);
       z-index: 0;
     }
 
-    .scenic-tint {
+    #bg-gradient {
       position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: radial-gradient(circle at center, rgba(15, 23, 42, 0.45) 0%, rgba(15, 23, 42, 0.85) 100%);
-      pointer-events: none;
+      inset: 0;
+      background: radial-gradient(circle at 50% 30%, rgba(15, 23, 42, 0.3) 0%, rgba(2, 6, 23, 0.85) 100%);
       z-index: 1;
     }
 
-    /* GAME VIEWPORT (POKI / CRAZYGAMES RESPONSIVE CONTAINER) */
-    .game-viewport {
-      width: 100%;
-      max-width: 440px;
-      height: 100vh;
-      height: 100dvh;
+    /* Game App Container */
+    #app-container {
       position: relative;
-      display: flex;
-      flex-direction: column;
-      background: #0f172a;
-      overflow: hidden;
-      box-shadow: 0 30px 80px rgba(0, 0, 0, 0.85);
-    }
-
-    @media (min-width: 481px) {
-      .game-viewport {
-        height: min(880px, 96vh);
-        max-height: 880px;
-        border-radius: 32px;
-        border: 1px solid rgba(255, 255, 255, 0.14);
-      }
-    }
-
-    /* SCREENS */
-    .screen {
-      position: absolute;
-      top: 0;
-      left: 0;
+      z-index: 2;
       width: 100%;
+      max-width: 500px;
       height: 100%;
-      z-index: 10;
+      margin: 0 auto;
       display: flex;
       flex-direction: column;
-      transition: opacity 0.28s ease, transform 0.28s ease;
-    }
-
-    .screen.hidden {
-      opacity: 0;
-      pointer-events: none;
-      transform: scale(0.96);
-    }
-
-    /* HOME SCREEN */
-    .screen-home {
-      align-items: center;
-      justify-content: center;
-      padding: clamp(16px, 4vh, 32px) 24px;
-    }
-
-    .home-content {
-      width: 100%;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: clamp(14px, 3vh, 26px);
-      text-align: center;
-    }
-
-    .home-badge {
-      display: inline-block;
-      background: rgba(0, 0, 0, 0.5);
-      border: 1px solid rgba(255, 255, 255, 0.25);
-      border-radius: 20px;
-      padding: 4px 14px;
-      font-size: 11px;
-      font-weight: 800;
-      letter-spacing: 1px;
-      color: var(--gold);
-      margin-bottom: 10px;
-    }
-
-    .home-title {
-      font-size: clamp(32px, 7vw, 42px);
-      font-weight: 900;
-      line-height: 1.05;
-      text-shadow: 0 4px 16px rgba(0, 0, 0, 0.8);
-    }
-
-    .home-title .highlight {
-      background: linear-gradient(180deg, #fde047 0%, #f59e0b 50%, #d97706 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      filter: drop-shadow(0 2px 8px rgba(245, 158, 11, 0.5));
-    }
-
-    .home-desc {
-      font-size: 12px;
-      color: rgba(255, 255, 255, 0.75);
-      font-weight: 600;
-      margin-top: 6px;
-    }
-
-    .home-status-card {
-      width: 100%;
-      max-width: 320px;
-      background: rgba(15, 23, 42, 0.75);
-      border: 1.5px solid rgba(255, 255, 255, 0.18);
-      border-radius: 20px;
-      padding: 14px 18px;
-      display: flex;
       justify-content: space-between;
-      align-items: center;
-      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+      padding: env(safe-area-inset-top, 12px) 12px env(safe-area-inset-bottom, 12px) 12px;
     }
 
-    .status-left {
-      display: flex;
-      flex-direction: column;
-      text-align: left;
-      gap: 2px;
-    }
-
-    .current-loc {
-      font-size: 11px;
-      font-weight: 800;
-      color: var(--gold);
-      text-transform: uppercase;
-    }
-
-    .current-lvl {
-      font-size: 16px;
-      font-weight: 900;
-    }
-
-    .home-coin-badge {
+    /* Header Bar */
+    header {
       display: flex;
       align-items: center;
-      gap: 5px;
-      background: rgba(0, 0, 0, 0.4);
-      border: 1px solid var(--gold);
-      border-radius: 16px;
-      padding: 5px 12px;
-      font-size: 14px;
-      font-weight: 900;
-    }
-
-    .btn-big-play {
-      width: 100%;
-      max-width: 320px;
-      background: linear-gradient(180deg, #22c55e 0%, #16a34a 100%);
-      border: 2px solid #86efac;
-      border-radius: 22px;
-      padding: 16px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 10px;
-      color: #fff;
-      font-family: var(--font-main);
-      font-size: 22px;
-      font-weight: 900;
-      letter-spacing: 1px;
-      cursor: pointer;
-      box-shadow: 0 6px 0 var(--green-shadow), 0 12px 25px rgba(22, 163, 74, 0.45);
-      transition: transform 0.08s;
-      animation: playPulse 2.4s infinite;
-    }
-
-    @keyframes playPulse {
-      0%, 100% { transform: scale(1); }
-      50% { transform: scale(1.025); }
-    }
-
-    .btn-big-play:active {
-      transform: translateY(4px);
-      box-shadow: 0 2px 0 var(--green-shadow);
-    }
-
-    .btn-home-sub {
-      width: 100%;
-      max-width: 320px;
-      background: rgba(255, 255, 255, 0.12);
-      border: 1.5px solid rgba(255, 255, 255, 0.25);
-      border-radius: 18px;
-      padding: 12px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      justify-content: space-between;
+      height: 52px;
+      padding: 0 4px;
       gap: 8px;
-      color: #fff;
-      font-family: var(--font-main);
-      font-size: 14px;
-      font-weight: 800;
-      cursor: pointer;
-      transition: transform 0.08s;
     }
 
-    .btn-home-sub:active { transform: translateY(2px); }
-
-    /* GAME TOPBAR */
-    .game-topbar {
-      position: relative;
-      z-index: 10;
+    .header-pill {
       display: flex;
-      justify-content: space-between;
       align-items: center;
-      padding: clamp(8px, 1.8vh, 14px) clamp(10px, 3vw, 16px) 4px;
+      gap: 6px;
+      background: rgba(15, 23, 42, 0.75);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      padding: 6px 12px;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+      font-weight: 700;
+      font-size: 13px;
     }
 
-    .top-col {
+    .level-badge {
+      display: flex;
+      flex-direction: column;
+      line-height: 1.1;
+    }
+    .level-badge .sub-title {
+      font-size: 10px;
+      color: #94a3b8;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .level-badge .main-title {
+      font-size: 14px;
+      color: #f8fafc;
+      font-weight: 800;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      max-width: 130px;
+    }
+
+    .header-actions {
       display: flex;
       align-items: center;
       gap: 6px;
     }
 
-    .circle-btn {
-      width: 38px;
-      height: 38px;
-      border-radius: 50%;
-      background: rgba(0, 0, 0, 0.4);
-      border: 1.5px solid rgba(255, 255, 255, 0.2);
-      color: #fff;
-      font-size: 16px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+    .btn-header {
       cursor: pointer;
-      transition: transform 0.08s;
-      touch-action: manipulation;
-    }
-
-    .circle-btn:active { transform: scale(0.92); }
-
-    .level-pill {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      background: rgba(0, 0, 0, 0.45);
-      border: 1.5px solid rgba(255, 255, 255, 0.18);
-      border-radius: 20px;
-      padding: 3px 14px;
-      cursor: pointer;
-      transition: transform 0.08s;
-      touch-action: manipulation;
-    }
-
-    .level-pill:active { transform: scale(0.95); }
-
-    .region-txt {
-      font-size: 9px;
-      font-weight: 800;
-      letter-spacing: 1px;
-      color: var(--gold);
-      text-transform: uppercase;
-    }
-
-    .level-num {
-      font-size: 13px;
-      font-weight: 900;
-      color: #ffffff;
-    }
-
-    .coin-capsule {
       display: flex;
       align-items: center;
       gap: 5px;
-      background: rgba(0, 0, 0, 0.45);
-      border: 1.5px solid var(--gold);
-      border-radius: 20px;
-      padding: 4px 10px;
-      cursor: pointer;
+      background: rgba(15, 23, 42, 0.75);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 999px;
+      padding: 6px 10px;
       color: #fff;
-      font-weight: 900;
       font-size: 13px;
-      box-shadow: 0 2px 8px rgba(245, 158, 11, 0.3);
-      touch-action: manipulation;
+      font-weight: 800;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+      transition: transform 0.15s, background-color 0.15s;
+    }
+    .btn-header:active {
+      transform: scale(0.92);
+    }
+    .btn-header.daily-btn {
+      background: linear-gradient(135deg, rgba(245, 158, 11, 0.3), rgba(217, 119, 6, 0.5));
+      border-color: rgba(245, 158, 11, 0.6);
+      color: #fef08a;
     }
 
-    .bonus-capsule {
-      display: flex;
-      align-items: center;
-      gap: 4px;
-      background: rgba(234, 88, 12, 0.35);
-      border: 1.5px solid #f97316;
-      border-radius: 20px;
-      padding: 4px 8px;
-      font-size: 11px;
-      font-weight: 900;
-      cursor: pointer;
-      transition: transform 0.15s;
+    .coin-badge {
+      color: #fef08a;
+      text-shadow: 0 0 8px var(--gold-glow);
     }
 
-    .bonus-capsule.bounce {
-      animation: jarBounce 0.4s ease;
-    }
-
-    @keyframes jarBounce {
-      0%, 100% { transform: scale(1); }
-      50% { transform: scale(1.2); }
-    }
-
-    /* UPPER SECTION: CROSSWORD GRID (WORDS OF WONDERS UX) */
-    .board-area {
-      position: relative;
-      z-index: 5;
+    /* Crossword Board Area */
+    #board-area {
       flex: 1;
       display: flex;
       align-items: center;
       justify-content: center;
-      padding: 6px 12px;
-      overflow: hidden;
-      width: 100%;
-    }
-
-    .crossword-matrix {
-      display: grid;
-      gap: 4px;
-      justify-content: center;
-      align-content: center;
-      transition: transform 0.2s ease;
-    }
-
-    .cw-cell {
-      width: var(--cell-size, 38px);
-      height: var(--cell-size, 38px);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: var(--cell-font, 20px);
-      font-weight: 900;
-      border-radius: 8px;
+      min-height: 160px;
       position: relative;
+      padding: 8px;
     }
 
-    .cw-cell.empty {
-      background: transparent;
+    #crossword-grid {
+      display: grid;
+      gap: 6px;
+      position: relative;
+      margin: 0 auto;
+      transition: transform 0.3s ease;
+    }
+
+    /* Grid Cell */
+    .crossword-cell {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      perspective: 600px;
+    }
+
+    .crossword-cell.hidden {
+      visibility: hidden;
       pointer-events: none;
     }
 
-    /* Frosted Ivory Unsolved Slot */
-    .cw-cell.slot {
-      background: rgba(255, 255, 255, 0.20);
-      border: 1.5px solid rgba(255, 255, 255, 0.45);
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2), inset 0 1px 2px rgba(255, 255, 255, 0.25);
-      color: transparent;
-    }
-
-    /* Solved Solid 3D Ivory/White Tile with Green/Gold Glow */
-    .cw-cell.slot.revealed {
-      background: #ffffff;
-      border: 1.5px solid #ffffff;
-      color: #0f172a;
-      box-shadow: 0 4px 0 #cbd5e1, 0 8px 18px rgba(0, 0, 0, 0.35);
-      animation: tileFlip 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
-    }
-
-    .cw-cell.slot.revealed.hinted {
-      border-color: var(--gold);
-      box-shadow: 0 4px 0 var(--gold-shadow), 0 0 16px rgba(245, 158, 11, 0.7);
-    }
-
-    @keyframes tileFlip {
-      0% { transform: scale(0.6) rotateX(90deg); opacity: 0; }
-      60% { transform: scale(1.1) rotateX(0deg); }
-      100% { transform: scale(1) rotateX(0deg); opacity: 1; }
-    }
-
-    /* WORD PREVIEW PILL */
-    .word-preview-zone {
+    .cell-inner {
+      width: 100%;
+      height: 100%;
       position: relative;
-      z-index: 10;
-      height: 34px;
+      transform-style: preserve-3d;
+      transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+      border-radius: 8px;
+    }
+
+    .crossword-cell.revealed .cell-inner {
+      transform: rotateY(180deg);
+    }
+
+    .cell-front, .cell-back {
+      position: absolute;
+      inset: 0;
+      backface-visibility: hidden;
+      -webkit-backface-visibility: hidden;
       display: flex;
       align-items: center;
       justify-content: center;
+      border-radius: 8px;
+      font-weight: 900;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.35);
     }
 
-    .word-preview-pill {
-      font-size: 19px;
+    /* Front (Locked state) */
+    .cell-front {
+      background: rgba(255, 255, 255, 0.16);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      border: 1.5px solid rgba(255, 255, 255, 0.35);
+      color: transparent;
+      cursor: pointer;
+      transition: border-color 0.2s, box-shadow 0.2s, background-color 0.2s;
+    }
+
+    /* Targeting mode pulse for locked cells */
+    body.targeting-mode .cell-front {
+      border: 2px solid #38bdf8 !important;
+      box-shadow: 0 0 16px rgba(56, 189, 248, 0.8) !important;
+      animation: pulseTarget 1s infinite alternate;
+      cursor: crosshair;
+    }
+    @keyframes pulseTarget {
+      0% { transform: scale(0.96); background: rgba(56, 189, 248, 0.2); }
+      100% { transform: scale(1.04); background: rgba(56, 189, 248, 0.4); }
+    }
+
+    /* Back (Revealed state) */
+    .cell-back {
+      background: linear-gradient(135deg, #ffffff, #f1f5f9);
+      border: 2px solid #fbbf24;
+      color: #0f172a;
+      transform: rotateY(180deg);
+      font-size: 20px;
+      text-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+      box-shadow: 0 0 14px rgba(251, 191, 36, 0.5), inset 0 2px 4px rgba(255, 255, 255, 0.8);
+    }
+
+    /* Star Badge on Daily Challenge Cell */
+    .star-badge {
+      position: absolute;
+      top: -6px;
+      right: -6px;
+      font-size: 14px;
+      z-index: 5;
+      animation: floatStar 1.8s ease-in-out infinite alternate;
+      filter: drop-shadow(0 0 6px rgba(245, 158, 11, 0.9));
+    }
+    @keyframes floatStar {
+      0% { transform: translateY(0) scale(1); }
+      100% { transform: translateY(-4px) scale(1.15); }
+    }
+
+    /* Targeting Banner */
+    #targeting-banner {
+      display: none;
+      position: absolute;
+      top: 65px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(14, 165, 233, 0.9);
+      backdrop-filter: blur(10px);
+      padding: 6px 16px;
+      border-radius: 999px;
+      font-size: 13px;
+      font-weight: 800;
+      color: #fff;
+      box-shadow: 0 4px 16px rgba(14, 165, 233, 0.5);
+      z-index: 20;
+      animation: bounceBanner 0.6s infinite alternate;
+    }
+    @keyframes bounceBanner {
+      0% { transform: translate(-50%, 0); }
+      100% { transform: translate(-50%, -4px); }
+    }
+
+    /* Preview Pill */
+    #preview-container {
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 4px;
+    }
+
+    #word-preview {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 80px;
+      height: 36px;
+      padding: 0 18px;
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.85);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1.5px solid rgba(255, 255, 255, 0.2);
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+      font-size: 18px;
       font-weight: 900;
       letter-spacing: 2px;
-      color: #0f172a;
-      background: #ffffff;
-      padding: 3px 20px;
-      border-radius: 20px;
-      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.45);
+      color: #f8fafc;
       opacity: 0;
-      transform: translateY(6px);
-      transition: opacity 0.12s, transform 0.12s;
-      pointer-events: none;
+      transform: scale(0.85);
+      transition: opacity 0.2s, transform 0.2s, border-color 0.2s;
     }
-
-    .word-preview-pill.active {
+    #word-preview.active {
       opacity: 1;
-      transform: translateY(0);
+      transform: scale(1);
+      border-color: #fbbf24;
+      box-shadow: 0 0 20px var(--gold-glow);
     }
 
-    .word-preview-pill.shake {
-      animation: shakePill 0.35s ease;
-      background: #ef4444;
-      color: #ffffff;
-    }
-
-    @keyframes shakePill {
-      0%, 100% { transform: translateX(0); }
-      20%, 60% { transform: translateX(-6px); }
-      40%, 80% { transform: translateX(6px); }
-    }
-
-    /* LOWER SECTION: LETTER WHEEL & DRAWING LAYER */
-    .wheel-zone {
-      position: relative;
-      z-index: 10;
-      padding-bottom: clamp(10px, 2.5vh, 22px);
+    /* Power-ups Toolbar */
+    #powerups-toolbar {
       display: flex;
-      justify-content: center;
       align-items: center;
-      gap: clamp(8px, 3.5vw, 16px);
-      touch-action: none;
+      justify-content: space-around;
+      width: 100%;
+      max-width: 380px;
+      margin: 0 auto 6px auto;
+      padding: 0 10px;
     }
 
-    .side-action-btn {
-      width: clamp(42px, 11vw, 52px);
-      height: clamp(42px, 11vw, 52px);
-      border-radius: 50%;
-      background: rgba(255, 255, 255, 0.18);
-      border: 2px solid rgba(255, 255, 255, 0.35);
-      color: #ffffff;
+    .btn-powerup {
+      cursor: pointer;
+      position: relative;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      cursor: pointer;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-      transition: transform 0.08s;
-      touch-action: manipulation;
+      width: 52px;
+      height: 52px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, rgba(30, 41, 59, 0.85), rgba(15, 23, 42, 0.95));
+      backdrop-filter: blur(10px);
+      border: 1.5px solid rgba(255, 255, 255, 0.2);
+      box-shadow: 0 6px 14px rgba(0, 0, 0, 0.35);
+      color: #fff;
+      transition: transform 0.15s, border-color 0.2s, box-shadow 0.2s;
     }
-
-    .side-action-btn:active { transform: scale(0.92); }
-
-    .side-action-btn.hint-btn {
-      background: rgba(245, 158, 11, 0.25);
-      border-color: var(--gold);
+    .btn-powerup:active {
+      transform: scale(0.9);
     }
-
-    .side-action-btn.ad-btn {
-      background: rgba(34, 197, 94, 0.25);
-      border-color: var(--green);
-    }
-
-    .btn-sub-badge {
-      font-size: 10px;
-      font-weight: 900;
+    .btn-powerup .icon {
+      font-size: 19px;
       line-height: 1;
-      margin-top: 1px;
     }
-    .hint-btn .btn-sub-badge { color: var(--gold); }
-    .ad-btn .btn-sub-badge { color: #86efac; }
+    .btn-powerup .cost {
+      font-size: 9px;
+      font-weight: 800;
+      color: #fef08a;
+      margin-top: 2px;
+      display: flex;
+      align-items: center;
+      gap: 1px;
+    }
+    .btn-powerup.active-tool {
+      border-color: #38bdf8;
+      box-shadow: 0 0 16px rgba(56, 189, 248, 0.8);
+      background: rgba(14, 165, 233, 0.3);
+    }
 
-    .wheel-turntable {
+    /* Bonus Chest Badge */
+    .bonus-chest-btn {
+      cursor: pointer;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      width: 52px;
+      height: 52px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, rgba(168, 85, 247, 0.35), rgba(126, 34, 206, 0.65));
+      border: 1.5px solid rgba(216, 180, 254, 0.4);
+      box-shadow: 0 6px 14px rgba(0, 0, 0, 0.35);
+      color: #fff;
+      transition: transform 0.15s;
+    }
+    .bonus-chest-btn:active {
+      transform: scale(0.9);
+    }
+    .bonus-chest-btn .counter {
+      font-size: 9px;
+      font-weight: 800;
+      color: #f3e8ff;
+      margin-top: 2px;
+    }
+
+    /* Wheel Container */
+    #wheel-wrapper {
       position: relative;
       width: var(--wheel-size);
       height: var(--wheel-size);
-      border-radius: 50%;
-      background: radial-gradient(circle, rgba(255, 255, 255, 0.14) 0%, rgba(15, 23, 42, 0.7) 100%);
-      border: 2px solid rgba(255, 255, 255, 0.25);
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), inset 0 2px 4px rgba(255, 255, 255, 0.2);
-      touch-action: none;
-    }
-
-    /* SVG Connecting Lines: STRICTLY UNDER LETTER CHIPS (z-index: 1) */
-    .wheel-svg-layer {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      pointer-events: none;
-      z-index: 1;
-    }
-
-    .wheel-svg-layer polyline {
-      stroke: var(--gold);
-      stroke-width: 8;
-      stroke-linecap: round;
-      stroke-linejoin: round;
-      fill: none;
-      filter: drop-shadow(0 2px 8px rgba(245, 158, 11, 0.8));
-    }
-
-    .letter-disc-container {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      touch-action: none;
-      z-index: 2;
-    }
-
-    /* 100% Solid Opaque 3D Ivory Letter Chips (z-index: 10 - Lines never cover letter text!) */
-    .letter-node {
-      position: absolute;
-      width: var(--node-size, 52px);
-      height: var(--node-size, 52px);
-      border-radius: 50%;
-      background: #ffffff;
-      border: 2.5px solid #ffffff;
-      color: #0f172a;
-      font-size: var(--node-font-size, 24px);
-      font-weight: 900;
+      margin: 0 auto 12px auto;
       display: flex;
       align-items: center;
       justify-content: center;
-      cursor: pointer;
-      box-shadow: 0 4px 0 #94a3b8, 0 6px 14px rgba(0, 0, 0, 0.35);
-      transform: translate(-50%, -50%) translateZ(0);
-      will-change: transform;
-      transition: transform 0.08s ease, background 0.12s ease;
-      z-index: 10;
       touch-action: none;
     }
 
-    .letter-node.selected {
-      background: var(--gold);
-      color: #ffffff;
-      border-color: #fef3c7;
-      transform: translate(-50%, -50%) scale(1.15) translateZ(0);
-      box-shadow: 0 2px 0 var(--gold-shadow), 0 0 18px rgba(245, 158, 11, 0.7);
+    #wheel-canvas-container {
+      position: absolute;
+      inset: 0;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(30, 41, 59, 0.5) 0%, rgba(15, 23, 42, 0.8) 100%);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 2px solid rgba(255, 255, 255, 0.18);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), inset 0 0 20px rgba(255, 255, 255, 0.05);
+      pointer-events: none;
     }
 
-    /* MODALS */
-    .modal-backdrop {
+    /* SVG Connector Line Layer */
+    #wheel-svg {
       position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: rgba(10, 15, 28, 0.88);
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 10;
+    }
+
+    #connection-line {
+      fill: none;
+      stroke: #fbbf24;
+      stroke-width: 12;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      filter: drop-shadow(0 0 8px rgba(251, 191, 36, 0.9));
+      transition: stroke-dashoffset 0.05s linear;
+    }
+
+    /* Wheel Letter Nodes */
+    .wheel-node {
+      position: absolute;
+      width: var(--node-size);
+      height: var(--node-size);
+      border-radius: 50%;
+      background: linear-gradient(135deg, #ffffff, #e2e8f0);
+      color: #0f172a;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      font-weight: 900;
+      box-shadow: 0 6px 14px rgba(0, 0, 0, 0.3), inset 0 2px 4px rgba(255, 255, 255, 0.9);
+      border: 2px solid rgba(255, 255, 255, 0.8);
+      z-index: 20;
+      transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1), background 0.2s, box-shadow 0.2s, color 0.2s;
+      transform: translate(-50%, -50%);
+    }
+
+    .wheel-node.selected {
+      background: linear-gradient(135deg, #fbbf24, #f59e0b);
+      color: #ffffff;
+      transform: translate(-50%, -50%) scale(1.18);
+      box-shadow: 0 0 22px rgba(245, 158, 11, 0.9), inset 0 2px 4px rgba(255, 255, 255, 0.5);
+      border-color: #fef08a;
+    }
+
+    /* Screen Flash Effect for Lightning */
+    #screen-flash {
+      position: fixed;
+      inset: 0;
+      background: #fff;
+      opacity: 0;
+      pointer-events: none;
+      z-index: 9999;
+      transition: opacity 0.1s ease-out;
+    }
+    #screen-flash.flash {
+      opacity: 0.85;
+    }
+
+    /* Flying Spark Projectile */
+    .spark-projectile {
+      position: fixed;
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      background: #fbbf24;
+      box-shadow: 0 0 16px #fbbf24, 0 0 28px #f59e0b;
+      pointer-events: none;
+      z-index: 1000;
+      transition: all 0.45s cubic-bezier(0.25, 1, 0.5, 1);
+    }
+
+    /* Flying Star Projectile */
+    .star-projectile {
+      position: fixed;
+      font-size: 22px;
+      pointer-events: none;
+      z-index: 1001;
+      filter: drop-shadow(0 0 10px rgba(245, 158, 11, 0.9));
+      transition: all 0.65s cubic-bezier(0.2, 0.8, 0.2, 1);
+    }
+
+    /* Flying Word Toast */
+    .floating-toast {
+      position: fixed;
+      bottom: 240px;
+      left: 50%;
+      transform: translateX(-50%) translateY(0);
+      background: rgba(15, 23, 42, 0.9);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      padding: 8px 20px;
+      border-radius: 999px;
+      font-weight: 800;
+      font-size: 14px;
+      color: #fef08a;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+      z-index: 2000;
+      pointer-events: none;
+      animation: toastAnim 1.6s forwards;
+    }
+    @keyframes toastAnim {
+      0% { opacity: 0; transform: translateX(-50%) translateY(15px); }
+      15% { opacity: 1; transform: translateX(-50%) translateY(0); }
+      75% { opacity: 1; transform: translateX(-50%) translateY(-5px); }
+      100% { opacity: 0; transform: translateX(-50%) translateY(-25px); }
+    }
+
+    /* Modals Glassmorphism */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(2, 6, 23, 0.85);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      z-index: 5000;
       display: flex;
       align-items: center;
       justify-content: center;
       padding: 16px;
-      z-index: 100;
-      transition: opacity 0.25s ease;
-    }
-
-    .modal-backdrop.hidden {
       opacity: 0;
       pointer-events: none;
+      transition: opacity 0.3s ease;
+    }
+    .modal-overlay.active {
+      opacity: 1;
+      pointer-events: auto;
     }
 
     .modal-card {
-      background: #1e293b;
-      border: 1.5px solid rgba(255, 255, 255, 0.16);
-      border-radius: 26px;
-      padding: 24px 20px;
       width: 100%;
-      max-width: 340px;
+      max-width: 420px;
+      background: linear-gradient(135deg, rgba(30, 41, 59, 0.95), rgba(15, 23, 42, 0.98));
+      border: 1.5px solid rgba(255, 255, 255, 0.18);
+      border-radius: 24px;
+      padding: 24px;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6), 0 0 30px rgba(245, 158, 11, 0.2);
       text-align: center;
-      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.85);
-      animation: modalScale 0.22s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      transform: scale(0.9);
+      transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+    .modal-overlay.active .modal-card {
+      transform: scale(1);
     }
 
-    @keyframes modalScale {
-      from { transform: scale(0.9) translateY(16px); opacity: 0; }
-      to { transform: scale(1) translateY(0); opacity: 1; }
-    }
-
-    .trophy-badge { font-size: 46px; margin-bottom: 4px; }
-    .eyebrow { font-size: 11px; font-weight: 800; letter-spacing: 1.5px; color: var(--gold); }
-    .modal-title { font-size: 22px; font-weight: 900; margin: 4px 0; }
-    .modal-subtitle { font-size: 12px; color: rgba(255, 255, 255, 0.7); margin-bottom: 16px; }
-
-    .reward-capsule {
-      background: rgba(245, 158, 11, 0.12);
-      border: 1.5px dashed var(--gold);
+    /* Discovery Card Modal */
+    .discovery-img {
+      width: 100%;
+      height: 200px;
       border-radius: 16px;
+      object-fit: cover;
+      margin-bottom: 14px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+      border: 1.5px solid rgba(255, 255, 255, 0.2);
+    }
+    .discovery-badge {
+      display: inline-block;
+      background: rgba(245, 158, 11, 0.2);
+      border: 1px solid rgba(245, 158, 11, 0.6);
+      color: #fef08a;
+      font-size: 11px;
+      font-weight: 800;
+      padding: 4px 12px;
+      border-radius: 999px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 6px;
+    }
+    .discovery-title {
+      font-size: 20px;
+      font-weight: 900;
+      color: #fff;
+      margin-bottom: 10px;
+    }
+    .discovery-trivia {
+      font-size: 13px;
+      line-height: 1.5;
+      color: #cbd5e1;
+      margin-bottom: 20px;
+      background: rgba(15, 23, 42, 0.6);
+      padding: 12px;
+      border-radius: 12px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    /* Buttons */
+    .btn-gold {
+      cursor: pointer;
+      width: 100%;
+      padding: 14px 20px;
+      border-radius: 999px;
+      border: none;
+      background: linear-gradient(135deg, #fbbf24, #d97706);
+      color: #0f172a;
+      font-weight: 900;
+      font-size: 16px;
+      box-shadow: 0 8px 20px rgba(245, 158, 11, 0.4);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      transition: transform 0.15s, box-shadow 0.15s;
+    }
+    .btn-gold:active {
+      transform: scale(0.96);
+    }
+
+    .btn-secondary {
+      cursor: pointer;
+      width: 100%;
+      padding: 12px 20px;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      background: rgba(30, 41, 59, 0.6);
+      color: #cbd5e1;
+      font-weight: 800;
+      font-size: 14px;
+      margin-top: 10px;
+      transition: transform 0.15s, background 0.15s;
+    }
+    .btn-secondary:active {
+      transform: scale(0.96);
+    }
+
+    /* Victory Modal Special */
+    .victory-stars {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      font-size: 38px;
+      margin-bottom: 12px;
+      filter: drop-shadow(0 0 14px rgba(245, 158, 11, 0.8));
+    }
+    .reward-box {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      background: rgba(245, 158, 11, 0.15);
+      border: 1px solid rgba(245, 158, 11, 0.4);
       padding: 10px;
+      border-radius: 14px;
+      font-weight: 900;
+      font-size: 18px;
+      color: #fef08a;
       margin-bottom: 18px;
     }
-    .reward-lbl { display: block; font-size: 11px; color: var(--gold); font-weight: 800; }
-    .reward-val { font-size: 22px; font-weight: 900; }
 
-    .modal-btns {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
+    /* Calendar Grid */
+    .calendar-grid {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 6px;
+      margin: 16px 0;
     }
-
-    .btn-modal-primary {
-      background: linear-gradient(180deg, #10b981 0%, #059669 100%);
-      color: #fff;
-      border: none;
-      border-radius: 16px;
-      padding: 13px;
-      font-size: 15px;
+    .calendar-day-header {
+      font-size: 11px;
       font-weight: 800;
-      box-shadow: 0 4px 0 #047857;
-      cursor: pointer;
-      font-family: var(--font-main);
+      color: #94a3b8;
+      text-transform: uppercase;
     }
-    .btn-modal-primary:active { transform: translateY(2px); box-shadow: 0 2px 0 #047857; }
-
-    .btn-modal-ghost {
-      background: rgba(255, 255, 255, 0.08);
-      border: 1px solid rgba(255, 255, 255, 0.2);
-      color: #fff;
-      border-radius: 16px;
-      padding: 11px;
-      font-size: 13px;
-      font-weight: 700;
-      cursor: pointer;
-      font-family: var(--font-main);
-    }
-
-    /* AD SIMULATOR MODALS (POKI / CRAZYGAMES COMPLIANT) */
-    .ad-card {
-      background: #0f172a;
-      border: 1.5px solid rgba(245, 158, 11, 0.4);
-      position: relative;
-    }
-    .ad-video-mock {
-      width: 100%;
-      height: 150px;
-      background: linear-gradient(135deg, #1e1b4b 0%, #31104b 100%);
-      border-radius: 16px;
-      margin: 12px 0;
+    .calendar-day-cell {
+      height: 38px;
+      border-radius: 8px;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      gap: 8px;
-      border: 1px solid rgba(255, 255, 255, 0.1);
-    }
-    .ad-progress-bar {
-      width: 80%;
-      height: 6px;
-      background: rgba(255, 255, 255, 0.15);
-      border-radius: 3px;
-      overflow: hidden;
-      margin-top: 8px;
-    }
-    .ad-progress-fill {
-      height: 100%;
-      background: var(--gold);
-      width: 0%;
-      transition: width 0.1s linear;
-    }
-
-    /* CONFETTI CANVAS */
-    #confetti-canvas {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      pointer-events: none;
-      z-index: 99;
-    }
-
-    /* TOAST */
-    #ka-toast {
-      position: fixed;
-      top: 24px;
-      left: 50%;
-      transform: translateX(-50%);
-      background: #0f172a;
-      color: #fff;
-      padding: 9px 20px;
-      border-radius: 20px;
+      font-size: 12px;
       font-weight: 800;
-      font-size: 13px;
-      z-index: 9999;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.5);
-      border: 1px solid rgba(255,255,255,0.2);
-      pointer-events: none;
+      background: rgba(15, 23, 42, 0.6);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      position: relative;
+    }
+    .calendar-day-cell.completed {
+      background: rgba(34, 197, 94, 0.25);
+      border-color: rgba(34, 197, 94, 0.6);
+      color: #86efac;
+    }
+    .calendar-day-cell.today {
+      border: 2px solid #fbbf24;
+      box-shadow: 0 0 10px rgba(251, 191, 36, 0.5);
+    }
+    .calendar-day-cell .check {
+      font-size: 10px;
+      color: #22c55e;
+      position: absolute;
+      bottom: 2px;
+    }
+
+    /* Ad Simulators */
+    .ad-screen {
+      position: fixed;
+      inset: 0;
+      background: #000;
+      z-index: 9000;
       display: none;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      text-align: center;
+      padding: 24px;
+    }
+    .ad-screen.active {
+      display: flex;
+    }
+    .ad-countdown {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background: rgba(255, 255, 255, 0.2);
+      border: 1px solid rgba(255, 255, 255, 0.4);
+      padding: 6px 14px;
+      border-radius: 999px;
+      font-weight: 800;
+      font-size: 14px;
+    }
+
+    /* Confetti Canvas */
+    #confetti-canvas {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 4000;
     }
   </style>
 </head>
 <body>
 
-  <div class="game-viewport">
-    <!-- Scenic Photography Background -->
-    <div class="scenic-bg" id="scenic-bg"></div>
-    <div class="scenic-tint"></div>
+  <!-- Background Layer -->
+  <div id="bg-layer"></div>
+  <div id="bg-gradient"></div>
 
-    <!-- ============================================== -->
-    <!-- 1. GİRİŞ EKRANI (HOME SCREEN)                  -->
-    <!-- ============================================== -->
-    <div id="screen-home" class="screen screen-home">
-      <div class="home-content">
-        <div>
-          <span class="home-badge">🏛️ TÜRKİYE KELİME TURU</span>
-          <h1 class="home-title">KELİME<br><span class="highlight">HARİKALARI</span></h1>
-          <p class="home-desc">Words of Wonders & Kelime Gezmece Deneyimi</p>
-        </div>
+  <!-- Screen Flash for Thunder/Lightning -->
+  <div id="screen-flash"></div>
 
-        <div class="home-status-card">
-          <div class="status-left">
-            <span class="current-loc" id="home-current-loc">KAPADOKYA</span>
-            <strong class="current-lvl" id="home-current-lvl">Bölüm 1 / 8</strong>
-          </div>
-          <div class="home-coin-badge">
-            <span>🪙</span>
-            <strong id="home-coins">100</strong>
-          </div>
-        </div>
-
-        <div style="width: 100%; display: flex; flex-direction: column; align-items: center; gap: 10px;">
-          <button id="btn-home-play" class="btn-big-play">
-            <span>▶</span>
-            <span>OYNA</span>
-          </button>
-          <button id="btn-home-rewarded" class="btn-home-sub">
-            <span>🎁 Ücretsiz +100 Altın</span>
-          </button>
-        </div>
-      </div>
-    </div>
-
-    <!-- ============================================== -->
-    <!-- 2. OYUN EKRANI (ACTIVE GAME SCREEN)            -->
-    <!-- ============================================== -->
-    <div id="screen-game" class="screen screen-game hidden">
-      <!-- Minimal Header -->
-      <header class="game-topbar">
-        <div class="top-col left">
-          <button id="btn-back-home" class="circle-btn" title="Ana Menü">🏠</button>
-          <button id="btn-sound" class="circle-btn" title="Ses">🔊</button>
-        </div>
-
-        <div class="top-col center">
-          <div class="level-pill" id="btn-level-pill">
-            <span class="region-txt" id="location-badge">KAPADOKYA</span>
-            <div class="level-num">BÖLÜM <span id="level-display">1</span></div>
-          </div>
-        </div>
-
-        <div class="top-col right">
-          <div class="bonus-capsule" id="bonus-capsule" title="Bonus Kelimeler (5 kelimeye +25 Altın)">
-            <span>🍯</span>
-            <span id="bonus-count">0/5</span>
-          </div>
-          <div class="coin-capsule" id="btn-free-coins" title="Altın Bakiye & Reklam">
-            <span>🪙</span>
-            <span id="coin-count">100</span>
-            <span style="color: #86efac; font-size: 11px; margin-left: 2px;">+</span>
-          </div>
-        </div>
-      </header>
-
-      <!-- UPPER SECTION: CROSSWORD GRID MATRIX (WORDS OF WONDERS UX) -->
-      <main class="board-area">
-        <div id="crossword-board" class="crossword-matrix">
-          <!-- Javascript renders intersecting crossword cells -->
-        </div>
-      </main>
-
-      <!-- Current Word Preview Pill -->
-      <div class="word-preview-zone">
-        <div id="current-word-preview" class="word-preview-pill"></div>
-      </div>
-
-      <!-- LOWER SECTION: LETTER WHEEL & DRAWING LAYER -->
-      <footer class="wheel-zone">
-        <!-- Shuffle Button (Free) -->
-        <button id="btn-shuffle" class="side-action-btn" title="Harfleri Karıştır (Ücretsiz)">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
-            <path d="M10.59 9.17L5.41 4 4 5.41l5.17 5.17 1.42-1.41zM14.5 4l2.04 2.04L4 18.59 5.41 20 17.96 7.46 20 9.5V4h-5.5zm.33 9.41l-1.41 1.41 3.13 3.13L14.5 20H20v-5.5l-2.04 2.04-3.13-3.13z"/>
-          </svg>
-          <span class="btn-sub-badge">Karıştır</span>
-        </button>
-
-        <!-- Turntable (SVG Line under letters) -->
-        <div class="wheel-turntable">
-          <svg id="wheel-lines" class="wheel-svg-layer"></svg>
-          <div id="letter-wheel" class="letter-disc-container">
-            <!-- 3D Solid Ivory Letter Stones -->
-          </div>
-        </div>
-
-        <!-- Hint Button (Cost: 50 Coins) -->
-        <button id="btn-hint" class="side-action-btn hint-btn" title="İpucu Al (50 Altın)">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
-            <path d="M9 21c0 .55.45 1 1 1h4c.55 0 1-.45 1-1v-1H9v1zm3-19C8.14 2 5 5.14 5 9c0 2.38 1.19 4.47 3 5.74V17c0 .55.45 1 1 1h6c.55 0 1-.45 1-1v-2.26c1.81-1.27 3-3.36 3-5.74 0-3.86-3.14-7-7-7z"/>
-          </svg>
-          <span class="btn-sub-badge">50 🪙</span>
-        </button>
-      </footer>
-    </div>
-  </div>
-
-  <!-- VICTORY MODAL -->
-  <div id="modal-victory" class="modal-backdrop hidden">
-    <div class="modal-card">
-      <div class="trophy-badge">🏆</div>
-      <span class="eyebrow">TEBRİKLER!</span>
-      <h2 id="victory-title" class="modal-title">Bölüm 1 Tamamlandı</h2>
-      <p class="modal-subtitle">Tüm çapraz bulmaca kelimelerini çözdün.</p>
-      
-      <div class="reward-capsule">
-        <span class="reward-lbl">Bölüm Ödülü</span>
-        <span class="reward-val">+30 🪙 Altın</span>
-      </div>
-
-      <div class="modal-btns">
-        <button id="btn-next-level" class="btn-modal-primary">Sonraki Bölüm ➔</button>
-        <button id="btn-share" class="btn-modal-ghost">Arkadaşına Gönder 📲</button>
-      </div>
-    </div>
-  </div>
-
-  <!-- REWARDED AD MODAL (CRAZYGAMES / POKI HOOKS & SIMULATOR) -->
-  <div id="modal-rewarded" class="modal-backdrop hidden">
-    <div class="modal-card ad-card">
-      <span class="eyebrow">📺 ÖDÜLLÜ REKLAM</span>
-      <h3 style="font-size: 18px; margin: 4px 0;">+100 Altın Kazan</h3>
-      <p style="font-size: 11px; color: rgba(255,255,255,0.65);">Reklamı sonuna kadar izle ve altınlarını anında al!</p>
-      
-      <div class="ad-video-mock">
-        <div style="font-size: 32px;">🎬</div>
-        <strong id="ad-timer-text" style="font-size: 15px; color: var(--gold);">5 saniye kaldı...</strong>
-        <div class="ad-progress-bar">
-          <div id="ad-progress-fill" class="ad-progress-fill"></div>
-        </div>
-      </div>
-
-      <p style="font-size: 10px; color: rgba(255,255,255,0.5);">Poki & CrazyGames Monetization API Uyumlu</p>
-    </div>
-  </div>
-
-  <!-- INTERSTITIAL AD MODAL (EVERY 2 LEVELS) -->
-  <div id="modal-interstitial" class="modal-backdrop hidden">
-    <div class="modal-card ad-card">
-      <span class="eyebrow">☕ KISA MOLA</span>
-      <h3 style="font-size: 18px; margin: 4px 0;">Oyun Arası</h3>
-      <div class="ad-video-mock" style="height: 120px;">
-        <div style="font-size: 28px;">🎮</div>
-        <small style="color: rgba(255,255,255,0.7);">Reklam yükleniyor...</small>
-      </div>
-      <button id="btn-skip-interstitial" class="btn-modal-primary" style="background: rgba(255,255,255,0.18);">3s sonra geçebilirsiniz</button>
-    </div>
-  </div>
-
+  <!-- Confetti Canvas -->
   <canvas id="confetti-canvas"></canvas>
-  <div id="ka-toast"></div>
 
-  <!-- ============================================== -->
-  <!-- 3. JAVASCRIPT MOTORU (PROCEDURAL AUDIO & LOGIC)-->
-  <!-- ============================================== -->
+  <!-- Targeting Instruction Banner -->
+  <div id="targeting-banner">🎯 Açmak istediğin kutucuğa dokun!</div>
+
+  <!-- Main Game App -->
+  <div id="app-container">
+
+    <!-- Top Header -->
+    <header>
+      <div class="header-pill">
+        <div class="level-badge">
+          <span class="sub-title" id="region-text">KAPADOKYA</span>
+          <span class="main-title" id="level-title-text">Bölüm 1</span>
+        </div>
+      </div>
+
+      <div class="header-actions">
+        <button class="btn-header daily-btn" id="btn-open-daily">
+          <span>📅</span> Günlük <span id="streak-indicator">🔥 1</span>
+        </button>
+        <button class="btn-header" id="btn-sound-toggle">
+          <span id="sound-icon">🔊</span>
+        </button>
+        <div class="header-pill coin-badge">
+          <span>🪙</span> <span id="coins-display">200</span>
+        </div>
+      </div>
+    </header>
+
+    <!-- Crossword Grid Area -->
+    <main id="board-area">
+      <div id="crossword-grid"></div>
+    </main>
+
+    <!-- Bottom Controls & Wheel Area -->
+    <section id="bottom-section">
+
+      <!-- Word Preview Pill -->
+      <div id="preview-container">
+        <div id="word-preview">KELİME</div>
+      </div>
+
+      <!-- Power-ups Toolbar -->
+      <div id="powerups-toolbar">
+        <!-- Shuffle -->
+        <button class="btn-powerup" id="btn-shuffle" title="Harfleri Karıştır">
+          <span class="icon">🔀</span>
+          <span class="cost">Ücretsiz</span>
+        </button>
+
+        <!-- Bulb Hint (50) -->
+        <button class="btn-powerup" id="btn-hint-bulb" title="Rastgele Harf Aç">
+          <span class="icon">💡</span>
+          <span class="cost">🪙 50</span>
+        </button>
+
+        <!-- Target Magnifier (100) -->
+        <button class="btn-powerup" id="btn-hint-target" title="Hedef Harfi Aç">
+          <span class="icon">🎯</span>
+          <span class="cost">🪙 100</span>
+        </button>
+
+        <!-- Lightning Fireworks (150) -->
+        <button class="btn-powerup" id="btn-hint-lightning" title="3 Harf Patlat">
+          <span class="icon">⚡</span>
+          <span class="cost">🪙 150</span>
+        </button>
+
+        <!-- Bonus Words Chest -->
+        <button class="bonus-chest-btn" id="btn-bonus-chest" title="Ekstra Kelime Sandığı">
+          <span class="icon">🎁</span>
+          <span class="counter" id="bonus-counter">0/5</span>
+        </button>
+      </div>
+
+      <!-- Letter Wheel -->
+      <div id="wheel-wrapper">
+        <div id="wheel-canvas-container"></div>
+        <svg id="wheel-svg">
+          <polyline id="connection-line" points=""></polyline>
+        </svg>
+        <div id="wheel-nodes-container"></div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <!-- ==================== MODALS ==================== -->
+
+  <!-- 1. Cultural Discovery Card Modal -->
+  <div class="modal-overlay" id="modal-discovery">
+    <div class="modal-card">
+      <img class="discovery-img" id="discovery-img" src="" alt="Landmark">
+      <span class="discovery-badge" id="discovery-region">BÖLGE</span>
+      <h2 class="discovery-title" id="discovery-title">Tarihi Yapı</h2>
+      <p class="discovery-trivia" id="discovery-trivia">Eser hakkında kültürel bilgi burada yer alacak.</p>
+      <button class="btn-gold" id="btn-discovery-continue">
+        <span>Devam Et</span> ➔
+      </button>
+    </div>
+  </div>
+
+  <!-- 2. Victory Modal with 2X Monetization -->
+  <div class="modal-overlay" id="modal-victory">
+    <div class="modal-card">
+      <div class="victory-stars">⭐⭐⭐</div>
+      <h2 style="font-size:26px; font-weight:900; margin-bottom:6px;">Bölüm Tamamlandı!</h2>
+      <p style="color:#94a3b8; font-size:14px; margin-bottom:16px;">Tüm kelimeleri ustalıkla çözdün.</p>
+
+      <div class="reward-box">
+        <span>Kazanılan Ödül:</span>
+        <span style="color:#fbbf24;">+25 Altın</span>
+      </div>
+
+      <!-- 2X Rewarded Ad Button -->
+      <button class="btn-gold" id="btn-victory-2x" style="margin-bottom:8px; font-size:15px;">
+        <span>🎁 2 Katı Kazan: +50 Altın</span>
+        <span style="font-size:11px; background:rgba(0,0,0,0.25); padding:2px 6px; border-radius:6px;">Reklam</span>
+      </button>
+
+      <!-- Standard Continue -->
+      <button class="btn-secondary" id="btn-victory-normal">
+        Normal Devam (+25 Altın)
+      </button>
+    </div>
+  </div>
+
+  <!-- 3. Daily Challenge & Calendar Modal -->
+  <div class="modal-overlay" id="modal-calendar">
+    <div class="modal-card" style="max-width: 440px;">
+      <h2 style="font-size:22px; font-weight:900; margin-bottom:4px;">📅 Günlük Bulmaca</h2>
+      <p style="color:#fef08a; font-weight:800; font-size:14px;" id="calendar-streak-text">🔥 1 Günlük Seri</p>
+
+      <!-- Calendar Month Days -->
+      <div class="calendar-grid" id="calendar-grid-container">
+        <!-- Rendered by JS -->
+      </div>
+
+      <div style="font-size:12px; color:#94a3b8; margin-bottom:14px;" id="daily-status-desc">
+        Günün bulmacasında 3 parlayan yıldızı toplayarak serini devam ettir!
+      </div>
+
+      <button class="btn-gold" id="btn-play-daily">
+        <span>Günün Bulmacasını Oyna</span> 🌟
+      </button>
+
+      <button class="btn-secondary" id="btn-close-calendar">
+        Kapat
+      </button>
+    </div>
+  </div>
+
+  <!-- 4. Insufficient Coins Modal -->
+  <div class="modal-overlay" id="modal-no-coins">
+    <div class="modal-card">
+      <div style="font-size:40px; margin-bottom:8px;">🪙</div>
+      <h2 style="font-size:22px; font-weight:900; margin-bottom:6px;">Yetersiz Altın!</h2>
+      <p style="color:#cbd5e1; font-size:13px; margin-bottom:18px;">
+        Bu gücü kullanmak için yeterli altının yok. Kısa bir reklam izleyerek hemen +100 Altın kazanabilirsin!
+      </p>
+      <button class="btn-gold" id="btn-watch-ad-for-coins">
+        <span>🎥 Reklam İzle: +100 Altın</span>
+      </button>
+      <button class="btn-secondary" id="btn-close-no-coins">
+        Vazgeç
+      </button>
+    </div>
+  </div>
+
+  <!-- 5. Simulated Rewarded Ad Overlay -->
+  <div class="ad-screen" id="rewarded-ad-screen">
+    <div class="ad-countdown" id="rewarded-ad-timer">Ödüllü Reklam - 5s</div>
+    <div style="font-size:56px; margin-bottom:16px;">🎮</div>
+    <h2 style="font-size:26px; font-weight:900; margin-bottom:8px;">Kelime Harikaları</h2>
+    <p style="color:#94a3b8; max-width:280px; font-size:14px; margin-bottom:24px;">
+      Harika oyunları keşfetmeye devam et! Sponsor video oynatılıyor...
+    </p>
+    <div style="width:180px; height:8px; background:rgba(255,255,255,0.2); border-radius:999px; overflow:hidden;">
+      <div id="rewarded-ad-progress" style="width:0%; height:100%; background:#fbbf24; transition:width 1s linear;"></div>
+    </div>
+  </div>
+
+  <!-- 6. Simulated Interstitial Ad Overlay -->
+  <div class="ad-screen" id="interstitial-ad-screen">
+    <div class="ad-countdown" id="interstitial-ad-timer">Geçiş Reklamı - 3s</div>
+    <div style="font-size:50px; margin-bottom:14px;">✨</div>
+    <h2 style="font-size:24px; font-weight:900; margin-bottom:6px;">Bölüm Arası Sponsoru</h2>
+    <p style="color:#94a3b8; font-size:13px;">Oyun yükleniyor, lütfen bekleyin...</p>
+  </div>
+
+  <!-- ==================== LOGIC ENGINE ==================== -->
   <script>
-    // TURKISH LOCALE SAFE HELPERS (Strict tr-TR compatibility)
-    const toUpperTR = (str) => (str || '').toLocaleUpperCase('tr-TR');
-    const toLowerTR = (str) => (str || '').toLocaleLowerCase('tr-TR');
+    /* GAME DATABASE & SOUND & CORE CONTROLLER */
+    
+  /* ==========================================================================
+     1. PROCEDURAL SOUND SYNTHESIS (WEB AUDIO API - ZERO EXTERNAL ASSETS)
+     ========================================================================== */
+  class SoundEngine {
+    constructor() {
+      this.ctx = null;
+      this.muted = localStorage.getItem('wow_sound_muted') === 'true';
+    }
 
-    // -----------------------------------------------------------------
-    // 1. WEB AUDIO API PROCEDURAL SOUND SYNTHESIZER (NO EXTERNAL AUDIO)
-    // -----------------------------------------------------------------
-    class SoundFX {
-      constructor() {
-        this.ctx = null;
-        this.enabled = true;
+    init() {
+      if (!this.ctx) {
+        const AudioCtx = window.AudioContext || window.webkitAudioContext;
+        this.ctx = new AudioCtx();
       }
-
-      init() {
-        if (!this.ctx) {
-          const AudioContextClass = window.AudioContext || window.webkitAudioContext;
-          this.ctx = new AudioContextClass();
-        }
-        if (this.ctx && this.ctx.state === 'suspended') {
-          this.ctx.resume();
-        }
-      }
-
-      toggle() {
-        this.enabled = !this.enabled;
-        return this.enabled;
-      }
-
-      // Incremental letter pitch: 261Hz, 329Hz, 392Hz, 523Hz, 659Hz, 784Hz, 1046Hz
-      playLetterTone(index) {
-        if (!this.enabled) return;
-        this.init();
-
-        const frequencies = [261.63, 329.63, 392.00, 523.25, 659.25, 783.99, 1046.50];
-        const freq = frequencies[index % frequencies.length] || 261.63;
-
-        const osc = this.ctx.createOscillator();
-        const gain = this.ctx.createGain();
-
-        osc.type = 'sine';
-        osc.frequency.setValueAtTime(freq, this.ctx.currentTime);
-
-        gain.gain.setValueAtTime(0.22, this.ctx.currentTime);
-        gain.gain.exponentialRampToValueAtTime(0.001, this.ctx.currentTime + 0.16);
-
-        osc.connect(gain);
-        gain.connect(this.ctx.destination);
-
-        osc.start();
-        osc.stop(this.ctx.currentTime + 0.16);
-      }
-
-      // Successful word finding harmonic C-major arpeggio
-      playWordSuccess() {
-        if (!this.enabled) return;
-        this.init();
-
-        const chord = [523.25, 659.25, 783.99, 1046.50];
-        chord.forEach((freq, idx) => {
-          const osc = this.ctx.createOscillator();
-          const gain = this.ctx.createGain();
-          const start = this.ctx.currentTime + idx * 0.06;
-
-          osc.type = 'triangle';
-          osc.frequency.setValueAtTime(freq, start);
-
-          gain.gain.setValueAtTime(0.24, start);
-          gain.gain.exponentialRampToValueAtTime(0.001, start + 0.38);
-
-          osc.connect(gain);
-          gain.connect(this.ctx.destination);
-
-          osc.start(start);
-          osc.stop(start + 0.38);
-        });
-      }
-
-      // Subtle low bass boop for wrong/invalid word
-      playInvalid() {
-        if (!this.enabled) return;
-        this.init();
-
-        const osc = this.ctx.createOscillator();
-        const gain = this.ctx.createGain();
-
-        osc.type = 'sawtooth';
-        osc.frequency.setValueAtTime(130, this.ctx.currentTime);
-        osc.frequency.exponentialRampToValueAtTime(75, this.ctx.currentTime + 0.2);
-
-        gain.gain.setValueAtTime(0.16, this.ctx.currentTime);
-        gain.gain.exponentialRampToValueAtTime(0.001, this.ctx.currentTime + 0.2);
-
-        osc.connect(gain);
-        gain.connect(this.ctx.destination);
-
-        osc.start();
-        osc.stop(this.ctx.currentTime + 0.2);
-      }
-
-      // Hint chime
-      playHint() {
-        if (!this.enabled) return;
-        this.init();
-
-        const notes = [1046.50, 1318.51, 1567.98, 2093.00];
-        notes.forEach((f, i) => {
-          const osc = this.ctx.createOscillator();
-          const gain = this.ctx.createGain();
-          const t = this.ctx.currentTime + i * 0.05;
-
-          osc.type = 'sine';
-          osc.frequency.setValueAtTime(f, t);
-
-          gain.gain.setValueAtTime(0.2, t);
-          gain.gain.exponentialRampToValueAtTime(0.001, t + 0.28);
-
-          osc.connect(gain);
-          gain.connect(this.ctx.destination);
-
-          osc.start(t);
-          osc.stop(t + 0.28);
-        });
-      }
-
-      // Shuffle mechanical tick
-      playShuffle() {
-        if (!this.enabled) return;
-        this.init();
-
-        const osc = this.ctx.createOscillator();
-        const gain = this.ctx.createGain();
-
-        osc.type = 'sine';
-        osc.frequency.setValueAtTime(480, this.ctx.currentTime);
-        osc.frequency.exponentialRampToValueAtTime(120, this.ctx.currentTime + 0.08);
-
-        gain.gain.setValueAtTime(0.18, this.ctx.currentTime);
-        gain.gain.exponentialRampToValueAtTime(0.001, this.ctx.currentTime + 0.08);
-
-        osc.connect(gain);
-        gain.connect(this.ctx.destination);
-
-        osc.start();
-        osc.stop(this.ctx.currentTime + 0.08);
-      }
-
-      // Bonus word / Coin collect ping
-      playCoin() {
-        if (!this.enabled) return;
-        this.init();
-
-        const osc = this.ctx.createOscillator();
-        const gain = this.ctx.createGain();
-
-        osc.type = 'sine';
-        osc.frequency.setValueAtTime(1174.66, this.ctx.currentTime);
-        osc.frequency.setValueAtTime(1760.00, this.ctx.currentTime + 0.07);
-
-        gain.gain.setValueAtTime(0.22, this.ctx.currentTime);
-        gain.gain.exponentialRampToValueAtTime(0.001, this.ctx.currentTime + 0.22);
-
-        osc.connect(gain);
-        gain.connect(this.ctx.destination);
-
-        osc.start();
-        osc.stop(this.ctx.currentTime + 0.22);
-      }
-
-      // Level Complete Victory Fanfare
-      playVictory() {
-        if (!this.enabled) return;
-        this.init();
-
-        const fanfare = [
-          { f: 523.25, d: 0.12 },
-          { f: 659.25, d: 0.12 },
-          { f: 783.99, d: 0.15 },
-          { f: 1046.50, d: 0.20 },
-          { f: 1318.51, d: 0.45 }
-        ];
-
-        let t = this.ctx.currentTime;
-        fanfare.forEach(note => {
-          const osc = this.ctx.createOscillator();
-          const gain = this.ctx.createGain();
-
-          osc.type = 'triangle';
-          osc.frequency.setValueAtTime(note.f, t);
-
-          gain.gain.setValueAtTime(0.28, t);
-          gain.gain.exponentialRampToValueAtTime(0.001, t + note.d);
-
-          osc.connect(gain);
-          gain.connect(this.ctx.destination);
-
-          osc.start(t);
-          osc.stop(t + note.d);
-
-          t += note.d * 0.8;
-        });
+      if (this.ctx.state === 'suspended') {
+        this.ctx.resume();
       }
     }
 
-    const soundFX = new SoundFX();
-
-    // -----------------------------------------------------------------
-    // 2. LEVEL DATABASE (8 INTERSECTING CROSSWORD LEVELS)
-    // -----------------------------------------------------------------
-    const WOW_LEVELS = [
-    {
-        "level": 1,
-        "location": "Kapadokya - Peri Bacaları",
-        "bg": "https://images.unsplash.com/photo-1570939274717-7eda259b50ed?auto=format&fit=crop&w=800&q=80",
-        "wheel": [
-            "A",
-            "K",
-            "T"
-        ],
-        "words": [
-            {
-                "id": "w1",
-                "word": "KAT",
-                "row": 2,
-                "col": 0,
-                "dir": "H"
-            },
-            {
-                "id": "w2",
-                "word": "TAK",
-                "row": 0,
-                "col": 0,
-                "dir": "V"
-            }
-        ],
-        "bonus": [
-            "AK"
-        ]
-    },
-    {
-        "level": 2,
-        "location": "Pamukkale - Travertenler",
-        "bg": "https://images.unsplash.com/photo-1549880338-65ddcdfd017b?auto=format&fit=crop&w=800&q=80",
-        "wheel": [
-            "E",
-            "K",
-            "A",
-            "L"
-        ],
-        "words": [
-            {
-                "id": "w1",
-                "word": "KALE",
-                "row": 2,
-                "col": 0,
-                "dir": "H"
-            },
-            {
-                "id": "w2",
-                "word": "KEL",
-                "row": 2,
-                "col": 0,
-                "dir": "V"
-            },
-            {
-                "id": "w3",
-                "word": "ELA",
-                "row": 0,
-                "col": 1,
-                "dir": "V"
-            }
-        ],
-        "bonus": [
-            "LAK",
-            "LAKE"
-        ]
-    },
-    {
-        "level": 3,
-        "location": "Galata Kulesi - İstanbul",
-        "bg": "https://images.unsplash.com/photo-1527838832700-5059252407fa?auto=format&fit=crop&w=800&q=80",
-        "wheel": [
-            "S",
-            "M",
-            "A",
-            "A"
-        ],
-        "words": [
-            {
-                "id": "w1",
-                "word": "MASA",
-                "row": 2,
-                "col": 0,
-                "dir": "H"
-            },
-            {
-                "id": "w2",
-                "word": "ASMA",
-                "row": 0,
-                "col": 0,
-                "dir": "V"
-            }
-        ],
-        "bonus": [
-            "AMA",
-            "SAM",
-            "AS"
-        ]
-    },
-    {
-        "level": 4,
-        "location": "Efes Antik Kenti - İzmir",
-        "bg": "https://images.unsplash.com/photo-1564507592333-c60657eea523?auto=format&fit=crop&w=800&q=80",
-        "wheel": [
-            "I",
-            "B",
-            "K",
-            "A",
-            "L"
-        ],
-        "words": [
-            {
-                "id": "w1",
-                "word": "BALIK",
-                "row": 2,
-                "col": 0,
-                "dir": "H"
-            },
-            {
-                "id": "w2",
-                "word": "BAL",
-                "row": 2,
-                "col": 0,
-                "dir": "V"
-            },
-            {
-                "id": "w3",
-                "word": "AKIL",
-                "row": 2,
-                "col": 1,
-                "dir": "V"
-            },
-            {
-                "id": "w4",
-                "word": "KIL",
-                "row": 0,
-                "col": 2,
-                "dir": "V"
-            }
-        ],
-        "bonus": [
-            "ALIK",
-            "BAK",
-            "KAL",
-            "LAK"
-        ]
-    },
-    {
-        "level": 5,
-        "location": "Nemrut Dağı - Gün Doğumu",
-        "bg": "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=800&q=80",
-        "wheel": [
-            "T",
-            "P",
-            "İ",
-            "K",
-            "A"
-        ],
-        "words": [
-            {
-                "id": "w1",
-                "word": "KİTAP",
-                "row": 3,
-                "col": 0,
-                "dir": "H"
-            },
-            {
-                "id": "w2",
-                "word": "TAKİP",
-                "row": 1,
-                "col": 0,
-                "dir": "V"
-            },
-            {
-                "id": "w3",
-                "word": "PATİK",
-                "row": 0,
-                "col": 1,
-                "dir": "V"
-            },
-            {
-                "id": "w4",
-                "word": "PAK",
-                "row": 2,
-                "col": 3,
-                "dir": "V"
-            }
-        ],
-        "bonus": [
-            "TİP",
-            "PAT",
-            "KAT",
-            "AİT"
-        ]
-    },
-    {
-        "level": 6,
-        "location": "Göbeklitepe - Şanlıurfa",
-        "bg": "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=800&q=80",
-        "wheel": [
-            "N",
-            "Z",
-            "E",
-            "D",
-            "İ"
-        ],
-        "words": [
-            {
-                "id": "w1",
-                "word": "DENİZ",
-                "row": 2,
-                "col": 0,
-                "dir": "H"
-            },
-            {
-                "id": "w2",
-                "word": "DİZ",
-                "row": 2,
-                "col": 0,
-                "dir": "V"
-            },
-            {
-                "id": "w3",
-                "word": "DİN",
-                "row": 0,
-                "col": 2,
-                "dir": "V"
-            }
-        ],
-        "bonus": [
-            "DİZE",
-            "İZ",
-            "İN",
-            "ZİN"
-        ]
-    },
-    {
-        "level": 7,
-        "location": "Ölüdeniz - Fethiye",
-        "bg": "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=800&q=80",
-        "wheel": [
-            "R",
-            "H",
-            "A",
-            "B",
-            "A"
-        ],
-        "words": [
-            {
-                "id": "w1",
-                "word": "BAHAR",
-                "row": 1,
-                "col": 0,
-                "dir": "H"
-            },
-            {
-                "id": "w2",
-                "word": "BAR",
-                "row": 1,
-                "col": 0,
-                "dir": "V"
-            },
-            {
-                "id": "w3",
-                "word": "HARA",
-                "row": 0,
-                "col": 1,
-                "dir": "V"
-            },
-            {
-                "id": "w4",
-                "word": "ARA",
-                "row": 1,
-                "col": 1,
-                "dir": "V"
-            }
-        ],
-        "bonus": [
-            "RAB",
-            "ABA",
-            "AHA"
-        ]
-    },
-    {
-        "level": 8,
-        "location": "Sümela Manastırı - Trabzon",
-        "bg": "https://images.unsplash.com/photo-1448375240586-882707db888b?auto=format&fit=crop&w=800&q=80",
-        "wheel": [
-            "L",
-            "M",
-            "E",
-            "K",
-            "A"
-        ],
-        "words": [
-            {
-                "id": "w1",
-                "word": "KALEM",
-                "row": 1,
-                "col": 0,
-                "dir": "H"
-            },
-            {
-                "id": "w2",
-                "word": "KELAM",
-                "row": 1,
-                "col": 0,
-                "dir": "V"
-            },
-            {
-                "id": "w3",
-                "word": "KALE",
-                "row": 0,
-                "col": 1,
-                "dir": "V"
-            },
-            {
-                "id": "w4",
-                "word": "ELA",
-                "row": 0,
-                "col": 2,
-                "dir": "V"
-            }
-        ],
-        "bonus": [
-            "AMEL",
-            "MAL",
-            "LAK",
-            "KEM"
-        ]
+    toggleMute() {
+      this.muted = !this.muted;
+      localStorage.setItem('wow_sound_muted', this.muted);
+      return this.muted;
     }
-];
 
-    // -----------------------------------------------------------------
-    // 3. MAIN GAME CONTROLLER (WOW & POKI/CRAZYGAMES STANDARDS)
-    // -----------------------------------------------------------------
-    class WoWGame {
-      constructor() {
-        this.storageKey = 'wow_singlefile_save_v1';
-        this.state = this.loadState();
+    // Incremental note frequencies for dragging letters (Pentatonic scale)
+    playLetterNote(index) {
+      if (this.muted) return;
+      this.init();
+      const freqs = [261.63, 293.66, 329.63, 392.00, 440.00, 523.25, 659.25, 783.99]; // C4, D4, E4, G4, A4, C5, E5, G5
+      const freq = freqs[Math.min(index, freqs.length - 1)];
 
-        this.currentWord = "";
-        this.selectedNodes = [];
-        this.isDragging = false;
+      const osc = this.ctx.createOscillator();
+      const gain = this.ctx.createGain();
+      osc.type = 'sine';
+      osc.frequency.setValueAtTime(freq, this.ctx.currentTime);
 
-        // Pre-cached geometry for 120 FPS Dragging
-        this.nodeData = [];
-        this.wheelRect = null;
+      gain.gain.setValueAtTime(0.2, this.ctx.currentTime);
+      gain.gain.exponentialRampToValueAtTime(0.001, this.ctx.currentTime + 0.25);
 
-        // Crossword grid map: key 'r,c' -> { el, char, wordIds, revealed }
-        this.cellMap = new Map();
-        this.solvedWordIds = new Set();
-        this.bonusWordsFound = new Set();
-        this.bonusProgress = 0; // 0 to 5
+      osc.connect(gain);
+      gain.connect(this.ctx.destination);
+      osc.start();
+      osc.stop(this.ctx.currentTime + 0.25);
+    }
 
-        // DOM Elements
-        this.screenHome = document.getElementById('screen-home');
-        this.screenGame = document.getElementById('screen-game');
-        this.scenicBg = document.getElementById('scenic-bg');
+    // Success chord arpeggio for word solved
+    playWordSuccess() {
+      if (this.muted) return;
+      this.init();
+      const notes = [523.25, 659.25, 783.99, 1046.50]; // C5, E5, G5, C6
+      notes.forEach((freq, idx) => {
+        const osc = this.ctx.createOscillator();
+        const gain = this.ctx.createGain();
+        osc.type = 'triangle';
+        osc.frequency.setValueAtTime(freq, this.ctx.currentTime + idx * 0.07);
 
-        this.homeLoc = document.getElementById('home-current-loc');
-        this.homeLvl = document.getElementById('home-current-lvl');
-        this.homeCoins = document.getElementById('home-coins');
+        const startTime = this.ctx.currentTime + idx * 0.07;
+        gain.gain.setValueAtTime(0.22, startTime);
+        gain.gain.exponentialRampToValueAtTime(0.001, startTime + 0.45);
 
-        this.boardEl = document.getElementById('crossword-board');
-        this.letterWheel = document.getElementById('letter-wheel');
-        this.wheelSvg = document.getElementById('wheel-lines');
-        this.wordPreview = document.getElementById('current-word-preview');
+        osc.connect(gain);
+        gain.connect(this.ctx.destination);
+        osc.start(startTime);
+        osc.stop(startTime + 0.45);
+      });
+    }
 
-        this.levelDisplay = document.getElementById('level-display');
-        this.locationBadge = document.getElementById('location-badge');
-        this.coinCount = document.getElementById('coin-count');
-        this.bonusCount = document.getElementById('bonus-count');
-        this.bonusCapsule = document.getElementById('bonus-capsule');
+    // Error boop on invalid word
+    playErrorBuzz() {
+      if (this.muted) return;
+      this.init();
+      const osc = this.ctx.createOscillator();
+      const gain = this.ctx.createGain();
+      osc.type = 'sawtooth';
+      osc.frequency.setValueAtTime(140, this.ctx.currentTime);
+      osc.frequency.exponentialRampToValueAtTime(80, this.ctx.currentTime + 0.22);
 
+      gain.gain.setValueAtTime(0.18, this.ctx.currentTime);
+      gain.gain.exponentialRampToValueAtTime(0.001, this.ctx.currentTime + 0.22);
+
+      osc.connect(gain);
+      gain.connect(this.ctx.destination);
+      osc.start();
+      osc.stop(this.ctx.currentTime + 0.22);
+    }
+
+    // Hint chime
+    playHint() {
+      if (this.muted) return;
+      this.init();
+      const freqs = [659.25, 830.61, 987.77]; // E5, G#5, B5
+      freqs.forEach((freq, idx) => {
+        const osc = this.ctx.createOscillator();
+        const gain = this.ctx.createGain();
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(freq, this.ctx.currentTime + idx * 0.08);
+
+        const startTime = this.ctx.currentTime + idx * 0.08;
+        gain.gain.setValueAtTime(0.25, startTime);
+        gain.gain.exponentialRampToValueAtTime(0.001, startTime + 0.5);
+
+        osc.connect(gain);
+        gain.connect(this.ctx.destination);
+        osc.start(startTime);
+        osc.stop(startTime + 0.5);
+      });
+    }
+
+    // Lightning blast with rumble
+    playLightning() {
+      if (this.muted) return;
+      this.init();
+      // Low Saw rumble
+      const osc = this.ctx.createOscillator();
+      const gain = this.ctx.createGain();
+      osc.type = 'sawtooth';
+      osc.frequency.setValueAtTime(100, this.ctx.currentTime);
+      osc.frequency.exponentialRampToValueAtTime(30, this.ctx.currentTime + 0.6);
+
+      gain.gain.setValueAtTime(0.35, this.ctx.currentTime);
+      gain.gain.exponentialRampToValueAtTime(0.001, this.ctx.currentTime + 0.6);
+
+      osc.connect(gain);
+      gain.connect(this.ctx.destination);
+      osc.start();
+      osc.stop(this.ctx.currentTime + 0.6);
+
+      // White noise blast
+      const bufferSize = this.ctx.sampleRate * 0.35;
+      const buffer = this.ctx.createBuffer(1, bufferSize, this.ctx.sampleRate);
+      const output = buffer.getChannelData(0);
+      for (let i = 0; i < bufferSize; i++) {
+        output[i] = Math.random() * 2 - 1;
+      }
+      const whiteNoise = this.ctx.createBufferSource();
+      whiteNoise.buffer = buffer;
+      const noiseGain = this.ctx.createGain();
+      noiseGain.gain.setValueAtTime(0.25, this.ctx.currentTime);
+      noiseGain.gain.exponentialRampToValueAtTime(0.001, this.ctx.currentTime + 0.35);
+
+      whiteNoise.connect(noiseGain);
+      noiseGain.connect(this.ctx.destination);
+      whiteNoise.start();
+    }
+
+    // Coin shower ping
+    playCoinShower() {
+      if (this.muted) return;
+      this.init();
+      const pings = [880, 1174, 1318, 1760];
+      pings.forEach((freq, i) => {
+        const osc = this.ctx.createOscillator();
+        const gain = this.ctx.createGain();
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(freq, this.ctx.currentTime + i * 0.06);
+
+        const startTime = this.ctx.currentTime + i * 0.06;
+        gain.gain.setValueAtTime(0.2, startTime);
+        gain.gain.exponentialRampToValueAtTime(0.001, startTime + 0.3);
+
+        osc.connect(gain);
+        gain.connect(this.ctx.destination);
+        osc.start(startTime);
+        osc.stop(startTime + 0.3);
+      });
+    }
+
+    // Fanfare victory
+    playFanfare() {
+      if (this.muted) return;
+      this.init();
+      const motif = [
+        { f: 523.25, t: 0.0, d: 0.15 },
+        { f: 659.25, t: 0.15, d: 0.15 },
+        { f: 783.99, t: 0.30, d: 0.2 },
+        { f: 1046.50, t: 0.50, d: 0.6 }
+      ];
+      motif.forEach(m => {
+        const osc = this.ctx.createOscillator();
+        const gain = this.ctx.createGain();
+        osc.type = 'triangle';
+        osc.frequency.setValueAtTime(m.f, this.ctx.currentTime + m.t);
+
+        const startTime = this.ctx.currentTime + m.t;
+        gain.gain.setValueAtTime(0.25, startTime);
+        gain.gain.exponentialRampToValueAtTime(0.001, startTime + m.d);
+
+        osc.connect(gain);
+        gain.connect(this.ctx.destination);
+        osc.start(startTime);
+        osc.stop(startTime + m.d);
+      });
+    }
+  }
+
+  /* ==========================================================================
+     2. CURATED LEVEL DATABASE (STRICT 90° CROSSWORD + CULTURAL TRIVIA)
+     ========================================================================== */
+  const LEVELS_DATA = [
+    {
+      id: 1,
+      title: "Kapadokya - Peri Bacaları",
+      region: "NEVŞEHİR",
+      bg: "https://images.unsplash.com/photo-1570939274717-7eda259b50ed?auto=format&fit=crop&w=1200&q=80",
+      trivia: "Milyonlarca yıl önce yanardağ küllerinin rüzgâr ve yağmurla aşınmasıyla oluşan peri bacaları, yüzlerce yıldır yeraltı şehirlerine ve gökyüzünü süsleyen rengarenk sıcak hava balonlarına ev sahipliği yapar.",
+      wheel: ["A", "K", "T"],
+      words: [
+        { id: "w1", word: "KAT", row: 2, col: 0, dir: "H" },
+        { id: "w2", word: "TAK", row: 0, col: 0, dir: "V" }
+      ],
+      bonus: ["AK"]
+    },
+    {
+      id: 2,
+      title: "Pamukkale - Travertenler",
+      region: "DENİZLİ",
+      bg: "https://images.unsplash.com/photo-1549880338-65ddcdfd017b?auto=format&fit=crop&w=1200&q=80",
+      trivia: "Termal suların içerisindeki kalsiyum karbonatın binlerce yılda çökelmesiyle oluşan bembeyaz traverten terasları, antik Hierapolis kentinin şifalı suları ile UNESCO Dünya Mirası listesindedir.",
+      wheel: ["E", "K", "A", "L"],
+      words: [
+        { id: "w1", word: "KALE", row: 1, col: 0, dir: "H" },
+        { id: "w2", word: "KEL", row: 1, col: 0, dir: "V" },
+        { id: "w3", word: "ELA", row: 0, col: 2, dir: "V" }
+      ],
+      bonus: ["LAK", "LAKE"]
+    },
+    {
+      id: 3,
+      title: "Galata Kulesi - İstanbul",
+      region: "İSTANBUL",
+      bg: "https://images.unsplash.com/photo-1527838832700-5059252407fa?auto=format&fit=crop&w=1200&q=80",
+      trivia: "1348 yılında Cenevizliler tarafından inşa edilen kule, 17. yüzyılda Hezarfen Ahmed Çelebi'nin tahta kanatlarla Boğaz'ı aşarak Üsküdar'a uçtuğu efsanevi kuledir.",
+      wheel: ["S", "M", "A", "A"],
+      words: [
+        { id: "w1", word: "MASA", row: 2, "col": 0, "dir": "H" },
+        { id: "w2", word: "ASMA", row: 0, "col": 0, "dir": "V" }
+      ],
+      bonus: ["AMA", "SAM", "AS"]
+    },
+    {
+      id: 4,
+      title: "Efes - Celsus Kütüphanesi",
+      region: "İZMİR",
+      bg: "https://images.unsplash.com/photo-1564507592333-c60657eea523?auto=format&fit=crop&w=1200&q=80",
+      trivia: "Antik dünyanın en büyük üçüncü kütüphanesi olan Celsus Kütüphanesi, 12 binden fazla parşömen rulosuna ev sahipliği yapmış ve antik felsefenin beşiği olmuştur.",
+      wheel: ["I", "B", "K", "A", "L"],
+      words: [
+        { id: "w1", word: "BALIK", row: 2, col: 0, dir: "H" },
+        { id: "w2", word: "BAL", row: 2, col: 0, dir: "V" },
+        { id: "w3", word: "KIL", row: 0, col: 2, dir: "V" }
+      ],
+      bonus: ["ALIK", "BAK", "KAL", "LAK", "AKIL"]
+    },
+    {
+      id: 5,
+      title: "Nemrut Dağı - Tanrılar Tahtı",
+      region: "ADIYAMAN",
+      bg: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1200&q=80",
+      trivia: "2150 metre yükseklikte Kommagene Kralı I. Antiochos tarafından yaptırılan devasa kral ve tanrı heykelleri, dünyanın en büyüleyici gün doğumu ve gün batımına tanıklık eder.",
+      wheel: ["T", "P", "İ", "K", "A"],
+      words: [
+        { id: "w1", word: "KİTAP", row: 2, col: 0, dir: "H" },
+        { id: "w2", word: "TAKİP", row: 0, col: 0, dir: "V" },
+        { id: "w3", word: "PAK", row: 1, col: 3, dir: "V" }
+      ],
+      bonus: ["TİP", "PAT", "KAT", "AİT", "PATİK"]
+    },
+    {
+      id: 6,
+      title: "Göbeklitepe - Tarihin Sıfırı",
+      region: "ŞANLIURFA",
+      bg: "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=1200&q=80",
+      trivia: "Yaklaşık 12.000 yıl öncesine dayanan T biçimli devasa kireçtaşı sütunlarıyla Göbeklitepe, insanlık tarihinin bilinen en eski anıtsal tapınak kompleksidir.",
+      wheel: ["N", "Z", "E", "D", "İ"],
+      words: [
+        { id: "w1", word: "DENİZ", row: 2, col: 0, dir: "H" },
+        { id: "w2", word: "DİZ", row: 2, col: 0, dir: "V" },
+        { id: "w3", word: "DİN", row: 0, col: 2, dir: "V" }
+      ],
+      bonus: ["DİZE", "İZ", "İN", "ZİN"]
+    },
+    {
+      id: 7,
+      title: "Kolezyum - Gladyatörler Arenası",
+      region: "ROMA, İTALYA",
+      bg: "https://images.unsplash.com/photo-1552832230-c0197dd311b5?auto=format&fit=crop&w=1200&q=80",
+      trivia: "İmparator Vespasianus tarafından MS 80 yılında tamamlanan 50.000 kişilik dev amfitiyatro, Roma İmparatorluğu'nun mühendislik harikası ve antik gladyatör dövüşlerinin merkezidir.",
+      wheel: ["M", "N", "A", "R", "O"],
+      words: [
+        { id: "w1", word: "ROMA", row: 2, col: 0, dir: "H" },
+        { id: "w2", word: "ORAN", row: 1, col: 0, dir: "V" },
+        { id: "w3", word: "ROMAN", row: 0, col: 2, dir: "V" }
+      ],
+      bonus: ["MOR", "ONAR", "ROM"]
+    },
+    {
+      id: 8,
+      title: "Tac Mahal - Aşkın Mermer Anıtı",
+      region: "AGRA, HİNDİSTAN",
+      bg: "https://images.unsplash.com/photo-1564507592333-c60657eea523?auto=format&fit=crop&w=1200&q=80",
+      trivia: "Şah Cihan'ın sevgili eşi Mümtaz Mahal anısına beyaz mermerden yaptırdığı bu kusursuz simetrik anıt mezar, dünyanın yeni 7 harikasından biri olarak kabul edilir.",
+      wheel: ["Ş", "A", "K", "U", "K"],
+      words: [
+        { id: "w1", word: "AŞK", row: 6, col: 0, dir: "H" },
+        { id: "w2", word: "ŞAK", row: 4, col: 2, dir: "V" },
+        { id: "w3", word: "KUŞ", row: 4, col: 0, dir: "H" },
+        { id: "w4", word: "KUŞAK", row: 0, col: 0, dir: "V" }
+      ],
+      bonus: ["KAŞ"]
+    }
+  ];
+
+  const DAILY_LEVEL_DATA = {
+    id: "daily",
+    title: "Günün Özel Meydan Okuması",
+    region: "GÜNLÜK GÖREV",
+    bg: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=80",
+    trivia: "Tebrikler! Bugünkü günlük bulmacayı başarıyla tamamladın ve 3 parlayan yıldızı koleksiyonuna kattın! Serini korumak için yarın tekrar gelmeyi unutma.",
+    wheel: ["R", "H", "A", "B", "A"],
+    words: [
+      { id: "dw1", word: "BAHAR", row: 1, col: 1, dir: "H" },
+      { id: "dw2", word: "HARA", row: 0, col: 2, dir: "V" },
+      { id: "dw3", word: "BAR", row: 0, col: 4, dir: "V" },
+      { id: "dw4", word: "ARA", row: 3, col: 0, dir: "H" }
+    ],
+    bonus: ["RAB", "ABA", "AHA"]
+  };
+
+  /* ==========================================================================
+     3. CORE GAME CONTROLLER
+     ========================================================================== */
+  class WoWGame {
+    constructor() {
+      this.sound = new SoundEngine();
+
+      // Persistent Game State
+      this.coins = parseInt(localStorage.getItem('wow_coins') || '250', 10);
+      this.stars = parseInt(localStorage.getItem('wow_stars') || '0', 10);
+      this.currentLevelIdx = parseInt(localStorage.getItem('wow_level_idx') || '0', 10);
+      this.completedDailyDates = JSON.parse(localStorage.getItem('wow_daily_dates') || '[]');
+      this.streak = parseInt(localStorage.getItem('wow_streak') || '1', 10);
+      this.bonusChestCount = parseInt(localStorage.getItem('wow_bonus_chest') || '0', 10);
+
+      this.levelsCompletedCount = 0;
+      this.isDailyMode = false;
+      this.isTargetingMode = false;
+
+      // Active level state
+      this.level = null;
+      this.unlockedWords = new Set();
+      this.revealedCells = new Set();
+      this.foundBonusWords = new Set();
+      this.dailyStarCells = new Set();
+      this.dailyStarsCollected = new Set();
+
+      // Wheel touch state
+      this.isDragging = false;
+      this.selectedNodeIndices = [];
+      this.currentLetters = [];
+      this.wheelNodePositions = [];
+      this.currentWheelLetters = [];
+
+      // DOM Elements
+      this.dom = {
+        bgLayer: document.getElementById('bg-layer'),
+        regionText: document.getElementById('region-text'),
+        levelTitleText: document.getElementById('level-title-text'),
+        streakIndicator: document.getElementById('streak-indicator'),
+        soundIcon: document.getElementById('sound-icon'),
+        coinsDisplay: document.getElementById('coins-display'),
+        crosswordGrid: document.getElementById('crossword-grid'),
+        wordPreview: document.getElementById('word-preview'),
+        wheelWrapper: document.getElementById('wheel-wrapper'),
+        wheelNodesContainer: document.getElementById('wheel-nodes-container'),
+        connectionLine: document.getElementById('connection-line'),
+        targetingBanner: document.getElementById('targeting-banner'),
+        bonusCounter: document.getElementById('bonus-counter'),
+        screenFlash: document.getElementById('screen-flash'),
+        confettiCanvas: document.getElementById('confetti-canvas'),
         // Modals
-        this.modalVictory = document.getElementById('modal-victory');
-        this.modalRewarded = document.getElementById('modal-rewarded');
-        this.modalInterstitial = document.getElementById('modal-interstitial');
+        modalDiscovery: document.getElementById('modal-discovery'),
+        discoveryImg: document.getElementById('discovery-img'),
+        discoveryRegion: document.getElementById('discovery-region'),
+        discoveryTitle: document.getElementById('discovery-title'),
+        discoveryTrivia: document.getElementById('discovery-trivia'),
+        modalVictory: document.getElementById('modal-victory'),
+        modalCalendar: document.getElementById('modal-calendar'),
+        calendarStreakText: document.getElementById('calendar-streak-text'),
+        calendarGridContainer: document.getElementById('calendar-grid-container'),
+        modalNoCoins: document.getElementById('modal-no-coins'),
+        rewardedAdScreen: document.getElementById('rewarded-ad-screen'),
+        rewardedAdTimer: document.getElementById('rewarded-ad-timer'),
+        rewardedAdProgress: document.getElementById('rewarded-ad-progress'),
+        interstitialAdScreen: document.getElementById('interstitial-ad-screen'),
+        interstitialAdTimer: document.getElementById('interstitial-ad-timer')
+      };
 
-        // Confetti Canvas
-        this.canvas = document.getElementById('confetti-canvas');
-        this.ctx = this.canvas.getContext('2d');
-        this.confettiParticles = [];
+      // Confetti Setup
+      this.ctxConfetti = this.dom.confettiCanvas.getContext('2d');
+      this.confettiParticles = [];
+      this.confettiAnimId = null;
 
-        this.init();
-      }
+      this.initEvents();
+      this.updateTopbar();
+      this.loadLevel(this.currentLevelIdx);
+    }
 
-      loadState() {
-        try {
-          const raw = localStorage.getItem(this.storageKey);
-          if (raw) {
-            const parsed = JSON.parse(raw);
-            return {
-              levelIndex: Math.max(0, parsed.levelIndex || 0),
-              coins: Math.max(0, parsed.coins !== undefined ? parsed.coins : 100),
-              bonusWords: parsed.bonusWords || []
-            };
-          }
-        } catch(e) {}
-        return { levelIndex: 0, coins: 100, bonusWords: [] };
-      }
+    /* ---------------- Event Listeners ---------------- */
+    initEvents() {
+      // Sound Toggle
+      document.getElementById('btn-sound-toggle').addEventListener('click', () => {
+        const isMuted = this.sound.toggleMute();
+        this.dom.soundIcon.textContent = isMuted ? '🔇' : '🔊';
+      });
+      this.dom.soundIcon.textContent = this.sound.muted ? '🔇' : '🔊';
 
-      saveState() {
-        localStorage.setItem(this.storageKey, JSON.stringify(this.state));
-        this.updateHeaderUI();
-      }
+      // Daily Calendar Modal
+      document.getElementById('btn-open-daily').addEventListener('click', () => {
+        this.openCalendarModal();
+      });
+      document.getElementById('btn-close-calendar').addEventListener('click', () => {
+        this.dom.modalCalendar.classList.remove('active');
+      });
+      document.getElementById('btn-play-daily').addEventListener('click', () => {
+        this.dom.modalCalendar.classList.remove('active');
+        this.startDailyChallenge();
+      });
 
-      updateHeaderUI() {
-        if (this.coinCount) this.coinCount.textContent = this.state.coins;
-        if (this.homeCoins) this.homeCoins.textContent = this.state.coins;
-        const cur = this.getCurrentLevel();
-        if (cur) {
-          if (this.homeLoc) this.homeLoc.textContent = toUpperTR(cur.location.split(' - ')[0]);
-          if (this.homeLvl) this.homeLvl.textContent = `Bölüm ${cur.level} / ${WOW_LEVELS.length}`;
-        }
-        if (this.bonusCount) this.bonusCount.textContent = `${this.bonusProgress}/5`;
-      }
+      // Power-ups
+      document.getElementById('btn-shuffle').addEventListener('click', () => this.handleShuffle());
+      document.getElementById('btn-hint-bulb').addEventListener('click', () => this.handleBulbHint());
+      document.getElementById('btn-hint-target').addEventListener('click', () => this.handleTargetMagnifier());
+      document.getElementById('btn-hint-lightning').addEventListener('click', () => this.handleLightning());
+      document.getElementById('btn-bonus-chest').addEventListener('click', () => {
+        this.showToast(`🎁 Bonus Sandık: ${this.bonusChestCount}/5 kelime`);
+      });
 
-      getCurrentLevel() {
-        return WOW_LEVELS[this.state.levelIndex % WOW_LEVELS.length];
-      }
+      // Modals
+      document.getElementById('btn-discovery-continue').addEventListener('click', () => {
+        this.dom.modalDiscovery.classList.remove('active');
+        this.openVictoryModal();
+      });
 
-      init() {
-        this.setupWindowResize();
-        this.setupEventListeners();
-        this.updateHeaderUI();
-      }
-
-      setupWindowResize() {
-        let timer = null;
-        const resize = () => {
-          this.canvas.width = window.innerWidth;
-          this.canvas.height = window.innerHeight;
-          this.adjustCrosswordScale();
-          if (this.letterWheel) {
-            this.wheelRect = this.letterWheel.getBoundingClientRect();
-          }
-        };
-        window.addEventListener('resize', () => {
-          clearTimeout(timer);
-          timer = setTimeout(resize, 60);
+      // Victory Modals
+      document.getElementById('btn-victory-normal').addEventListener('click', () => {
+        this.dom.modalVictory.classList.remove('active');
+        this.addCoins(25);
+        this.advanceAfterVictory();
+      });
+      document.getElementById('btn-victory-2x').addEventListener('click', () => {
+        this.dom.modalVictory.classList.remove('active');
+        this.showRewardedAd(50, () => {
+          this.advanceAfterVictory();
         });
-        resize();
-      }
+      });
 
-      setupEventListeners() {
-        // Screen switching
-        document.getElementById('btn-home-play').addEventListener('click', () => {
-          this.showScreen('game');
-          this.loadLevel(this.state.levelIndex);
+      // Insufficient Coins
+      document.getElementById('btn-close-no-coins').addEventListener('click', () => {
+        this.dom.modalNoCoins.classList.remove('active');
+      });
+      document.getElementById('btn-watch-ad-for-coins').addEventListener('click', () => {
+        this.dom.modalNoCoins.classList.remove('active');
+        this.showRewardedAd(100, () => {
+          this.showToast("🎉 +100 Altın hesabına eklendi!");
         });
+      });
 
-        document.getElementById('btn-back-home').addEventListener('click', () => {
-          this.showScreen('home');
-          this.saveState();
-        });
+      // Resize
+      window.addEventListener('resize', () => {
+        this.cacheWheelGeometry();
+        this.resizeCrosswordBoard();
+      });
 
-        // Sound Toggle
-        document.getElementById('btn-sound').addEventListener('click', (e) => {
-          const isEnabled = soundFX.toggle();
-          e.target.textContent = isEnabled ? '🔊' : '🔇';
-          e.target.style.opacity = isEnabled ? '1' : '0.5';
-        });
+      // Wheel Pointer Drag Engine
+      const wrapper = this.dom.wheelWrapper;
+      wrapper.addEventListener('pointerdown', (e) => this.onPointerDown(e));
+      wrapper.addEventListener('pointermove', (e) => this.onPointerMove(e));
+      wrapper.addEventListener('pointerup', (e) => this.onPointerUp(e));
+      wrapper.addEventListener('pointercancel', (e) => this.onPointerUp(e));
 
-        // Functional Game Buttons (Shuffle, Hint, Free Coins)
-        document.getElementById('btn-shuffle').addEventListener('click', () => this.shuffleWheel());
-        document.getElementById('btn-hint').addEventListener('click', () => this.useHint());
-        document.getElementById('btn-free-coins').addEventListener('click', () => this.showRewardedAd());
-        document.getElementById('btn-home-rewarded').addEventListener('click', () => this.showRewardedAd());
-
-        // Victory Buttons
-        document.getElementById('btn-next-level').addEventListener('click', () => this.nextLevel());
-        document.getElementById('btn-share').addEventListener('click', () => this.shareGame());
-
-        // Interstitial Ad Skip
-        document.getElementById('btn-skip-interstitial').addEventListener('click', () => {
-          this.closeModal(this.modalInterstitial);
-        });
-
-        // Pointer Gestures on Turntable (Zero-latency touch tracking)
-        this.letterWheel.addEventListener('pointerdown', (e) => this.onPointerDown(e), { passive: false });
-        window.addEventListener('pointermove', (e) => this.onPointerMove(e), { passive: false });
-        window.addEventListener('pointerup', () => this.onPointerUp(), { passive: false });
-        window.addEventListener('pointercancel', () => this.onPointerUp(), { passive: false });
-      }
-
-      showScreen(name) {
-        if (name === 'game') {
-          this.screenHome.classList.add('hidden');
-          this.screenGame.classList.remove('hidden');
-          setTimeout(() => {
-            this.adjustCrosswordScale();
-            this.updateWheelGeometry();
-          }, 60);
-        } else {
-          this.screenGame.classList.add('hidden');
-          this.screenHome.classList.remove('hidden');
+      // Haptic Helper
+      this.vibrate = (ms = 15) => {
+        if ('vibrate' in navigator) {
+          try { navigator.vibrate(ms); } catch (err) {}
         }
-      }
+      };
+    }
 
-      loadLevel(index) {
-        this.state.levelIndex = index;
-        this.saveState();
+    /* ---------------- UI Updates ---------------- */
+    updateTopbar() {
+      this.dom.coinsDisplay.textContent = this.coins;
+      this.dom.streakIndicator.textContent = `🔥 ${this.streak}`;
+      this.dom.bonusCounter.textContent = `${this.bonusChestCount}/5`;
+    }
 
-        const level = this.getCurrentLevel();
-        this.levelDisplay.textContent = level.level;
-        this.locationBadge.textContent = toUpperTR(level.location.split(' - ')[0]);
-        this.scenicBg.style.backgroundImage = `url('${level.bg}')`;
+    addCoins(amount) {
+      this.coins += amount;
+      localStorage.setItem('wow_coins', this.coins);
+      this.sound.playCoinShower();
+      this.updateTopbar();
+    }
 
-        this.cellMap.clear();
-        this.solvedWordIds.clear();
-        this.bonusWordsFound.clear();
-        this.closeModal(this.modalVictory);
+    showToast(message) {
+      const toast = document.createElement('div');
+      toast.className = 'floating-toast';
+      toast.textContent = message;
+      document.body.appendChild(toast);
+      setTimeout(() => toast.remove(), 1600);
+    }
 
-        // Build crossword matrix
-        this.renderCrosswordGrid(level);
-        this.renderWheel(level.wheel);
-      }
+    /* ---------------- Crossword Layout Engine ---------------- */
+    loadLevel(levelIndex) {
+      this.isDailyMode = false;
+      this.level = LEVELS_DATA[levelIndex % LEVELS_DATA.length];
+      this.unlockedWords.clear();
+      this.revealedCells.clear();
+      this.foundBonusWords.clear();
+      this.dailyStarCells.clear();
+      this.dailyStarsCollected.clear();
 
-      renderCrosswordGrid(level) {
-        this.boardEl.innerHTML = '';
+      this.setupLevelUI();
+    }
 
-        let maxR = 0, maxC = 0;
-        level.words.forEach(w => {
-          const endR = w.dir === 'V' ? w.row + w.word.length - 1 : w.row;
-          const endC = w.dir === 'H' ? w.col + w.word.length - 1 : w.col;
-          if (endR > maxR) maxR = endR;
-          if (endC > maxC) maxC = endC;
-        });
+    startDailyChallenge() {
+      this.isDailyMode = true;
+      this.level = DAILY_LEVEL_DATA;
+      this.unlockedWords.clear();
+      this.revealedCells.clear();
+      this.foundBonusWords.clear();
+      this.dailyStarCells.clear();
+      this.dailyStarsCollected.clear();
 
-        const rows = maxR + 1;
-        const cols = maxC + 1;
+      this.setupLevelUI();
+    }
 
-        // Map overlapping cell data
-        const gridData = {};
-        level.words.forEach(wObj => {
-          for (let i = 0; i < wObj.word.length; i++) {
-            const r = wObj.dir === 'V' ? wObj.row + i : wObj.row;
-            const c = wObj.dir === 'H' ? wObj.col + i : wObj.col;
-            const key = `${r},${c}`;
-            const char = toUpperTR(wObj.word[i]);
+    setupLevelUI() {
+      // Background Image
+      this.dom.bgLayer.style.backgroundImage = `url('${this.level.bg}')`;
 
-            if (!gridData[key]) {
-              gridData[key] = { char: char, wordIds: [wObj.id] };
-            } else {
-              gridData[key].wordIds.push(wObj.id);
-            }
-          }
-        });
+      // Header Info
+      this.dom.regionText.textContent = this.level.region;
+      this.dom.levelTitleText.textContent = this.isDailyMode ? "Günün Bulmacası" : `Bölüm ${this.level.id}`;
 
-        // Set CSS Grid template
-        this.boardEl.style.gridTemplateColumns = `repeat(${cols}, var(--cell-size, 38px))`;
-        this.boardEl.style.gridTemplateRows = `repeat(${rows}, var(--cell-size, 38px))`;
-        this.boardRows = rows;
-        this.boardCols = cols;
+      // Build Crossword Board
+      this.renderCrosswordGrid();
 
-        for (let r = 0; r < rows; r++) {
-          for (let c = 0; c < cols; c++) {
-            const key = `${r},${c}`;
-            const cell = document.createElement('div');
-            cell.className = 'cw-cell';
-            cell.dataset.r = r;
-            cell.dataset.c = c;
+      // Render Wheel
+      this.currentWheelLetters = [...this.level.wheel];
+      this.renderWheel();
+    }
 
-            if (gridData[key]) {
-              cell.classList.add('slot');
-              cell.dataset.char = gridData[key].char;
-              this.cellMap.set(key, {
-                el: cell,
-                char: gridData[key].char,
-                wordIds: gridData[key].wordIds,
-                revealed: false
-              });
-            } else {
-              cell.classList.add('empty');
-            }
+    renderCrosswordGrid() {
+      const words = this.level.words;
 
-            this.boardEl.appendChild(cell);
-          }
-        }
+      // 1. Calculate Bounding Box
+      let minR = Infinity, maxR = -Infinity;
+      let minC = Infinity, maxC = -Infinity;
 
-        this.adjustCrosswordScale();
-      }
+      words.forEach(w => {
+        const len = w.word.length;
+        const endR = w.dir === 'V' ? w.row + len - 1 : w.row;
+        const endC = w.dir === 'H' ? w.col + len - 1 : w.col;
 
-      adjustCrosswordScale() {
-        if (!this.boardRows || !this.boardCols) return;
-        const boardArea = this.boardEl.parentElement;
-        const availW = Math.min(boardArea ? boardArea.clientWidth - 20 : 380, 400);
-        const availH = Math.max(160, boardArea ? boardArea.clientHeight - 20 : 250);
+        minR = Math.min(minR, w.row);
+        maxR = Math.max(maxR, endR);
+        minC = Math.min(minC, w.col);
+        maxC = Math.max(maxC, endC);
+      });
 
-        const cellW = Math.floor((availW - (this.boardCols - 1) * 4) / this.boardCols);
-        const cellH = Math.floor((availH - (this.boardRows - 1) * 4) / this.boardRows);
+      const totalRows = maxR - minR + 1;
+      const totalCols = maxC - minC + 1;
 
-        const cellSize = Math.max(26, Math.min(46, cellW, cellH));
-        const font = Math.max(14, Math.floor(cellSize * 0.54));
+      // 2. Map coordinates (normalized) to letters & words
+      this.gridLetterMap = new Map(); // key: "r_c" -> { char, wordIds: [] }
+      words.forEach(w => {
+        const normR = w.row - minR;
+        const normC = w.col - minC;
+        for (let i = 0; i < w.word.length; i++) {
+          const r = normR + (w.dir === 'V' ? i : 0);
+          const c = normC + (w.dir === 'H' ? i : 0);
+          const key = `${r}_${c}`;
+          const ch = w.word[i].toLocaleUpperCase('tr-TR');
 
-        this.boardEl.style.setProperty('--cell-size', `${cellSize}px`);
-        this.boardEl.style.setProperty('--cell-font', `${font}px`);
-      }
-
-      updateWheelGeometry() {
-        if (!this.letterWheel) return;
-        this.wheelRect = this.letterWheel.getBoundingClientRect();
-      }
-
-      renderWheel(letters) {
-        this.letterWheel.innerHTML = '';
-        this.wheelSvg.innerHTML = '';
-        this.nodeData = [];
-
-        const turntableW = this.letterWheel.clientWidth || 220;
-        const center = turntableW / 2;
-        const radius = center * 0.65;
-        const total = letters.length;
-
-        let nodeSize = 52;
-        let fontSize = 25;
-        if (total === 5) { nodeSize = 48; fontSize = 23; }
-        else if (total >= 6) { nodeSize = 42; fontSize = 20; }
-
-        if (turntableW < 200) {
-          nodeSize = Math.floor(nodeSize * 0.88);
-          fontSize = Math.floor(fontSize * 0.88);
-        }
-
-        this.letterWheel.style.setProperty('--node-size', `${nodeSize}px`);
-        this.letterWheel.style.setProperty('--node-font-size', `${fontSize}px`);
-
-        letters.forEach((charRaw, i) => {
-          const char = toUpperTR(charRaw);
-          const angle = (i * (360 / total) - 90) * (Math.PI / 180);
-          const x = center + radius * Math.cos(angle);
-          const y = center + radius * Math.sin(angle);
-
-          const node = document.createElement('div');
-          node.className = 'letter-node';
-          node.textContent = char;
-          node.dataset.char = char;
-          node.style.left = `${x.toFixed(1)}px`;
-          node.style.top = `${y.toFixed(1)}px`;
-
-          this.letterWheel.appendChild(node);
-
-          this.nodeData.push({
-            el: node,
-            char: char,
-            x: x,
-            y: y,
-            hitRadius: (nodeSize / 2) + 12
-          });
-        });
-
-        this.updateWheelGeometry();
-      }
-
-      shuffleWheel() {
-        const level = this.getCurrentLevel();
-        const letters = [...level.wheel];
-        const targetWords = level.words.map(w => w.word);
-
-        // Smart circular scramble
-        let best = [...letters];
-        let minViolations = 999;
-        for (let t = 0; t < 150; t++) {
-          letters.sort(() => Math.random() - 0.5);
-          const doubled = letters.join('') + letters.join('');
-          const revDoubled = [...letters].reverse().join('') + [...letters].reverse().join('');
-          let v = 0;
-          for (const tw of targetWords) {
-            if (tw.length >= 3 && (doubled.includes(tw) || revDoubled.includes(tw))) v += tw.length;
-          }
-          if (v === 0) { best = [...letters]; break; }
-          if (v < minViolations) { minViolations = v; best = [...letters]; }
-        }
-
-        soundFX.playShuffle();
-        this.renderWheel(best);
-      }
-
-      // -------------------------------------------------------------
-      // 4. DRAWING LAYER & TOUCH TRACKING (120 FPS CACHED GEOMETRY)
-      // -------------------------------------------------------------
-      onPointerDown(e) {
-        if (e.cancelable) e.preventDefault();
-        this.updateWheelGeometry();
-
-        const relX = e.clientX - this.wheelRect.left;
-        const relY = e.clientY - this.wheelRect.top;
-
-        const hit = this.nodeData.find(n => Math.hypot(relX - n.x, relY - n.y) <= n.hitRadius);
-        if (hit) {
-          this.isDragging = true;
-          this.selectedNodes = [hit];
-          this.currentWord = hit.char;
-          hit.el.classList.add('selected');
-
-          soundFX.playLetterTone(0);
-          if (navigator.vibrate) navigator.vibrate(15);
-
-          this.updatePreview();
-          this.updateSvgPolyline(relX, relY);
-        }
-      }
-
-      onPointerMove(e) {
-        if (!this.isDragging) return;
-        if (e.cancelable) e.preventDefault();
-
-        const relX = e.clientX - this.wheelRect.left;
-        const relY = e.clientY - this.wheelRect.top;
-
-        const hit = this.nodeData.find(n => Math.hypot(relX - n.x, relY - n.y) <= n.hitRadius);
-        if (hit) {
-          const len = this.selectedNodes.length;
-          // Backtrack support
-          if (len >= 2 && hit === this.selectedNodes[len - 2]) {
-            const popped = this.selectedNodes.pop();
-            popped.el.classList.remove('selected');
-            this.currentWord = this.selectedNodes.map(n => n.char).join('');
-            soundFX.playLetterTone(this.selectedNodes.length - 1);
-            if (navigator.vibrate) navigator.vibrate(10);
-            this.updatePreview();
-          } else if (!this.selectedNodes.includes(hit)) {
-            this.selectedNodes.push(hit);
-            this.currentWord += hit.char;
-            hit.el.classList.add('selected');
-
-            soundFX.playLetterTone(this.selectedNodes.length - 1);
-            if (navigator.vibrate) navigator.vibrate(15);
-            this.updatePreview();
-          }
-        }
-
-        this.updateSvgPolyline(relX, relY);
-      }
-
-      onPointerUp() {
-        if (!this.isDragging) return;
-        this.isDragging = false;
-
-        this.validateWord(this.currentWord);
-
-        this.selectedNodes.forEach(item => item.el.classList.remove('selected'));
-        this.selectedNodes = [];
-        this.currentWord = "";
-        this.wheelSvg.innerHTML = '';
-        this.wordPreview.classList.remove('active');
-        this.wordPreview.textContent = "";
-      }
-
-      updateSvgPolyline(pointerRelX, pointerRelY) {
-        if (this.selectedNodes.length === 0) {
-          this.wheelSvg.innerHTML = '';
-          return;
-        }
-
-        const points = this.selectedNodes.map(n => `${n.x.toFixed(1)},${n.y.toFixed(1)}`);
-        if (this.isDragging && pointerRelX !== undefined && pointerRelY !== undefined) {
-          points.push(`${pointerRelX.toFixed(1)},${pointerRelY.toFixed(1)}`);
-        }
-
-        let polyline = this.wheelSvg.firstElementChild;
-        if (!polyline) {
-          polyline = document.createElementNS('http://www.w3.org/2000/svg', 'polyline');
-          this.wheelSvg.appendChild(polyline);
-        }
-        polyline.setAttribute('points', points.join(' '));
-      }
-
-      updatePreview() {
-        if (this.currentWord.length > 0) {
-          this.wordPreview.textContent = this.currentWord;
-          this.wordPreview.classList.add('active');
-        } else {
-          this.wordPreview.classList.remove('active');
-        }
-      }
-
-      // -------------------------------------------------------------
-      // 5. WORD VALIDATION & REVEAL ANIMATIONS
-      // -------------------------------------------------------------
-      validateWord(wordRaw) {
-        if (!wordRaw || wordRaw.length < 2) return;
-        const word = toUpperTR(wordRaw);
-        const level = this.getCurrentLevel();
-
-        const match = level.words.find(w => toUpperTR(w.word) === word);
-
-        if (match) {
-          if (this.solvedWordIds.has(match.id)) {
-            this.flashToast("Bu kelimeyi zaten buldun!");
-            soundFX.playInvalid();
-            return;
-          }
-
-          this.solvedWordIds.add(match.id);
-          this.revealCrosswordWord(match);
-          soundFX.playWordSuccess();
-          if (navigator.vibrate) navigator.vibrate([15, 30, 20]);
-
-          if (this.solvedWordIds.size === level.words.length) {
-            setTimeout(() => this.triggerVictory(), 600);
-          }
-        } else if (level.bonus && level.bonus.some(b => toUpperTR(b) === word)) {
-          if (this.bonusWordsFound.has(word)) {
-            this.flashToast("Bonus kelimeyi zaten aldın!");
+          if (!this.gridLetterMap.has(key)) {
+            this.gridLetterMap.set(key, { char: ch, wordIds: [w.id], r, c });
           } else {
-            this.bonusWordsFound.add(word);
-            this.bonusProgress++;
-            soundFX.playCoin();
-            this.bonusCapsule.classList.add('bounce');
-            setTimeout(() => this.bonusCapsule.classList.remove('bounce'), 450);
+            this.gridLetterMap.get(key).wordIds.push(w.id);
+          }
+        }
+      });
 
-            if (this.bonusProgress >= 5) {
-              this.bonusProgress = 0;
-              this.state.coins += 25;
-              this.saveState();
-              this.flashToast("🎉 5 Bonus Kelime! +25 🪙 Kazanıldı!");
-            } else {
-              this.flashToast(`🍯 Bonus Kelime: ${word}! (${this.bonusProgress}/5)`);
+      // 3. For Daily Mode: assign 3 stars to 3 random distinct cells
+      if (this.isDailyMode) {
+        const allKeys = Array.from(this.gridLetterMap.keys());
+        // shuffle keys and pick 3
+        const shuffled = [...allKeys].sort(() => 0.5 - Math.random());
+        const starKeys = shuffled.slice(0, Math.min(3, shuffled.length));
+        starKeys.forEach(k => this.dailyStarCells.add(k));
+      }
+
+      // 4. Determine Dynamic Responsive Cell Size
+      this.gridRows = totalRows;
+      this.gridCols = totalCols;
+
+      this.resizeCrosswordBoard();
+    }
+
+    resizeCrosswordBoard() {
+      if (!this.gridRows || !this.gridCols) return;
+      const boardArea = document.getElementById('board-area');
+      const maxW = boardArea.clientWidth - 24;
+      const maxH = boardArea.clientHeight - 24;
+
+      const cellW = Math.floor(maxW / this.gridCols);
+      const cellH = Math.floor(maxH / this.gridRows);
+      let cellSize = Math.min(cellW, cellH);
+      cellSize = Math.max(34, Math.min(cellSize, 60)); // Clamp 34px - 60px
+
+      const gridEl = this.dom.crosswordGrid;
+      gridEl.style.gridTemplateColumns = `repeat(${this.gridCols}, ${cellSize}px)`;
+      gridEl.style.gridTemplateRows = `repeat(${this.gridRows}, ${cellSize}px)`;
+      gridEl.innerHTML = '';
+
+      // Create cells
+      for (let r = 0; r < this.gridRows; r++) {
+        for (let c = 0; c < this.gridCols; c++) {
+          const key = `${r}_${c}`;
+          const cellEl = document.createElement('div');
+          cellEl.className = 'crossword-cell';
+          cellEl.dataset.key = key;
+
+          if (this.gridLetterMap.has(key)) {
+            const cellData = this.gridLetterMap.get(key);
+            const isRevealed = this.revealedCells.has(key);
+
+            cellEl.innerHTML = `
+              <div class="cell-inner">
+                <div class="cell-front"></div>
+                <div class="cell-back">${cellData.char}</div>
+              </div>
+            `;
+
+            if (isRevealed) {
+              cellEl.classList.add('revealed');
             }
-            this.updateHeaderUI();
-          }
-        } else {
-          soundFX.playInvalid();
-          this.wordPreview.classList.add('shake');
-          setTimeout(() => this.wordPreview.classList.remove('shake'), 380);
-        }
-      }
 
-      revealCrosswordWord(wObj) {
-        for (let i = 0; i < wObj.word.length; i++) {
-          const r = wObj.dir === 'V' ? wObj.row + i : wObj.row;
-          const c = wObj.dir === 'H' ? wObj.col + i : wObj.col;
-          const key = `${r},${c}`;
-          const cell = this.cellMap.get(key);
-          if (cell) {
-            setTimeout(() => {
-              cell.revealed = true;
-              cell.el.textContent = cell.char;
-              cell.el.classList.add('revealed');
-            }, i * 65);
-          }
-        }
-      }
-
-      // -------------------------------------------------------------
-      // 6. ECONOMY, HINTS & MONETIZATION (POKI / CRAZYGAMES STANDARDS)
-      // -------------------------------------------------------------
-      useHint() {
-        const cost = 50;
-        if (this.state.coins < cost) {
-          this.flashToast("Yetersiz Altın! Reklam izleyerek +100 Altın kazan!");
-          this.showRewardedAd();
-          return;
-        }
-
-        const unrevealed = [];
-        this.cellMap.forEach(cell => {
-          if (!cell.revealed) unrevealed.push(cell);
-        });
-
-        if (unrevealed.length === 0) {
-          this.flashToast("Açılacak harf kalmadı!");
-          return;
-        }
-
-        const chosen = unrevealed[Math.floor(Math.random() * unrevealed.length)];
-        chosen.revealed = true;
-        chosen.el.textContent = chosen.char;
-        chosen.el.classList.add('revealed', 'hinted');
-
-        this.state.coins -= cost;
-        this.saveState();
-        soundFX.playHint();
-
-        // Check if any word is fully revealed
-        const level = this.getCurrentLevel();
-        level.words.forEach(wObj => {
-          if (!this.solvedWordIds.has(wObj.id)) {
-            let all = true;
-            for (let i = 0; i < wObj.word.length; i++) {
-              const r = wObj.dir === 'V' ? wObj.row + i : wObj.row;
-              const c = wObj.dir === 'H' ? wObj.col + i : wObj.col;
-              const cd = this.cellMap.get(`${r},${c}`);
-              if (!cd || !cd.revealed) { all = false; break; }
+            // Daily Challenge Star Badge
+            if (this.isDailyMode && this.dailyStarCells.has(key) && !this.dailyStarsCollected.has(key)) {
+              const starEl = document.createElement('div');
+              starEl.className = 'star-badge';
+              starEl.textContent = '⭐';
+              cellEl.appendChild(starEl);
             }
-            if (all) this.solvedWordIds.add(wObj.id);
-          }
-        });
 
-        if (this.solvedWordIds.size === level.words.length) {
-          setTimeout(() => this.triggerVictory(), 600);
-        }
-      }
+            // Target click handler
+            cellEl.addEventListener('click', () => this.onCellClicked(key));
 
-      // Rewarded Ad (+100 Coins) - Poki / CrazyGames Hooks & High-polish Simulator
-      showRewardedAd() {
-        const grantReward = () => {
-          this.state.coins += 100;
-          this.saveState();
-          soundFX.playCoin();
-          this.flashToast("🪙 +100 Altın Bakiyene Eklendi!");
-        };
-
-        // 1. Check CrazyGames SDK
-        if (window.CrazyGames && window.CrazyGames.SDK && window.CrazyGames.SDK.ad) {
-          window.CrazyGames.SDK.ad.requestAd('rewarded', {
-            adFinished: () => grantReward(),
-            adError: () => grantReward()
-          });
-          return;
-        }
-
-        // 2. Check Poki SDK
-        if (window.PokiSDK && window.PokiSDK.rewardedBreak) {
-          window.PokiSDK.rewardedBreak().then(success => {
-            if (success) grantReward();
-          });
-          return;
-        }
-
-        // 3. Fallback High-polish Built-in Video Ad Simulator (5 Seconds)
-        this.openModal(this.modalRewarded);
-        let secondsLeft = 5;
-        const timerText = document.getElementById('ad-timer-text');
-        const fillBar = document.getElementById('ad-progress-fill');
-        fillBar.style.width = '0%';
-        timerText.textContent = `${secondsLeft} saniye kaldı...`;
-
-        const interval = setInterval(() => {
-          secondsLeft--;
-          fillBar.style.width = `${(5 - secondsLeft) * 20}%`;
-          if (secondsLeft > 0) {
-            timerText.textContent = `${secondsLeft} saniye kaldı...`;
           } else {
-            clearInterval(interval);
-            timerText.textContent = 'Tamamlandı! Ödül veriliyor...';
-            setTimeout(() => {
-              this.closeModal(this.modalRewarded);
-              grantReward();
-            }, 400);
+            cellEl.classList.add('hidden');
           }
-        }, 900);
-      }
 
-      // Interstitial Ad (Every 2 levels)
-      showInterstitialAd(callback) {
-        // Poki / CrazyGames Interstitial Hooks
-        if (window.CrazyGames && window.CrazyGames.SDK && window.CrazyGames.SDK.ad) {
-          window.CrazyGames.SDK.ad.requestAd('midgame', {
-            adFinished: () => callback && callback(),
-            adError: () => callback && callback()
-          });
-          return;
+          gridEl.appendChild(cellEl);
         }
-
-        if (window.PokiSDK && window.PokiSDK.commercialBreak) {
-          window.PokiSDK.commercialBreak().then(() => callback && callback());
-          return;
-        }
-
-        // Built-in simulator with 3s skip
-        this.openModal(this.modalInterstitial);
-        const btnSkip = document.getElementById('btn-skip-interstitial');
-        let countdown = 3;
-        btnSkip.textContent = `${countdown}s sonra geçebilirsiniz`;
-        btnSkip.disabled = true;
-
-        const timer = setInterval(() => {
-          countdown--;
-          if (countdown > 0) {
-            btnSkip.textContent = `${countdown}s sonra geçebilirsiniz`;
-          } else {
-            clearInterval(timer);
-            btnSkip.textContent = 'Reklamı Kapat ➔';
-            btnSkip.disabled = false;
-            btnSkip.style.background = 'var(--green)';
-            btnSkip.onclick = () => {
-              this.closeModal(this.modalInterstitial);
-              if (callback) callback();
-            };
-          }
-        }, 900);
-      }
-
-      triggerVictory() {
-        soundFX.playVictory();
-        this.startConfetti();
-        this.state.coins += 30;
-        this.saveState();
-
-        const level = this.getCurrentLevel();
-        document.getElementById('victory-title').textContent = `Bölüm ${level.level} Tamamlandı!`;
-        this.openModal(this.modalVictory);
-      }
-
-      nextLevel() {
-        this.stopConfetti();
-        const nextIdx = this.state.levelIndex + 1;
-        this.closeModal(this.modalVictory);
-
-        // Every 2 levels show interstitial ad
-        if (nextIdx % 2 === 0) {
-          this.showInterstitialAd(() => {
-            this.loadLevel(nextIdx % WOW_LEVELS.length);
-          });
-        } else {
-          this.loadLevel(nextIdx % WOW_LEVELS.length);
-        }
-      }
-
-      shareGame() {
-        const lvl = this.getCurrentLevel();
-        const text = `🏆 Kelime Harikaları'nda ${lvl.location} (Bölüm ${lvl.level}/${WOW_LEVELS.length}) çengelini bitirdim! Sen de oyna: https://umutcandemircan.github.io/kelime-harikalari/`;
-        if (navigator.share) {
-          navigator.share({ title: 'Kelime Harikaları', text }).catch(() => {});
-        } else {
-          navigator.clipboard.writeText(text);
-          this.flashToast("Meydan okuma panoya kopyalandı!");
-        }
-      }
-
-      openModal(el) { el.classList.remove('hidden'); }
-      closeModal(el) { el.classList.add('hidden'); }
-
-      flashToast(msg) {
-        const toast = document.getElementById('ka-toast');
-        toast.textContent = msg;
-        toast.style.display = 'block';
-        clearTimeout(this.toastTimer);
-        this.toastTimer = setTimeout(() => { toast.style.display = 'none'; }, 2400);
-      }
-
-      // -------------------------------------------------------------
-      // 7. PROCEDURAL CONFETTI CANNON
-      // -------------------------------------------------------------
-      startConfetti() {
-        this.confettiParticles = [];
-        const colors = ['#f59e0b', '#fbbf24', '#10b981', '#3b82f6', '#ec4899', '#ffffff'];
-        for (let i = 0; i < 90; i++) {
-          this.confettiParticles.push({
-            x: this.canvas.width / 2,
-            y: this.canvas.height / 2,
-            vx: (Math.random() - 0.5) * 14,
-            vy: (Math.random() - 0.7) * 16,
-            size: Math.random() * 8 + 4,
-            color: colors[Math.floor(Math.random() * colors.length)],
-            rotation: Math.random() * 360,
-            rSpeed: (Math.random() - 0.5) * 12,
-            gravity: 0.3
-          });
-        }
-
-        const render = () => {
-          if (this.confettiParticles.length === 0) return;
-          this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-
-          this.confettiParticles.forEach((p, idx) => {
-            p.vy += p.gravity;
-            p.x += p.vx;
-            p.y += p.vy;
-            p.rotation += p.rSpeed;
-
-            this.ctx.save();
-            this.ctx.translate(p.x, p.y);
-            this.ctx.rotate((p.rotation * Math.PI) / 180);
-            this.ctx.fillStyle = p.color;
-            this.ctx.fillRect(-p.size / 2, -p.size / 2, p.size, p.size);
-            this.ctx.restore();
-
-            if (p.y > this.canvas.height + 25) {
-              this.confettiParticles.splice(idx, 1);
-            }
-          });
-
-          this.confettiAnimId = requestAnimationFrame(render);
-        };
-
-        render();
-      }
-
-      stopConfetti() {
-        if (this.confettiAnimId) cancelAnimationFrame(this.confettiAnimId);
-        this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-        this.confettiParticles = [];
       }
     }
 
-    window.addEventListener('DOMContentLoaded', () => {
-      window.game = new WoWGame();
-    });
+    /* ---------------- Wheel & Interaction ---------------- */
+    renderWheel() {
+      const container = this.dom.wheelNodesContainer;
+      container.innerHTML = '';
+
+      const letters = this.currentWheelLetters;
+      const count = letters.length;
+      const radius = (this.dom.wheelWrapper.clientWidth / 2) - 34;
+      const center = this.dom.wheelWrapper.clientWidth / 2;
+
+      this.wheelNodePositions = [];
+
+      letters.forEach((char, idx) => {
+        // Angle in radians (starting from top -pi/2)
+        const angle = (idx * (2 * Math.PI / count)) - (Math.PI / 2);
+        const x = center + radius * Math.cos(angle);
+        const y = center + radius * Math.sin(angle);
+
+        const node = document.createElement('div');
+        node.className = 'wheel-node';
+        node.textContent = char;
+        node.style.left = `${x}px`;
+        node.style.top = `${y}px`;
+        node.dataset.index = idx;
+
+        container.appendChild(node);
+
+        this.wheelNodePositions.push({
+          index: idx,
+          char: char,
+          x: x,
+          y: y,
+          element: node
+        });
+      });
+    }
+
+    cacheWheelGeometry() {
+      if (!this.currentWheelLetters) return;
+      this.renderWheel();
+    }
+
+    handleShuffle() {
+      this.vibrate(20);
+      // Circular rotation animation
+      this.dom.wheelNodesContainer.style.transition = 'transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1)';
+      this.dom.wheelNodesContainer.style.transform = 'rotate(360deg)';
+
+      setTimeout(() => {
+        // Shuffle letters
+        this.currentWheelLetters.sort(() => 0.5 - Math.random());
+        this.dom.wheelNodesContainer.style.transition = 'none';
+        this.dom.wheelNodesContainer.style.transform = 'rotate(0deg)';
+        this.renderWheel();
+      }, 400);
+    }
+
+    /* ---------------- Pointer Drag Handling ---------------- */
+    onPointerDown(e) {
+      this.sound.init();
+      this.isDragging = true;
+      this.selectedNodeIndices = [];
+      this.currentLetters = [];
+      this.dom.wheelWrapper.setPointerCapture(e.pointerId);
+
+      this.checkPointerCollision(e.clientX, e.clientY);
+    }
+
+    onPointerMove(e) {
+      if (!this.isDragging) return;
+      this.checkPointerCollision(e.clientX, e.clientY);
+      this.updateConnectionLine(e.clientX, e.clientY);
+    }
+
+    onPointerUp(e) {
+      if (!this.isDragging) return;
+      this.isDragging = false;
+
+      // Submit Word
+      if (this.currentLetters.length > 0) {
+        const formed = this.currentLetters.join('').toLocaleUpperCase('tr-TR');
+        this.submitWord(formed);
+      }
+
+      // Reset Wheel & Line
+      this.selectedNodeIndices = [];
+      this.currentLetters = [];
+      this.dom.connectionLine.setAttribute('points', '');
+      this.dom.wordPreview.classList.remove('active');
+      document.querySelectorAll('.wheel-node.selected').forEach(n => n.classList.remove('selected'));
+    }
+
+    checkPointerCollision(clientX, clientY) {
+      const rect = this.dom.wheelWrapper.getBoundingClientRect();
+      const relX = clientX - rect.left;
+      const relY = clientY - rect.top;
+
+      // Hit radius for wheel nodes
+      const hitRadius = 36;
+
+      for (let i = 0; i < this.wheelNodePositions.length; i++) {
+        const node = this.wheelNodePositions[i];
+        const dx = relX - node.x;
+        const dy = relY - node.y;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+
+        if (dist <= hitRadius) {
+          // If not already in current sequence
+          if (!this.selectedNodeIndices.includes(i)) {
+            this.selectedNodeIndices.push(i);
+            this.currentLetters.push(node.char);
+            node.element.classList.add('selected');
+
+            this.vibrate(15);
+            this.sound.playLetterNote(this.selectedNodeIndices.length - 1);
+
+            // Update Preview Pill
+            const word = this.currentLetters.join('');
+            this.dom.wordPreview.textContent = word;
+            this.dom.wordPreview.classList.add('active');
+
+          } else if (this.selectedNodeIndices.length > 1 &&
+                     this.selectedNodeIndices[this.selectedNodeIndices.length - 2] === i) {
+            // Undo last selected letter if dragging back
+            const popped = this.selectedNodeIndices.pop();
+            this.currentLetters.pop();
+            this.wheelNodePositions[popped].element.classList.remove('selected');
+
+            this.vibrate(10);
+            const word = this.currentLetters.join('');
+            this.dom.wordPreview.textContent = word;
+            if (this.currentLetters.length === 0) {
+              this.dom.wordPreview.classList.remove('active');
+            }
+          }
+          break;
+        }
+      }
+    }
+
+    updateConnectionLine(pointerClientX, pointerClientY) {
+      if (this.selectedNodeIndices.length === 0) {
+        this.dom.connectionLine.setAttribute('points', '');
+        return;
+      }
+
+      const rect = this.dom.wheelWrapper.getBoundingClientRect();
+      const relX = pointerClientX - rect.left;
+      const relY = pointerClientY - rect.top;
+
+      let pointsStr = '';
+      this.selectedNodeIndices.forEach(idx => {
+        const node = this.wheelNodePositions[idx];
+        pointsStr += `${node.x},${node.y} `;
+      });
+
+      // Add dynamic point trailing mouse/finger
+      pointsStr += `${relX},${relY}`;
+      this.dom.connectionLine.setAttribute('points', pointsStr);
+    }
+
+    /* ---------------- Word Submission & Mechanics ---------------- */
+    submitWord(word) {
+      const matchLevelWord = this.level.words.find(w => w.word === word);
+
+      if (matchLevelWord) {
+        if (this.unlockedWords.has(matchLevelWord.id)) {
+          this.showToast("Bu kelime zaten açıldı!");
+          this.sound.playErrorBuzz();
+        } else {
+          // Word Solved!
+          this.unlockCrosswordWord(matchLevelWord);
+        }
+      } else if (this.level.bonus && this.level.bonus.includes(word)) {
+        // Bonus Word!
+        if (this.foundBonusWords.has(word)) {
+          this.showToast("Bu bonus kelime zaten bulundu!");
+          this.sound.playErrorBuzz();
+        } else {
+          this.foundBonusWords.add(word);
+          this.sound.playWordSuccess();
+          this.showToast(`✨ Bonus Kelime Bulundu: ${word}`);
+
+          this.bonusChestCount++;
+          if (this.bonusChestCount >= 5) {
+            this.bonusChestCount = 0;
+            this.addCoins(30);
+            this.showToast("🎁 Sandık Açıldı! +30 Altın!");
+          }
+          localStorage.setItem('wow_bonus_chest', this.bonusChestCount);
+          this.updateTopbar();
+        }
+      } else {
+        // Invalid Word
+        this.sound.playErrorBuzz();
+        this.vibrate([20, 40, 20]);
+      }
+    }
+
+    unlockCrosswordWord(wordObj) {
+      this.unlockedWords.add(wordObj.id);
+      this.sound.playWordSuccess();
+      this.vibrate(30);
+
+      // Determine bounding box normalization minR, minC
+      let minR = Infinity, minC = Infinity;
+      this.level.words.forEach(w => {
+        minR = Math.min(minR, w.row);
+        minC = Math.min(minC, w.col);
+      });
+
+      const normR = wordObj.row - minR;
+      const normC = wordObj.col - minC;
+
+      // Launch Flying Sparks from Preview Pill to each Cell
+      const previewRect = this.dom.wordPreview.getBoundingClientRect();
+      const originX = previewRect.left + previewRect.width / 2;
+      const originY = previewRect.top + previewRect.height / 2;
+
+      for (let i = 0; i < wordObj.word.length; i++) {
+        const r = normR + (wordObj.dir === 'V' ? i : 0);
+        const c = normC + (wordObj.dir === 'H' ? i : 0);
+        const key = `${r}_${c}`;
+
+        const cellEl = document.querySelector(`.crossword-cell[data-key="${key}"]`);
+        if (cellEl) {
+          const cellRect = cellEl.getBoundingClientRect();
+          const targetX = cellRect.left + cellRect.width / 2;
+          const targetY = cellRect.top + cellRect.height / 2;
+
+          this.spawnSpark(originX, originY, targetX, targetY, i * 80, () => {
+            cellEl.classList.add('revealed');
+            this.revealedCells.add(key);
+
+            // Collect Star if in Daily Mode
+            if (this.isDailyMode && this.dailyStarCells.has(key) && !this.dailyStarsCollected.has(key)) {
+              this.collectDailyStar(key, cellEl);
+            }
+
+            // Check if all words completed
+            this.checkLevelCompletion();
+          });
+        }
+      }
+    }
+
+    spawnSpark(startX, startY, endX, endY, delayMs, onArrive) {
+      setTimeout(() => {
+        const spark = document.createElement('div');
+        spark.className = 'spark-projectile';
+        spark.style.left = `${startX}px`;
+        spark.style.top = `${startY}px`;
+        document.body.appendChild(spark);
+
+        // Force reflow
+        spark.getBoundingClientRect();
+
+        spark.style.transform = `translate(${endX - startX}px, ${endY - startY}px) scale(1.6)`;
+
+        setTimeout(() => {
+          spark.remove();
+          if (onArrive) onArrive();
+        }, 450);
+      }, delayMs);
+    }
+
+    collectDailyStar(cellKey, cellEl) {
+      this.dailyStarsCollected.add(cellKey);
+      const starBadge = cellEl.querySelector('.star-badge');
+      if (starBadge) starBadge.remove();
+
+      // Flying Star animation to Topbar
+      const rect = cellEl.getBoundingClientRect();
+      const star = document.createElement('div');
+      star.className = 'star-projectile';
+      star.textContent = '⭐';
+      star.style.left = `${rect.left + rect.width / 2}px`;
+      star.style.top = `${rect.top + rect.height / 2}px`;
+      document.body.appendChild(star);
+
+      const targetEl = document.getElementById('btn-open-daily');
+      const targetRect = targetEl.getBoundingClientRect();
+
+      star.getBoundingClientRect();
+      star.style.transform = `translate(${targetRect.left - rect.left}px, ${targetRect.top - rect.top}px) scale(0.6)`;
+
+      setTimeout(() => {
+        star.remove();
+        this.stars++;
+        localStorage.setItem('wow_stars', this.stars);
+        this.showToast("⭐ 1 Yıldız Toplandı!");
+      }, 650);
+    }
+
+    checkLevelCompletion() {
+      // If all words are unlocked
+      if (this.unlockedWords.size === this.level.words.length) {
+        setTimeout(() => {
+          this.triggerVictory();
+        }, 600);
+      }
+    }
+
+    triggerVictory() {
+      this.sound.playFanfare();
+      this.startConfetti();
+
+      if (this.isDailyMode) {
+        const todayStr = new Date().toISOString().split('T')[0];
+        if (!this.completedDailyDates.includes(todayStr)) {
+          this.completedDailyDates.push(todayStr);
+          this.streak++;
+          localStorage.setItem('wow_daily_dates', JSON.stringify(this.completedDailyDates));
+          localStorage.setItem('wow_streak', this.streak);
+          this.updateTopbar();
+        }
+      }
+
+      // Show Discovery Card first
+      this.openDiscoveryCard();
+    }
+
+    openDiscoveryCard() {
+      this.dom.discoveryImg.src = this.level.bg;
+      this.dom.discoveryRegion.textContent = this.level.region;
+      this.dom.discoveryTitle.textContent = this.level.title;
+      this.dom.discoveryTrivia.textContent = this.level.trivia;
+
+      this.dom.modalDiscovery.classList.add('active');
+    }
+
+    openVictoryModal() {
+      this.dom.modalVictory.classList.add('active');
+    }
+
+    advanceAfterVictory() {
+      this.stopConfetti();
+      this.levelsCompletedCount++;
+
+      // Check Interstitial Ad Hook (Every 3 levels)
+      if (this.levelsCompletedCount % 3 === 0) {
+        this.showInterstitialAd(() => {
+          this.proceedToNextLevel();
+        });
+      } else {
+        this.proceedToNextLevel();
+      }
+    }
+
+    proceedToNextLevel() {
+      if (this.isDailyMode) {
+        this.loadLevel(this.currentLevelIdx);
+      } else {
+        this.currentLevelIdx = (this.currentLevelIdx + 1) % LEVELS_DATA.length;
+        localStorage.setItem('wow_level_idx', this.currentLevelIdx);
+        this.loadLevel(this.currentLevelIdx);
+      }
+    }
+
+    /* ---------------- Power-ups ---------------- */
+    handleBulbHint() {
+      if (this.coins < 50) {
+        this.dom.modalNoCoins.classList.add('active');
+        return;
+      }
+
+      // Find all unrevealed cells
+      const unrevealedKeys = [];
+      this.gridLetterMap.forEach((val, key) => {
+        if (!this.revealedCells.has(key)) unrevealedKeys.push(key);
+      });
+
+      if (unrevealedKeys.length === 0) return;
+
+      this.coins -= 50;
+      localStorage.setItem('wow_coins', this.coins);
+      this.updateTopbar();
+      this.sound.playHint();
+
+      // Pick 1 random cell
+      const randomKey = unrevealedKeys[Math.floor(Math.random() * unrevealedKeys.length)];
+      this.revealSingleCell(randomKey);
+    }
+
+    handleTargetMagnifier() {
+      if (this.coins < 100) {
+        this.dom.modalNoCoins.classList.add('active');
+        return;
+      }
+
+      this.isTargetingMode = !this.isTargetingMode;
+      const btn = document.getElementById('btn-hint-target');
+
+      if (this.isTargetingMode) {
+        btn.classList.add('active-tool');
+        document.body.classList.add('targeting-mode');
+        this.dom.targetingBanner.style.display = 'block';
+        this.showToast("🎯 Açmak istediğin kutucuğa tıkla!");
+      } else {
+        btn.classList.remove('active-tool');
+        document.body.classList.remove('targeting-mode');
+        this.dom.targetingBanner.style.display = 'none';
+      }
+    }
+
+    onCellClicked(cellKey) {
+      if (!this.isTargetingMode) return;
+      if (this.revealedCells.has(cellKey)) {
+        this.showToast("Bu kutucuk zaten açık!");
+        return;
+      }
+
+      // Consume 100 coins
+      this.coins -= 100;
+      localStorage.setItem('wow_coins', this.coins);
+      this.updateTopbar();
+      this.sound.playHint();
+
+      // Deactivate targeting mode
+      this.isTargetingMode = false;
+      document.getElementById('btn-hint-target').classList.remove('active-tool');
+      document.body.classList.remove('targeting-mode');
+      this.dom.targetingBanner.style.display = 'none';
+
+      this.revealSingleCell(cellKey);
+    }
+
+    handleLightning() {
+      if (this.coins < 150) {
+        this.dom.modalNoCoins.classList.add('active');
+        return;
+      }
+
+      // Find all unrevealed cells
+      const unrevealedKeys = [];
+      this.gridLetterMap.forEach((val, key) => {
+        if (!this.revealedCells.has(key)) unrevealedKeys.push(key);
+      });
+
+      if (unrevealedKeys.length === 0) return;
+
+      this.coins -= 150;
+      localStorage.setItem('wow_coins', this.coins);
+      this.updateTopbar();
+
+      // Screen Flash & Thunder
+      this.dom.screenFlash.classList.add('flash');
+      setTimeout(() => this.dom.screenFlash.classList.remove('flash'), 180);
+      this.sound.playLightning();
+      this.vibrate([40, 60, 40]);
+
+      // Pick 3-4 random unrevealed cells
+      const countToReveal = Math.min(unrevealedKeys.length, Math.floor(Math.random() * 2) + 3);
+      const shuffled = [...unrevealedKeys].sort(() => 0.5 - Math.random());
+      const selected = shuffled.slice(0, countToReveal);
+
+      selected.forEach((key, idx) => {
+        setTimeout(() => {
+          this.revealSingleCell(key);
+        }, idx * 120);
+      });
+    }
+
+    revealSingleCell(cellKey) {
+      const cellEl = document.querySelector(`.crossword-cell[data-key="${cellKey}"]`);
+      if (!cellEl) return;
+
+      cellEl.classList.add('revealed');
+      this.revealedCells.add(cellKey);
+
+      if (this.isDailyMode && this.dailyStarCells.has(cellKey) && !this.dailyStarsCollected.has(cellKey)) {
+        this.collectDailyStar(cellKey, cellEl);
+      }
+
+      // Check if all cells of any word are revealed
+      this.level.words.forEach(w => {
+        if (!this.unlockedWords.has(w.id)) {
+          let minR = Infinity, minC = Infinity;
+          this.level.words.forEach(item => {
+            minR = Math.min(minR, item.row);
+            minC = Math.min(minC, item.col);
+          });
+          const normR = w.row - minR;
+          const normC = w.col - minC;
+
+          let allCellsOpen = true;
+          for (let i = 0; i < w.word.length; i++) {
+            const r = normR + (w.dir === 'V' ? i : 0);
+            const c = normC + (w.dir === 'H' ? i : 0);
+            if (!this.revealedCells.has(`${r}_${c}`)) {
+              allCellsOpen = false;
+              break;
+            }
+          }
+
+          if (allCellsOpen) {
+            this.unlockedWords.add(w.id);
+          }
+        }
+      });
+
+      this.checkLevelCompletion();
+    }
+
+    /* ---------------- Calendar Modal & Daily Challenge ---------------- */
+    openCalendarModal() {
+      const now = new Date();
+      const currentYear = now.getFullYear();
+      const currentMonth = now.getMonth(); // 0-indexed
+      const todayDate = now.getDate();
+      const todayStr = now.toISOString().split('T')[0];
+
+      this.dom.calendarStreakText.textContent = `🔥 ${this.streak} Günlük Seri`;
+
+      const daysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate();
+      const firstDayIndex = new Date(currentYear, currentMonth, 1).getDay(); // 0: Sun, 1: Mon...
+      const startCol = (firstDayIndex + 6) % 7; // Convert to Mon:0, Sun:6
+
+      const container = this.dom.calendarGridContainer;
+      container.innerHTML = '';
+
+      // Day headers
+      const dayHeaders = ['Pzt', 'Sal', 'Çar', 'Per', 'Cum', 'Cmt', 'Paz'];
+      dayHeaders.forEach(dh => {
+        const headerCell = document.createElement('div');
+        headerCell.className = 'calendar-day-header';
+        headerCell.textContent = dh;
+        container.appendChild(headerCell);
+      });
+
+      // Blank slots before 1st of month
+      for (let i = 0; i < startCol; i++) {
+        const blank = document.createElement('div');
+        container.appendChild(blank);
+      }
+
+      // Days 1..daysInMonth
+      for (let day = 1; day <= daysInMonth; day++) {
+        const dayCell = document.createElement('div');
+        dayCell.className = 'calendar-day-cell';
+        dayCell.textContent = day;
+
+        const dateStr = `${currentYear}-${String(currentMonth + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
+
+        if (this.completedDailyDates.includes(dateStr)) {
+          dayCell.classList.add('completed');
+          const check = document.createElement('span');
+          check.className = 'check';
+          check.textContent = '✔';
+          dayCell.appendChild(check);
+        }
+
+        if (day === todayDate) {
+          dayCell.classList.add('today');
+        }
+
+        container.appendChild(dayCell);
+      }
+
+      const isTodayCompleted = this.completedDailyDates.includes(todayStr);
+      const playBtn = document.getElementById('btn-play-daily');
+      const statusDesc = document.getElementById('daily-status-desc');
+
+      if (isTodayCompleted) {
+        playBtn.textContent = "Bugünün Bulmacası Tamamlandı!";
+        playBtn.disabled = true;
+        playBtn.style.opacity = '0.6';
+        statusDesc.textContent = "Harika! Bugünün görevini tamamladın. Yarın serini devam ettirmek için tekrar gel.";
+      } else {
+        playBtn.textContent = "Günün Bulmacasını Oyna (3 ⭐)";
+        playBtn.disabled = false;
+        playBtn.style.opacity = '1';
+        statusDesc.textContent = "Günün bulmacasında 3 parlayan yıldızı toplayarak serini devam ettir!";
+      }
+
+      this.dom.modalCalendar.classList.add('active');
+    }
+
+    /* ---------------- Simulated Ads Engine (CrazyGames / Poki standard) ---------------- */
+    showRewardedAd(rewardCoins, onReward) {
+      const adScreen = this.dom.rewardedAdScreen;
+      const timerEl = this.dom.rewardedAdTimer;
+      const progressEl = this.dom.rewardedAdProgress;
+
+      adScreen.classList.add('active');
+      progressEl.style.width = '0%';
+
+      let timeLeft = 5;
+      timerEl.textContent = `Ödüllü Reklam - ${timeLeft}s`;
+
+      const interval = setInterval(() => {
+        timeLeft--;
+        timerEl.textContent = `Ödüllü Reklam - ${timeLeft}s`;
+        progressEl.style.width = `${((5 - timeLeft) / 5) * 100}%`;
+
+        if (timeLeft <= 0) {
+          clearInterval(interval);
+          setTimeout(() => {
+            adScreen.classList.remove('active');
+            this.addCoins(rewardCoins);
+            if (onReward) onReward();
+          }, 400);
+        }
+      }, 1000);
+    }
+
+    showInterstitialAd(onComplete) {
+      const adScreen = this.dom.interstitialAdScreen;
+      const timerEl = this.dom.interstitialAdTimer;
+
+      adScreen.classList.add('active');
+      let timeLeft = 3;
+      timerEl.textContent = `Geçiş Reklamı - ${timeLeft}s`;
+
+      const interval = setInterval(() => {
+        timeLeft--;
+        timerEl.textContent = `Geçiş Reklamı - ${timeLeft}s`;
+
+        if (timeLeft <= 0) {
+          clearInterval(interval);
+          setTimeout(() => {
+            adScreen.classList.remove('active');
+            if (onComplete) onComplete();
+          }, 300);
+        }
+      }, 1000);
+    }
+
+    /* ---------------- Confetti Particles System ---------------- */
+    startConfetti() {
+      const canvas = this.dom.confettiCanvas;
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+
+      const colors = ['#f59e0b', '#fbbf24', '#22c55e', '#38bdf8', '#ec4899', '#a855f7'];
+      this.confettiParticles = [];
+
+      for (let i = 0; i < 90; i++) {
+        this.confettiParticles.push({
+          x: Math.random() * canvas.width,
+          y: Math.random() * -canvas.height,
+          size: Math.random() * 8 + 6,
+          color: colors[Math.floor(Math.random() * colors.length)],
+          vx: Math.random() * 4 - 2,
+          vy: Math.random() * 5 + 3,
+          rot: Math.random() * 360,
+          vRot: Math.random() * 6 - 3
+        });
+      }
+
+      const animate = () => {
+        this.ctxConfetti.clearRect(0, 0, canvas.width, canvas.height);
+
+        this.confettiParticles.forEach(p => {
+          p.x += p.vx;
+          p.y += p.vy;
+          p.rot += p.vRot;
+
+          this.ctxConfetti.save();
+          this.ctxConfetti.translate(p.x, p.y);
+          this.ctxConfetti.rotate((p.rot * Math.PI) / 180);
+          this.ctxConfetti.fillStyle = p.color;
+          this.ctxConfetti.fillRect(-p.size / 2, -p.size / 2, p.size, p.size);
+          this.ctxConfetti.restore();
+
+          if (p.y > canvas.height + 20) {
+            p.y = -20;
+            p.x = Math.random() * canvas.width;
+          }
+        });
+
+        this.confettiAnimId = requestAnimationFrame(animate);
+      };
+
+      animate();
+    }
+
+    stopConfetti() {
+      if (this.confettiAnimId) cancelAnimationFrame(this.confettiAnimId);
+      this.ctxConfetti.clearRect(0, 0, this.dom.confettiCanvas.width, this.dom.confettiCanvas.height);
+      this.confettiParticles = [];
+    }
+  }
+
+  /* Bootstrap Application */
+  window.addEventListener('DOMContentLoaded', () => {
+    window.game = new WoWGame();
+  });
+
   </script>
 </body>
 </html>

@@ -1,1114 +1,3 @@
-<!DOCTYPE html>
-<html lang="tr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-    <meta name="referrer" content="no-referrer">
-    <title>Sözcük Seçferî: 1. Seçfer Türkiye</title>
-    <!-- SVG Data-URI Favicon: Compass & Gold 'S' -->
-    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='30' fill='%230b132b' stroke='%23f59e0b' stroke-width='3'/%3E%3Cpolygon points='32,8 37,27 56,32 37,37 32,56 27,37 8,32 27,27' fill='%230d9488'/%3E%3Ccircle cx='32' cy='32' r='12' fill='%23f8f9fa'/%3E%3Ctext x='32' y='38' font-size='16' font-weight='900' font-family='sans-serif' fill='%230b132b' text-anchor='middle'%3ES%3C/text%3E%3C/svg%3E">
-
-    <style>
-:root {
-            --bg-slate: #0b132b;
-            --bg-slate-card: #142247;
-            --bg-slate-panel: rgba(11, 19, 43, 0.92);
-            --text-ivory: #f8f9fa;
-            --gold-primary: #f59e0b;
-            --gold-dark: #d97706;
-            --gold-shadow: #b45309;
-            --turquoise: #0d9488;
-            --turquoise-dark: #0f766e;
-            --turquoise-shadow: #042f2c;
-            --seal-red: #991b1b;
-            --seal-shadow: #7f1d1d;
-            --tile-bg: rgba(255, 255, 255, 0.12);
-            --tile-border: rgba(255, 255, 255, 0.28);
-        }
-
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            user-select: none;
-            -webkit-user-select: none;
-            -webkit-tap-highlight-color: transparent;
-            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-        }
-
-        body {
-            background-color: var(--bg-slate);
-            color: var(--text-ivory);
-            width: 100vw;
-            height: 100vh;
-            overflow: hidden;
-            display: flex;
-            flex-direction: column;
-            position: relative;
-        }
-
-        /* 3D TACTILE BUTTONS */
-        .btn-3d {
-            background: linear-gradient(180deg, var(--gold-primary) 0%, var(--gold-dark) 100%);
-            color: #ffffff;
-            border: none;
-            border-radius: 14px;
-            padding: 14px 28px;
-            font-weight: 700;
-            font-size: 16px;
-            letter-spacing: 0.5px;
-            box-shadow: 0 6px 0 var(--gold-shadow), 0 10px 20px rgba(0, 0, 0, 0.45);
-            cursor: pointer;
-            transition: transform 0.08s ease, box-shadow 0.08s ease;
-            will-change: transform;
-            text-shadow: 0 1px 2px rgba(0,0,0,0.5);
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-        }
-
-        .btn-3d:active {
-            transform: translate3d(0, 4px, 0);
-            box-shadow: 0 2px 0 var(--gold-shadow), 0 4px 8px rgba(0, 0, 0, 0.4);
-        }
-
-        .btn-3d-turquoise {
-            background: linear-gradient(180deg, #14b8a6 0%, var(--turquoise) 100%);
-            box-shadow: 0 6px 0 var(--turquoise-shadow), 0 10px 20px rgba(0, 0, 0, 0.45);
-        }
-        .btn-3d-turquoise:active {
-            box-shadow: 0 2px 0 var(--turquoise-shadow), 0 4px 8px rgba(0, 0, 0, 0.4);
-        }
-
-        .btn-3d-indigo {
-            background: linear-gradient(180deg, #6366f1 0%, #4f46e5 100%);
-            box-shadow: 0 6px 0 #312e81, 0 10px 20px rgba(0, 0, 0, 0.45);
-        }
-        .btn-3d-indigo:active {
-            box-shadow: 0 2px 0 #312e81, 0 4px 8px rgba(0, 0, 0, 0.4);
-        }
-
-        .btn-3d-outline {
-            background: rgba(255, 255, 255, 0.08);
-            border: 1px solid rgba(255, 255, 255, 0.25);
-            color: var(--text-ivory);
-            box-shadow: 0 4px 0 rgba(0, 0, 0, 0.5);
-            padding: 8px 16px;
-            font-size: 14px;
-            border-radius: 10px;
-        }
-        .btn-3d-outline:active {
-            transform: translate3d(0, 2px, 0);
-            box-shadow: 0 2px 0 rgba(0, 0, 0, 0.5);
-        }
-
-        /* SCREEN STATE MACHINE */
-        .screen {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            display: none;
-            opacity: 0;
-            flex-direction: column;
-            will-change: opacity, transform;
-            transition: opacity 0.3s cubic-bezier(0.2, 0, 0, 1), transform 0.3s cubic-bezier(0.2, 0, 0, 1);
-        }
-
-        .screen.active {
-            display: flex;
-            opacity: 1;
-            z-index: 10;
-        }
-
-        /* TOP BAR */
-        .top-navbar {
-            width: 100%;
-            height: 60px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 0 16px;
-            background: rgba(11, 19, 43, 0.85);
-            backdrop-filter: blur(8px);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-            z-index: 50;
-        }
-
-        .brand-badge {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            font-weight: 800;
-            font-size: 17px;
-            letter-spacing: 0.5px;
-            color: var(--gold-primary);
-        }
-
-        .brand-logo-svg {
-            width: 32px;
-            height: 32px;
-            filter: drop-shadow(0 0 6px rgba(245, 158, 11, 0.5));
-        }
-
-        .nav-stats {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-
-        .stat-pill {
-            background: rgba(0, 0, 0, 0.45);
-            border: 1px solid rgba(245, 158, 11, 0.4);
-            padding: 6px 14px;
-            border-radius: 20px;
-            font-size: 14px;
-            font-weight: 700;
-            color: var(--gold-primary);
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            box-shadow: inset 0 1px 3px rgba(0,0,0,0.5);
-        }
-
-        /* HUB SCREEN */
-        #screen-hub {
-            background: radial-gradient(circle at 50% 20%, #1e2d5a 0%, #0b132b 75%);
-            justify-content: space-between;
-            align-items: center;
-            padding: 24px 16px;
-            overflow-y: auto;
-        }
-
-        .hub-hero {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
-            margin-top: 10px;
-        }
-
-        .hub-logo-large {
-            width: 90px;
-            height: 90px;
-            margin-bottom: 12px;
-            filter: drop-shadow(0 0 16px rgba(245, 158, 11, 0.6));
-            animation: pulse-slow 3s infinite alternate ease-in-out;
-        }
-
-        @keyframes pulse-slow {
-            0% { transform: scale(1); }
-            100% { transform: scale(1.05); }
-        }
-
-        .hub-title {
-            font-size: 30px;
-            font-weight: 900;
-            color: var(--gold-primary);
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            text-shadow: 0 2px 10px rgba(0,0,0,0.6);
-        }
-
-        .hub-subtitle {
-            font-size: 14px;
-            font-weight: 600;
-            color: #94a3b8;
-            letter-spacing: 4px;
-            margin-top: 4px;
-            text-transform: uppercase;
-        }
-
-        .hub-cards-container {
-            width: 100%;
-            max-width: 420px;
-            display: flex;
-            flex-direction: column;
-            gap: 16px;
-            margin: 20px 0;
-        }
-
-        .hub-card {
-            background: var(--bg-slate-card);
-            border: 1px solid rgba(255, 255, 255, 0.12);
-            border-radius: 18px;
-            padding: 18px 20px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            cursor: pointer;
-            position: relative;
-            overflow: hidden;
-            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
-            transition: transform 0.15s ease, border-color 0.15s ease;
-        }
-
-        .hub-card:active {
-            transform: scale(0.98);
-        }
-
-        .hub-card-primary {
-            border-color: rgba(245, 158, 11, 0.45);
-            background: linear-gradient(135deg, rgba(30, 45, 90, 0.9) 0%, rgba(13, 20, 44, 0.95) 100%);
-        }
-
-        .hub-card-icon {
-            font-size: 32px;
-            width: 52px;
-            height: 52px;
-            background: rgba(255, 255, 255, 0.08);
-            border-radius: 14px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-shrink: 0;
-            margin-right: 14px;
-        }
-
-        .hub-card-content {
-            flex: 1;
-        }
-
-        .hub-card-title {
-            font-size: 18px;
-            font-weight: 800;
-            color: var(--text-ivory);
-        }
-
-        .hub-card-desc {
-            font-size: 12px;
-            color: #94a3b8;
-            margin-top: 3px;
-        }
-
-        .hub-card-badge {
-            font-size: 11px;
-            font-weight: 700;
-            padding: 4px 10px;
-            border-radius: 12px;
-            background: rgba(245, 158, 11, 0.2);
-            color: var(--gold-primary);
-            border: 1px solid rgba(245, 158, 11, 0.4);
-            margin-left: 8px;
-        }
-
-        /* MAP SCREEN */
-        #screen-map {
-            background: #060b18;
-            position: relative;
-            overflow: hidden;
-        }
-
-        #map-stage-wrapper {
-            width: 100%;
-            height: 100%;
-            position: relative;
-            overflow: hidden;
-        }
-
-        #map-viewport {
-            width: 100%;
-            height: 100%;
-            position: absolute;
-            top: 0;
-            left: 0;
-            transform-origin: 0 0;
-            will-change: transform;
-            transition: transform 1.2s cubic-bezier(0.25, 1, 0.5, 1);
-        }
-
-        .turkey-svg {
-            width: 1100px;
-            height: 500px;
-            display: block;
-        }
-
-        .province-path {
-            fill: #13223f;
-            stroke: #0d9488;
-            stroke-width: 1.1;
-            transition: fill 0.2s ease, stroke 0.2s ease;
-            cursor: pointer;
-        }
-
-        .province-path:hover, .province-path.hovered {
-            fill: #1d3561;
-            stroke: var(--gold-primary);
-            stroke-width: 1.8;
-        }
-
-        .province-path.active-city {
-            fill: #223e75;
-            stroke: var(--gold-primary);
-            stroke-width: 2.4;
-            filter: drop-shadow(0 0 10px rgba(245, 158, 11, 0.8));
-        }
-
-        .province-path.completed {
-            fill: #0c333a;
-            stroke: #14b8a6;
-        }
-
-        /* MAP NODES & PINS */
-        .city-pin-node {
-            cursor: pointer;
-            transition: transform 0.2s ease;
-        }
-
-        .city-pin-circle {
-            fill: #0b132b;
-            stroke: var(--gold-primary);
-            stroke-width: 2;
-            transition: r 0.2s ease, fill 0.2s ease;
-        }
-
-        .city-pin-node.current .city-pin-circle {
-            fill: var(--gold-primary);
-            stroke: #ffffff;
-            stroke-width: 3;
-            animation: pulse-pin 1.5s infinite;
-        }
-
-        @keyframes pulse-pin {
-            0% { transform: scale(1); filter: drop-shadow(0 0 4px var(--gold-primary)); }
-            50% { transform: scale(1.3); filter: drop-shadow(0 0 12px var(--gold-primary)); }
-            100% { transform: scale(1); filter: drop-shadow(0 0 4px var(--gold-primary)); }
-        }
-
-        .city-pin-text {
-            font-size: 8px;
-            font-weight: 800;
-            fill: var(--text-ivory);
-            text-anchor: middle;
-            dominant-baseline: central;
-            pointer-events: none;
-        }
-
-        .city-label-text {
-            font-size: 10px;
-            font-weight: 700;
-            fill: var(--text-ivory);
-            text-anchor: middle;
-            pointer-events: none;
-            text-shadow: 0 1px 4px rgba(0,0,0,0.9);
-        }
-
-        /* ROUTE & TRAVEL CARRIER */
-        #travel-route {
-            stroke: var(--gold-primary);
-            stroke-width: 3;
-            stroke-dasharray: 8 6;
-            fill: none;
-            opacity: 0;
-            transition: opacity 0.4s ease;
-            filter: drop-shadow(0 0 6px var(--gold-primary));
-        }
-
-        #travel-carrier {
-            opacity: 0;
-            will-change: transform;
-            filter: drop-shadow(0 0 8px #ffffff);
-            pointer-events: none;
-        }
-
-        /* SLIDING CITY BOTTOM CARD */
-        .map-city-card {
-            position: absolute;
-            bottom: 24px;
-            left: 50%;
-            transform: translate3d(-50%, 120%, 0);
-            width: 92%;
-            max-width: 440px;
-            background: var(--bg-slate-panel);
-            border: 2px solid var(--gold-primary);
-            border-radius: 20px;
-            padding: 18px 20px;
-            backdrop-filter: blur(16px);
-            box-shadow: 0 12px 36px rgba(0, 0, 0, 0.65);
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-            z-index: 40;
-            transition: transform 0.4s cubic-bezier(0.18, 0.89, 0.32, 1.28);
-        }
-
-        .map-city-card.active {
-            transform: translate3d(-50%, 0, 0);
-        }
-
-        .map-city-header {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-
-        .map-city-plate {
-            background: var(--gold-primary);
-            color: #0b132b;
-            font-size: 14px;
-            font-weight: 900;
-            padding: 4px 10px;
-            border-radius: 8px;
-        }
-
-        .map-city-name {
-            font-size: 20px;
-            font-weight: 800;
-            color: var(--text-ivory);
-            margin-left: 10px;
-            flex: 1;
-        }
-
-        /* GAMEPLAY SCREEN */
-        #screen-game {
-            background: #080f24;
-            justify-content: space-between;
-            position: relative;
-        }
-
-        .game-bg-image {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            opacity: 0.28;
-            filter: blur(2px) brightness(0.7);
-            z-index: 1;
-            pointer-events: none;
-            transition: opacity 0.5s ease;
-        }
-
-        .game-ui-layer {
-            position: relative;
-            z-index: 2;
-            width: 100%;
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-        }
-
-        .game-header {
-            width: 100%;
-            padding: 12px 16px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            background: linear-gradient(180deg, rgba(11, 19, 43, 0.95) 0%, rgba(11, 19, 43, 0) 100%);
-        }
-
-        .game-title-group {
-            text-align: center;
-        }
-
-        .game-city-label {
-            font-size: 11px;
-            font-weight: 800;
-            letter-spacing: 2px;
-            color: var(--turquoise);
-            text-transform: uppercase;
-        }
-
-        .game-landmark-label {
-            font-size: 16px;
-            font-weight: 800;
-            color: var(--gold-primary);
-            max-width: 200px;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
-
-        /* CROSSWORD GRID CONTAINER */
-        .crossword-viewport {
-            flex: 1;
-            width: 100%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 16px;
-            overflow: hidden;
-        }
-
-        .crossword-board {
-            position: relative;
-            will-change: transform;
-            transform-origin: center center;
-            transition: transform 0.25s ease;
-        }
-
-        .grid-cell {
-            position: absolute;
-            width: 44px;
-            height: 44px;
-            background: var(--tile-bg);
-            border: 2px solid var(--tile-border);
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 22px;
-            font-weight: 800;
-            color: transparent;
-            backdrop-filter: blur(6px);
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
-            will-change: transform;
-            perspective: 800px;
-            transition: background 0.3s ease, border-color 0.3s ease, transform 0.3s cubic-bezier(0.18, 0.89, 0.32, 1.28);
-        }
-
-        .grid-cell.solved {
-            background: var(--text-ivory);
-            border-color: #ffffff;
-            color: var(--bg-slate);
-            transform: scale(1.04) rotateY(360deg);
-            box-shadow: 0 6px 16px rgba(245, 158, 11, 0.5);
-        }
-
-        .grid-cell.star-cell::after {
-            content: '⭐';
-            position: absolute;
-            top: -6px;
-            right: -6px;
-            font-size: 13px;
-        }
-
-        .grid-cell.target-mode {
-            border-color: #ef4444;
-            animation: target-pulse 0.8s infinite alternate;
-            cursor: pointer;
-        }
-
-        @keyframes target-pulse {
-            0% { transform: scale(1); box-shadow: 0 0 6px #ef4444; }
-            100% { transform: scale(1.1); box-shadow: 0 0 16px #ef4444; }
-        }
-
-        /* PREVIEW PILL & WHEEL */
-        .bottom-action-area {
-            width: 100%;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            padding-bottom: 24px;
-        }
-
-        .word-preview-pill {
-            background: rgba(13, 148, 136, 0.95);
-            color: #ffffff;
-            padding: 8px 24px;
-            border-radius: 24px;
-            font-size: 22px;
-            font-weight: 800;
-            letter-spacing: 3px;
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.4);
-            opacity: 0;
-            transform: translate3d(0, 10px, 0);
-            transition: opacity 0.15s ease, transform 0.15s ease, background 0.25s ease;
-            margin-bottom: 14px;
-            pointer-events: none;
-            min-height: 44px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .word-preview-pill.active {
-            opacity: 1;
-            transform: translate3d(0, 0, 0);
-        }
-
-        .wheel-assembly {
-            position: relative;
-            width: 270px;
-            height: 270px;
-            border-radius: 50%;
-            background: radial-gradient(circle, rgba(20, 34, 71, 0.85) 0%, rgba(11, 19, 43, 0.95) 100%);
-            border: 3px solid rgba(245, 158, 11, 0.35);
-            box-shadow: inset 0 0 24px rgba(0, 0, 0, 0.6), 0 12px 32px rgba(0, 0, 0, 0.55);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            touch-action: none;
-        }
-
-        .wheel-svg-layer {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-        }
-
-        .letter-node {
-            position: absolute;
-            width: 52px;
-            height: 52px;
-            border-radius: 50%;
-            background: var(--text-ivory);
-            color: var(--bg-slate);
-            font-size: 24px;
-            font-weight: 900;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.45);
-            cursor: pointer;
-            transform: translate(-50%, -50%);
-            transition: transform 0.12s cubic-bezier(0.18, 0.89, 0.32, 1.28), background 0.12s ease;
-            user-select: none;
-        }
-
-        .letter-node.selected {
-            background: var(--gold-primary);
-            color: #ffffff;
-            transform: translate(-50%, -50%) scale(1.22);
-            box-shadow: 0 8px 20px rgba(245, 158, 11, 0.6);
-        }
-
-        /* POWER-UPS DOCK */
-        .powerups-dock {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 14px;
-            margin-top: 18px;
-            width: 100%;
-            max-width: 380px;
-        }
-
-        .powerup-btn {
-            width: 54px;
-            height: 54px;
-            border-radius: 16px;
-            background: var(--bg-slate-card);
-            border: 2px solid var(--turquoise);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
-            transition: transform 0.08s ease;
-        }
-
-        .powerup-btn:active {
-            transform: scale(0.92);
-        }
-
-        .powerup-icon {
-            font-size: 20px;
-        }
-
-        .powerup-price {
-            font-size: 10px;
-            font-weight: 800;
-            color: var(--gold-primary);
-            margin-top: 1px;
-        }
-
-        /* DEYİM AVCISI SCREEN */
-        #screen-idiom {
-            background: radial-gradient(circle at 50% 30%, #2e1065 0%, #0b132b 85%);
-            justify-content: space-between;
-        }
-
-        .idiom-banner {
-            font-size: 14px;
-            color: #c084fc;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            margin-bottom: 12px;
-        }
-
-        .idiom-clue-box {
-            font-size: 28px;
-            font-weight: 900;
-            color: var(--gold-primary);
-            text-shadow: 0 2px 12px rgba(0,0,0,0.6);
-            margin-bottom: 24px;
-            text-align: center;
-            padding: 0 20px;
-        }
-
-        .idiom-board {
-            display: flex;
-            gap: 8px;
-            justify-content: center;
-            margin-bottom: 30px;
-        }
-
-        /* MODALS */
-        .modal-backdrop {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(4, 8, 20, 0.88);
-            backdrop-filter: blur(10px);
-            display: none;
-            align-items: center;
-            justify-content: center;
-            z-index: 100;
-            opacity: 0;
-            transition: opacity 0.25s ease;
-            padding: 20px;
-        }
-
-        .modal-backdrop.active {
-            display: flex;
-            opacity: 1;
-        }
-
-        .modal-dialog {
-            background: var(--bg-slate-card);
-            border: 2px solid var(--gold-primary);
-            border-radius: 24px;
-            padding: 24px;
-            max-width: 380px;
-            width: 100%;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.7);
-            transform: scale(0.9);
-            transition: transform 0.25s cubic-bezier(0.18, 0.89, 0.32, 1.28);
-        }
-
-        .modal-backdrop.active .modal-dialog {
-            transform: scale(1);
-        }
-
-        /* DISCOVERY POSTCARD */
-        .postcard-photo-frame {
-            width: 100%;
-            height: 180px;
-            border-radius: 16px;
-            position: relative;
-            overflow: hidden;
-            margin: 14px 0;
-            border: 2px solid rgba(255, 255, 255, 0.2);
-            box-shadow: inset 0 0 16px rgba(0,0,0,0.5);
-        }
-
-        .postcard-img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .wax-seal {
-            position: absolute;
-            bottom: 12px;
-            right: 12px;
-            width: 58px;
-            height: 58px;
-            border-radius: 50%;
-            background: radial-gradient(circle, var(--seal-red) 60%, var(--seal-shadow) 100%);
-            border: 3px dashed rgba(255, 255, 255, 0.5);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #ffffff;
-            font-size: 8px;
-            font-weight: 900;
-            text-transform: uppercase;
-            text-align: center;
-            transform: rotate(-14deg);
-            box-shadow: 0 4px 10px rgba(0,0,0,0.6);
-            line-height: 1.1;
-        }
-
-        .postcard-story {
-            font-size: 13px;
-            color: #cbd5e1;
-            line-height: 1.5;
-            margin-bottom: 20px;
-        }
-
-</style>
-
-
-</head>
-<body>
-
-    <!-- SCREEN 1: HUB / AçNAç MENÜ -->
-    <div id="screen-hub" class="screen active">
-        <div class="top-navbar" style="background: transparent; border: none;">
-            <div class="brand-badge">
-                <svg class="brand-logo-svg" viewBox="0 0 64 64">
-                    <circle cx="32" cy="32" r="30" fill="#0b132b" stroke="#f59e0b" stroke-width="3"/>
-                    <polygon points="32,8 37,27 56,32 37,37 32,56 27,37 8,32 27,27" fill="#0d9488"/>
-                    <circle cx="32" cy="32" r="12" fill="#f8f9fa"/>
-                    <text x="32" y="38" font-size="16" font-weight="900" font-family="sans-serif" fill="#0b132b" text-anchor="middle">S</text>
-                </svg>
-                <span>SÖZCÜK SEFERÎ</span>
-            </div>
-            <div class="nav-stats">
-                <div class="stat-pill">🪙 <span id="hub-coins">250</span></div>
-                <button class="btn-3d-outline" onclick="Açpp.showSeçttings()">⚙️</button>
-            </div>
-        </div>
-
-        <div class="hub-hero">
-            <svg class="hub-logo-large" viewBox="0 0 64 64">
-                <circle cx="32" cy="32" r="30" fill="#142247" stroke="#f59e0b" stroke-width="3"/>
-                <polygon points="32,6 38,26 58,32 38,38 32,58 26,38 6,32 26,26" fill="#0d9488"/>
-                <circle cx="32" cy="32" r="13" fill="#f8f9fa"/>
-                <text x="32" y="39" font-size="18" font-weight="900" font-family="sans-serif" fill="#0b132b" text-anchor="middle">S</text>
-            </svg>
-            <div class="hub-title">SÖZCÜK SEFERÎ</div>
-            <div class="hub-subtitle">1. SEFER: TÜRKİYE</div>
-        </div>
-
-        <div class="hub-cards-container">
-            <!-- CAçRD 1: AçNAç SEFER -->
-            <div class="hub-card hub-card-primary" onclick="Açpp.goToScreen('screen-map')">
-                <div class="hub-card-icon">🧭</div>
-                <div class="hub-card-content">
-                    <div style="display:flex; align-items:center;">
-                        <span class="hub-card-title">1. Seçfer: Türkiye</span>
-                        <span class="hub-card-badge" id="hub-progress-badge">İl 35/81</span>
-                    </div>
-                    <div class="hub-card-desc">81 ili keşfet, simge mekanların sırlarını çöz.</div>
-                </div>
-                <div style="font-size:22px; color:var(--gold-primary);">➔</div>
-            </div>
-
-            <!-- CAçRD 2: DEYİM AçVCISI -->
-            <div class="hub-card" onclick="Açpp.goToScreen('screen-idiom')">
-                <div class="hub-card-icon">🎭</div>
-                <div class="hub-card-content">
-                    <div class="hub-card-title">Deyim Açvcısı</div>
-                    <div class="hub-card-desc">Türkçenin saklı deyimlerini tamamla, altın kazan.</div>
-                </div>
-                <div style="font-size:22px; color:#a855f7;">➔</div>
-            </div>
-
-            <!-- CAçRD 3: GÜNLÜK BULMAçCAç -->
-            <div class="hub-card" onclick="Açpp.showDailyModal()">
-                <div class="hub-card-icon">📅</div>
-                <div class="hub-card-content">
-                    <div class="hub-card-title">Günlük Bulmaca</div>
-                    <div class="hub-card-desc">Yıldızlı harfleri topla, takvim serini koru.</div>
-                </div>
-                <div style="font-size:22px; color:#14b8a6;">➔</div>
-            </div>
-        </div>
-
-        <div style="font-size: 11px; color: #64748b; letter-spacing: 1px;">Sözcük Seçferî v1.0 • Türkiye Turu</div>
-    </div>
-
-    <!-- SCREEN 2: INTERAçKTİF 81 İL HAçRİTAçSI -->
-    <div id="screen-map" class="screen">
-        <div class="top-navbar">
-            <button class="btn-3d-outline" onclick="Açpp.goToScreen('screen-hub')">⬅ Menüü</button>
-            <div class="game-city-label" style="font-size:14px; color:var(--gold-primary);">TÜRKİYE YOLCULUK HAçRİTAçSI</div>
-            <div class="stat-pill">🪙 <span id="map-coins">250</span></div>
-        </div>
-
-        <div id="map-stage-wrapper">
-            <div id="map-viewport">
-                <svg class="turkey-svg" viewBox="0 0 1100 500" id="turkey-map-svg">
-                    <!-- Province Boundaries -->
-                    <g id="provinces-layer">
-                        {{ INJECT_MAçP_PAçTHS }}
-                    </g>
-                    <!-- Açnimated Travel Route -->
-                    <path id="travel-route" d="" />
-                    <!-- Gliding Travel Icon (Açirplane/Compass) -->
-                    <g id="travel-carrier">
-                        <circle cx="0" cy="0" r="10" fill="#f59e0b" stroke="#ffffff" stroke-width="2"/>
-                        <polygon points="0,-8 6,6 0,2 -6,6" fill="#0b132b"/>
-                    </g>
-                    <!-- City Node Pins -->
-                    <g id="city-pins-layer"></g>
-                </svg>
-            </div>
-        </div>
-
-        <!-- SLIDING CITY CAçRD -->
-        <div class="map-city-card" id="map-city-card">
-            <div class="map-city-header">
-                <div class="map-city-plate" id="card-city-plate">35</div>
-                <div class="map-city-name" id="card-city-name">İzmir</div>
-                <button class="btn-3d-outline" onclick="MapEngine.closeCard()">✕</button>
-            </div>
-            <div style="font-size:13px; color:#94a3b8;" id="card-city-desc">Ege'nin incisi, Efes Celsus ve Saat Kulesi'nin büyüleyici diyarı.</div>
-            <div style="display:flex; gap:10px;">
-                <button class="btn-3d" style="flex:1;" onclick="MapEngine.playSeçlectedCity()">KEŞFE BAçŞLAç ➔</button>
-            </div>
-        </div>
-    </div>
-
-    <!-- SCREEN 3: GAçMEPLAçY (CROSSWORD & WHEEL) -->
-    <div id="screen-game" class="screen">
-        <img src="" id="game-bg-img" class="game-bg-image" alt="Landmark Background" />
-        <div class="game-ui-layer">
-            <div class="game-header">
-                <button class="btn-3d-outline" onclick="Açpp.goToScreen('screen-map')">🗺️ Harita</button>
-                <div class="game-title-group">
-                    <div class="game-city-label" id="game-city-label">İZMİR (35)</div>
-                    <div class="game-landmark-label" id="game-landmark-label">Efes - Celsus Kütüphanesi</div>
-                </div>
-                <div class="stat-pill">🪙 <span id="game-coins">250</span></div>
-            </div>
-
-            <!-- CROSSWORD GRID -->
-            <div class="crossword-viewport" id="crossword-viewport">
-                <div class="crossword-board" id="crossword-board"></div>
-            </div>
-
-            <!-- BOTTOM AçREAç -->
-            <div class="bottom-action-area">
-                <div class="word-preview-pill" id="word-preview-pill"></div>
-
-                <div class="wheel-assembly" id="wheel-assembly">
-                    <svg class="wheel-svg-layer" id="wheel-svg-layer">
-                        <polyline id="wheel-drag-line" fill="none" stroke="#f59e0b" stroke-width="7" stroke-linecap="round" stroke-linejoin="round" />
-                    </svg>
-                    <div id="wheel-letters-container"></div>
-                </div>
-
-                <!-- POWERUPS -->
-                <div class="powerups-dock">
-                    <div class="powerup-btn" onclick="GameEngine.shuffleLetters()" title="Harfleri Karıştır">
-                        <span class="powerup-icon">🔀</span>
-                        <span class="powerup-price">Bedava</span>
-                    </div>
-                    <div class="powerup-btn" onclick="GameEngine.useBulb()" title="Rastgele Harf Açç">
-                        <span class="powerup-icon">💡</span>
-                        <span class="powerup-price">50</span>
-                    </div>
-                    <div class="powerup-btn" onclick="GameEngine.useTarget()" title="Hedef Harfi Seçç">
-                        <span class="powerup-icon">🎯</span>
-                        <span class="powerup-price">100</span>
-                    </div>
-                    <div class="powerup-btn" onclick="GameEngine.useBomb()" title="Bomba Patlat">
-                        <span class="powerup-icon">💣</span>
-                        <span class="powerup-price">150</span>
-                    </div>
-                    <div class="powerup-btn" style="border-color:#a855f7;" title="Bonus Kelime Sandığıığı">
-                        <span class="powerup-icon">📦</span>
-                        <span class="powerup-price" id="bonus-chest-text">0/5</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- SCREEN 4: DEYİM AçVCISI -->
-    <div id="screen-idiom" class="screen">
-        <div class="top-navbar">
-            <button class="btn-3d-outline" onclick="Açpp.goToScreen('screen-hub')">⬅ Menüü</button>
-            <div class="game-city-label" style="color:#c084fc;">DEYİM AçVCISI</div>
-            <div class="stat-pill">🪙 <span id="idiom-coins">250</span></div>
-        </div>
-
-        <div style="flex:1; display:flex; flex-direction:column; align-items:center; justify-content:center; padding:16px;">
-            <div class="idiom-banner">Eksik Deyim Kelimesini Tamamla</div>
-            <div class="idiom-clue-box" id="idiom-clue-box">Göze [...]</div>
-            <div class="idiom-board" id="idiom-board"></div>
-            <div style="font-size:13px; color:#cbd5e1; max-width:320px; text-align:center;" id="idiom-meaning-box">Seçvgi ve güven kazanmak, takdir edilmek.</div>
-        </div>
-
-        <div class="bottom-action-area">
-            <div class="word-preview-pill" id="idiom-preview-pill" style="background:#6366f1;"></div>
-            <div class="wheel-assembly" id="idiom-wheel-assembly" style="border-color:#818cf8;">
-                <svg class="wheel-svg-layer">
-                    <polyline id="idiom-drag-line" fill="none" stroke="#818cf8" stroke-width="7" stroke-linecap="round" stroke-linejoin="round" />
-                </svg>
-                <div id="idiom-letters-container"></div>
-            </div>
-        </div>
-    </div>
-
-    <!-- MODAçL 1: KEŞİF KAçRTPOSTAçLI (POSTCAçRD WIN MODAçL) -->
-    <div class="modal-backdrop" id="modal-postcard">
-        <div class="modal-dialog">
-            <div style="font-size:12px; font-weight:800; color:var(--turquoise); letter-spacing:2px;">MÜHÜRLÜ KEŞİF KAçRTPOSTAçLI</div>
-            <div style="font-size:20px; font-weight:900; color:var(--gold-primary); margin-top:4px;" id="post-landmark-title">Efes - Celsus Kütüphanesi</div>
-            
-            <div class="postcard-photo-frame">
-                <img src="" id="post-photo-img" class="postcard-img" alt="Landmark" />
-                <div class="wax-seal">
-                    <span>SÖZCÜK<br>SEFERÎ<br>★</span>
-                </div>
-            </div>
-
-            <div class="postcard-story" id="post-story-text">
-                Efes Açntik Kenti'nin kalbinde yer alan Celsus Kütüphanesi, dönemin en büyük bilgi hazinelerinden biri olarak kabul edilir.
-            </div>
-
-            <div style="display:flex; gap:10px; width:100%;">
-                <button class="btn-3d btn-3d-turquoise" style="flex:1; padding:12px;" onclick="Açpp.claim2xReward()">🎥 2X AçLTIN</button>
-                <button class="btn-3d" style="flex:1; padding:12px;" onclick="Açpp.continueAçfterWin()">DEVAçM ET ➔</button>
-            </div>
-        </div>
-    </div>
-
-    <!-- MODAçL 2: GÜNLÜK BULMAçCAç TAçKVİMİ -->
-    <div class="modal-backdrop" id="modal-daily">
-        <div class="modal-dialog">
-            <div style="font-size:24px; font-weight:900; color:var(--gold-primary);">📅 GÜNLÜK BULMAçCAç</div>
-            <div style="font-size:13px; color:#94a3b8; margin: 8px 0 16px;">Bugünün tarihi: <strong id="daily-date-str" style="color:var(--text-ivory);">2026-10-05</strong></div>
-            
-            <div style="display:flex; justify-content:center; gap:8px; margin-bottom:20px;">
-                <div style="width:34px; height:34px; background:var(--gold-primary); border-radius:50%; display:flex; align-items:center; justify-content:center; color:#0b132b; font-weight:900;">✓</div>
-                <div style="width:34px; height:34px; background:var(--gold-primary); border-radius:50%; display:flex; align-items:center; justify-content:center; color:#0b132b; font-weight:900;">✓</div>
-                <div style="width:34px; height:34px; background:var(--gold-primary); border-radius:50%; display:flex; align-items:center; justify-content:center; color:#0b132b; font-weight:900;">✓</div>
-                <div style="width:34px; height:34px; background:rgba(255,255,255,0.1); border-radius:50%; display:flex; align-items:center; justify-content:center;">⭐</div>
-                <div style="width:34px; height:34px; background:rgba(255,255,255,0.1); border-radius:50%; display:flex; align-items:center; justify-content:center;">⭐</div>
-            </div>
-
-            <p style="font-size:13px; color:#cbd5e1; margin-bottom:20px;">Özel yıldızlı kelimeleri çözerek takvim serini artır ve ekstra altın kazan!</p>
-
-            <button class="btn-3d btn-3d-turquoise" style="width:100%;" onclick="Açpp.startDailyChallenge()">GÜNÜN BULMAçCAçSINI OYNAç</button>
-            <button class="btn-3d-outline" style="width:100%; margin-top:10px;" onclick="Açpp.hideModal('modal-daily')">KAçPAçT</button>
-        </div>
-    </div>
-
-    <!-- MODAçL 3: YETERSİZ AçLTIN & REKLAçM İP дву -->
-    <div class="modal-backdrop" id="modal-insufficient-gold">
-        <div class="modal-dialog">
-            <div style="font-size:36px; margin-bottom:8px;">🪙</div>
-            <div style="font-size:20px; font-weight:900; color:var(--gold-primary);">Yetersiz Açltın!</div>
-            <p style="font-size:13px; color:#cbd5e1; margin:10px 0 20px;">Bu ipucunu kullanmak için yeterli altının yok. Kısa bir sponsorlu video izleyerek anında +100 Açltın kazanabilirsin.</p>
-            <button class="btn-3d" style="width:100%;" onclick="Açpp.watchAçdForGold()">🎥 VİDEO İZLE (+100 AçLTIN)</button>
-            <button class="btn-3d-outline" style="width:100%; margin-top:10px;" onclick="Açpp.hideModal('modal-insufficient-gold')">VAçZGEÇÇ</button>
-        </div>
-    </div>
-
-    <!-- MODAçL 4: AçYAçRLAçR -->
-    <div class="modal-backdrop" id="modal-settings">
-        <div class="modal-dialog">
-            <div style="font-size:20px; font-weight:900; color:var(--gold-primary); margin-bottom:16px;">OYUN AçYAçRLAçRI</div>
-            
-            <div style="width:100%; display:flex; justify-content:space-between; align-items:center; margin-bottom:16px;">
-                <span>🔊 Seçs Efektleri</span>
-                <input type="checkbox" id="setting-sound" checked onchange="AçudioEngine.toggleSound(this.checked)" style="transform:scale(1.4);" />
-            </div>
-            <div style="width:100%; display:flex; justify-content:space-between; align-items:center; margin-bottom:24px;">
-                <span>📳 Haptik Titreşim</span>
-                <input type="checkbox" id="setting-vibrate" checked onchange="SaveManager.setHaptic(this.checked)" style="transform:scale(1.4);" />
-            </div>
-
-            <button class="btn-3d" style="width:100%;" onclick="Açpp.hideModal('modal-settings')">TAçMAçM</button>
-        </div>
-    </div>
-
-    <!-- JAçVAçSCRIPT MOTORU -->
-    <script>
-
 // --- AUTO-GENERATED DATASETS ---
 const CITIES = [{"plate": 35, "name": "İzmir", "cx": 86.4, "cy": 286.4, "isShowcase": true, "landmarks": [{"name": "Efes - Celsus Kütüphanesi", "bg": "https://plus.unsplash.com/premium_photo-1664475023804-22236fbc8a69?auto=format&fit=crop&w=1280&q=80", "summary": "Antik dünyanın en görkemli üçüncü kütüphanesinin devasa mermer sütunları arasında gezerken tarihin fısıltılarını duyabilirsiniz.", "trivia": "Cephedeki 4 kadın heykeli Sophia (Akıl), Arete (Erdem), Ennoia (Kavrayış) ve Episteme (Bilgi) erdemlerini simgeler."}, {"name": "İzmir Saat Kulesi", "bg": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/ad/%C4%B0zmir_Clock_Tower%2C_Konak_Square.jpg/1280px-%C4%B0zmir_Clock_Tower%2C_Konak_Square.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail", "summary": "1901 yılında Konak Meydanı'nda inşa edilen 25 metre yüksekliğindeki kule, İzmir'in kalbi ve en zarif buluşma noktasıdır.", "trivia": "Kulenin saati Alman İmparatoru II. Wilhelm tarafından Osmanlı'ya hediye edilmiştir ve kurulduğu günden beri hiç durmamıştır."}, {"name": "Şirince Evleri", "bg": "https://upload.wikimedia.org/wikipedia/commons/f/f8/Sirincehouses.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled", "summary": "Zeytinlikler ve asma bahçeleri arasında bembeyaz geleneksel konaklarıyla masalsı bir Ege köyü.", "trivia": "Köyün eski adı 'Kırkınca' olup zamanla güzelliğinden ötürü Şirince olarak anılmaya başlanmıştır."}, {"name": "Bergama Akropolü", "bg": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/64/Pergamon_Acropolis.jpg/1280px-Pergamon_Acropolis.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail", "summary": "Tepelerin zirvesine kurulmuş, dünyanın en dik tiyatrosuna ve antik parşömen kütüphanesine sahip eşsiz Helenistik krallık.", "trivia": "Parşömen kağıdı (Pergamenum), Bergama Krallığı tarafından kütüphanelerindeki kitapları çoğaltmak için icat edilmiştir."}, {"name": "Tarihi Asansör", "bg": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/ec/Asansor_asagidan.JPG/1280px-Asansor_asagidan.JPG?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail", "summary": "1907 yılında iki semt arasındaki 155 basamaklı uçurumu aşmak için inşa edilen, körfeze tepeden bakan tarihi kule.", "trivia": "Asansörün bulunduğu sokak, İzmirli ünlü besteci ve şarkıcı Dario Moreno'nun adını taşımaktadır."}], "levels": [{"id": 1, "city_id": "izmir", "city_name": "İzmir", "sub_id": 1, "title": "İzmir - Bölüm 1: Efes - Celsus Kütüphanesi", "landmark_name": "Efes - Celsus Kütüphanesi", "bg": "https://plus.unsplash.com/premium_photo-1664475023804-22236fbc8a69?auto=format&fit=crop&w=1280&q=80", "wheel": ["K", "A", "T"], "words": [{"id": "w1", "word": "KAT", "row": 2, "col": 0, "dir": "H"}, {"id": "w2", "word": "TAK", "row": 0, "col": 0, "dir": "V"}], "bonus": ["AK"], "postcard": {"title": "Efes - Celsus Kütüphanesi", "city": "İzmir", "plate": 35, "summary": "Antik dünyanın en görkemli üçüncü kütüphanesinin devasa mermer sütunları arasında gezerken tarihin fısıltılarını duyabilirsiniz.", "trivia": "Cephedeki 4 kadın heykeli Sophia (Akıl), Arete (Erdem), Ennoia (Kavrayış) ve Episteme (Bilgi) erdemlerini simgeler.", "bg": "https://plus.unsplash.com/premium_photo-1664475023804-22236fbc8a69?auto=format&fit=crop&w=1280&q=80"}}, {"id": 2, "city_id": "izmir", "city_name": "İzmir", "sub_id": 2, "title": "İzmir - Bölüm 2: İzmir Saat Kulesi", "landmark_name": "İzmir Saat Kulesi", "bg": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/ad/%C4%B0zmir_Clock_Tower%2C_Konak_Square.jpg/1280px-%C4%B0zmir_Clock_Tower%2C_Konak_Square.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail", "wheel": ["K", "A", "L", "E"], "words": [{"id": "w1", "word": "KALE", "row": 1, "col": 0, "dir": "H"}, {"id": "w2", "word": "KEL", "row": 1, "col": 0, "dir": "V"}, {"id": "w3", "word": "ELA", "row": 0, "col": 2, "dir": "V"}], "bonus": ["LAK", "LAKE"], "postcard": {"title": "İzmir Saat Kulesi", "city": "İzmir", "plate": 35, "summary": "1901 yılında Konak Meydanı'nda inşa edilen 25 metre yüksekliğindeki kule, İzmir'in kalbi ve en zarif buluşma noktasıdır.", "trivia": "Kulenin saati Alman İmparatoru II. Wilhelm tarafından Osmanlı'ya hediye edilmiştir ve kurulduğu günden beri hiç durmamıştır.", "bg": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/ad/%C4%B0zmir_Clock_Tower%2C_Konak_Square.jpg/1280px-%C4%B0zmir_Clock_Tower%2C_Konak_Square.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail"}}, {"id": 3, "city_id": "izmir", "city_name": "İzmir", "sub_id": 3, "title": "İzmir - Bölüm 3: Şirince Evleri", "landmark_name": "Şirince Evleri", "bg": "https://upload.wikimedia.org/wikipedia/commons/f/f8/Sirincehouses.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled", "wheel": ["M", "A", "A", "S"], "words": [{"id": "w1", "word": "MASA", "row": 2, "col": 0, "dir": "H"}, {"id": "w2", "word": "ASMA", "row": 0, "col": 0, "dir": "V"}], "bonus": ["AMA", "SAM", "AS"], "postcard": {"title": "Şirince Evleri", "city": "İzmir", "plate": 35, "summary": "Zeytinlikler ve asma bahçeleri arasında bembeyaz geleneksel konaklarıyla masalsı bir Ege köyü.", "trivia": "Köyün eski adı 'Kırkınca' olup zamanla güzelliğinden ötürü Şirince olarak anılmaya başlanmıştır.", "bg": "https://upload.wikimedia.org/wikipedia/commons/f/f8/Sirincehouses.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled"}}, {"id": 4, "city_id": "izmir", "city_name": "İzmir", "sub_id": 4, "title": "İzmir - Bölüm 4: Bergama Akropolü", "landmark_name": "Bergama Akropolü", "bg": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/64/Pergamon_Acropolis.jpg/1280px-Pergamon_Acropolis.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail", "wheel": ["B", "A", "L", "I", "K"], "words": [{"id": "w1", "word": "BALIK", "row": 2, "col": 0, "dir": "H"}, {"id": "w2", "word": "BAL", "row": 2, "col": 0, "dir": "V"}, {"id": "w3", "word": "KIL", "row": 0, "col": 2, "dir": "V"}], "bonus": ["ALIK", "BAK", "KAL", "AKIL"], "postcard": {"title": "Bergama Akropolü", "city": "İzmir", "plate": 35, "summary": "Tepelerin zirvesine kurulmuş, dünyanın en dik tiyatrosuna ve antik parşömen kütüphanesine sahip eşsiz Helenistik krallık.", "trivia": "Parşömen kağıdı (Pergamenum), Bergama Krallığı tarafından kütüphanelerindeki kitapları çoğaltmak için icat edilmiştir.", "bg": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/64/Pergamon_Acropolis.jpg/1280px-Pergamon_Acropolis.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail"}}, {"id": 5, "city_id": "izmir", "city_name": "İzmir", "sub_id": 5, "title": "İzmir - Bölüm 5: Tarihi Asansör", "landmark_name": "Tarihi Asansör", "bg": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/ec/Asansor_asagidan.JPG/1280px-Asansor_asagidan.JPG?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail", "wheel": ["K", "İ", "T", "A", "P"], "words": [{"id": "w1", "word": "KİTAP", "row": 2, "col": 0, "dir": "H"}, {"id": "w2", "word": "TAKİP", "row": 0, "col": 0, "dir": "V"}, {"id": "w3", "word": "PAK", "row": 1, "col": 3, "dir": "V"}], "bonus": ["TİP", "PAT", "KAT", "AİT"], "postcard": {"title": "Tarihi Asansör", "city": "İzmir", "plate": 35, "summary": "1907 yılında iki semt arasındaki 155 basamaklı uçurumu aşmak için inşa edilen, körfeze tepeden bakan tarihi kule.", "trivia": "Asansörün bulunduğu sokak, İzmirli ünlü besteci ve şarkıcı Dario Moreno'nun adını taşımaktadır.", "bg": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/ec/Asansor_asagidan.JPG/1280px-Asansor_asagidan.JPG?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail"}}]}, {"plate": 45, "name": "Manisa", "cx": 158.5, "cy": 264.5, "isShowcase": false, "landmarks": [{"name": "Manisa Tarihi Meydanı", "bg": "https://images.unsplash.com/photo-1541432901042-2d8bd64b4a9b?auto=format&fit=crop&w=1280&q=80", "desc": "Manisa ilinin köklü tarihini ve zengin Anadolu kültürünü yansıtan simgesel merkezi. Binlerce yıllık mirasın izlerini taşır."}, {"name": "Manisa Doğal Güzellikleri", "bg": "https://images.unsplash.com/photo-1564507592333-c60657eea523?auto=format&fit=crop&w=1280&q=80", "desc": "Manisa coğrafyasının eşsiz doğası, yemyeşil vadileri ve temiz yaylaları ziyaretçilerine huzur dolu anlar sunar."}], "levels": [{"id": 1, "landmark": "Manisa Tarihi Meydanı", "bg": "https://images.unsplash.com/photo-1541432901042-2d8bd64b4a9b?auto=format&fit=crop&w=1280&q=80", "words": [{"word": "KALE", "row": 0, "col": 0, "dir": "H"}, {"word": "KEL", "row": 0, "col": 0, "dir": "V"}, {"word": "ELA", "row": 1, "col": 0, "dir": "H"}], "letters": ["A", "E", "K", "L"], "postcard": {"landmark": "Manisa Tarihi Meydanı", "city": "Manisa", "desc": "Manisa ilinin köklü tarihini ve zengin Anadolu kültürünü yansıtan simgesel merkezi. Binlerce yıllık mirasın izlerini taşır.", "bg": "https://images.unsplash.com/photo-1541432901042-2d8bd64b4a9b?auto=format&fit=crop&w=1280&q=80"}}, {"id": 2, "landmark": "Manisa Doğal Güzellikleri", "bg": "https://images.unsplash.com/photo-1564507592333-c60657eea523?auto=format&fit=crop&w=1280&q=80", "words": [{"word": "BALIK", "row": 0, "col": 0, "dir": "H"}, {"word": "BAL", "row": 0, "col": 0, "dir": "V"}, {"word": "KIL", "row": 0, "col": 4, "dir": "V"}], "letters": ["A", "B", "I", "K", "L"], "postcard": {"landmark": "Manisa Doğal Güzellikleri", "city": "Manisa", "desc": "Manisa coğrafyasının eşsiz doğası, yemyeşil vadileri ve temiz yaylaları ziyaretçilerine huzur dolu anlar sunar.", "bg": "https://images.unsplash.com/photo-1564507592333-c60657eea523?auto=format&fit=crop&w=1280&q=80"}}]}, {"plate": 9, "name": "Aydın", "cx": 127.6, "cy": 346.7, "isShowcase": false, "landmarks": [{"name": "Aydın Tarihi Meydanı", "bg": "https://images.unsplash.com/photo-1541432901042-2d8bd64b4a9b?auto=format&fit=crop&w=1280&q=80", "desc": "Aydın ilinin köklü tarihini ve zengin Anadolu kültürünü yansıtan simgesel merkezi. Binlerce yıllık mirasın izlerini taşır."}, {"name": "Aydın Doğal Güzellikleri", "bg": "https://images.unsplash.com/photo-1564507592333-c60657eea523?auto=format&fit=crop&w=1280&q=80", "desc": "Aydın coğrafyasının eşsiz doğası, yemyeşil vadileri ve temiz yaylaları ziyaretçilerine huzur dolu anlar sunar."}], "levels": [{"id": 1, "landmark": "Aydın Tarihi Meydanı", "bg": "https://images.unsplash.com/photo-1541432901042-2d8bd64b4a9b?auto=format&fit=crop&w=1280&q=80", "words": [{"word": "KALE", "row": 0, "col": 0, "dir": "H"}, {"word": "KEL", "row": 0, "col": 0, "dir": "V"}, {"word": "ELA", "row": 1, "col": 0, "dir": "H"}], "letters": ["A", "E", "K", "L"], "postcard": {"landmark": "Aydın Tarihi Meydanı", "city": "Aydın", "desc": "Aydın ilinin köklü tarihini ve zengin Anadolu kültürünü yansıtan simgesel merkezi. Binlerce yıllık mirasın izlerini taşır.", "bg": "https://images.unsplash.com/photo-1541432901042-2d8bd64b4a9b?auto=format&fit=crop&w=1280&q=80"}}, {"id": 2, "landmark": "Aydın Doğal Güzellikleri", "bg": "https://images.unsplash.com/photo-1564507592333-c60657eea523?auto=format&fit=crop&w=1280&q=80", "words": [{"word": "BALIK", "row": 0, "col": 0, "dir": "H"}, {"word": "BAL", "row": 0, "col": 0, "dir": "V"}, {"word": "KIL", "row": 0, "col": 4, "dir": "V"}], "letters": ["A", "B", "I", "K", "L"], "postcard": {"landmark": "Aydın Doğal Güzellikleri", "city": "Aydın", "desc": "Aydın coğrafyasının eşsiz doğası, yemyeşil vadileri ve temiz yaylaları ziyaretçilerine huzur dolu anlar sunar.", "bg": "https://images.unsplash.com/photo-1564507592333-c60657eea523?auto=format&fit=crop&w=1280&q=80"}}]}, {"plate": 48, "name": "Muğla", "cx": 157.7, "cy": 401.6, "isShowcase": false, "landmarks": [{"name": "Muğla Tarihi Meydanı", "bg": "https://images.unsplash.com/photo-1541432901042-2d8bd64b4a9b?auto=format&fit=crop&w=1280&q=80", "desc": "Muğla ilinin köklü tarihini ve zengin Anadolu kültürünü yansıtan simgesel merkezi. Binlerce yıllık mirasın izlerini taşır."}, {"name": "Muğla Doğal Güzellikleri", "bg": "https://images.unsplash.com/photo-1564507592333-c60657eea523?auto=format&fit=crop&w=1280&q=80", "desc": "Muğla coğrafyasının eşsiz doğası, yemyeşil vadileri ve temiz yaylaları ziyaretçilerine huzur dolu anlar sunar."}], "levels": [{"id": 1, "landmark": "Muğla Tarihi Meydanı", "bg": "https://images.unsplash.com/photo-1541432901042-2d8bd64b4a9b?auto=format&fit=crop&w=1280&q=80", "words": [{"word": "KALE", "row": 0, "col": 0, "dir": "H"}, {"word": "KEL", "row": 0, "col": 0, "dir": "V"}, {"word": "ELA", "row": 1, "col": 0, "dir": "H"}], "letters": ["A", "E", "K", "L"], "postcard": {"landmark": "Muğla Tarihi Meydanı", "city": "Muğla", "desc": "Muğla ilinin köklü tarihini ve zengin Anadolu kültürünü yansıtan simgesel merkezi. Binlerce yıllık mirasın izlerini taşır.", "bg": "https://images.unsplash.com/photo-1541432901042-2d8bd64b4a9b?auto=format&fit=crop&w=1280&q=80"}}, {"id": 2, "landmark": "Muğla Doğal Güzellikleri", "bg": "https://images.unsplash.com/photo-1564507592333-c60657eea523?auto=format&fit=crop&w=1280&q=80", "words": [{"word": "BALIK", "row": 0, "col": 0, "dir": "H"}, {"word": "BAL", "row": 0, "col": 0, "dir": "V"}, {"word": "KIL", "row": 0, "col": 4, "dir": "V"}], "letters": ["A", "B", "I", "K", "L"], "postcard": {"landmark": "Muğla Doğal Güzellikleri", "city": "Muğla", "desc": "Muğla coğrafyasının eşsiz doğası, yemyeşil vadileri ve temiz yaylaları ziyaretçilerine huzur dolu anlar sunar.", "bg": "https://images.unsplash.com/photo-1564507592333-c60657eea523?auto=format&fit=crop&w=1280&q=80"}}]}, {"plate": 20, "name": "Denizli", "cx": 222.7, "cy": 340.4, "isShowcase": true, "landmarks": [{"name": "Pamukkale Travertenleri", "bg": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/46/TR_Pamukkale_White_Terraces_asv2020-02_img16.jpg/1280px-TR_Pamukkale_White_Terraces_asv2020-02_img16.jpg", "summary": "Termal suların kalsiyum karbonat biriktirmesiyle oluşan bembeyaz basamaklı teraslar doğanın en nadide sanat eseridir.", "trivia": "Teras havuzlarının şifalı suyu yaz-kış 36 derecede sabit kalır."}, {"name": "Hierapolis Antik Tiyatrosu", "bg": "https://upload.wikimedia.org/wikipedia/commons/1/19/Pamukkale_Theater_tr.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled", "summary": "Travertenlerin hemen üzerinde yer alan, mitolojik kabartmalarıyla günümüze sapasağlam ulaşmış görkemli Roma tiyatrosu.", "trivia": "Hierapolis, antik dönemde gladyatör dövüşlerinin ve termal tedavilerin ana merkeziydi."}, {"name": "Kleopatra Antik Havuzu", "bg": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a0/Cleopatra_Antique_pool_%2815688240214%29.jpg/1280px-Cleopatra_Antique_pool_%2815688240214%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail", "summary": "M.S. 7. yüzyıldaki depremle yıkılan antik sütunların üzerinde yüzebileceğiniz dünyadaki tek tarihi termal havuz.", "trivia": "Efsaneye göre Mısır Kraliçesi Kleopatra güzelliğini bu havuzun mineral zengini sularına borçludur."}, {"name": "Kaklık Mağarası", "bg": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a7/Kakl%C4%B1k_Cave_-_panoramio.jpg/1280px-Kakl%C4%B1k_Cave_-_panoramio.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail", "summary": "Yeraltında oluşan basamaklı travertenleriyle 'Yeraltı Pamukkalesi' olarak anılan gizemli bir doğa harikası.", "trivia": "Mağaranın içindeki kükürtlü ve berrak suların cilt hastalıklarına iyi geldiği bilinmektedir."}, {"name": "Laodikeia Antik Kenti", "bg": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/11/Laodikeia%2C_Turkey_-_panoramio.jpg/1280px-Laodikeia%2C_Turkey_-_panoramio.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail", "summary": "İncil'de adı geçen yedi büyük kiliseden birine ev sahipliği yapan devasa Helenistik ticaret metropolü.", "trivia": "Antik dönemde Laodikeia'da üretilen siyah yumuşak yün kumaşlar tüm Akdeniz havzasında aranılan bir lükstü."}], "levels": [{"id": 16, "city_id": "denizli", "city_name": "Denizli", "sub_id": 1, "title": "Denizli - Bölüm 1: Pamukkale Travertenleri", "landmark_name": "Pamukkale Travertenleri", "bg": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/46/TR_Pamukkale_White_Terraces_asv2020-02_img16.jpg/1280px-TR_Pamukkale_White_Terraces_asv2020-02_img16.jpg", "wheel": ["O", "R", "M", "A", "N"], "words": [{"id": "w1", "word": "ORMAN", "row": 2, "col": 0, "dir": "H"}, {"id": "w2", "word": "MOR", "row": 1, "col": 0, "dir": "V"}, {"id": "w3", "word": "ROMAN", "row": 0, "col": 2, "dir": "V"}], "bonus": ["NAR", "ON", "ORA"], "postcard": {"title": "Pamukkale Travertenleri", "city": "Denizli", "plate": 20, "summary": "Termal suların kalsiyum karbonat biriktirmesiyle oluşan bembeyaz basamaklı teraslar doğanın en nadide sanat eseridir.", "trivia": "Teras havuzlarının şifalı suyu yaz-kış 36 derecede sabit kalır.", "bg": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/46/TR_Pamukkale_White_Terraces_asv2020-02_img16.jpg/1280px-TR_Pamukkale_White_Terraces_asv2020-02_img16.jpg"}}, {"id": 17, "city_id": "denizli", "city_name": "Denizli", "sub_id": 2, "title": "Denizli - Bölüm 2: Hierapolis Antik Tiyatrosu", "landmark_name": "Hierapolis Antik Tiyatrosu", "bg": "https://upload.wikimedia.org/wikipedia/commons/1/19/Pamukkale_Theater_tr.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled", "wheel": ["B", "U", "U", "L", "T", "M"], "words": [{"id": "w1", "word": "BULUT", "row": 1, "col": 0, "dir": "H"}, {"id": "w2", "word": "TULU", "row": 0, "col": 1, "dir": "V"}, {"id": "w3", "word": "UMUT", "row": 1, "col": 3, "dir": "V"}], "bonus": ["ULU", "BUT"], "postcard": {"title": "Hierapolis Antik Tiyatrosu", "city": "Denizli", "plate": 20, "summary": "Travertenlerin hemen üzerinde yer alan, mitolojik kabartmalarıyla günümüze sapasağlam ulaşmış görkemli Roma tiyatrosu.", "trivia": "Hierapolis, antik dönemde gladyatör dövüşlerinin ve termal tedavilerin ana merkeziydi.", "bg": "https://upload.wikimedia.org/wikipedia/commons/1/19/Pamukkale_Theater_tr.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled"}}, {"id": 18, "city_id": "denizli", "city_name": "Denizli", "sub_id": 3, "title": "Denizli - Bölüm 3: Kleopatra Antik Havuzu", "landmark_name": "Kleopatra Antik Havuzu", "bg": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a0/Cleopatra_Antique_pool_%2815688240214%29.jpg/1280px-Cleopatra_Antique_pool_%2815688240214%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail", "wheel": ["Ç", "Ç", "İ", "İ", "E", "K"], "words": [{"id": "w1", "word": "ÇİÇEK", "row": 2, "col": 0, "dir": "H"}, {"id": "w2", "word": "ÇEK", "row": 2, "col": 0, "dir": "V"}, {"id": "w3", "word": "KEÇİ", "row": 0, "col": 2, "dir": "V"}], "bonus": ["İKİ", "ÇEÇ"], "postcard": {"title": "Kleopatra Antik Havuzu", "city": "Denizli", "plate": 20, "summary": "M.S. 7. yüzyıldaki depremle yıkılan antik sütunların üzerinde yüzebileceğiniz dünyadaki tek tarihi termal havuz.", "trivia": "Efsaneye göre Mısır Kraliçesi Kleopatra güzelliğini bu havuzun mineral zengini sularına borçludur.", "bg": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a0/Cleopatra_Antique_pool_%2815688240214%29.jpg/1280px-Cleopatra_Antique_pool_%2815688240214%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail"}}, {"id": 19, "city_id": "denizli", "city_name": "Denizli", "sub_id": 4, "title": "Denizli - Bölüm 4: Kaklık Mağarası", "landmark_name": "Kaklık Mağarası", "bg": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a7/Kakl%C4%B1k_Cave_-_panoramio.jpg/1280px-Kakl%C4%B1k_Cave_-_panoramio.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail", "wheel": ["S", "E", "E", "V", "G", "İ"], "words": [{"id": "w1", "word": "SEVGİ", "row": 1, "col": 0, "dir": "H"}, {"id": "w2", "word": "SEV", "row": 1, "col": 0, "dir": "V"}, {"id": "w3", "word": "EGE", "row": 0, "col": 3, "dir": "V"}], "bonus": ["EV"], "postcard": {"title": "Kaklık Mağarası", "city": "Denizli", "plate": 20, "summary": "Yeraltında oluşan basamaklı travertenleriyle 'Yeraltı Pamukkalesi' olarak anılan gizemli bir doğa harikası.", "trivia": "Mağaranın içindeki kükürtlü ve berrak suların cilt hastalıklarına iyi geldiği bilinmektedir.", "bg": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a7/Kakl%C4%B1k_Cave_-_panoramio.jpg/1280px-Kakl%C4%B1k_Cave_-_panoramio.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail"}}, {"id": 20, "city_id": "denizli", "city_name": "Denizli", "sub_id": 5, "title": "Denizli - Bölüm 5: Laodikeia Antik Kenti", "landmark_name": "Laodikeia Antik Kenti", "bg": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/11/Laodikeia%2C_Turkey_-_panoramio.jpg/1280px-Laodikeia%2C_Turkey_-_panoramio.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail", "wheel": ["K", "A", "P", "I"], "words": [{"id": "w1", "word": "KAPI", "row": 0, "col": 0, "dir": "H"}, {"id": "w2", "word": "KAP", "row": 0, "col": 0, "dir": "V"}, {"id": "w3", "word": "PAK", "row": 0, "col": 2, "dir": "V"}], "bonus": ["AK"], "postcard": {"title": "Laodikeia Antik Kenti", "city": "Denizli", "plate": 20, "summary": "İncil'de adı geçen yedi büyük kiliseden birine ev sahipliği yapan devasa Helenistik ticaret metropolü.", "trivia": "Antik dönemde Laodikeia'da üretilen siyah yumuşak yün kumaşlar tüm Akdeniz havzasında aranılan bir lükstü.", "bg": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/11/Laodikeia%2C_Turkey_-_panoramio.jpg/1280px-Laodikeia%2C_Turkey_-_panoramio.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail"}}]}, {"plate": 7, "name": "Antalya", "cx": 275.7, "cy": 435.0, "isShowcase": false, "landmarks": [{"name": "Antalya Tarihi Meydanı", "bg": "https://images.unsplash.com/photo-1541432901042-2d8bd64b4a9b?auto=format&fit=crop&w=1280&q=80", "desc": "Antalya ilinin köklü tarihini ve zengin Anadolu kültürünü yansıtan simgesel merkezi. Binlerce yıllık mirasın izlerini taşır."}, {"name": "Antalya Doğal Güzellikleri", "bg": "https://images.unsplash.com/photo-1564507592333-c60657eea523?auto=format&fit=crop&w=1280&q=80", "desc": "Antalya coğrafyasının eşsiz doğası, yemyeşil vadileri ve temiz yaylaları ziyaretçilerine huzur dolu anlar sunar."}], "levels": [{"id": 1, "landmark": "Antalya Tarihi Meydanı", "bg": "https://images.unsplash.com/photo-1541432901042-2d8bd64b4a9b?auto=format&fit=crop&w=1280&q=80", "words": [{"word": "KALE", "row": 0, "col": 0, "dir": "H"}, {"word": "KEL", "row": 0, "col": 0, "dir": "V"}, {"word": "ELA", "row": 1, "col": 0, "dir": "H"}], "letters": ["A", "E", "K", "L"], "postcard": {"landmark": "Antalya Tarihi Meydanı", "city": "Antalya", "desc": "Antalya ilinin köklü tarihini ve zengin Anadolu kültürünü yansıtan simgesel merkezi. Binlerce yıllık mirasın izlerini taşır.", "bg": "https://images.unsplash.com/photo-1541432901042-2d8bd64b4a9b?auto=format&fit=crop&w=1280&q=80"}}, {"id": 2, "landmark": "Antalya Doğal Güzellikleri", "bg": "https://images.unsplash.com/photo-1564507592333-c60657eea523?auto=format&fit=crop&w=1280&q=80", "words": [{"word": "BALIK", "row": 0, "col": 0, "dir": "H"}, {"word": "BAL", "row": 0, "col": 0, "dir": "V"}, {"word": "KIL", "row": 0, "col": 4, "dir": "V"}], "letters": ["A", "B", "I", "K", "L"], "postcard": {"landmark": "Antalya Doğal Güzellikleri", "city": "Antalya", "desc": "Antalya coğrafyasının eşsiz doğası, yemyeşil vadileri ve temiz yaylaları ziyaretçilerine huzur dolu anlar sunar.", "bg": "https://images.unsplash.com/photo-1564507592333-c60657eea523?auto=format&fit=crop&w=1280&q=80"}}]}, {"plate": 15, "name": "Burdur", "cx": 265.1, "cy": 366.7, "isShowcase": false, "landmarks": [{"name": "Burdur Tarihi Meydanı", "bg": "https://images.unsplash.com/photo-1541432901042-2d8bd64b4a9b?auto=format&fit=crop&w=1280&q=80", "desc": "Burdur ilinin köklü tarihini ve zengin Anadolu kültürünü yansıtan simgesel merkezi. Binlerce yıllık mirasın izlerini taşır."}, {"name": "Burdur Doğal Güzellikleri", "bg": "https://images.unsplash.com/photo-1564507592333-c60657eea523?auto=format&fit=crop&w=1280&q=80", "desc": "Burdur coğrafyasının eşsiz doğası, yemyeşil vadileri ve temiz yaylaları ziyaretçilerine huzur dolu anlar sunar."}], "levels": [{"id": 1, "landmark": "Burdur Tarihi Meydanı", "bg": "https://images.unsplash.com/photo-1541432901042-2d8bd64b4a9b?auto=format&fit=crop&w=1280&q=80", "words": [{"word": "KALE", "row": 0, "col": 0, "dir": "H"}, {"word": "KEL", "row": 0, "col": 0, "dir": "V"}, {"word": "ELA", "row": 1, "col": 0, "dir": "H"}], "letters": ["A", "E", "K", "L"], "postcard": {"landmark": "Burdur Tarihi Meydanı", "city": "Burdur", "desc": "Burdur ilinin köklü tarihini ve zengin Anadolu kültürünü yansıtan simgesel merkezi. Binlerce yıllık mirasın izlerini taşır.", "bg": "https://images.unsplash.com/photo-1541432901042-2d8bd64b4a9b?auto=format&fit=crop&w=1280&q=80"}}, {"id": 2, "landmark": "Burdur Doğal Güzellikleri", "bg": "https://images.unsplash.com/photo-1564507592333-c60657eea523?auto=format&fit=crop&w=1280&q=80", "words": [{"word": "BALIK", "row": 0, "col": 0, "dir": "H"}, {"word": "BAL", "row": 0, "col": 0, "dir": "V"}, {"word": "KIL", "row": 0, "col": 4, "dir": "V"}], "letters": ["A", "B", "I", "K", "L"], "postcard": {"landmark": "Burdur Doğal Güzellikleri", "city": "Burdur", "desc": "Burdur coğrafyasının eşsiz doğası, yemyeşil vadileri ve temiz yaylaları ziyaretçilerine huzur dolu anlar sunar.", "bg": "https://images.unsplash.com/photo-1564507592333-c60657eea523?auto=format&fit=crop&w=1280&q=80"}}]}, {"plate": 32, "name": "Isparta", "cx": 308.2, "cy": 328.0, "isShowcase": false, "landmarks": [{"name": "Isparta Tarihi Meydanı", "bg": "https://images.unsplash.com/photo-1541432901042-2d8bd64b4a9b?auto=format&fit=crop&w=1280&q=80", "desc": "Isparta ilinin köklü tarihini ve zengin Anadolu kültürünü yansıtan simgesel merkezi. Binlerce yıllık mirasın izlerini taşır."}, {"name": "Isparta Doğal Güzellikleri", "bg": "https://images.unsplash.com/photo-1564507592333-c60657eea523?auto=format&fit=crop&w=1280&q=80", "desc": "Isparta coğrafyasının eşsiz doğası, yemyeşil vadileri ve temiz yaylaları ziyaretçilerine huzur dolu anlar sunar."}], "levels": [{"id": 1, "landmark": "Isparta Tarihi Meydanı", "bg": "https://images.unsplash.com/photo-1541432901042-2d8bd64b4a9b?auto=format&fit=crop&w=1280&q=80", "words": [{"word": "KALE", "row": 0, "col": 0, "dir": "H"}, {"word": "KEL", "row": 0, "col": 0, "dir": "V"}, {"word": "ELA", "row": 1, "col": 0, "dir": "H"}], "letters": ["A", "E", "K", "L"], "postcard": {"landmark": "Isparta Tarihi Meydanı", "city": "Isparta", "desc": "Isparta ilinin köklü tarihini ve zengin Anadolu kültürünü yansıtan simgesel merkezi. Binlerce yıllık mirasın izlerini taşır.", "bg": "https://images.unsplash.com/photo-1541432901042-2d8bd64b4a9b?auto=format&fit=crop&w=1280&q=80"}}, {"id": 2, "landmark": "Isparta Doğal Güzellikleri", "bg": "https://images.unsplash.com/photo-1564507592333-c60657eea523?auto=format&fit=crop&w=1280&q=80", "words": [{"word": "BALIK", "row": 0, "col": 0, "dir": "H"}, {"word": "BAL", "row": 0, "col": 0, "dir": "V"}, {"word": "KIL", "row": 0, "col": 4, "dir": "V"}], "letters": ["A", "B", "I", "K", "L"], "postcard": {"landmark": "Isparta Doğal Güzellikleri", "city": "Isparta", "desc": "Isparta coğrafyasının eşsiz doğası, yemyeşil vadileri ve temiz yaylaları ziyaretçilerine huzur dolu anlar sunar.", "bg": "https://images.unsplash.com/photo-1564507592333-c60657eea523?auto=format&fit=crop&w=1280&q=80"}}]}, {"plate": 42, "name": "Konya", "cx": 417.0, "cy": 324.6, "isShowcase": false, "landmarks": [{"name": "Konya Tarihi Meydanı", "bg": "https://images.unsplash.com/photo-1541432901042-2d8bd64b4a9b?auto=format&fit=crop&w=1280&q=80", "desc": "Konya ilinin köklü tarihini ve zengin Anadolu kültürünü yansıtan simgesel merkezi. Binlerce yıllık mirasın izlerini taşır."}, {"name": "Konya Doğal Güzellikleri", "bg": "https://images.unsplash.com/photo-1564507592333-c60657eea523?auto=format&fit=crop&w=1280&q=80", "desc": "Konya coğrafyasının eşsiz doğası, yemyeşil vadileri ve temiz yaylaları ziyaretçilerine huzur dolu anlar sunar."}], "levels": [{"id": 1, "landmark": "Konya Tarihi Meydanı", "bg": "https://images.unsplash.com/photo-1541432901042-2d8bd64b4a9b?auto=format&fit=crop&w=1280&q=80", "words": [{"word": "KALE", "row": 0, "col": 0, "dir": "H"}, {"word": "KEL", "row": 0, "col": 0, "dir": "V"}, {"word": "ELA", "row": 1, "col": 0, "dir": "H"}], "letters": ["A", "E", "K", "L"], "postcard": {"landmark": "Konya Tarihi Meydanı", "city": "Konya", "desc": "Konya ilinin köklü tarihini ve zengin Anadolu kültürünü yansıtan simgesel merkezi. Binlerce yıllık mirasın izlerini taşır.", "bg": "https://images.unsplash.com/photo-1541432901042-2d8bd64b4a9b?auto=format&fit=crop&w=1280&q=80"}}, {"id": 2, "landmark": "Konya Doğal Güzellikleri", "bg": "https://images.unsplash.com/photo-1564507592333-c60657eea523?auto=format&fit=crop&w=1280&q=80", "words": [{"word": "BALIK", "row": 0, "col": 0, "dir": "H"}, {"word": "BAL", "row": 0, "col": 0, "dir": "V"}, {"word": "KIL", "row": 0, "col": 4, "dir": "V"}], "letters": ["A", "B", "I", "K", "L"], "postcard": {"landmark": "Konya Doğal Güzellikleri", "city": "Konya", "desc": "Konya coğrafyasının eşsiz doğası, yemyeşil vadileri ve temiz yaylaları ziyaretçilerine huzur dolu anlar sunar.", "bg": "https://images.unsplash.com/photo-1564507592333-c60657eea523?auto=format&fit=crop&w=1280&q=80"}}]}, {"plate": 70, "name": "Karaman", "cx": 436.8, "cy": 387.4, "isShowcase": false, "landmarks": [{"name": "Karaman Tarihi Meydanı", "bg": "https://images.unsplash.com/photo-1541432901042-2d8bd64b4a9b?auto=format&fit=crop&w=1280&q=80", "desc": "Karaman ilinin köklü tarihini ve zengin Anadolu kültürünü yansıtan simgesel merkezi. Binlerce yıllık mirasın izlerini taşır."}, {"name": "Karaman Doğal Güzellikleri", "bg": "https://images.unsplash.com/photo-1564507592333-c60657eea523?auto=format&fit=crop&w=1280&q=80", "desc": "Karaman coğrafyasının eşsiz doğası, yemyeşil vadileri ve temiz yaylaları ziyaretçilerine huzur dolu anlar sunar."}], "levels": [{"id": 1, "landmark": "Karaman Tarihi Meydanı", "bg": "https://images.unsplash.com/photo-1541432901042-2d8bd64b4a9b?auto=format&fit=crop&w=1280&q=80", "words": [{"word": "KALE", "row": 0, "col": 0, "dir": "H"}, {"word": "KEL", "row": 0, "col": 0, "dir": "V"}, {"word": "ELA", "row": 1, "col": 0, "dir": "H"}], "letters": ["A", "E", "K", "L"], "postcard": {"landmark": "Karaman Tarihi Meydanı", "city": "Karaman", "desc": "Karaman ilinin köklü tarihini ve zengin Anadolu kültürünü yansıtan simgesel merkezi. Binlerce yıllık mirasın izlerini taşır.", "bg": "https://images.unsplash.com/photo-1541432901042-2d8bd64b4a9b?auto=format&fit=crop&w=1280&q=80"}}, {"id": 2, "landmark": "Karaman Doğal Güzellikleri", "bg": "https://images.unsplash.com/photo-1564507592333-c60657eea523?auto=format&fit=crop&w=1280&q=80", "words": [{"word": "BALIK", "row": 0, "col": 0, "dir": "H"}, {"word": "BAL", "row": 0, "col": 0, "dir": "V"}, {"word": "KIL", "row": 0, "col": 4, "dir": "V"}], "letters": ["A", "B", "I", "K", "L"], "postcard": {"landmark": "Karaman Doğal Güzellikleri", "city": "Karaman", "desc": "Karaman coğrafyasının eşsiz doğası, yemyeşil vadileri ve temiz yaylaları ziyaretçilerine huzur dolu anlar sunar.", "bg": "https://images.unsplash.com/photo-1564507592333-c60657eea523?auto=format&fit=crop&w=1280&q=80"}}]}, {"plate": 33, "name": "Mersin", "cx": 470.3, "cy": 427.3, "isShowcase": false, "landmarks": [{"name": "Mersin Tarihi Meydanı", "bg": "https://images.unsplash.com/photo-1541432901042-2d8bd64b4a9b?auto=format&fit=crop&w=1280&q=80", "desc": "Mersin ilinin köklü tarihini ve zengin Anadolu kültürünü yansıtan simgesel merkezi. Binlerce yıllık mirasın izlerini taşır."}, {"name": "Mersin Doğal Güzellikleri", "bg": "https://images.unsplash.com/photo-1564507592333-c60657eea523?auto=format&fit=crop&w=1280&q=80", "desc": "Mersin coğrafyasının eşsiz doğası, yemyeşil vadileri ve temiz yaylaları ziyaretçilerine huzur dolu anlar sunar."}], "levels": [{"id": 1, "landmark": "Mersin Tarihi Meydanı", "bg": "https://images.unsplash.com/photo-1541432901042-2d8bd64b4a9b?auto=format&fit=crop&w=1280&q=80", "words": [{"word": "KALE", "row": 0, "col": 0, "dir": "H"}, {"word": "KEL", "row": 0, "col": 0, "dir": "V"}, {"word": "ELA", "row": 1, "col": 0, "dir": "H"}], "letters": ["A", "E", "K", "L"], "postcard": {"landmark": "Mersin Tarihi Meydanı", "city": "Mersin", "desc": "Mersin ilinin köklü tarihini ve zengin Anadolu kültürünü yansıtan simgesel merkezi. Binlerce yıllık mirasın izlerini taşır.", "bg": "https://images.unsplash.com/photo-1541432901042-2d8bd64b4a9b?auto=format&fit=crop&w=1280&q=80"}}, {"id": 2, "landmark": "Mersin Doğal Güzellikleri", "bg": "https://images.unsplash.com/photo-1564507592333-c60657eea523?auto=format&fit=crop&w=1280&q=80", "words": [{"word": "BALIK", "row": 0, "col": 0, "dir": "H"}, {"word": "BAL", "row": 0, "col": 0, "dir": "V"}, {"word": "KIL", "row": 0, "col": 4, "dir": "V"}], "letters": ["A", "B", "I", "K", "L"], "postcard": {"landmark": "Mersin Doğal Güzellikleri", "city": "Mersin", "desc": "Mersin coğrafyasının eşsiz doğası, yemyeşil vadileri ve temiz yaylaları ziyaretçilerine huzur dolu anlar sunar.", "bg": "https://images.unsplash.com/photo-1564507592333-c60657eea523?auto=format&fit=crop&w=1280&q=80"}}]}, {"plate": 1, "name": "Adana", "cx": 564.3, "cy": 392.6, "isShowcase": false, "landmarks": [{"name": "Adana Tarihi Meydanı", "bg": "https://images.unsplash.com/photo-1541432901042-2d8bd64b4a9b?auto=format&fit=crop&w=1280&q=80", "desc": "Adana ilinin köklü tarihini ve zengin Anadolu kültürünü yansıtan simgesel merkezi. Binlerce yıllık mirasın izlerini taşır."}, {"name": "Adana Doğal Güzellikleri", "bg": "https://images.unsplash.com/photo-1564507592333-c60657eea523?auto=format&fit=crop&w=1280&q=80", "desc": "Adana coğrafyasının eşsiz doğası, yemyeşil vadileri ve temiz yaylaları ziyaretçilerine huzur dolu anlar sunar."}], "levels": [{"id": 1, "landmark": "Adana Tarihi Meydanı", "bg": "https://images.unsplash.com/photo-1541432901042-2d8bd64b4a9b?auto=format&fit=crop&w=1280&q=80", "words": [{"word": "KALE", "row": 0, "col": 0, "dir": "H"}, {"word": "KEL", "row": 0, "col": 0, "dir": "V"}, {"word": "ELA", "row": 1, "col": 0, "dir": "H"}], "letters": ["A", "E", "K", "L"], "postcard": {"landmark": "Adana Tarihi Meydanı", "city": "Adana", "desc": "Adana ilinin köklü tarihini ve zengin Anadolu kültürünü yansıtan simgesel merkezi. Binlerce yıllık mirasın izlerini taşır.", "bg": "https://images.unsplash.com/photo-1541432901042-2d8bd64b4a9b?auto=format&fit=crop&w=1280&q=80"}}, {"id": 2, "landmark": "Adana Doğal Güzellikleri", "bg": "https://images.unsplash.com/photo-1564507592333-c60657eea523?auto=format&fit=crop&w=1280&q=80", "words": [{"word": "BALIK", "row": 0, "col": 0, "dir": "H"}, {"word": "BAL", "row": 0, "col": 0, "dir": "V"}, {"word": "KIL", "row": 0, "col": 4, "dir": "V"}], "letters": ["A", "B", "I", "K", "L"], "postcard": {"landmark": "Adana Doğal Güzellikleri", "city": "Adana", "desc": "Adana coğrafyasının eşsiz doğası, yemyeşil vadileri ve temiz yaylaları ziyaretçilerine huzur dolu anlar sunar.", "bg": "https://images.unsplash.com/photo-1564507592333-c60657eea523?auto=format&fit=crop&w=1280&q=80"}}]}, {"plate": 80, "name": "Osmaniye", "cx": 603.3, "cy": 372.5, "isShowcase": false, "landmarks": [{"name": "Osmaniye Tarihi Meydanı", "bg": "https://images.unsplash.com/photo-1541432901042-2d8bd64b4a9b?auto=format&fit=crop&w=1280&q=80", "desc": "Osmaniye ilinin köklü tarihini ve zengin Anadolu kültürünü yansıtan simgesel merkezi. Binlerce yıllık mirasın izlerini taşır."}, {"name": "Osmaniye Doğal Güzellikleri", "bg": "https://images.unsplash.com/photo-1564507592333-c60657eea523?auto=format&fit=crop&w=1280&q=80", "desc": "Osmaniye coğrafyasının eşsiz doğası, yemyeşil vadileri ve temiz yaylaları ziyaretçilerine huzur dolu anlar sunar."}], "levels": [{"id": 1, "landmark": "Osmaniye Tarihi Meydanı", "bg": "https://images.unsplash.com/photo-1541432901042-2d8bd64b4a9b?auto=format&fit=crop&w=1280&q=80", "words": [{"word": "KALE", "row": 0, "col": 0, "dir": "H"}, {"word": "KEL", "row": 0, "col": 0, "dir": "V"}, {"word": "ELA", "row": 1, "col": 0, "dir": "H"}], "letters": ["A", "E", "K", "L"], "postcard": {"landmark": "Osmaniye Tarihi Meydanı", "city": "Osmaniye", "desc": "Osmaniye ilinin köklü tarihini ve zengin Anadolu kültürünü yansıtan simgesel merkezi. Binlerce yıllık mirasın izlerini taşır.", "bg": "https://images.unsplash.com/photo-1541432901042-2d8bd64b4a9b?auto=format&fit=crop&w=1280&q=80"}}, {"id": 2, "landmark": "Osmaniye Doğal Güzellikleri", "bg": "https://images.unsplash.com/photo-1564507592333-c60657eea523?auto=format&fit=crop&w=1280&q=80", "words": [{"word": "BALIK", "row": 0, "col": 0, "dir": "H"}, {"word": "BAL", "row": 0, "col": 0, "dir": "V"}, {"word": "KIL", "row": 0, "col": 4, "dir": "V"}], "letters": ["A", "B", "I", "K", "L"], "postcard": {"landmark": "Osmaniye Doğal Güzellikleri", "city": "Osmaniye", "desc": "Osmaniye coğrafyasının eşsiz doğası, yemyeşil vadileri ve temiz yaylaları ziyaretçilerine huzur dolu anlar sunar.", "bg": "https://images.unsplash.com/photo-1564507592333-c60657eea523?auto=format&fit=crop&w=1280&q=80"}}]}, {"plate": 31, "name": "Hatay", "cx": 604.3, "cy": 429.6, "isShowcase": false, "landmarks": [{"name": "Hatay Tarihi Meydanı", "bg": "https://images.unsplash.com/photo-1541432901042-2d8bd64b4a9b?auto=format&fit=crop&w=1280&q=80", "desc": "Hatay ilinin köklü tarihini ve zengin Anadolu kültürünü yansıtan simgesel merkezi. Binlerce yıllık mirasın izlerini taşır."}, {"name": "Hatay Doğal Güzellikleri", "bg": "https://images.unsplash.com/photo-1564507592333-c60657eea523?auto=format&fit=crop&w=1280&q=80", "desc": "Hatay coğrafyasının eşsiz doğası, yemyeşil vadileri ve temiz yaylaları ziyaretçilerine huzur dolu anlar sunar."}], "levels": [{"id": 1, "landmark": "Hatay Tarihi Meydanı", "bg": "https://images.unsplash.com/photo-1541432901042-2d8bd64b4a9b?auto=format&fit=crop&w=1280&q=80", "words": [{"word": "KALE", "row": 0, "col": 0, "dir": "H"}, {"word": "KEL", "row": 0, "col": 0, "dir": "V"}, {"word": "ELA", "row": 1, "col": 0, "dir": "H"}], "letters": ["A", "E", "K", "L"], "postcard": {"landmark": "Hatay Tarihi Meydanı", "city": "Hatay", "desc": "Hatay ilinin köklü tarihini ve zengin Anadolu kültürünü yansıtan simgesel merkezi. Binlerce yıllık mirasın izlerini taşır.", "bg": "https://images.unsplash.com/photo-1541432901042-2d8bd64b4a9b?auto=format&fit=crop&w=1280&q=80"}}, {"id": 2, "landmark": "Hatay Doğal Güzellikleri", "bg": "https://images.unsplash.com/photo-1564507592333-c60657eea523?auto=format&fit=crop&w=1280&q=80", "words": [{"word": "BALIK", "row": 0, "col": 0, "dir": "H"}, {"word": "BAL", "row": 0, "col": 0, "dir": "V"}, {"word": "KIL", "row": 0, "col": 4, "dir": "V"}], "letters": ["A", "B", "I", "K", "L"], "postcard": {"landmark": "Hatay Doğal Güzellikleri", "city": "Hatay", "desc": "Hatay coğrafyasının eşsiz doğası, yemyeşil vadileri ve temiz yaylaları ziyaretçilerine huzur dolu anlar sunar.", "bg": "https://images.unsplash.com/photo-1564507592333-c60657eea523?auto=format&fit=crop&w=1280&q=80"}}]}, {"plate": 27, "name": "Gaziantep", "cx": 667.0, "cy": 382.0, "isShowcase": false, "landmarks": [{"name": "Gaziantep Tarihi Meydanı", "bg": "https://images.unsplash.com/photo-1541432901042-2d8bd64b4a9b?auto=format&fit=crop&w=1280&q=80", "desc": "Gaziantep ilinin köklü tarihini ve zengin Anadolu kültürünü yansıtan simgesel merkezi. Binlerce yıllık mirasın izlerini taşır."}, {"name": "Gaziantep Doğal Güzellikleri", "bg": "https://images.unsplash.com/photo-1564507592333-c60657eea523?auto=format&fit=crop&w=1280&q=80", "desc": "Gaziantep coğrafyasının eşsiz doğası, yemyeşil vadileri ve temiz yaylaları ziyaretçilerine huzur dolu anlar sunar."}], "levels": [{"id": 1, "landmark": "Gaziantep Tarihi Meydanı", "bg": "https://images.unsplash.com/photo-1541432901042-2d8bd64b4a9b?auto=format&fit=crop&w=1280&q=80", "words": [{"word": "KALE", "row": 0, "col": 0, "dir": "H"}, {"word": "KEL", "row": 0, "col": 0, "dir": "V"}, {"word": "ELA", "row": 1, "col": 0, "dir": "H"}], "letters": ["A", "E", "K", "L"], "postcard": {"landmark": "Gaziantep Tarihi Meydanı", "city": "Gaziantep", "desc": "Gaziantep ilinin köklü tarihini ve zengin Anadolu kültürünü yansıtan simgesel merkezi. Binlerce yıllık mirasın izlerini taşır.", "bg": "https://images.unsplash.com/photo-1541432901042-2d8bd64b4a9b?auto=format&fit=crop&w=1280&q=80"}}, {"id": 2, "landmark": "Gaziantep Doğal Güzellikleri", "bg": "https://images.unsplash.com/photo-1564507592333-c60657eea523?auto=format&fit=crop&w=1280&q=80", "words": [{"word": "BALIK", "row": 0, "col": 0, "dir": "H"}, {"word": "BAL", "row": 0, "col": 0, "dir": "V"}, {"word": "KIL", "row": 0, "col": 4, "dir": "V"}], "letters": ["A", "B", "I", "K", "L"], "postcard": {"landmark": "Gaziantep Doğal Güzellikleri", "city": "Gaziantep", "desc": "Gaziantep coğrafyasının eşsiz doğası, yemyeşil vadileri ve temiz yaylaları ziyaretçilerine huzur dolu anlar sunar.", "bg": "https://images.unsplash.com/photo-1564507592333-c60657eea523?auto=format&fit=crop&w=1280&q=80"}}]}, {"plate": 79, "name": "Kilis", "cx": 651.9, "cy": 405.5, "isShowcase": false, "landmarks": [{"name": "Kilis Tarihi Meydanı", "bg": "https://images.unsplash.com/photo-1541432901042-2d8bd64b4a9b?auto=format&fit=crop&w=1280&q=80", "desc": "Kilis ilinin köklü tarihini ve zengin Anadolu kültürünü yansıtan simgesel merkezi. Binlerce yıllık mirasın izlerini taşır."}, {"name": "Kilis Doğal Güzellikleri", "bg": "https://images.unsplash.com/photo-1564507592333-c60657eea523?auto=format&fit=crop&w=1280&q=80", "desc": "Kilis coğrafyasının eşsiz doğası, yemyeşil vadileri ve temiz yaylaları ziyaretçilerine huzur dolu anlar sunar."}], "levels": [{"id": 1, "landmark": "Kilis Tarihi Meydanı", "bg": "https://images.unsplash.com/photo-1541432901042-2d8bd64b4a9b?auto=format&fit=crop&w=1280&q=80", "words": [{"word": "KALE", "row": 0, "col": 0, "dir": "H"}, {"word": "KEL", "row": 0, "col": 0, "dir": "V"}, {"word": "ELA", "row": 1, "col": 0, "dir": "H"}], "letters": ["A", "E", "K", "L"], "postcard": {"landmark": "Kilis Tarihi Meydanı", "city": "Kilis", "desc": "Kilis ilinin köklü tarihini ve zengin Anadolu kültürünü yansıtan simgesel merkezi. Binlerce yıllık mirasın izlerini taşır.", "bg": "https://images.unsplash.com/photo-1541432901042-2d8bd64b4a9b?auto=format&fit=crop&w=1280&q=80"}}, {"id": 2, "landmark": "Kilis Doğal Güzellikleri", "bg": "https://images.unsplash.com/photo-1564507592333-c60657eea523?auto=format&fit=crop&w=1280&q=80", "words": [{"word": "BALIK", "row": 0, "col": 0, "dir": "H"}, {"word": "BAL", "row": 0, "col": 0, "dir": "V"}, {"word": "KIL", "row": 0, "col": 4, "dir": "V"}], "letters": ["A", "B", "I", "K", "L"], "postcard": {"landmark": "Kilis Doğal Güzellikleri", "city": "Kilis", "desc": "Kilis coğrafyasının eşsiz doğası, yemyeşil vadileri ve temiz yaylaları ziyaretçilerine huzur dolu anlar sunar.", "bg": "https://images.unsplash.com/photo-1564507592333-c60657eea523?auto=format&fit=crop&w=1280&q=80"}}]}, {"plate": 63, "name": "Şanlıurfa", "cx": 751.6, "cy": 364.7, "isShowcase": true, "landmarks": [{"name": "Göbeklitepe Dikilitaşları", "bg": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/ec/G%C3%B6bekli_Tepe.jpg/1280px-G%C3%B6bekli_Tepe.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail", "summary": "M.Ö. 10.000 yılına tarihlenen T biçimli hayvan kabartmalı dikilitaşlar, insanlık tarihinin bilinen ilk anıtsal tapınağıdır.", "trivia": "Göbeklitepe, Mısır Piramitleri'nden 7.000 yıl, Stonehenge'den 6.000 yıl daha eskidir."}, {"name": "Balıklıgöl (Halil-ür Rahman)", "bg": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/70/Bal%C4%B1kl%C4%B1g%C3%B6l%2C_Urfa_2015.jpg/1280px-Bal%C4%B1kl%C4%B1g%C3%B6l%2C_Urfa_2015.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail", "summary": "Hz. İbrahim'in ateşe atıldığında ateşin suya, odunların balığa dönüştüğüne inanılan kutsal göl.", "trivia": "Göldeki balıklar kutsal kabul edildiği için tutulmaz ve asırlardır özenle beslenir."}, {"name": "Harran Kümbet Evleri", "bg": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/f0/Harran_Beehive_houses_196.jpg/1280px-Harran_Beehive_houses_196.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail", "summary": "Konik kubbeli kerpiç evleri ve dünyanın ilk üniversitelerinden birinin kalıntılarıyla ünlü tarihi çöl vahası.", "trivia": "Harran evlerinin harcında yumurta akı ve saman kullanılmış olup yazın serin, kışın sıcacık tutar."}, {"name": "Şanlıurfa Kalesi", "bg": "https://upload.wikimedia.org/wikipedia/commons/e/ea/Sanliurfa_Castle.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled", "summary": "Balıklıgöl'e tepeden bakan ve üzerinde Korint başlıklı iki devasa anıtsal sütun bulunan tarihi kale.", "trivia": "Halk arasında 'Mancınık Sütunları' olarak bilinen sütunların Hz. İbrahim'i ateşe atmak için kullanıldığı rivayet edilir."}, {"name": "Halfeti Batık Şehir", "bg": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/f2/Halfeti_on_the_Euphrates.jpg/1280px-Halfeti_on_the_Euphrates.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail", "summary": "Birecik Barajı gölü altında kalan tarihi taş evleri, minaresi sudan çıkan camisi ve efsanevi siyah gülüyle ünlü saklı cennet.", "trivia": "Dünyada yalnızca Halfeti'nin mikroklimalı toprağında doğal olarak simsiyah gül (Karagül) yetişmektedir."}], "levels": [{"id": 31, "city_id": "sanliurfa", "city_name": "Şanlıurfa", "sub_id": 1, "title": "Şanlıurfa - Bölüm 1: Göbeklitepe Dikilitaşları", "landmark_name": "Göbeklitepe Dikilitaşları", "bg": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/ec/G%C3%B6bekli_Tepe.jpg/1280px-G%C3%B6bekli_Tepe.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail", "wheel": ["A", "A", "D", "L", "E", "T"], "words": [{"id": "w1", "word": "ADALET", "row": 2, "col": 0, "dir": "H"}, {"id": "w2", "word": "ADA", "row": 2, "col": 0, "dir": "V"}, {"id": "w3", "word": "EDA", "row": 0, "col": 2, "dir": "V"}], "bonus": ["AT"], "postcard": {"title": "Göbeklitepe Dikilitaşları", "city": "Şanlıurfa", "plate": 63, "summary": "M.Ö. 10.000 yılına tarihlenen T biçimli hayvan kabartmalı dikilitaşlar, insanlık tarihinin bilinen ilk anıtsal tapınağıdır.", "trivia": "Göbeklitepe, Mısır Piramitleri'nden 7.000 yıl, Stonehenge'den 6.000 yıl daha eskidir.", "bg": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/ec/G%C3%B6bekli_Tepe.jpg/1280px-G%C3%B6bekli_Tepe.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail"}}, {"id": 32, "city_id": "sanliurfa", "city_name": "Şanlıurfa", "sub_id": 2, "title": "Şanlıurfa - Bölüm 2: Balıklıgöl (Halil-ür Rahman)", "landmark_name": "Balıklıgöl (Halil-ür Rahman)", "bg": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/70/Bal%C4%B1kl%C4%B1g%C3%B6l%2C_Urfa_2015.jpg/1280px-Bal%C4%B1kl%C4%B1g%C3%B6l%2C_Urfa_2015.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail", "wheel": ["K", "A", "N", "N", "Y", "O"], "words": [{"id": "w1", "word": "KANYON", "row": 2, "col": 0, "dir": "H"}, {"id": "w2", "word": "KAN", "row": 2, "col": 0, "dir": "V"}, {"id": "w3", "word": "YAN", "row": 0, "col": 2, "dir": "V"}], "bonus": ["OYA", "ON"], "postcard": {"title": "Balıklıgöl (Halil-ür Rahman)", "city": "Şanlıurfa", "plate": 63, "summary": "Hz. İbrahim'in ateşe atıldığında ateşin suya, odunların balığa dönüştüğüne inanılan kutsal göl.", "trivia": "Göldeki balıklar kutsal kabul edildiği için tutulmaz ve asırlardır özenle beslenir.", "bg": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/70/Bal%C4%B1kl%C4%B1g%C3%B6l%2C_Urfa_2015.jpg/1280px-Bal%C4%B1kl%C4%B1g%C3%B6l%2C_Urfa_2015.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail"}}, {"id": 33, "city_id": "sanliurfa", "city_name": "Şanlıurfa", "sub_id": 3, "title": "Şanlıurfa - Bölüm 3: Harran Kümbet Evleri", "landmark_name": "Harran Kümbet Evleri", "bg": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/f0/Harran_Beehive_houses_196.jpg/1280px-Harran_Beehive_houses_196.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail", "wheel": ["V", "O", "L", "K", "A", "N"], "words": [{"id": "w1", "word": "VOLKAN", "row": 2, "col": 0, "dir": "H"}, {"id": "w2", "word": "KOL", "row": 1, "col": 1, "dir": "V"}, {"id": "w3", "word": "LAK", "row": 0, "col": 3, "dir": "V"}], "bonus": ["VAN", "OVA"], "postcard": {"title": "Harran Kümbet Evleri", "city": "Şanlıurfa", "plate": 63, "summary": "Konik kubbeli kerpiç evleri ve dünyanın ilk üniversitelerinden birinin kalıntılarıyla ünlü tarihi çöl vahası.", "trivia": "Harran evlerinin harcında yumurta akı ve saman kullanılmış olup yazın serin, kışın sıcacık tutar.", "bg": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/f0/Harran_Beehive_houses_196.jpg/1280px-Harran_Beehive_houses_196.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail"}}, {"id": 34, "city_id": "sanliurfa", "city_name": "Şanlıurfa", "sub_id": 4, "title": "Şanlıurfa - Bölüm 4: Şanlıurfa Kalesi", "landmark_name": "Şanlıurfa Kalesi", "bg": "https://upload.wikimedia.org/wikipedia/commons/e/ea/Sanliurfa_Castle.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled", "wheel": ["Ş", "E", "E", "L", "L", "A"], "words": [{"id": "w1", "word": "ŞELALE", "row": 3, "col": 0, "dir": "H"}, {"id": "w2", "word": "LALE", "row": 0, "col": 1, "dir": "V"}, {"id": "w3", "word": "ELA", "row": 1, "col": 3, "dir": "V"}], "bonus": ["ŞAL"], "postcard": {"title": "Şanlıurfa Kalesi", "city": "Şanlıurfa", "plate": 63, "summary": "Balıklıgöl'e tepeden bakan ve üzerinde Korint başlıklı iki devasa anıtsal sütun bulunan tarihi kale.", "trivia": "Halk arasında 'Mancınık Sütunları' olarak bilinen sütunların Hz. İbrahim'i ateşe atmak için kullanıldığı rivayet edilir.", "bg": "https://upload.wikimedia.org/wikipedia/commons/e/ea/Sanliurfa_Castle.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled"}}, {"id": 35, "city_id": "sanliurfa", "city_name": "Şanlıurfa", "sub_id": 5, "title": "Şanlıurfa - Bölüm 5: Halfeti Batık Şehir", "landmark_name": "Halfeti Batık Şehir", "bg": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/f2/Halfeti_on_the_Euphrates.jpg/1280px-Halfeti_on_the_Euphrates.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail", "wheel": ["G", "U", "U", "R", "R", "H"], "words": [{"id": "w1", "word": "GURUR", "row": 1, "col": 0, "dir": "H"}, {"id": "w2", "word": "GUR", "row": 1, "col": 0, "dir": "V"}, {"id": "w3", "word": "UR", "row": 0, "col": 2, "dir": "V"}], "bonus": ["RUH"], "postcard": {"title": "Halfeti Batık Şehir", "city": "Şanlıurfa", "plate": 63, "summary": "Birecik Barajı gölü altında kalan tarihi taş evleri, minaresi sudan çıkan camisi ve efsanevi siyah gülüyle ünlü saklı cennet.", "trivia": "Dünyada yalnızca Halfeti'nin mikroklimalı toprağında doğal olarak simsiyah gül (Karagül) yetişmektedir.", "bg": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/f2/Halfeti_on_the_Euphrates.jpg/1280px-Halfeti_on_the_Euphrates.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail"}}]}, {"plate": 2, "name": "Adıyaman", "cx": 723.9, "cy": 331.3, "isShowcase": true, "landmarks": [{"name": "Nemrut Dağı Heykelleri", "bg": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/3b/APOLLON_NEMRUT_MOUNTAIN.jpg/1280px-APOLLON_NEMRUT_MOUNTAIN.jpg", "summary": "Gündoğumu ve günbatımının en büyüleyici izlendiği zirvede, devasa kral ve tanrı heykelleri doğu ile batıyı buluşturur.", "trivia": "Nemrut'taki aslan horoskopu kabartması, tarihin bilinen en eski astrolojik takvimidir."}, {"name": "Cendere Köprüsü", "bg": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/5d/Severus_Bridge_%28CENDERE_K%C3%96PR%C3%9CS%C3%9C%29.jpg/1280px-Severus_Bridge_%28CENDERE_K%C3%96PR%C3%9CS%C3%9C%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail", "summary": "Roma İmparatoru Septimius Severus döneminde harçsız olarak 92 devasa blok taşla inşa edilen 1800 yıllık köprü.", "trivia": "Dünyanın günümüze kadar ayakta kalmış ve araç trafiğine en uzun süre hizmet etmiş en eski taş köprülerinden biridir."}, {"name": "Arsemia Ören Yeri", "bg": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/1b/Turecko_Arsameia_%2804%29.jpg/1280px-Turecko_Arsameia_%2804%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail", "summary": "Kommagene krallarının yazlık başkenti; kayalara oyulmuş kabartmaları ve gizemli derin tünelleriyle meşhurdur.", "trivia": "Kral I. Antiochos ile Herakles'in el sıkışmasını betimleyen kabartma, antik dostluğun en önemli simgesidir."}, {"name": "Karakuş Tümülüsü", "bg": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/87/Tumulus_of_Karakus_01.jpg/1280px-Tumulus_of_Karakus_01.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail", "summary": "Sütun üzerindeki kartal heykeliyle tanınan, Kommagene kraliyet kadınlarına ait anıtsal mezar anıtı.", "trivia": "Sütundaki kartal heykeli gücü ve göksel korumayı simgeler."}, {"name": "Kahta Kalesi", "bg": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/99/Arsameia_%284955068809%29.jpg/1280px-Arsameia_%284955068809%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail", "summary": "Sarp kayalıkların üzerine kartal yuvası gibi kurulmuş, Memlük ve Selçuklu izlerini taşıyan savunma kalesi.", "trivia": "Kaleden nehre inen gizli su yolları ve güvercinlikler günümüze kadar korunmuştur."}], "levels": [{"id": 21, "city_id": "adiyaman", "city_name": "Adıyaman", "sub_id": 1, "title": "Adıyaman - Bölüm 1: Nemrut Dağı Heykelleri", "landmark_name": "Nemrut Dağı Heykelleri", "bg": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/3b/APOLLON_NEMRUT_MOUNTAIN.jpg/1280px-APOLLON_NEMRUT_MOUNTAIN.jpg", "wheel": ["D", "O", "S", "T", "K"], "words": [{"id": "w1", "word": "DOST", "row": 1, "col": 0, "dir": "H"}, {"id": "w2", "word": "TOS", "row": 0, "col": 1, "dir": "V"}, {"id": "w3", "word": "OT", "row": 0, "col": 3, "dir": "V"}], "bonus": ["KOD", "TOK"], "postcard": {"title": "Nemrut Dağı Heykelleri", "city": "Adıyaman", "plate": 2, "summary": "Gündoğumu ve günbatımının en büyüleyici izlendiği zirvede, devasa kral ve tanrı heykelleri doğu ile batıyı buluşturur.", "trivia": "Nemrut'taki aslan horoskopu kabartması, tarihin bilinen en eski astrolojik takvimidir.", "bg": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/3b/APOLLON_NEMRUT_MOUNTAIN.jpg/1280px-APOLLON_NEMRUT_MOUNTAIN.jpg"}}, {"id": 22, "city_id": "adiyaman", "city_name": "Adıyaman", "sub_id": 2, "title": "Adıyaman - Bölüm 2: Cendere Köprüsü", "landmark_name": "Cendere Köprüsü", "bg": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/5d/Severus_Bridge_%28CENDERE_K%C3%96PR%C3%9CS%C3%9C%29.jpg/1280px-Severus_Bridge_%28CENDERE_K%C3%96PR%C3%9CS%C3%9C%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail", "wheel": ["İ", "N", "N", "S", "A", "I"], "words": [{"id": "w1", "word": "İNSAN", "row": 2, "col": 0, "dir": "H"}, {"id": "w2", "word": "SAN", "row": 0, "col": 1, "dir": "V"}, {"id": "w3", "word": "ANI", "row": 2, "col": 3, "dir": "V"}], "bonus": ["AN", "AS"], "postcard": {"title": "Cendere Köprüsü", "city": "Adıyaman", "plate": 2, "summary": "Roma İmparatoru Septimius Severus döneminde harçsız olarak 92 devasa blok taşla inşa edilen 1800 yıllık köprü.", "trivia": "Dünyanın günümüze kadar ayakta kalmış ve araç trafiğine en uzun süre hizmet etmiş en eski taş köprülerinden biridir.", "bg": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/5d/Severus_Bridge_%28CENDERE_K%C3%96PR%C3%9CS%C3%9C%29.jpg/1280px-Severus_Bridge_%28CENDERE_K%C3%96PR%C3%9CS%C3%9C%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail"}}, {"id": 23, "city_id": "adiyaman", "city_name": "Adıyaman", "sub_id": 3, "title": "Adıyaman - Bölüm 3: Arsemia Ören Yeri", "landmark_name": "Arsemia Ören Yeri", "bg": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/1b/Turecko_Arsameia_%2804%29.jpg/1280px-Turecko_Arsameia_%2804%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail", "wheel": ["D", "A", "A", "L", "G", "Ğ"], "words": [{"id": "w1", "word": "DALGA", "row": 1, "col": 0, "dir": "H"}, {"id": "w2", "word": "ADA", "row": 0, "col": 0, "dir": "V"}, {"id": "w3", "word": "ALA", "row": 0, "col": 2, "dir": "V"}], "bonus": ["ALG", "DAĞ"], "postcard": {"title": "Arsemia Ören Yeri", "city": "Adıyaman", "plate": 2, "summary": "Kommagene krallarının yazlık başkenti; kayalara oyulmuş kabartmaları ve gizemli derin tünelleriyle meşhurdur.", "trivia": "Kral I. Antiochos ile Herakles'in el sıkışmasını betimleyen kabartma, antik dostluğun en önemli simgesidir.", "bg": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/1b/Turecko_Arsameia_%2804%29.jpg/1280px-Turecko_Arsameia_%2804%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail"}}, {"id": 24, "city_id": "adiyaman", "city_name": "Adıyaman", "sub_id": 4, "title": "Adıyaman - Bölüm 4: Karakuş Tümülüsü", "landmark_name": "Karakuş Tümülüsü", "bg": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/87/Tumulus_of_Karakus_01.jpg/1280px-Tumulus_of_Karakus_01.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail", "wheel": ["G", "G", "Ö", "L", "E", "E"], "words": [{"id": "w1", "word": "GÖLGE", "row": 1, "col": 0, "dir": "H"}, {"id": "w2", "word": "GÖL", "row": 1, "col": 0, "dir": "V"}, {"id": "w3", "word": "EGE", "row": 0, "col": 3, "dir": "V"}], "bonus": ["ÖGE"], "postcard": {"title": "Karakuş Tümülüsü", "city": "Adıyaman", "plate": 2, "summary": "Sütun üzerindeki kartal heykeliyle tanınan, Kommagene kraliyet kadınlarına ait anıtsal mezar anıtı.", "trivia": "Sütundaki kartal heykeli gücü ve göksel korumayı simgeler.", "bg": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/87/Tumulus_of_Karakus_01.jpg/1280px-Tumulus_of_Karakus_01.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail"}}, {"id": 25, "city_id": "adiyaman", "city_name": "Adıyaman", "sub_id": 5, "title": "Adıyaman - Bölüm 5: Kahta Kalesi", "landmark_name": "Kahta Kalesi", "bg": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/99/Arsameia_%284955068809%29.jpg/1280px-Arsameia_%284955068809%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail", "wheel": ["B", "A", "R", "I", "Ş"], "words": [{"id": "w1", "word": "BARIŞ", "row": 1, "col": 0, "dir": "H"}, {"id": "w2", "word": "BAŞ", "row": 1, "col": 0, "dir": "V"}, {"id": "w3", "word": "ARI", "row": 0, "col": 2, "dir": "V"}], "bonus": ["AŞ", "ARŞ"], "postcard": {"title": "Kahta Kalesi", "city": "Adıyaman", "plate": 2, "summary": "Sarp kayalıkların üzerine kartal yuvası gibi kurulmuş, Memlük ve Selçuklu izlerini taşıyan savunma kalesi.", "trivia": "Kaleden nehre inen gizli su yolları ve güvercinlikler günümüze kadar korunmuştur.", "bg": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/99/Arsameia_%284955068809%29.jpg/1280px-Arsameia_%284955068809%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail"}}]}, {"plate": 44, "name": "Malatya", "cx": 711.7, "cy": 285.8, "isShowcase": false, "landmarks": [{"name": "Malatya Tarihi Meydanı", "bg": "https://images.unsplash.com/photo-1541432901042-2d8bd64b4a9b?auto=format&fit=crop&w=1280&q=80", "desc": "Malatya ilinin köklü tarihini ve zengin Anadolu kültürünü yansıtan simgesel merkezi. Binlerce yıllık mirasın izlerini taşır."}, {"name": "Malatya Doğal Güzellikleri", "bg": "https://images.unsplash.com/photo-1564507592333-c60657eea523?auto=format&fit=crop&w=1280&q=80", "desc": "Malatya coğrafyasının eşsiz doğası, yemyeşil vadileri ve temiz yaylaları ziyaretçilerine huzur dolu anlar sunar."}], "levels": [{"id": 1, "landmark": "Malatya Tarihi Meydanı", "bg": "https://images.unsplash.com/photo-1541432901042-2d8bd64b4a9b?auto=format&fit=crop&w=1280&q=80", "words": [{"word": "KALE", "row": 0, "col": 0, "dir": "H"}, {"word": "KEL", "row": 0, "col": 0, "dir": "V"}, {"word": "ELA", "row": 1, "col": 0, "dir": "H"}], "letters": ["A", "E", "K", "L"], "postcard": {"landmark": "Malatya Tarihi Meydanı", "city": "Malatya", "desc": "Malatya ilinin köklü tarihini ve zengin Anadolu kültürünü yansıtan simgesel merkezi. Binlerce yıllık mirasın izlerini taşır.", "bg": "https://images.unsplash.com/photo-1541432901042-2d8bd64b4a9b?auto=format&fit=crop&w=1280&q=80"}}, {"id": 2, "landmark": "Malatya Doğal Güzellikleri", "bg": "https://images.unsplash.com/photo-1564507592333-c60657eea523?auto=format&fit=crop&w=1280&q=80", "words": [{"word": "BALIK", "row": 0, "col": 0, "dir": "H"}, {"word": "BAL", "row": 0, "col": 0, "dir": "V"}, {"word": "KIL", "row": 0, "col": 4, "dir": "V"}], "letters": ["A", "B", "I", "K", "L"], "postcard": {"landmark": "Malatya Doğal Güzellikleri", "city": "Malatya", "desc": "Malatya coğrafyasının eşsiz doğası, yemyeşil vadileri ve temiz yaylaları ziyaretçilerine huzur dolu anlar sunar.", "bg": "https://images.unsplash.com/photo-1564507592333-c60657eea523?auto=format&fit=crop&w=1280&q=80"}}]}, {"plate": 23, "name": "Elazığ", "cx": 783.4, "cy": 267.7, "isShowcase": false, "landmarks": [{"name": "Elazığ Tarihi Meydanı", "bg": "https://images.unsplash.com/photo-1541432901042-2d8bd64b4a9b?auto=format&fit=crop&w=1280&q=80", "desc": "Elazığ ilinin köklü tarihini ve zengin Anadolu kültürünü yansıtan simgesel merkezi. Binlerce yıllık mirasın izlerini taşır."}, {"name": "Elazığ Doğal Güzellikleri", "bg": "https://images.unsplash.com/photo-1564507592333-c60657eea523?auto=format&fit=crop&w=1280&q=80", "desc": "Elazığ coğrafyasının eşsiz doğası, yemyeşil vadileri ve temiz yaylaları ziyaretçilerine huzur dolu anlar sunar."}], "levels": [{"id": 1, "landmark": "Elazığ Tarihi Meydanı", "bg": "https://images.unsplash.com/photo-1541432901042-2d8bd64b4a9b?auto=format&fit=crop&w=1280&q=80", "words": [{"word": "KALE", "row": 0, "col": 0, "dir": "H"}, {"word": "KEL", "row": 0, "col": 0, "dir": "V"}, {"word": "ELA", "row": 1, "col": 0, "dir": "H"}], "letters": ["A", "E", "K", "L"], "postcard": {"landmark": "Elazığ Tarihi Meydanı", "city": "Elazığ", "desc": "Elazığ ilinin köklü tarihini ve zengin Anadolu kültürünü yansıtan simgesel merkezi. Binlerce yıllık mirasın izlerini taşır.", "bg": "https://images.unsplash.com/photo-1541432901042-2d8bd64b4a9b?auto=format&fit=crop&w=1280&q=80"}}, {"id": 2, "landmark": "Elazığ Doğal Güzellikleri", "bg": "https://images.unsplash.com/photo-1564507592333-c60657eea523?auto=format&fit=crop&w=1280&q=80", "words": [{"word": "BALIK", "row": 0, "col": 0, "dir": "H"}, {"word": "BAL", "row": 0, "col": 0, "dir": "V"}, {"word": "KIL", "row": 0, "col": 4, "dir": "V"}], "letters": ["A", "B", "I", "K", "L"], "postcard": {"landmark": "Elazığ Doğal Güzellikleri", "city": "Elazığ", "desc": "Elazığ coğrafyasının eşsiz doğası, yemyeşil vadileri ve temiz yaylaları ziyaretçilerine huzur dolu anlar sunar.", "bg": "https://images.unsplash.com/photo-1564507592333-c60657eea523?auto=format&fit=crop&w=1280&q=80"}}]}, {"plate": 62, "name": "Tunceli", "cx": 789.5, "cy": 233.2, "isShowcase": false, "landmarks": [{"name": "Tunceli Tarihi Meydanı", "bg": "https://images.unsplash.com/photo-1541432901042-2d8bd64b4a9b?auto=format&fit=crop&w=1280&q=80", "desc": "Tunceli ilinin köklü tarihini ve zengin Anadolu kültürünü yansıtan simgesel merkezi. Binlerce yıllık mirasın izlerini taşır."}, {"name": "Tunceli Doğal Güzellikleri", "bg": "https://images.unsplash.com/photo-1564507592333-c60657eea523?auto=format&fit=crop&w=1280&q=80", "desc": "Tunceli coğrafyasının eşsiz doğası, yemyeşil vadileri ve temiz yaylaları ziyaretçilerine huzur dolu anlar sunar."}], "levels": [{"id": 1, "landmark": "Tunceli Tarihi Meydanı", "bg": "https://images.unsplash.com/photo-1541432901042-2d8bd64b4a9b?auto=format&fit=crop&w=1280&q=80", "words": [{"word": "KALE", "row": 0, "col": 0, "dir": "H"}, {"word": "KEL", "row": 0, "col": 0, "dir": "V"}, {"word": "ELA", "row": 1, "col": 0, "dir": "H"}], "letters": ["A", "E", "K", "L"], "postcard": {"landmark": "Tunceli Tarihi Meydanı", "city": "Tunceli", "desc": "Tunceli ilinin köklü tarihini ve zengin Anadolu kültürünü yansıtan simgesel merkezi. Binlerce yıllık mirasın izlerini taşır.", "bg": "https://images.unsplash.com/photo-1541432901042-2d8bd64b4a9b?auto=format&fit=crop&w=1280&q=80"}}, {"id": 2, "landmark": "Tunceli Doğal Güzellikleri", "bg": "https://images.unsplash.com/photo-1564507592333-c60657eea523?auto=format&fit=crop&w=1280&q=80", "words": [{"word": "BALIK", "row": 0, "col": 0, "dir": "H"}, {"word": "BAL", "row": 0, "col": 0, "dir": "V"}, {"word": "KIL", "row": 0, "col": 4, "dir": "V"}], "letters": ["A", "B", "I", "K", "L"], "postcard": {"landmark": "Tunceli Doğal Güzellikleri", "city": "Tunceli", "desc": "Tunceli coğrafyasının eşsiz doğası, yemyeşil vadileri ve temiz yaylaları ziyaretçilerine huzur dolu anlar sunar.", "bg": "https://images.unsplash.com/photo-1564507592333-c60657eea523?auto=format&fit=crop&w=1280&q=80"}}]}, {"plate": 24, "name": "Erzincan", "cx": 770.3, "cy": 207.6, "isShowcase": false, "landmarks": [{"name": "Erzincan Tarihi Meydanı", "bg": "https://images.unsplash.com/photo-1541432901042-2d8bd64b4a9b?auto=format&fit=crop&w=1280&q=80", "desc": "Erzincan ilinin köklü tarihini ve zengin Anadolu kültürünü yansıtan simgesel merkezi. Binlerce yıllık mirasın izlerini taşır."}, {"name": "Erzincan Doğal Güzellikleri", "bg": "https://images.unsplash.com/photo-1564507592333-c60657eea523?auto=format&fit=crop&w=1280&q=80", "desc": "Erzincan coğrafyasının eşsiz doğası, yemyeşil vadileri ve temiz yaylaları ziyaretçilerine huzur dolu anlar sunar."}], "levels": [{"id": 1, "landmark": "Erzincan Tarihi Meydanı", "bg": "https://images.unsplash.com/photo-1541432901042-2d8bd64b4a9b?auto=format&fit=crop&w=1280&q=80", "words": [{"word": "KALE", "row": 0, "col": 0, "dir": "H"}, {"word": "KEL", "row": 0, "col": 0, "dir": "V"}, {"word": "ELA", "row": 1, "col": 0, "dir": "H"}], "letters": ["A", "E", "K", "L"], "postcard": {"landmark": "Erzincan Tarihi Meydanı", "city": "Erzincan", "desc": "Erzincan ilinin köklü tarihini ve zengin Anadolu kültürünü yansıtan simgesel merkezi. Binlerce yıllık mirasın izlerini taşır.", "bg": "https://images.unsplash.com/photo-1541432901042-2d8bd64b4a9b?auto=format&fit=crop&w=1280&q=80"}}, {"id": 2, "landmark": "Erzincan Doğal Güzellikleri", "bg": "https://images.unsplash.com/photo-1564507592333-c60657eea523?auto=format&fit=crop&w=1280&q=80", "words": [{"word": "BALIK", "row": 0, "col": 0, "dir": "H"}, {"word": "BAL", "row": 0, "col": 0, "dir": "V"}, {"word": "KIL", "row": 0, "col": 4, "dir": "V"}], "letters": ["A", "B", "I", "K", "L"], "postcard": {"landmark": "Erzincan Doğal Güzellikleri", "city": "Erzincan", "desc": "Erzincan coğrafyasının eşsiz doğası, yemyeşil vadileri ve temiz yaylaları ziyaretçilerine huzur dolu anlar sunar.", "bg": "https://images.unsplash.com/photo-1564507592333-c60657eea523?auto=format&fit=crop&w=1280&q=80"}}]}, {"plate": 29, "name": "Gümüşhane", "cx": 783.3, "cy": 153.2, "isShowcase": false, "landmarks": [{"name": "Gümüşhane Tarihi Meydanı", "bg": "https://images.unsplash.com/photo-1541432901042-2d8bd64b4a9b?auto=format&fit=crop&w=1280&q=80", "desc": "Gümüşhane ilinin köklü tarihini ve zengin Anadolu kültürünü yansıtan simgesel merkezi. Binlerce yıllık mirasın izlerini taşır."}, {"name": "Gümüşhane Doğal Güzellikleri", "bg": "https://images.unsplash.com/photo-1564507592333-c60657eea523?auto=format&fit=crop&w=1280&q=80", "desc": "Gümüşhane coğrafyasının eşsiz doğası, yemyeşil vadileri ve temiz yaylaları ziyaretçilerine huzur dolu anlar sunar."}], "levels": [{"id": 1, "landmark": "Gümüşhane Tarihi Meydanı", "bg": "https://images.unsplash.com/photo-1541432901042-2d8bd64b4a9b?auto=format&fit=crop&w=1280&q=80", "words": [{"word": "KALE", "row": 0, "col": 0, "dir": "H"}, {"word": "KEL", "row": 0, "col": 0, "dir": "V"}, {"word": "ELA", "row": 1, "col": 0, "dir": "H"}], "letters": ["A", "E", "K", "L"], "postcard": {"landmark": "Gümüşhane Tarihi Meydanı", "city": "Gümüşhane", "desc": "Gümüşhane ilinin köklü tarihini ve zengin Anadolu kültürünü yansıtan simgesel merkezi. Binlerce yıllık mirasın izlerini taşır.", "bg": "https://images.unsplash.com/photo-1541432901042-2d8bd64b4a9b?auto=format&fit=crop&w=1280&q=80"}}, {"id": 2, "landmark": "Gümüşhane Doğal Güzellikleri", "bg": "https://images.unsplash.com/photo-1564507592333-c60657eea523?auto=format&fit=crop&w=1280&q=80", "words": [{"word": "BALIK", "row": 0, "col": 0, "dir": "H"}, {"word": "BAL", "row": 0, "col": 0, "dir": "V"}, {"word": "KIL", "row": 0, "col": 4, "dir": "V"}], "letters": ["A", "B", "I", "K", "L"], "postcard": {"landmark": "Gümüşhane Doğal Güzellikleri", "city": "Gümüşhane", "desc": "Gümüşhane coğrafyasının eşsiz doğası, yemyeşil vadileri ve temiz yaylaları ziyaretçilerine huzur dolu anlar sunar.", "bg": "https://images.unsplash.com/photo-1564507592333-c60657eea523?auto=format&fit=crop&w=1280&q=80"}}]}, {"plate": 61, "name": "Trabzon", "cx": 803.6, "cy": 124.3, "isShowcase": true, "landmarks": [{"name": "Sümela Manastırı", "bg": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/db/Sumela_From_Across_Valley.JPG/1280px-Sumela_From_Across_Valley.JPG", "summary": "Deniz seviyesinden 1150 metre yüksekte, Karadağ'ın dik yamacına oyulmuş gökyüzünde asılı duran mucizevi manastır.", "trivia": "Manastırın içindeki ana kaya kilisesinin freskleri asırlardır canlı renklerini korumaktadır."}, {"name": "Uzungöl", "bg": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/7e/Uzung%C3%B6l_lake_and_town.jpg/1280px-Uzung%C3%B6l_lake_and_town.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail", "summary": "Dağ yamacından düşen kayaların Haldizen Deresi'nin önünü kapatmasıyla oluşan masalsı krater gölü.", "trivia": "Göl çevresindeki zengin ladin ormanları Kafkas yaban hayatının önemli bir sığınağıdır."}, {"name": "Trabzon Ayasofyası", "bg": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/d7/Panoramic_view_of_the_Hagia_Sophia_of_Trabzon.jpg/1280px-Panoramic_view_of_the_Hagia_Sophia_of_Trabzon.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail", "summary": "13. yüzyılda Trabzon İmparatorluğu döneminde inşa edilen, taş kabartmaları ve freskleriyle ünlü tarihi yapı.", "trivia": "Güney cephesindeki Adem ile Havva'nın yaratılışını anlatan taş friz Orta Çağ heykel sanatının nadir örneklerindendir."}, {"name": "Atatürk Köşkü", "bg": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/61/Trabzon_Museum_0039.jpg/1280px-Trabzon_Museum_0039.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail", "summary": "Soğuksu çam koruluğu içinde 1890 yılında inşa edilen bembeyaz Art Nouveau tarzı görkemli köşk.", "trivia": "Gazi Mustafa Kemal Atatürk, 1937 yılındaki Trabzon ziyaretinde tüm mal varlığını milletine bağışlama kararını bu köşkte almıştır."}, {"name": "Boztepe", "bg": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b7/Trabzon%2Charbour.jpg/1280px-Trabzon%2Charbour.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail", "summary": "Karadeniz'in sonsuz maviliği ile Trabzon kent merkezini panoramik olarak kucaklayan tarihi tepe.", "trivia": "Semaver çayı eşliğinde batan güneşi izlemek asırlardır şehrin en sevilen ritüelidir."}], "levels": [{"id": 26, "city_id": "trabzon", "city_name": "Trabzon", "sub_id": 1, "title": "Trabzon - Bölüm 1: Sümela Manastırı", "landmark_name": "Sümela Manastırı", "bg": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/db/Sumela_From_Across_Valley.JPG/1280px-Sumela_From_Across_Valley.JPG", "wheel": ["M", "U", "U", "T", "L"], "words": [{"id": "w1", "word": "MUTLU", "row": 1, "col": 0, "dir": "H"}, {"id": "w2", "word": "TUL", "row": 0, "col": 1, "dir": "V"}, {"id": "w3", "word": "ULU", "row": 0, "col": 3, "dir": "V"}], "bonus": ["UT"], "postcard": {"title": "Sümela Manastırı", "city": "Trabzon", "plate": 61, "summary": "Deniz seviyesinden 1150 metre yüksekte, Karadağ'ın dik yamacına oyulmuş gökyüzünde asılı duran mucizevi manastır.", "trivia": "Manastırın içindeki ana kaya kilisesinin freskleri asırlardır canlı renklerini korumaktadır.", "bg": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/db/Sumela_From_Across_Valley.JPG/1280px-Sumela_From_Across_Valley.JPG"}}, {"id": 27, "city_id": "trabzon", "city_name": "Trabzon", "sub_id": 2, "title": "Trabzon - Bölüm 2: Uzungöl", "landmark_name": "Uzungöl", "bg": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/7e/Uzung%C3%B6l_lake_and_town.jpg/1280px-Uzung%C3%B6l_lake_and_town.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail", "wheel": ["U", "U", "U", "M", "T", "T", "L"], "words": [{"id": "w1", "word": "UMUTLU", "row": 1, "col": 0, "dir": "H"}, {"id": "w2", "word": "UMUT", "row": 1, "col": 0, "dir": "V"}, {"id": "w3", "word": "TUT", "row": 0, "col": 2, "dir": "V"}], "bonus": ["MUT"], "postcard": {"title": "Uzungöl", "city": "Trabzon", "plate": 61, "summary": "Dağ yamacından düşen kayaların Haldizen Deresi'nin önünü kapatmasıyla oluşan masalsı krater gölü.", "trivia": "Göl çevresindeki zengin ladin ormanları Kafkas yaban hayatının önemli bir sığınağıdır.", "bg": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/7e/Uzung%C3%B6l_lake_and_town.jpg/1280px-Uzung%C3%B6l_lake_and_town.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail"}}, {"id": 28, "city_id": "trabzon", "city_name": "Trabzon", "sub_id": 3, "title": "Trabzon - Bölüm 3: Trabzon Ayasofyası", "landmark_name": "Trabzon Ayasofyası", "bg": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/d7/Panoramic_view_of_the_Hagia_Sophia_of_Trabzon.jpg/1280px-Panoramic_view_of_the_Hagia_Sophia_of_Trabzon.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail", "wheel": ["H", "U", "U", "Z", "R", "O"], "words": [{"id": "w1", "word": "HUZUR", "row": 2, "col": 0, "dir": "H"}, {"id": "w2", "word": "RUH", "row": 0, "col": 0, "dir": "V"}, {"id": "w3", "word": "ZOR", "row": 2, "col": 2, "dir": "V"}], "bonus": ["HUR"], "postcard": {"title": "Trabzon Ayasofyası", "city": "Trabzon", "plate": 61, "summary": "13. yüzyılda Trabzon İmparatorluğu döneminde inşa edilen, taş kabartmaları ve freskleriyle ünlü tarihi yapı.", "trivia": "Güney cephesindeki Adem ile Havva'nın yaratılışını anlatan taş friz Orta Çağ heykel sanatının nadir örneklerindendir.", "bg": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/d7/Panoramic_view_of_the_Hagia_Sophia_of_Trabzon.jpg/1280px-Panoramic_view_of_the_Hagia_Sophia_of_Trabzon.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail"}}, {"id": 29, "city_id": "trabzon", "city_name": "Trabzon", "sub_id": 4, "title": "Trabzon - Bölüm 4: Atatürk Köşkü", "landmark_name": "Atatürk Köşkü", "bg": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/61/Trabzon_Museum_0039.jpg/1280px-Trabzon_Museum_0039.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail", "wheel": ["K", "Ö", "P", "R", "Ü"], "words": [{"id": "w1", "word": "KÖPRÜ", "row": 1, "col": 0, "dir": "H"}, {"id": "w2", "word": "KÖP", "row": 1, "col": 0, "dir": "V"}, {"id": "w3", "word": "ÖRK", "row": 0, "col": 3, "dir": "V"}], "bonus": ["PÜR"], "postcard": {"title": "Atatürk Köşkü", "city": "Trabzon", "plate": 61, "summary": "Soğuksu çam koruluğu içinde 1890 yılında inşa edilen bembeyaz Art Nouveau tarzı görkemli köşk.", "trivia": "Gazi Mustafa Kemal Atatürk, 1937 yılındaki Trabzon ziyaretinde tüm mal varlığını milletine bağışlama kararını bu köşkte almıştır.", "bg": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/61/Trabzon_Museum_0039.jpg/1280px-Trabzon_Museum_0039.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail"}}, {"id": 30, "city_id": "trabzon", "city_name": "Trabzon", "sub_id": 5, "title": "Trabzon - Bölüm 5: Boztepe", "landmark_name": "Boztepe", "bg": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b7/Trabzon%2Charbour.jpg/1280px-Trabzon%2Charbour.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail", "wheel": ["N", "E", "H", "İ", "İ", "R"], "words": [{"id": "w1", "word": "NEHİR", "row": 2, "col": 0, "dir": "H"}, {"id": "w2", "word": "HER", "row": 1, "col": 1, "dir": "V"}, {"id": "w3", "word": "ERİ", "row": 0, "col": 3, "dir": "V"}], "bonus": ["İRİ", "İN"], "postcard": {"title": "Boztepe", "city": "Trabzon", "plate": 61, "summary": "Karadeniz'in sonsuz maviliği ile Trabzon kent merkezini panoramik olarak kucaklayan tarihi tepe.", "trivia": "Semaver çayı eşliğinde batan güneşi izlemek asırlardır şehrin en sevilen ritüelidir.", "bg": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b7/Trabzon%2Charbour.jpg/1280px-Trabzon%2Charbour.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail"}}]}, {"plate": 53, "name": "Rize", "cx": 860.3, "cy": 108.8, "isShowcase": false, "landmarks": [{"name": "Rize Tarihi Meydanı", "bg": "https://images.unsplash.com/photo-1541432901042-2d8bd64b4a9b?auto=format&fit=crop&w=1280&q=80", "desc": "Rize ilinin köklü tarihini ve zengin Anadolu kültürünü yansıtan simgesel merkezi. Binlerce yıllık mirasın izlerini taşır."}, {"name": "Rize Doğal Güzellikleri", "bg": "https://images.unsplash.com/photo-1564507592333-c60657eea523?auto=format&fit=crop&w=1280&q=80", "desc": "Rize coğrafyasının eşsiz doğası, yemyeşil vadileri ve temiz yaylaları ziyaretçilerine huzur dolu anlar sunar."}], "levels": [{"id": 1, "landmark": "Rize Tarihi Meydanı", "bg": "https://images.unsplash.com/photo-1541432901042-2d8bd64b4a9b?auto=format&fit=crop&w=1280&q=80", "words": [{"word": "KALE", "row": 0, "col": 0, "dir": "H"}, {"word": "KEL", "row": 0, "col": 0, "dir": "V"}, {"word": "ELA", "row": 1, "col": 0, "dir": "H"}], "letters": ["A", "E", "K", "L"], "postcard": {"landmark": "Rize Tarihi Meydanı", "city": "Rize", "desc": "Rize ilinin köklü tarihini ve zengin Anadolu kültürünü yansıtan simgesel merkezi. Binlerce yıllık mirasın izlerini taşır.", "bg": "https://images.unsplash.com/photo-1541432901042-2d8bd64b4a9b?auto=format&fit=crop&w=1280&q=80"}}, {"id": 2, "landmark": "Rize Doğal Güzellikleri", "bg": "https://images.unsplash.com/photo-1564507592333-c60657eea523?auto=format&fit=crop&w=1280&q=80", "words": [{"word": "BALIK", "row": 0, "col": 0, "dir": "H"}, {"word": "BAL", "row": 0, "col": 0, "dir": "V"}, {"word": "KIL", "row": 0, "col": 4, "dir": "V"}], "letters": ["A", "B", "I", "K", "L"], "postcard": {"landmark": "Rize Doğal Güzellikleri", "city": "Rize", "desc": "Rize coğrafyasının eşsiz doğası, yemyeşil vadileri ve temiz yaylaları ziyaretçilerine huzur dolu anlar sunar.", "bg": "https://images.unsplash.com/photo-1564507592333-c60657eea523?auto=format&fit=crop&w=1280&q=80"}}]}, {"plate": 8, "name": "Artvin", "cx": 907.5, "cy": 97.9, "isShowcase": false, "landmarks": [{"name": "Artvin Tarihi Meydanı", "bg": "https://images.unsplash.com/photo-1541432901042-2d8bd64b4a9b?auto=format&fit=crop&w=1280&q=80", "desc": "Artvin ilinin köklü tarihini ve zengin Anadolu kültürünü yansıtan simgesel merkezi. Binlerce yıllık mirasın izlerini taşır."}, {"name": "Artvin Doğal Güzellikleri", "bg": "https://images.unsplash.com/photo-1564507592333-c60657eea523?auto=format&fit=crop&w=1280&q=80", "desc": "Artvin coğrafyasının eşsiz doğası, yemyeşil vadileri ve temiz yaylaları ziyaretçilerine huzur dolu anlar sunar."}], "levels": [{"id": 1, "landmark": "Artvin Tarihi Meydanı", "bg": "https://images.unsplash.com/photo-1541432901042-2d8bd64b4a9b?auto=format&fit=crop&w=1280&q=80", "words": [{"word": "KALE", "row": 0, "col": 0, "dir": "H"}, {"word": "KEL", "row": 0, "col": 0, "dir": "V"}, {"word": "ELA", "row": 1, "col": 0, "dir": "H"}], "letters": ["A", "E", "K", "L"], "postcard": {"landmark": "Artvin Tarihi Meydanı", "city": "Artvin", "desc": "Artvin ilinin köklü tarihini ve zengin Anadolu kültürünü yansıtan simgesel merkezi. Binlerce yıllık mirasın izlerini taşır.", "bg": "https://images.unsplash.com/photo-1541432901042-2d8bd64b4a9b?auto=format&fit=crop&w=1280&q=80"}}, {"id": 2, "landmark": "Artvin Doğal Güzellikleri", "bg": "https://images.unsplash.com/photo-1564507592333-c60657eea523?auto=format&fit=crop&w=1280&q=80", "words": [{"word": "BALIK", "row": 0, "col": 0, "dir": "H"}, {"word": "BAL", "row": 0, "col": 0, "dir": "V"}, {"word": "KIL", "row": 0, "col": 4, "dir": "V"}], "letters": ["A", "B", "I", "K", "L"], "postcard": {"landmark": "Artvin Doğal Güzellikleri", "city": "Artvin", "desc": "Artvin coğrafyasının eşsiz doğası, yemyeşil vadileri ve temiz yaylaları ziyaretçilerine huzur dolu anlar sunar.", "bg": "https://images.unsplash.com/photo-1564507592333-c60657eea523?auto=format&fit=crop&w=1280&q=80"}}]}, {"plate": 75, "name": "Ardahan", "cx": 964.5, "cy": 93.9, "isShowcase": false, "landmarks": [{"name": "Ardahan Tarihi Meydanı", "bg": "https://images.unsplash.com/photo-1541432901042-2d8bd64b4a9b?auto=format&fit=crop&w=1280&q=80", "desc": "Ardahan ilinin köklü tarihini ve zengin Anadolu kültürünü yansıtan simgesel merkezi. Binlerce yıllık mirasın izlerini taşır."}, {"name": "Ardahan Doğal Güzellikleri", "bg": "https://images.unsplash.com/photo-1564507592333-c60657eea523?auto=format&fit=crop&w=1280&q=80", "desc": "Ardahan coğrafyasının eşsiz doğası, yemyeşil vadileri ve temiz yaylaları ziyaretçilerine huzur dolu anlar sunar."}], "levels": [{"id": 1, "landmark": "Ardahan Tarihi Meydanı", "bg": "https://images.unsplash.com/photo-1541432901042-2d8bd64b4a9b?auto=format&fit=crop&w=1280&q=80", "words": [{"word": "KALE", "row": 0, "col": 0, "dir": "H"}, {"word": "KEL", "row": 0, "col": 0, "dir": "V"}, {"word": "ELA", "row": 1, "col": 0, "dir": "H"}], "letters": ["A", "E", "K", "L"], "postcard": {"landmark": "Ardahan Tarihi Meydanı", "city": "Ardahan", "desc": "Ardahan ilinin köklü tarihini ve zengin Anadolu kültürünü yansıtan simgesel merkezi. Binlerce yıllık mirasın izlerini taşır.", "bg": "https://images.unsplash.com/photo-1541432901042-2d8bd64b4a9b?auto=format&fit=crop&w=1280&q=80"}}, {"id": 2, "landmark": "Ardahan Doğal Güzellikleri", "bg": "https://images.unsplash.com/photo-1564507592333-c60657eea523?auto=format&fit=crop&w=1280&q=80", "words": [{"word": "BALIK", "row": 0, "col": 0, "dir": "H"}, {"word": "BAL", "row": 0, "col": 0, "dir": "V"}, {"word": "KIL", "row": 0, "col": 4, "dir": "V"}], "letters": ["A", "B", "I", "K", "L"], "postcard": {"landmark": "Ardahan Doğal Güzellikleri", "city": "Ardahan", "desc": "Ardahan coğrafyasının eşsiz doğası, yemyeşil vadileri ve temiz yaylaları ziyaretçilerine huzur dolu anlar sunar.", "bg": "https://images.unsplash.com/photo-1564507592333-c60657eea523?auto=format&fit=crop&w=1280&q=80"}}]}, {"plate": 36, "name": "Kars", "cx": 984.6, "cy": 141.8, "isShowcase": true, "landmarks": [{"name": "Ani Harabeleri - Katedral", "bg": "https://upload.wikimedia.org/wikipedia/commons/4/4b/Ani_Cathedral_Texier_1842.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled", "summary": "İpek Yolu üzerinde kurulan ve Orta Çağ'ın en büyük ticaret metropollerinden biri olan '1001 Kiliseli Şehir'.", "trivia": "Ani Katedrali'nin mimarı Trdat, aynı zamanda İstanbul'daki Ayasofya'nın depremde yıkılan kubbesini onaran dahi mimardır."}, {"name": "Menûçihr Camii", "bg": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/cb/Ebul_Manucehr_Mosque.jpg/1280px-Ebul_Manucehr_Mosque.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail", "summary": "Arpaçay Kanyonu'nun kıyısında 1072 yılında inşa edilen, Anadolu'daki ilk Türk camisi.", "trivia": "Tavanındaki renkli taşlarla yapılan geometrik süslemeler Selçuklu sanatının ilk öncüleridir."}, {"name": "Kars Kalesi", "bg": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/cd/Kars_Kale.jpg/1280px-Kars_Kale.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail", "summary": "1153 yılında Selçuklu Sultanı Melik İzzeddin tarafından inşa ettirilen, sarp tepede şehri koruyan anıtsal kale.", "trivia": "1855 yılındaki Kars Zaferi sebebiyle şehre Osmanlı tarihinde ilk kez 'Gazi' unvanı verilmiştir."}, {"name": "Çıldır Gölü", "bg": "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/2d/Plant_inventory%3B_plant_material_introduced_%28IA_plantinventory157160agri%29.pdf/page1-500px-Plant_inventory%3B_plant_material_introduced_%28IA_plantinventory157160agri%29.pdf.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail", "summary": "Kışın tamamen buz tutan yüzeyinde atlı kızakların kaydığı, 1959 metre rakımlı Doğu Anadolu'nun en büyük tatlı su gölü.", "trivia": "Kışın buz tabakası kırılarak tutulan 'Sarı Balık' bölgenin en ünlü kış lezzetidir."}, {"name": "Fethiye Camii (Havariler)", "bg": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/87/Kars_Holy_Apostles_Church_drum_apostle_3730.jpg/1280px-Kars_Holy_Apostles_Church_drum_apostle_3730.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail", "summary": "10. yüzyılda Ermeni Bagratlı Krallığı döneminde bazalt taşlarla inşa edilen 12 Havariler Kilisesi.", "trivia": "Kubbe eteğinde 12 havariyi temsil eden kabartma heykeller günümüze kadar ulaşmıştır."}], "levels": [{"id": 36, "city_id": "kars", "city_name": "Kars", "sub_id": 1, "title": "Kars - Bölüm 1: Ani Harabeleri - Katedral", "landmark_name": "Ani Harabeleri - Katedral", "bg": "https://upload.wikimedia.org/wikipedia/commons/4/4b/Ani_Cathedral_Texier_1842.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled", "wheel": ["Z", "A", "A", "M", "N"], "words": [{"id": "w1", "word": "ZAMAN", "row": 2, "col": 0, "dir": "H"}, {"id": "w2", "word": "AZAM", "row": 1, "col": 0, "dir": "V"}, {"id": "w3", "word": "NAM", "row": 0, "col": 2, "dir": "V"}], "bonus": ["ZAN", "ANA"], "postcard": {"title": "Ani Harabeleri - Katedral", "city": "Kars", "plate": 36, "summary": "İpek Yolu üzerinde kurulan ve Orta Çağ'ın en büyük ticaret metropollerinden biri olan '1001 Kiliseli Şehir'.", "trivia": "Ani Katedrali'nin mimarı Trdat, aynı zamanda İstanbul'daki Ayasofya'nın depremde yıkılan kubbesini onaran dahi mimardır.", "bg": "https://upload.wikimedia.org/wikipedia/commons/4/4b/Ani_Cathedral_Texier_1842.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled"}}, {"id": 37, "city_id": "kars", "city_name": "Kars", "sub_id": 2, "title": "Kars - Bölüm 2: Menûçihr Camii", "landmark_name": "Menûçihr Camii", "bg": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/cb/Ebul_Manucehr_Mosque.jpg/1280px-Ebul_Manucehr_Mosque.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail", "wheel": ["G", "Ö", "K", "Y", "Ü", "Ü", "Z"], "words": [{"id": "w1", "word": "GÖKYÜZÜ", "row": 0, "col": 0, "dir": "H"}, {"id": "w2", "word": "GÖK", "row": 0, "col": 0, "dir": "V"}, {"id": "w3", "word": "YÜZ", "row": 0, "col": 3, "dir": "V"}], "bonus": ["GÖZ", "ÖZ"], "postcard": {"title": "Menûçihr Camii", "city": "Kars", "plate": 36, "summary": "Arpaçay Kanyonu'nun kıyısında 1072 yılında inşa edilen, Anadolu'daki ilk Türk camisi.", "trivia": "Tavanındaki renkli taşlarla yapılan geometrik süslemeler Selçuklu sanatının ilk öncüleridir.", "bg": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/cb/Ebul_Manucehr_Mosque.jpg/1280px-Ebul_Manucehr_Mosque.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail"}}, {"id": 38, "city_id": "kars", "city_name": "Kars", "sub_id": 3, "title": "Kars - Bölüm 3: Kars Kalesi", "landmark_name": "Kars Kalesi", "bg": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/cd/Kars_Kale.jpg/1280px-Kars_Kale.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail", "wheel": ["T", "O", "P", "R", "A", "K"], "words": [{"id": "w1", "word": "TOPRAK", "row": 2, "col": 0, "dir": "H"}, {"id": "w2", "word": "PARK", "row": 2, "col": 2, "dir": "V"}, {"id": "w3", "word": "POT", "row": 0, "col": 0, "dir": "V"}], "bonus": ["KOR", "KOT", "PAK"], "postcard": {"title": "Kars Kalesi", "city": "Kars", "plate": 36, "summary": "1153 yılında Selçuklu Sultanı Melik İzzeddin tarafından inşa ettirilen, sarp tepede şehri koruyan anıtsal kale.", "trivia": "1855 yılındaki Kars Zaferi sebebiyle şehre Osmanlı tarihinde ilk kez 'Gazi' unvanı verilmiştir.", "bg": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/cd/Kars_Kale.jpg/1280px-Kars_Kale.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail"}}, {"id": 39, "city_id": "kars", "city_name": "Kars", "sub_id": 4, "title": "Kars - Bölüm 4: Çıldır Gölü", "landmark_name": "Çıldır Gölü", "bg": "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/2d/Plant_inventory%3B_plant_material_introduced_%28IA_plantinventory157160agri%29.pdf/page1-500px-Plant_inventory%3B_plant_material_introduced_%28IA_plantinventory157160agri%29.pdf.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail", "wheel": ["R", "R", "Ü", "Z", "G", "A"], "words": [{"id": "w1", "word": "RÜZGAR", "row": 2, "col": 0, "dir": "H"}, {"id": "w2", "word": "GÜR", "row": 0, "col": 0, "dir": "V"}, {"id": "w3", "word": "ZAR", "row": 2, "col": 2, "dir": "V"}], "bonus": ["GAZ", "ARZ"], "postcard": {"title": "Çıldır Gölü", "city": "Kars", "plate": 36, "summary": "Kışın tamamen buz tutan yüzeyinde atlı kızakların kaydığı, 1959 metre rakımlı Doğu Anadolu'nun en büyük tatlı su gölü.", "trivia": "Kışın buz tabakası kırılarak tutulan 'Sarı Balık' bölgenin en ünlü kış lezzetidir.", "bg": "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/2d/Plant_inventory%3B_plant_material_introduced_%28IA_plantinventory157160agri%29.pdf/page1-500px-Plant_inventory%3B_plant_material_introduced_%28IA_plantinventory157160agri%29.pdf.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail"}}, {"id": 40, "city_id": "kars", "city_name": "Kars", "sub_id": 5, "title": "Kars - Bölüm 5: Fethiye Camii (Havariler)", "landmark_name": "Fethiye Camii (Havariler)", "bg": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/87/Kars_Holy_Apostles_Church_drum_apostle_3730.jpg/1280px-Kars_Holy_Apostles_Church_drum_apostle_3730.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail", "wheel": ["Y", "I", "I", "L", "D", "Z", "İ"], "words": [{"id": "w1", "word": "YILDIZ", "row": 2, "col": 0, "dir": "H"}, {"id": "w2", "word": "YIL", "row": 2, "col": 0, "dir": "V"}, {"id": "w3", "word": "DIL", "row": 0, "col": 2, "dir": "V"}], "bonus": ["İZ"], "postcard": {"title": "Fethiye Camii (Havariler)", "city": "Kars", "plate": 36, "summary": "10. yüzyılda Ermeni Bagratlı Krallığı döneminde bazalt taşlarla inşa edilen 12 Havariler Kilisesi.", "trivia": "Kubbe eteğinde 12 havariyi temsil eden kabartma heykeller günümüze kadar ulaşmıştır.", "bg": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/87/Kars_Holy_Apostles_Church_drum_apostle_3730.jpg/1280px-Kars_Holy_Apostles_Church_drum_apostle_3730.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail"}}]}, {"plate": 76, "name": "Iğdır", "cx": 1027.2, "cy": 184.9, "isShowcase": false, "landmarks": [{"name": "Iğdır Tarihi Meydanı", "bg": "https://images.unsplash.com/photo-1541432901042-2d8bd64b4a9b?auto=format&fit=crop&w=1280&q=80", "desc": "Iğdır ilinin köklü tarihini ve zengin Anadolu kültürünü yansıtan simgesel merkezi. Binlerce yıllık mirasın izlerini taşır."}, {"name": "Iğdır Doğal Güzellikleri", "bg": "https://images.unsplash.com/photo-1564507592333-c60657eea523?auto=format&fit=crop&w=1280&q=80", "desc": "Iğdır coğrafyasının eşsiz doğası, yemyeşil vadileri ve temiz yaylaları ziyaretçilerine huzur dolu anlar sunar."}], "levels": [{"id": 1, "landmark": "Iğdır Tarihi Meydanı", "bg": "https://images.unsplash.com/photo-1541432901042-2d8bd64b4a9b?auto=format&fit=crop&w=1280&q=80", "words": [{"word": "KALE", "row": 0, "col": 0, "dir": "H"}, {"word": "KEL", "row": 0, "col": 0, "dir": "V"}, {"word": "ELA", "row": 1, "col": 0, "dir": "H"}], "letters": ["A", "E", "K", "L"], "postcard": {"landmark": "Iğdır Tarihi Meydanı", "city": "Iğdır", "desc": "Iğdır ilinin köklü tarihini ve zengin Anadolu kültürünü yansıtan simgesel merkezi. Binlerce yıllık mirasın izlerini taşır.", "bg": "https://images.unsplash.com/photo-1541432901042-2d8bd64b4a9b?auto=format&fit=crop&w=1280&q=80"}}, {"id": 2, "landmark": "Iğdır Doğal Güzellikleri", "bg": "https://images.unsplash.com/photo-1564507592333-c60657eea523?auto=format&fit=crop&w=1280&q=80", "words": [{"word": "BALIK", "row": 0, "col": 0, "dir": "H"}, {"word": "BAL", "row": 0, "col": 0, "dir": "V"}, {"word": "KIL", "row": 0, "col": 4, "dir": "V"}], "letters": ["A", "B", "I", "K", "L"], "postcard": {"landmark": "Iğdır Doğal Güzellikleri", "city": "Iğdır", "desc": "Iğdır coğrafyasının eşsiz doğası, yemyeşil vadileri ve temiz yaylaları ziyaretçilerine huzur dolu anlar sunar.", "bg": "https://images.unsplash.com/photo-1564507592333-c60657eea523?auto=format&fit=crop&w=1280&q=80"}}]}, {"plate": 65, "name": "Van", "cx": 1018.4, "cy": 286.3, "isShowcase": false, "landmarks": [{"name": "Van Tarihi Meydanı", "bg": "https://images.unsplash.com/photo-1541432901042-2d8bd64b4a9b?auto=format&fit=crop&w=1280&q=80", "desc": "Van ilinin köklü tarihini ve zengin Anadolu kültürünü yansıtan simgesel merkezi. Binlerce yıllık mirasın izlerini taşır."}, {"name": "Van Doğal Güzellikleri", "bg": "https://images.unsplash.com/photo-1564507592333-c60657eea523?auto=format&fit=crop&w=1280&q=80", "desc": "Van coğrafyasının eşsiz doğası, yemyeşil vadileri ve temiz yaylaları ziyaretçilerine huzur dolu anlar sunar."}], "levels": [{"id": 1, "landmark": "Van Tarihi Meydanı", "bg": "https://images.unsplash.com/photo-1541432901042-2d8bd64b4a9b?auto=format&fit=crop&w=1280&q=80", "words": [{"word": "KALE", "row": 0, "col": 0, "dir": "H"}, {"word": "KEL", "row": 0, "col": 0, "dir": "V"}, {"word": "ELA", "row": 1, "col": 0, "dir": "H"}], "letters": ["A", "E", "K", "L"], "postcard": {"landmark": "Van Tarihi Meydanı", "city": "Van", "desc": "Van ilinin köklü tarihini ve zengin Anadolu kültürünü yansıtan simgesel merkezi. Binlerce yıllık mirasın izlerini taşır.", "bg": "https://images.unsplash.com/photo-1541432901042-2d8bd64b4a9b?auto=format&fit=crop&w=1280&q=80"}}, {"id": 2, "landmark": "Van Doğal Güzellikleri", "bg": "https://images.unsplash.com/photo-1564507592333-c60657eea523?auto=format&fit=crop&w=1280&q=80", "words": [{"word": "BALIK", "row": 0, "col": 0, "dir": "H"}, {"word": "BAL", "row": 0, "col": 0, "dir": "V"}, {"word": "KIL", "row": 0, "col": 4, "dir": "V"}], "letters": ["A", "B", "I", "K", "L"], "postcard": {"landmark": "Van Doğal Güzellikleri", "city": "Van", "desc": "Van coğrafyasının eşsiz doğası, yemyeşil vadileri ve temiz yaylaları ziyaretçilerine huzur dolu anlar sunar.", "bg": "https://images.unsplash.com/photo-1564507592333-c60657eea523?auto=format&fit=crop&w=1280&q=80"}}]}, {"plate": 30, "name": "Hakkâri", "cx": 1044.9, "cy": 362.5, "isShowcase": false, "landmarks": [{"name": "Hakkâri Tarihi Meydanı", "bg": "https://images.unsplash.com/photo-1541432901042-2d8bd64b4a9b?auto=format&fit=crop&w=1280&q=80", "desc": "Hakkâri ilinin köklü tarihini ve zengin Anadolu kültürünü yansıtan simgesel merkezi. Binlerce yıllık mirasın izlerini taşır."}, {"name": "Hakkâri Doğal Güzellikleri", "bg": "https://images.unsplash.com/photo-1564507592333-c60657eea523?auto=format&fit=crop&w=1280&q=80", "desc": "Hakkâri coğrafyasının eşsiz doğası, yemyeşil vadileri ve temiz yaylaları ziyaretçilerine huzur dolu anlar sunar."}], "levels": [{"id": 1, "landmark": "Hakkâri Tarihi Meydanı", "bg": "https://images.unsplash.com/photo-1541432901042-2d8bd64b4a9b?auto=format&fit=crop&w=1280&q=80", "words": [{"word": "KALE", "row": 0, "col": 0, "dir": "H"}, {"word": "KEL", "row": 0, "col": 0, "dir": "V"}, {"word": "ELA", "row": 1, "col": 0, "dir": "H"}], "letters": ["A", "E", "K", "L"], "postcard": {"landmark": "Hakkâri Tarihi Meydanı", "city": "Hakkâri", "desc": "Hakkâri ilinin köklü tarihini ve zengin Anadolu kültürünü yansıtan simgesel merkezi. Binlerce yıllık mirasın izlerini taşır.", "bg": "https://images.unsplash.com/photo-1541432901042-2d8bd64b4a9b?auto=format&fit=crop&w=1280&q=80"}}, {"id": 2, "landmark": "Hakkâri Doğal Güzellikleri", "bg": "https://images.unsplash.com/photo-1564507592333-c60657eea523?auto=format&fit=crop&w=1280&q=80", "words": [{"word": "BALIK", "row": 0, "col": 0, "dir": "H"}, {"word": "BAL", "row": 0, "col": 0, "dir": "V"}, {"word": "KIL", "row": 0, "col": 4, "dir": "V"}], "letters": ["A", "B", "I", "K", "L"], "postcard": {"landmark": "Hakkâri Doğal Güzellikleri", "city": "Hakkâri", "desc": "Hakkâri coğrafyasının eşsiz doğası, yemyeşil vadileri ve temiz yaylaları ziyaretçilerine huzur dolu anlar sunar.", "bg": "https://images.unsplash.com/photo-1564507592333-c60657eea523?auto=format&fit=crop&w=1280&q=80"}}]}, {"plate": 73, "name": "Şırnak", "cx": 950.0, "cy": 359.8, "isShowcase": false, "landmarks": [{"name": "Şırnak Tarihi Meydanı", "bg": "https://images.unsplash.com/photo-1541432901042-2d8bd64b4a9b?auto=format&fit=crop&w=1280&q=80", "desc": "Şırnak ilinin köklü tarihini ve zengin Anadolu kültürünü yansıtan simgesel merkezi. Binlerce yıllık mirasın izlerini taşır."}, {"name": "Şırnak Doğal Güzellikleri", "bg": "https://images.unsplash.com/photo-1564507592333-c60657eea523?auto=format&fit=crop&w=1280&q=80", "desc": "Şırnak coğrafyasının eşsiz doğası, yemyeşil vadileri ve temiz yaylaları ziyaretçilerine huzur dolu anlar sunar."}], "levels": [{"id": 1, "landmark": "Şırnak Tarihi Meydanı", "bg": "https://images.unsplash.com/photo-1541432901042-2d8bd64b4a9b?auto=format&fit=crop&w=1280&q=80", "words": [{"word": "KALE", "row": 0, "col": 0, "dir": "H"}, {"word": "KEL", "row": 0, "col": 0, "dir": "V"}, {"word": "ELA", "row": 1, "col": 0, "dir": "H"}], "letters": ["A", "E", "K", "L"], "postcard": {"landmark": "Şırnak Tarihi Meydanı", "city": "Şırnak", "desc": "Şırnak ilinin köklü tarihini ve zengin Anadolu kültürünü yansıtan simgesel merkezi. Binlerce yıllık mirasın izlerini taşır.", "bg": "https://images.unsplash.com/photo-1541432901042-2d8bd64b4a9b?auto=format&fit=crop&w=1280&q=80"}}, {"id": 2, "landmark": "Şırnak Doğal Güzellikleri", "bg": "https://images.unsplash.com/photo-1564507592333-c60657eea523?auto=format&fit=crop&w=1280&q=80", "words": [{"word": "BALIK", "row": 0, "col": 0, "dir": "H"}, {"word": "BAL", "row": 0, "col": 0, "dir": "V"}, {"word": "KIL", "row": 0, "col": 4, "dir": "V"}], "letters": ["A", "B", "I", "K", "L"], "postcard": {"landmark": "Şırnak Doğal Güzellikleri", "city": "Şırnak", "desc": "Şırnak coğrafyasının eşsiz doğası, yemyeşil vadileri ve temiz yaylaları ziyaretçilerine huzur dolu anlar sunar.", "bg": "https://images.unsplash.com/photo-1564507592333-c60657eea523?auto=format&fit=crop&w=1280&q=80"}}]}, {"plate": 56, "name": "Siirt", "cx": 928.3, "cy": 324.5, "isShowcase": false, "landmarks": [{"name": "Siirt Tarihi Meydanı", "bg": "https://images.unsplash.com/photo-1541432901042-2d8bd64b4a9b?auto=format&fit=crop&w=1280&q=80", "desc": "Siirt ilinin köklü tarihini ve zengin Anadolu kültürünü yansıtan simgesel merkezi. Binlerce yıllık mirasın izlerini taşır."}, {"name": "Siirt Doğal Güzellikleri", "bg": "https://images.unsplash.com/photo-1564507592333-c60657eea523?auto=format&fit=crop&w=1280&q=80", "desc": "Siirt coğrafyasının eşsiz doğası, yemyeşil vadileri ve temiz yaylaları ziyaretçilerine huzur dolu anlar sunar."}], "levels": [{"id": 1, "landmark": "Siirt Tarihi Meydanı", "bg": "https://images.unsplash.com/photo-1541432901042-2d8bd64b4a9b?auto=format&fit=crop&w=1280&q=80", "words": [{"word": "KALE", "row": 0, "col": 0, "dir": "H"}, {"word": "KEL", "row": 0, "col": 0, "dir": "V"}, {"word": "ELA", "row": 1, "col": 0, "dir": "H"}], "letters": ["A", "E", "K", "L"], "postcard": {"landmark": "Siirt Tarihi Meydanı", "city": "Siirt", "desc": "Siirt ilinin köklü tarihini ve zengin Anadolu kültürünü yansıtan simgesel merkezi. Binlerce yıllık mirasın izlerini taşır.", "bg": "https://images.unsplash.com/photo-1541432901042-2d8bd64b4a9b?auto=format&fit=crop&w=1280&q=80"}}, {"id": 2, "landmark": "Siirt Doğal Güzellikleri", "bg": "https://images.unsplash.com/photo-1564507592333-c60657eea523?auto=format&fit=crop&w=1280&q=80", "words": [{"word": "BALIK", "row": 0, "col": 0, "dir": "H"}, {"word": "BAL", "row": 0, "col": 0, "dir": "V"}, {"word": "KIL", "row": 0, "col": 4, "dir": "V"}], "letters": ["A", "B", "I", "K", "L"], "postcard": {"landmark": "Siirt Doğal Güzellikleri", "city": "Siirt", "desc": "Siirt coğrafyasının eşsiz doğası, yemyeşil vadileri ve temiz yaylaları ziyaretçilerine huzur dolu anlar sunar.", "bg": "https://images.unsplash.com/photo-1564507592333-c60657eea523?auto=format&fit=crop&w=1280&q=80"}}]}, {"plate": 72, "name": "Batman", "cx": 889.4, "cy": 317.5, "isShowcase": false, "landmarks": [{"name": "Batman Tarihi Meydanı", "bg": "https://images.unsplash.com/photo-1541432901042-2d8bd64b4a9b?auto=format&fit=crop&w=1280&q=80", "desc": "Batman ilinin köklü tarihini ve zengin Anadolu kültürünü yansıtan simgesel merkezi. Binlerce yıllık mirasın izlerini taşır."}, {"name": "Batman Doğal Güzellikleri", "bg": "https://images.unsplash.com/photo-1564507592333-c60657eea523?auto=format&fit=crop&w=1280&q=80", "desc": "Batman coğrafyasının eşsiz doğası, yemyeşil vadileri ve temiz yaylaları ziyaretçilerine huzur dolu anlar sunar."}], "levels": [{"id": 1, "landmark": "Batman Tarihi Meydanı", "bg": "https://images.unsplash.com/photo-1541432901042-2d8bd64b4a9b?auto=format&fit=crop&w=1280&q=80", "words": [{"word": "KALE", "row": 0, "col": 0, "dir": "H"}, {"word": "KEL", "row": 0, "col": 0, "dir": "V"}, {"word": "ELA", "row": 1, "col": 0, "dir": "H"}], "letters": ["A", "E", "K", "L"], "postcard": {"landmark": "Batman Tarihi Meydanı", "city": "Batman", "desc": "Batman ilinin köklü tarihini ve zengin Anadolu kültürünü yansıtan simgesel merkezi. Binlerce yıllık mirasın izlerini taşır.", "bg": "https://images.unsplash.com/photo-1541432901042-2d8bd64b4a9b?auto=format&fit=crop&w=1280&q=80"}}, {"id": 2, "landmark": "Batman Doğal Güzellikleri", "bg": "https://images.unsplash.com/photo-1564507592333-c60657eea523?auto=format&fit=crop&w=1280&q=80", "words": [{"word": "BALIK", "row": 0, "col": 0, "dir": "H"}, {"word": "BAL", "row": 0, "col": 0, "dir": "V"}, {"word": "KIL", "row": 0, "col": 4, "dir": "V"}], "letters": ["A", "B", "I", "K", "L"], "postcard": {"landmark": "Batman Doğal Güzellikleri", "city": "Batman", "desc": "Batman coğrafyasının eşsiz doğası, yemyeşil vadileri ve temiz yaylaları ziyaretçilerine huzur dolu anlar sunar.", "bg": "https://images.unsplash.com/photo-1564507592333-c60657eea523?auto=format&fit=crop&w=1280&q=80"}}]}, {"plate": 21, "name": "Diyarbakır", "cx": 828.7, "cy": 313.2, "isShowcase": false, "landmarks": [{"name": "Diyarbakır Tarihi Meydanı", "bg": "https://images.unsplash.com/photo-1541432901042-2d8bd64b4a9b?auto=format&fit=crop&w=1280&q=80", "desc": "Diyarbakır ilinin köklü tarihini ve zengin Anadolu kültürünü yansıtan simgesel merkezi. Binlerce yıllık mirasın izlerini taşır."}, {"name": "Diyarbakır Doğal Güzellikleri", "bg": "https://images.unsplash.com/photo-1564507592333-c60657eea523?auto=format&fit=crop&w=1280&q=80", "desc": "Diyarbakır coğrafyasının eşsiz doğası, yemyeşil vadileri ve temiz yaylaları ziyaretçilerine huzur dolu anlar sunar."}], "levels": [{"id": 1, "landmark": "Diyarbakır Tarihi Meydanı", "bg": "https://images.unsplash.com/photo-1541432901042-2d8bd64b4a9b?auto=format&fit=crop&w=1280&q=80", "words": [{"word": "KALE", "row": 0, "col": 0, "dir": "H"}, {"word": "KEL", "row": 0, "col": 0, "dir": "V"}, {"word": "ELA", "row": 1, "col": 0, "dir": "H"}], "letters": ["A", "E", "K", "L"], "postcard": {"landmark": "Diyarbakır Tarihi Meydanı", "city": "Diyarbakır", "desc": "Diyarbakır ilinin köklü tarihini ve zengin Anadolu kültürünü yansıtan simgesel merkezi. Binlerce yıllık mirasın izlerini taşır.", "bg": "https://images.unsplash.com/photo-1541432901042-2d8bd64b4a9b?auto=format&fit=crop&w=1280&q=80"}}, {"id": 2, "landmark": "Diyarbakır Doğal Güzellikleri", "bg": "https://images.unsplash.com/photo-1564507592333-c60657eea523?auto=format&fit=crop&w=1280&q=80", "words": [{"word": "BALIK", "row": 0, "col": 0, "dir": "H"}, {"word": "BAL", "row": 0, "col": 0, "dir": "V"}, {"word": "KIL", "row": 0, "col": 4, "dir": "V"}], "letters": ["A", "B", "I", "K", "L"], "postcard": {"landmark": "Diyarbakır Doğal Güzellikleri", "city": "Diyarbakır", "desc": "Diyarbakır coğrafyasının eşsiz doğası, yemyeşil vadileri ve temiz yaylaları ziyaretçilerine huzur dolu anlar sunar.", "bg": "https://images.unsplash.com/photo-1564507592333-c60657eea523?auto=format&fit=crop&w=1280&q=80"}}]}, {"plate": 47, "name": "Mardin", "cx": 866.9, "cy": 361.7, "isShowcase": false, "landmarks": [{"name": "Mardin Tarihi Meydanı", "bg": "https://images.unsplash.com/photo-1541432901042-2d8bd64b4a9b?auto=format&fit=crop&w=1280&q=80", "desc": "Mardin ilinin köklü tarihini ve zengin Anadolu kültürünü yansıtan simgesel merkezi. Binlerce yıllık mirasın izlerini taşır."}, {"name": "Mardin Doğal Güzellikleri", "bg": "https://images.unsplash.com/photo-1564507592333-c60657eea523?auto=format&fit=crop&w=1280&q=80", "desc": "Mardin coğrafyasının eşsiz doğası, yemyeşil vadileri ve temiz yaylaları ziyaretçilerine huzur dolu anlar sunar."}], "levels": [{"id": 1, "landmark": "Mardin Tarihi Meydanı", "bg": "https://images.unsplash.com/photo-1541432901042-2d8bd64b4a9b?auto=format&fit=crop&w=1280&q=80", "words": [{"word": "KALE", "row": 0, "col": 0, "dir": "H"}, {"word": "KEL", "row": 0, "col": 0, "dir": "V"}, {"word": "ELA", "row": 1, "col": 0, "dir": "H"}], "letters": ["A", "E", "K", "L"], "postcard": {"landmark": "Mardin Tarihi Meydanı", "city": "Mardin", "desc": "Mardin ilinin köklü tarihini ve zengin Anadolu kültürünü yansıtan simgesel merkezi. Binlerce yıllık mirasın izlerini taşır.", "bg": "https://images.unsplash.com/photo-1541432901042-2d8bd64b4a9b?auto=format&fit=crop&w=1280&q=80"}}, {"id": 2, "landmark": "Mardin Doğal Güzellikleri", "bg": "https://images.unsplash.com/photo-1564507592333-c60657eea523?auto=format&fit=crop&w=1280&q=80", "words": [{"word": "BALIK", "row": 0, "col": 0, "dir": "H"}, {"word": "BAL", "row": 0, "col": 0, "dir": "V"}, {"word": "KIL", "row": 0, "col": 4, "dir": "V"}], "letters": ["A", "B", "I", "K", "L"], "postcard": {"landmark": "Mardin Doğal Güzellikleri", "city": "Mardin", "desc": "Mardin coğrafyasının eşsiz doğası, yemyeşil vadileri ve temiz yaylaları ziyaretçilerine huzur dolu anlar sunar.", "bg": "https://images.unsplash.com/photo-1564507592333-c60657eea523?auto=format&fit=crop&w=1280&q=80"}}]}, {"plate": 46, "name": "Kahramanmaraş", "cx": 645.0, "cy": 329.9, "isShowcase": false, "landmarks": [{"name": "Kahramanmaraş Tarihi Meydanı", "bg": "https://images.unsplash.com/photo-1541432901042-2d8bd64b4a9b?auto=format&fit=crop&w=1280&q=80", "desc": "Kahramanmaraş ilinin köklü tarihini ve zengin Anadolu kültürünü yansıtan simgesel merkezi. Binlerce yıllık mirasın izlerini taşır."}, {"name": "Kahramanmaraş Doğal Güzellikleri", "bg": "https://images.unsplash.com/photo-1564507592333-c60657eea523?auto=format&fit=crop&w=1280&q=80", "desc": "Kahramanmaraş coğrafyasının eşsiz doğası, yemyeşil vadileri ve temiz yaylaları ziyaretçilerine huzur dolu anlar sunar."}], "levels": [{"id": 1, "landmark": "Kahramanmaraş Tarihi Meydanı", "bg": "https://images.unsplash.com/photo-1541432901042-2d8bd64b4a9b?auto=format&fit=crop&w=1280&q=80", "words": [{"word": "KALE", "row": 0, "col": 0, "dir": "H"}, {"word": "KEL", "row": 0, "col": 0, "dir": "V"}, {"word": "ELA", "row": 1, "col": 0, "dir": "H"}], "letters": ["A", "E", "K", "L"], "postcard": {"landmark": "Kahramanmaraş Tarihi Meydanı", "city": "Kahramanmaraş", "desc": "Kahramanmaraş ilinin köklü tarihini ve zengin Anadolu kültürünü yansıtan simgesel merkezi. Binlerce yıllık mirasın izlerini taşır.", "bg": "https://images.unsplash.com/photo-1541432901042-2d8bd64b4a9b?auto=format&fit=crop&w=1280&q=80"}}, {"id": 2, "landmark": "Kahramanmaraş Doğal Güzellikleri", "bg": "https://images.unsplash.com/photo-1564507592333-c60657eea523?auto=format&fit=crop&w=1280&q=80", "words": [{"word": "BALIK", "row": 0, "col": 0, "dir": "H"}, {"word": "BAL", "row": 0, "col": 0, "dir": "V"}, {"word": "KIL", "row": 0, "col": 4, "dir": "V"}], "letters": ["A", "B", "I", "K", "L"], "postcard": {"landmark": "Kahramanmaraş Doğal Güzellikleri", "city": "Kahramanmaraş", "desc": "Kahramanmaraş coğrafyasının eşsiz doğası, yemyeşil vadileri ve temiz yaylaları ziyaretçilerine huzur dolu anlar sunar.", "bg": "https://images.unsplash.com/photo-1564507592333-c60657eea523?auto=format&fit=crop&w=1280&q=80"}}]}, {"plate": 58, "name": "Sivas", "cx": 664.6, "cy": 203.1, "isShowcase": false, "landmarks": [{"name": "Sivas Tarihi Meydanı", "bg": "https://images.unsplash.com/photo-1541432901042-2d8bd64b4a9b?auto=format&fit=crop&w=1280&q=80", "desc": "Sivas ilinin köklü tarihini ve zengin Anadolu kültürünü yansıtan simgesel merkezi. Binlerce yıllık mirasın izlerini taşır."}, {"name": "Sivas Doğal Güzellikleri", "bg": "https://images.unsplash.com/photo-1564507592333-c60657eea523?auto=format&fit=crop&w=1280&q=80", "desc": "Sivas coğrafyasının eşsiz doğası, yemyeşil vadileri ve temiz yaylaları ziyaretçilerine huzur dolu anlar sunar."}], "levels": [{"id": 1, "landmark": "Sivas Tarihi Meydanı", "bg": "https://images.unsplash.com/photo-1541432901042-2d8bd64b4a9b?auto=format&fit=crop&w=1280&q=80", "words": [{"word": "KALE", "row": 0, "col": 0, "dir": "H"}, {"word": "KEL", "row": 0, "col": 0, "dir": "V"}, {"word": "ELA", "row": 1, "col": 0, "dir": "H"}], "letters": ["A", "E", "K", "L"], "postcard": {"landmark": "Sivas Tarihi Meydanı", "city": "Sivas", "desc": "Sivas ilinin köklü tarihini ve zengin Anadolu kültürünü yansıtan simgesel merkezi. Binlerce yıllık mirasın izlerini taşır.", "bg": "https://images.unsplash.com/photo-1541432901042-2d8bd64b4a9b?auto=format&fit=crop&w=1280&q=80"}}, {"id": 2, "landmark": "Sivas Doğal Güzellikleri", "bg": "https://images.unsplash.com/photo-1564507592333-c60657eea523?auto=format&fit=crop&w=1280&q=80", "words": [{"word": "BALIK", "row": 0, "col": 0, "dir": "H"}, {"word": "BAL", "row": 0, "col": 0, "dir": "V"}, {"word": "KIL", "row": 0, "col": 4, "dir": "V"}], "letters": ["A", "B", "I", "K", "L"], "postcard": {"landmark": "Sivas Doğal Güzellikleri", "city": "Sivas", "desc": "Sivas coğrafyasının eşsiz doğası, yemyeşil vadileri ve temiz yaylaları ziyaretçilerine huzur dolu anlar sunar.", "bg": "https://images.unsplash.com/photo-1564507592333-c60657eea523?auto=format&fit=crop&w=1280&q=80"}}]}, {"plate": 60, "name": "Tokat", "cx": 626.8, "cy": 150.8, "isShowcase": false, "landmarks": [{"name": "Tokat Tarihi Meydanı", "bg": "https://images.unsplash.com/photo-1541432901042-2d8bd64b4a9b?auto=format&fit=crop&w=1280&q=80", "desc": "Tokat ilinin köklü tarihini ve zengin Anadolu kültürünü yansıtan simgesel merkezi. Binlerce yıllık mirasın izlerini taşır."}, {"name": "Tokat Doğal Güzellikleri", "bg": "https://images.unsplash.com/photo-1564507592333-c60657eea523?auto=format&fit=crop&w=1280&q=80", "desc": "Tokat coğrafyasının eşsiz doğası, yemyeşil vadileri ve temiz yaylaları ziyaretçilerine huzur dolu anlar sunar."}], "levels": [{"id": 1, "landmark": "Tokat Tarihi Meydanı", "bg": "https://images.unsplash.com/photo-1541432901042-2d8bd64b4a9b?auto=format&fit=crop&w=1280&q=80", "words": [{"word": "KALE", "row": 0, "col": 0, "dir": "H"}, {"word": "KEL", "row": 0, "col": 0, "dir": "V"}, {"word": "ELA", "row": 1, "col": 0, "dir": "H"}], "letters": ["A", "E", "K", "L"], "postcard": {"landmark": "Tokat Tarihi Meydanı", "city": "Tokat", "desc": "Tokat ilinin köklü tarihini ve zengin Anadolu kültürünü yansıtan simgesel merkezi. Binlerce yıllık mirasın izlerini taşır.", "bg": "https://images.unsplash.com/photo-1541432901042-2d8bd64b4a9b?auto=format&fit=crop&w=1280&q=80"}}, {"id": 2, "landmark": "Tokat Doğal Güzellikleri", "bg": "https://images.unsplash.com/photo-1564507592333-c60657eea523?auto=format&fit=crop&w=1280&q=80", "words": [{"word": "BALIK", "row": 0, "col": 0, "dir": "H"}, {"word": "BAL", "row": 0, "col": 0, "dir": "V"}, {"word": "KIL", "row": 0, "col": 4, "dir": "V"}], "letters": ["A", "B", "I", "K", "L"], "postcard": {"landmark": "Tokat Doğal Güzellikleri", "city": "Tokat", "desc": "Tokat coğrafyasının eşsiz doğası, yemyeşil vadileri ve temiz yaylaları ziyaretçilerine huzur dolu anlar sunar.", "bg": "https://images.unsplash.com/photo-1564507592333-c60657eea523?auto=format&fit=crop&w=1280&q=80"}}]}, {"plate": 52, "name": "Ordu", "cx": 670.6, "cy": 121.4, "isShowcase": false, "landmarks": [{"name": "Ordu Tarihi Meydanı", "bg": "https://images.unsplash.com/photo-1541432901042-2d8bd64b4a9b?auto=format&fit=crop&w=1280&q=80", "desc": "Ordu ilinin köklü tarihini ve zengin Anadolu kültürünü yansıtan simgesel merkezi. Binlerce yıllık mirasın izlerini taşır."}, {"name": "Ordu Doğal Güzellikleri", "bg": "https://images.unsplash.com/photo-1564507592333-c60657eea523?auto=format&fit=crop&w=1280&q=80", "desc": "Ordu coğrafyasının eşsiz doğası, yemyeşil vadileri ve temiz yaylaları ziyaretçilerine huzur dolu anlar sunar."}], "levels": [{"id": 1, "landmark": "Ordu Tarihi Meydanı", "bg": "https://images.unsplash.com/photo-1541432901042-2d8bd64b4a9b?auto=format&fit=crop&w=1280&q=80", "words": [{"word": "KALE", "row": 0, "col": 0, "dir": "H"}, {"word": "KEL", "row": 0, "col": 0, "dir": "V"}, {"word": "ELA", "row": 1, "col": 0, "dir": "H"}], "letters": ["A", "E", "K", "L"], "postcard": {"landmark": "Ordu Tarihi Meydanı", "city": "Ordu", "desc": "Ordu ilinin köklü tarihini ve zengin Anadolu kültürünü yansıtan simgesel merkezi. Binlerce yıllık mirasın izlerini taşır.", "bg": "https://images.unsplash.com/photo-1541432901042-2d8bd64b4a9b?auto=format&fit=crop&w=1280&q=80"}}, {"id": 2, "landmark": "Ordu Doğal Güzellikleri", "bg": "https://images.unsplash.com/photo-1564507592333-c60657eea523?auto=format&fit=crop&w=1280&q=80", "words": [{"word": "BALIK", "row": 0, "col": 0, "dir": "H"}, {"word": "BAL", "row": 0, "col": 0, "dir": "V"}, {"word": "KIL", "row": 0, "col": 4, "dir": "V"}], "letters": ["A", "B", "I", "K", "L"], "postcard": {"landmark": "Ordu Doğal Güzellikleri", "city": "Ordu", "desc": "Ordu coğrafyasının eşsiz doğası, yemyeşil vadileri ve temiz yaylaları ziyaretçilerine huzur dolu anlar sunar.", "bg": "https://images.unsplash.com/photo-1564507592333-c60657eea523?auto=format&fit=crop&w=1280&q=80"}}]}, {"plate": 28, "name": "Giresun", "cx": 739.7, "cy": 131.7, "isShowcase": false, "landmarks": [{"name": "Giresun Tarihi Meydanı", "bg": "https://images.unsplash.com/photo-1541432901042-2d8bd64b4a9b?auto=format&fit=crop&w=1280&q=80", "desc": "Giresun ilinin köklü tarihini ve zengin Anadolu kültürünü yansıtan simgesel merkezi. Binlerce yıllık mirasın izlerini taşır."}, {"name": "Giresun Doğal Güzellikleri", "bg": "https://images.unsplash.com/photo-1564507592333-c60657eea523?auto=format&fit=crop&w=1280&q=80", "desc": "Giresun coğrafyasının eşsiz doğası, yemyeşil vadileri ve temiz yaylaları ziyaretçilerine huzur dolu anlar sunar."}], "levels": [{"id": 1, "landmark": "Giresun Tarihi Meydanı", "bg": "https://images.unsplash.com/photo-1541432901042-2d8bd64b4a9b?auto=format&fit=crop&w=1280&q=80", "words": [{"word": "KALE", "row": 0, "col": 0, "dir": "H"}, {"word": "KEL", "row": 0, "col": 0, "dir": "V"}, {"word": "ELA", "row": 1, "col": 0, "dir": "H"}], "letters": ["A", "E", "K", "L"], "postcard": {"landmark": "Giresun Tarihi Meydanı", "city": "Giresun", "desc": "Giresun ilinin köklü tarihini ve zengin Anadolu kültürünü yansıtan simgesel merkezi. Binlerce yıllık mirasın izlerini taşır.", "bg": "https://images.unsplash.com/photo-1541432901042-2d8bd64b4a9b?auto=format&fit=crop&w=1280&q=80"}}, {"id": 2, "landmark": "Giresun Doğal Güzellikleri", "bg": "https://images.unsplash.com/photo-1564507592333-c60657eea523?auto=format&fit=crop&w=1280&q=80", "words": [{"word": "BALIK", "row": 0, "col": 0, "dir": "H"}, {"word": "BAL", "row": 0, "col": 0, "dir": "V"}, {"word": "KIL", "row": 0, "col": 4, "dir": "V"}], "letters": ["A", "B", "I", "K", "L"], "postcard": {"landmark": "Giresun Doğal Güzellikleri", "city": "Giresun", "desc": "Giresun coğrafyasının eşsiz doğası, yemyeşil vadileri ve temiz yaylaları ziyaretçilerine huzur dolu anlar sunar.", "bg": "https://images.unsplash.com/photo-1564507592333-c60657eea523?auto=format&fit=crop&w=1280&q=80"}}]}, {"plate": 55, "name": "Samsun", "cx": 606.6, "cy": 93.9, "isShowcase": false, "landmarks": [{"name": "Samsun Tarihi Meydanı", "bg": "https://images.unsplash.com/photo-1541432901042-2d8bd64b4a9b?auto=format&fit=crop&w=1280&q=80", "desc": "Samsun ilinin köklü tarihini ve zengin Anadolu kültürünü yansıtan simgesel merkezi. Binlerce yıllık mirasın izlerini taşır."}, {"name": "Samsun Doğal Güzellikleri", "bg": "https://images.unsplash.com/photo-1564507592333-c60657eea523?auto=format&fit=crop&w=1280&q=80", "desc": "Samsun coğrafyasının eşsiz doğası, yemyeşil vadileri ve temiz yaylaları ziyaretçilerine huzur dolu anlar sunar."}], "levels": [{"id": 1, "landmark": "Samsun Tarihi Meydanı", "bg": "https://images.unsplash.com/photo-1541432901042-2d8bd64b4a9b?auto=format&fit=crop&w=1280&q=80", "words": [{"word": "KALE", "row": 0, "col": 0, "dir": "H"}, {"word": "KEL", "row": 0, "col": 0, "dir": "V"}, {"word": "ELA", "row": 1, "col": 0, "dir": "H"}], "letters": ["A", "E", "K", "L"], "postcard": {"landmark": "Samsun Tarihi Meydanı", "city": "Samsun", "desc": "Samsun ilinin köklü tarihini ve zengin Anadolu kültürünü yansıtan simgesel merkezi. Binlerce yıllık mirasın izlerini taşır.", "bg": "https://images.unsplash.com/photo-1541432901042-2d8bd64b4a9b?auto=format&fit=crop&w=1280&q=80"}}, {"id": 2, "landmark": "Samsun Doğal Güzellikleri", "bg": "https://images.unsplash.com/photo-1564507592333-c60657eea523?auto=format&fit=crop&w=1280&q=80", "words": [{"word": "BALIK", "row": 0, "col": 0, "dir": "H"}, {"word": "BAL", "row": 0, "col": 0, "dir": "V"}, {"word": "KIL", "row": 0, "col": 4, "dir": "V"}], "letters": ["A", "B", "I", "K", "L"], "postcard": {"landmark": "Samsun Doğal Güzellikleri", "city": "Samsun", "desc": "Samsun coğrafyasının eşsiz doğası, yemyeşil vadileri ve temiz yaylaları ziyaretçilerine huzur dolu anlar sunar.", "bg": "https://images.unsplash.com/photo-1564507592333-c60657eea523?auto=format&fit=crop&w=1280&q=80"}}]}, {"plate": 5, "name": "Amasya", "cx": 577.7, "cy": 131.6, "isShowcase": false, "landmarks": [{"name": "Amasya Tarihi Meydanı", "bg": "https://images.unsplash.com/photo-1541432901042-2d8bd64b4a9b?auto=format&fit=crop&w=1280&q=80", "desc": "Amasya ilinin köklü tarihini ve zengin Anadolu kültürünü yansıtan simgesel merkezi. Binlerce yıllık mirasın izlerini taşır."}, {"name": "Amasya Doğal Güzellikleri", "bg": "https://images.unsplash.com/photo-1564507592333-c60657eea523?auto=format&fit=crop&w=1280&q=80", "desc": "Amasya coğrafyasının eşsiz doğası, yemyeşil vadileri ve temiz yaylaları ziyaretçilerine huzur dolu anlar sunar."}], "levels": [{"id": 1, "landmark": "Amasya Tarihi Meydanı", "bg": "https://images.unsplash.com/photo-1541432901042-2d8bd64b4a9b?auto=format&fit=crop&w=1280&q=80", "words": [{"word": "KALE", "row": 0, "col": 0, "dir": "H"}, {"word": "KEL", "row": 0, "col": 0, "dir": "V"}, {"word": "ELA", "row": 1, "col": 0, "dir": "H"}], "letters": ["A", "E", "K", "L"], "postcard": {"landmark": "Amasya Tarihi Meydanı", "city": "Amasya", "desc": "Amasya ilinin köklü tarihini ve zengin Anadolu kültürünü yansıtan simgesel merkezi. Binlerce yıllık mirasın izlerini taşır.", "bg": "https://images.unsplash.com/photo-1541432901042-2d8bd64b4a9b?auto=format&fit=crop&w=1280&q=80"}}, {"id": 2, "landmark": "Amasya Doğal Güzellikleri", "bg": "https://images.unsplash.com/photo-1564507592333-c60657eea523?auto=format&fit=crop&w=1280&q=80", "words": [{"word": "BALIK", "row": 0, "col": 0, "dir": "H"}, {"word": "BAL", "row": 0, "col": 0, "dir": "V"}, {"word": "KIL", "row": 0, "col": 4, "dir": "V"}], "letters": ["A", "B", "I", "K", "L"], "postcard": {"landmark": "Amasya Doğal Güzellikleri", "city": "Amasya", "desc": "Amasya coğrafyasının eşsiz doğası, yemyeşil vadileri ve temiz yaylaları ziyaretçilerine huzur dolu anlar sunar.", "bg": "https://images.unsplash.com/photo-1564507592333-c60657eea523?auto=format&fit=crop&w=1280&q=80"}}]}, {"plate": 19, "name": "Çorum", "cx": 519.4, "cy": 136.3, "isShowcase": false, "landmarks": [{"name": "Çorum Tarihi Meydanı", "bg": "https://images.unsplash.com/photo-1541432901042-2d8bd64b4a9b?auto=format&fit=crop&w=1280&q=80", "desc": "Çorum ilinin köklü tarihini ve zengin Anadolu kültürünü yansıtan simgesel merkezi. Binlerce yıllık mirasın izlerini taşır."}, {"name": "Çorum Doğal Güzellikleri", "bg": "https://images.unsplash.com/photo-1564507592333-c60657eea523?auto=format&fit=crop&w=1280&q=80", "desc": "Çorum coğrafyasının eşsiz doğası, yemyeşil vadileri ve temiz yaylaları ziyaretçilerine huzur dolu anlar sunar."}], "levels": [{"id": 1, "landmark": "Çorum Tarihi Meydanı", "bg": "https://images.unsplash.com/photo-1541432901042-2d8bd64b4a9b?auto=format&fit=crop&w=1280&q=80", "words": [{"word": "KALE", "row": 0, "col": 0, "dir": "H"}, {"word": "KEL", "row": 0, "col": 0, "dir": "V"}, {"word": "ELA", "row": 1, "col": 0, "dir": "H"}], "letters": ["A", "E", "K", "L"], "postcard": {"landmark": "Çorum Tarihi Meydanı", "city": "Çorum", "desc": "Çorum ilinin köklü tarihini ve zengin Anadolu kültürünü yansıtan simgesel merkezi. Binlerce yıllık mirasın izlerini taşır.", "bg": "https://images.unsplash.com/photo-1541432901042-2d8bd64b4a9b?auto=format&fit=crop&w=1280&q=80"}}, {"id": 2, "landmark": "Çorum Doğal Güzellikleri", "bg": "https://images.unsplash.com/photo-1564507592333-c60657eea523?auto=format&fit=crop&w=1280&q=80", "words": [{"word": "BALIK", "row": 0, "col": 0, "dir": "H"}, {"word": "BAL", "row": 0, "col": 0, "dir": "V"}, {"word": "KIL", "row": 0, "col": 4, "dir": "V"}], "letters": ["A", "B", "I", "K", "L"], "postcard": {"landmark": "Çorum Doğal Güzellikleri", "city": "Çorum", "desc": "Çorum coğrafyasının eşsiz doğası, yemyeşil vadileri ve temiz yaylaları ziyaretçilerine huzur dolu anlar sunar.", "bg": "https://images.unsplash.com/photo-1564507592333-c60657eea523?auto=format&fit=crop&w=1280&q=80"}}]}, {"plate": 18, "name": "Çankırı", "cx": 451.3, "cy": 128.8, "isShowcase": false, "landmarks": [{"name": "Çankırı Tarihi Meydanı", "bg": "https://images.unsplash.com/photo-1541432901042-2d8bd64b4a9b?auto=format&fit=crop&w=1280&q=80", "desc": "Çankırı ilinin köklü tarihini ve zengin Anadolu kültürünü yansıtan simgesel merkezi. Binlerce yıllık mirasın izlerini taşır."}, {"name": "Çankırı Doğal Güzellikleri", "bg": "https://images.unsplash.com/photo-1564507592333-c60657eea523?auto=format&fit=crop&w=1280&q=80", "desc": "Çankırı coğrafyasının eşsiz doğası, yemyeşil vadileri ve temiz yaylaları ziyaretçilerine huzur dolu anlar sunar."}], "levels": [{"id": 1, "landmark": "Çankırı Tarihi Meydanı", "bg": "https://images.unsplash.com/photo-1541432901042-2d8bd64b4a9b?auto=format&fit=crop&w=1280&q=80", "words": [{"word": "KALE", "row": 0, "col": 0, "dir": "H"}, {"word": "KEL", "row": 0, "col": 0, "dir": "V"}, {"word": "ELA", "row": 1, "col": 0, "dir": "H"}], "letters": ["A", "E", "K", "L"], "postcard": {"landmark": "Çankırı Tarihi Meydanı", "city": "Çankırı", "desc": "Çankırı ilinin köklü tarihini ve zengin Anadolu kültürünü yansıtan simgesel merkezi. Binlerce yıllık mirasın izlerini taşır.", "bg": "https://images.unsplash.com/photo-1541432901042-2d8bd64b4a9b?auto=format&fit=crop&w=1280&q=80"}}, {"id": 2, "landmark": "Çankırı Doğal Güzellikleri", "bg": "https://images.unsplash.com/photo-1564507592333-c60657eea523?auto=format&fit=crop&w=1280&q=80", "words": [{"word": "BALIK", "row": 0, "col": 0, "dir": "H"}, {"word": "BAL", "row": 0, "col": 0, "dir": "V"}, {"word": "KIL", "row": 0, "col": 4, "dir": "V"}], "letters": ["A", "B", "I", "K", "L"], "postcard": {"landmark": "Çankırı Doğal Güzellikleri", "city": "Çankırı", "desc": "Çankırı coğrafyasının eşsiz doğası, yemyeşil vadileri ve temiz yaylaları ziyaretçilerine huzur dolu anlar sunar.", "bg": "https://images.unsplash.com/photo-1564507592333-c60657eea523?auto=format&fit=crop&w=1280&q=80"}}]}, {"plate": 37, "name": "Kastamonu", "cx": 465.3, "cy": 81.4, "isShowcase": false, "landmarks": [{"name": "Kastamonu Tarihi Meydanı", "bg": "https://images.unsplash.com/photo-1541432901042-2d8bd64b4a9b?auto=format&fit=crop&w=1280&q=80", "desc": "Kastamonu ilinin köklü tarihini ve zengin Anadolu kültürünü yansıtan simgesel merkezi. Binlerce yıllık mirasın izlerini taşır."}, {"name": "Kastamonu Doğal Güzellikleri", "bg": "https://images.unsplash.com/photo-1564507592333-c60657eea523?auto=format&fit=crop&w=1280&q=80", "desc": "Kastamonu coğrafyasının eşsiz doğası, yemyeşil vadileri ve temiz yaylaları ziyaretçilerine huzur dolu anlar sunar."}], "levels": [{"id": 1, "landmark": "Kastamonu Tarihi Meydanı", "bg": "https://images.unsplash.com/photo-1541432901042-2d8bd64b4a9b?auto=format&fit=crop&w=1280&q=80", "words": [{"word": "KALE", "row": 0, "col": 0, "dir": "H"}, {"word": "KEL", "row": 0, "col": 0, "dir": "V"}, {"word": "ELA", "row": 1, "col": 0, "dir": "H"}], "letters": ["A", "E", "K", "L"], "postcard": {"landmark": "Kastamonu Tarihi Meydanı", "city": "Kastamonu", "desc": "Kastamonu ilinin köklü tarihini ve zengin Anadolu kültürünü yansıtan simgesel merkezi. Binlerce yıllık mirasın izlerini taşır.", "bg": "https://images.unsplash.com/photo-1541432901042-2d8bd64b4a9b?auto=format&fit=crop&w=1280&q=80"}}, {"id": 2, "landmark": "Kastamonu Doğal Güzellikleri", "bg": "https://images.unsplash.com/photo-1564507592333-c60657eea523?auto=format&fit=crop&w=1280&q=80", "words": [{"word": "BALIK", "row": 0, "col": 0, "dir": "H"}, {"word": "BAL", "row": 0, "col": 0, "dir": "V"}, {"word": "KIL", "row": 0, "col": 4, "dir": "V"}], "letters": ["A", "B", "I", "K", "L"], "postcard": {"landmark": "Kastamonu Doğal Güzellikleri", "city": "Kastamonu", "desc": "Kastamonu coğrafyasının eşsiz doğası, yemyeşil vadileri ve temiz yaylaları ziyaretçilerine huzur dolu anlar sunar.", "bg": "https://images.unsplash.com/photo-1564507592333-c60657eea523?auto=format&fit=crop&w=1280&q=80"}}]}, {"plate": 74, "name": "Bartın", "cx": 395.9, "cy": 65.3, "isShowcase": false, "landmarks": [{"name": "Bartın Tarihi Meydanı", "bg": "https://images.unsplash.com/photo-1541432901042-2d8bd64b4a9b?auto=format&fit=crop&w=1280&q=80", "desc": "Bartın ilinin köklü tarihini ve zengin Anadolu kültürünü yansıtan simgesel merkezi. Binlerce yıllık mirasın izlerini taşır."}, {"name": "Bartın Doğal Güzellikleri", "bg": "https://images.unsplash.com/photo-1564507592333-c60657eea523?auto=format&fit=crop&w=1280&q=80", "desc": "Bartın coğrafyasının eşsiz doğası, yemyeşil vadileri ve temiz yaylaları ziyaretçilerine huzur dolu anlar sunar."}], "levels": [{"id": 1, "landmark": "Bartın Tarihi Meydanı", "bg": "https://images.unsplash.com/photo-1541432901042-2d8bd64b4a9b?auto=format&fit=crop&w=1280&q=80", "words": [{"word": "KALE", "row": 0, "col": 0, "dir": "H"}, {"word": "KEL", "row": 0, "col": 0, "dir": "V"}, {"word": "ELA", "row": 1, "col": 0, "dir": "H"}], "letters": ["A", "E", "K", "L"], "postcard": {"landmark": "Bartın Tarihi Meydanı", "city": "Bartın", "desc": "Bartın ilinin köklü tarihini ve zengin Anadolu kültürünü yansıtan simgesel merkezi. Binlerce yıllık mirasın izlerini taşır.", "bg": "https://images.unsplash.com/photo-1541432901042-2d8bd64b4a9b?auto=format&fit=crop&w=1280&q=80"}}, {"id": 2, "landmark": "Bartın Doğal Güzellikleri", "bg": "https://images.unsplash.com/photo-1564507592333-c60657eea523?auto=format&fit=crop&w=1280&q=80", "words": [{"word": "BALIK", "row": 0, "col": 0, "dir": "H"}, {"word": "BAL", "row": 0, "col": 0, "dir": "V"}, {"word": "KIL", "row": 0, "col": 4, "dir": "V"}], "letters": ["A", "B", "I", "K", "L"], "postcard": {"landmark": "Bartın Doğal Güzellikleri", "city": "Bartın", "desc": "Bartın coğrafyasının eşsiz doğası, yemyeşil vadileri ve temiz yaylaları ziyaretçilerine huzur dolu anlar sunar.", "bg": "https://images.unsplash.com/photo-1564507592333-c60657eea523?auto=format&fit=crop&w=1280&q=80"}}]}, {"plate": 78, "name": "Karabük", "cx": 409.1, "cy": 92.6, "isShowcase": false, "landmarks": [{"name": "Karabük Tarihi Meydanı", "bg": "https://images.unsplash.com/photo-1541432901042-2d8bd64b4a9b?auto=format&fit=crop&w=1280&q=80", "desc": "Karabük ilinin köklü tarihini ve zengin Anadolu kültürünü yansıtan simgesel merkezi. Binlerce yıllık mirasın izlerini taşır."}, {"name": "Karabük Doğal Güzellikleri", "bg": "https://images.unsplash.com/photo-1564507592333-c60657eea523?auto=format&fit=crop&w=1280&q=80", "desc": "Karabük coğrafyasının eşsiz doğası, yemyeşil vadileri ve temiz yaylaları ziyaretçilerine huzur dolu anlar sunar."}], "levels": [{"id": 1, "landmark": "Karabük Tarihi Meydanı", "bg": "https://images.unsplash.com/photo-1541432901042-2d8bd64b4a9b?auto=format&fit=crop&w=1280&q=80", "words": [{"word": "KALE", "row": 0, "col": 0, "dir": "H"}, {"word": "KEL", "row": 0, "col": 0, "dir": "V"}, {"word": "ELA", "row": 1, "col": 0, "dir": "H"}], "letters": ["A", "E", "K", "L"], "postcard": {"landmark": "Karabük Tarihi Meydanı", "city": "Karabük", "desc": "Karabük ilinin köklü tarihini ve zengin Anadolu kültürünü yansıtan simgesel merkezi. Binlerce yıllık mirasın izlerini taşır.", "bg": "https://images.unsplash.com/photo-1541432901042-2d8bd64b4a9b?auto=format&fit=crop&w=1280&q=80"}}, {"id": 2, "landmark": "Karabük Doğal Güzellikleri", "bg": "https://images.unsplash.com/photo-1564507592333-c60657eea523?auto=format&fit=crop&w=1280&q=80", "words": [{"word": "BALIK", "row": 0, "col": 0, "dir": "H"}, {"word": "BAL", "row": 0, "col": 0, "dir": "V"}, {"word": "KIL", "row": 0, "col": 4, "dir": "V"}], "letters": ["A", "B", "I", "K", "L"], "postcard": {"landmark": "Karabük Doğal Güzellikleri", "city": "Karabük", "desc": "Karabük coğrafyasının eşsiz doğası, yemyeşil vadileri ve temiz yaylaları ziyaretçilerine huzur dolu anlar sunar.", "bg": "https://images.unsplash.com/photo-1564507592333-c60657eea523?auto=format&fit=crop&w=1280&q=80"}}]}, {"plate": 67, "name": "Zonguldak", "cx": 360.5, "cy": 87.9, "isShowcase": false, "landmarks": [{"name": "Zonguldak Tarihi Meydanı", "bg": "https://images.unsplash.com/photo-1541432901042-2d8bd64b4a9b?auto=format&fit=crop&w=1280&q=80", "desc": "Zonguldak ilinin köklü tarihini ve zengin Anadolu kültürünü yansıtan simgesel merkezi. Binlerce yıllık mirasın izlerini taşır."}, {"name": "Zonguldak Doğal Güzellikleri", "bg": "https://images.unsplash.com/photo-1564507592333-c60657eea523?auto=format&fit=crop&w=1280&q=80", "desc": "Zonguldak coğrafyasının eşsiz doğası, yemyeşil vadileri ve temiz yaylaları ziyaretçilerine huzur dolu anlar sunar."}], "levels": [{"id": 1, "landmark": "Zonguldak Tarihi Meydanı", "bg": "https://images.unsplash.com/photo-1541432901042-2d8bd64b4a9b?auto=format&fit=crop&w=1280&q=80", "words": [{"word": "KALE", "row": 0, "col": 0, "dir": "H"}, {"word": "KEL", "row": 0, "col": 0, "dir": "V"}, {"word": "ELA", "row": 1, "col": 0, "dir": "H"}], "letters": ["A", "E", "K", "L"], "postcard": {"landmark": "Zonguldak Tarihi Meydanı", "city": "Zonguldak", "desc": "Zonguldak ilinin köklü tarihini ve zengin Anadolu kültürünü yansıtan simgesel merkezi. Binlerce yıllık mirasın izlerini taşır.", "bg": "https://images.unsplash.com/photo-1541432901042-2d8bd64b4a9b?auto=format&fit=crop&w=1280&q=80"}}, {"id": 2, "landmark": "Zonguldak Doğal Güzellikleri", "bg": "https://images.unsplash.com/photo-1564507592333-c60657eea523?auto=format&fit=crop&w=1280&q=80", "words": [{"word": "BALIK", "row": 0, "col": 0, "dir": "H"}, {"word": "BAL", "row": 0, "col": 0, "dir": "V"}, {"word": "KIL", "row": 0, "col": 4, "dir": "V"}], "letters": ["A", "B", "I", "K", "L"], "postcard": {"landmark": "Zonguldak Doğal Güzellikleri", "city": "Zonguldak", "desc": "Zonguldak coğrafyasının eşsiz doğası, yemyeşil vadileri ve temiz yaylaları ziyaretçilerine huzur dolu anlar sunar.", "bg": "https://images.unsplash.com/photo-1564507592333-c60657eea523?auto=format&fit=crop&w=1280&q=80"}}]}, {"plate": 81, "name": "Düzce", "cx": 333.4, "cy": 117.5, "isShowcase": false, "landmarks": [{"name": "Düzce Tarihi Meydanı", "bg": "https://images.unsplash.com/photo-1541432901042-2d8bd64b4a9b?auto=format&fit=crop&w=1280&q=80", "desc": "Düzce ilinin köklü tarihini ve zengin Anadolu kültürünü yansıtan simgesel merkezi. Binlerce yıllık mirasın izlerini taşır."}, {"name": "Düzce Doğal Güzellikleri", "bg": "https://images.unsplash.com/photo-1564507592333-c60657eea523?auto=format&fit=crop&w=1280&q=80", "desc": "Düzce coğrafyasının eşsiz doğası, yemyeşil vadileri ve temiz yaylaları ziyaretçilerine huzur dolu anlar sunar."}], "levels": [{"id": 1, "landmark": "Düzce Tarihi Meydanı", "bg": "https://images.unsplash.com/photo-1541432901042-2d8bd64b4a9b?auto=format&fit=crop&w=1280&q=80", "words": [{"word": "KALE", "row": 0, "col": 0, "dir": "H"}, {"word": "KEL", "row": 0, "col": 0, "dir": "V"}, {"word": "ELA", "row": 1, "col": 0, "dir": "H"}], "letters": ["A", "E", "K", "L"], "postcard": {"landmark": "Düzce Tarihi Meydanı", "city": "Düzce", "desc": "Düzce ilinin köklü tarihini ve zengin Anadolu kültürünü yansıtan simgesel merkezi. Binlerce yıllık mirasın izlerini taşır.", "bg": "https://images.unsplash.com/photo-1541432901042-2d8bd64b4a9b?auto=format&fit=crop&w=1280&q=80"}}, {"id": 2, "landmark": "Düzce Doğal Güzellikleri", "bg": "https://images.unsplash.com/photo-1564507592333-c60657eea523?auto=format&fit=crop&w=1280&q=80", "words": [{"word": "BALIK", "row": 0, "col": 0, "dir": "H"}, {"word": "BAL", "row": 0, "col": 0, "dir": "V"}, {"word": "KIL", "row": 0, "col": 4, "dir": "V"}], "letters": ["A", "B", "I", "K", "L"], "postcard": {"landmark": "Düzce Doğal Güzellikleri", "city": "Düzce", "desc": "Düzce coğrafyasının eşsiz doğası, yemyeşil vadileri ve temiz yaylaları ziyaretçilerine huzur dolu anlar sunar.", "bg": "https://images.unsplash.com/photo-1564507592333-c60657eea523?auto=format&fit=crop&w=1280&q=80"}}]}, {"plate": 14, "name": "Bolu", "cx": 344.7, "cy": 137.7, "isShowcase": false, "landmarks": [{"name": "Bolu Tarihi Meydanı", "bg": "https://images.unsplash.com/photo-1541432901042-2d8bd64b4a9b?auto=format&fit=crop&w=1280&q=80", "desc": "Bolu ilinin köklü tarihini ve zengin Anadolu kültürünü yansıtan simgesel merkezi. Binlerce yıllık mirasın izlerini taşır."}, {"name": "Bolu Doğal Güzellikleri", "bg": "https://images.unsplash.com/photo-1564507592333-c60657eea523?auto=format&fit=crop&w=1280&q=80", "desc": "Bolu coğrafyasının eşsiz doğası, yemyeşil vadileri ve temiz yaylaları ziyaretçilerine huzur dolu anlar sunar."}], "levels": [{"id": 1, "landmark": "Bolu Tarihi Meydanı", "bg": "https://images.unsplash.com/photo-1541432901042-2d8bd64b4a9b?auto=format&fit=crop&w=1280&q=80", "words": [{"word": "KALE", "row": 0, "col": 0, "dir": "H"}, {"word": "KEL", "row": 0, "col": 0, "dir": "V"}, {"word": "ELA", "row": 1, "col": 0, "dir": "H"}], "letters": ["A", "E", "K", "L"], "postcard": {"landmark": "Bolu Tarihi Meydanı", "city": "Bolu", "desc": "Bolu ilinin köklü tarihini ve zengin Anadolu kültürünü yansıtan simgesel merkezi. Binlerce yıllık mirasın izlerini taşır.", "bg": "https://images.unsplash.com/photo-1541432901042-2d8bd64b4a9b?auto=format&fit=crop&w=1280&q=80"}}, {"id": 2, "landmark": "Bolu Doğal Güzellikleri", "bg": "https://images.unsplash.com/photo-1564507592333-c60657eea523?auto=format&fit=crop&w=1280&q=80", "words": [{"word": "BALIK", "row": 0, "col": 0, "dir": "H"}, {"word": "BAL", "row": 0, "col": 0, "dir": "V"}, {"word": "KIL", "row": 0, "col": 4, "dir": "V"}], "letters": ["A", "B", "I", "K", "L"], "postcard": {"landmark": "Bolu Doğal Güzellikleri", "city": "Bolu", "desc": "Bolu coğrafyasının eşsiz doğası, yemyeşil vadileri ve temiz yaylaları ziyaretçilerine huzur dolu anlar sunar.", "bg": "https://images.unsplash.com/photo-1564507592333-c60657eea523?auto=format&fit=crop&w=1280&q=80"}}]}, {"plate": 26, "name": "Eskişehir", "cx": 316.7, "cy": 208.8, "isShowcase": false, "landmarks": [{"name": "Eskişehir Tarihi Meydanı", "bg": "https://images.unsplash.com/photo-1541432901042-2d8bd64b4a9b?auto=format&fit=crop&w=1280&q=80", "desc": "Eskişehir ilinin köklü tarihini ve zengin Anadolu kültürünü yansıtan simgesel merkezi. Binlerce yıllık mirasın izlerini taşır."}, {"name": "Eskişehir Doğal Güzellikleri", "bg": "https://images.unsplash.com/photo-1564507592333-c60657eea523?auto=format&fit=crop&w=1280&q=80", "desc": "Eskişehir coğrafyasının eşsiz doğası, yemyeşil vadileri ve temiz yaylaları ziyaretçilerine huzur dolu anlar sunar."}], "levels": [{"id": 1, "landmark": "Eskişehir Tarihi Meydanı", "bg": "https://images.unsplash.com/photo-1541432901042-2d8bd64b4a9b?auto=format&fit=crop&w=1280&q=80", "words": [{"word": "KALE", "row": 0, "col": 0, "dir": "H"}, {"word": "KEL", "row": 0, "col": 0, "dir": "V"}, {"word": "ELA", "row": 1, "col": 0, "dir": "H"}], "letters": ["A", "E", "K", "L"], "postcard": {"landmark": "Eskişehir Tarihi Meydanı", "city": "Eskişehir", "desc": "Eskişehir ilinin köklü tarihini ve zengin Anadolu kültürünü yansıtan simgesel merkezi. Binlerce yıllık mirasın izlerini taşır.", "bg": "https://images.unsplash.com/photo-1541432901042-2d8bd64b4a9b?auto=format&fit=crop&w=1280&q=80"}}, {"id": 2, "landmark": "Eskişehir Doğal Güzellikleri", "bg": "https://images.unsplash.com/photo-1564507592333-c60657eea523?auto=format&fit=crop&w=1280&q=80", "words": [{"word": "BALIK", "row": 0, "col": 0, "dir": "H"}, {"word": "BAL", "row": 0, "col": 0, "dir": "V"}, {"word": "KIL", "row": 0, "col": 4, "dir": "V"}], "letters": ["A", "B", "I", "K", "L"], "postcard": {"landmark": "Eskişehir Doğal Güzellikleri", "city": "Eskişehir", "desc": "Eskişehir coğrafyasının eşsiz doğası, yemyeşil vadileri ve temiz yaylaları ziyaretçilerine huzur dolu anlar sunar.", "bg": "https://images.unsplash.com/photo-1564507592333-c60657eea523?auto=format&fit=crop&w=1280&q=80"}}]}, {"plate": 43, "name": "Kütahya", "cx": 236.3, "cy": 229.7, "isShowcase": false, "landmarks": [{"name": "Kütahya Tarihi Meydanı", "bg": "https://images.unsplash.com/photo-1541432901042-2d8bd64b4a9b?auto=format&fit=crop&w=1280&q=80", "desc": "Kütahya ilinin köklü tarihini ve zengin Anadolu kültürünü yansıtan simgesel merkezi. Binlerce yıllık mirasın izlerini taşır."}, {"name": "Kütahya Doğal Güzellikleri", "bg": "https://images.unsplash.com/photo-1564507592333-c60657eea523?auto=format&fit=crop&w=1280&q=80", "desc": "Kütahya coğrafyasının eşsiz doğası, yemyeşil vadileri ve temiz yaylaları ziyaretçilerine huzur dolu anlar sunar."}], "levels": [{"id": 1, "landmark": "Kütahya Tarihi Meydanı", "bg": "https://images.unsplash.com/photo-1541432901042-2d8bd64b4a9b?auto=format&fit=crop&w=1280&q=80", "words": [{"word": "KALE", "row": 0, "col": 0, "dir": "H"}, {"word": "KEL", "row": 0, "col": 0, "dir": "V"}, {"word": "ELA", "row": 1, "col": 0, "dir": "H"}], "letters": ["A", "E", "K", "L"], "postcard": {"landmark": "Kütahya Tarihi Meydanı", "city": "Kütahya", "desc": "Kütahya ilinin köklü tarihini ve zengin Anadolu kültürünü yansıtan simgesel merkezi. Binlerce yıllık mirasın izlerini taşır.", "bg": "https://images.unsplash.com/photo-1541432901042-2d8bd64b4a9b?auto=format&fit=crop&w=1280&q=80"}}, {"id": 2, "landmark": "Kütahya Doğal Güzellikleri", "bg": "https://images.unsplash.com/photo-1564507592333-c60657eea523?auto=format&fit=crop&w=1280&q=80", "words": [{"word": "BALIK", "row": 0, "col": 0, "dir": "H"}, {"word": "BAL", "row": 0, "col": 0, "dir": "V"}, {"word": "KIL", "row": 0, "col": 4, "dir": "V"}], "letters": ["A", "B", "I", "K", "L"], "postcard": {"landmark": "Kütahya Doğal Güzellikleri", "city": "Kütahya", "desc": "Kütahya coğrafyasının eşsiz doğası, yemyeşil vadileri ve temiz yaylaları ziyaretçilerine huzur dolu anlar sunar.", "bg": "https://images.unsplash.com/photo-1564507592333-c60657eea523?auto=format&fit=crop&w=1280&q=80"}}]}, {"plate": 64, "name": "Uşak", "cx": 229.2, "cy": 284.6, "isShowcase": false, "landmarks": [{"name": "Uşak Tarihi Meydanı", "bg": "https://images.unsplash.com/photo-1541432901042-2d8bd64b4a9b?auto=format&fit=crop&w=1280&q=80", "desc": "Uşak ilinin köklü tarihini ve zengin Anadolu kültürünü yansıtan simgesel merkezi. Binlerce yıllık mirasın izlerini taşır."}, {"name": "Uşak Doğal Güzellikleri", "bg": "https://images.unsplash.com/photo-1564507592333-c60657eea523?auto=format&fit=crop&w=1280&q=80", "desc": "Uşak coğrafyasının eşsiz doğası, yemyeşil vadileri ve temiz yaylaları ziyaretçilerine huzur dolu anlar sunar."}], "levels": [{"id": 1, "landmark": "Uşak Tarihi Meydanı", "bg": "https://images.unsplash.com/photo-1541432901042-2d8bd64b4a9b?auto=format&fit=crop&w=1280&q=80", "words": [{"word": "KALE", "row": 0, "col": 0, "dir": "H"}, {"word": "KEL", "row": 0, "col": 0, "dir": "V"}, {"word": "ELA", "row": 1, "col": 0, "dir": "H"}], "letters": ["A", "E", "K", "L"], "postcard": {"landmark": "Uşak Tarihi Meydanı", "city": "Uşak", "desc": "Uşak ilinin köklü tarihini ve zengin Anadolu kültürünü yansıtan simgesel merkezi. Binlerce yıllık mirasın izlerini taşır.", "bg": "https://images.unsplash.com/photo-1541432901042-2d8bd64b4a9b?auto=format&fit=crop&w=1280&q=80"}}, {"id": 2, "landmark": "Uşak Doğal Güzellikleri", "bg": "https://images.unsplash.com/photo-1564507592333-c60657eea523?auto=format&fit=crop&w=1280&q=80", "words": [{"word": "BALIK", "row": 0, "col": 0, "dir": "H"}, {"word": "BAL", "row": 0, "col": 0, "dir": "V"}, {"word": "KIL", "row": 0, "col": 4, "dir": "V"}], "letters": ["A", "B", "I", "K", "L"], "postcard": {"landmark": "Uşak Doğal Güzellikleri", "city": "Uşak", "desc": "Uşak coğrafyasının eşsiz doğası, yemyeşil vadileri ve temiz yaylaları ziyaretçilerine huzur dolu anlar sunar.", "bg": "https://images.unsplash.com/photo-1564507592333-c60657eea523?auto=format&fit=crop&w=1280&q=80"}}]}, {"plate": 10, "name": "Balıkesir", "cx": 115.8, "cy": 190.1, "isShowcase": false, "landmarks": [{"name": "Balıkesir Tarihi Meydanı", "bg": "https://images.unsplash.com/photo-1541432901042-2d8bd64b4a9b?auto=format&fit=crop&w=1280&q=80", "desc": "Balıkesir ilinin köklü tarihini ve zengin Anadolu kültürünü yansıtan simgesel merkezi. Binlerce yıllık mirasın izlerini taşır."}, {"name": "Balıkesir Doğal Güzellikleri", "bg": "https://images.unsplash.com/photo-1564507592333-c60657eea523?auto=format&fit=crop&w=1280&q=80", "desc": "Balıkesir coğrafyasının eşsiz doğası, yemyeşil vadileri ve temiz yaylaları ziyaretçilerine huzur dolu anlar sunar."}], "levels": [{"id": 1, "landmark": "Balıkesir Tarihi Meydanı", "bg": "https://images.unsplash.com/photo-1541432901042-2d8bd64b4a9b?auto=format&fit=crop&w=1280&q=80", "words": [{"word": "KALE", "row": 0, "col": 0, "dir": "H"}, {"word": "KEL", "row": 0, "col": 0, "dir": "V"}, {"word": "ELA", "row": 1, "col": 0, "dir": "H"}], "letters": ["A", "E", "K", "L"], "postcard": {"landmark": "Balıkesir Tarihi Meydanı", "city": "Balıkesir", "desc": "Balıkesir ilinin köklü tarihini ve zengin Anadolu kültürünü yansıtan simgesel merkezi. Binlerce yıllık mirasın izlerini taşır.", "bg": "https://images.unsplash.com/photo-1541432901042-2d8bd64b4a9b?auto=format&fit=crop&w=1280&q=80"}}, {"id": 2, "landmark": "Balıkesir Doğal Güzellikleri", "bg": "https://images.unsplash.com/photo-1564507592333-c60657eea523?auto=format&fit=crop&w=1280&q=80", "words": [{"word": "BALIK", "row": 0, "col": 0, "dir": "H"}, {"word": "BAL", "row": 0, "col": 0, "dir": "V"}, {"word": "KIL", "row": 0, "col": 4, "dir": "V"}], "letters": ["A", "B", "I", "K", "L"], "postcard": {"landmark": "Balıkesir Doğal Güzellikleri", "city": "Balıkesir", "desc": "Balıkesir coğrafyasının eşsiz doğası, yemyeşil vadileri ve temiz yaylaları ziyaretçilerine huzur dolu anlar sunar.", "bg": "https://images.unsplash.com/photo-1564507592333-c60657eea523?auto=format&fit=crop&w=1280&q=80"}}]}, {"plate": 17, "name": "Çanakkale", "cx": 72.0, "cy": 171.2, "isShowcase": false, "landmarks": [{"name": "Çanakkale Tarihi Meydanı", "bg": "https://images.unsplash.com/photo-1541432901042-2d8bd64b4a9b?auto=format&fit=crop&w=1280&q=80", "desc": "Çanakkale ilinin köklü tarihini ve zengin Anadolu kültürünü yansıtan simgesel merkezi. Binlerce yıllık mirasın izlerini taşır."}, {"name": "Çanakkale Doğal Güzellikleri", "bg": "https://images.unsplash.com/photo-1564507592333-c60657eea523?auto=format&fit=crop&w=1280&q=80", "desc": "Çanakkale coğrafyasının eşsiz doğası, yemyeşil vadileri ve temiz yaylaları ziyaretçilerine huzur dolu anlar sunar."}], "levels": [{"id": 1, "landmark": "Çanakkale Tarihi Meydanı", "bg": "https://images.unsplash.com/photo-1541432901042-2d8bd64b4a9b?auto=format&fit=crop&w=1280&q=80", "words": [{"word": "KALE", "row": 0, "col": 0, "dir": "H"}, {"word": "KEL", "row": 0, "col": 0, "dir": "V"}, {"word": "ELA", "row": 1, "col": 0, "dir": "H"}], "letters": ["A", "E", "K", "L"], "postcard": {"landmark": "Çanakkale Tarihi Meydanı", "city": "Çanakkale", "desc": "Çanakkale ilinin köklü tarihini ve zengin Anadolu kültürünü yansıtan simgesel merkezi. Binlerce yıllık mirasın izlerini taşır.", "bg": "https://images.unsplash.com/photo-1541432901042-2d8bd64b4a9b?auto=format&fit=crop&w=1280&q=80"}}, {"id": 2, "landmark": "Çanakkale Doğal Güzellikleri", "bg": "https://images.unsplash.com/photo-1564507592333-c60657eea523?auto=format&fit=crop&w=1280&q=80", "words": [{"word": "BALIK", "row": 0, "col": 0, "dir": "H"}, {"word": "BAL", "row": 0, "col": 0, "dir": "V"}, {"word": "KIL", "row": 0, "col": 4, "dir": "V"}], "letters": ["A", "B", "I", "K", "L"], "postcard": {"landmark": "Çanakkale Doğal Güzellikleri", "city": "Çanakkale", "desc": "Çanakkale coğrafyasının eşsiz doğası, yemyeşil vadileri ve temiz yaylaları ziyaretçilerine huzur dolu anlar sunar.", "bg": "https://images.unsplash.com/photo-1564507592333-c60657eea523?auto=format&fit=crop&w=1280&q=80"}}]}, {"plate": 22, "name": "Edirne", "cx": 71.9, "cy": 100.6, "isShowcase": false, "landmarks": [{"name": "Edirne Tarihi Meydanı", "bg": "https://images.unsplash.com/photo-1541432901042-2d8bd64b4a9b?auto=format&fit=crop&w=1280&q=80", "desc": "Edirne ilinin köklü tarihini ve zengin Anadolu kültürünü yansıtan simgesel merkezi. Binlerce yıllık mirasın izlerini taşır."}, {"name": "Edirne Doğal Güzellikleri", "bg": "https://images.unsplash.com/photo-1564507592333-c60657eea523?auto=format&fit=crop&w=1280&q=80", "desc": "Edirne coğrafyasının eşsiz doğası, yemyeşil vadileri ve temiz yaylaları ziyaretçilerine huzur dolu anlar sunar."}], "levels": [{"id": 1, "landmark": "Edirne Tarihi Meydanı", "bg": "https://images.unsplash.com/photo-1541432901042-2d8bd64b4a9b?auto=format&fit=crop&w=1280&q=80", "words": [{"word": "KALE", "row": 0, "col": 0, "dir": "H"}, {"word": "KEL", "row": 0, "col": 0, "dir": "V"}, {"word": "ELA", "row": 1, "col": 0, "dir": "H"}], "letters": ["A", "E", "K", "L"], "postcard": {"landmark": "Edirne Tarihi Meydanı", "city": "Edirne", "desc": "Edirne ilinin köklü tarihini ve zengin Anadolu kültürünü yansıtan simgesel merkezi. Binlerce yıllık mirasın izlerini taşır.", "bg": "https://images.unsplash.com/photo-1541432901042-2d8bd64b4a9b?auto=format&fit=crop&w=1280&q=80"}}, {"id": 2, "landmark": "Edirne Doğal Güzellikleri", "bg": "https://images.unsplash.com/photo-1564507592333-c60657eea523?auto=format&fit=crop&w=1280&q=80", "words": [{"word": "BALIK", "row": 0, "col": 0, "dir": "H"}, {"word": "BAL", "row": 0, "col": 0, "dir": "V"}, {"word": "KIL", "row": 0, "col": 4, "dir": "V"}], "letters": ["A", "B", "I", "K", "L"], "postcard": {"landmark": "Edirne Doğal Güzellikleri", "city": "Edirne", "desc": "Edirne coğrafyasının eşsiz doğası, yemyeşil vadileri ve temiz yaylaları ziyaretçilerine huzur dolu anlar sunar.", "bg": "https://images.unsplash.com/photo-1564507592333-c60657eea523?auto=format&fit=crop&w=1280&q=80"}}]}, {"plate": 39, "name": "Kırklareli", "cx": 126.5, "cy": 55.4, "isShowcase": false, "landmarks": [{"name": "Kırklareli Tarihi Meydanı", "bg": "https://images.unsplash.com/photo-1541432901042-2d8bd64b4a9b?auto=format&fit=crop&w=1280&q=80", "desc": "Kırklareli ilinin köklü tarihini ve zengin Anadolu kültürünü yansıtan simgesel merkezi. Binlerce yıllık mirasın izlerini taşır."}, {"name": "Kırklareli Doğal Güzellikleri", "bg": "https://images.unsplash.com/photo-1564507592333-c60657eea523?auto=format&fit=crop&w=1280&q=80", "desc": "Kırklareli coğrafyasının eşsiz doğası, yemyeşil vadileri ve temiz yaylaları ziyaretçilerine huzur dolu anlar sunar."}], "levels": [{"id": 1, "landmark": "Kırklareli Tarihi Meydanı", "bg": "https://images.unsplash.com/photo-1541432901042-2d8bd64b4a9b?auto=format&fit=crop&w=1280&q=80", "words": [{"word": "KALE", "row": 0, "col": 0, "dir": "H"}, {"word": "KEL", "row": 0, "col": 0, "dir": "V"}, {"word": "ELA", "row": 1, "col": 0, "dir": "H"}], "letters": ["A", "E", "K", "L"], "postcard": {"landmark": "Kırklareli Tarihi Meydanı", "city": "Kırklareli", "desc": "Kırklareli ilinin köklü tarihini ve zengin Anadolu kültürünü yansıtan simgesel merkezi. Binlerce yıllık mirasın izlerini taşır.", "bg": "https://images.unsplash.com/photo-1541432901042-2d8bd64b4a9b?auto=format&fit=crop&w=1280&q=80"}}, {"id": 2, "landmark": "Kırklareli Doğal Güzellikleri", "bg": "https://images.unsplash.com/photo-1564507592333-c60657eea523?auto=format&fit=crop&w=1280&q=80", "words": [{"word": "BALIK", "row": 0, "col": 0, "dir": "H"}, {"word": "BAL", "row": 0, "col": 0, "dir": "V"}, {"word": "KIL", "row": 0, "col": 4, "dir": "V"}], "letters": ["A", "B", "I", "K", "L"], "postcard": {"landmark": "Kırklareli Doğal Güzellikleri", "city": "Kırklareli", "desc": "Kırklareli coğrafyasının eşsiz doğası, yemyeşil vadileri ve temiz yaylaları ziyaretçilerine huzur dolu anlar sunar.", "bg": "https://images.unsplash.com/photo-1564507592333-c60657eea523?auto=format&fit=crop&w=1280&q=80"}}]}, {"plate": 59, "name": "Tekirdağ", "cx": 123.5, "cy": 100.9, "isShowcase": false, "landmarks": [{"name": "Tekirdağ Tarihi Meydanı", "bg": "https://images.unsplash.com/photo-1541432901042-2d8bd64b4a9b?auto=format&fit=crop&w=1280&q=80", "desc": "Tekirdağ ilinin köklü tarihini ve zengin Anadolu kültürünü yansıtan simgesel merkezi. Binlerce yıllık mirasın izlerini taşır."}, {"name": "Tekirdağ Doğal Güzellikleri", "bg": "https://images.unsplash.com/photo-1564507592333-c60657eea523?auto=format&fit=crop&w=1280&q=80", "desc": "Tekirdağ coğrafyasının eşsiz doğası, yemyeşil vadileri ve temiz yaylaları ziyaretçilerine huzur dolu anlar sunar."}], "levels": [{"id": 1, "landmark": "Tekirdağ Tarihi Meydanı", "bg": "https://images.unsplash.com/photo-1541432901042-2d8bd64b4a9b?auto=format&fit=crop&w=1280&q=80", "words": [{"word": "KALE", "row": 0, "col": 0, "dir": "H"}, {"word": "KEL", "row": 0, "col": 0, "dir": "V"}, {"word": "ELA", "row": 1, "col": 0, "dir": "H"}], "letters": ["A", "E", "K", "L"], "postcard": {"landmark": "Tekirdağ Tarihi Meydanı", "city": "Tekirdağ", "desc": "Tekirdağ ilinin köklü tarihini ve zengin Anadolu kültürünü yansıtan simgesel merkezi. Binlerce yıllık mirasın izlerini taşır.", "bg": "https://images.unsplash.com/photo-1541432901042-2d8bd64b4a9b?auto=format&fit=crop&w=1280&q=80"}}, {"id": 2, "landmark": "Tekirdağ Doğal Güzellikleri", "bg": "https://images.unsplash.com/photo-1564507592333-c60657eea523?auto=format&fit=crop&w=1280&q=80", "words": [{"word": "BALIK", "row": 0, "col": 0, "dir": "H"}, {"word": "BAL", "row": 0, "col": 0, "dir": "V"}, {"word": "KIL", "row": 0, "col": 4, "dir": "V"}], "letters": ["A", "B", "I", "K", "L"], "postcard": {"landmark": "Tekirdağ Doğal Güzellikleri", "city": "Tekirdağ", "desc": "Tekirdağ coğrafyasının eşsiz doğası, yemyeşil vadileri ve temiz yaylaları ziyaretçilerine huzur dolu anlar sunar.", "bg": "https://images.unsplash.com/photo-1564507592333-c60657eea523?auto=format&fit=crop&w=1280&q=80"}}]}, {"plate": 34, "name": "İstanbul", "cx": 207.3, "cy": 108.3, "isShowcase": true, "landmarks": [{"name": "Galata Kulesi", "bg": "https://images.unsplash.com/photo-1524231757912-21f4fe3a7200?auto=format&fit=crop&w=1280&q=80", "summary": "1348 yılında Cenevizliler tarafından inşa edilen kule, Haliç ve Boğaz'ın eşsiz panoramasına hakim tarihi fenerdir.", "trivia": "17. yüzyılda Hezarfen Ahmed Çelebi takma kanatlarıyla kuleden uçarak Boğaz'ı aşmış ve Üsküdar'a inmiştir."}, {"name": "Ayasofya-i Kebir Cami", "bg": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/8b/Hagia_Sophia_light.JPG/1280px-Hagia_Sophia_light.JPG?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail", "summary": "537 yılında inşa edilen, havada asılı gibi duran devasa kubbesiyle mimarlık tarihinin en büyük başyapıtlarından biri.", "trivia": "Kubbesinin inşasında kullanılan hafif volkanik tuğlaların Rodos Adası'ndan özel olarak getirildiği kaydedilmiştir."}, {"name": "15 Temmuz Şehitler Köprüsü", "bg": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/6a/Istanbul%2C_Bosphorus_at_night.jpg/1280px-Istanbul%2C_Bosphorus_at_night.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail", "summary": "Asya ile Avrupa kıtalarını deniz üzerinden birbirine bağlayan Türkiye'nin ilk kıtalararası asma köprüsü.", "trivia": "Her yıl düzenlenen İstanbul Maratonu sayesinde dünyada iki kıta arasında koşulan tek parkur olma özelliğine sahiptir."}, {"name": "Sultanahmet Camii", "bg": "https://images.unsplash.com/photo-1527838832700-5059252407fa?auto=format&fit=crop&w=1280&q=80", "summary": "İç mekanını süsleyen 20 bini aşkın mavi İznik çinisi ve altı zarif minaresiyle 'Mavi Cami' olarak dünya çapında tanınır.", "trivia": "Mimar Sedefkâr Mehmed Ağa, camiyi dönemin en gelişmiş akustik matematik hesaplamalarıyla tasarlamıştır."}, {"name": "Kız Kulesi", "bg": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/9b/Istanbul_Bosphorus_Maidens_Tower_IMG_8123_1920.jpg/1280px-Istanbul_Bosphorus_Maidens_Tower_IMG_8123_1920.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail", "summary": "Boğaz'ın sularında küçük bir adacık üzerinde yükselen, binlerce yıllık efsanelere ev sahipliği yapmış narin kule.", "trivia": "Antik çağlarda Boğaz'dan geçen gemilerden vergi almak amacıyla zincir çekilen bir gümrük istasyonu olarak kullanılmıştır."}], "levels": [{"id": 11, "city_id": "istanbul", "city_name": "İstanbul", "sub_id": 1, "title": "İstanbul - Bölüm 1: Galata Kulesi", "landmark_name": "Galata Kulesi", "bg": "https://images.unsplash.com/photo-1524231757912-21f4fe3a7200?auto=format&fit=crop&w=1280&q=80", "wheel": ["T", "A", "A", "R", "İ", "H"], "words": [{"id": "w1", "word": "TARİH", "row": 3, "col": 0, "dir": "H"}, {"id": "w2", "word": "HAT", "row": 1, "col": 0, "dir": "V"}, {"id": "w3", "word": "AHİR", "row": 0, "col": 2, "dir": "V"}], "bonus": ["RAHAT", "HART"], "postcard": {"title": "Galata Kulesi", "city": "İstanbul", "plate": 34, "summary": "1348 yılında Cenevizliler tarafından inşa edilen kule, Haliç ve Boğaz'ın eşsiz panoramasına hakim tarihi fenerdir.", "trivia": "17. yüzyılda Hezarfen Ahmed Çelebi takma kanatlarıyla kuleden uçarak Boğaz'ı aşmış ve Üsküdar'a inmiştir.", "bg": "https://images.unsplash.com/photo-1524231757912-21f4fe3a7200?auto=format&fit=crop&w=1280&q=80"}}, {"id": 12, "city_id": "istanbul", "city_name": "İstanbul", "sub_id": 2, "title": "İstanbul - Bölüm 2: Ayasofya-i Kebir Cami", "landmark_name": "Ayasofya-i Kebir Cami", "bg": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/8b/Hagia_Sophia_light.JPG/1280px-Hagia_Sophia_light.JPG?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail", "wheel": ["Ç", "I", "N", "A", "R"], "words": [{"id": "w1", "word": "ÇINAR", "row": 0, "col": 0, "dir": "H"}, {"id": "w2", "word": "ÇIN", "row": 0, "col": 0, "dir": "V"}, {"id": "w3", "word": "NAR", "row": 0, "col": 2, "dir": "V"}], "bonus": ["ARI", "IRA", "ANI"], "postcard": {"title": "Ayasofya-i Kebir Cami", "city": "İstanbul", "plate": 34, "summary": "537 yılında inşa edilen, havada asılı gibi duran devasa kubbesiyle mimarlık tarihinin en büyük başyapıtlarından biri.", "trivia": "Kubbesinin inşasında kullanılan hafif volkanik tuğlaların Rodos Adası'ndan özel olarak getirildiği kaydedilmiştir.", "bg": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/8b/Hagia_Sophia_light.JPG/1280px-Hagia_Sophia_light.JPG?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail"}}, {"id": 13, "city_id": "istanbul", "city_name": "İstanbul", "sub_id": 3, "title": "İstanbul - Bölüm 3: 15 Temmuz Şehitler Köprüsü", "landmark_name": "15 Temmuz Şehitler Köprüsü", "bg": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/6a/Istanbul%2C_Bosphorus_at_night.jpg/1280px-Istanbul%2C_Bosphorus_at_night.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail", "wheel": ["B", "A", "A", "H", "R"], "words": [{"id": "w1", "word": "BAHAR", "row": 0, "col": 0, "dir": "H"}, {"id": "w2", "word": "BAR", "row": 0, "col": 0, "dir": "V"}, {"id": "w3", "word": "ARA", "row": 0, "col": 3, "dir": "V"}], "bonus": ["HARA", "RAB", "ABA"], "postcard": {"title": "15 Temmuz Şehitler Köprüsü", "city": "İstanbul", "plate": 34, "summary": "Asya ile Avrupa kıtalarını deniz üzerinden birbirine bağlayan Türkiye'nin ilk kıtalararası asma köprüsü.", "trivia": "Her yıl düzenlenen İstanbul Maratonu sayesinde dünyada iki kıta arasında koşulan tek parkur olma özelliğine sahiptir.", "bg": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/6a/Istanbul%2C_Bosphorus_at_night.jpg/1280px-Istanbul%2C_Bosphorus_at_night.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail"}}, {"id": 14, "city_id": "istanbul", "city_name": "İstanbul", "sub_id": 4, "title": "İstanbul - Bölüm 4: Sultanahmet Camii", "landmark_name": "Sultanahmet Camii", "bg": "https://images.unsplash.com/photo-1527838832700-5059252407fa?auto=format&fit=crop&w=1280&q=80", "wheel": ["G", "Ü", "N", "E", "Ş"], "words": [{"id": "w1", "word": "GÜNEŞ", "row": 2, "col": 0, "dir": "H"}, {"id": "w2", "word": "GÜN", "row": 2, "col": 0, "dir": "V"}, {"id": "w3", "word": "GEN", "row": 0, "col": 2, "dir": "V"}], "bonus": ["ŞEN"], "postcard": {"title": "Sultanahmet Camii", "city": "İstanbul", "plate": 34, "summary": "İç mekanını süsleyen 20 bini aşkın mavi İznik çinisi ve altı zarif minaresiyle 'Mavi Cami' olarak dünya çapında tanınır.", "trivia": "Mimar Sedefkâr Mehmed Ağa, camiyi dönemin en gelişmiş akustik matematik hesaplamalarıyla tasarlamıştır.", "bg": "https://images.unsplash.com/photo-1527838832700-5059252407fa?auto=format&fit=crop&w=1280&q=80"}}, {"id": 15, "city_id": "istanbul", "city_name": "İstanbul", "sub_id": 5, "title": "İstanbul - Bölüm 5: Kız Kulesi", "landmark_name": "Kız Kulesi", "bg": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/9b/Istanbul_Bosphorus_Maidens_Tower_IMG_8123_1920.jpg/1280px-Istanbul_Bosphorus_Maidens_Tower_IMG_8123_1920.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail", "wheel": ["Ş", "E", "H", "İ", "İ", "R"], "words": [{"id": "w1", "word": "ŞEHİR", "row": 0, "col": 0, "dir": "H"}, {"id": "w2", "word": "ŞER", "row": 0, "col": 0, "dir": "V"}, {"id": "w3", "word": "HER", "row": 0, "col": 2, "dir": "V"}], "bonus": ["ŞİİR", "ER"], "postcard": {"title": "Kız Kulesi", "city": "İstanbul", "plate": 34, "summary": "Boğaz'ın sularında küçük bir adacık üzerinde yükselen, binlerce yıllık efsanelere ev sahipliği yapmış narin kule.", "trivia": "Antik çağlarda Boğaz'dan geçen gemilerden vergi almak amacıyla zincir çekilen bir gümrük istasyonu olarak kullanılmıştır.", "bg": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/9b/Istanbul_Bosphorus_Maidens_Tower_IMG_8123_1920.jpg/1280px-Istanbul_Bosphorus_Maidens_Tower_IMG_8123_1920.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail"}}]}, {"plate": 41, "name": "Kocaeli", "cx": 254.1, "cy": 116.2, "isShowcase": false, "landmarks": [{"name": "Kocaeli Tarihi Meydanı", "bg": "https://images.unsplash.com/photo-1541432901042-2d8bd64b4a9b?auto=format&fit=crop&w=1280&q=80", "desc": "Kocaeli ilinin köklü tarihini ve zengin Anadolu kültürünü yansıtan simgesel merkezi. Binlerce yıllık mirasın izlerini taşır."}, {"name": "Kocaeli Doğal Güzellikleri", "bg": "https://images.unsplash.com/photo-1564507592333-c60657eea523?auto=format&fit=crop&w=1280&q=80", "desc": "Kocaeli coğrafyasının eşsiz doğası, yemyeşil vadileri ve temiz yaylaları ziyaretçilerine huzur dolu anlar sunar."}], "levels": [{"id": 1, "landmark": "Kocaeli Tarihi Meydanı", "bg": "https://images.unsplash.com/photo-1541432901042-2d8bd64b4a9b?auto=format&fit=crop&w=1280&q=80", "words": [{"word": "KALE", "row": 0, "col": 0, "dir": "H"}, {"word": "KEL", "row": 0, "col": 0, "dir": "V"}, {"word": "ELA", "row": 1, "col": 0, "dir": "H"}], "letters": ["A", "E", "K", "L"], "postcard": {"landmark": "Kocaeli Tarihi Meydanı", "city": "Kocaeli", "desc": "Kocaeli ilinin köklü tarihini ve zengin Anadolu kültürünü yansıtan simgesel merkezi. Binlerce yıllık mirasın izlerini taşır.", "bg": "https://images.unsplash.com/photo-1541432901042-2d8bd64b4a9b?auto=format&fit=crop&w=1280&q=80"}}, {"id": 2, "landmark": "Kocaeli Doğal Güzellikleri", "bg": "https://images.unsplash.com/photo-1564507592333-c60657eea523?auto=format&fit=crop&w=1280&q=80", "words": [{"word": "BALIK", "row": 0, "col": 0, "dir": "H"}, {"word": "BAL", "row": 0, "col": 0, "dir": "V"}, {"word": "KIL", "row": 0, "col": 4, "dir": "V"}], "letters": ["A", "B", "I", "K", "L"], "postcard": {"landmark": "Kocaeli Doğal Güzellikleri", "city": "Kocaeli", "desc": "Kocaeli coğrafyasının eşsiz doğası, yemyeşil vadileri ve temiz yaylaları ziyaretçilerine huzur dolu anlar sunar.", "bg": "https://images.unsplash.com/photo-1564507592333-c60657eea523?auto=format&fit=crop&w=1280&q=80"}}]}, {"plate": 54, "name": "Sakarya", "cx": 291.2, "cy": 123.3, "isShowcase": false, "landmarks": [{"name": "Sakarya Tarihi Meydanı", "bg": "https://images.unsplash.com/photo-1541432901042-2d8bd64b4a9b?auto=format&fit=crop&w=1280&q=80", "desc": "Sakarya ilinin köklü tarihini ve zengin Anadolu kültürünü yansıtan simgesel merkezi. Binlerce yıllık mirasın izlerini taşır."}, {"name": "Sakarya Doğal Güzellikleri", "bg": "https://images.unsplash.com/photo-1564507592333-c60657eea523?auto=format&fit=crop&w=1280&q=80", "desc": "Sakarya coğrafyasının eşsiz doğası, yemyeşil vadileri ve temiz yaylaları ziyaretçilerine huzur dolu anlar sunar."}], "levels": [{"id": 1, "landmark": "Sakarya Tarihi Meydanı", "bg": "https://images.unsplash.com/photo-1541432901042-2d8bd64b4a9b?auto=format&fit=crop&w=1280&q=80", "words": [{"word": "KALE", "row": 0, "col": 0, "dir": "H"}, {"word": "KEL", "row": 0, "col": 0, "dir": "V"}, {"word": "ELA", "row": 1, "col": 0, "dir": "H"}], "letters": ["A", "E", "K", "L"], "postcard": {"landmark": "Sakarya Tarihi Meydanı", "city": "Sakarya", "desc": "Sakarya ilinin köklü tarihini ve zengin Anadolu kültürünü yansıtan simgesel merkezi. Binlerce yıllık mirasın izlerini taşır.", "bg": "https://images.unsplash.com/photo-1541432901042-2d8bd64b4a9b?auto=format&fit=crop&w=1280&q=80"}}, {"id": 2, "landmark": "Sakarya Doğal Güzellikleri", "bg": "https://images.unsplash.com/photo-1564507592333-c60657eea523?auto=format&fit=crop&w=1280&q=80", "words": [{"word": "BALIK", "row": 0, "col": 0, "dir": "H"}, {"word": "BAL", "row": 0, "col": 0, "dir": "V"}, {"word": "KIL", "row": 0, "col": 4, "dir": "V"}], "letters": ["A", "B", "I", "K", "L"], "postcard": {"landmark": "Sakarya Doğal Güzellikleri", "city": "Sakarya", "desc": "Sakarya coğrafyasının eşsiz doğası, yemyeşil vadileri ve temiz yaylaları ziyaretçilerine huzur dolu anlar sunar.", "bg": "https://images.unsplash.com/photo-1564507592333-c60657eea523?auto=format&fit=crop&w=1280&q=80"}}]}, {"plate": 11, "name": "Bilecik", "cx": 263.9, "cy": 173.6, "isShowcase": false, "landmarks": [{"name": "Bilecik Tarihi Meydanı", "bg": "https://images.unsplash.com/photo-1541432901042-2d8bd64b4a9b?auto=format&fit=crop&w=1280&q=80", "desc": "Bilecik ilinin köklü tarihini ve zengin Anadolu kültürünü yansıtan simgesel merkezi. Binlerce yıllık mirasın izlerini taşır."}, {"name": "Bilecik Doğal Güzellikleri", "bg": "https://images.unsplash.com/photo-1564507592333-c60657eea523?auto=format&fit=crop&w=1280&q=80", "desc": "Bilecik coğrafyasının eşsiz doğası, yemyeşil vadileri ve temiz yaylaları ziyaretçilerine huzur dolu anlar sunar."}], "levels": [{"id": 1, "landmark": "Bilecik Tarihi Meydanı", "bg": "https://images.unsplash.com/photo-1541432901042-2d8bd64b4a9b?auto=format&fit=crop&w=1280&q=80", "words": [{"word": "KALE", "row": 0, "col": 0, "dir": "H"}, {"word": "KEL", "row": 0, "col": 0, "dir": "V"}, {"word": "ELA", "row": 1, "col": 0, "dir": "H"}], "letters": ["A", "E", "K", "L"], "postcard": {"landmark": "Bilecik Tarihi Meydanı", "city": "Bilecik", "desc": "Bilecik ilinin köklü tarihini ve zengin Anadolu kültürünü yansıtan simgesel merkezi. Binlerce yıllık mirasın izlerini taşır.", "bg": "https://images.unsplash.com/photo-1541432901042-2d8bd64b4a9b?auto=format&fit=crop&w=1280&q=80"}}, {"id": 2, "landmark": "Bilecik Doğal Güzellikleri", "bg": "https://images.unsplash.com/photo-1564507592333-c60657eea523?auto=format&fit=crop&w=1280&q=80", "words": [{"word": "BALIK", "row": 0, "col": 0, "dir": "H"}, {"word": "BAL", "row": 0, "col": 0, "dir": "V"}, {"word": "KIL", "row": 0, "col": 4, "dir": "V"}], "letters": ["A", "B", "I", "K", "L"], "postcard": {"landmark": "Bilecik Doğal Güzellikleri", "city": "Bilecik", "desc": "Bilecik coğrafyasının eşsiz doğası, yemyeşil vadileri ve temiz yaylaları ziyaretçilerine huzur dolu anlar sunar.", "bg": "https://images.unsplash.com/photo-1564507592333-c60657eea523?auto=format&fit=crop&w=1280&q=80"}}]}, {"plate": 16, "name": "Bursa", "cx": 212.3, "cy": 165.1, "isShowcase": false, "landmarks": [{"name": "Bursa Tarihi Meydanı", "bg": "https://images.unsplash.com/photo-1541432901042-2d8bd64b4a9b?auto=format&fit=crop&w=1280&q=80", "desc": "Bursa ilinin köklü tarihini ve zengin Anadolu kültürünü yansıtan simgesel merkezi. Binlerce yıllık mirasın izlerini taşır."}, {"name": "Bursa Doğal Güzellikleri", "bg": "https://images.unsplash.com/photo-1564507592333-c60657eea523?auto=format&fit=crop&w=1280&q=80", "desc": "Bursa coğrafyasının eşsiz doğası, yemyeşil vadileri ve temiz yaylaları ziyaretçilerine huzur dolu anlar sunar."}], "levels": [{"id": 1, "landmark": "Bursa Tarihi Meydanı", "bg": "https://images.unsplash.com/photo-1541432901042-2d8bd64b4a9b?auto=format&fit=crop&w=1280&q=80", "words": [{"word": "KALE", "row": 0, "col": 0, "dir": "H"}, {"word": "KEL", "row": 0, "col": 0, "dir": "V"}, {"word": "ELA", "row": 1, "col": 0, "dir": "H"}], "letters": ["A", "E", "K", "L"], "postcard": {"landmark": "Bursa Tarihi Meydanı", "city": "Bursa", "desc": "Bursa ilinin köklü tarihini ve zengin Anadolu kültürünü yansıtan simgesel merkezi. Binlerce yıllık mirasın izlerini taşır.", "bg": "https://images.unsplash.com/photo-1541432901042-2d8bd64b4a9b?auto=format&fit=crop&w=1280&q=80"}}, {"id": 2, "landmark": "Bursa Doğal Güzellikleri", "bg": "https://images.unsplash.com/photo-1564507592333-c60657eea523?auto=format&fit=crop&w=1280&q=80", "words": [{"word": "BALIK", "row": 0, "col": 0, "dir": "H"}, {"word": "BAL", "row": 0, "col": 0, "dir": "V"}, {"word": "KIL", "row": 0, "col": 4, "dir": "V"}], "letters": ["A", "B", "I", "K", "L"], "postcard": {"landmark": "Bursa Doğal Güzellikleri", "city": "Bursa", "desc": "Bursa coğrafyasının eşsiz doğası, yemyeşil vadileri ve temiz yaylaları ziyaretçilerine huzur dolu anlar sunar.", "bg": "https://images.unsplash.com/photo-1564507592333-c60657eea523?auto=format&fit=crop&w=1280&q=80"}}]}, {"plate": 77, "name": "Yalova", "cx": 213.7, "cy": 139.7, "isShowcase": false, "landmarks": [{"name": "Yalova Tarihi Meydanı", "bg": "https://images.unsplash.com/photo-1541432901042-2d8bd64b4a9b?auto=format&fit=crop&w=1280&q=80", "desc": "Yalova ilinin köklü tarihini ve zengin Anadolu kültürünü yansıtan simgesel merkezi. Binlerce yıllık mirasın izlerini taşır."}, {"name": "Yalova Doğal Güzellikleri", "bg": "https://images.unsplash.com/photo-1564507592333-c60657eea523?auto=format&fit=crop&w=1280&q=80", "desc": "Yalova coğrafyasının eşsiz doğası, yemyeşil vadileri ve temiz yaylaları ziyaretçilerine huzur dolu anlar sunar."}], "levels": [{"id": 1, "landmark": "Yalova Tarihi Meydanı", "bg": "https://images.unsplash.com/photo-1541432901042-2d8bd64b4a9b?auto=format&fit=crop&w=1280&q=80", "words": [{"word": "KALE", "row": 0, "col": 0, "dir": "H"}, {"word": "KEL", "row": 0, "col": 0, "dir": "V"}, {"word": "ELA", "row": 1, "col": 0, "dir": "H"}], "letters": ["A", "E", "K", "L"], "postcard": {"landmark": "Yalova Tarihi Meydanı", "city": "Yalova", "desc": "Yalova ilinin köklü tarihini ve zengin Anadolu kültürünü yansıtan simgesel merkezi. Binlerce yıllık mirasın izlerini taşır.", "bg": "https://images.unsplash.com/photo-1541432901042-2d8bd64b4a9b?auto=format&fit=crop&w=1280&q=80"}}, {"id": 2, "landmark": "Yalova Doğal Güzellikleri", "bg": "https://images.unsplash.com/photo-1564507592333-c60657eea523?auto=format&fit=crop&w=1280&q=80", "words": [{"word": "BALIK", "row": 0, "col": 0, "dir": "H"}, {"word": "BAL", "row": 0, "col": 0, "dir": "V"}, {"word": "KIL", "row": 0, "col": 4, "dir": "V"}], "letters": ["A", "B", "I", "K", "L"], "postcard": {"landmark": "Yalova Doğal Güzellikleri", "city": "Yalova", "desc": "Yalova coğrafyasının eşsiz doğası, yemyeşil vadileri ve temiz yaylaları ziyaretçilerine huzur dolu anlar sunar.", "bg": "https://images.unsplash.com/photo-1564507592333-c60657eea523?auto=format&fit=crop&w=1280&q=80"}}]}, {"plate": 6, "name": "Ankara", "cx": 405.5, "cy": 200.1, "isShowcase": false, "landmarks": [{"name": "Ankara Tarihi Meydanı", "bg": "https://images.unsplash.com/photo-1541432901042-2d8bd64b4a9b?auto=format&fit=crop&w=1280&q=80", "desc": "Ankara ilinin köklü tarihini ve zengin Anadolu kültürünü yansıtan simgesel merkezi. Binlerce yıllık mirasın izlerini taşır."}, {"name": "Ankara Doğal Güzellikleri", "bg": "https://images.unsplash.com/photo-1564507592333-c60657eea523?auto=format&fit=crop&w=1280&q=80", "desc": "Ankara coğrafyasının eşsiz doğası, yemyeşil vadileri ve temiz yaylaları ziyaretçilerine huzur dolu anlar sunar."}], "levels": [{"id": 1, "landmark": "Ankara Tarihi Meydanı", "bg": "https://images.unsplash.com/photo-1541432901042-2d8bd64b4a9b?auto=format&fit=crop&w=1280&q=80", "words": [{"word": "KALE", "row": 0, "col": 0, "dir": "H"}, {"word": "KEL", "row": 0, "col": 0, "dir": "V"}, {"word": "ELA", "row": 1, "col": 0, "dir": "H"}], "letters": ["A", "E", "K", "L"], "postcard": {"landmark": "Ankara Tarihi Meydanı", "city": "Ankara", "desc": "Ankara ilinin köklü tarihini ve zengin Anadolu kültürünü yansıtan simgesel merkezi. Binlerce yıllık mirasın izlerini taşır.", "bg": "https://images.unsplash.com/photo-1541432901042-2d8bd64b4a9b?auto=format&fit=crop&w=1280&q=80"}}, {"id": 2, "landmark": "Ankara Doğal Güzellikleri", "bg": "https://images.unsplash.com/photo-1564507592333-c60657eea523?auto=format&fit=crop&w=1280&q=80", "words": [{"word": "BALIK", "row": 0, "col": 0, "dir": "H"}, {"word": "BAL", "row": 0, "col": 0, "dir": "V"}, {"word": "KIL", "row": 0, "col": 4, "dir": "V"}], "letters": ["A", "B", "I", "K", "L"], "postcard": {"landmark": "Ankara Doğal Güzellikleri", "city": "Ankara", "desc": "Ankara coğrafyasının eşsiz doğası, yemyeşil vadileri ve temiz yaylaları ziyaretçilerine huzur dolu anlar sunar.", "bg": "https://images.unsplash.com/photo-1564507592333-c60657eea523?auto=format&fit=crop&w=1280&q=80"}}]}, {"plate": 71, "name": "Kırıkkale", "cx": 463.0, "cy": 198.8, "isShowcase": false, "landmarks": [{"name": "Kırıkkale Tarihi Meydanı", "bg": "https://images.unsplash.com/photo-1541432901042-2d8bd64b4a9b?auto=format&fit=crop&w=1280&q=80", "desc": "Kırıkkale ilinin köklü tarihini ve zengin Anadolu kültürünü yansıtan simgesel merkezi. Binlerce yıllık mirasın izlerini taşır."}, {"name": "Kırıkkale Doğal Güzellikleri", "bg": "https://images.unsplash.com/photo-1564507592333-c60657eea523?auto=format&fit=crop&w=1280&q=80", "desc": "Kırıkkale coğrafyasının eşsiz doğası, yemyeşil vadileri ve temiz yaylaları ziyaretçilerine huzur dolu anlar sunar."}], "levels": [{"id": 1, "landmark": "Kırıkkale Tarihi Meydanı", "bg": "https://images.unsplash.com/photo-1541432901042-2d8bd64b4a9b?auto=format&fit=crop&w=1280&q=80", "words": [{"word": "KALE", "row": 0, "col": 0, "dir": "H"}, {"word": "KEL", "row": 0, "col": 0, "dir": "V"}, {"word": "ELA", "row": 1, "col": 0, "dir": "H"}], "letters": ["A", "E", "K", "L"], "postcard": {"landmark": "Kırıkkale Tarihi Meydanı", "city": "Kırıkkale", "desc": "Kırıkkale ilinin köklü tarihini ve zengin Anadolu kültürünü yansıtan simgesel merkezi. Binlerce yıllık mirasın izlerini taşır.", "bg": "https://images.unsplash.com/photo-1541432901042-2d8bd64b4a9b?auto=format&fit=crop&w=1280&q=80"}}, {"id": 2, "landmark": "Kırıkkale Doğal Güzellikleri", "bg": "https://images.unsplash.com/photo-1564507592333-c60657eea523?auto=format&fit=crop&w=1280&q=80", "words": [{"word": "BALIK", "row": 0, "col": 0, "dir": "H"}, {"word": "BAL", "row": 0, "col": 0, "dir": "V"}, {"word": "KIL", "row": 0, "col": 4, "dir": "V"}], "letters": ["A", "B", "I", "K", "L"], "postcard": {"landmark": "Kırıkkale Doğal Güzellikleri", "city": "Kırıkkale", "desc": "Kırıkkale coğrafyasının eşsiz doğası, yemyeşil vadileri ve temiz yaylaları ziyaretçilerine huzur dolu anlar sunar.", "bg": "https://images.unsplash.com/photo-1564507592333-c60657eea523?auto=format&fit=crop&w=1280&q=80"}}]}, {"plate": 40, "name": "Kırşehir", "cx": 496.5, "cy": 231.6, "isShowcase": false, "landmarks": [{"name": "Kırşehir Tarihi Meydanı", "bg": "https://images.unsplash.com/photo-1541432901042-2d8bd64b4a9b?auto=format&fit=crop&w=1280&q=80", "desc": "Kırşehir ilinin köklü tarihini ve zengin Anadolu kültürünü yansıtan simgesel merkezi. Binlerce yıllık mirasın izlerini taşır."}, {"name": "Kırşehir Doğal Güzellikleri", "bg": "https://images.unsplash.com/photo-1564507592333-c60657eea523?auto=format&fit=crop&w=1280&q=80", "desc": "Kırşehir coğrafyasının eşsiz doğası, yemyeşil vadileri ve temiz yaylaları ziyaretçilerine huzur dolu anlar sunar."}], "levels": [{"id": 1, "landmark": "Kırşehir Tarihi Meydanı", "bg": "https://images.unsplash.com/photo-1541432901042-2d8bd64b4a9b?auto=format&fit=crop&w=1280&q=80", "words": [{"word": "KALE", "row": 0, "col": 0, "dir": "H"}, {"word": "KEL", "row": 0, "col": 0, "dir": "V"}, {"word": "ELA", "row": 1, "col": 0, "dir": "H"}], "letters": ["A", "E", "K", "L"], "postcard": {"landmark": "Kırşehir Tarihi Meydanı", "city": "Kırşehir", "desc": "Kırşehir ilinin köklü tarihini ve zengin Anadolu kültürünü yansıtan simgesel merkezi. Binlerce yıllık mirasın izlerini taşır.", "bg": "https://images.unsplash.com/photo-1541432901042-2d8bd64b4a9b?auto=format&fit=crop&w=1280&q=80"}}, {"id": 2, "landmark": "Kırşehir Doğal Güzellikleri", "bg": "https://images.unsplash.com/photo-1564507592333-c60657eea523?auto=format&fit=crop&w=1280&q=80", "words": [{"word": "BALIK", "row": 0, "col": 0, "dir": "H"}, {"word": "BAL", "row": 0, "col": 0, "dir": "V"}, {"word": "KIL", "row": 0, "col": 4, "dir": "V"}], "letters": ["A", "B", "I", "K", "L"], "postcard": {"landmark": "Kırşehir Doğal Güzellikleri", "city": "Kırşehir", "desc": "Kırşehir coğrafyasının eşsiz doğası, yemyeşil vadileri ve temiz yaylaları ziyaretçilerine huzur dolu anlar sunar.", "bg": "https://images.unsplash.com/photo-1564507592333-c60657eea523?auto=format&fit=crop&w=1280&q=80"}}]}, {"plate": 50, "name": "Nevşehir", "cx": 518.9, "cy": 255.1, "isShowcase": true, "landmarks": [{"name": "Göreme Sıcak Hava Balonları", "bg": "https://images.unsplash.com/photo-1641128324972-af3212f0f6bd?auto=format&fit=crop&w=1280&q=80", "summary": "Gündoğumunda vadilerin üzerinden yükselen yüzlerce sıcak hava balonu, dünyanın en büyüleyici hava manzaralarından birini sunar.", "trivia": "Kapadokya adı antik Pers dilinde 'Katpatuka' yani 'Güzel Atlar Ülkesi' anlamına gelir."}, {"name": "Uçhisar Kalesi", "bg": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/e9/Castle_U%C3%A7hisar_in_Cappadocia.jpg/1280px-Castle_U%C3%A7hisar_in_Cappadocia.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail", "summary": "Bölgenin en yüksek noktasına oyulmuş dev kaya kütlesi, tüm Kapadokya vadilerine hakim eşsiz bir gözetleme kalesidir.", "trivia": "Kalenin içindeki gizli tünellerin kilometrelerce uzaktaki sığınaklara ve su kaynaklarına ulaştığı bilinmektedir."}, {"name": "Paşabağ Peribacaları", "bg": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/0e/Spring_in_Goreme.jpg/1280px-Spring_in_Goreme.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail", "summary": "Çok başlı mantar formundaki peri bacalarının en görkemlilerinin yer aldığı, keşişlerin inzivaya çekildiği büyüleyici vadi.", "trivia": "Aziz Simeon gibi rahipler, dünyevi işlerden uzaklaşmak için bu peribacalarının içindeki oyuklarda yıllarca yaşamıştır."}, {"name": "Derinkuyu Yeraltı Şehri", "bg": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/07/DerinkuyuUndergroundCity02.jpg/1280px-DerinkuyuUndergroundCity02.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail", "summary": "Yerin 8 kat altına inen, on binlerce insanın aylarca yaşayabileceği havalandırma, ahır ve kiliseleri olan mühendislik harikası.", "trivia": "1963 yılında bir köylünün evini tadilat ederken duvarın arkasında gizli bir oda bulmasıyla tesadüfen keşfedilmiştir."}, {"name": "Ihlara Vadisi", "bg": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/1d/Yaprakhisar.jpg/1280px-Yaprakhisar.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail", "summary": "Melendiz Çayı'nın kanyonu yararak oluşturduğu 14 kilometrelik cennet vadide, kayalara oyulmuş yüzlerce tarihi kilise bulunur.", "trivia": "Vadinin mikroklima iklimi sayesinde çevresindeki bozkırın aksine fıstık ağaçları ve yemyeşil bitki örtüsü yetişir."}], "levels": [{"id": 6, "city_id": "nevsehir", "city_name": "Nevşehir", "sub_id": 1, "title": "Nevşehir - Bölüm 1: Göreme Sıcak Hava Balonları", "landmark_name": "Göreme Sıcak Hava Balonları", "bg": "https://images.unsplash.com/photo-1641128324972-af3212f0f6bd?auto=format&fit=crop&w=1280&q=80", "wheel": ["D", "E", "N", "İ", "Z"], "words": [{"id": "w1", "word": "DENİZ", "row": 2, "col": 0, "dir": "H"}, {"id": "w2", "word": "DİZ", "row": 2, "col": 0, "dir": "V"}, {"id": "w3", "word": "DİN", "row": 0, "col": 2, "dir": "V"}], "bonus": ["DİZE", "İZ", "İN"], "postcard": {"title": "Göreme Sıcak Hava Balonları", "city": "Nevşehir", "plate": 50, "summary": "Gündoğumunda vadilerin üzerinden yükselen yüzlerce sıcak hava balonu, dünyanın en büyüleyici hava manzaralarından birini sunar.", "trivia": "Kapadokya adı antik Pers dilinde 'Katpatuka' yani 'Güzel Atlar Ülkesi' anlamına gelir.", "bg": "https://images.unsplash.com/photo-1641128324972-af3212f0f6bd?auto=format&fit=crop&w=1280&q=80"}}, {"id": 7, "city_id": "nevsehir", "city_name": "Nevşehir", "sub_id": 2, "title": "Nevşehir - Bölüm 2: Uçhisar Kalesi", "landmark_name": "Uçhisar Kalesi", "bg": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/e9/Castle_U%C3%A7hisar_in_Cappadocia.jpg/1280px-Castle_U%C3%A7hisar_in_Cappadocia.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail", "wheel": ["R", "O", "M", "A", "N"], "words": [{"id": "w1", "word": "ROMA", "row": 2, "col": 0, "dir": "H"}, {"id": "w2", "word": "ORAN", "row": 1, "col": 0, "dir": "V"}, {"id": "w3", "word": "ROMAN", "row": 0, "col": 2, "dir": "V"}], "bonus": ["MOR", "ONAR", "ROM"], "postcard": {"title": "Uçhisar Kalesi", "city": "Nevşehir", "plate": 50, "summary": "Bölgenin en yüksek noktasına oyulmuş dev kaya kütlesi, tüm Kapadokya vadilerine hakim eşsiz bir gözetleme kalesidir.", "trivia": "Kalenin içindeki gizli tünellerin kilometrelerce uzaktaki sığınaklara ve su kaynaklarına ulaştığı bilinmektedir.", "bg": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/e9/Castle_U%C3%A7hisar_in_Cappadocia.jpg/1280px-Castle_U%C3%A7hisar_in_Cappadocia.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail"}}, {"id": 8, "city_id": "nevsehir", "city_name": "Nevşehir", "sub_id": 3, "title": "Nevşehir - Bölüm 3: Paşabağ Peribacaları", "landmark_name": "Paşabağ Peribacaları", "bg": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/0e/Spring_in_Goreme.jpg/1280px-Spring_in_Goreme.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail", "wheel": ["K", "K", "U", "Ş", "A"], "words": [{"id": "w1", "word": "KUŞAK", "row": 1, "col": 0, "dir": "H"}, {"id": "w2", "word": "KUŞ", "row": 1, "col": 0, "dir": "V"}, {"id": "w3", "word": "AŞK", "row": 0, "col": 2, "dir": "V"}], "bonus": ["ŞAK", "KAŞ"], "postcard": {"title": "Paşabağ Peribacaları", "city": "Nevşehir", "plate": 50, "summary": "Çok başlı mantar formundaki peri bacalarının en görkemlilerinin yer aldığı, keşişlerin inzivaya çekildiği büyüleyici vadi.", "trivia": "Aziz Simeon gibi rahipler, dünyevi işlerden uzaklaşmak için bu peribacalarının içindeki oyuklarda yıllarca yaşamıştır.", "bg": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/0e/Spring_in_Goreme.jpg/1280px-Spring_in_Goreme.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail"}}, {"id": 9, "city_id": "nevsehir", "city_name": "Nevşehir", "sub_id": 4, "title": "Nevşehir - Bölüm 4: Derinkuyu Yeraltı Şehri", "landmark_name": "Derinkuyu Yeraltı Şehri", "bg": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/07/DerinkuyuUndergroundCity02.jpg/1280px-DerinkuyuUndergroundCity02.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail", "wheel": ["Y", "A", "A", "Z"], "words": [{"id": "w1", "word": "YAZ", "row": 1, "col": 0, "dir": "H"}, {"id": "w2", "word": "AYAZ", "row": 0, "col": 0, "dir": "V"}], "bonus": ["AY", "AZ"], "postcard": {"title": "Derinkuyu Yeraltı Şehri", "city": "Nevşehir", "plate": 50, "summary": "Yerin 8 kat altına inen, on binlerce insanın aylarca yaşayabileceği havalandırma, ahır ve kiliseleri olan mühendislik harikası.", "trivia": "1963 yılında bir köylünün evini tadilat ederken duvarın arkasında gizli bir oda bulmasıyla tesadüfen keşfedilmiştir.", "bg": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/07/DerinkuyuUndergroundCity02.jpg/1280px-DerinkuyuUndergroundCity02.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail"}}, {"id": 10, "city_id": "nevsehir", "city_name": "Nevşehir", "sub_id": 5, "title": "Nevşehir - Bölüm 5: Ihlara Vadisi", "landmark_name": "Ihlara Vadisi", "bg": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/1d/Yaprakhisar.jpg/1280px-Yaprakhisar.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail", "wheel": ["K", "O", "R", "U"], "words": [{"id": "w1", "word": "KOR", "row": 2, "col": 0, "dir": "H"}, {"id": "w2", "word": "OKUR", "row": 1, "col": 0, "dir": "V"}, {"id": "w3", "word": "KORU", "row": 0, "col": 2, "dir": "V"}], "bonus": ["KUR", "ROK", "OK"], "postcard": {"title": "Ihlara Vadisi", "city": "Nevşehir", "plate": 50, "summary": "Melendiz Çayı'nın kanyonu yararak oluşturduğu 14 kilometrelik cennet vadide, kayalara oyulmuş yüzlerce tarihi kilise bulunur.", "trivia": "Vadinin mikroklima iklimi sayesinde çevresindeki bozkırın aksine fıstık ağaçları ve yemyeşil bitki örtüsü yetişir.", "bg": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/1d/Yaprakhisar.jpg/1280px-Yaprakhisar.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail"}}]}, {"plate": 68, "name": "Aksaray", "cx": 478.2, "cy": 289.6, "isShowcase": false, "landmarks": [{"name": "Aksaray Tarihi Meydanı", "bg": "https://images.unsplash.com/photo-1541432901042-2d8bd64b4a9b?auto=format&fit=crop&w=1280&q=80", "desc": "Aksaray ilinin köklü tarihini ve zengin Anadolu kültürünü yansıtan simgesel merkezi. Binlerce yıllık mirasın izlerini taşır."}, {"name": "Aksaray Doğal Güzellikleri", "bg": "https://images.unsplash.com/photo-1564507592333-c60657eea523?auto=format&fit=crop&w=1280&q=80", "desc": "Aksaray coğrafyasının eşsiz doğası, yemyeşil vadileri ve temiz yaylaları ziyaretçilerine huzur dolu anlar sunar."}], "levels": [{"id": 1, "landmark": "Aksaray Tarihi Meydanı", "bg": "https://images.unsplash.com/photo-1541432901042-2d8bd64b4a9b?auto=format&fit=crop&w=1280&q=80", "words": [{"word": "KALE", "row": 0, "col": 0, "dir": "H"}, {"word": "KEL", "row": 0, "col": 0, "dir": "V"}, {"word": "ELA", "row": 1, "col": 0, "dir": "H"}], "letters": ["A", "E", "K", "L"], "postcard": {"landmark": "Aksaray Tarihi Meydanı", "city": "Aksaray", "desc": "Aksaray ilinin köklü tarihini ve zengin Anadolu kültürünü yansıtan simgesel merkezi. Binlerce yıllık mirasın izlerini taşır.", "bg": "https://images.unsplash.com/photo-1541432901042-2d8bd64b4a9b?auto=format&fit=crop&w=1280&q=80"}}, {"id": 2, "landmark": "Aksaray Doğal Güzellikleri", "bg": "https://images.unsplash.com/photo-1564507592333-c60657eea523?auto=format&fit=crop&w=1280&q=80", "words": [{"word": "BALIK", "row": 0, "col": 0, "dir": "H"}, {"word": "BAL", "row": 0, "col": 0, "dir": "V"}, {"word": "KIL", "row": 0, "col": 4, "dir": "V"}], "letters": ["A", "B", "I", "K", "L"], "postcard": {"landmark": "Aksaray Doğal Güzellikleri", "city": "Aksaray", "desc": "Aksaray coğrafyasının eşsiz doğası, yemyeşil vadileri ve temiz yaylaları ziyaretçilerine huzur dolu anlar sunar.", "bg": "https://images.unsplash.com/photo-1564507592333-c60657eea523?auto=format&fit=crop&w=1280&q=80"}}]}, {"plate": 51, "name": "Niğde", "cx": 521.2, "cy": 324.7, "isShowcase": false, "landmarks": [{"name": "Niğde Tarihi Meydanı", "bg": "https://images.unsplash.com/photo-1541432901042-2d8bd64b4a9b?auto=format&fit=crop&w=1280&q=80", "desc": "Niğde ilinin köklü tarihini ve zengin Anadolu kültürünü yansıtan simgesel merkezi. Binlerce yıllık mirasın izlerini taşır."}, {"name": "Niğde Doğal Güzellikleri", "bg": "https://images.unsplash.com/photo-1564507592333-c60657eea523?auto=format&fit=crop&w=1280&q=80", "desc": "Niğde coğrafyasının eşsiz doğası, yemyeşil vadileri ve temiz yaylaları ziyaretçilerine huzur dolu anlar sunar."}], "levels": [{"id": 1, "landmark": "Niğde Tarihi Meydanı", "bg": "https://images.unsplash.com/photo-1541432901042-2d8bd64b4a9b?auto=format&fit=crop&w=1280&q=80", "words": [{"word": "KALE", "row": 0, "col": 0, "dir": "H"}, {"word": "KEL", "row": 0, "col": 0, "dir": "V"}, {"word": "ELA", "row": 1, "col": 0, "dir": "H"}], "letters": ["A", "E", "K", "L"], "postcard": {"landmark": "Niğde Tarihi Meydanı", "city": "Niğde", "desc": "Niğde ilinin köklü tarihini ve zengin Anadolu kültürünü yansıtan simgesel merkezi. Binlerce yıllık mirasın izlerini taşır.", "bg": "https://images.unsplash.com/photo-1541432901042-2d8bd64b4a9b?auto=format&fit=crop&w=1280&q=80"}}, {"id": 2, "landmark": "Niğde Doğal Güzellikleri", "bg": "https://images.unsplash.com/photo-1564507592333-c60657eea523?auto=format&fit=crop&w=1280&q=80", "words": [{"word": "BALIK", "row": 0, "col": 0, "dir": "H"}, {"word": "BAL", "row": 0, "col": 0, "dir": "V"}, {"word": "KIL", "row": 0, "col": 4, "dir": "V"}], "letters": ["A", "B", "I", "K", "L"], "postcard": {"landmark": "Niğde Doğal Güzellikleri", "city": "Niğde", "desc": "Niğde coğrafyasının eşsiz doğası, yemyeşil vadileri ve temiz yaylaları ziyaretçilerine huzur dolu anlar sunar.", "bg": "https://images.unsplash.com/photo-1564507592333-c60657eea523?auto=format&fit=crop&w=1280&q=80"}}]}, {"plate": 66, "name": "Yozgat", "cx": 549.2, "cy": 202.3, "isShowcase": false, "landmarks": [{"name": "Yozgat Tarihi Meydanı", "bg": "https://images.unsplash.com/photo-1541432901042-2d8bd64b4a9b?auto=format&fit=crop&w=1280&q=80", "desc": "Yozgat ilinin köklü tarihini ve zengin Anadolu kültürünü yansıtan simgesel merkezi. Binlerce yıllık mirasın izlerini taşır."}, {"name": "Yozgat Doğal Güzellikleri", "bg": "https://images.unsplash.com/photo-1564507592333-c60657eea523?auto=format&fit=crop&w=1280&q=80", "desc": "Yozgat coğrafyasının eşsiz doğası, yemyeşil vadileri ve temiz yaylaları ziyaretçilerine huzur dolu anlar sunar."}], "levels": [{"id": 1, "landmark": "Yozgat Tarihi Meydanı", "bg": "https://images.unsplash.com/photo-1541432901042-2d8bd64b4a9b?auto=format&fit=crop&w=1280&q=80", "words": [{"word": "KALE", "row": 0, "col": 0, "dir": "H"}, {"word": "KEL", "row": 0, "col": 0, "dir": "V"}, {"word": "ELA", "row": 1, "col": 0, "dir": "H"}], "letters": ["A", "E", "K", "L"], "postcard": {"landmark": "Yozgat Tarihi Meydanı", "city": "Yozgat", "desc": "Yozgat ilinin köklü tarihini ve zengin Anadolu kültürünü yansıtan simgesel merkezi. Binlerce yıllık mirasın izlerini taşır.", "bg": "https://images.unsplash.com/photo-1541432901042-2d8bd64b4a9b?auto=format&fit=crop&w=1280&q=80"}}, {"id": 2, "landmark": "Yozgat Doğal Güzellikleri", "bg": "https://images.unsplash.com/photo-1564507592333-c60657eea523?auto=format&fit=crop&w=1280&q=80", "words": [{"word": "BALIK", "row": 0, "col": 0, "dir": "H"}, {"word": "BAL", "row": 0, "col": 0, "dir": "V"}, {"word": "KIL", "row": 0, "col": 4, "dir": "V"}], "letters": ["A", "B", "I", "K", "L"], "postcard": {"landmark": "Yozgat Doğal Güzellikleri", "city": "Yozgat", "desc": "Yozgat coğrafyasının eşsiz doğası, yemyeşil vadileri ve temiz yaylaları ziyaretçilerine huzur dolu anlar sunar.", "bg": "https://images.unsplash.com/photo-1564507592333-c60657eea523?auto=format&fit=crop&w=1280&q=80"}}]}, {"plate": 49, "name": "Muş", "cx": 913.2, "cy": 249.2, "isShowcase": false, "landmarks": [{"name": "Muş Tarihi Meydanı", "bg": "https://images.unsplash.com/photo-1541432901042-2d8bd64b4a9b?auto=format&fit=crop&w=1280&q=80", "desc": "Muş ilinin köklü tarihini ve zengin Anadolu kültürünü yansıtan simgesel merkezi. Binlerce yıllık mirasın izlerini taşır."}, {"name": "Muş Doğal Güzellikleri", "bg": "https://images.unsplash.com/photo-1564507592333-c60657eea523?auto=format&fit=crop&w=1280&q=80", "desc": "Muş coğrafyasının eşsiz doğası, yemyeşil vadileri ve temiz yaylaları ziyaretçilerine huzur dolu anlar sunar."}], "levels": [{"id": 1, "landmark": "Muş Tarihi Meydanı", "bg": "https://images.unsplash.com/photo-1541432901042-2d8bd64b4a9b?auto=format&fit=crop&w=1280&q=80", "words": [{"word": "KALE", "row": 0, "col": 0, "dir": "H"}, {"word": "KEL", "row": 0, "col": 0, "dir": "V"}, {"word": "ELA", "row": 1, "col": 0, "dir": "H"}], "letters": ["A", "E", "K", "L"], "postcard": {"landmark": "Muş Tarihi Meydanı", "city": "Muş", "desc": "Muş ilinin köklü tarihini ve zengin Anadolu kültürünü yansıtan simgesel merkezi. Binlerce yıllık mirasın izlerini taşır.", "bg": "https://images.unsplash.com/photo-1541432901042-2d8bd64b4a9b?auto=format&fit=crop&w=1280&q=80"}}, {"id": 2, "landmark": "Muş Doğal Güzellikleri", "bg": "https://images.unsplash.com/photo-1564507592333-c60657eea523?auto=format&fit=crop&w=1280&q=80", "words": [{"word": "BALIK", "row": 0, "col": 0, "dir": "H"}, {"word": "BAL", "row": 0, "col": 0, "dir": "V"}, {"word": "KIL", "row": 0, "col": 4, "dir": "V"}], "letters": ["A", "B", "I", "K", "L"], "postcard": {"landmark": "Muş Doğal Güzellikleri", "city": "Muş", "desc": "Muş coğrafyasının eşsiz doğası, yemyeşil vadileri ve temiz yaylaları ziyaretçilerine huzur dolu anlar sunar.", "bg": "https://images.unsplash.com/photo-1564507592333-c60657eea523?auto=format&fit=crop&w=1280&q=80"}}]}, {"plate": 13, "name": "Bitlis", "cx": 943.6, "cy": 281.3, "isShowcase": false, "landmarks": [{"name": "Bitlis Tarihi Meydanı", "bg": "https://images.unsplash.com/photo-1541432901042-2d8bd64b4a9b?auto=format&fit=crop&w=1280&q=80", "desc": "Bitlis ilinin köklü tarihini ve zengin Anadolu kültürünü yansıtan simgesel merkezi. Binlerce yıllık mirasın izlerini taşır."}, {"name": "Bitlis Doğal Güzellikleri", "bg": "https://images.unsplash.com/photo-1564507592333-c60657eea523?auto=format&fit=crop&w=1280&q=80", "desc": "Bitlis coğrafyasının eşsiz doğası, yemyeşil vadileri ve temiz yaylaları ziyaretçilerine huzur dolu anlar sunar."}], "levels": [{"id": 1, "landmark": "Bitlis Tarihi Meydanı", "bg": "https://images.unsplash.com/photo-1541432901042-2d8bd64b4a9b?auto=format&fit=crop&w=1280&q=80", "words": [{"word": "KALE", "row": 0, "col": 0, "dir": "H"}, {"word": "KEL", "row": 0, "col": 0, "dir": "V"}, {"word": "ELA", "row": 1, "col": 0, "dir": "H"}], "letters": ["A", "E", "K", "L"], "postcard": {"landmark": "Bitlis Tarihi Meydanı", "city": "Bitlis", "desc": "Bitlis ilinin köklü tarihini ve zengin Anadolu kültürünü yansıtan simgesel merkezi. Binlerce yıllık mirasın izlerini taşır.", "bg": "https://images.unsplash.com/photo-1541432901042-2d8bd64b4a9b?auto=format&fit=crop&w=1280&q=80"}}, {"id": 2, "landmark": "Bitlis Doğal Güzellikleri", "bg": "https://images.unsplash.com/photo-1564507592333-c60657eea523?auto=format&fit=crop&w=1280&q=80", "words": [{"word": "BALIK", "row": 0, "col": 0, "dir": "H"}, {"word": "BAL", "row": 0, "col": 0, "dir": "V"}, {"word": "KIL", "row": 0, "col": 4, "dir": "V"}], "letters": ["A", "B", "I", "K", "L"], "postcard": {"landmark": "Bitlis Doğal Güzellikleri", "city": "Bitlis", "desc": "Bitlis coğrafyasının eşsiz doğası, yemyeşil vadileri ve temiz yaylaları ziyaretçilerine huzur dolu anlar sunar.", "bg": "https://images.unsplash.com/photo-1564507592333-c60657eea523?auto=format&fit=crop&w=1280&q=80"}}]}, {"plate": 12, "name": "Bingöl", "cx": 843.2, "cy": 245.2, "isShowcase": false, "landmarks": [{"name": "Bingöl Tarihi Meydanı", "bg": "https://images.unsplash.com/photo-1541432901042-2d8bd64b4a9b?auto=format&fit=crop&w=1280&q=80", "desc": "Bingöl ilinin köklü tarihini ve zengin Anadolu kültürünü yansıtan simgesel merkezi. Binlerce yıllık mirasın izlerini taşır."}, {"name": "Bingöl Doğal Güzellikleri", "bg": "https://images.unsplash.com/photo-1564507592333-c60657eea523?auto=format&fit=crop&w=1280&q=80", "desc": "Bingöl coğrafyasının eşsiz doğası, yemyeşil vadileri ve temiz yaylaları ziyaretçilerine huzur dolu anlar sunar."}], "levels": [{"id": 1, "landmark": "Bingöl Tarihi Meydanı", "bg": "https://images.unsplash.com/photo-1541432901042-2d8bd64b4a9b?auto=format&fit=crop&w=1280&q=80", "words": [{"word": "KALE", "row": 0, "col": 0, "dir": "H"}, {"word": "KEL", "row": 0, "col": 0, "dir": "V"}, {"word": "ELA", "row": 1, "col": 0, "dir": "H"}], "letters": ["A", "E", "K", "L"], "postcard": {"landmark": "Bingöl Tarihi Meydanı", "city": "Bingöl", "desc": "Bingöl ilinin köklü tarihini ve zengin Anadolu kültürünü yansıtan simgesel merkezi. Binlerce yıllık mirasın izlerini taşır.", "bg": "https://images.unsplash.com/photo-1541432901042-2d8bd64b4a9b?auto=format&fit=crop&w=1280&q=80"}}, {"id": 2, "landmark": "Bingöl Doğal Güzellikleri", "bg": "https://images.unsplash.com/photo-1564507592333-c60657eea523?auto=format&fit=crop&w=1280&q=80", "words": [{"word": "BALIK", "row": 0, "col": 0, "dir": "H"}, {"word": "BAL", "row": 0, "col": 0, "dir": "V"}, {"word": "KIL", "row": 0, "col": 4, "dir": "V"}], "letters": ["A", "B", "I", "K", "L"], "postcard": {"landmark": "Bingöl Doğal Güzellikleri", "city": "Bingöl", "desc": "Bingöl coğrafyasının eşsiz doğası, yemyeşil vadileri ve temiz yaylaları ziyaretçilerine huzur dolu anlar sunar.", "bg": "https://images.unsplash.com/photo-1564507592333-c60657eea523?auto=format&fit=crop&w=1280&q=80"}}]}, {"plate": 69, "name": "Bayburt", "cx": 821.4, "cy": 163.3, "isShowcase": false, "landmarks": [{"name": "Bayburt Tarihi Meydanı", "bg": "https://images.unsplash.com/photo-1541432901042-2d8bd64b4a9b?auto=format&fit=crop&w=1280&q=80", "desc": "Bayburt ilinin köklü tarihini ve zengin Anadolu kültürünü yansıtan simgesel merkezi. Binlerce yıllık mirasın izlerini taşır."}, {"name": "Bayburt Doğal Güzellikleri", "bg": "https://images.unsplash.com/photo-1564507592333-c60657eea523?auto=format&fit=crop&w=1280&q=80", "desc": "Bayburt coğrafyasının eşsiz doğası, yemyeşil vadileri ve temiz yaylaları ziyaretçilerine huzur dolu anlar sunar."}], "levels": [{"id": 1, "landmark": "Bayburt Tarihi Meydanı", "bg": "https://images.unsplash.com/photo-1541432901042-2d8bd64b4a9b?auto=format&fit=crop&w=1280&q=80", "words": [{"word": "KALE", "row": 0, "col": 0, "dir": "H"}, {"word": "KEL", "row": 0, "col": 0, "dir": "V"}, {"word": "ELA", "row": 1, "col": 0, "dir": "H"}], "letters": ["A", "E", "K", "L"], "postcard": {"landmark": "Bayburt Tarihi Meydanı", "city": "Bayburt", "desc": "Bayburt ilinin köklü tarihini ve zengin Anadolu kültürünü yansıtan simgesel merkezi. Binlerce yıllık mirasın izlerini taşır.", "bg": "https://images.unsplash.com/photo-1541432901042-2d8bd64b4a9b?auto=format&fit=crop&w=1280&q=80"}}, {"id": 2, "landmark": "Bayburt Doğal Güzellikleri", "bg": "https://images.unsplash.com/photo-1564507592333-c60657eea523?auto=format&fit=crop&w=1280&q=80", "words": [{"word": "BALIK", "row": 0, "col": 0, "dir": "H"}, {"word": "BAL", "row": 0, "col": 0, "dir": "V"}, {"word": "KIL", "row": 0, "col": 4, "dir": "V"}], "letters": ["A", "B", "I", "K", "L"], "postcard": {"landmark": "Bayburt Doğal Güzellikleri", "city": "Bayburt", "desc": "Bayburt coğrafyasının eşsiz doğası, yemyeşil vadileri ve temiz yaylaları ziyaretçilerine huzur dolu anlar sunar.", "bg": "https://images.unsplash.com/photo-1564507592333-c60657eea523?auto=format&fit=crop&w=1280&q=80"}}]}, {"plate": 3, "name": "Afyonkarahisar", "cx": 294.4, "cy": 279.3, "isShowcase": false, "landmarks": [{"name": "Afyonkarahisar Tarihi Meydanı", "bg": "https://images.unsplash.com/photo-1541432901042-2d8bd64b4a9b?auto=format&fit=crop&w=1280&q=80", "desc": "Afyonkarahisar ilinin köklü tarihini ve zengin Anadolu kültürünü yansıtan simgesel merkezi. Binlerce yıllık mirasın izlerini taşır."}, {"name": "Afyonkarahisar Doğal Güzellikleri", "bg": "https://images.unsplash.com/photo-1564507592333-c60657eea523?auto=format&fit=crop&w=1280&q=80", "desc": "Afyonkarahisar coğrafyasının eşsiz doğası, yemyeşil vadileri ve temiz yaylaları ziyaretçilerine huzur dolu anlar sunar."}], "levels": [{"id": 1, "landmark": "Afyonkarahisar Tarihi Meydanı", "bg": "https://images.unsplash.com/photo-1541432901042-2d8bd64b4a9b?auto=format&fit=crop&w=1280&q=80", "words": [{"word": "KALE", "row": 0, "col": 0, "dir": "H"}, {"word": "KEL", "row": 0, "col": 0, "dir": "V"}, {"word": "ELA", "row": 1, "col": 0, "dir": "H"}], "letters": ["A", "E", "K", "L"], "postcard": {"landmark": "Afyonkarahisar Tarihi Meydanı", "city": "Afyonkarahisar", "desc": "Afyonkarahisar ilinin köklü tarihini ve zengin Anadolu kültürünü yansıtan simgesel merkezi. Binlerce yıllık mirasın izlerini taşır.", "bg": "https://images.unsplash.com/photo-1541432901042-2d8bd64b4a9b?auto=format&fit=crop&w=1280&q=80"}}, {"id": 2, "landmark": "Afyonkarahisar Doğal Güzellikleri", "bg": "https://images.unsplash.com/photo-1564507592333-c60657eea523?auto=format&fit=crop&w=1280&q=80", "words": [{"word": "BALIK", "row": 0, "col": 0, "dir": "H"}, {"word": "BAL", "row": 0, "col": 0, "dir": "V"}, {"word": "KIL", "row": 0, "col": 4, "dir": "V"}], "letters": ["A", "B", "I", "K", "L"], "postcard": {"landmark": "Afyonkarahisar Doğal Güzellikleri", "city": "Afyonkarahisar", "desc": "Afyonkarahisar coğrafyasının eşsiz doğası, yemyeşil vadileri ve temiz yaylaları ziyaretçilerine huzur dolu anlar sunar.", "bg": "https://images.unsplash.com/photo-1564507592333-c60657eea523?auto=format&fit=crop&w=1280&q=80"}}]}, {"plate": 4, "name": "Ağrı", "cx": 998.3, "cy": 213.2, "isShowcase": false, "landmarks": [{"name": "Ağrı Tarihi Meydanı", "bg": "https://images.unsplash.com/photo-1541432901042-2d8bd64b4a9b?auto=format&fit=crop&w=1280&q=80", "desc": "Ağrı ilinin köklü tarihini ve zengin Anadolu kültürünü yansıtan simgesel merkezi. Binlerce yıllık mirasın izlerini taşır."}, {"name": "Ağrı Doğal Güzellikleri", "bg": "https://images.unsplash.com/photo-1564507592333-c60657eea523?auto=format&fit=crop&w=1280&q=80", "desc": "Ağrı coğrafyasının eşsiz doğası, yemyeşil vadileri ve temiz yaylaları ziyaretçilerine huzur dolu anlar sunar."}], "levels": [{"id": 1, "landmark": "Ağrı Tarihi Meydanı", "bg": "https://images.unsplash.com/photo-1541432901042-2d8bd64b4a9b?auto=format&fit=crop&w=1280&q=80", "words": [{"word": "KALE", "row": 0, "col": 0, "dir": "H"}, {"word": "KEL", "row": 0, "col": 0, "dir": "V"}, {"word": "ELA", "row": 1, "col": 0, "dir": "H"}], "letters": ["A", "E", "K", "L"], "postcard": {"landmark": "Ağrı Tarihi Meydanı", "city": "Ağrı", "desc": "Ağrı ilinin köklü tarihini ve zengin Anadolu kültürünü yansıtan simgesel merkezi. Binlerce yıllık mirasın izlerini taşır.", "bg": "https://images.unsplash.com/photo-1541432901042-2d8bd64b4a9b?auto=format&fit=crop&w=1280&q=80"}}, {"id": 2, "landmark": "Ağrı Doğal Güzellikleri", "bg": "https://images.unsplash.com/photo-1564507592333-c60657eea523?auto=format&fit=crop&w=1280&q=80", "words": [{"word": "BALIK", "row": 0, "col": 0, "dir": "H"}, {"word": "BAL", "row": 0, "col": 0, "dir": "V"}, {"word": "KIL", "row": 0, "col": 4, "dir": "V"}], "letters": ["A", "B", "I", "K", "L"], "postcard": {"landmark": "Ağrı Doğal Güzellikleri", "city": "Ağrı", "desc": "Ağrı coğrafyasının eşsiz doğası, yemyeşil vadileri ve temiz yaylaları ziyaretçilerine huzur dolu anlar sunar.", "bg": "https://images.unsplash.com/photo-1564507592333-c60657eea523?auto=format&fit=crop&w=1280&q=80"}}]}, {"plate": 25, "name": "Erzurum", "cx": 894.7, "cy": 174.4, "isShowcase": false, "landmarks": [{"name": "Erzurum Tarihi Meydanı", "bg": "https://images.unsplash.com/photo-1541432901042-2d8bd64b4a9b?auto=format&fit=crop&w=1280&q=80", "desc": "Erzurum ilinin köklü tarihini ve zengin Anadolu kültürünü yansıtan simgesel merkezi. Binlerce yıllık mirasın izlerini taşır."}, {"name": "Erzurum Doğal Güzellikleri", "bg": "https://images.unsplash.com/photo-1564507592333-c60657eea523?auto=format&fit=crop&w=1280&q=80", "desc": "Erzurum coğrafyasının eşsiz doğası, yemyeşil vadileri ve temiz yaylaları ziyaretçilerine huzur dolu anlar sunar."}], "levels": [{"id": 1, "landmark": "Erzurum Tarihi Meydanı", "bg": "https://images.unsplash.com/photo-1541432901042-2d8bd64b4a9b?auto=format&fit=crop&w=1280&q=80", "words": [{"word": "KALE", "row": 0, "col": 0, "dir": "H"}, {"word": "KEL", "row": 0, "col": 0, "dir": "V"}, {"word": "ELA", "row": 1, "col": 0, "dir": "H"}], "letters": ["A", "E", "K", "L"], "postcard": {"landmark": "Erzurum Tarihi Meydanı", "city": "Erzurum", "desc": "Erzurum ilinin köklü tarihini ve zengin Anadolu kültürünü yansıtan simgesel merkezi. Binlerce yıllık mirasın izlerini taşır.", "bg": "https://images.unsplash.com/photo-1541432901042-2d8bd64b4a9b?auto=format&fit=crop&w=1280&q=80"}}, {"id": 2, "landmark": "Erzurum Doğal Güzellikleri", "bg": "https://images.unsplash.com/photo-1564507592333-c60657eea523?auto=format&fit=crop&w=1280&q=80", "words": [{"word": "BALIK", "row": 0, "col": 0, "dir": "H"}, {"word": "BAL", "row": 0, "col": 0, "dir": "V"}, {"word": "KIL", "row": 0, "col": 4, "dir": "V"}], "letters": ["A", "B", "I", "K", "L"], "postcard": {"landmark": "Erzurum Doğal Güzellikleri", "city": "Erzurum", "desc": "Erzurum coğrafyasının eşsiz doğası, yemyeşil vadileri ve temiz yaylaları ziyaretçilerine huzur dolu anlar sunar.", "bg": "https://images.unsplash.com/photo-1564507592333-c60657eea523?auto=format&fit=crop&w=1280&q=80"}}]}, {"plate": 38, "name": "Kayseri", "cx": 578.0, "cy": 272.7, "isShowcase": false, "landmarks": [{"name": "Kayseri Tarihi Meydanı", "bg": "https://images.unsplash.com/photo-1541432901042-2d8bd64b4a9b?auto=format&fit=crop&w=1280&q=80", "desc": "Kayseri ilinin köklü tarihini ve zengin Anadolu kültürünü yansıtan simgesel merkezi. Binlerce yıllık mirasın izlerini taşır."}, {"name": "Kayseri Doğal Güzellikleri", "bg": "https://images.unsplash.com/photo-1564507592333-c60657eea523?auto=format&fit=crop&w=1280&q=80", "desc": "Kayseri coğrafyasının eşsiz doğası, yemyeşil vadileri ve temiz yaylaları ziyaretçilerine huzur dolu anlar sunar."}], "levels": [{"id": 1, "landmark": "Kayseri Tarihi Meydanı", "bg": "https://images.unsplash.com/photo-1541432901042-2d8bd64b4a9b?auto=format&fit=crop&w=1280&q=80", "words": [{"word": "KALE", "row": 0, "col": 0, "dir": "H"}, {"word": "KEL", "row": 0, "col": 0, "dir": "V"}, {"word": "ELA", "row": 1, "col": 0, "dir": "H"}], "letters": ["A", "E", "K", "L"], "postcard": {"landmark": "Kayseri Tarihi Meydanı", "city": "Kayseri", "desc": "Kayseri ilinin köklü tarihini ve zengin Anadolu kültürünü yansıtan simgesel merkezi. Binlerce yıllık mirasın izlerini taşır.", "bg": "https://images.unsplash.com/photo-1541432901042-2d8bd64b4a9b?auto=format&fit=crop&w=1280&q=80"}}, {"id": 2, "landmark": "Kayseri Doğal Güzellikleri", "bg": "https://images.unsplash.com/photo-1564507592333-c60657eea523?auto=format&fit=crop&w=1280&q=80", "words": [{"word": "BALIK", "row": 0, "col": 0, "dir": "H"}, {"word": "BAL", "row": 0, "col": 0, "dir": "V"}, {"word": "KIL", "row": 0, "col": 4, "dir": "V"}], "letters": ["A", "B", "I", "K", "L"], "postcard": {"landmark": "Kayseri Doğal Güzellikleri", "city": "Kayseri", "desc": "Kayseri coğrafyasının eşsiz doğası, yemyeşil vadileri ve temiz yaylaları ziyaretçilerine huzur dolu anlar sunar.", "bg": "https://images.unsplash.com/photo-1564507592333-c60657eea523?auto=format&fit=crop&w=1280&q=80"}}]}, {"plate": 57, "name": "Sinop", "cx": 532.2, "cy": 56.8, "isShowcase": false, "landmarks": [{"name": "Sinop Tarihi Meydanı", "bg": "https://images.unsplash.com/photo-1541432901042-2d8bd64b4a9b?auto=format&fit=crop&w=1280&q=80", "desc": "Sinop ilinin köklü tarihini ve zengin Anadolu kültürünü yansıtan simgesel merkezi. Binlerce yıllık mirasın izlerini taşır."}, {"name": "Sinop Doğal Güzellikleri", "bg": "https://images.unsplash.com/photo-1564507592333-c60657eea523?auto=format&fit=crop&w=1280&q=80", "desc": "Sinop coğrafyasının eşsiz doğası, yemyeşil vadileri ve temiz yaylaları ziyaretçilerine huzur dolu anlar sunar."}], "levels": [{"id": 1, "landmark": "Sinop Tarihi Meydanı", "bg": "https://images.unsplash.com/photo-1541432901042-2d8bd64b4a9b?auto=format&fit=crop&w=1280&q=80", "words": [{"word": "KALE", "row": 0, "col": 0, "dir": "H"}, {"word": "KEL", "row": 0, "col": 0, "dir": "V"}, {"word": "ELA", "row": 1, "col": 0, "dir": "H"}], "letters": ["A", "E", "K", "L"], "postcard": {"landmark": "Sinop Tarihi Meydanı", "city": "Sinop", "desc": "Sinop ilinin köklü tarihini ve zengin Anadolu kültürünü yansıtan simgesel merkezi. Binlerce yıllık mirasın izlerini taşır.", "bg": "https://images.unsplash.com/photo-1541432901042-2d8bd64b4a9b?auto=format&fit=crop&w=1280&q=80"}}, {"id": 2, "landmark": "Sinop Doğal Güzellikleri", "bg": "https://images.unsplash.com/photo-1564507592333-c60657eea523?auto=format&fit=crop&w=1280&q=80", "words": [{"word": "BALIK", "row": 0, "col": 0, "dir": "H"}, {"word": "BAL", "row": 0, "col": 0, "dir": "V"}, {"word": "KIL", "row": 0, "col": 4, "dir": "V"}], "letters": ["A", "B", "I", "K", "L"], "postcard": {"landmark": "Sinop Doğal Güzellikleri", "city": "Sinop", "desc": "Sinop coğrafyasının eşsiz doğası, yemyeşil vadileri ve temiz yaylaları ziyaretçilerine huzur dolu anlar sunar.", "bg": "https://images.unsplash.com/photo-1564507592333-c60657eea523?auto=format&fit=crop&w=1280&q=80"}}]}];
 const TDK_DICT_FULL = {
@@ -2986,143 +1875,58 @@ const IDIOMS = [
 
 // --- utils.js ---
 // TÜRKÇE KARAKTER DÖNÜŞÜM YARDIMCISI
-const trUpper = (s) => s ? s.replace(/i/g, 'İ').replace(/ı/g, 'I').toLocaleUpperCase('tr-TR') : '';
-const trLower = (s) => s ? s.replace(/İ/g, 'i').replace(/I/g, 'ı').toLocaleLowerCase('tr-TR') : '';
+        const trUpper = (s) => s ? s.replace(/i/g, 'İ').replace(/ı/g, 'I').toLocaleUpperCase('tr-TR') : '';
+        const trLower = (s) => s ? s.replace(/İ/g, 'i').replace(/I/g, 'ı').toLocaleLowerCase('tr-TR') : '';
+
+        
 
 // --- SaveManager.js ---
-// 1. SAVE MANAGER (LOCALSTORAGE) WITH VERSIONING AND CORRUPTION FALLBACK
-const SaveManager = {
-    KEY: 'sozcukSeferi_save',
-    CURRENT_VERSION: 2,
-    
-    // The canonical schema for version 2
-    defaultData: {
-        version: 2,
-        coins: 250,
-        currentCityIdx: 0,
-        unlockedCityIdx: 0,
-        currentSubLevel: 0,
-        completedProvinces: [],
-        stars: {}, // Format: "cityIdx_subLevel": 1|2|3
-        bonusChest: 0,
-        soundEnabled: true,
-        hapticEnabled: true,
-        dailyStreak: 0,
-        lastDailyTimestamp: null,
-        totalPlayTime: 0
-    },
-    
-    data: null,
-    
-    init() {
-        this.data = JSON.parse(JSON.stringify(this.defaultData));
-        this.load();
-    },
-
-    load() {
-        try {
-            const s = localStorage.getItem(this.KEY);
-            if (!s) return;
-            
-            let parsed = JSON.parse(s);
-            
-            // Migration pipeline
-            if (!parsed.version || parsed.version < this.CURRENT_VERSION) {
-                console.warn(`[SaveManager] Migrating save file from version ${parsed.version || 1} to ${this.CURRENT_VERSION}`);
-                parsed = this.migrate(parsed);
+// 1. SAVE MANAGER (LOCALSTORAGE)
+        const SaveManager = {
+            KEY: 'sozcukSeferi_v1_save',
+            data: {
+                coins: 250,
+                currentCityIdx: 0,
+                unlockedCityIdx: 0,
+                currentSubLevel: 0,
+                completedProvinces: [],
+                bonusChest: 0,
+                soundEnabled: true,
+                hapticEnabled: true,
+                dailyStreak: 0,
+                lastDaily: null
+            },
+            load() {
+                try {
+                    const s = localStorage.getItem(this.KEY);
+                    if (s) this.data = { ...this.data, ...JSON.parse(s) };
+                } catch (e) { console.error(e); }
+            },
+            save() {
+                try { localStorage.setItem(this.KEY, JSON.stringify(this.data)); } catch (e) {}
+            },
+            addCoins(amount) {
+                this.data.coins += amount;
+                this.save();
+                App.updateUI();
+            },
+            spendCoins(amount) {
+                if (this.data.coins >= amount) {
+                    this.data.coins -= amount;
+                    this.save();
+                    App.updateUI();
+                    return true;
+                }
+                App.showModal('modal-insufficient-gold');
+                return false;
+            },
+            setHaptic(val) {
+                this.data.hapticEnabled = val;
+                this.save();
             }
-            
-            // Schema validation (corruption fallback)
-            if (this.validateSchema(parsed)) {
-                this.data = { ...this.defaultData, ...parsed };
-            } else {
-                throw new Error("Invalid save schema");
-            }
-        } catch (e) {
-            console.error("[SaveManager] Save file corrupted or missing. Falling back to default data.", e);
-            this.data = JSON.parse(JSON.stringify(this.defaultData));
-            this.save();
-        }
-    },
-    
-    migrate(oldData) {
-        let newData = { ...this.defaultData };
-        // V1 to V2 mapping
-        if (oldData.coins !== undefined) newData.coins = oldData.coins;
-        if (oldData.currentCityIdx !== undefined) newData.currentCityIdx = oldData.currentCityIdx;
-        if (oldData.unlockedCityIdx !== undefined) newData.unlockedCityIdx = oldData.unlockedCityIdx;
-        if (oldData.currentSubLevel !== undefined) newData.currentSubLevel = oldData.currentSubLevel;
-        if (oldData.completedProvinces !== undefined) newData.completedProvinces = oldData.completedProvinces;
-        if (oldData.soundEnabled !== undefined) newData.soundEnabled = oldData.soundEnabled;
-        if (oldData.hapticEnabled !== undefined) newData.hapticEnabled = oldData.hapticEnabled;
-        if (oldData.dailyStreak !== undefined) newData.dailyStreak = oldData.dailyStreak;
-        newData.version = this.CURRENT_VERSION;
-        return newData;
-    },
-    
-    validateSchema(data) {
-        // Strict typing check
-        if (typeof data !== 'object' || data === null) return false;
-        if (typeof data.coins !== 'number' || data.coins < 0) return false;
-        if (typeof data.currentCityIdx !== 'number') return false;
-        if (!Array.isArray(data.completedProvinces)) return false;
-        return true;
-    },
+        };
 
-    save() {
-        try {
-            this.data.version = this.CURRENT_VERSION;
-            localStorage.setItem(this.KEY, JSON.stringify(this.data));
-        } catch (e) {
-            console.error("[SaveManager] Quota exceeded or permission denied", e);
-        }
-    },
-
-    addCoins(amount) {
-        if (amount <= 0) return;
-        this.data.coins += amount;
-        this.save();
-        App.updateUI();
-    },
-
-    spendCoins(amount) {
-        if (amount <= 0) return false;
-        if (this.data.coins >= amount) {
-            this.data.coins -= amount;
-            this.save();
-            App.updateUI();
-            return true;
-        }
-        App.showModal('modal-insufficient-gold');
-        return false;
-    },
-    
-    saveStar(cityIdx, subLevel, stars) {
-        const key = `${cityIdx}_${subLevel}`;
-        const currentStars = this.data.stars[key] || 0;
-        if (stars > currentStars) {
-            this.data.stars[key] = stars;
-            this.save();
-        }
-    },
-    
-    getStars(cityIdx, subLevel) {
-        return this.data.stars[`${cityIdx}_${subLevel}`] || 0;
-    },
-
-    setHaptic(val) {
-        this.data.hapticEnabled = !!val;
-        this.save();
-    },
-    
-    setSound(val) {
-        this.data.soundEnabled = !!val;
-        this.save();
-    }
-};
-
-// Initialize early
-SaveManager.init();
+        
 
 // --- AudioEngine.js ---
 // 2. PROCEDURAL WEB AUDIO SYNTHESIZER
@@ -3309,412 +2113,321 @@ SaveManager.init();
 
 // --- GameEngine.js ---
 // 4. CROSSWORD & GAMEPLAY ENGINE
-const GameEngine = {
-    city: null,
-    level: null,
-    gridCells: [],
-    words: [],
-    foundWords: new Set(),
-    letters: [],
-    selectedIndices: [],
-    isDragging: false,
-    targetModeActive: false,
-    
-    // Performance & Scoring
-    mistakes: 0,
-    hintsUsed: 0,
-    difficulty: 'EASY', // EASY | MEDIUM | HARD
+        const GameEngine = {
+            city: null,
+            level: null,
+            gridCells: [],
+            words: [],
+            foundWords: new Set(),
+            letters: [],
+            selectedIndices: [],
+            isDragging: false,
+            targetModeActive: false,
 
-    loadLevel() {
-        const cityIdx = SaveManager.data.currentCityIdx;
-        const subIdx = SaveManager.data.currentSubLevel;
-        this.city = CITIES[cityIdx];
-        this.level = this.city.levels[subIdx % this.city.levels.length];
-        
-        document.getElementById('game-city-label').innerText = `${trUpper(this.city.name)} (${this.city.plate < 10 ? '0' + this.city.plate : this.city.plate})`;
-        document.getElementById('game-landmark-label').innerText = this.level.landmark || this.city.name;
-        document.getElementById('game-bg-img').src = this.level.bg || '';
+            loadLevel() {
+                const cityIdx = SaveManager.data.currentCityIdx;
+                const subIdx = SaveManager.data.currentSubLevel;
+                this.city = CITIES[cityIdx];
+                this.level = this.city.levels[subIdx % this.city.levels.length];
+                
+                document.getElementById('game-city-label').innerText = `${trUpper(this.city.name)} (${this.city.plate < 10 ? '0' + this.city.plate : this.city.plate})`;
+                document.getElementById('game-landmark-label').innerText = this.level.landmark || this.city.name;
+                document.getElementById('game-bg-img').src = this.level.bg || '';
 
-        this.foundWords.clear();
-        this.words = this.level.words;
-        this.letters = [...this.level.letters];
-        
-        // Reset Scoring
-        this.mistakes = 0;
-        this.hintsUsed = 0;
-        this.difficulty = this.calculateDifficulty(this.level);
-        
-        this.buildCrossword();
-        this.shuffleLetters();
-    },
+                this.foundWords.clear();
+                this.words = this.level.words;
+                this.letters = [...this.level.letters];
+                
+                this.buildCrossword();
+                this.shuffleLetters();
+            },
 
-    calculateDifficulty(level) {
-        const wordCount = level.words.length;
-        const totalLen = level.words.reduce((sum, w) => sum + w.word.length, 0);
-        const avgLen = totalLen / wordCount;
-        
-        if (wordCount < 4 && avgLen <= 4.5) return 'EASY';
-        if (wordCount > 6 || avgLen > 5.5) return 'HARD';
-        return 'MEDIUM';
-    },
+            buildCrossword() {
+                const board = document.getElementById('crossword-board');
+                board.innerHTML = '';
+                if (!this.words || this.words.length === 0) return;
 
-    buildCrossword() {
-        const container = document.getElementById('crossword-container');
-        container.innerHTML = '';
-        this.gridCells = [];
+                let minR = Math.min(...this.words.map(w => w.row));
+                let maxR = Math.max(...this.words.map(w => w.dir === 'V' ? w.row + w.word.length - 1 : w.row));
+                let minC = Math.min(...this.words.map(w => w.col));
+                let maxC = Math.max(...this.words.map(w => w.dir === 'H' ? w.col + w.word.length - 1 : w.col));
 
-        if (this.words.length === 0) return;
+                const rows = maxR - minR + 1;
+                const cols = maxC - minC + 1;
+                const cellSize = 44, gap = 4;
+                const totalW = cols * cellSize + (cols - 1) * gap;
+                const totalH = rows * cellSize + (rows - 1) * gap;
 
-        let minR = Math.min(...this.words.map(w => w.row));
-        let maxR = Math.max(...this.words.map(w => w.dir === 'V' ? w.row + w.word.length - 1 : w.row));
-        let minC = Math.min(...this.words.map(w => w.col));
-        let maxC = Math.max(...this.words.map(w => w.dir === 'H' ? w.col + w.word.length - 1 : w.col));
+                board.style.width = totalW + 'px';
+                board.style.height = totalH + 'px';
 
-        const rows = maxR - minR + 1;
-        const cols = maxC - minC + 1;
-        
-        // Ensure minimum 4x4 for visual padding
-        const maxDim = Math.max(rows, cols, 4);
+                // Responsive auto-fit scaling for viewport without overflow
+                const viewport = document.getElementById('crossword-viewport');
+                const maxW = viewport.clientWidth - 32;
+                const maxH = viewport.clientHeight - 32;
+                const scale = Math.min(1, maxW / totalW, maxH / totalH);
+                board.style.transform = `scale(${scale})`;
 
-        container.style.gridTemplateColumns = `repeat(${cols}, 1fr)`;
-        container.style.gridTemplateRows = `repeat(${rows}, 1fr)`;
-        container.style.aspectRatio = `${cols}/${rows}`;
+                this.gridCells = [];
+                this.words.forEach(w => {
+                    for (let i = 0; i < w.word.length; i++) {
+                        const r = w.row - minR + (w.dir === 'V' ? i : 0);
+                        const c = w.col - minC + (w.dir === 'H' ? i : 0);
+                        const id = `cell-${r}-${c}`;
 
-        const gridMap = {};
-        this.words.forEach(w => {
-            for (let i = 0; i < w.word.length; i++) {
-                const r = w.row - minR + (w.dir === 'V' ? i : 0);
-                const c = w.col - minC + (w.dir === 'H' ? i : 0);
-                const char = w.word[i];
-                gridMap[`${r},${c}`] = char;
-            }
-        });
+                        if (!document.getElementById(id)) {
+                            const div = document.createElement('div');
+                            div.className = 'grid-cell';
+                            div.id = id;
+                            div.style.top = (r * (cellSize + gap)) + 'px';
+                            div.style.left = (c * (cellSize + gap)) + 'px';
+                            div.dataset.char = w.word[i];
+                            div.dataset.r = r;
+                            div.dataset.c = c;
+                            div.onclick = () => this.handleCellClick(div);
+                            board.appendChild(div);
+                            this.gridCells.push({ id, r, c, char: w.word[i], solved: false, el: div });
+                        }
+                    }
+                });
+            },
 
-        for (let r = 0; r < rows; r++) {
-            for (let c = 0; c < cols; c++) {
-                const char = gridMap[`${r},${c}`];
-                if (char) {
-                    const cell = document.createElement('div');
-                    cell.className = 'grid-cell';
-                    cell.onclick = () => this.handleCellClick(cell);
-                    container.appendChild(cell);
-                    this.gridCells.push({ r, c, char, el: cell, solved: false });
+            shuffleLetters() {
+                for (let i = this.letters.length - 1; i > 0; i--) {
+                    const j = Math.floor(Math.random() * (i + 1));
+                    [this.letters[i], this.letters[j]] = [this.letters[j], this.letters[i]];
+                }
+                this.drawWheel();
+            },
+
+            drawWheel() {
+                const container = document.getElementById('wheel-letters-container');
+                container.innerHTML = '';
+                const radius = 95;
+                const cx = 135, cy = 135;
+                const step = (2 * Math.PI) / this.letters.length;
+
+                this.letters.forEach((char, i) => {
+                    const angle = i * step - Math.PI / 2;
+                    const x = cx + radius * Math.cos(angle);
+                    const y = cy + radius * Math.sin(angle);
+
+                    const node = document.createElement('div');
+                    node.className = 'letter-node';
+                    node.style.left = x + 'px';
+                    node.style.top = y + 'px';
+                    node.innerText = char;
+                    node.dataset.idx = i;
+                    node.dataset.x = x;
+                    node.dataset.y = y;
+                    container.appendChild(node);
+                });
+                this.updateDragLine(null);
+            },
+
+            handleDown(e) {
+                if (e.target.classList.contains('letter-node')) {
+                    this.isDragging = true;
+                    this.selectedIndices = [e.target.dataset.idx];
+                    e.target.classList.add('selected');
+                    this.updateDragLine(e);
+                    this.updatePreview();
+                    AudioEngine.playLetter(this.selectedIndices.length - 1);
+                }
+            },
+
+            handleMove(e) {
+                if (!this.isDragging) return;
+                let clientX = e.touches ? e.touches[0].clientX : e.clientX;
+                let clientY = e.touches ? e.touches[0].clientY : e.clientY;
+
+                const el = document.elementFromPoint(clientX, clientY);
+                if (el && el.classList.contains('letter-node')) {
+                    const idx = el.dataset.idx;
+                    if (!this.selectedIndices.includes(idx)) {
+                        this.selectedIndices.push(idx);
+                        el.classList.add('selected');
+                        this.updatePreview();
+                        AudioEngine.playLetter(this.selectedIndices.length - 1);
+                    } else if (this.selectedIndices.length > 1 && this.selectedIndices[this.selectedIndices.length - 2] === idx) {
+                        const popped = this.selectedIndices.pop();
+                        document.querySelector(`.letter-node[data-idx="${popped}"]`).classList.remove('selected');
+                        this.updatePreview();
+                    }
+                }
+                this.updateDragLine({ clientX, clientY });
+            },
+
+            handleUp(e) {
+                if (!this.isDragging) return;
+                this.isDragging = false;
+                const word = this.selectedIndices.map(i => this.letters[i]).join('');
+                this.validateWord(word);
+
+                this.selectedIndices = [];
+                document.querySelectorAll('.letter-node').forEach(n => n.classList.remove('selected'));
+                this.updateDragLine(null);
+                this.updatePreview();
+            },
+
+            updateDragLine(e) {
+                const poly = document.getElementById('wheel-drag-line');
+                if (this.selectedIndices.length === 0) {
+                    poly.setAttribute('points', '');
+                    return;
+                }
+                let pts = [];
+                this.selectedIndices.forEach(idx => {
+                    const el = document.querySelector(`.letter-node[data-idx="${idx}"]`);
+                    pts.push(`${el.dataset.x},${el.dataset.y}`);
+                });
+                if (e) {
+                    const rect = document.getElementById('wheel-assembly').getBoundingClientRect();
+                    const x = (e.clientX !== undefined ? e.clientX : e.touches[0].clientX) - rect.left;
+                    const y = (e.clientY !== undefined ? e.clientY : e.touches[0].clientY) - rect.top;
+                    pts.push(`${x},${y}`);
+                }
+                poly.setAttribute('points', pts.join(' '));
+            },
+
+            updatePreview() {
+                const pill = document.getElementById('word-preview-pill');
+                if (this.selectedIndices.length > 0) {
+                    pill.innerText = this.selectedIndices.map(i => this.letters[i]).join('');
+                    pill.classList.add('active');
+                    pill.style.background = 'rgba(13, 148, 136, 0.95)';
                 } else {
-                    const empty = document.createElement('div');
-                    container.appendChild(empty);
+                    pill.classList.remove('active');
                 }
-            }
-        }
-    },
+            },
 
-    shuffleLetters() {
-        for (let i = this.letters.length - 1; i > 0; i--) {
-            const j = Math.floor(Math.random() * (i + 1));
-            [this.letters[i], this.letters[j]] = [this.letters[j], this.letters[i]];
-        }
-        this.drawWheel();
-    },
+            validateWord(word) {
+                if (!word || word.length < 2) return;
+                let matched = false;
 
-    drawWheel() {
-        const svg = document.getElementById('wheel-svg');
-        const labels = document.getElementById('wheel-labels');
-        labels.innerHTML = '';
-        
-        const count = this.letters.length;
-        const r = 100;
-        const cx = 150;
-        const cy = 150;
+                this.words.forEach(w => {
+                    if (w.word === word) {
+                        if (!this.foundWords.has(word)) {
+                            this.foundWords.add(word);
+                            matched = true;
+                            AudioEngine.playWordCorrect();
+                            this.revealWord(w);
+                        }
+                    }
+                });
 
-        for (let i = 0; i < count; i++) {
-            const angle = (i * 2 * Math.PI) / count - Math.PI / 2;
-            const x = cx + r * Math.cos(angle);
-            const y = cy + r * Math.sin(angle);
+                if (!matched) {
+                    AudioEngine.playWrong();
+                    const pill = document.getElementById('word-preview-pill');
+                    pill.style.background = 'rgba(220, 38, 38, 0.95)';
+                    pill.classList.add('active');
+                    setTimeout(() => pill.classList.remove('active'), 500);
 
-            const node = document.createElement('div');
-            node.className = 'letter-node';
-            node.innerText = this.letters[i];
-            node.style.left = `${x}px`;
-            node.style.top = `${y}px`;
-            node.dataset.idx = i;
-            node.dataset.x = x;
-            node.dataset.y = y;
-
-            labels.appendChild(node);
-        }
-
-        const asm = document.getElementById('wheel-assembly');
-        asm.onpointerdown = this.handleDown.bind(this);
-        asm.onpointermove = this.handleMove.bind(this);
-        asm.onpointerup = this.handleUp.bind(this);
-        asm.onpointercancel = this.handleUp.bind(this);
-    },
-
-    handleDown(e) {
-        if (e.target.classList.contains('letter-node')) {
-            this.isDragging = true;
-            this.selectedIndices = [parseInt(e.target.dataset.idx)];
-            e.target.classList.add('selected');
-            this.updateDragLine(e);
-            this.updatePreview();
-            AudioEngine.playPop();
-        }
-    },
-
-    handleMove(e) {
-        if (!this.isDragging) return;
-        e.preventDefault();
-
-        const clientX = e.clientX !== undefined ? e.clientX : (e.touches && e.touches[0].clientX);
-        const clientY = e.clientY !== undefined ? e.clientY : (e.touches && e.touches[0].clientY);
-        
-        if (clientX === undefined) return;
-
-        const el = document.elementFromPoint(clientX, clientY);
-        if (el && el.classList.contains('letter-node')) {
-            const idx = parseInt(el.dataset.idx);
-            if (!this.selectedIndices.includes(idx)) {
-                this.selectedIndices.push(idx);
-                el.classList.add('selected');
-                this.updatePreview();
-                AudioEngine.playPop();
-            } else if (this.selectedIndices.length > 1 && idx === this.selectedIndices[this.selectedIndices.length - 2]) {
-                const popped = this.selectedIndices.pop();
-                document.querySelector(`.letter-node[data-idx="${popped}"]`).classList.remove('selected');
-                this.updatePreview();
-                AudioEngine.playPop();
-            }
-        }
-        this.updateDragLine({ clientX, clientY });
-    },
-
-    handleUp(e) {
-        if (!this.isDragging) return;
-        this.isDragging = false;
-        const word = this.selectedIndices.map(i => this.letters[i]).join('');
-        this.validateWord(word);
-
-        this.selectedIndices = [];
-        document.querySelectorAll('.letter-node').forEach(n => n.classList.remove('selected'));
-        this.updateDragLine(null);
-        this.updatePreview();
-    },
-
-    updateDragLine(e) {
-        const poly = document.getElementById('wheel-drag-line');
-        if (this.selectedIndices.length === 0) {
-            poly.setAttribute('points', '');
-            return;
-        }
-        let pts = [];
-        this.selectedIndices.forEach(idx => {
-            const el = document.querySelector(`.letter-node[data-idx="${idx}"]`);
-            pts.push(`${el.dataset.x},${el.dataset.y}`);
-        });
-        if (e) {
-            const rect = document.getElementById('wheel-assembly').getBoundingClientRect();
-            const x = (e.clientX !== undefined ? e.clientX : e.touches[0].clientX) - rect.left;
-            const y = (e.clientY !== undefined ? e.clientY : e.touches[0].clientY) - rect.top;
-            pts.push(`${x},${y}`);
-        }
-        poly.setAttribute('points', pts.join(' '));
-    },
-
-    updatePreview() {
-        const pill = document.getElementById('word-preview-pill');
-        if (this.selectedIndices.length > 0) {
-            pill.innerText = this.selectedIndices.map(i => this.letters[i]).join('');
-            pill.classList.add('active');
-            pill.style.background = 'rgba(13, 148, 136, 0.95)';
-        } else {
-            pill.classList.remove('active');
-        }
-    },
-
-    validateWord(word) {
-        if (!word || word.length < 2) return;
-        let matched = false;
-
-        this.words.forEach(w => {
-            if (w.word === word) {
-                if (!this.foundWords.has(word)) {
-                    this.foundWords.add(word);
-                    matched = true;
-                    AudioEngine.playWordCorrect();
-                    this.revealWord(w);
+                    // Add to bonus chest
+                    SaveManager.data.bonusChest = (SaveManager.data.bonusChest || 0) + 1;
+                    if (SaveManager.data.bonusChest >= 5) {
+                        SaveManager.data.bonusChest = 0;
+                        SaveManager.addCoins(30);
+                        AudioEngine.playVictory();
+                    }
+                    SaveManager.save();
+                    document.getElementById('bonus-chest-text').innerText = `${SaveManager.data.bonusChest}/5`;
                 }
-            }
-        });
+            },
 
-        if (!matched) {
-            this.mistakes++;
-            AudioEngine.playWrong();
-            const pill = document.getElementById('word-preview-pill');
-            pill.style.background = 'rgba(220, 38, 38, 0.95)';
-            pill.classList.add('active');
-            setTimeout(() => pill.classList.remove('active'), 500);
+            revealWord(w) {
+                let minR = Math.min(...this.words.map(ww => ww.row));
+                let minC = Math.min(...this.words.map(ww => ww.col));
 
-            // Add to bonus chest if it's a valid word in TDK dictionary but not in puzzle
-            if (TDK_DICT_FULL.includes(word)) {
-                SaveManager.data.bonusChest = (SaveManager.data.bonusChest || 0) + 1;
-                if (SaveManager.data.bonusChest >= 5) {
-                    SaveManager.data.bonusChest = 0;
-                    SaveManager.addCoins(30);
+                for (let i = 0; i < w.word.length; i++) {
+                    const r = w.row - minR + (w.dir === 'V' ? i : 0);
+                    const c = w.col - minC + (w.dir === 'H' ? i : 0);
+                    const cell = this.gridCells.find(gc => gc.r === r && gc.c === c);
+                    if (cell && !cell.solved) {
+                        cell.solved = true;
+                        setTimeout(() => {
+                            cell.el.innerText = cell.char;
+                            cell.el.classList.add('solved');
+                        }, i * 80);
+                    }
+                }
+                setTimeout(() => this.checkWinCondition(), w.word.length * 80 + 350);
+            },
+
+            checkWinCondition() {
+                if (this.foundWords.size === this.words.length) {
                     AudioEngine.playVictory();
+                    SaveManager.addCoins(20);
+                    
+                    // Show Postcard
+                    const pc = this.level.postcard || {
+                        landmark: this.level.landmark || this.city.name,
+                        desc: `${this.city.name} ilimizin eşsiz güzelliklerini başarıyla keşfettin!`,
+                        bg: this.level.bg
+                    };
+                    document.getElementById('post-landmark-title').innerText = pc.landmark;
+                    document.getElementById('post-story-text').innerText = pc.desc;
+                    document.getElementById('post-photo-img').src = pc.bg || '';
+                    App.showModal('modal-postcard');
                 }
-                SaveManager.save();
-                document.getElementById('bonus-chest-text').innerText = `${SaveManager.data.bonusChest}/5`;
-                // Show floating text "Bonus!"
-            }
-        }
-    },
+            },
 
-    revealWord(w) {
-        let minR = Math.min(...this.words.map(ww => ww.row));
-        let minC = Math.min(...this.words.map(ww => ww.col));
+            // POWERUPS
+            useBulb() {
+                if (SaveManager.spendCoins(50)) {
+                    const unsolved = this.gridCells.filter(c => !c.solved);
+                    if (unsolved.length > 0) {
+                        const target = unsolved[Math.floor(Math.random() * unsolved.length)];
+                        target.solved = true;
+                        target.el.innerText = target.char;
+                        target.el.classList.add('solved');
+                        AudioEngine.playWordCorrect();
+                        this.checkWinCondition();
+                    }
+                }
+            },
 
-        for (let i = 0; i < w.word.length; i++) {
-            const r = w.row - minR + (w.dir === 'V' ? i : 0);
-            const c = w.col - minC + (w.dir === 'H' ? i : 0);
-            const cell = this.gridCells.find(gc => gc.r === r && gc.c === c);
-            if (cell && !cell.solved) {
-                cell.solved = true;
-                setTimeout(() => {
+            useTarget() {
+                if (this.targetModeActive) return;
+                if (SaveManager.spendCoins(100)) {
+                    this.targetModeActive = true;
+                    this.gridCells.filter(c => !c.solved).forEach(c => c.el.classList.add('target-mode'));
+                }
+            },
+
+            handleCellClick(el) {
+                if (!this.targetModeActive) return;
+                const cell = this.gridCells.find(c => c.el === el);
+                if (cell && !cell.solved) {
+                    cell.solved = true;
                     cell.el.innerText = cell.char;
                     cell.el.classList.add('solved');
-                    cell.el.style.transform = 'scale(1.1) rotateX(180deg)';
-                    setTimeout(() => cell.el.style.transform = 'scale(1) rotateX(0deg)', 150);
-                }, i * 80);
-            }
-        }
-        setTimeout(() => this.checkWinCondition(), w.word.length * 80 + 350);
-    },
+                    this.targetModeActive = false;
+                    this.gridCells.forEach(c => c.el.classList.remove('target-mode'));
+                    AudioEngine.playWordCorrect();
+                    this.checkWinCondition();
+                }
+            },
 
-    calculateStars() {
-        // Dynamic scoring based on difficulty
-        const totalWords = this.words.length;
+            useBomb() {
+                if (SaveManager.spendCoins(150)) {
+                    const unsolved = this.gridCells.filter(c => !c.solved);
+                    const count = Math.min(3, unsolved.length);
+                    for (let i = 0; i < count; i++) {
+                        const target = unsolved[i];
+                        target.solved = true;
+                        setTimeout(() => {
+                            target.el.innerText = target.char;
+                            target.el.classList.add('solved');
+                        }, i * 100);
+                    }
+                    AudioEngine.playVictory();
+                    setTimeout(() => this.checkWinCondition(), count * 100 + 300);
+                }
+            }
+        };
+
         
-        let stars = 3;
-        if (this.hintsUsed > 0) {
-            stars = 2;
-        }
-        if (this.hintsUsed > 2 || this.mistakes > totalWords * 1.5) {
-            stars = 1;
-        }
-        if (this.hintsUsed === 0 && this.mistakes === 0) {
-            stars = 3; // Perfect
-        }
-        return stars;
-    },
-
-    checkWinCondition() {
-        if (this.foundWords.size === this.words.length) {
-            AudioEngine.playVictory();
-            
-            const stars = this.calculateStars();
-            let baseReward = 20;
-            if (this.difficulty === 'MEDIUM') baseReward = 30;
-            if (this.difficulty === 'HARD') baseReward = 50;
-            
-            const finalReward = baseReward + (stars * 5);
-            SaveManager.addCoins(finalReward);
-            
-            SaveManager.saveStar(SaveManager.data.currentCityIdx, SaveManager.data.currentSubLevel, stars);
-            
-            // Show Postcard
-            const pc = this.level.postcard || {
-                landmark: this.level.landmark || this.city.name,
-                desc: `${this.city.name} ilimizin eşsiz güzelliklerini ${stars} yıldızla başarıyla keşfettin!`,
-                bg: this.level.bg
-            };
-            document.getElementById('post-landmark-title').innerText = pc.landmark;
-            document.getElementById('post-story-text').innerText = pc.desc;
-            document.getElementById('post-photo-img').src = pc.bg || '';
-            
-            // Render stars in postcard (we need to inject this into the UI)
-            const pcStars = document.getElementById('post-stars') || document.createElement('div');
-            pcStars.id = 'post-stars';
-            pcStars.innerHTML = '⭐'.repeat(stars) + '☆'.repeat(3 - stars);
-            pcStars.style.fontSize = '24px';
-            pcStars.style.textAlign = 'center';
-            pcStars.style.margin = '10px 0';
-            
-            const titleEl = document.getElementById('post-landmark-title');
-            if (!document.getElementById('post-stars')) {
-                titleEl.parentNode.insertBefore(pcStars, titleEl.nextSibling);
-            }
-            
-            App.showModal('modal-postcard');
-        }
-    },
-
-    // POWERUPS
-    useBulb() {
-        let cost = 30;
-        if (SaveManager.spendCoins(cost)) {
-            this.hintsUsed++;
-            const unsolved = this.gridCells.filter(c => !c.solved);
-            if (unsolved.length > 0) {
-                const target = unsolved[Math.floor(Math.random() * unsolved.length)];
-                target.solved = true;
-                target.el.innerText = target.char;
-                target.el.classList.add('solved');
-                AudioEngine.playWordCorrect();
-                this.checkWinCondition();
-            }
-        }
-    },
-
-    useTarget() {
-        if (this.targetModeActive) return;
-        let cost = 60;
-        if (SaveManager.spendCoins(cost)) {
-            this.hintsUsed++;
-            this.targetModeActive = true;
-            this.gridCells.filter(c => !c.solved).forEach(c => {
-                c.el.classList.add('target-mode');
-                c.el.style.animation = 'pulse 1s infinite';
-            });
-        }
-    },
-
-    handleCellClick(el) {
-        if (!this.targetModeActive) return;
-        const cell = this.gridCells.find(c => c.el === el);
-        if (cell && !cell.solved) {
-            cell.solved = true;
-            cell.el.innerText = cell.char;
-            cell.el.classList.add('solved');
-            this.targetModeActive = false;
-            this.gridCells.forEach(c => {
-                c.el.classList.remove('target-mode');
-                c.el.style.animation = 'none';
-            });
-            AudioEngine.playWordCorrect();
-            this.checkWinCondition();
-        }
-    },
-
-    useBomb() {
-        let cost = 90;
-        if (SaveManager.spendCoins(cost)) {
-            this.hintsUsed += 3;
-            const unsolved = this.gridCells.filter(c => !c.solved);
-            const count = Math.min(3, unsolved.length);
-            for (let i = 0; i < count; i++) {
-                const target = unsolved[i];
-                target.solved = true;
-                setTimeout(() => {
-                    target.el.innerText = target.char;
-                    target.el.classList.add('solved');
-                    target.el.style.transform = 'scale(1.2)';
-                    setTimeout(() => target.el.style.transform = 'scale(1)', 200);
-                }, i * 150);
-            }
-            AudioEngine.playVictory();
-            setTimeout(() => this.checkWinCondition(), count * 150 + 300);
-        }
-    }
-};
 
 // --- IdiomEngine.js ---
 // 5. DEYİM AVCISI MINI-MODE
@@ -3840,14 +2553,6 @@ const GameEngine = {
         const App = {
             init() {
                 SaveManager.load();
-                if ('serviceWorker' in navigator) {
-                    window.addEventListener('load', () => {
-                        navigator.serviceWorker.register('./sw.js').then(reg => {
-                            console.log('SW registered:', reg.scope);
-                        }).catch(err => console.log('SW registration failed:', err));
-                    });
-                }
-
                 this.updateUI();
                 MapEngine.init();
 
@@ -3985,7 +2690,3 @@ const GameEngine = {
         };
 
         window.onload = () => App.init();
-
-</script>
-</body>
-</html>

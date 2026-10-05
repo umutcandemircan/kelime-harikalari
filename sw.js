@@ -1,13 +1,9 @@
-// Kelime Harikaları Service Worker - Offline PWA Support
-const CACHE_NAME = 'kelime-harikalari-v2.0.0';
+// Sözcük Seferî Service Worker - Zero-Dependency Offline PWA Support
+const CACHE_NAME = 'sozcuk-seferi-v3.0.0';
 const STATIC_ASSETS = [
   './',
   './index.html',
-  './manifest.json',
-  './config.js',
-  './credits.json',
-  './idioms.json',
-  './levels_100.json'
+  './manifest.json'
 ];
 
 self.addEventListener('install', (event) => {
@@ -34,13 +30,12 @@ self.addEventListener('activate', (event) => {
 });
 
 self.addEventListener('fetch', (event) => {
-  // Navigation or static asset request
   if (event.request.method !== 'GET') return;
 
   event.respondWith(
     caches.match(event.request).then((cachedResponse) => {
       if (cachedResponse) {
-        // Return cache but update in background for next time
+        // Stale-while-revalidate for html and json
         fetch(event.request).then((networkResponse) => {
           if (networkResponse && networkResponse.status === 200) {
             caches.open(CACHE_NAME).then((cache) => cache.put(event.request, networkResponse));
@@ -50,8 +45,8 @@ self.addEventListener('fetch', (event) => {
       }
 
       return fetch(event.request).then((networkResponse) => {
-        // If image or asset, cache it
-        if (networkResponse && networkResponse.status === 200 && networkResponse.type === 'basic') {
+        // Dynamic caching for images (Wikipedia landmarks etc.)
+        if (networkResponse && networkResponse.status === 200) {
           const responseToCache = networkResponse.clone();
           caches.open(CACHE_NAME).then((cache) => {
             cache.put(event.request, responseToCache);

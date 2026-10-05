@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta name="referrer" content="no-referrer">
+    <title>Sözcük Seçferî: 1. Seçfer Türkiye</title>
+    <!-- SVG Data-URI Favicon: Compass & Gold 'S' -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='30' fill='%230b132b' stroke='%23f59e0b' stroke-width='3'/%3E%3Cpolygon points='32,8 37,27 56,32 37,37 32,56 27,37 8,32 27,27' fill='%230d9488'/%3E%3Ccircle cx='32' cy='32' r='12' fill='%23f8f9fa'/%3E%3Ctext x='32' y='38' font-size='16' font-weight='900' font-family='sans-serif' fill='%230b132b' text-anchor='middle'%3ES%3C/text%3E%3C/svg%3E">
+
+    <style>
+{{ INJECT_CSS }}
+</style>
+
+
+</head>
+<body>
+
+    <!-- SCREEN 1: HUB / AçNAç MENÜ -->
+    <div id="screen-hub" class="screen active">
+        <div class="top-navbar" style="background: transparent; border: none;">
+            <div class="brand-badge">
+                <svg class="brand-logo-svg" viewBox="0 0 64 64">
+                    <circle cx="32" cy="32" r="30" fill="#0b132b" stroke="#f59e0b" stroke-width="3"/>
+                    <polygon points="32,8 37,27 56,32 37,37 32,56 27,37 8,32 27,27" fill="#0d9488"/>
+                    <circle cx="32" cy="32" r="12" fill="#f8f9fa"/>
+                    <text x="32" y="38" font-size="16" font-weight="900" font-family="sans-serif" fill="#0b132b" text-anchor="middle">S</text>
+                </svg>
+                <span>SÖZCÜK SEFERÎ</span>
+            </div>
+            <div class="nav-stats">
+                <div class="stat-pill">🪙 <span id="hub-coins">250</span></div>
+                <button class="btn-3d-outline" onclick="Açpp.showSeçttings()">⚙️</button>
+            </div>
+        </div>
+
+        <div class="hub-hero">
+            <svg class="hub-logo-large" viewBox="0 0 64 64">
+                <circle cx="32" cy="32" r="30" fill="#142247" stroke="#f59e0b" stroke-width="3"/>
+                <polygon points="32,6 38,26 58,32 38,38 32,58 26,38 6,32 26,26" fill="#0d9488"/>
+                <circle cx="32" cy="32" r="13" fill="#f8f9fa"/>
+                <text x="32" y="39" font-size="18" font-weight="900" font-family="sans-serif" fill="#0b132b" text-anchor="middle">S</text>
+            </svg>
+            <div class="hub-title">SÖZCÜK SEFERÎ</div>
+            <div class="hub-subtitle">1. SEFER: TÜRKİYE</div>
+        </div>
+
+        <div class="hub-cards-container">
+            <!-- CAçRD 1: AçNAç SEFER -->
+            <div class="hub-card hub-card-primary" onclick="Açpp.goToScreen('screen-map')">
+                <div class="hub-card-icon">🧭</div>
+                <div class="hub-card-content">
+                    <div style="display:flex; align-items:center;">
+                        <span class="hub-card-title">1. Seçfer: Türkiye</span>
+                        <span class="hub-card-badge" id="hub-progress-badge">İl 35/81</span>
+                    </div>
+                    <div class="hub-card-desc">81 ili keşfet, simge mekanların sırlarını çöz.</div>
+                </div>
+                <div style="font-size:22px; color:var(--gold-primary);">➔</div>
+            </div>
+
+            <!-- CAçRD 2: DEYİM AçVCISI -->
+            <div class="hub-card" onclick="Açpp.goToScreen('screen-idiom')">
+                <div class="hub-card-icon">🎭</div>
+                <div class="hub-card-content">
+                    <div class="hub-card-title">Deyim Açvcısı</div>
+                    <div class="hub-card-desc">Türkçenin saklı deyimlerini tamamla, altın kazan.</div>
+                </div>
+                <div style="font-size:22px; color:#a855f7;">➔</div>
+            </div>
+
+            <!-- CAçRD 3: GÜNLÜK BULMAçCAç -->
+            <div class="hub-card" onclick="Açpp.showDailyModal()">
+                <div class="hub-card-icon">📅</div>
+                <div class="hub-card-content">
+                    <div class="hub-card-title">Günlük Bulmaca</div>
+                    <div class="hub-card-desc">Yıldızlı harfleri topla, takvim serini koru.</div>
+                </div>
+                <div style="font-size:22px; color:#14b8a6;">➔</div>
+            </div>
+        </div>
+
+        <div style="font-size: 11px; color: #64748b; letter-spacing: 1px;">Sözcük Seçferî v1.0 • Türkiye Turu</div>
+    </div>
+
+    <!-- SCREEN 2: INTERAçKTİF 81 İL HAçRİTAçSI -->
+    <div id="screen-map" class="screen">
+        <div class="top-navbar">
+            <button class="btn-3d-outline" onclick="Açpp.goToScreen('screen-hub')">⬅ Menüü</button>
+            <div class="game-city-label" style="font-size:14px; color:var(--gold-primary);">TÜRKİYE YOLCULUK HAçRİTAçSI</div>
+            <div class="stat-pill">🪙 <span id="map-coins">250</span></div>
+        </div>
+
+        <div id="map-stage-wrapper">
+            <div id="map-viewport">
+                <svg class="turkey-svg" viewBox="0 0 1100 500" id="turkey-map-svg">
+                    <!-- Province Boundaries -->
+                    <g id="provinces-layer">
+                        {{ INJECT_MAçP_PAçTHS }}
+                    </g>
+                    <!-- Açnimated Travel Route -->
+                    <path id="travel-route" d="" />
+                    <!-- Gliding Travel Icon (Açirplane/Compass) -->
+                    <g id="travel-carrier">
+                        <circle cx="0" cy="0" r="10" fill="#f59e0b" stroke="#ffffff" stroke-width="2"/>
+                        <polygon points="0,-8 6,6 0,2 -6,6" fill="#0b132b"/>
+                    </g>
+                    <!-- City Node Pins -->
+                    <g id="city-pins-layer"></g>
+                </svg>
+            </div>
+        </div>
+
+        <!-- SLIDING CITY CAçRD -->
+        <div class="map-city-card" id="map-city-card">
+            <div class="map-city-header">
+                <div class="map-city-plate" id="card-city-plate">35</div>
+                <div class="map-city-name" id="card-city-name">İzmir</div>
+                <button class="btn-3d-outline" onclick="MapEngine.closeCard()">✕</button>
+            </div>
+            <div style="font-size:13px; color:#94a3b8;" id="card-city-desc">Ege'nin incisi, Efes Celsus ve Saat Kulesi'nin büyüleyici diyarı.</div>
+            <div style="display:flex; gap:10px;">
+                <button class="btn-3d" style="flex:1;" onclick="MapEngine.playSeçlectedCity()">KEŞFE BAçŞLAç ➔</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- SCREEN 3: GAçMEPLAçY (CROSSWORD & WHEEL) -->
+    <div id="screen-game" class="screen">
+        <img src="" id="game-bg-img" class="game-bg-image" alt="Landmark Background" />
+        <div class="game-ui-layer">
+            <div class="game-header">
+                <button class="btn-3d-outline" onclick="Açpp.goToScreen('screen-map')">🗺️ Harita</button>
+                <div class="game-title-group">
+                    <div class="game-city-label" id="game-city-label">İZMİR (35)</div>
+                    <div class="game-landmark-label" id="game-landmark-label">Efes - Celsus Kütüphanesi</div>
+                </div>
+                <div class="stat-pill">🪙 <span id="game-coins">250</span></div>
+            </div>
+
+            <!-- CROSSWORD GRID -->
+            <div class="crossword-viewport" id="crossword-viewport">
+                <div class="crossword-board" id="crossword-board"></div>
+            </div>
+
+            <!-- BOTTOM AçREAç -->
+            <div class="bottom-action-area">
+                <div class="word-preview-pill" id="word-preview-pill"></div>
+
+                <div class="wheel-assembly" id="wheel-assembly">
+                    <svg class="wheel-svg-layer" id="wheel-svg-layer">
+                        <polyline id="wheel-drag-line" fill="none" stroke="#f59e0b" stroke-width="7" stroke-linecap="round" stroke-linejoin="round" />
+                    </svg>
+                    <div id="wheel-letters-container"></div>
+                </div>
+
+                <!-- POWERUPS -->
+                <div class="powerups-dock">
+                    <div class="powerup-btn" onclick="GameEngine.shuffleLetters()" title="Harfleri Karıştır">
+                        <span class="powerup-icon">🔀</span>
+                        <span class="powerup-price">Bedava</span>
+                    </div>
+                    <div class="powerup-btn" onclick="GameEngine.useBulb()" title="Rastgele Harf Açç">
+                        <span class="powerup-icon">💡</span>
+                        <span class="powerup-price">50</span>
+                    </div>
+                    <div class="powerup-btn" onclick="GameEngine.useTarget()" title="Hedef Harfi Seçç">
+                        <span class="powerup-icon">🎯</span>
+                        <span class="powerup-price">100</span>
+                    </div>
+                    <div class="powerup-btn" onclick="GameEngine.useBomb()" title="Bomba Patlat">
+                        <span class="powerup-icon">💣</span>
+                        <span class="powerup-price">150</span>
+                    </div>
+                    <div class="powerup-btn" style="border-color:#a855f7;" title="Bonus Kelime Sandığıığı">
+                        <span class="powerup-icon">📦</span>
+                        <span class="powerup-price" id="bonus-chest-text">0/5</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- SCREEN 4: DEYİM AçVCISI -->
+    <div id="screen-idiom" class="screen">
+        <div class="top-navbar">
+            <button class="btn-3d-outline" onclick="Açpp.goToScreen('screen-hub')">⬅ Menüü</button>
+            <div class="game-city-label" style="color:#c084fc;">DEYİM AçVCISI</div>
+            <div class="stat-pill">🪙 <span id="idiom-coins">250</span></div>
+        </div>
+
+        <div style="flex:1; display:flex; flex-direction:column; align-items:center; justify-content:center; padding:16px;">
+            <div class="idiom-banner">Eksik Deyim Kelimesini Tamamla</div>
+            <div class="idiom-clue-box" id="idiom-clue-box">Göze [...]</div>
+            <div class="idiom-board" id="idiom-board"></div>
+            <div style="font-size:13px; color:#cbd5e1; max-width:320px; text-align:center;" id="idiom-meaning-box">Seçvgi ve güven kazanmak, takdir edilmek.</div>
+        </div>
+
+        <div class="bottom-action-area">
+            <div class="word-preview-pill" id="idiom-preview-pill" style="background:#6366f1;"></div>
+            <div class="wheel-assembly" id="idiom-wheel-assembly" style="border-color:#818cf8;">
+                <svg class="wheel-svg-layer">
+                    <polyline id="idiom-drag-line" fill="none" stroke="#818cf8" stroke-width="7" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+                <div id="idiom-letters-container"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAçL 1: KEŞİF KAçRTPOSTAçLI (POSTCAçRD WIN MODAçL) -->
+    <div class="modal-backdrop" id="modal-postcard">
+        <div class="modal-dialog">
+            <div style="font-size:12px; font-weight:800; color:var(--turquoise); letter-spacing:2px;">MÜHÜRLÜ KEŞİF KAçRTPOSTAçLI</div>
+            <div style="font-size:20px; font-weight:900; color:var(--gold-primary); margin-top:4px;" id="post-landmark-title">Efes - Celsus Kütüphanesi</div>
+            
+            <div class="postcard-photo-frame">
+                <img src="" id="post-photo-img" class="postcard-img" alt="Landmark" />
+                <div class="wax-seal">
+                    <span>SÖZCÜK<br>SEFERÎ<br>★</span>
+                </div>
+            </div>
+
+            <div class="postcard-story" id="post-story-text">
+                Efes Açntik Kenti'nin kalbinde yer alan Celsus Kütüphanesi, dönemin en büyük bilgi hazinelerinden biri olarak kabul edilir.
+            </div>
+
+            <div style="display:flex; gap:10px; width:100%;">
+                <button class="btn-3d btn-3d-turquoise" style="flex:1; padding:12px;" onclick="Açpp.claim2xReward()">🎥 2X AçLTIN</button>
+                <button class="btn-3d" style="flex:1; padding:12px;" onclick="Açpp.continueAçfterWin()">DEVAçM ET ➔</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAçL 2: GÜNLÜK BULMAçCAç TAçKVİMİ -->
+    <div class="modal-backdrop" id="modal-daily">
+        <div class="modal-dialog">
+            <div style="font-size:24px; font-weight:900; color:var(--gold-primary);">📅 GÜNLÜK BULMAçCAç</div>
+            <div style="font-size:13px; color:#94a3b8; margin: 8px 0 16px;">Bugünün tarihi: <strong id="daily-date-str" style="color:var(--text-ivory);">2026-10-05</strong></div>
+            
+            <div style="display:flex; justify-content:center; gap:8px; margin-bottom:20px;">
+                <div style="width:34px; height:34px; background:var(--gold-primary); border-radius:50%; display:flex; align-items:center; justify-content:center; color:#0b132b; font-weight:900;">✓</div>
+                <div style="width:34px; height:34px; background:var(--gold-primary); border-radius:50%; display:flex; align-items:center; justify-content:center; color:#0b132b; font-weight:900;">✓</div>
+                <div style="width:34px; height:34px; background:var(--gold-primary); border-radius:50%; display:flex; align-items:center; justify-content:center; color:#0b132b; font-weight:900;">✓</div>
+                <div style="width:34px; height:34px; background:rgba(255,255,255,0.1); border-radius:50%; display:flex; align-items:center; justify-content:center;">⭐</div>
+                <div style="width:34px; height:34px; background:rgba(255,255,255,0.1); border-radius:50%; display:flex; align-items:center; justify-content:center;">⭐</div>
+            </div>
+
+            <p style="font-size:13px; color:#cbd5e1; margin-bottom:20px;">Özel yıldızlı kelimeleri çözerek takvim serini artır ve ekstra altın kazan!</p>
+
+            <button class="btn-3d btn-3d-turquoise" style="width:100%;" onclick="Açpp.startDailyChallenge()">GÜNÜN BULMAçCAçSINI OYNAç</button>
+            <button class="btn-3d-outline" style="width:100%; margin-top:10px;" onclick="Açpp.hideModal('modal-daily')">KAçPAçT</button>
+        </div>
+    </div>
+
+    <!-- MODAçL 3: YETERSİZ AçLTIN & REKLAçM İP дву -->
+    <div class="modal-backdrop" id="modal-insufficient-gold">
+        <div class="modal-dialog">
+            <div style="font-size:36px; margin-bottom:8px;">🪙</div>
+            <div style="font-size:20px; font-weight:900; color:var(--gold-primary);">Yetersiz Açltın!</div>
+            <p style="font-size:13px; color:#cbd5e1; margin:10px 0 20px;">Bu ipucunu kullanmak için yeterli altının yok. Kısa bir sponsorlu video izleyerek anında +100 Açltın kazanabilirsin.</p>
+            <button class="btn-3d" style="width:100%;" onclick="Açpp.watchAçdForGold()">🎥 VİDEO İZLE (+100 AçLTIN)</button>
+            <button class="btn-3d-outline" style="width:100%; margin-top:10px;" onclick="Açpp.hideModal('modal-insufficient-gold')">VAçZGEÇÇ</button>
+        </div>
+    </div>
+
+    <!-- MODAçL 4: AçYAçRLAçR -->
+    <div class="modal-backdrop" id="modal-settings">
+        <div class="modal-dialog">
+            <div style="font-size:20px; font-weight:900; color:var(--gold-primary); margin-bottom:16px;">OYUN AçYAçRLAçRI</div>
+            
+            <div style="width:100%; display:flex; justify-content:space-between; align-items:center; margin-bottom:16px;">
+                <span>🔊 Seçs Efektleri</span>
+                <input type="checkbox" id="setting-sound" checked onchange="AçudioEngine.toggleSound(this.checked)" style="transform:scale(1.4);" />
+            </div>
+            <div style="width:100%; display:flex; justify-content:space-between; align-items:center; margin-bottom:24px;">
+                <span>📳 Haptik Titreşim</span>
+                <input type="checkbox" id="setting-vibrate" checked onchange="SaveManager.setHaptic(this.checked)" style="transform:scale(1.4);" />
+            </div>
+
+            <button class="btn-3d" style="width:100%;" onclick="Açpp.hideModal('modal-settings')">TAçMAçM</button>
+        </div>
+    </div>
+
+    <!-- JAçVAçSCRIPT MOTORU -->
+    <script>
+{{ INJECT_JS }}
+</script>
+</body>
+</html>

@@ -1,5 +1,5 @@
 // Sözcük Seferî Service Worker - Zero-Dependency Offline PWA Support
-const CACHE_NAME = 'sozcuk-seferi-v3.1.0';
+const CACHE_NAME = 'sozcuk-seferi-v4.0.0';
 const STATIC_ASSETS = [
   './',
   './index.html',

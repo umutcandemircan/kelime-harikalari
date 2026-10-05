@@ -1,9 +1,11 @@
 // Sözcük Seferî Service Worker - Zero-Dependency Offline PWA Support
-const CACHE_NAME = 'sozcuk-seferi-v3.0.0';
+const CACHE_NAME = 'sozcuk-seferi-v3.1.0';
 const STATIC_ASSETS = [
   './',
   './index.html',
-  './manifest.json'
+  './manifest.json',
+  './icon-192.png',
+  './icon-512.png'
 ];
 
 self.addEventListener('install', (event) => {
@@ -35,7 +37,7 @@ self.addEventListener('fetch', (event) => {
   event.respondWith(
     caches.match(event.request).then((cachedResponse) => {
       if (cachedResponse) {
-        // Stale-while-revalidate for html and json
+        // Stale-while-revalidate for local static assets
         fetch(event.request).then((networkResponse) => {
           if (networkResponse && networkResponse.status === 200) {
             caches.open(CACHE_NAME).then((cache) => cache.put(event.request, networkResponse));
@@ -45,7 +47,7 @@ self.addEventListener('fetch', (event) => {
       }
 
       return fetch(event.request).then((networkResponse) => {
-        // Dynamic caching for images (Wikipedia landmarks etc.)
+        // Dynamic caching for external images (Unsplash landmarks etc.)
         if (networkResponse && networkResponse.status === 200) {
           const responseToCache = networkResponse.clone();
           caches.open(CACHE_NAME).then((cache) => {

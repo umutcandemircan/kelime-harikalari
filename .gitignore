@@ -1,5 +1,7 @@
 __pycache__/
 *.pyc
 *.png
+!icon-192.png
+!icon-512.png
 .DS_Store
 Thumbs.db

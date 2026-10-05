@@ -9,6 +9,8 @@ const GameEngine = {
     selectedIndices: [],
     isDragging: false,
     targetModeActive: false,
+    isDailyMode: false,
+    dailyLevel: null,
     
     // Performance & Scoring
     mistakes: 0,
@@ -16,18 +18,40 @@ const GameEngine = {
     difficulty: 'EASY', // EASY | MEDIUM | HARD
 
     loadLevel() {
+        this.isDailyMode = false;
         const cityIdx = SaveManager.data.currentCityIdx;
         const subIdx = SaveManager.data.currentSubLevel;
         this.city = CITIES[cityIdx];
-        this.level = this.city.levels[subIdx % this.city.levels.length];
+        const levels = this.city.levels || [];
+        this.level = levels[subIdx % levels.length];
         
         document.getElementById('game-city-label').innerText = `${trUpper(this.city.name)} (${this.city.plate < 10 ? '0' + this.city.plate : this.city.plate})`;
         document.getElementById('game-landmark-label').innerText = this.level.landmark || this.city.name;
         document.getElementById('game-bg-img').src = this.level.bg || '';
 
+        this.initLevelCommon();
+    },
+
+    loadDailyLevel(dailyLvl) {
+        this.isDailyMode = true;
+        this.dailyLevel = dailyLvl;
+        this.level = dailyLvl;
+        this.city = { name: "Günün Bulmacası", plate: 0 };
+
+        document.getElementById('game-city-label').innerText = "GÜNLÜK BULMACA";
+        document.getElementById('game-landmark-label').innerText = "Günün Özel Meydan Okuması";
+        document.getElementById('game-bg-img').src = "https://images.unsplash.com/photo-1541432901042-2d8bd64b4a9b?auto=format&fit=crop&w=1280&q=80";
+
+        this.initLevelCommon();
+    },
+
+    initLevelCommon() {
         this.foundWords.clear();
-        this.words = this.level.words;
-        this.letters = [...this.level.letters];
+        this.words = this.level.words || [];
+        
+        // Robust wheel/letters extraction
+        const rawLetters = this.level.letters || this.level.wheel || [];
+        this.letters = [...rawLetters];
         
         // Reset Scoring
         this.mistakes = 0;
@@ -39,17 +63,20 @@ const GameEngine = {
     },
 
     calculateDifficulty(level) {
-        const wordCount = level.words.length;
-        const totalLen = level.words.reduce((sum, w) => sum + w.word.length, 0);
+        const words = level.words || [];
+        if (words.length === 0) return 'EASY';
+        const wordCount = words.length;
+        const totalLen = words.reduce((sum, w) => sum + (w.word ? w.word.length : 0), 0);
         const avgLen = totalLen / wordCount;
         
-        if (wordCount < 4 && avgLen <= 4.5) return 'EASY';
-        if (wordCount > 6 || avgLen > 5.5) return 'HARD';
+        if (wordCount <= 3 && avgLen <= 4.0) return 'EASY';
+        if (wordCount >= 5 || avgLen >= 5.0) return 'HARD';
         return 'MEDIUM';
     },
 
     buildCrossword() {
-        const container = document.getElementById('crossword-container');
+        const container = document.getElementById('crossword-board');
+        if (!container) return;
         container.innerHTML = '';
         this.gridCells = [];
 
@@ -62,9 +89,6 @@ const GameEngine = {
 
         const rows = maxR - minR + 1;
         const cols = maxC - minC + 1;
-        
-        // Ensure minimum 4x4 for visual padding
-        const maxDim = Math.max(rows, cols, 4);
 
         container.style.gridTemplateColumns = `repeat(${cols}, 1fr)`;
         container.style.gridTemplateRows = `repeat(${rows}, 1fr)`;
@@ -75,8 +99,7 @@ const GameEngine = {
             for (let i = 0; i < w.word.length; i++) {
                 const r = w.row - minR + (w.dir === 'V' ? i : 0);
                 const c = w.col - minC + (w.dir === 'H' ? i : 0);
-                const char = w.word[i];
-                gridMap[`${r},${c}`] = char;
+                gridMap[`${r},${c}`] = w.word[i];
             }
         });
 
@@ -106,11 +129,13 @@ const GameEngine = {
     },
 
     drawWheel() {
-        const svg = document.getElementById('wheel-svg');
-        const labels = document.getElementById('wheel-labels');
+        const labels = document.getElementById('wheel-letters-container');
+        if (!labels) return;
         labels.innerHTML = '';
         
         const count = this.letters.length;
+        if (count === 0) return;
+        
         const r = 100;
         const cx = 150;
         const cy = 150;
@@ -133,14 +158,16 @@ const GameEngine = {
         }
 
         const asm = document.getElementById('wheel-assembly');
-        asm.onpointerdown = this.handleDown.bind(this);
-        asm.onpointermove = this.handleMove.bind(this);
-        asm.onpointerup = this.handleUp.bind(this);
-        asm.onpointercancel = this.handleUp.bind(this);
+        if (asm) {
+            asm.onpointerdown = this.handleDown.bind(this);
+            asm.onpointermove = this.handleMove.bind(this);
+            asm.onpointerup = this.handleUp.bind(this);
+            asm.onpointercancel = this.handleUp.bind(this);
+        }
     },
 
     handleDown(e) {
-        if (e.target.classList.contains('letter-node')) {
+        if (e.target && e.target.classList.contains('letter-node')) {
             this.isDragging = true;
             this.selectedIndices = [parseInt(e.target.dataset.idx)];
             e.target.classList.add('selected');
@@ -169,7 +196,8 @@ const GameEngine = {
                 AudioEngine.playPop();
             } else if (this.selectedIndices.length > 1 && idx === this.selectedIndices[this.selectedIndices.length - 2]) {
                 const popped = this.selectedIndices.pop();
-                document.querySelector(`.letter-node[data-idx="${popped}"]`).classList.remove('selected');
+                const node = document.querySelector(`.letter-node[data-idx="${popped}"]`);
+                if (node) node.classList.remove('selected');
                 this.updatePreview();
                 AudioEngine.playPop();
             }
@@ -191,6 +219,7 @@ const GameEngine = {
 
     updateDragLine(e) {
         const poly = document.getElementById('wheel-drag-line');
+        if (!poly) return;
         if (this.selectedIndices.length === 0) {
             poly.setAttribute('points', '');
             return;
@@ -198,7 +227,7 @@ const GameEngine = {
         let pts = [];
         this.selectedIndices.forEach(idx => {
             const el = document.querySelector(`.letter-node[data-idx="${idx}"]`);
-            pts.push(`${el.dataset.x},${el.dataset.y}`);
+            if (el) pts.push(`${el.dataset.x},${el.dataset.y}`);
         });
         if (e) {
             const rect = document.getElementById('wheel-assembly').getBoundingClientRect();
@@ -211,6 +240,7 @@ const GameEngine = {
 
     updatePreview() {
         const pill = document.getElementById('word-preview-pill');
+        if (!pill) return;
         if (this.selectedIndices.length > 0) {
             pill.innerText = this.selectedIndices.map(i => this.letters[i]).join('');
             pill.classList.add('active');
@@ -239,12 +269,14 @@ const GameEngine = {
             this.mistakes++;
             AudioEngine.playWrong();
             const pill = document.getElementById('word-preview-pill');
-            pill.style.background = 'rgba(220, 38, 38, 0.95)';
-            pill.classList.add('active');
-            setTimeout(() => pill.classList.remove('active'), 500);
+            if (pill) {
+                pill.style.background = 'rgba(220, 38, 38, 0.95)';
+                pill.classList.add('active');
+                setTimeout(() => pill.classList.remove('active'), 500);
+            }
 
-            // Add to bonus chest if it's a valid word in TDK dictionary but not in puzzle
-            if (TDK_DICT_FULL.includes(word)) {
+            // Bonus word check in TDK dictionary
+            if (typeof TDK_DICT_FULL !== 'undefined' && TDK_DICT_FULL.includes(word)) {
                 SaveManager.data.bonusChest = (SaveManager.data.bonusChest || 0) + 1;
                 if (SaveManager.data.bonusChest >= 5) {
                     SaveManager.data.bonusChest = 0;
@@ -252,8 +284,8 @@ const GameEngine = {
                     AudioEngine.playVictory();
                 }
                 SaveManager.save();
-                document.getElementById('bonus-chest-text').innerText = `${SaveManager.data.bonusChest}/5`;
-                // Show floating text "Bonus!"
+                const bonusEl = document.getElementById('bonus-chest-text');
+                if (bonusEl) bonusEl.innerText = `${SaveManager.data.bonusChest}/5`;
             }
         }
     },
@@ -280,26 +312,47 @@ const GameEngine = {
     },
 
     calculateStars() {
-        // Dynamic scoring based on difficulty
         const totalWords = this.words.length;
-        
-        let stars = 3;
-        if (this.hintsUsed > 0) {
-            stars = 2;
+        if (this.hintsUsed === 0 && this.mistakes <= 1) {
+            return 3; // 3 stars: no hints and max 1 mistake
         }
-        if (this.hintsUsed > 2 || this.mistakes > totalWords * 1.5) {
-            stars = 1;
+        if (this.hintsUsed <= 1 && this.mistakes <= 3) {
+            return 2; // 2 stars
         }
-        if (this.hintsUsed === 0 && this.mistakes === 0) {
-            stars = 3; // Perfect
-        }
-        return stars;
+        return 1; // 1 star minimum on completion
     },
 
     checkWinCondition() {
         if (this.foundWords.size === this.words.length) {
             AudioEngine.playVictory();
             
+            if (this.isDailyMode) {
+                // Daily Challenge win
+                const todayStr = new Date().toISOString().split('T')[0];
+                const streak = SaveManager.recordDailyCompletion(todayStr, 50);
+                
+                document.getElementById('post-landmark-title').innerText = "GÜNLÜK BULMACA TAMAMLANDI!";
+                document.getElementById('post-story-text').innerText = `Tebrikler! Günün bulmacasını başarıyla çözdün.\nSerin: ${streak} Gün! (+50 Altın)`;
+                document.getElementById('post-photo-img').src = "https://images.unsplash.com/photo-1541432901042-2d8bd64b4a9b?auto=format&fit=crop&w=1280&q=80";
+                
+                let pcStars = document.getElementById('post-stars');
+                if (!pcStars) {
+                    pcStars = document.createElement('div');
+                    pcStars.id = 'post-stars';
+                    const titleEl = document.getElementById('post-landmark-title');
+                    titleEl.parentNode.insertBefore(pcStars, titleEl.nextSibling);
+                }
+                pcStars.innerHTML = '⭐ GÜNLÜK ZAFER ⭐';
+                pcStars.style.fontSize = '20px';
+                pcStars.style.textAlign = 'center';
+                pcStars.style.margin = '10px 0';
+                pcStars.style.color = '#f59e0b';
+                
+                App.showModal('modal-postcard');
+                return;
+            }
+            
+            // Regular Level win
             const stars = this.calculateStars();
             let baseReward = 20;
             if (this.difficulty === 'MEDIUM') baseReward = 30;
@@ -316,22 +369,23 @@ const GameEngine = {
                 desc: `${this.city.name} ilimizin eşsiz güzelliklerini ${stars} yıldızla başarıyla keşfettin!`,
                 bg: this.level.bg
             };
-            document.getElementById('post-landmark-title').innerText = pc.landmark;
-            document.getElementById('post-story-text').innerText = pc.desc;
-            document.getElementById('post-photo-img').src = pc.bg || '';
+            document.getElementById('post-landmark-title').innerText = pc.landmark || this.city.name;
+            document.getElementById('post-story-text').innerText = pc.desc || '';
+            document.getElementById('post-photo-img').src = pc.bg || this.level.bg || '';
             
-            // Render stars in postcard (we need to inject this into the UI)
-            const pcStars = document.getElementById('post-stars') || document.createElement('div');
-            pcStars.id = 'post-stars';
-            pcStars.innerHTML = '⭐'.repeat(stars) + '☆'.repeat(3 - stars);
-            pcStars.style.fontSize = '24px';
-            pcStars.style.textAlign = 'center';
-            pcStars.style.margin = '10px 0';
-            
-            const titleEl = document.getElementById('post-landmark-title');
-            if (!document.getElementById('post-stars')) {
+            // Render stars
+            let pcStars = document.getElementById('post-stars');
+            if (!pcStars) {
+                pcStars = document.createElement('div');
+                pcStars.id = 'post-stars';
+                const titleEl = document.getElementById('post-landmark-title');
                 titleEl.parentNode.insertBefore(pcStars, titleEl.nextSibling);
             }
+            pcStars.innerHTML = '★'.repeat(stars) + '☆'.repeat(3 - stars);
+            pcStars.style.fontSize = '28px';
+            pcStars.style.textAlign = 'center';
+            pcStars.style.margin = '8px 0';
+            pcStars.style.color = '#f59e0b';
             
             App.showModal('modal-postcard');
         }
@@ -362,7 +416,6 @@ const GameEngine = {
             this.targetModeActive = true;
             this.gridCells.filter(c => !c.solved).forEach(c => {
                 c.el.classList.add('target-mode');
-                c.el.style.animation = 'pulse 1s infinite';
             });
         }
     },
@@ -375,10 +428,7 @@ const GameEngine = {
             cell.el.innerText = cell.char;
             cell.el.classList.add('solved');
             this.targetModeActive = false;
-            this.gridCells.forEach(c => {
-                c.el.classList.remove('target-mode');
-                c.el.style.animation = 'none';
-            });
+            this.gridCells.forEach(c => c.el.classList.remove('target-mode'));
             AudioEngine.playWordCorrect();
             this.checkWinCondition();
         }

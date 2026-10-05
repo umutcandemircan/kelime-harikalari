@@ -1,0 +1,2396 @@
+[
+  {
+    "id": "izmir",
+    "name": "İzmir",
+    "plate": 35,
+    "region_name": "Ege Bölgesi",
+    "coords": {
+      "x": 85,
+      "y": 215
+    },
+    "description": "Ege'nin incisi, binlerce yıllık antik kentlerin, zeytin ağaçlarının ve imbat rüzgarlarının şehri.",
+    "landmarks": [
+      {
+        "name": "Efes - Celsus Kütüphanesi",
+        "bg": "https://plus.unsplash.com/premium_photo-1664475023804-22236fbc8a69?auto=format&fit=crop&w=1280&q=80",
+        "summary": "Antik dünyanın en görkemli üçüncü kütüphanesinin devasa mermer sütunları arasında gezerken tarihin fısıltılarını duyabilirsiniz.",
+        "trivia": "Cephedeki 4 kadın heykeli Sophia (Akıl), Arete (Erdem), Ennoia (Kavrayış) ve Episteme (Bilgi) erdemlerini simgeler."
+      },
+      {
+        "name": "İzmir Saat Kulesi",
+        "bg": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/ad/%C4%B0zmir_Clock_Tower%2C_Konak_Square.jpg/1280px-%C4%B0zmir_Clock_Tower%2C_Konak_Square.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "summary": "1901 yılında Konak Meydanı'nda inşa edilen 25 metre yüksekliğindeki kule, İzmir'in kalbi ve en zarif buluşma noktasıdır.",
+        "trivia": "Kulenin saati Alman İmparatoru II. Wilhelm tarafından Osmanlı'ya hediye edilmiştir ve kurulduğu günden beri hiç durmamıştır."
+      },
+      {
+        "name": "Şirince Evleri",
+        "bg": "https://upload.wikimedia.org/wikipedia/commons/f/f8/Sirincehouses.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+        "summary": "Zeytinlikler ve asma bahçeleri arasında bembeyaz geleneksel konaklarıyla masalsı bir Ege köyü.",
+        "trivia": "Köyün eski adı 'Kırkınca' olup zamanla güzelliğinden ötürü Şirince olarak anılmaya başlanmıştır."
+      },
+      {
+        "name": "Bergama Akropolü",
+        "bg": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/64/Pergamon_Acropolis.jpg/1280px-Pergamon_Acropolis.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "summary": "Tepelerin zirvesine kurulmuş, dünyanın en dik tiyatrosuna ve antik parşömen kütüphanesine sahip eşsiz Helenistik krallık.",
+        "trivia": "Parşömen kağıdı (Pergamenum), Bergama Krallığı tarafından kütüphanelerindeki kitapları çoğaltmak için icat edilmiştir."
+      },
+      {
+        "name": "Tarihi Asansör",
+        "bg": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/ec/Asansor_asagidan.JPG/1280px-Asansor_asagidan.JPG?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "summary": "1907 yılında iki semt arasındaki 155 basamaklı uçurumu aşmak için inşa edilen, körfeze tepeden bakan tarihi kule.",
+        "trivia": "Asansörün bulunduğu sokak, İzmirli ünlü besteci ve şarkıcı Dario Moreno'nun adını taşımaktadır."
+      }
+    ],
+    "levels": [
+      {
+        "id": 1,
+        "city_id": "izmir",
+        "city_name": "İzmir",
+        "sub_id": 1,
+        "title": "İzmir - Bölüm 1: Efes - Celsus Kütüphanesi",
+        "landmark_name": "Efes - Celsus Kütüphanesi",
+        "bg": "https://plus.unsplash.com/premium_photo-1664475023804-22236fbc8a69?auto=format&fit=crop&w=1280&q=80",
+        "wheel": [
+          "K",
+          "A",
+          "T"
+        ],
+        "words": [
+          {
+            "id": "w1",
+            "word": "KAT",
+            "row": 2,
+            "col": 0,
+            "dir": "H"
+          },
+          {
+            "id": "w2",
+            "word": "TAK",
+            "row": 0,
+            "col": 0,
+            "dir": "V"
+          }
+        ],
+        "bonus": [
+          "AK"
+        ],
+        "postcard": {
+          "title": "Efes - Celsus Kütüphanesi",
+          "city": "İzmir",
+          "plate": 35,
+          "summary": "Antik dünyanın en görkemli üçüncü kütüphanesinin devasa mermer sütunları arasında gezerken tarihin fısıltılarını duyabilirsiniz.",
+          "trivia": "Cephedeki 4 kadın heykeli Sophia (Akıl), Arete (Erdem), Ennoia (Kavrayış) ve Episteme (Bilgi) erdemlerini simgeler.",
+          "bg": "https://plus.unsplash.com/premium_photo-1664475023804-22236fbc8a69?auto=format&fit=crop&w=1280&q=80"
+        }
+      },
+      {
+        "id": 2,
+        "city_id": "izmir",
+        "city_name": "İzmir",
+        "sub_id": 2,
+        "title": "İzmir - Bölüm 2: İzmir Saat Kulesi",
+        "landmark_name": "İzmir Saat Kulesi",
+        "bg": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/ad/%C4%B0zmir_Clock_Tower%2C_Konak_Square.jpg/1280px-%C4%B0zmir_Clock_Tower%2C_Konak_Square.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "wheel": [
+          "K",
+          "A",
+          "L",
+          "E"
+        ],
+        "words": [
+          {
+            "id": "w1",
+            "word": "KALE",
+            "row": 1,
+            "col": 0,
+            "dir": "H"
+          },
+          {
+            "id": "w2",
+            "word": "KEL",
+            "row": 1,
+            "col": 0,
+            "dir": "V"
+          },
+          {
+            "id": "w3",
+            "word": "ELA",
+            "row": 0,
+            "col": 2,
+            "dir": "V"
+          }
+        ],
+        "bonus": [
+          "LAK",
+          "LAKE"
+        ],
+        "postcard": {
+          "title": "İzmir Saat Kulesi",
+          "city": "İzmir",
+          "plate": 35,
+          "summary": "1901 yılında Konak Meydanı'nda inşa edilen 25 metre yüksekliğindeki kule, İzmir'in kalbi ve en zarif buluşma noktasıdır.",
+          "trivia": "Kulenin saati Alman İmparatoru II. Wilhelm tarafından Osmanlı'ya hediye edilmiştir ve kurulduğu günden beri hiç durmamıştır.",
+          "bg": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/ad/%C4%B0zmir_Clock_Tower%2C_Konak_Square.jpg/1280px-%C4%B0zmir_Clock_Tower%2C_Konak_Square.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail"
+        }
+      },
+      {
+        "id": 3,
+        "city_id": "izmir",
+        "city_name": "İzmir",
+        "sub_id": 3,
+        "title": "İzmir - Bölüm 3: Şirince Evleri",
+        "landmark_name": "Şirince Evleri",
+        "bg": "https://upload.wikimedia.org/wikipedia/commons/f/f8/Sirincehouses.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+        "wheel": [
+          "M",
+          "A",
+          "A",
+          "S"
+        ],
+        "words": [
+          {
+            "id": "w1",
+            "word": "MASA",
+            "row": 2,
+            "col": 0,
+            "dir": "H"
+          },
+          {
+            "id": "w2",
+            "word": "ASMA",
+            "row": 0,
+            "col": 0,
+            "dir": "V"
+          }
+        ],
+        "bonus": [
+          "AMA",
+          "SAM",
+          "AS"
+        ],
+        "postcard": {
+          "title": "Şirince Evleri",
+          "city": "İzmir",
+          "plate": 35,
+          "summary": "Zeytinlikler ve asma bahçeleri arasında bembeyaz geleneksel konaklarıyla masalsı bir Ege köyü.",
+          "trivia": "Köyün eski adı 'Kırkınca' olup zamanla güzelliğinden ötürü Şirince olarak anılmaya başlanmıştır.",
+          "bg": "https://upload.wikimedia.org/wikipedia/commons/f/f8/Sirincehouses.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled"
+        }
+      },
+      {
+        "id": 4,
+        "city_id": "izmir",
+        "city_name": "İzmir",
+        "sub_id": 4,
+        "title": "İzmir - Bölüm 4: Bergama Akropolü",
+        "landmark_name": "Bergama Akropolü",
+        "bg": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/64/Pergamon_Acropolis.jpg/1280px-Pergamon_Acropolis.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "wheel": [
+          "B",
+          "A",
+          "L",
+          "I",
+          "K"
+        ],
+        "words": [
+          {
+            "id": "w1",
+            "word": "BALIK",
+            "row": 2,
+            "col": 0,
+            "dir": "H"
+          },
+          {
+            "id": "w2",
+            "word": "BAL",
+            "row": 2,
+            "col": 0,
+            "dir": "V"
+          },
+          {
+            "id": "w3",
+            "word": "KIL",
+            "row": 0,
+            "col": 2,
+            "dir": "V"
+          }
+        ],
+        "bonus": [
+          "ALIK",
+          "BAK",
+          "KAL",
+          "AKIL"
+        ],
+        "postcard": {
+          "title": "Bergama Akropolü",
+          "city": "İzmir",
+          "plate": 35,
+          "summary": "Tepelerin zirvesine kurulmuş, dünyanın en dik tiyatrosuna ve antik parşömen kütüphanesine sahip eşsiz Helenistik krallık.",
+          "trivia": "Parşömen kağıdı (Pergamenum), Bergama Krallığı tarafından kütüphanelerindeki kitapları çoğaltmak için icat edilmiştir.",
+          "bg": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/64/Pergamon_Acropolis.jpg/1280px-Pergamon_Acropolis.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail"
+        }
+      },
+      {
+        "id": 5,
+        "city_id": "izmir",
+        "city_name": "İzmir",
+        "sub_id": 5,
+        "title": "İzmir - Bölüm 5: Tarihi Asansör",
+        "landmark_name": "Tarihi Asansör",
+        "bg": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/ec/Asansor_asagidan.JPG/1280px-Asansor_asagidan.JPG?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "wheel": [
+          "K",
+          "İ",
+          "T",
+          "A",
+          "P"
+        ],
+        "words": [
+          {
+            "id": "w1",
+            "word": "KİTAP",
+            "row": 2,
+            "col": 0,
+            "dir": "H"
+          },
+          {
+            "id": "w2",
+            "word": "TAKİP",
+            "row": 0,
+            "col": 0,
+            "dir": "V"
+          },
+          {
+            "id": "w3",
+            "word": "PAK",
+            "row": 1,
+            "col": 3,
+            "dir": "V"
+          }
+        ],
+        "bonus": [
+          "TİP",
+          "PAT",
+          "KAT",
+          "AİT"
+        ],
+        "postcard": {
+          "title": "Tarihi Asansör",
+          "city": "İzmir",
+          "plate": 35,
+          "summary": "1907 yılında iki semt arasındaki 155 basamaklı uçurumu aşmak için inşa edilen, körfeze tepeden bakan tarihi kule.",
+          "trivia": "Asansörün bulunduğu sokak, İzmirli ünlü besteci ve şarkıcı Dario Moreno'nun adını taşımaktadır.",
+          "bg": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/ec/Asansor_asagidan.JPG/1280px-Asansor_asagidan.JPG?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail"
+        }
+      }
+    ]
+  },
+  {
+    "id": "nevsehir",
+    "name": "Nevşehir",
+    "plate": 50,
+    "region_name": "İç Anadolu Bölgesi",
+    "coords": {
+      "x": 395,
+      "y": 205
+    },
+    "description": "Milyonlarca yıllık peri bacaları, gökyüzünü süsleyen rengarenk balonları ve yeraltı şehirleriyle masallar diyarı.",
+    "landmarks": [
+      {
+        "name": "Göreme Sıcak Hava Balonları",
+        "bg": "https://images.unsplash.com/photo-1641128324972-af3212f0f6bd?auto=format&fit=crop&w=1280&q=80",
+        "summary": "Gündoğumunda vadilerin üzerinden yükselen yüzlerce sıcak hava balonu, dünyanın en büyüleyici hava manzaralarından birini sunar.",
+        "trivia": "Kapadokya adı antik Pers dilinde 'Katpatuka' yani 'Güzel Atlar Ülkesi' anlamına gelir."
+      },
+      {
+        "name": "Uçhisar Kalesi",
+        "bg": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/e9/Castle_U%C3%A7hisar_in_Cappadocia.jpg/1280px-Castle_U%C3%A7hisar_in_Cappadocia.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "summary": "Bölgenin en yüksek noktasına oyulmuş dev kaya kütlesi, tüm Kapadokya vadilerine hakim eşsiz bir gözetleme kalesidir.",
+        "trivia": "Kalenin içindeki gizli tünellerin kilometrelerce uzaktaki sığınaklara ve su kaynaklarına ulaştığı bilinmektedir."
+      },
+      {
+        "name": "Paşabağ Peribacaları",
+        "bg": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/0e/Spring_in_Goreme.jpg/1280px-Spring_in_Goreme.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "summary": "Çok başlı mantar formundaki peri bacalarının en görkemlilerinin yer aldığı, keşişlerin inzivaya çekildiği büyüleyici vadi.",
+        "trivia": "Aziz Simeon gibi rahipler, dünyevi işlerden uzaklaşmak için bu peribacalarının içindeki oyuklarda yıllarca yaşamıştır."
+      },
+      {
+        "name": "Derinkuyu Yeraltı Şehri",
+        "bg": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/07/DerinkuyuUndergroundCity02.jpg/1280px-DerinkuyuUndergroundCity02.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "summary": "Yerin 8 kat altına inen, on binlerce insanın aylarca yaşayabileceği havalandırma, ahır ve kiliseleri olan mühendislik harikası.",
+        "trivia": "1963 yılında bir köylünün evini tadilat ederken duvarın arkasında gizli bir oda bulmasıyla tesadüfen keşfedilmiştir."
+      },
+      {
+        "name": "Ihlara Vadisi",
+        "bg": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/1d/Yaprakhisar.jpg/1280px-Yaprakhisar.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "summary": "Melendiz Çayı'nın kanyonu yararak oluşturduğu 14 kilometrelik cennet vadide, kayalara oyulmuş yüzlerce tarihi kilise bulunur.",
+        "trivia": "Vadinin mikroklima iklimi sayesinde çevresindeki bozkırın aksine fıstık ağaçları ve yemyeşil bitki örtüsü yetişir."
+      }
+    ],
+    "levels": [
+      {
+        "id": 6,
+        "city_id": "nevsehir",
+        "city_name": "Nevşehir",
+        "sub_id": 1,
+        "title": "Nevşehir - Bölüm 1: Göreme Sıcak Hava Balonları",
+        "landmark_name": "Göreme Sıcak Hava Balonları",
+        "bg": "https://images.unsplash.com/photo-1641128324972-af3212f0f6bd?auto=format&fit=crop&w=1280&q=80",
+        "wheel": [
+          "D",
+          "E",
+          "N",
+          "İ",
+          "Z"
+        ],
+        "words": [
+          {
+            "id": "w1",
+            "word": "DENİZ",
+            "row": 2,
+            "col": 0,
+            "dir": "H"
+          },
+          {
+            "id": "w2",
+            "word": "DİZ",
+            "row": 2,
+            "col": 0,
+            "dir": "V"
+          },
+          {
+            "id": "w3",
+            "word": "DİN",
+            "row": 0,
+            "col": 2,
+            "dir": "V"
+          }
+        ],
+        "bonus": [
+          "DİZE",
+          "İZ",
+          "İN"
+        ],
+        "postcard": {
+          "title": "Göreme Sıcak Hava Balonları",
+          "city": "Nevşehir",
+          "plate": 50,
+          "summary": "Gündoğumunda vadilerin üzerinden yükselen yüzlerce sıcak hava balonu, dünyanın en büyüleyici hava manzaralarından birini sunar.",
+          "trivia": "Kapadokya adı antik Pers dilinde 'Katpatuka' yani 'Güzel Atlar Ülkesi' anlamına gelir.",
+          "bg": "https://images.unsplash.com/photo-1641128324972-af3212f0f6bd?auto=format&fit=crop&w=1280&q=80"
+        }
+      },
+      {
+        "id": 7,
+        "city_id": "nevsehir",
+        "city_name": "Nevşehir",
+        "sub_id": 2,
+        "title": "Nevşehir - Bölüm 2: Uçhisar Kalesi",
+        "landmark_name": "Uçhisar Kalesi",
+        "bg": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/e9/Castle_U%C3%A7hisar_in_Cappadocia.jpg/1280px-Castle_U%C3%A7hisar_in_Cappadocia.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "wheel": [
+          "R",
+          "O",
+          "M",
+          "A",
+          "N"
+        ],
+        "words": [
+          {
+            "id": "w1",
+            "word": "ROMA",
+            "row": 2,
+            "col": 0,
+            "dir": "H"
+          },
+          {
+            "id": "w2",
+            "word": "ORAN",
+            "row": 1,
+            "col": 0,
+            "dir": "V"
+          },
+          {
+            "id": "w3",
+            "word": "ROMAN",
+            "row": 0,
+            "col": 2,
+            "dir": "V"
+          }
+        ],
+        "bonus": [
+          "MOR",
+          "ONAR",
+          "ROM"
+        ],
+        "postcard": {
+          "title": "Uçhisar Kalesi",
+          "city": "Nevşehir",
+          "plate": 50,
+          "summary": "Bölgenin en yüksek noktasına oyulmuş dev kaya kütlesi, tüm Kapadokya vadilerine hakim eşsiz bir gözetleme kalesidir.",
+          "trivia": "Kalenin içindeki gizli tünellerin kilometrelerce uzaktaki sığınaklara ve su kaynaklarına ulaştığı bilinmektedir.",
+          "bg": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/e9/Castle_U%C3%A7hisar_in_Cappadocia.jpg/1280px-Castle_U%C3%A7hisar_in_Cappadocia.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail"
+        }
+      },
+      {
+        "id": 8,
+        "city_id": "nevsehir",
+        "city_name": "Nevşehir",
+        "sub_id": 3,
+        "title": "Nevşehir - Bölüm 3: Paşabağ Peribacaları",
+        "landmark_name": "Paşabağ Peribacaları",
+        "bg": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/0e/Spring_in_Goreme.jpg/1280px-Spring_in_Goreme.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "wheel": [
+          "K",
+          "K",
+          "U",
+          "Ş",
+          "A"
+        ],
+        "words": [
+          {
+            "id": "w1",
+            "word": "KUŞAK",
+            "row": 1,
+            "col": 0,
+            "dir": "H"
+          },
+          {
+            "id": "w2",
+            "word": "KUŞ",
+            "row": 1,
+            "col": 0,
+            "dir": "V"
+          },
+          {
+            "id": "w3",
+            "word": "AŞK",
+            "row": 0,
+            "col": 2,
+            "dir": "V"
+          }
+        ],
+        "bonus": [
+          "ŞAK",
+          "KAŞ"
+        ],
+        "postcard": {
+          "title": "Paşabağ Peribacaları",
+          "city": "Nevşehir",
+          "plate": 50,
+          "summary": "Çok başlı mantar formundaki peri bacalarının en görkemlilerinin yer aldığı, keşişlerin inzivaya çekildiği büyüleyici vadi.",
+          "trivia": "Aziz Simeon gibi rahipler, dünyevi işlerden uzaklaşmak için bu peribacalarının içindeki oyuklarda yıllarca yaşamıştır.",
+          "bg": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/0e/Spring_in_Goreme.jpg/1280px-Spring_in_Goreme.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail"
+        }
+      },
+      {
+        "id": 9,
+        "city_id": "nevsehir",
+        "city_name": "Nevşehir",
+        "sub_id": 4,
+        "title": "Nevşehir - Bölüm 4: Derinkuyu Yeraltı Şehri",
+        "landmark_name": "Derinkuyu Yeraltı Şehri",
+        "bg": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/07/DerinkuyuUndergroundCity02.jpg/1280px-DerinkuyuUndergroundCity02.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "wheel": [
+          "Y",
+          "A",
+          "A",
+          "Z"
+        ],
+        "words": [
+          {
+            "id": "w1",
+            "word": "YAZ",
+            "row": 1,
+            "col": 0,
+            "dir": "H"
+          },
+          {
+            "id": "w2",
+            "word": "AYAZ",
+            "row": 0,
+            "col": 0,
+            "dir": "V"
+          }
+        ],
+        "bonus": [
+          "AY",
+          "AZ"
+        ],
+        "postcard": {
+          "title": "Derinkuyu Yeraltı Şehri",
+          "city": "Nevşehir",
+          "plate": 50,
+          "summary": "Yerin 8 kat altına inen, on binlerce insanın aylarca yaşayabileceği havalandırma, ahır ve kiliseleri olan mühendislik harikası.",
+          "trivia": "1963 yılında bir köylünün evini tadilat ederken duvarın arkasında gizli bir oda bulmasıyla tesadüfen keşfedilmiştir.",
+          "bg": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/07/DerinkuyuUndergroundCity02.jpg/1280px-DerinkuyuUndergroundCity02.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail"
+        }
+      },
+      {
+        "id": 10,
+        "city_id": "nevsehir",
+        "city_name": "Nevşehir",
+        "sub_id": 5,
+        "title": "Nevşehir - Bölüm 5: Ihlara Vadisi",
+        "landmark_name": "Ihlara Vadisi",
+        "bg": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/1d/Yaprakhisar.jpg/1280px-Yaprakhisar.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "wheel": [
+          "K",
+          "O",
+          "R",
+          "U"
+        ],
+        "words": [
+          {
+            "id": "w1",
+            "word": "KOR",
+            "row": 2,
+            "col": 0,
+            "dir": "H"
+          },
+          {
+            "id": "w2",
+            "word": "OKUR",
+            "row": 1,
+            "col": 0,
+            "dir": "V"
+          },
+          {
+            "id": "w3",
+            "word": "KORU",
+            "row": 0,
+            "col": 2,
+            "dir": "V"
+          }
+        ],
+        "bonus": [
+          "KUR",
+          "ROK",
+          "OK"
+        ],
+        "postcard": {
+          "title": "Ihlara Vadisi",
+          "city": "Nevşehir",
+          "plate": 50,
+          "summary": "Melendiz Çayı'nın kanyonu yararak oluşturduğu 14 kilometrelik cennet vadide, kayalara oyulmuş yüzlerce tarihi kilise bulunur.",
+          "trivia": "Vadinin mikroklima iklimi sayesinde çevresindeki bozkırın aksine fıstık ağaçları ve yemyeşil bitki örtüsü yetişir.",
+          "bg": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/1d/Yaprakhisar.jpg/1280px-Yaprakhisar.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail"
+        }
+      }
+    ]
+  },
+  {
+    "id": "istanbul",
+    "name": "İstanbul",
+    "plate": 34,
+    "region_name": "Marmara Bölgesi",
+    "coords": {
+      "x": 175,
+      "y": 105
+    },
+    "description": "Asya ile Avrupa'yı birbirine bağlayan, üç büyük imparatorluğa başkentlik yapmış dünyanın kalbi.",
+    "landmarks": [
+      {
+        "name": "Galata Kulesi",
+        "bg": "https://images.unsplash.com/photo-1524231757912-21f4fe3a7200?auto=format&fit=crop&w=1280&q=80",
+        "summary": "1348 yılında Cenevizliler tarafından inşa edilen kule, Haliç ve Boğaz'ın eşsiz panoramasına hakim tarihi fenerdir.",
+        "trivia": "17. yüzyılda Hezarfen Ahmed Çelebi takma kanatlarıyla kuleden uçarak Boğaz'ı aşmış ve Üsküdar'a inmiştir."
+      },
+      {
+        "name": "Ayasofya-i Kebir Cami",
+        "bg": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/8b/Hagia_Sophia_light.JPG/1280px-Hagia_Sophia_light.JPG?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "summary": "537 yılında inşa edilen, havada asılı gibi duran devasa kubbesiyle mimarlık tarihinin en büyük başyapıtlarından biri.",
+        "trivia": "Kubbesinin inşasında kullanılan hafif volkanik tuğlaların Rodos Adası'ndan özel olarak getirildiği kaydedilmiştir."
+      },
+      {
+        "name": "15 Temmuz Şehitler Köprüsü",
+        "bg": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/6a/Istanbul%2C_Bosphorus_at_night.jpg/1280px-Istanbul%2C_Bosphorus_at_night.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "summary": "Asya ile Avrupa kıtalarını deniz üzerinden birbirine bağlayan Türkiye'nin ilk kıtalararası asma köprüsü.",
+        "trivia": "Her yıl düzenlenen İstanbul Maratonu sayesinde dünyada iki kıta arasında koşulan tek parkur olma özelliğine sahiptir."
+      },
+      {
+        "name": "Sultanahmet Camii",
+        "bg": "https://images.unsplash.com/photo-1527838832700-5059252407fa?auto=format&fit=crop&w=1280&q=80",
+        "summary": "İç mekanını süsleyen 20 bini aşkın mavi İznik çinisi ve altı zarif minaresiyle 'Mavi Cami' olarak dünya çapında tanınır.",
+        "trivia": "Mimar Sedefkâr Mehmed Ağa, camiyi dönemin en gelişmiş akustik matematik hesaplamalarıyla tasarlamıştır."
+      },
+      {
+        "name": "Kız Kulesi",
+        "bg": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/9b/Istanbul_Bosphorus_Maidens_Tower_IMG_8123_1920.jpg/1280px-Istanbul_Bosphorus_Maidens_Tower_IMG_8123_1920.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "summary": "Boğaz'ın sularında küçük bir adacık üzerinde yükselen, binlerce yıllık efsanelere ev sahipliği yapmış narin kule.",
+        "trivia": "Antik çağlarda Boğaz'dan geçen gemilerden vergi almak amacıyla zincir çekilen bir gümrük istasyonu olarak kullanılmıştır."
+      }
+    ],
+    "levels": [
+      {
+        "id": 11,
+        "city_id": "istanbul",
+        "city_name": "İstanbul",
+        "sub_id": 1,
+        "title": "İstanbul - Bölüm 1: Galata Kulesi",
+        "landmark_name": "Galata Kulesi",
+        "bg": "https://images.unsplash.com/photo-1524231757912-21f4fe3a7200?auto=format&fit=crop&w=1280&q=80",
+        "wheel": [
+          "T",
+          "A",
+          "A",
+          "R",
+          "İ",
+          "H"
+        ],
+        "words": [
+          {
+            "id": "w1",
+            "word": "TARİH",
+            "row": 3,
+            "col": 0,
+            "dir": "H"
+          },
+          {
+            "id": "w2",
+            "word": "HAT",
+            "row": 1,
+            "col": 0,
+            "dir": "V"
+          },
+          {
+            "id": "w3",
+            "word": "AHİR",
+            "row": 0,
+            "col": 2,
+            "dir": "V"
+          }
+        ],
+        "bonus": [
+          "RAHAT",
+          "HART"
+        ],
+        "postcard": {
+          "title": "Galata Kulesi",
+          "city": "İstanbul",
+          "plate": 34,
+          "summary": "1348 yılında Cenevizliler tarafından inşa edilen kule, Haliç ve Boğaz'ın eşsiz panoramasına hakim tarihi fenerdir.",
+          "trivia": "17. yüzyılda Hezarfen Ahmed Çelebi takma kanatlarıyla kuleden uçarak Boğaz'ı aşmış ve Üsküdar'a inmiştir.",
+          "bg": "https://images.unsplash.com/photo-1524231757912-21f4fe3a7200?auto=format&fit=crop&w=1280&q=80"
+        }
+      },
+      {
+        "id": 12,
+        "city_id": "istanbul",
+        "city_name": "İstanbul",
+        "sub_id": 2,
+        "title": "İstanbul - Bölüm 2: Ayasofya-i Kebir Cami",
+        "landmark_name": "Ayasofya-i Kebir Cami",
+        "bg": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/8b/Hagia_Sophia_light.JPG/1280px-Hagia_Sophia_light.JPG?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "wheel": [
+          "Ç",
+          "I",
+          "N",
+          "A",
+          "R"
+        ],
+        "words": [
+          {
+            "id": "w1",
+            "word": "ÇINAR",
+            "row": 0,
+            "col": 0,
+            "dir": "H"
+          },
+          {
+            "id": "w2",
+            "word": "ÇIN",
+            "row": 0,
+            "col": 0,
+            "dir": "V"
+          },
+          {
+            "id": "w3",
+            "word": "NAR",
+            "row": 0,
+            "col": 2,
+            "dir": "V"
+          }
+        ],
+        "bonus": [
+          "ARI",
+          "IRA",
+          "ANI"
+        ],
+        "postcard": {
+          "title": "Ayasofya-i Kebir Cami",
+          "city": "İstanbul",
+          "plate": 34,
+          "summary": "537 yılında inşa edilen, havada asılı gibi duran devasa kubbesiyle mimarlık tarihinin en büyük başyapıtlarından biri.",
+          "trivia": "Kubbesinin inşasında kullanılan hafif volkanik tuğlaların Rodos Adası'ndan özel olarak getirildiği kaydedilmiştir.",
+          "bg": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/8b/Hagia_Sophia_light.JPG/1280px-Hagia_Sophia_light.JPG?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail"
+        }
+      },
+      {
+        "id": 13,
+        "city_id": "istanbul",
+        "city_name": "İstanbul",
+        "sub_id": 3,
+        "title": "İstanbul - Bölüm 3: 15 Temmuz Şehitler Köprüsü",
+        "landmark_name": "15 Temmuz Şehitler Köprüsü",
+        "bg": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/6a/Istanbul%2C_Bosphorus_at_night.jpg/1280px-Istanbul%2C_Bosphorus_at_night.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "wheel": [
+          "B",
+          "A",
+          "A",
+          "H",
+          "R"
+        ],
+        "words": [
+          {
+            "id": "w1",
+            "word": "BAHAR",
+            "row": 0,
+            "col": 0,
+            "dir": "H"
+          },
+          {
+            "id": "w2",
+            "word": "BAR",
+            "row": 0,
+            "col": 0,
+            "dir": "V"
+          },
+          {
+            "id": "w3",
+            "word": "ARA",
+            "row": 0,
+            "col": 3,
+            "dir": "V"
+          }
+        ],
+        "bonus": [
+          "HARA",
+          "RAB",
+          "ABA"
+        ],
+        "postcard": {
+          "title": "15 Temmuz Şehitler Köprüsü",
+          "city": "İstanbul",
+          "plate": 34,
+          "summary": "Asya ile Avrupa kıtalarını deniz üzerinden birbirine bağlayan Türkiye'nin ilk kıtalararası asma köprüsü.",
+          "trivia": "Her yıl düzenlenen İstanbul Maratonu sayesinde dünyada iki kıta arasında koşulan tek parkur olma özelliğine sahiptir.",
+          "bg": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/6a/Istanbul%2C_Bosphorus_at_night.jpg/1280px-Istanbul%2C_Bosphorus_at_night.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail"
+        }
+      },
+      {
+        "id": 14,
+        "city_id": "istanbul",
+        "city_name": "İstanbul",
+        "sub_id": 4,
+        "title": "İstanbul - Bölüm 4: Sultanahmet Camii",
+        "landmark_name": "Sultanahmet Camii",
+        "bg": "https://images.unsplash.com/photo-1527838832700-5059252407fa?auto=format&fit=crop&w=1280&q=80",
+        "wheel": [
+          "G",
+          "Ü",
+          "N",
+          "E",
+          "Ş"
+        ],
+        "words": [
+          {
+            "id": "w1",
+            "word": "GÜNEŞ",
+            "row": 2,
+            "col": 0,
+            "dir": "H"
+          },
+          {
+            "id": "w2",
+            "word": "GÜN",
+            "row": 2,
+            "col": 0,
+            "dir": "V"
+          },
+          {
+            "id": "w3",
+            "word": "GEN",
+            "row": 0,
+            "col": 2,
+            "dir": "V"
+          }
+        ],
+        "bonus": [
+          "ŞEN"
+        ],
+        "postcard": {
+          "title": "Sultanahmet Camii",
+          "city": "İstanbul",
+          "plate": 34,
+          "summary": "İç mekanını süsleyen 20 bini aşkın mavi İznik çinisi ve altı zarif minaresiyle 'Mavi Cami' olarak dünya çapında tanınır.",
+          "trivia": "Mimar Sedefkâr Mehmed Ağa, camiyi dönemin en gelişmiş akustik matematik hesaplamalarıyla tasarlamıştır.",
+          "bg": "https://images.unsplash.com/photo-1527838832700-5059252407fa?auto=format&fit=crop&w=1280&q=80"
+        }
+      },
+      {
+        "id": 15,
+        "city_id": "istanbul",
+        "city_name": "İstanbul",
+        "sub_id": 5,
+        "title": "İstanbul - Bölüm 5: Kız Kulesi",
+        "landmark_name": "Kız Kulesi",
+        "bg": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/9b/Istanbul_Bosphorus_Maidens_Tower_IMG_8123_1920.jpg/1280px-Istanbul_Bosphorus_Maidens_Tower_IMG_8123_1920.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "wheel": [
+          "Ş",
+          "E",
+          "H",
+          "İ",
+          "İ",
+          "R"
+        ],
+        "words": [
+          {
+            "id": "w1",
+            "word": "ŞEHİR",
+            "row": 0,
+            "col": 0,
+            "dir": "H"
+          },
+          {
+            "id": "w2",
+            "word": "ŞER",
+            "row": 0,
+            "col": 0,
+            "dir": "V"
+          },
+          {
+            "id": "w3",
+            "word": "HER",
+            "row": 0,
+            "col": 2,
+            "dir": "V"
+          }
+        ],
+        "bonus": [
+          "ŞİİR",
+          "ER"
+        ],
+        "postcard": {
+          "title": "Kız Kulesi",
+          "city": "İstanbul",
+          "plate": 34,
+          "summary": "Boğaz'ın sularında küçük bir adacık üzerinde yükselen, binlerce yıllık efsanelere ev sahipliği yapmış narin kule.",
+          "trivia": "Antik çağlarda Boğaz'dan geçen gemilerden vergi almak amacıyla zincir çekilen bir gümrük istasyonu olarak kullanılmıştır.",
+          "bg": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/9b/Istanbul_Bosphorus_Maidens_Tower_IMG_8123_1920.jpg/1280px-Istanbul_Bosphorus_Maidens_Tower_IMG_8123_1920.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail"
+        }
+      }
+    ]
+  },
+  {
+    "id": "denizli",
+    "name": "Denizli",
+    "plate": 20,
+    "region_name": "Ege Bölgesi",
+    "coords": {
+      "x": 155,
+      "y": 240
+    },
+    "description": "Bembeyaz pamuk terasları, antik şifa havuzları ve köklü dokumacılık kültürüyle Ege'nin parlayan yıldızı.",
+    "landmarks": [
+      {
+        "name": "Pamukkale Travertenleri",
+        "bg": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/46/TR_Pamukkale_White_Terraces_asv2020-02_img16.jpg/1280px-TR_Pamukkale_White_Terraces_asv2020-02_img16.jpg",
+        "summary": "Termal suların kalsiyum karbonat biriktirmesiyle oluşan bembeyaz basamaklı teraslar doğanın en nadide sanat eseridir.",
+        "trivia": "Teras havuzlarının şifalı suyu yaz-kış 36 derecede sabit kalır."
+      },
+      {
+        "name": "Hierapolis Antik Tiyatrosu",
+        "bg": "https://upload.wikimedia.org/wikipedia/commons/1/19/Pamukkale_Theater_tr.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+        "summary": "Travertenlerin hemen üzerinde yer alan, mitolojik kabartmalarıyla günümüze sapasağlam ulaşmış görkemli Roma tiyatrosu.",
+        "trivia": "Hierapolis, antik dönemde gladyatör dövüşlerinin ve termal tedavilerin ana merkeziydi."
+      },
+      {
+        "name": "Kleopatra Antik Havuzu",
+        "bg": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a0/Cleopatra_Antique_pool_%2815688240214%29.jpg/1280px-Cleopatra_Antique_pool_%2815688240214%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "summary": "M.S. 7. yüzyıldaki depremle yıkılan antik sütunların üzerinde yüzebileceğiniz dünyadaki tek tarihi termal havuz.",
+        "trivia": "Efsaneye göre Mısır Kraliçesi Kleopatra güzelliğini bu havuzun mineral zengini sularına borçludur."
+      },
+      {
+        "name": "Kaklık Mağarası",
+        "bg": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a7/Kakl%C4%B1k_Cave_-_panoramio.jpg/1280px-Kakl%C4%B1k_Cave_-_panoramio.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "summary": "Yeraltında oluşan basamaklı travertenleriyle 'Yeraltı Pamukkalesi' olarak anılan gizemli bir doğa harikası.",
+        "trivia": "Mağaranın içindeki kükürtlü ve berrak suların cilt hastalıklarına iyi geldiği bilinmektedir."
+      },
+      {
+        "name": "Laodikeia Antik Kenti",
+        "bg": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/11/Laodikeia%2C_Turkey_-_panoramio.jpg/1280px-Laodikeia%2C_Turkey_-_panoramio.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "summary": "İncil'de adı geçen yedi büyük kiliseden birine ev sahipliği yapan devasa Helenistik ticaret metropolü.",
+        "trivia": "Antik dönemde Laodikeia'da üretilen siyah yumuşak yün kumaşlar tüm Akdeniz havzasında aranılan bir lükstü."
+      }
+    ],
+    "levels": [
+      {
+        "id": 16,
+        "city_id": "denizli",
+        "city_name": "Denizli",
+        "sub_id": 1,
+        "title": "Denizli - Bölüm 1: Pamukkale Travertenleri",
+        "landmark_name": "Pamukkale Travertenleri",
+        "bg": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/46/TR_Pamukkale_White_Terraces_asv2020-02_img16.jpg/1280px-TR_Pamukkale_White_Terraces_asv2020-02_img16.jpg",
+        "wheel": [
+          "O",
+          "R",
+          "M",
+          "A",
+          "N"
+        ],
+        "words": [
+          {
+            "id": "w1",
+            "word": "ORMAN",
+            "row": 2,
+            "col": 0,
+            "dir": "H"
+          },
+          {
+            "id": "w2",
+            "word": "MOR",
+            "row": 1,
+            "col": 0,
+            "dir": "V"
+          },
+          {
+            "id": "w3",
+            "word": "ROMAN",
+            "row": 0,
+            "col": 2,
+            "dir": "V"
+          }
+        ],
+        "bonus": [
+          "NAR",
+          "ON",
+          "ORA"
+        ],
+        "postcard": {
+          "title": "Pamukkale Travertenleri",
+          "city": "Denizli",
+          "plate": 20,
+          "summary": "Termal suların kalsiyum karbonat biriktirmesiyle oluşan bembeyaz basamaklı teraslar doğanın en nadide sanat eseridir.",
+          "trivia": "Teras havuzlarının şifalı suyu yaz-kış 36 derecede sabit kalır.",
+          "bg": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/46/TR_Pamukkale_White_Terraces_asv2020-02_img16.jpg/1280px-TR_Pamukkale_White_Terraces_asv2020-02_img16.jpg"
+        }
+      },
+      {
+        "id": 17,
+        "city_id": "denizli",
+        "city_name": "Denizli",
+        "sub_id": 2,
+        "title": "Denizli - Bölüm 2: Hierapolis Antik Tiyatrosu",
+        "landmark_name": "Hierapolis Antik Tiyatrosu",
+        "bg": "https://upload.wikimedia.org/wikipedia/commons/1/19/Pamukkale_Theater_tr.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+        "wheel": [
+          "B",
+          "U",
+          "U",
+          "L",
+          "T",
+          "M"
+        ],
+        "words": [
+          {
+            "id": "w1",
+            "word": "BULUT",
+            "row": 1,
+            "col": 0,
+            "dir": "H"
+          },
+          {
+            "id": "w2",
+            "word": "TULU",
+            "row": 0,
+            "col": 1,
+            "dir": "V"
+          },
+          {
+            "id": "w3",
+            "word": "UMUT",
+            "row": 1,
+            "col": 3,
+            "dir": "V"
+          }
+        ],
+        "bonus": [
+          "ULU",
+          "BUT"
+        ],
+        "postcard": {
+          "title": "Hierapolis Antik Tiyatrosu",
+          "city": "Denizli",
+          "plate": 20,
+          "summary": "Travertenlerin hemen üzerinde yer alan, mitolojik kabartmalarıyla günümüze sapasağlam ulaşmış görkemli Roma tiyatrosu.",
+          "trivia": "Hierapolis, antik dönemde gladyatör dövüşlerinin ve termal tedavilerin ana merkeziydi.",
+          "bg": "https://upload.wikimedia.org/wikipedia/commons/1/19/Pamukkale_Theater_tr.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled"
+        }
+      },
+      {
+        "id": 18,
+        "city_id": "denizli",
+        "city_name": "Denizli",
+        "sub_id": 3,
+        "title": "Denizli - Bölüm 3: Kleopatra Antik Havuzu",
+        "landmark_name": "Kleopatra Antik Havuzu",
+        "bg": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a0/Cleopatra_Antique_pool_%2815688240214%29.jpg/1280px-Cleopatra_Antique_pool_%2815688240214%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "wheel": [
+          "Ç",
+          "Ç",
+          "İ",
+          "İ",
+          "E",
+          "K"
+        ],
+        "words": [
+          {
+            "id": "w1",
+            "word": "ÇİÇEK",
+            "row": 2,
+            "col": 0,
+            "dir": "H"
+          },
+          {
+            "id": "w2",
+            "word": "ÇEK",
+            "row": 2,
+            "col": 0,
+            "dir": "V"
+          },
+          {
+            "id": "w3",
+            "word": "KEÇİ",
+            "row": 0,
+            "col": 2,
+            "dir": "V"
+          }
+        ],
+        "bonus": [
+          "İKİ",
+          "ÇEÇ"
+        ],
+        "postcard": {
+          "title": "Kleopatra Antik Havuzu",
+          "city": "Denizli",
+          "plate": 20,
+          "summary": "M.S. 7. yüzyıldaki depremle yıkılan antik sütunların üzerinde yüzebileceğiniz dünyadaki tek tarihi termal havuz.",
+          "trivia": "Efsaneye göre Mısır Kraliçesi Kleopatra güzelliğini bu havuzun mineral zengini sularına borçludur.",
+          "bg": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a0/Cleopatra_Antique_pool_%2815688240214%29.jpg/1280px-Cleopatra_Antique_pool_%2815688240214%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail"
+        }
+      },
+      {
+        "id": 19,
+        "city_id": "denizli",
+        "city_name": "Denizli",
+        "sub_id": 4,
+        "title": "Denizli - Bölüm 4: Kaklık Mağarası",
+        "landmark_name": "Kaklık Mağarası",
+        "bg": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a7/Kakl%C4%B1k_Cave_-_panoramio.jpg/1280px-Kakl%C4%B1k_Cave_-_panoramio.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "wheel": [
+          "S",
+          "E",
+          "E",
+          "V",
+          "G",
+          "İ"
+        ],
+        "words": [
+          {
+            "id": "w1",
+            "word": "SEVGİ",
+            "row": 1,
+            "col": 0,
+            "dir": "H"
+          },
+          {
+            "id": "w2",
+            "word": "SEV",
+            "row": 1,
+            "col": 0,
+            "dir": "V"
+          },
+          {
+            "id": "w3",
+            "word": "EGE",
+            "row": 0,
+            "col": 3,
+            "dir": "V"
+          }
+        ],
+        "bonus": [
+          "EV"
+        ],
+        "postcard": {
+          "title": "Kaklık Mağarası",
+          "city": "Denizli",
+          "plate": 20,
+          "summary": "Yeraltında oluşan basamaklı travertenleriyle 'Yeraltı Pamukkalesi' olarak anılan gizemli bir doğa harikası.",
+          "trivia": "Mağaranın içindeki kükürtlü ve berrak suların cilt hastalıklarına iyi geldiği bilinmektedir.",
+          "bg": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a7/Kakl%C4%B1k_Cave_-_panoramio.jpg/1280px-Kakl%C4%B1k_Cave_-_panoramio.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail"
+        }
+      },
+      {
+        "id": 20,
+        "city_id": "denizli",
+        "city_name": "Denizli",
+        "sub_id": 5,
+        "title": "Denizli - Bölüm 5: Laodikeia Antik Kenti",
+        "landmark_name": "Laodikeia Antik Kenti",
+        "bg": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/11/Laodikeia%2C_Turkey_-_panoramio.jpg/1280px-Laodikeia%2C_Turkey_-_panoramio.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "wheel": [
+          "K",
+          "A",
+          "P",
+          "I"
+        ],
+        "words": [
+          {
+            "id": "w1",
+            "word": "KAPI",
+            "row": 0,
+            "col": 0,
+            "dir": "H"
+          },
+          {
+            "id": "w2",
+            "word": "KAP",
+            "row": 0,
+            "col": 0,
+            "dir": "V"
+          },
+          {
+            "id": "w3",
+            "word": "PAK",
+            "row": 0,
+            "col": 2,
+            "dir": "V"
+          }
+        ],
+        "bonus": [
+          "AK"
+        ],
+        "postcard": {
+          "title": "Laodikeia Antik Kenti",
+          "city": "Denizli",
+          "plate": 20,
+          "summary": "İncil'de adı geçen yedi büyük kiliseden birine ev sahipliği yapan devasa Helenistik ticaret metropolü.",
+          "trivia": "Antik dönemde Laodikeia'da üretilen siyah yumuşak yün kumaşlar tüm Akdeniz havzasında aranılan bir lükstü.",
+          "bg": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/11/Laodikeia%2C_Turkey_-_panoramio.jpg/1280px-Laodikeia%2C_Turkey_-_panoramio.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail"
+        }
+      }
+    ]
+  },
+  {
+    "id": "adiyaman",
+    "name": "Adıyaman",
+    "plate": 2,
+    "region_name": "Güneydoğu Anadolu",
+    "coords": {
+      "x": 560,
+      "y": 245
+    },
+    "description": "2150 metre zirvede gökyüzüne bakan tanrılar tahtı ve Kommagene Krallığı'nın ebedi mirası.",
+    "landmarks": [
+      {
+        "name": "Nemrut Dağı Heykelleri",
+        "bg": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/3b/APOLLON_NEMRUT_MOUNTAIN.jpg/1280px-APOLLON_NEMRUT_MOUNTAIN.jpg",
+        "summary": "Gündoğumu ve günbatımının en büyüleyici izlendiği zirvede, devasa kral ve tanrı heykelleri doğu ile batıyı buluşturur.",
+        "trivia": "Nemrut'taki aslan horoskopu kabartması, tarihin bilinen en eski astrolojik takvimidir."
+      },
+      {
+        "name": "Cendere Köprüsü",
+        "bg": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/5d/Severus_Bridge_%28CENDERE_K%C3%96PR%C3%9CS%C3%9C%29.jpg/1280px-Severus_Bridge_%28CENDERE_K%C3%96PR%C3%9CS%C3%9C%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "summary": "Roma İmparatoru Septimius Severus döneminde harçsız olarak 92 devasa blok taşla inşa edilen 1800 yıllık köprü.",
+        "trivia": "Dünyanın günümüze kadar ayakta kalmış ve araç trafiğine en uzun süre hizmet etmiş en eski taş köprülerinden biridir."
+      },
+      {
+        "name": "Arsemia Ören Yeri",
+        "bg": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/1b/Turecko_Arsameia_%2804%29.jpg/1280px-Turecko_Arsameia_%2804%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "summary": "Kommagene krallarının yazlık başkenti; kayalara oyulmuş kabartmaları ve gizemli derin tünelleriyle meşhurdur.",
+        "trivia": "Kral I. Antiochos ile Herakles'in el sıkışmasını betimleyen kabartma, antik dostluğun en önemli simgesidir."
+      },
+      {
+        "name": "Karakuş Tümülüsü",
+        "bg": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/87/Tumulus_of_Karakus_01.jpg/1280px-Tumulus_of_Karakus_01.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "summary": "Sütun üzerindeki kartal heykeliyle tanınan, Kommagene kraliyet kadınlarına ait anıtsal mezar anıtı.",
+        "trivia": "Sütundaki kartal heykeli gücü ve göksel korumayı simgeler."
+      },
+      {
+        "name": "Kahta Kalesi",
+        "bg": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/99/Arsameia_%284955068809%29.jpg/1280px-Arsameia_%284955068809%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "summary": "Sarp kayalıkların üzerine kartal yuvası gibi kurulmuş, Memlük ve Selçuklu izlerini taşıyan savunma kalesi.",
+        "trivia": "Kaleden nehre inen gizli su yolları ve güvercinlikler günümüze kadar korunmuştur."
+      }
+    ],
+    "levels": [
+      {
+        "id": 21,
+        "city_id": "adiyaman",
+        "city_name": "Adıyaman",
+        "sub_id": 1,
+        "title": "Adıyaman - Bölüm 1: Nemrut Dağı Heykelleri",
+        "landmark_name": "Nemrut Dağı Heykelleri",
+        "bg": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/3b/APOLLON_NEMRUT_MOUNTAIN.jpg/1280px-APOLLON_NEMRUT_MOUNTAIN.jpg",
+        "wheel": [
+          "D",
+          "O",
+          "S",
+          "T",
+          "K"
+        ],
+        "words": [
+          {
+            "id": "w1",
+            "word": "DOST",
+            "row": 1,
+            "col": 0,
+            "dir": "H"
+          },
+          {
+            "id": "w2",
+            "word": "TOS",
+            "row": 0,
+            "col": 1,
+            "dir": "V"
+          },
+          {
+            "id": "w3",
+            "word": "OT",
+            "row": 0,
+            "col": 3,
+            "dir": "V"
+          }
+        ],
+        "bonus": [
+          "KOD",
+          "TOK"
+        ],
+        "postcard": {
+          "title": "Nemrut Dağı Heykelleri",
+          "city": "Adıyaman",
+          "plate": 2,
+          "summary": "Gündoğumu ve günbatımının en büyüleyici izlendiği zirvede, devasa kral ve tanrı heykelleri doğu ile batıyı buluşturur.",
+          "trivia": "Nemrut'taki aslan horoskopu kabartması, tarihin bilinen en eski astrolojik takvimidir.",
+          "bg": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/3b/APOLLON_NEMRUT_MOUNTAIN.jpg/1280px-APOLLON_NEMRUT_MOUNTAIN.jpg"
+        }
+      },
+      {
+        "id": 22,
+        "city_id": "adiyaman",
+        "city_name": "Adıyaman",
+        "sub_id": 2,
+        "title": "Adıyaman - Bölüm 2: Cendere Köprüsü",
+        "landmark_name": "Cendere Köprüsü",
+        "bg": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/5d/Severus_Bridge_%28CENDERE_K%C3%96PR%C3%9CS%C3%9C%29.jpg/1280px-Severus_Bridge_%28CENDERE_K%C3%96PR%C3%9CS%C3%9C%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "wheel": [
+          "İ",
+          "N",
+          "N",
+          "S",
+          "A",
+          "I"
+        ],
+        "words": [
+          {
+            "id": "w1",
+            "word": "İNSAN",
+            "row": 2,
+            "col": 0,
+            "dir": "H"
+          },
+          {
+            "id": "w2",
+            "word": "SAN",
+            "row": 0,
+            "col": 1,
+            "dir": "V"
+          },
+          {
+            "id": "w3",
+            "word": "ANI",
+            "row": 2,
+            "col": 3,
+            "dir": "V"
+          }
+        ],
+        "bonus": [
+          "AN",
+          "AS"
+        ],
+        "postcard": {
+          "title": "Cendere Köprüsü",
+          "city": "Adıyaman",
+          "plate": 2,
+          "summary": "Roma İmparatoru Septimius Severus döneminde harçsız olarak 92 devasa blok taşla inşa edilen 1800 yıllık köprü.",
+          "trivia": "Dünyanın günümüze kadar ayakta kalmış ve araç trafiğine en uzun süre hizmet etmiş en eski taş köprülerinden biridir.",
+          "bg": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/5d/Severus_Bridge_%28CENDERE_K%C3%96PR%C3%9CS%C3%9C%29.jpg/1280px-Severus_Bridge_%28CENDERE_K%C3%96PR%C3%9CS%C3%9C%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail"
+        }
+      },
+      {
+        "id": 23,
+        "city_id": "adiyaman",
+        "city_name": "Adıyaman",
+        "sub_id": 3,
+        "title": "Adıyaman - Bölüm 3: Arsemia Ören Yeri",
+        "landmark_name": "Arsemia Ören Yeri",
+        "bg": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/1b/Turecko_Arsameia_%2804%29.jpg/1280px-Turecko_Arsameia_%2804%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "wheel": [
+          "D",
+          "A",
+          "A",
+          "L",
+          "G",
+          "Ğ"
+        ],
+        "words": [
+          {
+            "id": "w1",
+            "word": "DALGA",
+            "row": 1,
+            "col": 0,
+            "dir": "H"
+          },
+          {
+            "id": "w2",
+            "word": "ADA",
+            "row": 0,
+            "col": 0,
+            "dir": "V"
+          },
+          {
+            "id": "w3",
+            "word": "ALA",
+            "row": 0,
+            "col": 2,
+            "dir": "V"
+          }
+        ],
+        "bonus": [
+          "ALG",
+          "DAĞ"
+        ],
+        "postcard": {
+          "title": "Arsemia Ören Yeri",
+          "city": "Adıyaman",
+          "plate": 2,
+          "summary": "Kommagene krallarının yazlık başkenti; kayalara oyulmuş kabartmaları ve gizemli derin tünelleriyle meşhurdur.",
+          "trivia": "Kral I. Antiochos ile Herakles'in el sıkışmasını betimleyen kabartma, antik dostluğun en önemli simgesidir.",
+          "bg": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/1b/Turecko_Arsameia_%2804%29.jpg/1280px-Turecko_Arsameia_%2804%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail"
+        }
+      },
+      {
+        "id": 24,
+        "city_id": "adiyaman",
+        "city_name": "Adıyaman",
+        "sub_id": 4,
+        "title": "Adıyaman - Bölüm 4: Karakuş Tümülüsü",
+        "landmark_name": "Karakuş Tümülüsü",
+        "bg": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/87/Tumulus_of_Karakus_01.jpg/1280px-Tumulus_of_Karakus_01.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "wheel": [
+          "G",
+          "G",
+          "Ö",
+          "L",
+          "E",
+          "E"
+        ],
+        "words": [
+          {
+            "id": "w1",
+            "word": "GÖLGE",
+            "row": 1,
+            "col": 0,
+            "dir": "H"
+          },
+          {
+            "id": "w2",
+            "word": "GÖL",
+            "row": 1,
+            "col": 0,
+            "dir": "V"
+          },
+          {
+            "id": "w3",
+            "word": "EGE",
+            "row": 0,
+            "col": 3,
+            "dir": "V"
+          }
+        ],
+        "bonus": [
+          "ÖGE"
+        ],
+        "postcard": {
+          "title": "Karakuş Tümülüsü",
+          "city": "Adıyaman",
+          "plate": 2,
+          "summary": "Sütun üzerindeki kartal heykeliyle tanınan, Kommagene kraliyet kadınlarına ait anıtsal mezar anıtı.",
+          "trivia": "Sütundaki kartal heykeli gücü ve göksel korumayı simgeler.",
+          "bg": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/87/Tumulus_of_Karakus_01.jpg/1280px-Tumulus_of_Karakus_01.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail"
+        }
+      },
+      {
+        "id": 25,
+        "city_id": "adiyaman",
+        "city_name": "Adıyaman",
+        "sub_id": 5,
+        "title": "Adıyaman - Bölüm 5: Kahta Kalesi",
+        "landmark_name": "Kahta Kalesi",
+        "bg": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/99/Arsameia_%284955068809%29.jpg/1280px-Arsameia_%284955068809%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "wheel": [
+          "B",
+          "A",
+          "R",
+          "I",
+          "Ş"
+        ],
+        "words": [
+          {
+            "id": "w1",
+            "word": "BARIŞ",
+            "row": 1,
+            "col": 0,
+            "dir": "H"
+          },
+          {
+            "id": "w2",
+            "word": "BAŞ",
+            "row": 1,
+            "col": 0,
+            "dir": "V"
+          },
+          {
+            "id": "w3",
+            "word": "ARI",
+            "row": 0,
+            "col": 2,
+            "dir": "V"
+          }
+        ],
+        "bonus": [
+          "AŞ",
+          "ARŞ"
+        ],
+        "postcard": {
+          "title": "Kahta Kalesi",
+          "city": "Adıyaman",
+          "plate": 2,
+          "summary": "Sarp kayalıkların üzerine kartal yuvası gibi kurulmuş, Memlük ve Selçuklu izlerini taşıyan savunma kalesi.",
+          "trivia": "Kaleden nehre inen gizli su yolları ve güvercinlikler günümüze kadar korunmuştur.",
+          "bg": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/99/Arsameia_%284955068809%29.jpg/1280px-Arsameia_%284955068809%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail"
+        }
+      }
+    ]
+  },
+  {
+    "id": "trabzon",
+    "name": "Trabzon",
+    "plate": 61,
+    "region_name": "Karadeniz Bölgesi",
+    "coords": {
+      "x": 590,
+      "y": 105
+    },
+    "description": "Zümrüt yeşili yaylaları, sisli dağları ve Karadağ'ın sarp kayalıklarına oyulmuş Sümela'nın vatanı.",
+    "landmarks": [
+      {
+        "name": "Sümela Manastırı",
+        "bg": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/db/Sumela_From_Across_Valley.JPG/1280px-Sumela_From_Across_Valley.JPG",
+        "summary": "Deniz seviyesinden 1150 metre yüksekte, Karadağ'ın dik yamacına oyulmuş gökyüzünde asılı duran mucizevi manastır.",
+        "trivia": "Manastırın içindeki ana kaya kilisesinin freskleri asırlardır canlı renklerini korumaktadır."
+      },
+      {
+        "name": "Uzungöl",
+        "bg": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/7e/Uzung%C3%B6l_lake_and_town.jpg/1280px-Uzung%C3%B6l_lake_and_town.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "summary": "Dağ yamacından düşen kayaların Haldizen Deresi'nin önünü kapatmasıyla oluşan masalsı krater gölü.",
+        "trivia": "Göl çevresindeki zengin ladin ormanları Kafkas yaban hayatının önemli bir sığınağıdır."
+      },
+      {
+        "name": "Trabzon Ayasofyası",
+        "bg": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/d7/Panoramic_view_of_the_Hagia_Sophia_of_Trabzon.jpg/1280px-Panoramic_view_of_the_Hagia_Sophia_of_Trabzon.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "summary": "13. yüzyılda Trabzon İmparatorluğu döneminde inşa edilen, taş kabartmaları ve freskleriyle ünlü tarihi yapı.",
+        "trivia": "Güney cephesindeki Adem ile Havva'nın yaratılışını anlatan taş friz Orta Çağ heykel sanatının nadir örneklerindendir."
+      },
+      {
+        "name": "Atatürk Köşkü",
+        "bg": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/61/Trabzon_Museum_0039.jpg/1280px-Trabzon_Museum_0039.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "summary": "Soğuksu çam koruluğu içinde 1890 yılında inşa edilen bembeyaz Art Nouveau tarzı görkemli köşk.",
+        "trivia": "Gazi Mustafa Kemal Atatürk, 1937 yılındaki Trabzon ziyaretinde tüm mal varlığını milletine bağışlama kararını bu köşkte almıştır."
+      },
+      {
+        "name": "Boztepe",
+        "bg": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b7/Trabzon%2Charbour.jpg/1280px-Trabzon%2Charbour.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "summary": "Karadeniz'in sonsuz maviliği ile Trabzon kent merkezini panoramik olarak kucaklayan tarihi tepe.",
+        "trivia": "Semaver çayı eşliğinde batan güneşi izlemek asırlardır şehrin en sevilen ritüelidir."
+      }
+    ],
+    "levels": [
+      {
+        "id": 26,
+        "city_id": "trabzon",
+        "city_name": "Trabzon",
+        "sub_id": 1,
+        "title": "Trabzon - Bölüm 1: Sümela Manastırı",
+        "landmark_name": "Sümela Manastırı",
+        "bg": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/db/Sumela_From_Across_Valley.JPG/1280px-Sumela_From_Across_Valley.JPG",
+        "wheel": [
+          "M",
+          "U",
+          "U",
+          "T",
+          "L"
+        ],
+        "words": [
+          {
+            "id": "w1",
+            "word": "MUTLU",
+            "row": 1,
+            "col": 0,
+            "dir": "H"
+          },
+          {
+            "id": "w2",
+            "word": "TUL",
+            "row": 0,
+            "col": 1,
+            "dir": "V"
+          },
+          {
+            "id": "w3",
+            "word": "ULU",
+            "row": 0,
+            "col": 3,
+            "dir": "V"
+          }
+        ],
+        "bonus": [
+          "UT"
+        ],
+        "postcard": {
+          "title": "Sümela Manastırı",
+          "city": "Trabzon",
+          "plate": 61,
+          "summary": "Deniz seviyesinden 1150 metre yüksekte, Karadağ'ın dik yamacına oyulmuş gökyüzünde asılı duran mucizevi manastır.",
+          "trivia": "Manastırın içindeki ana kaya kilisesinin freskleri asırlardır canlı renklerini korumaktadır.",
+          "bg": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/db/Sumela_From_Across_Valley.JPG/1280px-Sumela_From_Across_Valley.JPG"
+        }
+      },
+      {
+        "id": 27,
+        "city_id": "trabzon",
+        "city_name": "Trabzon",
+        "sub_id": 2,
+        "title": "Trabzon - Bölüm 2: Uzungöl",
+        "landmark_name": "Uzungöl",
+        "bg": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/7e/Uzung%C3%B6l_lake_and_town.jpg/1280px-Uzung%C3%B6l_lake_and_town.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "wheel": [
+          "U",
+          "U",
+          "U",
+          "M",
+          "T",
+          "T",
+          "L"
+        ],
+        "words": [
+          {
+            "id": "w1",
+            "word": "UMUTLU",
+            "row": 1,
+            "col": 0,
+            "dir": "H"
+          },
+          {
+            "id": "w2",
+            "word": "UMUT",
+            "row": 1,
+            "col": 0,
+            "dir": "V"
+          },
+          {
+            "id": "w3",
+            "word": "TUT",
+            "row": 0,
+            "col": 2,
+            "dir": "V"
+          }
+        ],
+        "bonus": [
+          "MUT"
+        ],
+        "postcard": {
+          "title": "Uzungöl",
+          "city": "Trabzon",
+          "plate": 61,
+          "summary": "Dağ yamacından düşen kayaların Haldizen Deresi'nin önünü kapatmasıyla oluşan masalsı krater gölü.",
+          "trivia": "Göl çevresindeki zengin ladin ormanları Kafkas yaban hayatının önemli bir sığınağıdır.",
+          "bg": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/7e/Uzung%C3%B6l_lake_and_town.jpg/1280px-Uzung%C3%B6l_lake_and_town.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail"
+        }
+      },
+      {
+        "id": 28,
+        "city_id": "trabzon",
+        "city_name": "Trabzon",
+        "sub_id": 3,
+        "title": "Trabzon - Bölüm 3: Trabzon Ayasofyası",
+        "landmark_name": "Trabzon Ayasofyası",
+        "bg": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/d7/Panoramic_view_of_the_Hagia_Sophia_of_Trabzon.jpg/1280px-Panoramic_view_of_the_Hagia_Sophia_of_Trabzon.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "wheel": [
+          "H",
+          "U",
+          "U",
+          "Z",
+          "R",
+          "O"
+        ],
+        "words": [
+          {
+            "id": "w1",
+            "word": "HUZUR",
+            "row": 2,
+            "col": 0,
+            "dir": "H"
+          },
+          {
+            "id": "w2",
+            "word": "RUH",
+            "row": 0,
+            "col": 0,
+            "dir": "V"
+          },
+          {
+            "id": "w3",
+            "word": "ZOR",
+            "row": 2,
+            "col": 2,
+            "dir": "V"
+          }
+        ],
+        "bonus": [
+          "HUR"
+        ],
+        "postcard": {
+          "title": "Trabzon Ayasofyası",
+          "city": "Trabzon",
+          "plate": 61,
+          "summary": "13. yüzyılda Trabzon İmparatorluğu döneminde inşa edilen, taş kabartmaları ve freskleriyle ünlü tarihi yapı.",
+          "trivia": "Güney cephesindeki Adem ile Havva'nın yaratılışını anlatan taş friz Orta Çağ heykel sanatının nadir örneklerindendir.",
+          "bg": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/d7/Panoramic_view_of_the_Hagia_Sophia_of_Trabzon.jpg/1280px-Panoramic_view_of_the_Hagia_Sophia_of_Trabzon.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail"
+        }
+      },
+      {
+        "id": 29,
+        "city_id": "trabzon",
+        "city_name": "Trabzon",
+        "sub_id": 4,
+        "title": "Trabzon - Bölüm 4: Atatürk Köşkü",
+        "landmark_name": "Atatürk Köşkü",
+        "bg": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/61/Trabzon_Museum_0039.jpg/1280px-Trabzon_Museum_0039.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "wheel": [
+          "K",
+          "Ö",
+          "P",
+          "R",
+          "Ü"
+        ],
+        "words": [
+          {
+            "id": "w1",
+            "word": "KÖPRÜ",
+            "row": 1,
+            "col": 0,
+            "dir": "H"
+          },
+          {
+            "id": "w2",
+            "word": "KÖP",
+            "row": 1,
+            "col": 0,
+            "dir": "V"
+          },
+          {
+            "id": "w3",
+            "word": "ÖRK",
+            "row": 0,
+            "col": 3,
+            "dir": "V"
+          }
+        ],
+        "bonus": [
+          "PÜR"
+        ],
+        "postcard": {
+          "title": "Atatürk Köşkü",
+          "city": "Trabzon",
+          "plate": 61,
+          "summary": "Soğuksu çam koruluğu içinde 1890 yılında inşa edilen bembeyaz Art Nouveau tarzı görkemli köşk.",
+          "trivia": "Gazi Mustafa Kemal Atatürk, 1937 yılındaki Trabzon ziyaretinde tüm mal varlığını milletine bağışlama kararını bu köşkte almıştır.",
+          "bg": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/61/Trabzon_Museum_0039.jpg/1280px-Trabzon_Museum_0039.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail"
+        }
+      },
+      {
+        "id": 30,
+        "city_id": "trabzon",
+        "city_name": "Trabzon",
+        "sub_id": 5,
+        "title": "Trabzon - Bölüm 5: Boztepe",
+        "landmark_name": "Boztepe",
+        "bg": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b7/Trabzon%2Charbour.jpg/1280px-Trabzon%2Charbour.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "wheel": [
+          "N",
+          "E",
+          "H",
+          "İ",
+          "İ",
+          "R"
+        ],
+        "words": [
+          {
+            "id": "w1",
+            "word": "NEHİR",
+            "row": 2,
+            "col": 0,
+            "dir": "H"
+          },
+          {
+            "id": "w2",
+            "word": "HER",
+            "row": 1,
+            "col": 1,
+            "dir": "V"
+          },
+          {
+            "id": "w3",
+            "word": "ERİ",
+            "row": 0,
+            "col": 3,
+            "dir": "V"
+          }
+        ],
+        "bonus": [
+          "İRİ",
+          "İN"
+        ],
+        "postcard": {
+          "title": "Boztepe",
+          "city": "Trabzon",
+          "plate": 61,
+          "summary": "Karadeniz'in sonsuz maviliği ile Trabzon kent merkezini panoramik olarak kucaklayan tarihi tepe.",
+          "trivia": "Semaver çayı eşliğinde batan güneşi izlemek asırlardır şehrin en sevilen ritüelidir.",
+          "bg": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b7/Trabzon%2Charbour.jpg/1280px-Trabzon%2Charbour.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail"
+        }
+      }
+    ]
+  },
+  {
+    "id": "sanliurfa",
+    "name": "Şanlıurfa",
+    "plate": 63,
+    "region_name": "Güneydoğu Anadolu",
+    "coords": {
+      "x": 580,
+      "y": 285
+    },
+    "description": "Tarihin sıfır noktası Göbeklitepe, efsanevi Balıklıgöl ve kadim peygamberler şehri.",
+    "landmarks": [
+      {
+        "name": "Göbeklitepe Dikilitaşları",
+        "bg": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/ec/G%C3%B6bekli_Tepe.jpg/1280px-G%C3%B6bekli_Tepe.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "summary": "M.Ö. 10.000 yılına tarihlenen T biçimli hayvan kabartmalı dikilitaşlar, insanlık tarihinin bilinen ilk anıtsal tapınağıdır.",
+        "trivia": "Göbeklitepe, Mısır Piramitleri'nden 7.000 yıl, Stonehenge'den 6.000 yıl daha eskidir."
+      },
+      {
+        "name": "Balıklıgöl (Halil-ür Rahman)",
+        "bg": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/70/Bal%C4%B1kl%C4%B1g%C3%B6l%2C_Urfa_2015.jpg/1280px-Bal%C4%B1kl%C4%B1g%C3%B6l%2C_Urfa_2015.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "summary": "Hz. İbrahim'in ateşe atıldığında ateşin suya, odunların balığa dönüştüğüne inanılan kutsal göl.",
+        "trivia": "Göldeki balıklar kutsal kabul edildiği için tutulmaz ve asırlardır özenle beslenir."
+      },
+      {
+        "name": "Harran Kümbet Evleri",
+        "bg": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/f0/Harran_Beehive_houses_196.jpg/1280px-Harran_Beehive_houses_196.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "summary": "Konik kubbeli kerpiç evleri ve dünyanın ilk üniversitelerinden birinin kalıntılarıyla ünlü tarihi çöl vahası.",
+        "trivia": "Harran evlerinin harcında yumurta akı ve saman kullanılmış olup yazın serin, kışın sıcacık tutar."
+      },
+      {
+        "name": "Şanlıurfa Kalesi",
+        "bg": "https://upload.wikimedia.org/wikipedia/commons/e/ea/Sanliurfa_Castle.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+        "summary": "Balıklıgöl'e tepeden bakan ve üzerinde Korint başlıklı iki devasa anıtsal sütun bulunan tarihi kale.",
+        "trivia": "Halk arasında 'Mancınık Sütunları' olarak bilinen sütunların Hz. İbrahim'i ateşe atmak için kullanıldığı rivayet edilir."
+      },
+      {
+        "name": "Halfeti Batık Şehir",
+        "bg": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/f2/Halfeti_on_the_Euphrates.jpg/1280px-Halfeti_on_the_Euphrates.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "summary": "Birecik Barajı gölü altında kalan tarihi taş evleri, minaresi sudan çıkan camisi ve efsanevi siyah gülüyle ünlü saklı cennet.",
+        "trivia": "Dünyada yalnızca Halfeti'nin mikroklimalı toprağında doğal olarak simsiyah gül (Karagül) yetişmektedir."
+      }
+    ],
+    "levels": [
+      {
+        "id": 31,
+        "city_id": "sanliurfa",
+        "city_name": "Şanlıurfa",
+        "sub_id": 1,
+        "title": "Şanlıurfa - Bölüm 1: Göbeklitepe Dikilitaşları",
+        "landmark_name": "Göbeklitepe Dikilitaşları",
+        "bg": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/ec/G%C3%B6bekli_Tepe.jpg/1280px-G%C3%B6bekli_Tepe.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "wheel": [
+          "A",
+          "A",
+          "D",
+          "L",
+          "E",
+          "T"
+        ],
+        "words": [
+          {
+            "id": "w1",
+            "word": "ADALET",
+            "row": 2,
+            "col": 0,
+            "dir": "H"
+          },
+          {
+            "id": "w2",
+            "word": "ADA",
+            "row": 2,
+            "col": 0,
+            "dir": "V"
+          },
+          {
+            "id": "w3",
+            "word": "EDA",
+            "row": 0,
+            "col": 2,
+            "dir": "V"
+          }
+        ],
+        "bonus": [
+          "AT"
+        ],
+        "postcard": {
+          "title": "Göbeklitepe Dikilitaşları",
+          "city": "Şanlıurfa",
+          "plate": 63,
+          "summary": "M.Ö. 10.000 yılına tarihlenen T biçimli hayvan kabartmalı dikilitaşlar, insanlık tarihinin bilinen ilk anıtsal tapınağıdır.",
+          "trivia": "Göbeklitepe, Mısır Piramitleri'nden 7.000 yıl, Stonehenge'den 6.000 yıl daha eskidir.",
+          "bg": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/ec/G%C3%B6bekli_Tepe.jpg/1280px-G%C3%B6bekli_Tepe.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail"
+        }
+      },
+      {
+        "id": 32,
+        "city_id": "sanliurfa",
+        "city_name": "Şanlıurfa",
+        "sub_id": 2,
+        "title": "Şanlıurfa - Bölüm 2: Balıklıgöl (Halil-ür Rahman)",
+        "landmark_name": "Balıklıgöl (Halil-ür Rahman)",
+        "bg": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/70/Bal%C4%B1kl%C4%B1g%C3%B6l%2C_Urfa_2015.jpg/1280px-Bal%C4%B1kl%C4%B1g%C3%B6l%2C_Urfa_2015.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "wheel": [
+          "K",
+          "A",
+          "N",
+          "N",
+          "Y",
+          "O"
+        ],
+        "words": [
+          {
+            "id": "w1",
+            "word": "KANYON",
+            "row": 2,
+            "col": 0,
+            "dir": "H"
+          },
+          {
+            "id": "w2",
+            "word": "KAN",
+            "row": 2,
+            "col": 0,
+            "dir": "V"
+          },
+          {
+            "id": "w3",
+            "word": "YAN",
+            "row": 0,
+            "col": 2,
+            "dir": "V"
+          }
+        ],
+        "bonus": [
+          "OYA",
+          "ON"
+        ],
+        "postcard": {
+          "title": "Balıklıgöl (Halil-ür Rahman)",
+          "city": "Şanlıurfa",
+          "plate": 63,
+          "summary": "Hz. İbrahim'in ateşe atıldığında ateşin suya, odunların balığa dönüştüğüne inanılan kutsal göl.",
+          "trivia": "Göldeki balıklar kutsal kabul edildiği için tutulmaz ve asırlardır özenle beslenir.",
+          "bg": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/70/Bal%C4%B1kl%C4%B1g%C3%B6l%2C_Urfa_2015.jpg/1280px-Bal%C4%B1kl%C4%B1g%C3%B6l%2C_Urfa_2015.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail"
+        }
+      },
+      {
+        "id": 33,
+        "city_id": "sanliurfa",
+        "city_name": "Şanlıurfa",
+        "sub_id": 3,
+        "title": "Şanlıurfa - Bölüm 3: Harran Kümbet Evleri",
+        "landmark_name": "Harran Kümbet Evleri",
+        "bg": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/f0/Harran_Beehive_houses_196.jpg/1280px-Harran_Beehive_houses_196.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "wheel": [
+          "V",
+          "O",
+          "L",
+          "K",
+          "A",
+          "N"
+        ],
+        "words": [
+          {
+            "id": "w1",
+            "word": "VOLKAN",
+            "row": 2,
+            "col": 0,
+            "dir": "H"
+          },
+          {
+            "id": "w2",
+            "word": "KOL",
+            "row": 1,
+            "col": 1,
+            "dir": "V"
+          },
+          {
+            "id": "w3",
+            "word": "LAK",
+            "row": 0,
+            "col": 3,
+            "dir": "V"
+          }
+        ],
+        "bonus": [
+          "VAN",
+          "OVA"
+        ],
+        "postcard": {
+          "title": "Harran Kümbet Evleri",
+          "city": "Şanlıurfa",
+          "plate": 63,
+          "summary": "Konik kubbeli kerpiç evleri ve dünyanın ilk üniversitelerinden birinin kalıntılarıyla ünlü tarihi çöl vahası.",
+          "trivia": "Harran evlerinin harcında yumurta akı ve saman kullanılmış olup yazın serin, kışın sıcacık tutar.",
+          "bg": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/f0/Harran_Beehive_houses_196.jpg/1280px-Harran_Beehive_houses_196.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail"
+        }
+      },
+      {
+        "id": 34,
+        "city_id": "sanliurfa",
+        "city_name": "Şanlıurfa",
+        "sub_id": 4,
+        "title": "Şanlıurfa - Bölüm 4: Şanlıurfa Kalesi",
+        "landmark_name": "Şanlıurfa Kalesi",
+        "bg": "https://upload.wikimedia.org/wikipedia/commons/e/ea/Sanliurfa_Castle.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+        "wheel": [
+          "Ş",
+          "E",
+          "E",
+          "L",
+          "L",
+          "A"
+        ],
+        "words": [
+          {
+            "id": "w1",
+            "word": "ŞELALE",
+            "row": 3,
+            "col": 0,
+            "dir": "H"
+          },
+          {
+            "id": "w2",
+            "word": "LALE",
+            "row": 0,
+            "col": 1,
+            "dir": "V"
+          },
+          {
+            "id": "w3",
+            "word": "ELA",
+            "row": 1,
+            "col": 3,
+            "dir": "V"
+          }
+        ],
+        "bonus": [
+          "ŞAL"
+        ],
+        "postcard": {
+          "title": "Şanlıurfa Kalesi",
+          "city": "Şanlıurfa",
+          "plate": 63,
+          "summary": "Balıklıgöl'e tepeden bakan ve üzerinde Korint başlıklı iki devasa anıtsal sütun bulunan tarihi kale.",
+          "trivia": "Halk arasında 'Mancınık Sütunları' olarak bilinen sütunların Hz. İbrahim'i ateşe atmak için kullanıldığı rivayet edilir.",
+          "bg": "https://upload.wikimedia.org/wikipedia/commons/e/ea/Sanliurfa_Castle.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled"
+        }
+      },
+      {
+        "id": 35,
+        "city_id": "sanliurfa",
+        "city_name": "Şanlıurfa",
+        "sub_id": 5,
+        "title": "Şanlıurfa - Bölüm 5: Halfeti Batık Şehir",
+        "landmark_name": "Halfeti Batık Şehir",
+        "bg": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/f2/Halfeti_on_the_Euphrates.jpg/1280px-Halfeti_on_the_Euphrates.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "wheel": [
+          "G",
+          "U",
+          "U",
+          "R",
+          "R",
+          "H"
+        ],
+        "words": [
+          {
+            "id": "w1",
+            "word": "GURUR",
+            "row": 1,
+            "col": 0,
+            "dir": "H"
+          },
+          {
+            "id": "w2",
+            "word": "GUR",
+            "row": 1,
+            "col": 0,
+            "dir": "V"
+          },
+          {
+            "id": "w3",
+            "word": "UR",
+            "row": 0,
+            "col": 2,
+            "dir": "V"
+          }
+        ],
+        "bonus": [
+          "RUH"
+        ],
+        "postcard": {
+          "title": "Halfeti Batık Şehir",
+          "city": "Şanlıurfa",
+          "plate": 63,
+          "summary": "Birecik Barajı gölü altında kalan tarihi taş evleri, minaresi sudan çıkan camisi ve efsanevi siyah gülüyle ünlü saklı cennet.",
+          "trivia": "Dünyada yalnızca Halfeti'nin mikroklimalı toprağında doğal olarak simsiyah gül (Karagül) yetişmektedir.",
+          "bg": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/f2/Halfeti_on_the_Euphrates.jpg/1280px-Halfeti_on_the_Euphrates.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail"
+        }
+      }
+    ]
+  },
+  {
+    "id": "kars",
+    "name": "Kars",
+    "plate": 36,
+    "region_name": "Doğu Anadolu",
+    "coords": {
+      "x": 730,
+      "y": 115
+    },
+    "description": "Binbir kiliseli efsanevi Ani Harabeleri, donmuş Çıldır Gölü ve Baltık mimarisiyle Doğu'nun kalesi.",
+    "landmarks": [
+      {
+        "name": "Ani Harabeleri - Katedral",
+        "bg": "https://upload.wikimedia.org/wikipedia/commons/4/4b/Ani_Cathedral_Texier_1842.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+        "summary": "İpek Yolu üzerinde kurulan ve Orta Çağ'ın en büyük ticaret metropollerinden biri olan '1001 Kiliseli Şehir'.",
+        "trivia": "Ani Katedrali'nin mimarı Trdat, aynı zamanda İstanbul'daki Ayasofya'nın depremde yıkılan kubbesini onaran dahi mimardır."
+      },
+      {
+        "name": "Menûçihr Camii",
+        "bg": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/cb/Ebul_Manucehr_Mosque.jpg/1280px-Ebul_Manucehr_Mosque.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "summary": "Arpaçay Kanyonu'nun kıyısında 1072 yılında inşa edilen, Anadolu'daki ilk Türk camisi.",
+        "trivia": "Tavanındaki renkli taşlarla yapılan geometrik süslemeler Selçuklu sanatının ilk öncüleridir."
+      },
+      {
+        "name": "Kars Kalesi",
+        "bg": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/cd/Kars_Kale.jpg/1280px-Kars_Kale.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "summary": "1153 yılında Selçuklu Sultanı Melik İzzeddin tarafından inşa ettirilen, sarp tepede şehri koruyan anıtsal kale.",
+        "trivia": "1855 yılındaki Kars Zaferi sebebiyle şehre Osmanlı tarihinde ilk kez 'Gazi' unvanı verilmiştir."
+      },
+      {
+        "name": "Çıldır Gölü",
+        "bg": "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/2d/Plant_inventory%3B_plant_material_introduced_%28IA_plantinventory157160agri%29.pdf/page1-500px-Plant_inventory%3B_plant_material_introduced_%28IA_plantinventory157160agri%29.pdf.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "summary": "Kışın tamamen buz tutan yüzeyinde atlı kızakların kaydığı, 1959 metre rakımlı Doğu Anadolu'nun en büyük tatlı su gölü.",
+        "trivia": "Kışın buz tabakası kırılarak tutulan 'Sarı Balık' bölgenin en ünlü kış lezzetidir."
+      },
+      {
+        "name": "Fethiye Camii (Havariler)",
+        "bg": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/87/Kars_Holy_Apostles_Church_drum_apostle_3730.jpg/1280px-Kars_Holy_Apostles_Church_drum_apostle_3730.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "summary": "10. yüzyılda Ermeni Bagratlı Krallığı döneminde bazalt taşlarla inşa edilen 12 Havariler Kilisesi.",
+        "trivia": "Kubbe eteğinde 12 havariyi temsil eden kabartma heykeller günümüze kadar ulaşmıştır."
+      }
+    ],
+    "levels": [
+      {
+        "id": 36,
+        "city_id": "kars",
+        "city_name": "Kars",
+        "sub_id": 1,
+        "title": "Kars - Bölüm 1: Ani Harabeleri - Katedral",
+        "landmark_name": "Ani Harabeleri - Katedral",
+        "bg": "https://upload.wikimedia.org/wikipedia/commons/4/4b/Ani_Cathedral_Texier_1842.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+        "wheel": [
+          "Z",
+          "A",
+          "A",
+          "M",
+          "N"
+        ],
+        "words": [
+          {
+            "id": "w1",
+            "word": "ZAMAN",
+            "row": 2,
+            "col": 0,
+            "dir": "H"
+          },
+          {
+            "id": "w2",
+            "word": "AZAM",
+            "row": 1,
+            "col": 0,
+            "dir": "V"
+          },
+          {
+            "id": "w3",
+            "word": "NAM",
+            "row": 0,
+            "col": 2,
+            "dir": "V"
+          }
+        ],
+        "bonus": [
+          "ZAN",
+          "ANA"
+        ],
+        "postcard": {
+          "title": "Ani Harabeleri - Katedral",
+          "city": "Kars",
+          "plate": 36,
+          "summary": "İpek Yolu üzerinde kurulan ve Orta Çağ'ın en büyük ticaret metropollerinden biri olan '1001 Kiliseli Şehir'.",
+          "trivia": "Ani Katedrali'nin mimarı Trdat, aynı zamanda İstanbul'daki Ayasofya'nın depremde yıkılan kubbesini onaran dahi mimardır.",
+          "bg": "https://upload.wikimedia.org/wikipedia/commons/4/4b/Ani_Cathedral_Texier_1842.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled"
+        }
+      },
+      {
+        "id": 37,
+        "city_id": "kars",
+        "city_name": "Kars",
+        "sub_id": 2,
+        "title": "Kars - Bölüm 2: Menûçihr Camii",
+        "landmark_name": "Menûçihr Camii",
+        "bg": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/cb/Ebul_Manucehr_Mosque.jpg/1280px-Ebul_Manucehr_Mosque.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "wheel": [
+          "G",
+          "Ö",
+          "K",
+          "Y",
+          "Ü",
+          "Ü",
+          "Z"
+        ],
+        "words": [
+          {
+            "id": "w1",
+            "word": "GÖKYÜZÜ",
+            "row": 0,
+            "col": 0,
+            "dir": "H"
+          },
+          {
+            "id": "w2",
+            "word": "GÖK",
+            "row": 0,
+            "col": 0,
+            "dir": "V"
+          },
+          {
+            "id": "w3",
+            "word": "YÜZ",
+            "row": 0,
+            "col": 3,
+            "dir": "V"
+          }
+        ],
+        "bonus": [
+          "GÖZ",
+          "ÖZ"
+        ],
+        "postcard": {
+          "title": "Menûçihr Camii",
+          "city": "Kars",
+          "plate": 36,
+          "summary": "Arpaçay Kanyonu'nun kıyısında 1072 yılında inşa edilen, Anadolu'daki ilk Türk camisi.",
+          "trivia": "Tavanındaki renkli taşlarla yapılan geometrik süslemeler Selçuklu sanatının ilk öncüleridir.",
+          "bg": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/cb/Ebul_Manucehr_Mosque.jpg/1280px-Ebul_Manucehr_Mosque.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail"
+        }
+      },
+      {
+        "id": 38,
+        "city_id": "kars",
+        "city_name": "Kars",
+        "sub_id": 3,
+        "title": "Kars - Bölüm 3: Kars Kalesi",
+        "landmark_name": "Kars Kalesi",
+        "bg": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/cd/Kars_Kale.jpg/1280px-Kars_Kale.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "wheel": [
+          "T",
+          "O",
+          "P",
+          "R",
+          "A",
+          "K"
+        ],
+        "words": [
+          {
+            "id": "w1",
+            "word": "TOPRAK",
+            "row": 2,
+            "col": 0,
+            "dir": "H"
+          },
+          {
+            "id": "w2",
+            "word": "PARK",
+            "row": 2,
+            "col": 2,
+            "dir": "V"
+          },
+          {
+            "id": "w3",
+            "word": "POT",
+            "row": 0,
+            "col": 0,
+            "dir": "V"
+          }
+        ],
+        "bonus": [
+          "KOR",
+          "KOT",
+          "PAK"
+        ],
+        "postcard": {
+          "title": "Kars Kalesi",
+          "city": "Kars",
+          "plate": 36,
+          "summary": "1153 yılında Selçuklu Sultanı Melik İzzeddin tarafından inşa ettirilen, sarp tepede şehri koruyan anıtsal kale.",
+          "trivia": "1855 yılındaki Kars Zaferi sebebiyle şehre Osmanlı tarihinde ilk kez 'Gazi' unvanı verilmiştir.",
+          "bg": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/cd/Kars_Kale.jpg/1280px-Kars_Kale.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail"
+        }
+      },
+      {
+        "id": 39,
+        "city_id": "kars",
+        "city_name": "Kars",
+        "sub_id": 4,
+        "title": "Kars - Bölüm 4: Çıldır Gölü",
+        "landmark_name": "Çıldır Gölü",
+        "bg": "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/2d/Plant_inventory%3B_plant_material_introduced_%28IA_plantinventory157160agri%29.pdf/page1-500px-Plant_inventory%3B_plant_material_introduced_%28IA_plantinventory157160agri%29.pdf.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "wheel": [
+          "R",
+          "R",
+          "Ü",
+          "Z",
+          "G",
+          "A"
+        ],
+        "words": [
+          {
+            "id": "w1",
+            "word": "RÜZGAR",
+            "row": 2,
+            "col": 0,
+            "dir": "H"
+          },
+          {
+            "id": "w2",
+            "word": "GÜR",
+            "row": 0,
+            "col": 0,
+            "dir": "V"
+          },
+          {
+            "id": "w3",
+            "word": "ZAR",
+            "row": 2,
+            "col": 2,
+            "dir": "V"
+          }
+        ],
+        "bonus": [
+          "GAZ",
+          "ARZ"
+        ],
+        "postcard": {
+          "title": "Çıldır Gölü",
+          "city": "Kars",
+          "plate": 36,
+          "summary": "Kışın tamamen buz tutan yüzeyinde atlı kızakların kaydığı, 1959 metre rakımlı Doğu Anadolu'nun en büyük tatlı su gölü.",
+          "trivia": "Kışın buz tabakası kırılarak tutulan 'Sarı Balık' bölgenin en ünlü kış lezzetidir.",
+          "bg": "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/2d/Plant_inventory%3B_plant_material_introduced_%28IA_plantinventory157160agri%29.pdf/page1-500px-Plant_inventory%3B_plant_material_introduced_%28IA_plantinventory157160agri%29.pdf.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail"
+        }
+      },
+      {
+        "id": 40,
+        "city_id": "kars",
+        "city_name": "Kars",
+        "sub_id": 5,
+        "title": "Kars - Bölüm 5: Fethiye Camii (Havariler)",
+        "landmark_name": "Fethiye Camii (Havariler)",
+        "bg": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/87/Kars_Holy_Apostles_Church_drum_apostle_3730.jpg/1280px-Kars_Holy_Apostles_Church_drum_apostle_3730.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "wheel": [
+          "Y",
+          "I",
+          "I",
+          "L",
+          "D",
+          "Z",
+          "İ"
+        ],
+        "words": [
+          {
+            "id": "w1",
+            "word": "YILDIZ",
+            "row": 2,
+            "col": 0,
+            "dir": "H"
+          },
+          {
+            "id": "w2",
+            "word": "YIL",
+            "row": 2,
+            "col": 0,
+            "dir": "V"
+          },
+          {
+            "id": "w3",
+            "word": "DIL",
+            "row": 0,
+            "col": 2,
+            "dir": "V"
+          }
+        ],
+        "bonus": [
+          "İZ"
+        ],
+        "postcard": {
+          "title": "Fethiye Camii (Havariler)",
+          "city": "Kars",
+          "plate": 36,
+          "summary": "10. yüzyılda Ermeni Bagratlı Krallığı döneminde bazalt taşlarla inşa edilen 12 Havariler Kilisesi.",
+          "trivia": "Kubbe eteğinde 12 havariyi temsil eden kabartma heykeller günümüze kadar ulaşmıştır.",
+          "bg": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/87/Kars_Holy_Apostles_Church_drum_apostle_3730.jpg/1280px-Kars_Holy_Apostles_Church_drum_apostle_3730.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail"
+        }
+      }
+    ]
+  }
+]

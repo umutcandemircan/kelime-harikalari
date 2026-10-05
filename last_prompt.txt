@@ -1,0 +1,44 @@
+<USER_REQUEST>
+GÖREV: "Kelime Harikaları" web oyununu; ana menü mimarisi, 81 ile genişleyebilir çok seviyeli şehir sistemi, interaktif Türkiye haritası ve seyahat animasyonları içeren, yüksek performanslı ticari bir sürüme yükselt.
+
+KATI KURALLAR VE DÜZELTMELER:
+
+1. Telif ve Marka Temizliği:
+   - Projenin hiçbir yerinde (title, meta etiketleri, değişken isimleri, yorum satırları veya arayüz) "Words of Wonders" veya "WoW" ismi GEÇMEYECEKTİR.
+   - Oyunun resmi adı "Kelime Harikaları"dır.
+
+2. Arayüz Durum Yönetimi (State Machine) & Ana Sayfa:
+   - Oyun artık doğrudan seviyeyle açılmayacak. Tek sayfa içinde akıcı geçiş yapan 3 ana ekran olacak:
+     * [MENU]: "Oyna", "Yolculuk Haritası", "Günlük Bulmaca", "Ayarlar" (Ses/Titreşim) ve mevcut altın/seviye göstergesi.
+     * [MAP_VIEW]: Şehirlerin ve kilitli/açık durumların görüldüğü görsel harita rotası.
+     * [GAMEPLAY]: Çapraz bulmaca, harf çarkı, ipuçları ve önizleme kapsülü.
+   - Ekranlar arası geçişler yumuşak CSS fade/slide animasyonlarıyla yapılmalıdır.
+
+3. Şehir Hiyerarşisi ve Bölüm Mimarisi (81 İl / Çoklu Bölüm):
+   - Mimari: `Ülke -> İl -> Bölüm (Simge Yapı)`.
+   - Her ilde 5 ila 10 farklı alt bölüm yer alacak. Her alt bölümün arka plan görseli o şehre ait farklı bir tarihi/doğal güzelliğe ait olacaktır.
+   - Örnek İlk Paketler (Her görsel doğrulanmış, telifsiz Unsplash optimize URL'i ile):
+     * İzmir (5 Bölüm): Efes Celsus Kütüphanesi, İzmir Saat Kulesi, Şirince Evleri, Bergama Akropolü, Tarihi Asansör.
+     * Nevşehir (5 Bölüm): Göreme Sıcak Hava Balonları, Uçhisar Kalesi, Paşabağ Peribacaları, Derinkuyu Yeraltı Şehri, Ihlara Vadisi.
+     * İstanbul (5 Bölüm): Galata Kulesi, Ayasofya, Boğaz Köprüsü, Sultanahmet, Kız Kulesi.
+   - Sistem, yeni iller ve ileride diğer ülkeler (örneğin İtalya, Mısır, Japonya) JSON dizisine eklendiğinde sıfır kod değişikliğiyle otomatik çalışacak yapıda tasarlanacaktır.
+
+4. Şehirler Arası Seyahat Animasyonu (Travel Transition):
+   - Bir ilin tüm bölümleri tamamlandığında doğrudan bir sonraki ile geçilmeyecek; bir "Yolculuk Modalı" açılacak.
+   - Stilize vektörel Türkiye haritası üzerinde biten ilden bir sonraki ile doğru kesik çizgili bir rota çizilecek. Mini bir seyahat ikonu (uçak/araba) bu rota boyunca ses efekti eşliğinde süzülecek ve yeni şehre varış kutlanacaktır.
+
+5. Performans, Ön Bellekleme ve İnsan Dokunuşlu Keşif Kartı:
+   - Görsel Optimizasyonu: Arka plan resim URL'leri optimize edilecek (`?auto=format&fit=crop&w=1080&q=75`). Oyuncu Bölüm 1'deyken, Bölüm 2'nin görseli JavaScript Image nesnesiyle arka planda sessizce önceden yüklenecektir (preloading).
+   - Kültürel Keşif Kartı (Postcard UX): Bölüm bittiğinde kuru ansiklopedik pencere yerine; hafif eğimli (tilt efektli), altın mühürlü bir "Dijital Kartpostal" animasyonla ekrana gelecek. 2 cümlelik samimi ve merak uyandıran hap bilgi + "Koleksiyona Eklendi" damgası yer alacak.
+
+6. Oynanış Motoru ve Algoritmik Güvenlik:
+   - KESİN KESİŞİM KURALI: Çapraz bulmacada iki paralel kelime ASLA bitişik satır/sütunlarda yer alamaz. Kelimeler sadece 90 derece dik açıyla tek bir ortak harfte kesişebilir.
+   - Türkçe Karakter Standardı: Harf ve kelime eşleşmelerinde `.toLocaleUpperCase('tr-TR')` zorunludur (İ-I, Ş-S, Ğ-G sorunsuz olmalı).
+   - Game Juice: Harf çarkında harfleri birleştiren neon SVG çizgisi, harf seçiminde Web Audio pentatonik sesler, haptic titreşim (`navigator.vibrate`), kelime kutularına doğru uçan parçacık efekti.
+   - Ekonomi: Karıştır (Bedava), Büyüteç (100 Altın), Havai Fişek (150 Altın), Ampul (50 Altın), Sandık (Bonus Kelimeler), Bölüm Sonu 2 Katı Altın Reklam Kancası (`showRewardedAd`).
+
+Lütfen harici JS/CSS kütüphanesi gerektirmeyen, doğrudan tek bir `index.html` dosyası olarak çalışan, hiçbir yeri kesilmemiş eksiksiz üretim kodunu yaz.
+</USER_REQUEST>
+<ADDITIONAL_METADATA>
+The current local time is: 2026-10-04T22:32:22+03:00.
+</ADDITIONAL_METADATA>

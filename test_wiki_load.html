@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset='utf-8'>
+<meta name='referrer' content='no-referrer'>
+</head>
+<body>
+<img id='img1' src='https://thumb.wikimedia.org/wikipedia/commons/thumb/4/46/TR_Pamukkale_White_Terraces_asv2020-02_img16.jpg/1280px-TR_Pamukkale_White_Terraces_asv2020-02_img16.jpg'>
+<script>
+window.onload = () => {
+    const img = document.getElementById('img1');
+    const d = document.createElement('div');
+    d.id = 'RESULT';
+    d.textContent = 'complete:' + img.complete + ', naturalWidth:' + img.naturalWidth;
+    document.body.appendChild(d);
+};
+</script>
+</body>
+</html>

@@ -170,6 +170,16 @@ const App = {
         this.showModal('modal-settings');
     },
 
+    resetProgress() {
+        if (confirm("Tüm oyun ilerlemen sıfırlanacak ve haritadan başlangıç ili seçimine dönülecektir. Onaylıyor musun?")) {
+            localStorage.clear();
+            SaveManager.init();
+            this.hideModal('modal-settings');
+            this.goToScreen('screen-hub');
+            this.updateUI();
+        }
+    },
+
     showDailyModal() {
         const todayStr = new Date().toISOString().split('T')[0];
         const state = SaveManager.getDailyState(todayStr);

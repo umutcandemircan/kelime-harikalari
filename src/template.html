@@ -326,7 +326,11 @@
                 <input type="checkbox" id="setting-vibrate" checked onchange="SaveManager.setHaptic(this.checked)" style="transform:scale(1.4);" />
             </div>
 
-            <button class="btn-3d" style="width:100%;" onclick="App.hideModal('modal-settings')">TAMAM</button>
+            <button class="btn-3d" style="width:100%; margin-bottom:12px;" onclick="App.hideModal('modal-settings')">TAMAM</button>
+
+            <button class="btn-3d-outline" style="width:100%; border-color:#ef4444; color:#ef4444; font-size:12px; padding:8px;" onclick="App.resetProgress()">
+                🔄 İlerlemeyi Sıfırla (Baştan Başla)
+            </button>
         </div>
     </div>
 

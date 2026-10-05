@@ -70,13 +70,8 @@ const SaveManager = {
             out.coins = Math.max(0, Math.min(99999, Math.floor(input.coins)));
         }
 
-        // 2. hasSelectedStartCity
-        if (typeof input.hasSelectedStartCity === 'boolean') {
-            out.hasSelectedStartCity = input.hasSelectedStartCity;
-        } else if ((Array.isArray(input.completedProvinces) && input.completedProvinces.length > 0) ||
-                   (typeof input.stars === 'object' && input.stars && Object.keys(input.stars).length > 0)) {
-            out.hasSelectedStartCity = true;
-        }
+        // 2. hasSelectedStartCity (Only true if explicitly selected)
+        out.hasSelectedStartCity = typeof input.hasSelectedStartCity === 'boolean' ? input.hasSelectedStartCity : false;
         
         // 3. City index bounds: 0 to 80 (81 provinces)
         if (typeof input.currentCityIdx === 'number' && !isNaN(input.currentCityIdx)) {

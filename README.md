@@ -1,113 +1,72 @@
-# Kelime Harikaları 🇹🇷
+# Sözcük Seferî: 1. Sefer Türkiye 🧭🇹🇷
 
-[![GitHub Pages](https://img.shields.io/badge/Deploy-GitHub%20Pages-blue.svg)](https://umutcandemircan.github.io/kelime-harikalari/)
-[![PWA Ready](https://img.shields.io/badge/PWA-Ready-success.svg)](https://umutcandemircan.github.io/kelime-harikalari/)
-[![License: CC BY-SA 4.0](https://img.shields.io/badge/License-CC%20BY--SA%204.0-lightgrey.svg)](https://creativecommons.org/licenses/by-sa/4.0/)
+**Sözcük Seferî**, Türkiye'nin 81 ilini, kadim tarihini, doğal güzelliklerini ve zengin Türk dilini harmanlayan; mobil öncelikli, 60 FPS donanım ivmeli yeni nesil bir çapraz bulmaca ve kelime yolculuğu oyunudur.
 
-> **Kelime Harikaları**, Türk dili ve kültürel mirasından ilham alan, mobil öncelikli, sıfır harici kütüphane bağımlılığına sahip modern bir çapraz bulmaca ve harf çarkı web oyunudur.
-
-🎮 **Canlı Oyna:** [https://umutcandemircan.github.io/kelime-harikalari/](https://umutcandemircan.github.io/kelime-harikalari/)
+Canlı Oyna: **[Sözcük Seferî Canlı Sürüm](https://umutcandemircan.github.io/kelime-harikalari/)**
 
 ---
 
 ## 🌟 Öne Çıkan Özellikler
 
-### 1. 🧩 Matematiksel Olarak Doğrulanmış 100 Bölüm
-- **Sıfır Hatalı Kesişim:** Paralel bitişiklik hatası bulunmayan, katı çapraz bulmaca ızgara motoru (kelimeler yalnızca 90° dik açıyla tek bir harfte kesişebilir).
-- **%100 Çözülebilirlik:** 100 bölümün tamamı harf çarkındaki harflerin çoklu kümesiyle (multiset) eksiksiz çözülebilir olduğu doğrulanmıştır.
-- **TDK Uyumlu Sözlük:** Küfür, argo, uydurma sözcük ve Türkçe dışı harf (Q, W, X) içermeyen denetlenmiş kelime hazinesi.
-- **Kültürel Bölge Temaları:** Kapadokya, Efes, Nemrut, Pamukkale, Sümela, Truva, Göbeklitepe ve Safranbolu.
+### 1. 🗺️ Gerçek Vektörel Türkiye Haritası & Sinematik Kamera
+* **Coğrafi Doğruluk:** Soyut veya çember şablonlar yerine, Türkiye'nin gerçek kıyı ve sınır kıvrımlarına sahip 81 il vektörel SVG haritası.
+* **Sinematik Pan & Zoom:** Şehirler arasında seyahat ederken harita kamerası `cubic-bezier(0.25, 1, 0.5, 1)` eğrisiyle hedef şehre pürüzsüzce odaklanır ve yaklaşır.
+* **Animasyonlu Rota & Seyahat Taşıtı:** Şehir geçişlerinde iki nokta arasında kesikli rota çizgisi belirir ve seyahat simgesi rota üzerinde süzülür.
 
-### 2. 📜 Atasözü ve Deyim Modu
-- **150 Doğrulanmış Atasözü ve Deyim:** `idioms.json` veri tabanından rastgele seçilen Türk atasözü ve deyimlerinde eksik olan kelimeyi çarktaki harflerle tamamlama mekaniği.
-- Anlam açıklamalarıyla Türkçenin zenginliğini öğreten eğitici mod.
+### 2. 🧩 Matematiksel Çapraz Bulmaca Izgarası (Sıfır Hata)
+* **0 Paralel Çakışma İlkesi:** İki paralel kelimenin bitişik satır veya sütunlarda yer alması matematiksel olarak engellenmiştir. Kelimeler yalnızca 90 derecelik dik açıyla, tek bir ortak harf hücresinde kesişebilir.
+* **Dinamik Bounding Box:** 4x4'ten 9x9'a kadar tüm bulmaca ızgaraları ekranın üst yarısına matematiksel olarak ortalanır; mobil cihazlarda (360x800 vb.) sıfır taşmayla ölçeklenir.
+* **3D Perspektif Açılış:** Çözülen kelimeler 3D çevrilme (`rotateY`) efektiyle açılır ve altın ışıltısıyla kutularına yerleşir.
 
-### 3. 📅 Günlük Bulmaca & Takvim (Europe/Istanbul)
-- **Tarih Tabanlı Seed:** Tüm oyuncuların aynı gün aynı bulmacayı çözmesini sağlayan deterministik seed motoru.
-- **İstanbul Saat Dilimi:** Gece yarısı (00:00 Europe/Istanbul) sıfırlama mekanizması.
-- **Seri (Streak) ve Ay Takvimi:** Çözülen günlerin yeşil tikle kaydedildiği etkileşimli aylık takvim.
-- **Wordle Tarzı Paylaşım Kartı:** Emoji tabanlı skor ve seri paylaşım panosu (`navigator.share` / `navigator.clipboard`).
+### 3. 🎭 Zengin Oyun Modları
+* **1. Sefer: Türkiye:** 81 ili adım adım keşfettiğin ana yolculuk hikayesi. Efes Celsus Kütüphanesi, Galata Kulesi, Göreme Balonları, Pamukkale, Sümela Manastırı gibi 40'tan fazla vitrin mekanda mühürlü kartpostal keşifleri.
+* **Deyim Avcısı:** Türkçenin köklü deyimlerini tamamlama mini oyunu (*"Göze [...]" ➔ "GİRMEK"*, *"Ateşle [...]" ➔ "OYNAMAK"*).
+* **Günlük Bulmaca:** Cihaz tarihine (`YYYY-AA-GG`) kilitli, yıldızlı harfleri toplayarak takvim serisini sürdürme modu.
 
-### 4. 📖 İnteraktif TDK Anlam Kartı
-- Izgarada açılan herhangi bir kelimenin üzerine dokunulduğunda, o kelimenin **Türk Dil Kurumu (TDK)** Güncel Türkçe Sözlük standartlarındaki türü (İsim/Sıfat/Zarf vb.) ve kapsamlı tanımını gösteren şık bir anlam kartı açılır.
+### 4. 🎨 "Anti-AI" Sanat Yönetimi ve 3D Dokunsal Arayüz
+* **Özgün Renk Paleti:** Jenerik mor-mavi yapay zeka şablonları yerine derin arduvaz mavisi (`#0b132b`), fildişi harf kutuları (`#f8f9fa`), fırçalanmış antik altın (`#f59e0b`) ve Türk turkuazı (`#0d9488`).
+* **Fiziksel 3D Tuşlar:** Tıklandığında 3px çöken katmanlı gölge yapısıyla gerçekçi dokunma hissi veren butonlar.
+* **Özel Vektörel Logo & Favicon:** Pusula gülü ve altın "S" motifiyle bezenmiş inline SVG logo ve sekme ikonu.
 
-### 5. 🎵 Prosedürel Web Audio API & Akıcı Seviye Akışı
-- **Sıfır Harici Ses Dosyası:** Hiçbir harici MP3 veya WAV indirilmez; tüm tonlar, akorlar ve melodiler Web Audio API ile gerçek zamanlı sentezlenir.
-- **Doğal Tizleşen Çark Tonları:** Harf çarkında gezinirken pentatonik ton akışı (C4, D4, E4, G4, A4, C5).
-- **Kesintisiz Bölüm İlerlemesi:** Normal bölümlerde (1, 2, 3, 4...) oyuncuyu yoran popup modal yerine yumuşak arp tınısı, altın ışıltı ve otomatik akıcı geçiş (`+25 🪙`).
-- **5 Bölümde Bir Keşif Kartı (Milestone):** Her 5 bölümde bir (bölge tamamlandığında) yüksek çözünürlüklü tarihi mekan fotoğrafı, kültürel bilgi ve 2X ödül seçeneği içeren Keşif Kartı modalı.
-- **Haptic Titreşim:** Mobil dokunmatik cihazlar için `navigator.vibrate` geri bildirimi.
+### 5. 🔊 Prosedürel Web Audio API & Dokunsal Geri Bildirim
+* **Harici MP3 Yok:** Tüm sesler Web Audio API osilatörleri ile anlık sentezlenir.
+* **Yükselen Pentatonik Gam:** Çarkta her harf bağlandığında C4-A4 aralığında yükselen müzikal tonlar.
+* **Haptik Titreşim:** Mobil cihazlarda harfe dokunulduğunda ve kelime çözüldüğünde `navigator.vibrate` kancası.
 
-### 6. 🪙 Dengelenmiş Ekonomi ve İpuçları
-- **Hile ve Sömürü Engeli:** Bölüm tamamlama ödülü (+25 Altın) ve adil ipucu fiyatlandırması:
-  - 🔀 **Karıştır:** Ücretsiz (360° animasyon)
-  - 💡 **Ampul:** 50 Altın (Rastgele 1 harf açar)
-  - 🎯 **Hedefçi:** 90 Altın (İstenen hücreye dokunarak o harfi açar)
-  - ⚡ **Şimşek:** 140 Altın (Izgaradaki 3-4 harfi aynı anda patlatır)
-  - 🎁 **Bonus Sandığı:** Izgara dışındaki her 5 geçerli Türkçe kelimede +30 Altın ödül.
-  - 🧪 **Ekonomi Simülasyonu:** 50 bölümlük Monte Carlo simülasyonu (`simulate_economy.py`) ile oyuncunun asla iflas etmeden adil biçimde ilerleyebildiği kanıtlanmıştır.
-
-### 7. 📱 PWA & %100 Mobil Uyumluluk
-- **Kusursuz Görünüm (360x800'den 4K'ya):** Sıfır yatay taşma (`0px overflow`), dinamik bounding box grid ölçeklemesi.
-- **Tam Ekran Arka Plan:** Gerçek tarihi mekanların yüksek çözünürlüklü panoramik fotoğrafları ekrana tam oturur.
-- **PWA (Progressive Web App):** `manifest.json` ve `sw.js` (Service Worker) ile internet bağlantısı olmasa bile çevrimdışı oynanabilir ve ana ekrana yüklenebilir.
-- **Erişilebilirlik (a11y):**
-  - 📖 OpenDyslexic yazı tipi desteği
-  - 👁️ Yüksek Karşıtlık (High Contrast) modu
-  - ⏩ Azaltılmış Hareket (Prefers Reduced Motion) desteği
-  - 🔊 Ekran okuyucular için ARIA etiketleri
+### 6. 💎 Ekonomi, Güçlendiriciler ve Gelir Altyapısı
+* **Güçlendirici Cephanesi:**
+  * 🔀 **Karıştır:** Çarktaki harfleri ücretsiz yeniden karıştırır.
+  * 💡 **Ampul (50 Altın):** Rastgele 1 gizli harfi açar.
+  * 🎯 **Hedefçi (100 Altın):** Seçilen kilitli kutuyu doğrudan açar.
+  * 💣 **Bomba (150 Altın):** Izgarada birden fazla harfi patlatarak açar.
+* **Bonus Sandığı:** Izgarada olmayan geçerli Türkçe kelimeler sandıkta toplanır, her 5 kelimede +30 Altın verir.
+* **Monetization Hooks:** `showRewardedAd('2x')`, `showRewardedAd('hint')` ve seyahat geçişlerinde `showInterstitialAd()`.
 
 ---
 
-## 🏛️ Kültürel Miras & Kaynakça (`credits.json`)
+## 💻 Teknik Mimari
 
-Oyundaki tüm tarihi ve kültürel arka plan görselleri **Wikimedia Commons** üzerindeki açık lisanslı (Creative Commons BY-SA) eserlerden derlenmiştir:
-
-| Bölge | Görsel | Yazar / Sanatçı | Lisans | Kaynak |
-|---|---|---|---|---|
-| **Kapadokya** | Hot air balloon over Cappadocia | user:mila-dem | CC BY-SA 4.0 | [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Hot_air_balloon_over_Cappadocia.jpg) |
-| **Efes** | Library of Celsus in Ephesus | Benh LIEU SONG | CC BY-SA 3.0 | [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Library_of_Celsus_Ephesus_2011.jpg) |
-| **Nemrut Dağı** | Mount Nemrut Statues | Bernard Gagnon | CC BY-SA 3.0 | [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Mount_Nemrut_Bernard_Gagnon.jpg) |
-| **Pamukkale** | Pamukkale Travertines | chensiyuan | CC BY-SA 4.0 | [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:1_pamukkale_travertines_section_2011.jpg) |
-| **Sümela Manastırı** | Sumela Monastery Trabzon | Bjørn Christian Tørrissen | CC BY-SA 3.0 | [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Sumela_from_across_valley.jpg) |
-| **Truva** | Wooden Horse of Troy | Dosseman | CC BY-SA 4.0 | [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Canakkale_Troy_Wooden_horse_8314.jpg) |
-| **Göbeklitepe** | Göbekli Tepe Enclosure | Teomancimit | CC BY-SA 3.0 | [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:G%C3%B6bekli_Tepe_2020.jpg) |
-| **Safranbolu** | Traditional Safranbolu Houses | Mr. Granger | CC0 1.0 Universal | [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Safranbolu_houses_01.jpg) |
-
-Sözlük ve atasözü/deyim verileri **Türk Dil Kurumu (TDK)** Güncel Türkçe Sözlük standartları referans alınarak doğrulanmıştır.
+* **Tek Dosyalık Yapı:** HTML5, CSS3 ve ES6 JavaScript tamamen `index.html` içerisinde bağımsız olarak çalışır.
+* **Sıfır Harici Kütüphane:** React, Vue, jQuery veya Bootstrap gibi harici bağımlılıklar yoktur.
+* **60 FPS Donanım İvmesi:** Animasyonlar DOM yerine GPU katmanında `transform: translate3d()` ve `opacity` üzerinden işlenir.
+* **Kusursuz Girdi Takibi:** Birleşik `PointerEvent` API (`pointerdown`, `pointermove`, `pointerup`) ve mobil kaymayı önleyen `touch-action: none`.
+* **Kayıt Yönetimi:** `SaveManager` ile ilerleme, altın ve ayarlar `localStorage`'da kalıcı olarak saklanır.
+* **Platform Uyumluluğu:** Doğrudan tarayıcıda, Progressive Web App (PWA) olarak veya Capacitor / Cordova ile Android/iOS mağazalarında çalışabilir.
 
 ---
 
-## 🔒 Gizlilik Politikası
+## 🚀 Yerel Çalıştırma
 
-- **Sıfır Kişisel Veri Toplama:** Oyunda hiçbir kullanıcı adı, e-posta, IP adresi, konum veya üçüncü taraf çerez takibi yapılmaz.
-- **Tamamen Yerel Depolama:** İlerleme, altınlar, günlük seri ve ayarlar yalnızca tarayıcınızın kendi `localStorage` alanında saklanır.
-- **Açık ve Dürüst Reklam Modeli:** Sahte indirme butonları veya yanıltıcı popup reklamlar içermez.
+Projeyi çalıştırmak için herhangi bir derleme aracına (build tool) ihtiyaç yoktur:
 
----
-
-## 💻 Yerel Geliştirme
-
-Projeyi yerel bilgisayarınızda çalıştırmak için:
-
-```bash
-# Depoyu klonlayın
-git clone https://github.com/umutcandemircan/kelime-harikalari.git
-cd kelime-harikalari
-
-# Statik sunucu başlatın
-python -m http.server 8080
-```
-
-Tarayıcınızda `http://localhost:8080` adresini açarak oyunu hemen oynayabilirsiniz.
+1. Repoyu klonlayın:
+   ```bash
+   git clone https://github.com/umutcandemircan/kelime-harikalari.git
+   ```
+2. `index.html` dosyasını doğrudan dilediğiniz modern tarayıcıda açın.
 
 ---
 
-## 🛠️ Test ve Doğrulama Araçları
+## 📄 Lisans
 
-Depo içerisinde otomatik kalite ve doğrulama komutları yer almaktadır:
-
-- `python validate_strict_crossword.py`: 100 bölümün paralel kuralını ve çözülebilirliğini denetler.
-- `python test_turkish_locale.py`: İ-I, Ş-S, Ğ-G, Ü-U, Ö-O, Ç-C harf ve büyük/küçük harf dönüşüm kurallarını test eder.
-- `python simulate_economy.py`: 50 seviyelik ekonomik dengeyi ve altın akışını simüle eder.
-- `python test_360_fit.py`: 360x800 mobil ekranda sıfır taşma garantisini doğrular.
+Bu proje açık kaynaklı ve telifsiz eğitim/eğlence amaçlı hazırlanmıştır. Tüm kültürel görseller Unsplash ve Wikimedia Commons kamu malı / Creative Commons lisanslarına uygundur.

@@ -68,6 +68,25 @@ const App = {
         this.goToScreen('screen-hub');
     },
 
+    startJourney() {
+        if (!SaveManager.data.hasSelectedStartCity) {
+            this.goToScreen('screen-map');
+            this.showModal('modal-start-city');
+            const banner = document.getElementById('map-guidance-banner');
+            if (banner) banner.innerText = "🗺️ Başlamak istediğin ili haritadan seç!";
+        } else {
+            this.goToScreen('screen-game');
+        }
+    },
+
+    onCityCompletedTravel() {
+        this.hideModal('modal-city-completed');
+        MapEngine.isSelectingNextRoute = true;
+        this.goToScreen('screen-map');
+        const banner = document.getElementById('map-guidance-banner');
+        if (banner) banner.innerText = "✨ Sıradaki Hedefini Seç: Haritadan yeni bir il seç!";
+    },
+
     updateUI() {
         const coins = SaveManager.data.coins;
         ['hub-coins', 'map-coins', 'game-coins', 'idiom-coins'].forEach(id => {
@@ -77,9 +96,24 @@ const App = {
 
         // Update total stars indicator in Hub
         const totalStars = SaveManager.getTotalStars();
-        const hubTitleSub = document.querySelector('.hub-title-container p');
-        if (hubTitleSub) {
-            hubTitleSub.innerHTML = `Türkiye'nin 81 ilini adım adım keşfet!<br><span style="color:#f59e0b; font-weight:700;">⭐ ${totalStars} Yıldız Toplandı</span>`;
+        const hubStarsSummary = document.getElementById('hub-stars-summary');
+        if (hubStarsSummary) {
+            hubStarsSummary.innerText = `⭐ ${totalStars} Yıldız Toplandı`;
+        }
+
+        // Update Hub "Sefere Çık" card status
+        const progressBadge = document.getElementById('hub-progress-badge');
+        const journeySub = document.getElementById('hub-journey-subtitle');
+        if (!SaveManager.data.hasSelectedStartCity) {
+            if (progressBadge) progressBadge.innerText = "Başlangıç";
+            if (journeySub) journeySub.innerText = "Yolculuğa başlamak için bir il seç";
+        } else {
+            const curCity = CITIES[SaveManager.data.currentCityIdx] || CITIES[0];
+            const sub = SaveManager.data.currentSubLevel;
+            const m = Math.floor(sub / 2) + 1;
+            const b = (sub % 2) + 1;
+            if (progressBadge) progressBadge.innerText = `${curCity.name} (${curCity.plate < 10 ? '0' + curCity.plate : curCity.plate})`;
+            if (journeySub) journeySub.innerText = `Mekan ${m}/5 • Bulmaca ${b}/2 — Devam Et`;
         }
 
         // Update province map pins
@@ -100,6 +134,15 @@ const App = {
                 MapEngine.highlightProvinces();
                 const cur = CITIES[SaveManager.data.currentCityIdx];
                 if (cur) MapEngine.panCameraTo(cur.cx, cur.cy, 1.4);
+                
+                const banner = document.getElementById('map-guidance-banner');
+                if (banner && !MapEngine.isSelectingNextRoute) {
+                    if (!SaveManager.data.hasSelectedStartCity) {
+                        banner.innerText = "🗺️ Başlamak istediğin ili haritadan seç!";
+                    } else {
+                        banner.innerText = "🗺️ Türkiye Turu • Keşfetmek istediğin ile dokun";
+                    }
+                }
             } else if (screenId === 'screen-game') {
                 if (!GameEngine.isDailyMode) {
                     GameEngine.loadLevel();
@@ -194,32 +237,9 @@ const App = {
         SaveManager.data.currentSubLevel++;
 
         if (SaveManager.data.currentSubLevel >= levels.length) {
-            // City finished!
-            SaveManager.data.currentSubLevel = 0;
-            if (!SaveManager.data.completedProvinces.includes(city.plate)) {
-                SaveManager.data.completedProvinces.push(city.plate);
-            }
-
-            const nextCityIdx = curCityIdx + 1;
-            if (nextCityIdx < CITIES.length) {
-                if (curCityIdx === SaveManager.data.unlockedCityIdx) {
-                    SaveManager.data.unlockedCityIdx = nextCityIdx;
-                }
-                SaveManager.data.currentCityIdx = nextCityIdx;
-                SaveManager.save();
-
-                this.goToScreen('screen-map');
-                setTimeout(() => {
-                    MapEngine.animateTravel(curCityIdx, nextCityIdx, () => {
-                        MapEngine.selectCity(nextCityIdx);
-                    });
-                }, 400);
-            } else {
-                // Completed all 81 provinces!
-                SaveManager.save();
-                alert("TEBRİKLER! Türkiye'nin 81 ilini kapsayan Sözcük Seferi'ni başarıyla tamamladın!");
-                this.goToScreen('screen-map');
-            }
+            SaveManager.data.currentSubLevel = levels.length - 1;
+            SaveManager.save();
+            this.onCityCompletedTravel();
         } else {
             SaveManager.save();
             GameEngine.loadLevel();

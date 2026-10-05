@@ -25,9 +25,28 @@ const GameEngine = {
         const levels = this.city.levels || [];
         this.level = levels[subIdx % levels.length];
         
-        document.getElementById('game-city-label').innerText = `${trUpper(this.city.name)} (${this.city.plate < 10 ? '0' + this.city.plate : this.city.plate})`;
-        document.getElementById('game-landmark-label').innerText = this.level.landmark || this.city.name;
-        document.getElementById('game-bg-img').src = this.level.bg || '';
+        const plateStr = this.city.plate < 10 ? '0' + this.city.plate : this.city.plate;
+        const mekanNo = this.level.mekan_no || (Math.floor(subIdx / 2) + 1);
+        const bulmacaNo = this.level.bulmaca_no || ((subIdx % 2) + 1);
+        const landmarkName = this.level.landmark || this.city.name;
+
+        // Top bar format: [İl Adı] (Plaka) — Mekan X/5: [Mekan Adı] — Bulmaca Y/2
+        const cityLabel = document.getElementById('game-city-label');
+        if (cityLabel) {
+            cityLabel.innerText = `${trUpper(this.city.name)} (${plateStr}) — Mekan ${mekanNo}/5: ${landmarkName} — Bulmaca ${bulmacaNo}/2`;
+        }
+
+        const landmarkLabel = document.getElementById('game-landmark-label');
+        if (landmarkLabel) landmarkLabel.innerText = landmarkName;
+
+        const currentStars = SaveManager.getStars(cityIdx, subIdx);
+        const starsLabel = document.getElementById('game-stars-label');
+        if (starsLabel) {
+            starsLabel.innerText = currentStars > 0 ? '★'.repeat(currentStars) + '☆'.repeat(3 - currentStars) : '⭐⭐⭐';
+        }
+
+        const bgImg = document.getElementById('game-bg-img');
+        if (bgImg) bgImg.src = this.level.bg || '';
 
         this.initLevelCommon();
     },
@@ -39,8 +58,10 @@ const GameEngine = {
         this.city = { name: "Günün Bulmacası", plate: 0 };
 
         document.getElementById('game-city-label').innerText = "GÜNLÜK BULMACA";
-        document.getElementById('game-landmark-label').innerText = "Günün Özel Meydan Okuması";
-        document.getElementById('game-bg-img').src = "https://images.unsplash.com/photo-1541432901042-2d8bd64b4a9b?auto=format&fit=crop&w=1280&q=80";
+        const landmarkLabel = document.getElementById('game-landmark-label');
+        if (landmarkLabel) landmarkLabel.innerText = "Günün Özel Meydan Okuması";
+        const bgImg = document.getElementById('game-bg-img');
+        if (bgImg) bgImg.src = "https://images.unsplash.com/photo-1541432901042-2d8bd64b4a9b?auto=format&fit=crop&w=1280&q=80";
 
         this.initLevelCommon();
     },
@@ -90,8 +111,19 @@ const GameEngine = {
         const rows = maxR - minR + 1;
         const cols = maxC - minC + 1;
 
-        container.style.gridTemplateColumns = `repeat(${cols}, 1fr)`;
-        container.style.gridTemplateRows = `repeat(${rows}, 1fr)`;
+        // Auto-fit math for non-overflowing crossword grid
+        const vp = document.getElementById('crossword-viewport');
+        const availW = vp && vp.clientWidth > 0 ? (vp.clientWidth - 24) : 340;
+        const availH = vp && vp.clientHeight > 0 ? (vp.clientHeight - 20) : 280;
+        const gap = 5;
+        const sizeW = Math.floor((availW - (cols - 1) * gap) / cols);
+        const sizeH = Math.floor((availH - (rows - 1) * gap) / rows);
+        let cellSize = Math.min(sizeW, sizeH, 46);
+        if (cellSize < 30) cellSize = 30;
+
+        container.style.setProperty('--cell-size', `${cellSize}px`);
+        container.style.gridTemplateColumns = `repeat(${cols}, var(--cell-size, ${cellSize}px))`;
+        container.style.gridTemplateRows = `repeat(${rows}, var(--cell-size, ${cellSize}px))`;
         container.style.aspectRatio = `${cols}/${rows}`;
 
         const gridMap = {};
@@ -361,9 +393,35 @@ const GameEngine = {
             const finalReward = baseReward + (stars * 5);
             SaveManager.addCoins(finalReward);
             
-            SaveManager.saveStar(SaveManager.data.currentCityIdx, SaveManager.data.currentSubLevel, stars);
+            const subIdx = SaveManager.data.currentSubLevel;
+            SaveManager.saveStar(SaveManager.data.currentCityIdx, subIdx, stars);
+
+            const isCityCompleted = (subIdx === 9 || subIdx >= (this.city.levels.length - 1));
+
+            if (isCityCompleted) {
+                // Major City Completion: 10/10 puzzles solved!
+                SaveManager.addCoins(100);
+                if (!SaveManager.data.completedProvinces.includes(this.city.plate)) {
+                    SaveManager.data.completedProvinces.push(this.city.plate);
+                }
+                SaveManager.save();
+
+                const compTitle = document.getElementById('completed-city-title');
+                if (compTitle) compTitle.innerText = `${trUpper(this.city.name)} TAMAMLANDI!`;
+
+                const compImg = document.getElementById('completed-city-img');
+                if (compImg) compImg.src = this.level.bg || '';
+
+                const compStory = document.getElementById('completed-city-story');
+                if (compStory) {
+                    compStory.innerHTML = `Tebrikler! <strong>${this.city.name}</strong> ilimizin 5 simgesel mekanındaki 10 bulmacayı başarıyla çözdün ve yeşil/altın zafer mührünü kazandın!`;
+                }
+
+                App.showModal('modal-city-completed');
+                return;
+            }
             
-            // Show Postcard
+            // Show Normal Postcard for sub-levels (1-9)
             const pc = this.level.postcard || {
                 landmark: this.level.landmark || this.city.name,
                 desc: `${this.city.name} ilimizin eşsiz güzelliklerini ${stars} yıldızla başarıyla keşfettin!`,

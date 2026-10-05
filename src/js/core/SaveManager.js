@@ -2,13 +2,14 @@
 const SaveManager = {
     KEY: 'sozcukSeferi_v2_save',
     LEGACY_KEYS: ['sozcukSeferi_v1_save', 'sozcukSeferi_save', 'kelimeHarikalari_save'],
-    CURRENT_VERSION: 2,
+    CURRENT_VERSION: 3,
     
     defaultData: {
-        version: 2,
+        version: 3,
         coins: 250,
+        hasSelectedStartCity: false,
         currentCityIdx: 0,
-        unlockedCityIdx: 0,
+        unlockedCityIdx: 80,
         currentSubLevel: 0,
         completedProvinces: [],
         stars: {}, // Format: "cityIdx_subLevel": 1 | 2 | 3
@@ -68,26 +69,31 @@ const SaveManager = {
         if (typeof input.coins === 'number' && !isNaN(input.coins)) {
             out.coins = Math.max(0, Math.min(99999, Math.floor(input.coins)));
         }
+
+        // 2. hasSelectedStartCity
+        if (typeof input.hasSelectedStartCity === 'boolean') {
+            out.hasSelectedStartCity = input.hasSelectedStartCity;
+        } else if ((Array.isArray(input.completedProvinces) && input.completedProvinces.length > 0) ||
+                   (typeof input.stars === 'object' && input.stars && Object.keys(input.stars).length > 0)) {
+            out.hasSelectedStartCity = true;
+        }
         
-        // 2. City index bounds: 0 to 80 (81 provinces)
+        // 3. City index bounds: 0 to 80 (81 provinces)
         if (typeof input.currentCityIdx === 'number' && !isNaN(input.currentCityIdx)) {
             out.currentCityIdx = Math.max(0, Math.min(80, Math.floor(input.currentCityIdx)));
         }
         if (typeof input.unlockedCityIdx === 'number' && !isNaN(input.unlockedCityIdx)) {
             out.unlockedCityIdx = Math.max(0, Math.min(80, Math.floor(input.unlockedCityIdx)));
+        } else {
+            out.unlockedCityIdx = 80;
         }
         
-        // Ensure currentCityIdx cannot exceed unlockedCityIdx
-        if (out.currentCityIdx > out.unlockedCityIdx) {
-            out.currentCityIdx = out.unlockedCityIdx;
-        }
-        
-        // 3. SubLevel bounds: integer between 0 and 10
+        // 4. SubLevel bounds: integer between 0 and 9 (10 levels per province)
         if (typeof input.currentSubLevel === 'number' && !isNaN(input.currentSubLevel)) {
-            out.currentSubLevel = Math.max(0, Math.min(10, Math.floor(input.currentSubLevel)));
+            out.currentSubLevel = Math.max(0, Math.min(9, Math.floor(input.currentSubLevel)));
         }
         
-        // 4. Completed provinces: array of unique numbers between 1 and 81
+        // 5. Completed provinces: array of unique numbers between 1 and 81
         if (Array.isArray(input.completedProvinces)) {
             out.completedProvinces = [...new Set(
                 input.completedProvinces
@@ -96,7 +102,7 @@ const SaveManager = {
             )];
         }
         
-        // 5. Stars validation: dictionary of "city_sub" -> 1..3
+        // 6. Stars validation: dictionary of "city_sub" -> 1..3
         if (typeof input.stars === 'object' && input.stars !== null) {
             out.stars = {};
             for (const [k, v] of Object.entries(input.stars)) {
@@ -106,22 +112,21 @@ const SaveManager = {
             }
         }
         
-        // 6. Bonus chest: 0 to 5
+        // 7. Bonus chest: 0 to 5
         if (typeof input.bonusChest === 'number' && !isNaN(input.bonusChest)) {
             out.bonusChest = Math.max(0, Math.min(5, Math.floor(input.bonusChest)));
         }
         
-        // 7. Settings
+        // 8. Settings
         out.soundEnabled = typeof input.soundEnabled === 'boolean' ? input.soundEnabled : true;
         out.hapticEnabled = typeof input.hapticEnabled === 'boolean' ? input.hapticEnabled : true;
         
-        // 8. Daily Challenge State
+        // 9. Daily Challenge State
         if (typeof input.daily === 'object' && input.daily !== null) {
             out.daily.lastDate = typeof input.daily.lastDate === 'string' ? input.daily.lastDate : null;
             out.daily.streak = typeof input.daily.streak === 'number' ? Math.max(0, Math.floor(input.daily.streak)) : 0;
             out.daily.completedToday = typeof input.daily.completedToday === 'boolean' ? input.daily.completedToday : false;
         } else if (typeof input.lastDaily === 'string') {
-            // Legacy daily field migration
             out.daily.lastDate = input.lastDaily;
             out.daily.streak = typeof input.dailyStreak === 'number' ? Math.max(0, Math.floor(input.dailyStreak)) : 0;
         }

@@ -1,8 +1,41 @@
 const { spawn } = require('child_process');
 const fs = require('fs');
+const http = require('http');
+const path = require('path');
 
 async function runBrowserQA() {
     console.log("=== LAUNCHING CHROME HEADLESS BROWSER QA ===");
+
+    // 0. Start local self-contained static server
+    const server = http.createServer((req, res) => {
+        let reqPath = req.url.split('?')[0];
+        if (reqPath === '/') reqPath = '/index.html';
+        let filePath = path.join(__dirname, '..', reqPath);
+        if (!fs.existsSync(filePath) || fs.statSync(filePath).isDirectory()) {
+            filePath = path.join(__dirname, '..', 'index.html');
+        }
+        const ext = path.extname(filePath).toLowerCase();
+        const mimeTypes = {
+            '.html': 'text/html; charset=utf-8',
+            '.js': 'application/javascript; charset=utf-8',
+            '.css': 'text/css; charset=utf-8',
+            '.json': 'application/json; charset=utf-8',
+            '.png': 'image/png',
+            '.jpg': 'image/jpeg',
+            '.svg': 'image/svg+xml'
+        };
+        const contentType = mimeTypes[ext] || 'application/octet-stream';
+        try {
+            const content = fs.readFileSync(filePath);
+            res.writeHead(200, { 'Content-Type': contentType });
+            res.end(content);
+        } catch (e) {
+            res.writeHead(404);
+            res.end('Not found');
+        }
+    });
+    await new Promise(r => server.listen(8989, r));
+    console.log("Self-contained static server listening on http://localhost:8989");
     
     const chromePath = 'C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe';
     const port = 9222;
@@ -79,8 +112,8 @@ async function runBrowserQA() {
         await send('DOM.enable');
         
         // 1. Navigate to local server
-        console.log("Navigating to http://localhost:8080/index.html...");
-        await send('Page.navigate', { url: 'http://localhost:8080/index.html' });
+        console.log("Navigating to http://localhost:8989/index.html...");
+        await send('Page.navigate', { url: 'http://localhost:8989/index.html' });
         await new Promise(r => setTimeout(r, 1200));
 
         // 2. Verify Boot State
@@ -93,37 +126,40 @@ async function runBrowserQA() {
         console.log("Player starting coins:", coins);
         console.assert(coins >= 250, "Coins should be initialized");
 
-        // 3. Test Navigation: Hub -> Map
-        console.log("\n[TEST 2] Testing Navigation: Hub -> Map...");
-        await evaluate(`App.goToScreen('screen-map')`);
+        // 3. Test Navigation: Hub -> Onboarding Map
+        console.log("\n[TEST 2] Testing Onboarding Flow (Hub -> Sefere Çık)...");
+        await evaluate(`localStorage.clear(); SaveManager.init(); App.updateUI();`);
+        await evaluate(`App.startJourney()`);
         await new Promise(r => setTimeout(r, 400));
         const mapScreenActive = await evaluate(`document.getElementById('screen-map').classList.contains('active')`);
         console.assert(mapScreenActive, "Map screen should be active");
+        const startCityModalActive = await evaluate(`document.getElementById('modal-start-city').classList.contains('active')`);
+        console.assert(startCityModalActive, "Start city modal should be active on first play");
+        console.log("PASS: Onboarding modal appeared as expected.");
+
+        await evaluate(`App.hideModal('modal-start-city')`);
         const pinCount = await evaluate(`document.querySelectorAll('.city-pin-node').length`);
         console.log(`Rendered map pins: ${pinCount} (Expected 81)`);
         console.assert(pinCount === 81, "All 81 province pins must be rendered");
 
-        // 4. Test Progression Guard (Attempting to click locked city 80)
-        console.log("\n[TEST 3] Testing Progression Guard on Locked City...");
-        await evaluate(`MapEngine.selectCity(50)`); // City 50 should be locked
-        const actionBtnText = await evaluate(`document.querySelector('#map-city-card button.btn-3d').innerText`);
-        console.log("City 50 Action Button Text:", actionBtnText);
-        console.assert(actionBtnText.includes("KİLİTLİ"), "Action button for locked city should say KİLİTLİ");
+        // 4. Test Free Start City Selection (e.g. City 34: İstanbul)
+        console.log("\n[TEST 3] Testing Free Start City Selection (Selecting City 33: Mersin / City 34: İstanbul)...");
+        const istIdx = await evaluate(`CITIES.findIndex(c => c.plate === 34)`);
+        await evaluate(`MapEngine.selectCity(${istIdx})`);
+        const actionBtnText = await evaluate(`document.getElementById('card-action-btn').innerText`);
+        console.log("Start City Action Button Text:", actionBtnText);
+        console.assert(actionBtnText.includes("YOLCULUĞA BURADAN BAŞLA"), "Should offer starting journey from selected city");
         
-        const currentBefore = await evaluate(`SaveManager.data.currentCityIdx`);
-        await evaluate(`MapEngine.playSelectedCity()`);
-        const currentAfter = await evaluate(`SaveManager.data.currentCityIdx`);
-        console.assert(currentBefore === currentAfter, "Progression guard should prevent playing locked city!");
-        console.log("PASS: Progression guard successfully blocked unauthorized level start.");
-
-        // 5. Test Playing Unlocked City (City 0: İzmir)
-        console.log("\n[TEST 4] Starting Unlocked City 0 (İzmir)...");
-        await evaluate(`MapEngine.selectCity(0)`);
-        await evaluate(`MapEngine.playSelectedCity()`);
+        // Start journey from İstanbul
+        await evaluate(`document.getElementById('card-action-btn').click()`);
         await new Promise(r => setTimeout(r, 500));
         
         const gameActive = await evaluate(`document.getElementById('screen-game').classList.contains('active')`);
-        console.assert(gameActive, "Game screen should be active");
+        console.assert(gameActive, "Game screen should be active after start city selection");
+        
+        const headerText = await evaluate(`document.getElementById('game-city-label').innerText`);
+        console.log("Game Header Text:", headerText);
+        console.assert(headerText.includes("İSTANBUL") && headerText.includes("Mekan 1/5") && headerText.includes("Bulmaca 1/2"), "Header format must match product spec");
         
         const cellsCount = await evaluate(`document.querySelectorAll('.grid-cell').length`);
         const lettersCount = await evaluate(`document.querySelectorAll('.letter-node').length`);
@@ -131,8 +167,8 @@ async function runBrowserQA() {
         console.assert(cellsCount > 0, "Grid cells should be rendered");
         console.assert(lettersCount > 0, "Wheel letter nodes should be rendered");
 
-        // 6. Test Hints / Powerups
-        console.log("\n[TEST 5] Testing Hints / Powerups...");
+        // 5. Test Hints / Powerups
+        console.log("\n[TEST 4] Testing Hints / Powerups...");
         const coinsBeforeHint = await evaluate(`SaveManager.data.coins`);
         await evaluate(`GameEngine.useBulb()`);
         const coinsAfterHint = await evaluate(`SaveManager.data.coins`);
@@ -141,8 +177,8 @@ async function runBrowserQA() {
         const hintsUsed = await evaluate(`GameEngine.hintsUsed`);
         console.assert(hintsUsed === 1, "HintsUsed should be incremented to 1");
 
-        // 7. Test Word Completion & Win Condition
-        console.log("\n[TEST 6] Solving level words to test win & stars...");
+        // 6. Test Sub-Level Completion (Postcard Modal)
+        console.log("\n[TEST 5] Solving sub-level words to test normal postcard modal...");
         await evaluate(`
             const words = GameEngine.words;
             words.forEach(w => {
@@ -154,7 +190,43 @@ async function runBrowserQA() {
         
         const postcardActive = await evaluate(`document.getElementById('modal-postcard').classList.contains('active')`);
         console.log("Postcard modal active:", postcardActive);
-        console.assert(postcardActive, "Postcard win modal should be displayed");
+        console.assert(postcardActive, "Postcard win modal should be displayed for sub-level");
+
+        // 7. Test City Finale Completion (10th Level -> Modal City Completed)
+        console.log("\n[TEST 6] Testing 10th level completion (Major City Completion Modal & Seal)...");
+        await evaluate(`App.hideModal('modal-postcard');`);
+        // Fast forward to level 9 (the 10th level)
+        await evaluate(`SaveManager.data.currentSubLevel = 9; GameEngine.loadLevel();`);
+        const lvl10Header = await evaluate(`document.getElementById('game-city-label').innerText`);
+        console.log("Level 10 Header Text:", lvl10Header);
+        console.assert(lvl10Header.includes("Mekan 5/5") && lvl10Header.includes("Bulmaca 2/2"), "10th level should be Mekan 5/5 Bulmaca 2/2");
+
+        // Solve level 10
+        await evaluate(`
+            GameEngine.words.forEach(w => {
+                GameEngine.foundWords.add(w.word);
+                GameEngine.revealWord(w);
+            });
+        `);
+        await new Promise(r => setTimeout(r, 900));
+        
+        const cityCompletedModalActive = await evaluate(`document.getElementById('modal-city-completed').classList.contains('active')`);
+        console.log("City completed modal active:", cityCompletedModalActive);
+        console.assert(cityCompletedModalActive, "Major city completion modal must be displayed on 10th level!");
+
+        // Test Travel to Next City from Completed City
+        console.log("\n[TEST 7] Testing Travel to Next City Flow...");
+        await evaluate(`App.onCityCompletedTravel()`);
+        await new Promise(r => setTimeout(r, 400));
+        
+        const onMap = await evaluate(`document.getElementById('screen-map').classList.contains('active')`);
+        console.assert(onMap, "Map screen should be active after clicking travel");
+        const bannerText = await evaluate(`document.getElementById('map-guidance-banner').innerText`);
+        console.log("Map Guidance Banner:", bannerText);
+        console.assert(bannerText.includes("Sıradaki Hedefini Seç"), "Guidance banner should prompt next destination");
+
+        const istCompleted = await evaluate(`SaveManager.data.completedProvinces.includes(34)`);
+        console.assert(istCompleted, "İstanbul should now be marked in completedProvinces");
 
         // 8. Test Daily Challenge Flow
         console.log("\n[TEST 7] Testing Daily Challenge State Machine...");
@@ -240,6 +312,7 @@ async function runBrowserQA() {
         ws.close();
         console.log("\n=== ALL BROWSER QA SUITES COMPLETED SUCCESSFULLY ===");
     } finally {
+        server.close();
         chromeProc.kill();
     }
 }

@@ -86,24 +86,25 @@ def find_strict_crossword(words):
             return res
     return None
 
-test_levels = [
-    ("Lvl 1 - Kapadokya", ["KAT", "TAK"]),
-    ("Lvl 2 - Pamukkale", ["KALE", "KEL", "ELA"]),
-    ("Lvl 3 - Galata", ["MASA", "ASMA"]),
-    ("Lvl 4 - Efes", ["BALIK", "BAL", "KIL"]),
-    ("Lvl 5 - Nemrut", ["KİTAP", "TAKİP", "PAK"]),
-    ("Lvl 6 - Göbeklitepe", ["DENİZ", "DİZ", "DİN"]),
-    ("Lvl 7 - Roma Kolezyum", ["ROMA", "ORAN", "ROMAN"]),
-    ("Lvl 8 - Tac Mahal", ["AŞK", "ŞAK", "KUŞ", "KUŞAK"]),
-    ("Daily Challenge", ["BAHAR", "HARA", "BAR", "ARA"])
-]
+if __name__ == '__main__':
+    test_levels = [
+        ("Lvl 1 - Kapadokya", ["KAT", "TAK"]),
+        ("Lvl 2 - Pamukkale", ["KALE", "KEL", "ELA"]),
+        ("Lvl 3 - Galata", ["MASA", "ASMA"]),
+        ("Lvl 4 - Efes", ["BALIK", "BAL", "KIL"]),
+        ("Lvl 5 - Nemrut", ["KİTAP", "TAKİP", "PAK"]),
+        ("Lvl 6 - Göbeklitepe", ["DENİZ", "DİZ", "DİN"]),
+        ("Lvl 7 - Roma Kolezyum", ["ROMA", "ORAN", "ROMAN"]),
+        ("Lvl 8 - Tac Mahal", ["AŞK", "ŞAK", "KUŞ", "KUŞAK"]),
+        ("Daily Challenge", ["BAHAR", "HARA", "BAR", "ARA"])
+    ]
 
-print("Solving strict non-adjacent crosswords...")
-for name, wlist in test_levels:
-    res = find_strict_crossword(wlist)
-    if res:
-        print(f"PASS: {name}")
-        for w in res:
-            print(f"   {w}")
-    else:
-        print(f"FAIL: {name}")
+    print("Solving strict non-adjacent crosswords...")
+    for name, wlist in test_levels:
+        res = find_strict_crossword(wlist)
+        if res:
+            print(f"PASS: {name}")
+            for w in res:
+                print(f"   {w}")
+        else:
+            print(f"FAIL: {name}")

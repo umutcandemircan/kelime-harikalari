@@ -42,30 +42,20 @@
         </div>
 
         <div class="hub-cards-container">
-            <!-- CARD 1: SEFERE ÇIK (ONBOARDING / PLAY) -->
+            <!-- CARD 1: YOLCULUĞA BAŞLA (PRIMARY ACTION) -->
             <div class="hub-card hub-card-primary" onclick="App.startJourney()">
                 <div class="hub-card-icon">🧭</div>
                 <div class="hub-card-content">
                     <div style="display:flex; align-items:center;">
-                        <span class="hub-card-title">Sefere Çık</span>
+                        <span class="hub-card-title">Yolculuğa Başla</span>
                         <span class="hub-card-badge" id="hub-progress-badge">Başlangıç</span>
                     </div>
-                    <span class="hub-card-subtitle" id="hub-journey-subtitle">Yolculuğa başlamak için bir il seç</span>
+                    <span class="hub-card-subtitle" id="hub-journey-subtitle">Türkiye seferine çıkmak için dokun</span>
                 </div>
                 <span class="hub-card-arrow">➔</span>
             </div>
 
-            <!-- CARD 2: YOLCULUK HARİTASI -->
-            <div class="hub-card" onclick="App.goToScreen('screen-map')">
-                <div class="hub-card-icon">🗺️</div>
-                <div class="hub-card-content">
-                    <span class="hub-card-title">Türkiye Haritası</span>
-                    <span class="hub-card-subtitle">81 ili ve rotanı harita üzerinde incele</span>
-                </div>
-                <span class="hub-card-arrow">➔</span>
-            </div>
-
-            <!-- CARD 3: DEYİM AVCISI -->
+            <!-- CARD 2: DEYİM AVCISI -->
             <div class="hub-card" onclick="App.goToScreen('screen-idiom')">
                 <div class="hub-card-icon">🎭</div>
                 <div class="hub-card-content">
@@ -75,7 +65,7 @@
                 <span class="hub-card-arrow">➔</span>
             </div>
 
-            <!-- CARD 4: GÜNLÜK BULMACA -->
+            <!-- CARD 3: GÜNLÜK BULMACA -->
             <div class="hub-card" onclick="App.showDailyModal()">
                 <div class="hub-card-icon">📅</div>
                 <div class="hub-card-content">
@@ -89,6 +79,10 @@
             </div>
         </div>
 
+        <!-- PROGRESS SUMMARY FOOTER -->
+        <div class="hub-footer-progress" id="hub-footer-progress">
+            Keşfedilen: 0/81 İl | Toplam Yıldız: ⭐ 0
+        </div>
         <div style="font-size: 11px; color: #64748b; letter-spacing: 1px;">Sözcük Seferî v2.0 • Türkiye Turu</div>
     </div>
 
@@ -103,6 +97,13 @@
         <!-- Floating Interactive Route Guidance Banner -->
         <div class="map-guidance-banner" id="map-guidance-banner">
             🗺️ Başlamak istediğin ili haritadan seç!
+        </div>
+
+        <!-- FLOATING ZOOM & FOCUS CONTROLS -->
+        <div class="map-controls-floating">
+            <button class="map-ctrl-btn" onclick="MapEngine.zoomIn()" title="Yakınlaştır">➕</button>
+            <button class="map-ctrl-btn" onclick="MapEngine.zoomOut()" title="Uzaklaştır">➖</button>
+            <button class="map-ctrl-btn map-ctrl-reset" onclick="MapEngine.resetCamera()" title="Odakla / Sıfırla">🎯</button>
         </div>
 
         <div id="map-stage-wrapper">

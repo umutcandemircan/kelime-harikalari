@@ -1,7 +1,18 @@
-// 3. INTERACTIVE 81-PROVINCE MAP ENGINE
+// 3. INTERACTIVE 81-PROVINCE TOUCH PAN & PINCH-ZOOM MAP ENGINE
 const MapEngine = {
     selectedCityIdx: 0,
     isSelectingNextRoute: false,
+    
+    // Smooth Touch Pan & Zoom State
+    scale: 1.6,
+    panX: 0,
+    panY: 0,
+    isPanning: false,
+    startX: 0,
+    startY: 0,
+    startPanX: 0,
+    startPanY: 0,
+    dragDistance: 0,
     
     init() {
         this.renderPins();
@@ -19,11 +30,12 @@ const MapEngine = {
             
             const fillClass = isCurrent ? 'current' : (isCompleted ? 'completed' : 'unlocked');
             
-            html += `<g class="city-pin-node ${fillClass}" data-idx="${idx}" onclick="MapEngine.selectCity(${idx})" transform="translate(${c.cx}, ${c.cy})">
-                <circle class="pin-hitbox" r="22" fill="transparent" />
+            // 52px Hitbox (r=26) for generous thumb touch targets on mobile
+            html += `<g class="city-pin-node ${fillClass}" data-idx="${idx}" onclick="MapEngine.handlePinClick(${idx})" transform="translate(${c.cx}, ${c.cy})">
+                <circle class="pin-hitbox" r="26" fill="transparent" />
                 <circle class="city-pin-circle ${fillClass}" r="${isCurrent ? 10 : (isCompleted ? 8 : 6)}" />
                 <text class="city-pin-text" y="1">${isCompleted ? '✓' : (c.plate < 10 ? '0' + c.plate : c.plate)}</text>
-                <text class="city-label-text" y="${isCurrent ? -13 : -10}">${c.name}</text>
+                <text class="city-label-text" y="${isCurrent ? -14 : -11}">${c.name}</text>
             </g>`;
         });
         pinsLayer.innerHTML = html;
@@ -44,13 +56,139 @@ const MapEngine = {
     },
 
     bindEvents() {
+        const stage = document.getElementById('map-stage-wrapper');
+        if (stage) {
+            stage.addEventListener('pointerdown', (e) => this.onPointerDown(e));
+            window.addEventListener('pointermove', (e) => this.onPointerMove(e));
+            window.addEventListener('pointerup', (e) => this.onPointerUp(e));
+            window.addEventListener('pointercancel', (e) => this.onPointerUp(e));
+            
+            // Desktop Wheel Zoom
+            stage.addEventListener('wheel', (e) => {
+                e.preventDefault();
+                const delta = e.deltaY < 0 ? 1.15 : 0.87;
+                this.setZoom(this.scale * delta, e.clientX, e.clientY);
+            }, { passive: false });
+        }
+
         document.querySelectorAll('.province-path').forEach(el => {
             el.addEventListener('click', () => {
+                if (this.dragDistance > 8) return;
                 const plate = parseInt(el.dataset.plate);
                 const cityIdx = CITIES.findIndex(c => c.plate === plate);
                 if (cityIdx !== -1) MapEngine.selectCity(cityIdx);
             });
         });
+    },
+
+    onPointerDown(e) {
+        if (e.target.closest('#map-city-card') || e.target.closest('.map-controls-floating')) return;
+        this.isPanning = true;
+        this.startX = e.clientX;
+        this.startY = e.clientY;
+        this.startPanX = this.panX;
+        this.startPanY = this.panY;
+        this.dragDistance = 0;
+        
+        const viewport = document.getElementById('map-viewport');
+        if (viewport) viewport.style.transition = 'none';
+    },
+
+    onPointerMove(e) {
+        if (!this.isPanning) return;
+        const dx = e.clientX - this.startX;
+        const dy = e.clientY - this.startY;
+        this.dragDistance = Math.hypot(dx, dy);
+        
+        this.panX = this.startPanX + dx;
+        this.panY = this.startPanY + dy;
+        this.applyTransform(false);
+    },
+
+    onPointerUp(e) {
+        if (!this.isPanning) return;
+        this.isPanning = false;
+        this.clampBounds();
+        this.applyTransform(true);
+    },
+
+    handlePinClick(idx) {
+        if (this.dragDistance > 8) return; // Ignore drag release on pins
+        this.selectCity(idx);
+    },
+
+    zoomIn() {
+        this.setZoom(Math.min(3.8, this.scale * 1.3));
+    },
+
+    zoomOut() {
+        this.setZoom(Math.max(0.75, this.scale / 1.3));
+    },
+
+    resetCamera() {
+        const cur = CITIES[SaveManager.data.currentCityIdx] || CITIES[0];
+        this.panCameraTo(cur.cx, cur.cy, 1.8);
+    },
+
+    setZoom(newScale, focalX, focalY) {
+        const stage = document.getElementById('map-stage-wrapper');
+        const vpW = stage ? stage.clientWidth : 360;
+        const vpH = stage ? stage.clientHeight : 500;
+        
+        const focusX = (focalX !== undefined) ? focalX : (vpW / 2);
+        const focusY = (focalY !== undefined) ? focalY : (vpH / 2);
+
+        // Keep focal point stationary during zoom
+        const svgX = (focusX - this.panX) / this.scale;
+        const svgY = (focusY - this.panY) / this.scale;
+
+        this.scale = Math.max(0.75, Math.min(3.8, newScale));
+        this.panX = focusX - (svgX * this.scale);
+        this.panY = focusY - (svgY * this.scale);
+        this.clampBounds();
+        this.applyTransform(true);
+    },
+
+    clampBounds() {
+        const stage = document.getElementById('map-stage-wrapper');
+        const vpW = stage ? stage.clientWidth : 360;
+        const vpH = stage ? stage.clientHeight : 500;
+        
+        const mapW = 1100 * this.scale;
+        const mapH = 500 * this.scale;
+        
+        const minX = vpW - mapW - 100;
+        const maxX = 100;
+        const minY = vpH - mapH - 100;
+        const maxY = 100;
+
+        if (mapW > vpW) {
+            this.panX = Math.min(maxX, Math.max(minX, this.panX));
+        }
+        if (mapH > vpH) {
+            this.panY = Math.min(maxY, Math.max(minY, this.panY));
+        }
+    },
+
+    applyTransform(smooth = false) {
+        const viewport = document.getElementById('map-viewport');
+        if (!viewport) return;
+        viewport.style.transition = smooth ? 'transform 0.5s cubic-bezier(0.25, 1, 0.5, 1)' : 'none';
+        viewport.style.transform = `translate3d(${this.panX}px, ${this.panY}px, 0) scale(${this.scale})`;
+    },
+
+    panCameraTo(cx, cy, scale) {
+        const stage = document.getElementById('map-stage-wrapper');
+        if (!stage) return;
+        
+        const vpW = stage.clientWidth || 360;
+        const vpH = stage.clientHeight || 500;
+        
+        this.scale = scale || this.scale || 1.8;
+        this.panX = (vpW / 2) - (cx * this.scale);
+        this.panY = (vpH / 2) - (cy * this.scale);
+        this.clampBounds();
+        this.applyTransform(true);
     },
 
     selectCity(idx) {
@@ -100,8 +238,8 @@ const MapEngine = {
 
         document.getElementById('map-city-card').classList.add('active');
 
-        // Animate Camera to selected city
-        this.panCameraTo(city.cx, city.cy, 2.0);
+        // Smoothly focus camera on selected city
+        this.panCameraTo(city.cx, city.cy, 2.2);
     },
 
     startAtCity(idx) {
@@ -132,19 +270,6 @@ const MapEngine = {
             App.updateUI();
             App.goToScreen('screen-game');
         });
-    },
-
-    panCameraTo(cx, cy, scale) {
-        const viewport = document.getElementById('map-viewport');
-        const stage = document.getElementById('map-stage-wrapper');
-        if (!viewport || !stage) return;
-        
-        const vpW = stage.clientWidth || 360;
-        const vpH = stage.clientHeight || 500;
-        
-        const tx = (vpW / 2) - (cx * scale);
-        const ty = (vpH / 2) - (cy * scale);
-        viewport.style.transform = `translate3d(${tx}px, ${ty}px, 0) scale(${scale})`;
     },
 
     closeCard() {
@@ -192,7 +317,6 @@ const MapEngine = {
             if (!start) start = ts;
             const elapsed = ts - start;
             const progress = Math.min(elapsed / duration, 1);
-            // Ease in-out
             const ease = progress < 0.5 ? 2 * progress * progress : -1 + (4 - 2 * progress) * progress;
             const pt = route.getPointAtLength(ease * totalLen);
             carrier.setAttribute('transform', `translate(${pt.x}, ${pt.y})`);
@@ -200,7 +324,7 @@ const MapEngine = {
             // Smooth camera follow
             const curCx = panStartCx + (panEndCx - panStartCx) * ease;
             const curCy = panStartCy + (panEndCy - panStartCy) * ease;
-            self.panCameraTo(curCx, curCy, 1.8);
+            self.panCameraTo(curCx, curCy, 2.0);
 
             if (progress < 1) {
                 requestAnimationFrame(step);

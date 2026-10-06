@@ -289,6 +289,21 @@
             transition: all 0.3s ease;
         }
 
+        /* HUB FOOTER PROGRESS SUMMARY */
+        .hub-footer-progress {
+            background: rgba(28, 37, 65, 0.7);
+            border: 1px solid rgba(245, 158, 11, 0.3);
+            border-radius: 20px;
+            padding: 8px 18px;
+            font-size: 12px;
+            font-weight: 800;
+            color: #e2e8f0;
+            letter-spacing: 0.5px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+            margin: 6px 0;
+            text-align: center;
+        }
+
         #map-stage-wrapper {
             flex: 1;
             width: 100%;
@@ -298,6 +313,51 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            touch-action: none;
+            user-select: none;
+            cursor: grab;
+        }
+
+        #map-stage-wrapper:active {
+            cursor: grabbing;
+        }
+
+        /* FLOATING MAP ZOOM & FOCUS CONTROLS */
+        .map-controls-floating {
+            position: absolute;
+            right: 16px;
+            bottom: 24px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            z-index: 40;
+        }
+
+        .map-ctrl-btn {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: rgba(11, 19, 43, 0.94);
+            border: 1.5px solid var(--gold-primary);
+            color: #ffffff;
+            font-size: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+            cursor: pointer;
+            transition: transform 0.15s ease, background 0.15s ease;
+            user-select: none;
+            touch-action: manipulation;
+        }
+
+        .map-ctrl-btn:active {
+            transform: scale(0.92);
+            background: var(--slate-secondary);
+        }
+
+        .map-ctrl-reset {
+            border-color: var(--turquoise);
         }
 
         #map-viewport {
@@ -306,7 +366,7 @@
             position: absolute;
             transform-origin: 0 0;
             will-change: transform;
-            transition: transform 0.8s cubic-bezier(0.25, 1, 0.5, 1);
+            transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1);
         }
 
         .turkey-svg {

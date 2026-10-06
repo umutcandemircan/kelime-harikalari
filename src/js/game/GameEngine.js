@@ -46,7 +46,11 @@ const GameEngine = {
         }
 
         const bgImg = document.getElementById('game-bg-img');
-        if (bgImg) bgImg.src = this.level.bg || '';
+        if (bgImg) {
+            const fallback = getFallbackLandmarkSVG(landmarkName, this.city.name, this.city.plate);
+            bgImg.onerror = () => { bgImg.src = fallback; bgImg.onerror = null; };
+            bgImg.src = this.level.bg || fallback;
+        }
 
         this.initLevelCommon();
     },
@@ -114,17 +118,27 @@ const GameEngine = {
         // Auto-fit math for non-overflowing crossword grid
         const vp = document.getElementById('crossword-viewport');
         const availW = vp && vp.clientWidth > 0 ? (vp.clientWidth - 24) : 340;
-        const availH = vp && vp.clientHeight > 0 ? (vp.clientHeight - 20) : 280;
+        const availH = vp && vp.clientHeight > 0 ? (vp.clientHeight - 24) : 280;
         const gap = 5;
         const sizeW = Math.floor((availW - (cols - 1) * gap) / cols);
         const sizeH = Math.floor((availH - (rows - 1) * gap) / rows);
         let cellSize = Math.min(sizeW, sizeH, 46);
-        if (cellSize < 30) cellSize = 30;
+        if (cellSize < 24) cellSize = 24;
 
         container.style.setProperty('--cell-size', `${cellSize}px`);
         container.style.gridTemplateColumns = `repeat(${cols}, var(--cell-size, ${cellSize}px))`;
         container.style.gridTemplateRows = `repeat(${rows}, var(--cell-size, ${cellSize}px))`;
         container.style.aspectRatio = `${cols}/${rows}`;
+
+        const totalW = cols * cellSize + (cols - 1) * gap;
+        const totalH = rows * cellSize + (rows - 1) * gap;
+        if (totalW > availW || totalH > availH) {
+            const scale = Math.min(availW / totalW, availH / totalH);
+            container.style.transform = `scale(${scale})`;
+            container.style.transformOrigin = 'center center';
+        } else {
+            container.style.transform = 'none';
+        }
 
         const gridMap = {};
         this.words.forEach(w => {
@@ -410,7 +424,11 @@ const GameEngine = {
                 if (compTitle) compTitle.innerText = `${trUpper(this.city.name)} TAMAMLANDI!`;
 
                 const compImg = document.getElementById('completed-city-img');
-                if (compImg) compImg.src = this.level.bg || '';
+                if (compImg) {
+                    const fallback = getFallbackLandmarkSVG(this.city.name + ' Simgesi', this.city.name, this.city.plate);
+                    compImg.onerror = () => { compImg.src = fallback; compImg.onerror = null; };
+                    compImg.src = this.level.bg || fallback;
+                }
 
                 const compStory = document.getElementById('completed-city-story');
                 if (compStory) {
@@ -429,7 +447,12 @@ const GameEngine = {
             };
             document.getElementById('post-landmark-title').innerText = pc.landmark || this.city.name;
             document.getElementById('post-story-text').innerText = pc.desc || '';
-            document.getElementById('post-photo-img').src = pc.bg || this.level.bg || '';
+            const pcPhoto = document.getElementById('post-photo-img');
+            if (pcPhoto) {
+                const fallback = getFallbackLandmarkSVG(pc.landmark, pc.city || this.city.name, pc.plate || this.city.plate);
+                pcPhoto.onerror = () => { pcPhoto.src = fallback; pcPhoto.onerror = null; };
+                pcPhoto.src = pc.bg || this.level.bg || fallback;
+            }
             
             // Render stars
             let pcStars = document.getElementById('post-stars');

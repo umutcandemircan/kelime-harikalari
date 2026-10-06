@@ -101,7 +101,13 @@ const App = {
             hubStarsSummary.innerText = `⭐ ${totalStars} Yıldız Toplandı`;
         }
 
-        // Update Hub "Sefere Çık" card status
+        const completedCount = SaveManager.data.completedProvinces ? SaveManager.data.completedProvinces.length : 0;
+        const footerProgress = document.getElementById('hub-footer-progress');
+        if (footerProgress) {
+            footerProgress.innerText = `Keşfedilen: ${completedCount}/81 İl | Toplam Yıldız: ⭐ ${totalStars}`;
+        }
+
+        // Update Hub "Yolculuğa Başla" card status
         const progressBadge = document.getElementById('hub-progress-badge');
         const journeySub = document.getElementById('hub-journey-subtitle');
         if (!SaveManager.data.hasSelectedStartCity) {
@@ -132,8 +138,8 @@ const App = {
             if (screenId === 'screen-map') {
                 MapEngine.renderPins();
                 MapEngine.highlightProvinces();
-                const cur = CITIES[SaveManager.data.currentCityIdx];
-                if (cur) MapEngine.panCameraTo(cur.cx, cur.cy, 1.4);
+                const cur = CITIES[SaveManager.data.currentCityIdx] || CITIES[0];
+                if (cur) MapEngine.panCameraTo(cur.cx, cur.cy, 1.8);
                 
                 const banner = document.getElementById('map-guidance-banner');
                 if (banner && !MapEngine.isSelectingNextRoute) {

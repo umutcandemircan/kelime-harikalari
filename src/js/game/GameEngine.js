@@ -355,16 +355,7 @@ const GameEngine = {
         setTimeout(() => this.checkWinCondition(), w.word.length * 80 + 350);
     },
 
-    calculateStars() {
-        const totalWords = this.words.length;
-        if (this.hintsUsed === 0 && this.mistakes <= 1) {
-            return 3; // 3 stars: no hints and max 1 mistake
-        }
-        if (this.hintsUsed <= 1 && this.mistakes <= 3) {
-            return 2; // 2 stars
-        }
-        return 1; // 1 star minimum on completion
-    },
+    
 
     checkWinCondition() {
         if (this.foundWords.size === this.words.length) {
@@ -379,25 +370,14 @@ const GameEngine = {
                 document.getElementById('post-story-text').innerText = `Tebrikler! Günün bulmacasını başarıyla çözdün.\nSerin: ${streak} Gün! (+50 Altın)`;
                 document.getElementById('post-photo-img').src = "https://images.unsplash.com/photo-1541432901042-2d8bd64b4a9b?auto=format&fit=crop&w=1280&q=80";
                 
-                let pcStars = document.getElementById('post-stars');
-                if (!pcStars) {
-                    pcStars = document.createElement('div');
-                    pcStars.id = 'post-stars';
-                    const titleEl = document.getElementById('post-landmark-title');
-                    titleEl.parentNode.insertBefore(pcStars, titleEl.nextSibling);
-                }
-                pcStars.innerHTML = '⭐ GÜNLÜK ZAFER ⭐';
-                pcStars.style.fontSize = '20px';
-                pcStars.style.textAlign = 'center';
-                pcStars.style.margin = '10px 0';
-                pcStars.style.color = '#f59e0b';
+                
                 
                 App.showModal('modal-postcard');
                 return;
             }
             
             // Regular Level win
-            const stars = this.calculateStars();
+            const stars = 3;
             let baseReward = 20;
             if (this.difficulty === 'MEDIUM') baseReward = 30;
             if (this.difficulty === 'HARD') baseReward = 50;
@@ -449,18 +429,7 @@ const GameEngine = {
             }
             
             // Render stars
-            let pcStars = document.getElementById('post-stars');
-            if (!pcStars) {
-                pcStars = document.createElement('div');
-                pcStars.id = 'post-stars';
-                const titleEl = document.getElementById('post-landmark-title');
-                titleEl.parentNode.insertBefore(pcStars, titleEl.nextSibling);
-            }
-            pcStars.innerHTML = '★'.repeat(stars) + '☆'.repeat(3 - stars);
-            pcStars.style.fontSize = '28px';
-            pcStars.style.textAlign = 'center';
-            pcStars.style.margin = '8px 0';
-            pcStars.style.color = '#f59e0b';
+            
             
             App.showModal('modal-postcard');
         }

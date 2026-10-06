@@ -1110,29 +1110,8 @@
             object-fit: cover;
         }
 
-        .wax-seal {
-            position: absolute;
-            bottom: -15px;
-            right: -15px;
-            width: 60px;
-            height: 60px;
-            background: linear-gradient(135deg, #a67c00 0%, #bf953f 50%, #b38728 51%, #fbf5b7 100%);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.6), inset 0 2px 4px rgba(255, 255, 255, 0.4);
-            border: 2px solid #5c3a21;
-        }
-
-        .wax-seal span {
-            font-size: 8px;
-            font-weight: 900;
-            color: #fee2e2;
-            text-align: center;
-            line-height: 1.1;
-        }
-
+        
+        
         .postcard-story {
             font-size: 12px;
             color: var(--text-muted);

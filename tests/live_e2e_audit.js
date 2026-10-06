@@ -97,9 +97,20 @@ async function runLiveE2E() {
             localStorage.clear();
             caches.keys().then(keys => Promise.all(keys.map(k => caches.delete(k))));
         `);
-        // Hard reload
+        // Hard reload and wait for App to load
         await send('Page.reload', { ignoreCache: true });
-        await new Promise(r => setTimeout(r, 2000));
+        for (let i = 0; i < 40; i++) {
+            await new Promise(r => setTimeout(r, 500));
+            try {
+                const ready = await evaluate(`typeof window.App !== 'undefined'`);
+                if (ready) {
+                    console.log(`Page ready after ${(i + 1) * 500}ms`);
+                    break;
+                }
+            } catch (e) {
+                // still navigating/loading
+            }
+        }
         
         let shot = await send('Page.captureScreenshot', { format: 'png' });
         fs.writeFileSync('docs/screenshots/live_01_hub.png', Buffer.from(shot.data, 'base64'));

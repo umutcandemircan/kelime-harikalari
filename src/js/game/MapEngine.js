@@ -43,6 +43,11 @@ const MapEngine = {
             const svg = document.getElementById('turkey-map-svg');
             if (svg) {
                 svg.setAttribute('viewBox', `${this.vbX} ${this.vbY} ${this.vbW} ${this.vbH}`);
+                if (this.vbW > 700) {
+                    svg.classList.add('zoomed-out');
+                } else {
+                    svg.classList.remove('zoomed-out');
+                }
             }
             this.rafId = requestAnimationFrame(step);
         };
@@ -112,6 +117,12 @@ const MapEngine = {
 
     onPointerDown(e) {
         if (e.target.closest('#map-city-card') || e.target.closest('.map-controls-floating')) return;
+        
+        // If they click outside the card on the map, close the card and remove focus
+        if (!e.target.closest('.city-pin-node') && !e.target.closest('.province-path')) {
+             this.closeCard();
+        }
+        
         this.isPanning = true;
         this.startX = e.clientX;
         this.startY = e.clientY;
@@ -260,6 +271,13 @@ const MapEngine = {
         this.targetVbX = cx - newW / 2;
         this.targetVbY = cy - newH / 2;
         this.clampBounds();
+        
+        const svg = document.getElementById('turkey-map-svg');
+        if (svg) {
+            svg.classList.add('has-focus');
+            document.querySelectorAll('.province-path').forEach(el => el.classList.remove('focused'));
+            if (path) path.classList.add('focused');
+        }
     },
 
     selectCity(idx) {
@@ -373,6 +391,11 @@ const MapEngine = {
     closeCard() {
         const card = document.getElementById('map-city-card');
         if (card) card.classList.remove('active');
+        const svg = document.getElementById('turkey-map-svg');
+        if (svg) {
+            svg.classList.remove('has-focus');
+            document.querySelectorAll('.province-path').forEach(el => el.classList.remove('focused'));
+        }
     },
 
     playSelectedCity() {

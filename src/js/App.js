@@ -202,7 +202,7 @@ const App = {
 
         document.getElementById('daily-date-str').innerText = todayStr;
         
-        const actionBtn = document.querySelector('#modal-daily button.btn-3d-turquoise');
+        const actionBtn = document.querySelector('#modal-daily button.btn-3d-ocean');
         const descP = document.querySelector('#modal-daily p');
 
         if (state.completedToday) {

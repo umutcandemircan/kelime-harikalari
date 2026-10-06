@@ -3,50 +3,21 @@ const MapEngine = {
     selectedCityIdx: 0,
     isSelectingNextRoute: false,
     
-    // ViewBox state (Initial viewBox 0 0 1100 500)
-    vbX: 0,
-    vbY: 0,
-    vbW: 1100,
-    vbH: 500,
-    
-    targetVbX: 0,
-    targetVbY: 0,
-    targetVbW: 1100,
-    targetVbH: 500,
-
+    // Smooth Touch Pan & Zoom State
+    scale: 1.6,
+    panX: 0,
+    panY: 0,
     isPanning: false,
     startX: 0,
     startY: 0,
-    startVbX: 0,
-    startVbY: 0,
+    startPanX: 0,
+    startPanY: 0,
     dragDistance: 0,
-    
-    rafId: null,
     
     init() {
         this.renderPins();
         this.highlightProvinces();
         this.bindEvents();
-        
-        // Start continuous viewBox lerp loop
-        this.startLerpLoop();
-    },
-
-    startLerpLoop() {
-        const step = () => {
-            // Cubic-bezier smooth lerping
-            this.vbX += (this.targetVbX - this.vbX) * 0.1;
-            this.vbY += (this.targetVbY - this.vbY) * 0.1;
-            this.vbW += (this.targetVbW - this.vbW) * 0.1;
-            this.vbH += (this.targetVbH - this.vbH) * 0.1;
-            
-            const svg = document.getElementById('turkey-map-svg');
-            if (svg) {
-                svg.setAttribute('viewBox', `${this.vbX} ${this.vbY} ${this.vbW} ${this.vbH}`);
-            }
-            this.rafId = requestAnimationFrame(step);
-        };
-        if (!this.rafId) step();
     },
 
     renderPins() {
@@ -85,18 +56,18 @@ const MapEngine = {
     },
 
     bindEvents() {
-        const svg = document.getElementById('turkey-map-svg');
-        if (svg) {
-            svg.addEventListener('pointerdown', (e) => this.onPointerDown(e));
+        const stage = document.getElementById('map-stage-wrapper');
+        if (stage) {
+            stage.addEventListener('pointerdown', (e) => this.onPointerDown(e));
             window.addEventListener('pointermove', (e) => this.onPointerMove(e));
             window.addEventListener('pointerup', (e) => this.onPointerUp(e));
             window.addEventListener('pointercancel', (e) => this.onPointerUp(e));
             
             // Desktop Wheel Zoom
-            svg.addEventListener('wheel', (e) => {
+            stage.addEventListener('wheel', (e) => {
                 e.preventDefault();
-                const delta = e.deltaY < 0 ? 0.85 : 1.15;
-                this.setZoom(delta, e);
+                const delta = e.deltaY < 0 ? 1.15 : 0.87;
+                this.setZoom(this.scale * delta, e.clientX, e.clientY);
             }, { passive: false });
         }
 
@@ -115,9 +86,12 @@ const MapEngine = {
         this.isPanning = true;
         this.startX = e.clientX;
         this.startY = e.clientY;
-        this.startVbX = this.targetVbX;
-        this.startVbY = this.targetVbY;
+        this.startPanX = this.panX;
+        this.startPanY = this.panY;
         this.dragDistance = 0;
+        
+        const viewport = document.getElementById('map-viewport');
+        if (viewport) viewport.style.transition = 'none';
     },
 
     onPointerMove(e) {
@@ -126,140 +100,95 @@ const MapEngine = {
         const dy = e.clientY - this.startY;
         this.dragDistance = Math.hypot(dx, dy);
         
-        // Convert screen pixel delta to viewBox units
-        const stage = document.getElementById('map-stage-wrapper');
-        const vpW = stage.clientWidth || 1;
-        const ratio = this.targetVbW / vpW;
-        
-        this.targetVbX = this.startVbX - dx * ratio;
-        this.targetVbY = this.startVbY - dy * ratio;
-        this.clampBounds();
+        this.panX = this.startPanX + dx;
+        this.panY = this.startPanY + dy;
+        this.applyTransform(false);
     },
 
     onPointerUp(e) {
         if (!this.isPanning) return;
         this.isPanning = false;
         this.clampBounds();
+        this.applyTransform(true);
     },
 
     handlePinClick(idx) {
-        if (this.dragDistance > 8) return; 
+        if (this.dragDistance > 8) return; // Ignore drag release on pins
         this.selectCity(idx);
     },
 
-    setZoom(delta, e) {
-        const svg = document.getElementById('turkey-map-svg');
-        const rect = svg.getBoundingClientRect();
-        
-        // Pointer position relative to SVG element
-        const px = e.clientX - rect.left;
-        const py = e.clientY - rect.top;
-        
-        // Convert to percentage of current viewBox
-        const pxPct = px / rect.width;
-        const pyPct = py / rect.height;
-        
-        // Focal point in viewBox coordinates
-        const focalX = this.targetVbX + (this.targetVbW * pxPct);
-        const focalY = this.targetVbY + (this.targetVbH * pyPct);
-        
-        let newVbW = this.targetVbW * delta;
-        let newVbH = this.targetVbH * delta;
-        
-        // Constrain Zoom
-        if (newVbW < 150) { newVbW = 150; newVbH = 150 * (500/1100); }
-        if (newVbW > 1100) { newVbW = 1100; newVbH = 500; }
-        
-        this.targetVbW = newVbW;
-        this.targetVbH = newVbH;
-        this.targetVbX = focalX - (newVbW * pxPct);
-        this.targetVbY = focalY - (newVbH * pyPct);
-        this.clampBounds();
-    },
-
     zoomIn() {
-        this.targetVbW *= 0.75;
-        this.targetVbH *= 0.75;
-        this.targetVbX += (this.vbW - this.targetVbW) / 2;
-        this.targetVbY += (this.vbH - this.targetVbH) / 2;
-        this.clampBounds();
+        this.setZoom(Math.min(3.8, this.scale * 1.3));
     },
 
     zoomOut() {
-        this.targetVbW *= 1.33;
-        this.targetVbH *= 1.33;
-        this.targetVbX -= (this.targetVbW - this.vbW) / 2;
-        this.targetVbY -= (this.targetVbH - this.vbH) / 2;
-        this.clampBounds();
+        this.setZoom(Math.max(0.75, this.scale / 1.3));
     },
 
     resetCamera() {
-        const curIdx = SaveManager.data.currentCityIdx;
-        this.focusOnCity(curIdx);
+        const cur = CITIES[SaveManager.data.currentCityIdx] || CITIES[0];
+        this.panCameraTo(cur.cx, cur.cy, 1.8);
+    },
+
+    setZoom(newScale, focalX, focalY) {
+        const stage = document.getElementById('map-stage-wrapper');
+        const vpW = stage ? stage.clientWidth : 360;
+        const vpH = stage ? stage.clientHeight : 500;
+        
+        const focusX = (focalX !== undefined) ? focalX : (vpW / 2);
+        const focusY = (focalY !== undefined) ? focalY : (vpH / 2);
+
+        // Keep focal point stationary during zoom
+        const svgX = (focusX - this.panX) / this.scale;
+        const svgY = (focusY - this.panY) / this.scale;
+
+        this.scale = Math.max(0.75, Math.min(3.8, newScale));
+        this.panX = focusX - (svgX * this.scale);
+        this.panY = focusY - (svgY * this.scale);
+        this.clampBounds();
+        this.applyTransform(true);
     },
 
     clampBounds() {
-        // Constrain width
-        if (this.targetVbW > 1100) { this.targetVbW = 1100; this.targetVbH = 500; }
-        if (this.targetVbW < 150) { this.targetVbW = 150; this.targetVbH = 150 * (500/1100); }
+        const stage = document.getElementById('map-stage-wrapper');
+        const vpW = stage ? stage.clientWidth : 360;
+        const vpH = stage ? stage.clientHeight : 500;
         
-        // Constrain position (padding around edges)
-        const minX = -100;
-        const maxX = 1100 - this.targetVbW + 100;
-        const minY = -100;
-        const maxY = 500 - this.targetVbH + 100;
+        const mapW = 1100 * this.scale;
+        const mapH = 500 * this.scale;
         
-        if (this.targetVbX < minX) this.targetVbX = minX;
-        if (this.targetVbX > maxX) this.targetVbX = maxX;
-        if (this.targetVbY < minY) this.targetVbY = minY;
-        if (this.targetVbY > maxY) this.targetVbY = maxY;
+        const minX = vpW - mapW - 100;
+        const maxX = 100;
+        const minY = vpH - mapH - 100;
+        const maxY = 100;
+
+        if (mapW > vpW) {
+            this.panX = Math.min(maxX, Math.max(minX, this.panX));
+        }
+        if (mapH > vpH) {
+            this.panY = Math.min(maxY, Math.max(minY, this.panY));
+        }
     },
 
-    focusOnCity(idx) {
-        if (idx < 0 || idx >= CITIES.length) return;
-        const city = CITIES[idx];
-        const path = document.querySelector(`.province-path[data-plate="${city.plate}"]`);
-        if (!path) {
-            // Fallback to center point
-            this.targetVbW = 300;
-            this.targetVbH = 136;
-            this.targetVbX = city.cx - this.targetVbW/2;
-            this.targetVbY = city.cy - this.targetVbH/2;
-            this.clampBounds();
-            return;
-        }
+    applyTransform(smooth = false) {
+        const viewport = document.getElementById('map-viewport');
+        if (!viewport) return;
+        viewport.style.transition = smooth ? 'transform 0.5s cubic-bezier(0.25, 1, 0.5, 1)' : 'none';
+        viewport.style.transform = `translate3d(${this.panX}px, ${this.panY}px, 0) scale(${this.scale})`;
+    },
 
-        const bbox = path.getBBox();
+    panCameraTo(cx, cy, scale) {
         const stage = document.getElementById('map-stage-wrapper');
-        const aspect = (stage.clientWidth || 360) / (stage.clientHeight || 500);
+        if (!stage) return;
         
-        // 35% padding inside the box
-        const padW = bbox.width * 1.70;
-        const padH = bbox.height * 1.70;
+        const vpW = stage.clientWidth || 360;
+        const vpH = stage.clientHeight || 500;
         
-        let newW, newH;
-        if (padW / padH > aspect) {
-            newW = padW;
-            newH = padW / aspect;
-        } else {
-            newH = padH;
-            newW = padH * aspect;
-        }
-        
-        // Enforce max limits
-        if (newW > 1100) {
-            newW = 1100;
-            newH = 1100 / aspect;
-        }
-        
-        const cx = bbox.x + bbox.width / 2;
-        const cy = bbox.y + bbox.height / 2;
-        
-        this.targetVbW = newW;
-        this.targetVbH = newH;
-        this.targetVbX = cx - newW / 2;
-        this.targetVbY = cy - newH / 2;
+        this.scale = scale || this.scale || 1.8;
+        this.panX = (vpW / 2) - (cx * this.scale);
+        this.panY = (vpH / 2) - (cy * this.scale);
         this.clampBounds();
+        this.applyTransform(true);
     },
 
     selectCity(idx) {
@@ -274,23 +203,25 @@ const MapEngine = {
         document.getElementById('card-city-plate').innerText = city.plate < 10 ? '0' + city.plate : city.plate;
         document.getElementById('card-city-name').innerText = city.name;
         
+        const totalLevels = city.levels ? city.levels.length : 25;
+        const starInfo = SaveManager.getCityStars(idx, totalLevels);
         const curCity = CITIES[SaveManager.data.currentCityIdx] || CITIES[0];
         const isCurCompleted = SaveManager.data.completedProvinces.includes(curCity.plate);
         
         const descEl = document.getElementById('card-city-desc');
         if (isCompleted) {
-            descEl.innerHTML = `<span style="color:#10b981; font-weight:bold;">✓ Vilayet Keşif Mührü Alındı</span><br>${city.name} ilimizin 5 mekanındaki 25 bulmacayı başarıyla tamamladın. Koleksiyon kartpostalın mühürlendi.`;
+            descEl.innerHTML = `<span style="color:#10b981; font-weight:bold;">✓ Mühürlendi</span> • ⭐ ${starInfo.earned}/${starInfo.max} Yıldız<br>${city.name} ilimizin 5 mekanındaki 25 bulmacayı başarıyla tamamladın.`;
         } else if (isCurrent && hasStarted) {
             const sub = SaveManager.data.currentSubLevel;
             const m = Math.floor(sub / 5) + 1;
             const b = (sub % 5) + 1;
-            descEl.innerHTML = `<span style="color:#f59e0b; font-weight:bold;">📍 Aktif Sefer</span> • Keşif: Mekan ${m}/5 — Bölüm ${b}/5<br>${city.name} ilindeki yolculuğun devam ediyor (${sub + 1}/25).`;
+            descEl.innerHTML = `<span style="color:#f59e0b; font-weight:bold;">📍 Aktif Sefer</span> • Mekan ${m}/5 • Bulmaca ${b}/5<br>${city.name} ilindeki yolculuğun devam ediyor (${sub + 1}/25).`;
         } else if (!hasStarted) {
-            descEl.innerHTML = `5 Mekan • 25 Bölüm • Altın Keşif Mührü<br>${city.name} ilini başlangıç noktan olarak seç ve maceraya başla!`;
+            descEl.innerHTML = `5 Mekan • 25 Bulmaca • ⭐ 0/${totalLevels * 3} Yıldız<br>${city.name} ilini başlangıç noktan olarak seç ve maceraya başla!`;
         } else if (this.isSelectingNextRoute || isCurCompleted) {
-            descEl.innerHTML = `5 Mekan • 25 Bölüm • Altın Keşif Mührü<br>Yeni rotanı ${city.name} olarak belirle ve keşfe başla!`;
+            descEl.innerHTML = `5 Mekan • 25 Bulmaca • ⭐ 0/${totalLevels * 3} Yıldız<br>Yeni rotanı ${city.name} olarak belirle ve keşfe başla!`;
         } else {
-            descEl.innerHTML = `<span style="color:#ef4444; font-weight:bold;">🔒 Kilitli İl</span> • 5 Mekan • 25 Bölüm<br>Bu ile geçebilmek için önce aktif ilin olan <strong>${curCity.name}</strong> ilindeki 25 bulmacayı tamamlamalısın!`;
+            descEl.innerHTML = `<span style="color:#ef4444; font-weight:bold;">🔒 Kilitli İl</span> • 5 Mekan • 25 Bulmaca<br>Bu ile geçebilmek için önce aktif ilin olan <strong>${curCity.name}</strong> ilindeki 25 bulmacayı tamamlamalısın!`;
         }
 
         // Action button state & text
@@ -323,8 +254,8 @@ const MapEngine = {
 
         document.getElementById('map-city-card').classList.add('active');
 
-        // Smoothly focus camera on selected city using true SVG BBox
-        this.focusOnCity(idx);
+        // Smoothly focus camera on selected city
+        this.panCameraTo(city.cx, city.cy, 2.2);
     },
 
     showLockedToast(cityName) {
@@ -360,6 +291,7 @@ const MapEngine = {
             return;
         }
 
+        // Animate curved travel route and then enter game
         this.animateTravel(fromIdx, targetIdx, () => {
             SaveManager.data.currentCityIdx = targetIdx;
             SaveManager.data.currentSubLevel = 0;
@@ -393,9 +325,9 @@ const MapEngine = {
             return;
         }
 
-        // Curved route (quadratic bezier) with dashed golden line
+        // Curved route (quadratic bezier)
         const midX = (fromCity.cx + toCity.cx) / 2;
-        const midY = Math.min(fromCity.cy, toCity.cy) - 60;
+        const midY = Math.min(fromCity.cy, toCity.cy) - 40;
         const d = `M ${fromCity.cx} ${fromCity.cy} Q ${midX} ${midY} ${toCity.cx} ${toCity.cy}`;
         route.setAttribute('d', d);
         route.style.opacity = '1';
@@ -403,32 +335,26 @@ const MapEngine = {
 
         const totalLen = route.getTotalLength();
         let start = null;
-        const duration = 1500;
+        const duration = 1400;
 
-        // Animate viewBox lerp tracking the zeppelin
-        const initialVbX = this.targetVbX;
-        const initialVbY = this.targetVbY;
-
-        const stage = document.getElementById('map-stage-wrapper');
-        const aspect = (stage.clientWidth || 360) / (stage.clientHeight || 500);
-        this.targetVbW = 400; // Zoom in for travel tracking
-        this.targetVbH = 400 / aspect;
+        const panStartCx = fromCity.cx;
+        const panStartCy = fromCity.cy;
+        const panEndCx = toCity.cx;
+        const panEndCy = toCity.cy;
 
         const self = this;
         function step(ts) {
             if (!start) start = ts;
             const elapsed = ts - start;
             const progress = Math.min(elapsed / duration, 1);
-            
-            // easeInOutQuad
             const ease = progress < 0.5 ? 2 * progress * progress : -1 + (4 - 2 * progress) * progress;
             const pt = route.getPointAtLength(ease * totalLen);
-            carrier.setAttribute('transform', `translate(${pt.x}, ${pt.y}) scale(1.5)`);
+            carrier.setAttribute('transform', `translate(${pt.x}, ${pt.y})`);
 
-            // Camera tracks the carrier
-            self.targetVbX = pt.x - self.targetVbW / 2;
-            self.targetVbY = pt.y - self.targetVbH / 2;
-            self.clampBounds();
+            // Smooth camera follow
+            const curCx = panStartCx + (panEndCx - panStartCx) * ease;
+            const curCy = panStartCy + (panEndCy - panStartCy) * ease;
+            self.panCameraTo(curCx, curCy, 2.0);
 
             if (progress < 1) {
                 requestAnimationFrame(step);

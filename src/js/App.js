@@ -66,6 +66,18 @@ const App = {
         }
 
         this.goToScreen('screen-hub');
+
+        // Show Expedition Journal if not seen for this version
+        if (SaveManager.data.version !== "2.2") {
+            SaveManager.data.version = "2.2";
+            SaveManager.save();
+            this.showModal('modal-journal');
+        }
+    },
+
+    startJourneyFromJournal() {
+        this.hideModal('modal-journal');
+        this.startJourney();
     },
 
     startJourney() {
@@ -94,17 +106,16 @@ const App = {
             if (el) el.innerText = coins;
         });
 
-        // Update total stars indicator in Hub
-        const totalStars = SaveManager.getTotalStars();
+        const completedCount = SaveManager.data.completedProvinces ? SaveManager.data.completedProvinces.length : 0;
+        
         const hubStarsSummary = document.getElementById('hub-stars-summary');
         if (hubStarsSummary) {
-            hubStarsSummary.innerText = `⭐ ${totalStars} Yıldız Toplandı`;
+            hubStarsSummary.innerText = `📜 ${completedCount}/81 Vilayet Mührü`;
         }
 
-        const completedCount = SaveManager.data.completedProvinces ? SaveManager.data.completedProvinces.length : 0;
         const footerProgress = document.getElementById('hub-footer-progress');
         if (footerProgress) {
-            footerProgress.innerText = `Keşfedilen: ${completedCount}/81 İl | Toplam Yıldız: ⭐ ${totalStars}`;
+            footerProgress.innerText = `Keşfedilen: ${completedCount}/81 İl | Kazanılan Mühür: ${completedCount}`;
         }
 
         // Update Hub "Yolculuğa Başla" card status
@@ -138,8 +149,7 @@ const App = {
             if (screenId === 'screen-map') {
                 MapEngine.renderPins();
                 MapEngine.highlightProvinces();
-                const cur = CITIES[SaveManager.data.currentCityIdx] || CITIES[0];
-                if (cur) MapEngine.panCameraTo(cur.cx, cur.cy, 1.8);
+                MapEngine.focusOnCity(SaveManager.data.currentCityIdx || 0);
                 
                 const banner = document.getElementById('map-guidance-banner');
                 if (banner && !MapEngine.isSelectingNextRoute) {

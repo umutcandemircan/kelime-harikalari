@@ -438,7 +438,7 @@ const GameEngine = {
             // Show Normal Postcard for sub-levels (1-24)
             const pc = this.level.postcard || {
                 landmark: this.level.landmark || this.city.name,
-                desc: `${this.city.name} ilimizin eşsiz güzelliklerini ${stars} yıldızla başarıyla keşfettin!`,
+                desc: `${this.city.name} ilimizin eşsiz güzelliklerini başarıyla keşfettin!`,
                 bg: this.level.bg
             };
             document.getElementById('post-landmark-title').innerText = pc.landmark || this.city.name;

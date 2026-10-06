@@ -37,7 +37,7 @@
             <div class="hub-compass-symbol">🧭</div>
             <div class="hub-title-container">
                 <h2>1. SEFER: TÜRKİYE</h2>
-                <p>Türkiye'nin 81 ilini adım adım keşfet!<br><span id="hub-stars-summary" style="color:#f59e0b; font-weight:700;">⭐ 0 Yıldız Toplandı</span></p>
+                <p>Türkiye'nin 81 ilini adım adım keşfet!<br><span id="hub-stars-summary" style="color:#f59e0b; font-weight:700;">📜 0/81 Vilayet Mührü</span></p>
             </div>
         </div>
 
@@ -109,7 +109,7 @@
 
         <!-- PROGRESS SUMMARY FOOTER -->
         <div class="hub-footer-progress" id="hub-footer-progress">
-            Keşfedilen: 0/81 İl | Toplam Yıldız: ⭐ 0
+            Keşfedilen: 0/81 İl | Kazanılan Mühür: 0
         </div>
         <div style="font-size: 11px; color: #64748b; letter-spacing: 1px;">Sözcük Seferî v2.0 • Türkiye Turu</div>
     </div>
@@ -302,6 +302,30 @@
 
             <button class="btn-3d btn-3d-turquoise" style="width:100%; padding:14px; font-size:14px;" onclick="App.onCityCompletedTravel()">
                 YENİ ŞEHRE SEYAHAT ET ➔
+            </button>
+        </div>
+    </div>
+
+    <!-- MODAL: SEFER GÜNLÜĞÜ (JOURNAL / UPDATE NOTES) -->
+    <div class="modal-backdrop" id="modal-journal">
+        <div class="modal-dialog" style="text-align: left; padding: 24px;">
+            <div style="font-size:24px; font-weight:900; color:var(--gold-primary); margin-bottom: 8px; text-align:center;">📜 SEFER GÜNLÜĞÜ</div>
+            <p style="font-size:14px; color:#cbd5e1; margin-bottom:20px; text-align:center; line-height:1.5;">
+                Sözcük Seferî dünyasına hoş geldin yolcu! Türkiye'nin 81 ilindeki gizli kelimeleri keşfetmeye hazır mısın?
+            </p>
+            
+            <div style="background: rgba(13, 148, 136, 0.1); border: 1px solid rgba(13, 148, 136, 0.4); padding: 16px; border-radius: 12px; margin-bottom: 24px;">
+                <div style="font-size:13px; font-weight:800; color:var(--turquoise); margin-bottom:12px; letter-spacing:1px; text-transform:uppercase;">Bu Sürümde Neler Yeni?</div>
+                <ul style="font-size:13px; color:#f8f9fa; margin-left:16px; line-height:1.6;">
+                    <li style="margin-bottom:8px;"><strong>Harita Serbestliği:</strong> Artık yolculuğa Türkiye'nin 81 ilinden dilediğini seçerek başlayabilirsin.</li>
+                    <li style="margin-bottom:8px;"><strong>2.025 Yeni Bölüm:</strong> Her ilde 5 mekan ve 25 benzersiz bulmaca hiyerarşisi (Kolay'dan Düşündürücü'ye).</li>
+                    <li style="margin-bottom:8px;"><strong>Gerçek Fotoğraflar:</strong> Tüm vitrin mekanları yüksek çözünürlüklü gerçek fotoğraflarla güncellendi.</li>
+                    <li><strong>Deyim Avcısı Modu:</strong> Kültürel atasözü ve deyimleri çözerek altın kazanma fırsatı!</li>
+                </ul>
+            </div>
+            
+            <button class="btn-3d" style="width:100%; padding:14px; font-size:15px;" onclick="App.startJourneyFromJournal()">
+                YOLCULUĞA BAŞLA ➔
             </button>
         </div>
     </div>

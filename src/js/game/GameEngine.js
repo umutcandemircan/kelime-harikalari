@@ -26,14 +26,14 @@ const GameEngine = {
         this.level = levels[subIdx % levels.length];
         
         const plateStr = this.city.plate < 10 ? '0' + this.city.plate : this.city.plate;
-        const mekanNo = this.level.mekan_no || (Math.floor(subIdx / 2) + 1);
-        const bulmacaNo = this.level.bulmaca_no || ((subIdx % 2) + 1);
+        const mekanNo = this.level.mekan_no || (Math.floor(subIdx / 5) + 1);
+        const bulmacaNo = this.level.bulmaca_no || ((subIdx % 5) + 1);
         const landmarkName = this.level.landmark || this.city.name;
 
-        // Top bar format: [İl Adı] (Plaka) — Mekan X/5: [Mekan Adı] — Bulmaca Y/2
+        // Top bar format: [İl Adı] (Plaka) — Mekan X/5: [Mekan Adı] — Bulmaca Y/5
         const cityLabel = document.getElementById('game-city-label');
         if (cityLabel) {
-            cityLabel.innerText = `${trUpper(this.city.name)} (${plateStr}) — Mekan ${mekanNo}/5: ${landmarkName} — Bulmaca ${bulmacaNo}/2`;
+            cityLabel.innerText = `${trUpper(this.city.name)} (${plateStr}) — Mekan ${mekanNo}/5: ${landmarkName} — Bulmaca ${bulmacaNo}/5`;
         }
 
         const landmarkLabel = document.getElementById('game-landmark-label');
@@ -47,9 +47,7 @@ const GameEngine = {
 
         const bgImg = document.getElementById('game-bg-img');
         if (bgImg) {
-            const fallback = getFallbackLandmarkSVG(landmarkName, this.city.name, this.city.plate);
-            bgImg.onerror = () => { bgImg.src = fallback; bgImg.onerror = null; };
-            bgImg.src = this.level.bg || fallback;
+            setupPhotoWithFallback(bgImg, this.level.bg, document.getElementById('screen-game'));
         }
 
         this.initLevelCommon();
@@ -410,10 +408,10 @@ const GameEngine = {
             const subIdx = SaveManager.data.currentSubLevel;
             SaveManager.saveStar(SaveManager.data.currentCityIdx, subIdx, stars);
 
-            const isCityCompleted = (subIdx === 9 || subIdx >= (this.city.levels.length - 1));
+            const isCityCompleted = (subIdx === 24 || subIdx >= (this.city.levels.length - 1));
 
             if (isCityCompleted) {
-                // Major City Completion: 10/10 puzzles solved!
+                // Major City Completion: 25/25 puzzles solved!
                 SaveManager.addCoins(100);
                 if (!SaveManager.data.completedProvinces.includes(this.city.plate)) {
                     SaveManager.data.completedProvinces.push(this.city.plate);
@@ -425,21 +423,19 @@ const GameEngine = {
 
                 const compImg = document.getElementById('completed-city-img');
                 if (compImg) {
-                    const fallback = getFallbackLandmarkSVG(this.city.name + ' Simgesi', this.city.name, this.city.plate);
-                    compImg.onerror = () => { compImg.src = fallback; compImg.onerror = null; };
-                    compImg.src = this.level.bg || fallback;
+                    setupPhotoWithFallback(compImg, this.level.bg, document.querySelector('#modal-city-completed .postcard-photo-frame'));
                 }
 
                 const compStory = document.getElementById('completed-city-story');
                 if (compStory) {
-                    compStory.innerHTML = `Tebrikler! <strong>${this.city.name}</strong> ilimizin 5 simgesel mekanındaki 10 bulmacayı başarıyla çözdün ve yeşil/altın zafer mührünü kazandın!`;
+                    compStory.innerHTML = `Tebrikler! <strong>${this.city.name}</strong> ilimizin 5 simgesel mekanındaki 25 bulmacayı başarıyla çözdün ve altın zafer mührünü kazandın!`;
                 }
 
                 App.showModal('modal-city-completed');
                 return;
             }
             
-            // Show Normal Postcard for sub-levels (1-9)
+            // Show Normal Postcard for sub-levels (1-24)
             const pc = this.level.postcard || {
                 landmark: this.level.landmark || this.city.name,
                 desc: `${this.city.name} ilimizin eşsiz güzelliklerini ${stars} yıldızla başarıyla keşfettin!`,
@@ -449,9 +445,7 @@ const GameEngine = {
             document.getElementById('post-story-text').innerText = pc.desc || '';
             const pcPhoto = document.getElementById('post-photo-img');
             if (pcPhoto) {
-                const fallback = getFallbackLandmarkSVG(pc.landmark, pc.city || this.city.name, pc.plate || this.city.plate);
-                pcPhoto.onerror = () => { pcPhoto.src = fallback; pcPhoto.onerror = null; };
-                pcPhoto.src = pc.bg || this.level.bg || fallback;
+                setupPhotoWithFallback(pcPhoto, pc.bg || this.level.bg, document.querySelector('#modal-postcard .postcard-photo-frame'));
             }
             
             // Render stars

@@ -159,13 +159,23 @@ async function runBrowserQA() {
         
         const headerText = await evaluate(`document.getElementById('game-city-label').innerText`);
         console.log("Game Header Text:", headerText);
-        console.assert(headerText.includes("İSTANBUL") && headerText.includes("Mekan 1/5") && headerText.includes("Bulmaca 1/2"), "Header format must match product spec");
-        
+        console.assert(headerText.includes("İSTANBUL") && headerText.includes("Mekan 1/5") && headerText.includes("Bulmaca 1/5"), "Header format must match product spec (Mekan 1/5 - Bulmaca 1/5)");
+
         const cellsCount = await evaluate(`document.querySelectorAll('.grid-cell').length`);
         const lettersCount = await evaluate(`document.querySelectorAll('.letter-node').length`);
         console.log(`Crossword cells rendered: ${cellsCount}, Wheel letters: ${lettersCount}`);
         console.assert(cellsCount > 0, "Grid cells should be rendered");
         console.assert(lettersCount > 0, "Wheel letter nodes should be rendered");
+
+        // Test Strict City Locking on Map
+        console.log("\n[TEST 3B] Testing Strict City Locking on Map...");
+        await evaluate(`App.goToScreen('screen-map');`);
+        const ankIdx = await evaluate(`CITIES.findIndex(c => c.plate === 6)`);
+        await evaluate(`MapEngine.selectCity(${ankIdx});`);
+        const lockBtnText = await evaluate(`document.getElementById('card-action-btn').innerText`);
+        console.log("Locked City Action Button Text:", lockBtnText);
+        console.assert(lockBtnText.includes("KİLİTLİ"), "Uncompleted other city must be strictly locked!");
+        await evaluate(`App.goToScreen('screen-game');`);
 
         // 5. Test Hints / Powerups
         console.log("\n[TEST 4] Testing Hints / Powerups...");
@@ -192,16 +202,16 @@ async function runBrowserQA() {
         console.log("Postcard modal active:", postcardActive);
         console.assert(postcardActive, "Postcard win modal should be displayed for sub-level");
 
-        // 7. Test City Finale Completion (10th Level -> Modal City Completed)
-        console.log("\n[TEST 6] Testing 10th level completion (Major City Completion Modal & Seal)...");
+        // 7. Test City Finale Completion (25th Level -> Modal City Completed)
+        console.log("\n[TEST 6] Testing 25th level completion (Major City Completion Modal & Seal)...");
         await evaluate(`App.hideModal('modal-postcard');`);
-        // Fast forward to level 9 (the 10th level)
-        await evaluate(`SaveManager.data.currentSubLevel = 9; GameEngine.loadLevel();`);
-        const lvl10Header = await evaluate(`document.getElementById('game-city-label').innerText`);
-        console.log("Level 10 Header Text:", lvl10Header);
-        console.assert(lvl10Header.includes("Mekan 5/5") && lvl10Header.includes("Bulmaca 2/2"), "10th level should be Mekan 5/5 Bulmaca 2/2");
+        // Fast forward to level 24 (the 25th level)
+        await evaluate(`SaveManager.data.currentSubLevel = 24; GameEngine.loadLevel();`);
+        const lvl25Header = await evaluate(`document.getElementById('game-city-label').innerText`);
+        console.log("Level 25 Header Text:", lvl25Header);
+        console.assert(lvl25Header.includes("Mekan 5/5") && lvl25Header.includes("Bulmaca 5/5"), "25th level should be Mekan 5/5 Bulmaca 5/5");
 
-        // Solve level 10
+        // Solve level 25
         await evaluate(`
             GameEngine.words.forEach(w => {
                 GameEngine.foundWords.add(w.word);
@@ -212,7 +222,7 @@ async function runBrowserQA() {
         
         const cityCompletedModalActive = await evaluate(`document.getElementById('modal-city-completed').classList.contains('active')`);
         console.log("City completed modal active:", cityCompletedModalActive);
-        console.assert(cityCompletedModalActive, "Major city completion modal must be displayed on 10th level!");
+        console.assert(cityCompletedModalActive, "Major city completion modal must be displayed on 25th level!");
 
         // Test Travel to Next City from Completed City
         console.log("\n[TEST 7] Testing Travel to Next City Flow...");
@@ -228,8 +238,18 @@ async function runBrowserQA() {
         const istCompleted = await evaluate(`SaveManager.data.completedProvinces.includes(34)`);
         console.assert(istCompleted, "İstanbul should now be marked in completedProvinces");
 
+        // Test Deyim Avcısı screen and absence of undefined
+        console.log("\n[TEST 7B] Testing Deyim Avcısı UI & Bug Fix...");
+        await evaluate(`App.goToScreen('screen-idiom'); IdiomEngine.init();`);
+        const idiomClue = await evaluate(`document.getElementById('idiom-clue-box').innerText`);
+        console.log("Idiom Clue:", idiomClue);
+        console.assert(!idiomClue.includes("undefined"), "Idiom clue must NEVER contain undefined!");
+        console.assert(idiomClue.length > 3, "Idiom clue must be populated");
+        const idiomBlankExists = await evaluate(`document.querySelectorAll('.idiom-blank').length > 0`);
+        console.assert(idiomBlankExists, "Idiom blank marker must exist in DOM");
+
         // 8. Test Daily Challenge Flow
-        console.log("\n[TEST 7] Testing Daily Challenge State Machine...");
+        console.log("\n[TEST 8] Testing Daily Challenge State Machine...");
         await evaluate(`App.hideModal('modal-postcard'); App.goToScreen('screen-hub');`);
         await evaluate(`App.showDailyModal()`);
         const dailyModalActive = await evaluate(`document.getElementById('modal-daily').classList.contains('active')`);

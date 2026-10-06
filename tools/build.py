@@ -92,6 +92,11 @@ def build():
 const CITIES = {cities_json_str};
 const TDK_DICT_FULL = {tdk_json_str};
 const IDIOMS = {idioms_json_str};
+if (typeof window !== 'undefined') {{
+    window.CITIES = CITIES;
+    window.TDK_DICT_FULL = TDK_DICT_FULL;
+    window.IDIOMS = IDIOMS;
+}}
 """
 
     # 4. Read JS Modules in order

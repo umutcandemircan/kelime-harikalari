@@ -41,6 +41,34 @@
             </div>
         </div>
 
+        <!-- EXPEDITIONS BAR (SEFERLER BARI) -->
+        <div class="expeditions-bar">
+            <div class="expedition-pill active">
+                <span class="exp-flag">🇹🇷</span>
+                <div class="exp-info">
+                    <span class="exp-title">1. Sefer: Türkiye</span>
+                    <span class="exp-sub">81 İl • Aktif</span>
+                </div>
+                <span class="exp-status">✓</span>
+            </div>
+            <div class="expedition-pill locked" title="1. Sefer tamamlandığında açılır">
+                <span class="exp-flag">🇮🇹</span>
+                <div class="exp-info">
+                    <span class="exp-title">2. Sefer: İtalya</span>
+                    <span class="exp-sub">Kilitli</span>
+                </div>
+                <span class="exp-status">🔒</span>
+            </div>
+            <div class="expedition-pill locked" title="2. Sefer tamamlandığında açılır">
+                <span class="exp-flag">🇪🇬</span>
+                <div class="exp-info">
+                    <span class="exp-title">3. Sefer: Mısır</span>
+                    <span class="exp-sub">Kilitli</span>
+                </div>
+                <span class="exp-status">🔒</span>
+            </div>
+        </div>
+
         <div class="hub-cards-container">
             <!-- CARD 1: YOLCULUĞA BAŞLA (PRIMARY ACTION) -->
             <div class="hub-card hub-card-primary" onclick="App.startJourney()">
@@ -172,26 +200,26 @@
 
                 <!-- 4 TACTILE (3D) POWER-UPS ARSENAL -->
                 <div class="powerups-toolbar">
-                    <div class="powerup-btn" onclick="GameEngine.shuffleLetters()" title="Harfleri Karıştır">
+                    <button type="button" class="powerup-btn" onclick="GameEngine.shuffleLetters()" title="Harfleri Karıştır">
                         <span class="powerup-icon">🔀</span>
                         <span class="powerup-price">Ücretsiz</span>
-                    </div>
-                    <div class="powerup-btn" onclick="GameEngine.useBulb()" title="Rastgele Harf Aç (Ampul)">
+                    </button>
+                    <button type="button" class="powerup-btn" onclick="GameEngine.useBulb()" title="Rastgele Harf Aç (Ampul)">
                         <span class="powerup-icon">💡</span>
                         <span class="powerup-price">30</span>
-                    </div>
-                    <div class="powerup-btn" onclick="GameEngine.useTarget()" title="Hedef Harfi Seç (Hedef)">
+                    </button>
+                    <button type="button" class="powerup-btn" onclick="GameEngine.useTarget()" title="Hedef Harfi Seç (Hedef)">
                         <span class="powerup-icon">🎯</span>
                         <span class="powerup-price">60</span>
-                    </div>
-                    <div class="powerup-btn" onclick="GameEngine.useBomb()" title="Bomba Patlat (3 Harf Aç)">
+                    </button>
+                    <button type="button" class="powerup-btn" onclick="GameEngine.useBomb()" title="Bomba Patlat (3 Harf Aç)">
                         <span class="powerup-icon">💣</span>
                         <span class="powerup-price">90</span>
-                    </div>
-                    <div class="powerup-btn" style="border-color:#a855f7;" title="TDK Bonus Kelime Sandığı">
+                    </button>
+                    <button type="button" class="powerup-btn" style="border-color:#a855f7;" title="TDK Bonus Kelime Sandığı">
                         <span class="powerup-icon">📦</span>
                         <span class="powerup-price" id="bonus-chest-text">0/5</span>
-                    </div>
+                    </button>
                 </div>
             </div>
         </div>
@@ -199,24 +227,27 @@
 
     <!-- SCREEN 4: DEYİM AVCISI -->
     <div id="screen-idiom" class="screen">
-        <div class="top-navbar">
+        <div class="top-navbar" style="background: rgba(15, 23, 42, 0.75); backdrop-filter: blur(8px);">
             <button class="btn-3d-outline" onclick="App.goToScreen('screen-hub')">⬅ Menü</button>
-            <div class="game-city-label" style="color:#c084fc;">DEYİM AVCISI</div>
+            <div class="game-city-label" style="color:var(--gold-primary); letter-spacing:2px;">🎭 DEYİM AVCISI</div>
             <div class="stat-pill">🪙 <span id="idiom-coins">250</span></div>
         </div>
 
-        <div style="flex:1; display:flex; flex-direction:column; align-items:center; justify-content:center; padding:16px;">
-            <div class="idiom-banner">Eksik Deyim Kelimesini Tamamla</div>
-            <div class="idiom-clue-box" id="idiom-clue-box">Göze [...]</div>
-            <div class="idiom-board" id="idiom-board"></div>
-            <div style="font-size:13px; color:#cbd5e1; max-width:320px; text-align:center;" id="idiom-meaning-box">Sevgi ve güven kazanmak, takdir edilmek.</div>
+        <div class="idiom-desk-area">
+            <div class="idiom-parchment-card">
+                <div class="parchment-stamp">KÜLTÜR HAZİNESİ</div>
+                <div class="idiom-banner">Eksik Deyim Kelimesini Tamamla</div>
+                <div class="idiom-clue-box" id="idiom-clue-box"></div>
+                <div class="idiom-board" id="idiom-board"></div>
+                <div class="idiom-meaning-box" id="idiom-meaning-box"></div>
+            </div>
         </div>
 
         <div class="bottom-action-area">
-            <div class="word-preview-pill" id="idiom-preview-pill" style="background:#6366f1;"></div>
-            <div class="wheel-assembly" id="idiom-wheel-assembly" style="border-color:#818cf8;">
+            <div class="word-preview-pill" id="idiom-preview-pill" style="background:#0d9488;"></div>
+            <div class="wheel-assembly" id="idiom-wheel-assembly" style="border-color:var(--gold-primary);">
                 <svg class="wheel-svg-layer">
-                    <polyline id="idiom-drag-line" fill="none" stroke="#818cf8" stroke-width="7" stroke-linecap="round" stroke-linejoin="round" />
+                    <polyline id="idiom-drag-line" fill="none" stroke="#f59e0b" stroke-width="7" stroke-linecap="round" stroke-linejoin="round" />
                 </svg>
                 <div id="idiom-letters-container"></div>
             </div>
@@ -262,7 +293,7 @@
             </div>
 
             <div class="postcard-story" id="completed-city-story" style="font-size:13px; line-height:1.5;">
-                Tebrikler! Bu ilin 5 mekanındaki 10 bulmacayı başarıyla tamamladın ve altın mührü kazandın!
+                Tebrikler! Bu ilin 5 mekanındaki 25 bulmacayı başarıyla tamamladın ve altın mührü kazandın!
             </div>
 
             <div style="font-size:15px; font-weight:bold; color:var(--turquoise); margin-bottom:14px;">

@@ -116,10 +116,10 @@ const App = {
         } else {
             const curCity = CITIES[SaveManager.data.currentCityIdx] || CITIES[0];
             const sub = SaveManager.data.currentSubLevel;
-            const m = Math.floor(sub / 2) + 1;
-            const b = (sub % 2) + 1;
-            if (progressBadge) progressBadge.innerText = `${curCity.name} (${curCity.plate < 10 ? '0' + curCity.plate : curCity.plate})`;
-            if (journeySub) journeySub.innerText = `Mekan ${m}/5 • Bulmaca ${b}/2 — Devam Et`;
+            const m = Math.floor(sub / 5) + 1;
+            const b = (sub % 5) + 1;
+            if (progressBadge) progressBadge.innerText = `${curCity.name} (${sub + 1}/25)`;
+            if (journeySub) journeySub.innerText = `Mekan ${m}/5 • Bulmaca ${b}/5 — Devam Et`;
         }
 
         // Update province map pins

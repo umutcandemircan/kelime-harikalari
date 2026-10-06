@@ -83,9 +83,9 @@ const SaveManager = {
             out.unlockedCityIdx = 80;
         }
         
-        // 4. SubLevel bounds: integer between 0 and 9 (10 levels per province)
+        // 4. SubLevel bounds: integer between 0 and 24 (25 levels per province)
         if (typeof input.currentSubLevel === 'number' && !isNaN(input.currentSubLevel)) {
-            out.currentSubLevel = Math.max(0, Math.min(9, Math.floor(input.currentSubLevel)));
+            out.currentSubLevel = Math.max(0, Math.min(24, Math.floor(input.currentSubLevel)));
         }
         
         // 5. Completed provinces: array of unique numbers between 1 and 81

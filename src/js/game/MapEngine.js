@@ -203,36 +203,52 @@ const MapEngine = {
         document.getElementById('card-city-plate').innerText = city.plate < 10 ? '0' + city.plate : city.plate;
         document.getElementById('card-city-name').innerText = city.name;
         
-        const totalLevels = city.levels ? city.levels.length : 10;
+        const totalLevels = city.levels ? city.levels.length : 25;
         const starInfo = SaveManager.getCityStars(idx, totalLevels);
+        const curCity = CITIES[SaveManager.data.currentCityIdx] || CITIES[0];
+        const isCurCompleted = SaveManager.data.completedProvinces.includes(curCity.plate);
         
         const descEl = document.getElementById('card-city-desc');
         if (isCompleted) {
-            descEl.innerHTML = `<span style="color:#10b981; font-weight:bold;">✓ Mühürlendi</span> • ⭐ ${starInfo.earned}/${starInfo.max} Yıldız<br>${city.name} ilimizin 5 mekanındaki 10 bulmacayı başarıyla tamamladın.`;
+            descEl.innerHTML = `<span style="color:#10b981; font-weight:bold;">✓ Mühürlendi</span> • ⭐ ${starInfo.earned}/${starInfo.max} Yıldız<br>${city.name} ilimizin 5 mekanındaki 25 bulmacayı başarıyla tamamladın.`;
         } else if (isCurrent && hasStarted) {
             const sub = SaveManager.data.currentSubLevel;
-            const m = Math.floor(sub / 2) + 1;
-            const b = (sub % 2) + 1;
-            descEl.innerHTML = `<span style="color:#f59e0b; font-weight:bold;">📍 Aktif Sefer</span> • Mekan ${m}/5 • Bulmaca ${b}/2<br>${city.name} ilindeki yolculuğun devam ediyor.`;
+            const m = Math.floor(sub / 5) + 1;
+            const b = (sub % 5) + 1;
+            descEl.innerHTML = `<span style="color:#f59e0b; font-weight:bold;">📍 Aktif Sefer</span> • Mekan ${m}/5 • Bulmaca ${b}/5<br>${city.name} ilindeki yolculuğun devam ediyor (${sub + 1}/25).`;
+        } else if (!hasStarted) {
+            descEl.innerHTML = `5 Mekan • 25 Bulmaca • ⭐ 0/${totalLevels * 3} Yıldız<br>${city.name} ilini başlangıç noktan olarak seç ve maceraya başla!`;
+        } else if (this.isSelectingNextRoute || isCurCompleted) {
+            descEl.innerHTML = `5 Mekan • 25 Bulmaca • ⭐ 0/${totalLevels * 3} Yıldız<br>Yeni rotanı ${city.name} olarak belirle ve keşfe başla!`;
         } else {
-            descEl.innerHTML = `5 Mekan • 10 Bulmaca • ⭐ 0/${totalLevels * 3} Yıldız<br>${city.name} ilinin tarihi ve kültürel güzelliklerini keşfet.`;
+            descEl.innerHTML = `<span style="color:#ef4444; font-weight:bold;">🔒 Kilitli İl</span> • 5 Mekan • 25 Bulmaca<br>Bu ile geçebilmek için önce aktif ilin olan <strong>${curCity.name}</strong> ilindeki 25 bulmacayı tamamlamalısın!`;
         }
 
         // Action button state & text
         const actionBtn = document.getElementById('card-action-btn') || document.querySelector('#map-city-card button.btn-3d');
         if (actionBtn) {
-            actionBtn.style.opacity = '1';
             actionBtn.style.pointerEvents = 'auto';
 
             if (!hasStarted) {
                 actionBtn.innerText = "YOLCULUĞA BURADAN BAŞLA ➔";
+                actionBtn.style.opacity = '1';
                 actionBtn.onclick = () => MapEngine.startAtCity(idx);
-            } else if (this.isSelectingNextRoute || (isCompleted && !isCurrent) || (!isCompleted && !isCurrent)) {
-                actionBtn.innerText = isCompleted ? "TEKRAR OYNA ➔" : "BURAYA SEYAHAT ET ➔";
+            } else if (isCurrent) {
+                actionBtn.innerText = isCompleted ? "TEKRAR OYNA ➔" : "OYUNA DEVAM ET ➔";
+                actionBtn.style.opacity = '1';
+                actionBtn.onclick = () => MapEngine.playSelectedCity();
+            } else if (isCompleted) {
+                actionBtn.innerText = "TEKRAR OYNA ➔";
+                actionBtn.style.opacity = '1';
+                actionBtn.onclick = () => MapEngine.travelToCity(idx);
+            } else if (this.isSelectingNextRoute || isCurCompleted) {
+                actionBtn.innerText = "BURAYA SEYAHAT ET ➔";
+                actionBtn.style.opacity = '1';
                 actionBtn.onclick = () => MapEngine.travelToCity(idx);
             } else {
-                actionBtn.innerText = isCompleted ? "TEKRAR OYNA ➔" : "OYUNA DEVAM ET ➔";
-                actionBtn.onclick = () => MapEngine.playSelectedCity();
+                actionBtn.innerText = `🔒 KİLİTLİ (Önce ${curCity.name})`;
+                actionBtn.style.opacity = '0.65';
+                actionBtn.onclick = () => MapEngine.showLockedToast(curCity.name);
             }
         }
 
@@ -240,6 +256,20 @@ const MapEngine = {
 
         // Smoothly focus camera on selected city
         this.panCameraTo(city.cx, city.cy, 2.2);
+    },
+
+    showLockedToast(cityName) {
+        if (window.AudioEngine) AudioEngine.playWrong();
+        let toast = document.getElementById('map-locked-toast');
+        if (!toast) {
+            toast = document.createElement('div');
+            toast.id = 'map-locked-toast';
+            toast.className = 'map-locked-toast';
+            document.body.appendChild(toast);
+        }
+        toast.innerHTML = `🔒 <strong>Bu il kilitli!</strong><br>Önce <strong>${cityName}</strong> ilindeki 25 bulmacayı tamamlamalısın!`;
+        toast.classList.add('active');
+        setTimeout(() => toast.classList.remove('active'), 2500);
     },
 
     startAtCity(idx) {

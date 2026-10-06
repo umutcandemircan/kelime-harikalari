@@ -3,55 +3,29 @@ const MapEngine = {
     selectedCityIdx: 0,
     isSelectingNextRoute: false,
     
-    // ViewBox state (Initial viewBox 0 0 1100 500)
-    vbX: 0,
-    vbY: 0,
-    vbW: 1100,
-    vbH: 500,
-    
-    targetVbX: 0,
-    targetVbY: 0,
-    targetVbW: 1100,
-    targetVbH: 500,
-
+    // Smooth Touch Pan & Zoom State
+    scale: 1.8,
+    panX: 0,
+    panY: 0,
     isPanning: false,
     startX: 0,
     startY: 0,
-    startVbX: 0,
-    startVbY: 0,
+    startPanX: 0,
+    startPanY: 0,
     dragDistance: 0,
-    
-    rafId: null,
     
     init() {
         this.renderPins();
         this.highlightProvinces();
         this.bindEvents();
         
-        // Start continuous viewBox lerp loop
-        this.startLerpLoop();
-    },
-
-    startLerpLoop() {
-        const step = () => {
-            // Cubic-bezier smooth lerping
-            this.vbX += (this.targetVbX - this.vbX) * 0.1;
-            this.vbY += (this.targetVbY - this.vbY) * 0.1;
-            this.vbW += (this.targetVbW - this.vbW) * 0.1;
-            this.vbH += (this.targetVbH - this.vbH) * 0.1;
-            
-            const svg = document.getElementById('turkey-map-svg');
-            if (svg) {
-                svg.setAttribute('viewBox', `${this.vbX} ${this.vbY} ${this.vbW} ${this.vbH}`);
-                if (this.vbW > 700) {
-                    svg.classList.add('zoomed-out');
-                } else {
-                    svg.classList.remove('zoomed-out');
-                }
-            }
-            this.rafId = requestAnimationFrame(step);
-        };
-        if (!this.rafId) step();
+        // Initial Camera Setup: Center active city or Turkey overview
+        const curIdx = SaveManager.data.currentCityIdx || 0;
+        if (SaveManager.data.hasSelectedStartCity) {
+            this.focusOnCity(curIdx, 1.8);
+        } else {
+            this.panCameraTo(550, 250, 1.0);
+        }
     },
 
     renderPins() {
@@ -90,18 +64,18 @@ const MapEngine = {
     },
 
     bindEvents() {
-        const svg = document.getElementById('turkey-map-svg');
-        if (svg) {
-            svg.addEventListener('pointerdown', (e) => this.onPointerDown(e));
+        const stage = document.getElementById('map-stage-wrapper');
+        if (stage) {
+            stage.addEventListener('pointerdown', (e) => this.onPointerDown(e));
             window.addEventListener('pointermove', (e) => this.onPointerMove(e));
             window.addEventListener('pointerup', (e) => this.onPointerUp(e));
             window.addEventListener('pointercancel', (e) => this.onPointerUp(e));
             
             // Desktop Wheel Zoom
-            svg.addEventListener('wheel', (e) => {
+            stage.addEventListener('wheel', (e) => {
                 e.preventDefault();
-                const delta = e.deltaY < 0 ? 0.85 : 1.15;
-                this.setZoom(delta, e);
+                const delta = e.deltaY < 0 ? 1.18 : 0.85;
+                this.setZoom(this.scale * delta, e.clientX, e.clientY);
             }, { passive: false });
         }
 
@@ -118,17 +92,20 @@ const MapEngine = {
     onPointerDown(e) {
         if (e.target.closest('#map-city-card') || e.target.closest('.map-controls-floating')) return;
         
-        // If they click outside the card on the map, close the card and remove focus
+        // If clicking outside on the map, dismiss card and unfocus
         if (!e.target.closest('.city-pin-node') && !e.target.closest('.province-path')) {
-             this.closeCard();
+            this.closeCard();
         }
         
         this.isPanning = true;
         this.startX = e.clientX;
         this.startY = e.clientY;
-        this.startVbX = this.targetVbX;
-        this.startVbY = this.targetVbY;
+        this.startPanX = this.panX;
+        this.startPanY = this.panY;
         this.dragDistance = 0;
+        
+        const viewport = document.getElementById('map-viewport');
+        if (viewport) viewport.style.transition = 'none';
     },
 
     onPointerMove(e) {
@@ -137,20 +114,15 @@ const MapEngine = {
         const dy = e.clientY - this.startY;
         this.dragDistance = Math.hypot(dx, dy);
         
-        // Convert screen pixel delta to viewBox units
-        const stage = document.getElementById('map-stage-wrapper');
-        const vpW = stage.clientWidth || 1;
-        const ratio = this.targetVbW / vpW;
-        
-        this.targetVbX = this.startVbX - dx * ratio;
-        this.targetVbY = this.startVbY - dy * ratio;
-        this.clampBounds();
+        this.panX = this.startPanX + dx;
+        this.panY = this.startPanY + dy;
+        this.applyTransform(false);
     },
 
     onPointerUp(e) {
         if (!this.isPanning) return;
         this.isPanning = false;
-        this.clampBounds();
+        this.applyTransform(true);
     },
 
     handlePinClick(idx) {
@@ -158,120 +130,91 @@ const MapEngine = {
         this.selectCity(idx);
     },
 
-    setZoom(delta, e) {
-        const svg = document.getElementById('turkey-map-svg');
-        const rect = svg.getBoundingClientRect();
-        
-        // Pointer position relative to SVG element
-        const px = e.clientX - rect.left;
-        const py = e.clientY - rect.top;
-        
-        // Convert to percentage of current viewBox
-        const pxPct = px / rect.width;
-        const pyPct = py / rect.height;
-        
-        // Focal point in viewBox coordinates
-        const focalX = this.targetVbX + (this.targetVbW * pxPct);
-        const focalY = this.targetVbY + (this.targetVbH * pyPct);
-        
-        let newVbW = this.targetVbW * delta;
-        let newVbH = this.targetVbH * delta;
-        
-        // Constrain Zoom
-        if (newVbW < 150) { newVbW = 150; newVbH = 150 * (500/1100); }
-        if (newVbW > 1100) { newVbW = 1100; newVbH = 500; }
-        
-        this.targetVbW = newVbW;
-        this.targetVbH = newVbH;
-        this.targetVbX = focalX - (newVbW * pxPct);
-        this.targetVbY = focalY - (newVbH * pyPct);
-        this.clampBounds();
-    },
-
     zoomIn() {
-        this.targetVbW *= 0.75;
-        this.targetVbH *= 0.75;
-        this.targetVbX += (this.vbW - this.targetVbW) / 2;
-        this.targetVbY += (this.vbH - this.targetVbH) / 2;
-        this.clampBounds();
+        this.setZoom(Math.min(3.8, this.scale * 1.3));
     },
 
     zoomOut() {
-        this.targetVbW *= 1.33;
-        this.targetVbH *= 1.33;
-        this.targetVbX -= (this.targetVbW - this.vbW) / 2;
-        this.targetVbY -= (this.targetVbH - this.vbH) / 2;
-        this.clampBounds();
+        this.setZoom(Math.max(0.65, this.scale / 1.3));
     },
 
     resetCamera() {
-        const curIdx = SaveManager.data.currentCityIdx;
-        this.focusOnCity(curIdx);
+        const curIdx = SaveManager.data.currentCityIdx || 0;
+        this.focusOnCity(curIdx, 2.0);
     },
 
-    clampBounds() {
-        // Constrain width
-        if (this.targetVbW > 1100) { this.targetVbW = 1100; this.targetVbH = 500; }
-        if (this.targetVbW < 150) { this.targetVbW = 150; this.targetVbH = 150 * (500/1100); }
+    setZoom(newScale, focalX, focalY) {
+        const container = document.getElementById('map-stage-wrapper') || document.getElementById('map-viewport')?.parentElement || document.body;
+        const vpW = container.clientWidth || 360;
+        const vpH = container.clientHeight || 500;
         
-        // Constrain position (padding around edges)
-        const minX = -100;
-        const maxX = 1100 - this.targetVbW + 100;
-        const minY = -100;
-        const maxY = 500 - this.targetVbH + 100;
-        
-        if (this.targetVbX < minX) this.targetVbX = minX;
-        if (this.targetVbX > maxX) this.targetVbX = maxX;
-        if (this.targetVbY < minY) this.targetVbY = minY;
-        if (this.targetVbY > maxY) this.targetVbY = maxY;
+        const focusX = (focalX !== undefined) ? focalX : (vpW / 2);
+        const focusY = (focalY !== undefined) ? focalY : (vpH / 2);
+
+        // Keep focal point stationary during zoom
+        const mapX = (focusX - this.panX) / this.scale;
+        const mapY = (focusY - this.panY) / this.scale;
+
+        this.scale = Math.max(0.65, Math.min(3.8, newScale));
+        this.panX = focusX - (mapX * this.scale);
+        this.panY = focusY - (mapY * this.scale);
+        this.applyTransform(true);
+        this.updateZoomClasses();
     },
 
-    focusOnCity(idx) {
+    applyTransform(smooth = false) {
+        const viewport = document.getElementById('map-viewport');
+        if (!viewport) return;
+        viewport.style.transition = smooth ? 'transform 0.5s cubic-bezier(0.25, 1, 0.5, 1)' : 'none';
+        viewport.style.transform = `translate3d(${this.panX}px, ${this.panY}px, 0) scale(${this.scale})`;
+    },
+
+    updateZoomClasses() {
+        const svg = document.getElementById('turkey-map-svg');
+        if (!svg) return;
+        if (this.scale <= 1.25) {
+            svg.classList.add('zoomed-out');
+        } else {
+            svg.classList.remove('zoomed-out');
+        }
+    },
+
+    panCameraTo(cx, cy, scale = 2.0) {
+        const container = document.getElementById('map-stage-wrapper') || document.getElementById('map-viewport')?.parentElement || document.body;
+        this.scale = scale;
+        this.panX = (container.clientWidth / 2) - (cx * scale);
+        this.panY = (container.clientHeight / 2) - (cy * scale);
+        this.applyTransform(true);
+        this.updateZoomClasses();
+    },
+
+    focusOnCity(idx, customScale) {
         if (idx < 0 || idx >= CITIES.length) return;
         const city = CITIES[idx];
         const path = document.querySelector(`.province-path[data-plate="${city.plate}"]`);
-        if (!path) {
-            // Fallback to center point
-            this.targetVbW = 300;
-            this.targetVbH = 136;
-            this.targetVbX = city.cx - this.targetVbW/2;
-            this.targetVbY = city.cy - this.targetVbH/2;
-            this.clampBounds();
-            return;
-        }
-
-        const bbox = path.getBBox();
-        const stage = document.getElementById('map-stage-wrapper');
-        const aspect = (stage.clientWidth || 360) / (stage.clientHeight || 500);
         
-        // 35% padding inside the box
-        const padW = bbox.width * 1.70;
-        const padH = bbox.height * 1.70;
+        let centerX = city.cx;
+        let centerY = city.cy;
         
-        let newW, newH;
-        if (padW / padH > aspect) {
-            newW = padW;
-            newH = padW / aspect;
-        } else {
-            newH = padH;
-            newW = padH * aspect;
+        if (path) {
+            const bbox = path.getBBox();
+            centerX = bbox.x + bbox.width / 2;
+            centerY = bbox.y + bbox.height / 2;
         }
         
-        // Enforce max limits
-        if (newW > 1100) {
-            newW = 1100;
-            newH = 1100 / aspect;
-        }
+        const container = document.getElementById('map-stage-wrapper') || document.getElementById('map-viewport')?.parentElement || document.body;
+        const scale = customScale || 2.0;
         
-        const cx = bbox.x + bbox.width / 2;
-        const cy = bbox.y + bbox.height / 2;
+        const targetX = (container.clientWidth / 2) - (centerX * scale);
+        const targetY = (container.clientHeight / 2) - (centerY * scale);
         
-        this.targetVbW = newW;
-        this.targetVbH = newH;
-        this.targetVbX = cx - newW / 2;
-        this.targetVbY = cy - newH / 2;
-        this.clampBounds();
+        this.scale = scale;
+        this.panX = targetX;
+        this.panY = targetY;
+        this.applyTransform(true);
+        this.updateZoomClasses();
         
+        // Visual focus styling
         const svg = document.getElementById('turkey-map-svg');
         if (svg) {
             svg.classList.add('has-focus');
@@ -341,8 +284,8 @@ const MapEngine = {
 
         document.getElementById('map-city-card').classList.add('active');
 
-        // Smoothly focus camera on selected city using true SVG BBox
-        this.focusOnCity(idx);
+        // Smoothly focus camera on selected city using the exact mathematical center formula
+        this.focusOnCity(idx, 2.0);
     },
 
     showLockedToast(cityName) {
@@ -427,15 +370,8 @@ const MapEngine = {
         const totalLen = route.getTotalLength();
         let start = null;
         const duration = 1500;
-
-        // Animate viewBox lerp tracking the zeppelin
-        const initialVbX = this.targetVbX;
-        const initialVbY = this.targetVbY;
-
-        const stage = document.getElementById('map-stage-wrapper');
-        const aspect = (stage.clientWidth || 360) / (stage.clientHeight || 500);
-        this.targetVbW = 400; // Zoom in for travel tracking
-        this.targetVbH = 400 / aspect;
+        const container = document.getElementById('map-stage-wrapper') || document.getElementById('map-viewport')?.parentElement || document.body;
+        const scale = 2.0;
 
         const self = this;
         function step(ts) {
@@ -448,10 +384,11 @@ const MapEngine = {
             const pt = route.getPointAtLength(ease * totalLen);
             carrier.setAttribute('transform', `translate(${pt.x}, ${pt.y}) scale(1.5)`);
 
-            // Camera tracks the carrier
-            self.targetVbX = pt.x - self.targetVbW / 2;
-            self.targetVbY = pt.y - self.targetVbH / 2;
-            self.clampBounds();
+            // Smooth camera follow tracking the carrier in center
+            self.panX = (container.clientWidth / 2) - (pt.x * scale);
+            self.panY = (container.clientHeight / 2) - (pt.y * scale);
+            self.scale = scale;
+            self.applyTransform(false);
 
             if (progress < 1) {
                 requestAnimationFrame(step);

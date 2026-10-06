@@ -175,6 +175,48 @@ async function runBrowserQA() {
         const lockBtnText = await evaluate(`document.getElementById('card-action-btn').innerText`);
         console.log("Locked City Action Button Text:", lockBtnText);
         console.assert(lockBtnText.includes("KİLİTLİ"), "Uncompleted other city must be strictly locked!");
+
+        // Test 3C: Geometric Centering of clicked cities (Eskişehir, İzmir, Van)
+        console.log("\n[TEST 3C] Testing Province Geometric Centering (Eskişehir, İzmir, Van)...");
+        for (const plate of [26, 35, 65]) {
+            const cIdx = await evaluate(`CITIES.findIndex(c => c.plate === ${plate})`);
+            await evaluate(`MapEngine.selectCity(${cIdx})`);
+            await new Promise(r => setTimeout(r, 600)); // wait for transition
+
+            const centeringResult = await evaluate(`(() => {
+                const path = document.querySelector('.province-path[data-plate="${plate}"]');
+                const bbox = path.getBBox();
+                const centerX = bbox.x + bbox.width / 2;
+                const centerY = bbox.y + bbox.height / 2;
+
+                const stage = document.getElementById('map-stage-wrapper');
+                const stageRect = stage.getBoundingClientRect();
+                const expectedScreenX = stageRect.left + stageRect.width / 2;
+                const expectedScreenY = stageRect.top + stageRect.height / 2;
+
+                const svg = document.getElementById('turkey-map-svg');
+                const pt = svg.createSVGPoint();
+                pt.x = centerX;
+                pt.y = centerY;
+                const screenPt = pt.matrixTransform(path.getScreenCTM());
+
+                return {
+                    plate: ${plate},
+                    name: CITIES[${cIdx}].name,
+                    expectedX: Math.round(expectedScreenX),
+                    expectedY: Math.round(expectedScreenY),
+                    actualX: Math.round(screenPt.x),
+                    actualY: Math.round(screenPt.y),
+                    diffX: Math.abs(Math.round(screenPt.x - expectedScreenX)),
+                    diffY: Math.abs(Math.round(screenPt.y - expectedScreenY))
+                };
+            })()`);
+
+            console.log(`[Centering Check] ${centeringResult.name} (Plaka ${centeringResult.plate}): expected (${centeringResult.expectedX}, ${centeringResult.expectedY}), actual (${centeringResult.actualX}, ${centeringResult.actualY}), diff: (${centeringResult.diffX}px, ${centeringResult.diffY}px)`);
+            console.assert(centeringResult.diffX <= 2 && centeringResult.diffY <= 2, `Province ${centeringResult.name} must be within 2px of screen geometric center`);
+        }
+        console.log("PASS: All tested provinces perfectly centered at screen geometric center!");
+
         await evaluate(`App.goToScreen('screen-game');`);
 
         // 5. Test Hints / Powerups

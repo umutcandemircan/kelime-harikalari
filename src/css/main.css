@@ -467,19 +467,19 @@
         }
 
         #map-viewport {
-            width: 100%;
-            height: 100%;
+            width: 1100px;
+            height: 500px;
             position: absolute;
             top: 0;
             left: 0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            transform-origin: 0 0;
+            will-change: transform;
+            transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1);
         }
 
         .turkey-svg {
-            width: 100%;
-            height: 100%;
+            width: 1100px;
+            height: 500px;
             display: block;
         }
 

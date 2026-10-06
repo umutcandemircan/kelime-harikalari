@@ -399,12 +399,13 @@
             content: "";
             position: absolute;
             top: 0; left: 0; right: 0; bottom: 0;
-            background-image: 
-                linear-gradient(rgba(28,37,65,0.05) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(28,37,65,0.05) 1px, transparent 1px),
-                linear-gradient(45deg, rgba(212,163,115,0.03) 1px, transparent 1px),
-                linear-gradient(-45deg, rgba(212,163,115,0.03) 1px, transparent 1px);
-            background-size: 40px 40px, 40px 40px, 120px 120px, 120px 120px;
+            background: 
+                radial-gradient(circle at 80% 20%, rgba(212,163,115,0.08) 0%, transparent 40%),
+                linear-gradient(rgba(28,37,65,0.08) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(28,37,65,0.08) 1px, transparent 1px),
+                linear-gradient(45deg, rgba(212,163,115,0.05) 1px, transparent 1px),
+                linear-gradient(-45deg, rgba(212,163,115,0.05) 1px, transparent 1px);
+            background-size: 100% 100%, 60px 60px, 60px 60px, 180px 180px, 180px 180px;
             z-index: 0;
             pointer-events: none;
         }
@@ -475,6 +476,16 @@
             transform-origin: 0 0;
             will-change: transform;
             transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+            transform-style: preserve-3d;
+        }
+        
+        #map-stage-wrapper {
+            perspective: 1200px;
+            background-color: #0d1629;
+            background-image: url('data:image/svg+xml;utf8,<svg width="200" height="200" xmlns="http://www.w3.org/2000/svg"><circle cx="100" cy="100" r="90" fill="none" stroke="rgba(212,163,115,0.05)" stroke-width="1"/><path d="M100 10 L100 190 M10 100 L190 100 M35 35 L165 165 M35 165 L165 35" stroke="rgba(212,163,115,0.05)" stroke-width="1"/></svg>');
+            background-repeat: no-repeat;
+            background-position: center center;
+            background-size: contain;
         }
 
         .turkey-svg {
@@ -766,6 +777,10 @@
         }
 
         .word-preview-pill {
+            white-space: nowrap;
+            max-width: 90%;
+            overflow: hidden;
+            text-overflow: ellipsis;
             min-height: 36px;
             padding: 6px 20px;
             background: rgba(13, 148, 136, 0.95);
@@ -811,14 +826,14 @@
             position: absolute;
             width: 52px;
             height: 52px;
-            margin-left: -26px;
-            margin-top: -26px;
+            transform: translate(-50%, -50%);
             border-radius: 50%;
             background: #ffffff;
             color: #0b132b;
             display: flex;
             align-items: center;
             justify-content: center;
+            text-align: center;
             font-weight: 900;
             font-size: 22px;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
@@ -831,7 +846,7 @@
         .letter-node.selected {
             background: var(--gold-primary);
             color: #ffffff;
-            transform: scale(1.15);
+            transform: translate(-50%, -50%) scale(1.15);
             box-shadow: 0 0 14px rgba(245, 158, 11, 0.8);
         }
 
@@ -1138,4 +1153,13 @@
         }
         .city-pin-node {
             transition: opacity 0.4s ease, transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .province-path.focused {
+            transform: translateZ(20px);
+            filter: drop-shadow(0 15px 15px rgba(0,0,0,0.6));
+        }
+        .turkey-svg {
+            transform: rotateX(6deg) translateZ(0);
+            transform-style: preserve-3d;
         }

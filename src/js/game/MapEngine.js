@@ -14,6 +14,11 @@ const MapEngine = {
     startPanY: 0,
     dragDistance: 0,
     
+    // Pinch to Zoom
+    isPinching: false,
+    startPinchDist: 0,
+    startPinchScale: 1,
+    
     init() {
         this.renderPins();
         this.highlightProvinces();
@@ -66,10 +71,14 @@ const MapEngine = {
     bindEvents() {
         const stage = document.getElementById('map-stage-wrapper');
         if (stage) {
-            stage.addEventListener('pointerdown', (e) => this.onPointerDown(e));
-            window.addEventListener('pointermove', (e) => this.onPointerMove(e));
-            window.addEventListener('pointerup', (e) => this.onPointerUp(e));
-            window.addEventListener('pointercancel', (e) => this.onPointerUp(e));
+            stage.addEventListener('touchstart', (e) => this.onTouchStart(e), { passive: false });
+            stage.addEventListener('touchmove', (e) => this.onTouchMove(e), { passive: false });
+            stage.addEventListener('touchend', (e) => this.onTouchEnd(e), { passive: false });
+            stage.addEventListener('touchcancel', (e) => this.onTouchEnd(e), { passive: false });
+            
+            stage.addEventListener('pointerdown', (e) => { if(e.pointerType === 'mouse') this.onPointerDown(e); });
+            window.addEventListener('pointermove', (e) => { if(e.pointerType === 'mouse') this.onPointerMove(e); });
+            window.addEventListener('pointerup', (e) => { if(e.pointerType === 'mouse') this.onPointerUp(e); });
             
             // Desktop Wheel Zoom
             stage.addEventListener('wheel', (e) => {
@@ -87,6 +96,76 @@ const MapEngine = {
                 if (cityIdx !== -1) MapEngine.selectCity(cityIdx);
             });
         });
+    },
+
+
+    onTouchStart(e) {
+        if (e.target.closest('#map-city-card') || e.target.closest('.map-controls-floating')) return;
+        if (!e.target.closest('.city-pin-node') && !e.target.closest('.province-path')) {
+            this.closeCard();
+        }
+        
+        if (e.touches.length === 2) {
+            e.preventDefault();
+            this.isPinching = true;
+            this.isPanning = false;
+            const dx = e.touches[0].clientX - e.touches[1].clientX;
+            const dy = e.touches[0].clientY - e.touches[1].clientY;
+            this.startPinchDist = Math.hypot(dx, dy);
+            this.startPinchScale = this.scale;
+        } else if (e.touches.length === 1) {
+            this.isPanning = true;
+            this.isPinching = false;
+            this.startX = e.touches[0].clientX;
+            this.startY = e.touches[0].clientY;
+            this.startPanX = this.panX;
+            this.startPanY = this.panY;
+            this.dragDistance = 0;
+        }
+        const viewport = document.getElementById('map-viewport');
+        if (viewport) viewport.style.transition = 'none';
+    },
+
+    onTouchMove(e) {
+        if (this.isPinching && e.touches.length === 2) {
+            e.preventDefault();
+            const dx = e.touches[0].clientX - e.touches[1].clientX;
+            const dy = e.touches[0].clientY - e.touches[1].clientY;
+            const dist = Math.hypot(dx, dy);
+            
+            const centerX = (e.touches[0].clientX + e.touches[1].clientX) / 2;
+            const centerY = (e.touches[0].clientY + e.touches[1].clientY) / 2;
+            
+            const newScale = this.startPinchScale * (dist / this.startPinchDist);
+            this.setZoom(newScale, centerX, centerY, false);
+            
+        } else if (this.isPanning && e.touches.length === 1) {
+            e.preventDefault();
+            const dx = e.touches[0].clientX - this.startX;
+            const dy = e.touches[0].clientY - this.startY;
+            this.dragDistance = Math.hypot(dx, dy);
+            
+            this.panX = this.startPanX + dx;
+            this.panY = this.startPanY + dy;
+            this.applyTransform(false);
+        }
+    },
+
+    onTouchEnd(e) {
+        if (this.isPinching && e.touches.length < 2) {
+            this.isPinching = false;
+            if (e.touches.length === 1) {
+                // Resume panning with 1 finger
+                this.isPanning = true;
+                this.startX = e.touches[0].clientX;
+                this.startY = e.touches[0].clientY;
+                this.startPanX = this.panX;
+                this.startPanY = this.panY;
+            }
+        } else if (this.isPanning && e.touches.length === 0) {
+            this.isPanning = false;
+            this.applyTransform(true);
+        }
     },
 
     onPointerDown(e) {
@@ -131,11 +210,11 @@ const MapEngine = {
     },
 
     zoomIn() {
-        this.setZoom(Math.min(3.8, this.scale * 1.3));
+        this.setZoom(Math.min(4.5, this.scale * 1.3));
     },
 
     zoomOut() {
-        this.setZoom(Math.max(0.65, this.scale / 1.3));
+        this.setZoom(Math.max(1.0, this.scale / 1.3));
     },
 
     resetCamera() {
@@ -143,7 +222,7 @@ const MapEngine = {
         this.focusOnCity(curIdx, 2.0);
     },
 
-    setZoom(newScale, focalX, focalY) {
+    setZoom(newScale, focalX, focalY, smooth = true) {
         const container = document.getElementById('map-stage-wrapper') || document.getElementById('map-viewport')?.parentElement || document.body;
         const vpW = container.clientWidth || 360;
         const vpH = container.clientHeight || 500;
@@ -155,16 +234,34 @@ const MapEngine = {
         const mapX = (focusX - this.panX) / this.scale;
         const mapY = (focusY - this.panY) / this.scale;
 
-        this.scale = Math.max(0.65, Math.min(3.8, newScale));
+        this.scale = Math.max(1.0, Math.min(4.5, newScale));
         this.panX = focusX - (mapX * this.scale);
         this.panY = focusY - (mapY * this.scale);
-        this.applyTransform(true);
+        this.applyTransform(smooth);
         this.updateZoomClasses();
     },
 
     applyTransform(smooth = false) {
         const viewport = document.getElementById('map-viewport');
         if (!viewport) return;
+        
+        // Boundary Clamping
+        const container = document.getElementById('map-stage-wrapper') || document.body;
+        const vpW = container.clientWidth;
+        const vpH = container.clientHeight;
+        const mapW = 1100 * this.scale;
+        const mapH = 500 * this.scale;
+        
+        const minX = vpW - mapW - 50;
+        const maxX = 50;
+        const minY = vpH - mapH - 50;
+        const maxY = 50;
+        
+        if (this.panX > maxX) this.panX = maxX;
+        if (this.panX < minX) this.panX = minX;
+        if (this.panY > maxY) this.panY = maxY;
+        if (this.panY < minY) this.panY = minY;
+        
         viewport.style.transition = smooth ? 'transform 0.5s cubic-bezier(0.25, 1, 0.5, 1)' : 'none';
         viewport.style.transform = `translate3d(${this.panX}px, ${this.panY}px, 0) scale(${this.scale})`;
     },

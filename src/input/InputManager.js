@@ -64,9 +64,18 @@ const InputManager = {
 
     handleEscape() {
         // Find visible modals
-        const visibleModal = document.querySelector('.modal-overlay:not(.hidden)');
+        const visibleModal = document.querySelector('.modal-backdrop:not(.hidden)');
         if (visibleModal) {
-            visibleModal.classList.add('hidden');
+            if (visibleModal.id === 'modal-onboarding' && window.OnboardingModal) {
+                OnboardingModal.skip();
+            } else if (visibleModal.id === 'modal-feedback' && window.FeedbackModal) {
+                FeedbackModal.close();
+            } else if (visibleModal.id === 'modal-release-notes' && window.ReleaseNotesModal) {
+                ReleaseNotesModal.close();
+            } else {
+                visibleModal.classList.add('hidden');
+                visibleModal.setAttribute('aria-hidden', 'true');
+            }
             return;
         }
 

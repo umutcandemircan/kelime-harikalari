@@ -27,17 +27,37 @@ const OnboardingModal = {
         }
     ],
 
+    init() {
+        // Keyboard support: Enter/Space advances or finishes, Escape skips
+        window.addEventListener('keydown', (e) => {
+            const modal = document.getElementById('modal-onboarding');
+            if (modal && !modal.classList.contains('hidden')) {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    this.next();
+                } else if (e.key === 'Escape') {
+                    e.preventDefault();
+                    this.skip();
+                }
+            }
+        });
+    },
+
     open() {
         const modal = document.getElementById('modal-onboarding');
         if (!modal) return;
         this.currentStep = 0;
         this.renderStep();
         modal.classList.remove('hidden');
+        modal.setAttribute('aria-hidden', 'false');
     },
 
     close() {
         const modal = document.getElementById('modal-onboarding');
-        if (modal) modal.classList.add('hidden');
+        if (modal) {
+            modal.classList.add('hidden');
+            modal.setAttribute('aria-hidden', 'true');
+        }
         SaveManager.data.onboardingCompleted = true;
         SaveManager.save();
     },
@@ -46,20 +66,29 @@ const OnboardingModal = {
         if (this.currentStep < this.totalSteps - 1) {
             this.currentStep++;
             this.renderStep();
-            AudioEngine.playPop(this.currentStep);
-        } else {
-            this.close();
-            // Start journey
-            if (window.ScreenRouter) {
-                ScreenRouter.goTo('screen-globe');
+            if (window.AudioEngine && typeof AudioEngine.playPop === 'function') {
+                AudioEngine.playPop(this.currentStep);
             }
+        } else {
+            this.finish();
+        }
+    },
+
+    finish() {
+        this.close();
+        if (window.AudioEngine && typeof AudioEngine.playFanfare === 'function') {
+            AudioEngine.playFanfare();
+        }
+        // Navigate cleanly to Hub screen
+        if (window.ScreenRouter && typeof ScreenRouter.goTo === 'function') {
+            ScreenRouter.goTo('screen-hub');
         }
     },
 
     skip() {
         this.close();
-        if (window.ScreenRouter) {
-            ScreenRouter.goTo('screen-globe');
+        if (window.ScreenRouter && typeof ScreenRouter.goTo === 'function') {
+            ScreenRouter.goTo('screen-hub');
         }
     },
 
@@ -77,12 +106,12 @@ const OnboardingModal = {
 
         if (dotsEl) {
             dotsEl.innerHTML = this.steps.map((_, i) => 
-                `<span class="onboard-dot ${i === this.currentStep ? 'active' : ''}"></span>`
+                `<span class="onboard-dot ${i === this.currentStep ? 'active' : ''}" aria-label="Adım ${i + 1}"></span>`
             ).join('');
         }
 
         if (btnNext) {
-            btnNext.innerText = this.currentStep === this.totalSteps - 1 ? 'Sefer Başlasın! 🚀' : 'İlerle →';
+            btnNext.innerText = this.currentStep === this.totalSteps - 1 ? 'SEFER BAŞLASIN! 🚀' : 'İlerle →';
         }
     }
 };

@@ -80,6 +80,11 @@ const App = {
             CountryMap.init();
         }
 
+        // Initialize Onboarding
+        if (window.OnboardingModal && typeof OnboardingModal.init === 'function') {
+            OnboardingModal.init();
+        }
+
         // Check Onboarding
         if (!SaveManager.data.onboardingCompleted) {
             OnboardingModal.open();

@@ -14,131 +14,129 @@
 </style>
 </head>
 <body>
-    <!-- MAINTENANCE OVERLAY -->
-    <div id="maintenance-overlay">
-        <div class="maintenance-content">
-            <h1>SÖZCÜK SEFERÎ</h1>
-            <h2>🛠 TEKNİK BAKIM MOLASI</h2>
-            <p>Sizlere daha pürüzsüz ve keyifli bir deneyim sunabilmek için oyunumuzu kısa süreliğine bakıma aldık.</p>
-            <p>Hata düzeltmeleri ve yepyeni özelliklerle çok yakında geri döneceğiz. Sabrınız için teşekkür ederiz!</p>
-            <div class="maintenance-spinner"></div>
-        </div>
-    </div>
+    
 
 
-    <!-- SCREEN 1: HUB / ANA MENÜ -->
+            <!-- SCREEN 1: HUB / ANA MENÜ -->
     <div id="screen-hub" class="screen active">
-        <div class="top-navbar" style="background: transparent; border: none;">
+        <!-- TOP NAVBAR -->
+        <div class="top-navbar">
             <div class="brand-badge">
-                <svg width="24" height="24" viewBox="0 0 64 64">
-                    <circle cx="32" cy="32" r="30" fill="#0b132b" stroke="#f59e0b" stroke-width="3"/>
-                    <polygon points="32,8 37,27 56,32 37,37 32,56 27,37 8,32 27,27" fill="#0d9488"/>
-                    <circle cx="32" cy="32" r="12" fill="#f8f9fa"/>
-                    <text x="32" y="38" font-size="16" font-weight="900" font-family="sans-serif" fill="#0b132b" text-anchor="middle">S</text>
-                </svg>
-                <span>SÖZCÜK SEFERÎ</span>
+                <div class="compass-mini-icon">
+                    <svg width="28" height="28" viewBox="0 0 64 64">
+                        <circle cx="32" cy="32" r="30" fill="#181512" stroke="#d4af37" stroke-width="2.5"/>
+                        <circle cx="32" cy="32" r="26" fill="none" stroke="rgba(212,175,55,0.3)" stroke-dasharray="2,3"/>
+                        <polygon points="32,10 37,30 32,26 27,30" fill="#d4af37"/>
+                        <polygon points="32,54 37,34 32,38 27,34" fill="#8c827a"/>
+                        <circle cx="32" cy="32" r="4.5" fill="#d4af37"/>
+                    </svg>
+                </div>
+                <div class="brand-text">
+                    <span class="brand-title">SÖZCÜK SEFERÎ</span>
+                    <span class="brand-subtitle">DÜNYA KELİME ATLASI</span>
+                </div>
             </div>
             <div class="nav-stats">
-                <div class="stat-pill">🪙 <span id="hub-coins">250</span></div>
-                <button class="btn-3d-outline" onclick="App.showSettings()">⚙️</button>
+                <div class="stat-pill" title="Mevcut Altın">🪙 <span id="hub-coins">250</span></div>
+                <button class="btn-icon" onclick="App.showSettings()" title="Ayarlar">⚙️</button>
             </div>
         </div>
 
+        <!-- MAIN HERO -->
         <div class="hub-hero">
-            <div class="hub-compass-symbol">🧭</div>
+            <div class="hero-insignia">
+                <div class="insignia-ring"></div>
+                <div class="hero-compass-symbol">🧭</div>
+            </div>
             <div class="hub-title-container">
-                <h2>1. SEFER: TÜRKİYE</h2>
-                <p>Türkiye'nin 81 ilini adım adım keşfet!<br><span id="hub-stars-summary" style="color:#f59e0b; font-weight:700;">📜 0/81 Vilayet Mührü</span></p>
+                <h2>SÖZCÜK SEFERÎ</h2>
+                <div class="hero-divider">✦ ——— 🌍 ——— ✦</div>
+                <p>Kelimelerle Dünyayı ve Kültürleri Keşfet</p>
             </div>
         </div>
 
-        <!-- EXPEDITIONS BAR (SEFERLER BARI) -->
-        <div class="expeditions-bar">
-            <div class="expedition-pill active">
-                <span class="exp-flag">🇹🇷</span>
-                <div class="exp-info">
-                    <span class="exp-title">1. Sefer: Türkiye</span>
-                    <span class="exp-sub">81 İl • Aktif</span>
-                </div>
-                <span class="exp-status">✓</span>
-            </div>
-            <div class="expedition-pill locked" title="1. Sefer tamamlandığında açılır">
-                <span class="exp-flag">🇮🇹</span>
-                <div class="exp-info">
-                    <span class="exp-title">2. Sefer: İtalya</span>
-                    <span class="exp-sub">Kilitli</span>
-                </div>
-                <span class="exp-status">🔒</span>
-            </div>
-            <div class="expedition-pill locked" title="2. Sefer tamamlandığında açılır">
-                <span class="exp-flag">🇪🇬</span>
-                <div class="exp-info">
-                    <span class="exp-title">3. Sefer: Mısır</span>
-                    <span class="exp-sub">Kilitli</span>
-                </div>
-                <span class="exp-status">🔒</span>
-            </div>
-        </div>
-
-        <div class="hub-cards-container">
-            <!-- CARD 1: YOLCULUĞA BAŞLA (PRIMARY ACTION) -->
-            <div class="hub-card hub-card-primary" onclick="App.startJourney()">
-                <div class="hub-card-icon">🧭</div>
-                <div class="hub-card-content">
-                    <div style="display:flex; align-items:center;">
-                        <span class="hub-card-title">Yolculuğa Başla</span>
-                        <span class="hub-card-badge" id="hub-progress-badge">Başlangıç</span>
+        <!-- 3 CORE GAME MODES -->
+        <div class="hub-modes-container">
+            <!-- MODE 1: SÖZCÜK SEFERİ (DÜNYA TURU) -->
+            <div class="hub-mode-card mode-card-primary" onclick="App.openWorldMap()">
+                <div class="mode-card-badge-top">ANA OYUN MODU</div>
+                <div class="mode-card-main">
+                    <div class="mode-card-icon-box">🌍</div>
+                    <div class="mode-card-text">
+                        <h3 class="mode-card-title">Sözcük Seferi</h3>
+                        <p class="mode-card-desc">Dünya haritasında şehirleri ve her şehrin 5 simgesel mekanını kelimelerle keşfet.</p>
+                        <div class="mode-card-meta">
+                            <span class="meta-pill">📍 Aktif Sefer: Türkiye</span>
+                            <span class="meta-pill" id="hub-progress-badge">Vilayet: 0/81</span>
+                        </div>
                     </div>
-                    <span class="hub-card-subtitle" id="hub-journey-subtitle">Türkiye seferine çıkmak için dokun</span>
                 </div>
-                <span class="hub-card-arrow">➔</span>
+                <div class="mode-card-action">
+                    <span class="action-label" id="hub-journey-subtitle">Haritaya Gir ve Keşfe Başla</span>
+                    <span class="action-btn-circle">➔</span>
+                </div>
             </div>
 
-            <!-- CARD 2: DEYİM AVCISI -->
-            <div class="hub-card" onclick="App.goToScreen('screen-idiom')">
-                <div class="hub-card-icon">🎭</div>
-                <div class="hub-card-content">
-                    <span class="hub-card-title">Deyim Avcısı</span>
-                    <span class="hub-card-subtitle">Kültürel atasözü ve deyimleri tamamla</span>
-                </div>
-                <span class="hub-card-arrow">➔</span>
-            </div>
-
-            <!-- CARD 3: GÜNLÜK BULMACA -->
-            <div class="hub-card" onclick="App.showDailyModal()">
-                <div class="hub-card-icon">📅</div>
-                <div class="hub-card-content">
-                    <div style="display:flex; align-items:center;">
-                        <span class="hub-card-title">Günlük Bulmaca</span>
-                        <span class="hub-card-badge" style="background:#0d9488;">Özel</span>
+            <!-- MODE 2: ATASÖZÜ & DEYİM SANDIĞI -->
+            <div class="hub-mode-card mode-card-idiom" onclick="App.goToScreen('screen-idiom')">
+                <div class="mode-card-badge-top" style="background:#b45309;">KÜLTÜR HAZİNESİ</div>
+                <div class="mode-card-main">
+                    <div class="mode-card-icon-box" style="background:rgba(180,83,9,0.25); border-color:rgba(212,175,55,0.4);">📜</div>
+                    <div class="mode-card-text">
+                        <h3 class="mode-card-title">Atasözü & Deyim Sandığı</h3>
+                        <p class="mode-card-desc">Kültürel atasözü ve deyimlerdeki eksik sözcükleri bularak halk bilgeliğini tamamla.</p>
+                        <div class="mode-card-meta">
+                            <span class="meta-pill" style="border-color:rgba(212,175,55,0.3); color:#fde68a;">🧠 Dil & Zeka</span>
+                        </div>
                     </div>
-                    <span class="hub-card-subtitle">Her gün yeni bir bulmaca ve bonus altın</span>
                 </div>
-                <span class="hub-card-arrow">➔</span>
+                <div class="mode-card-action">
+                    <span class="action-label">Deyim Avcısını Başlat</span>
+                    <span class="action-btn-circle">➔</span>
+                </div>
+            </div>
+
+            <!-- MODE 3: GÜNÜN SEFERİ -->
+            <div class="hub-mode-card mode-card-daily" onclick="App.showDailyModal()">
+                <div class="mode-card-badge-top" style="background:#047857;">ÖZEL ROTA</div>
+                <div class="mode-card-main">
+                    <div class="mode-card-icon-box" style="background:rgba(4,120,87,0.25); border-color:rgba(16,185,129,0.4);">📅</div>
+                    <div class="mode-card-text">
+                        <h3 class="mode-card-title">Günün Seferi</h3>
+                        <p class="mode-card-desc">Her gün yenilenen özel keşif bulmacasıyla seriyi koru ve bonus altın kazan.</p>
+                        <div class="mode-card-meta">
+                            <span class="meta-pill" style="border-color:rgba(16,185,129,0.4); color:#a7f3d0;">🪙 +50 Altın Ödülü</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="mode-card-action">
+                    <span class="action-label">Günün Bulmacasını Çöz</span>
+                    <span class="action-btn-circle">➔</span>
+                </div>
             </div>
         </div>
 
-        <!-- PROGRESS SUMMARY FOOTER -->
-        <div class="hub-footer-progress" id="hub-footer-progress">
-            Keşfedilen: 0/81 İl | Kazanılan Mühür: 0
+        <!-- FOOTER -->
+        <div class="hub-footer-status">
+            <span id="hub-stars-summary">📜 0/81 Vilayet Mührü Kazanıldı</span>
+            <span class="hub-version">Sözcük Seferî • v4.0</span>
         </div>
-        <div style="font-size: 11px; color: #64748b; letter-spacing: 1px;">Sözcük Seferî v2.0 • Türkiye Turu</div>
     </div>
 
-    <!-- SCREEN 2: 81-PROVINCE MAP VIEW -->
+        <!-- SCREEN 2: DÜNYA VE ŞEHİR HARİTASI -->
     <div id="screen-map" class="screen">
         <div class="top-navbar">
-            <button class="btn-3d-outline" onclick="App.goToScreen('screen-hub')">⬅ Menü</button>
-            <div class="game-city-label" style="font-size:14px; color:var(--gold-primary);">TÜRKİYE YOLCULUK HARİTASI</div>
+            <button class="btn-icon-back" onclick="App.goToScreen('screen-hub')">⬅ Ana Menü</button>
+            <div class="map-title-badge">🌍 DÜNYA ATLASI</div>
             <div class="stat-pill">🪙 <span id="map-coins">250</span></div>
         </div>
 
-        <!-- Floating Interactive Route Guidance Banner -->
+        <!-- Interactive Guidance Banner -->
         <div class="map-guidance-banner" id="map-guidance-banner">
-            🗺️ Başlamak istediğin ili haritadan seç!
+            🗺️ Keşfetmek istediğin şehri veya ülkeyi haritadan seç!
         </div>
 
-        <!-- FLOATING ZOOM & FOCUS CONTROLS -->
+        <!-- FLOATING ZOOM CONTROLS -->
         <div class="map-controls-floating">
             <button class="map-ctrl-btn" onclick="MapEngine.zoomIn()" title="Yakınlaştır">➕</button>
             <button class="map-ctrl-btn" onclick="MapEngine.zoomOut()" title="Uzaklaştır">➖</button>
@@ -148,33 +146,134 @@
         <div id="map-stage-wrapper">
             <div id="map-viewport">
                 <svg class="turkey-svg" viewBox="0 0 1100 500" id="turkey-map-svg">
-                    <!-- Provinces Layer (81 SVG paths injected) -->
+                    <defs>
+                        <!-- Compass Def -->
+                        <g id="def-compass-rose">
+                            <circle cx="0" cy="0" r="38" fill="rgba(11,15,26,0.7)" stroke="rgba(212,175,55,0.4)" stroke-width="1.2" />
+                            <circle cx="0" cy="0" r="4" fill="#d4af37" />
+                            <polygon points="0,-36 4,-8 0,0 -4,-8" fill="#d4af37" />
+                            <polygon points="0,36 4,8 0,0 -4,8" fill="#78716c" />
+                            <polygon points="36,0 8,4 0,0 8,-4" fill="#d4af37" />
+                            <polygon points="-36,0 -8,4 0,0 -8,-4" fill="#78716c" />
+                            <text x="0" y="-23" font-size="7" font-weight="bold" fill="#d4af37" text-anchor="middle">N</text>
+                            <text x="0" y="30" font-size="7" font-weight="bold" fill="#78716c" text-anchor="middle">S</text>
+                        </g>
+
+                        <!-- Cloud Def -->
+                        <g id="def-cloud">
+                            <path d="M10 20 A10 10 0 0 1 30 14 A14 14 0 0 1 52 14 A12 12 0 0 1 68 20 A8 8 0 0 1 68 28 L10 28 A8 8 0 0 1 10 20 Z" fill="rgba(255,255,255,0.05)" />
+                        </g>
+                    </defs>
+
+                    <!-- WORLD CONTINENTS SILHOUETTES (POINTER EVENTS NONE) -->
+                    <!-- COMPLETE 3D WORLD MAP CONTINENTS LAYER -->
+                    <g id="world-continents-layer" pointer-events="none">
+                        <!-- North America -->
+                        <path d="M 180,80 L 320,60 L 520,70 L 620,130 L 680,180 L 640,240 L 580,280 L 540,320 L 480,360 L 460,420 L 500,460 L 520,510 L 490,520 L 450,470 L 400,430 L 320,380 L 260,330 L 220,270 L 160,200 L 140,140 Z" class="continent-path" />
+                        <!-- Greenland -->
+                        <path d="M 720,50 L 840,40 L 880,90 L 830,160 L 760,170 L 710,120 Z" class="continent-path" />
+                        <!-- South America -->
+                        <path d="M 500,530 L 560,510 L 640,540 L 730,560 L 790,620 L 770,690 L 720,770 L 670,860 L 640,920 L 620,870 L 610,790 L 570,720 L 520,640 L 480,580 Z" class="continent-path" />
+                        <!-- Europe -->
+                        <path d="M 940,110 L 1020,90 L 1080,120 L 1150,150 L 1120,220 L 1050,230 L 980,260 L 940,280 L 910,240 L 930,190 L 920,150 Z" class="continent-path" />
+                        <!-- British Isles -->
+                        <path d="M 920,190 L 950,180 L 960,210 L 930,230 Z" class="continent-path" />
+                        <!-- Africa -->
+                        <path d="M 940,320 L 1050,310 L 1160,330 L 1220,390 L 1290,480 L 1260,580 L 1220,680 L 1180,770 L 1120,840 L 1080,780 L 1020,690 L 980,590 L 920,520 L 890,440 L 890,370 Z" class="continent-path" />
+                        <!-- Madagascar -->
+                        <path d="M 1280,680 L 1310,670 L 1330,730 L 1300,770 L 1280,720 Z" class="continent-path" />
+                        <!-- Asia & Siberia -->
+                        <path d="M 1150,150 L 1320,110 L 1520,80 L 1720,90 L 1880,120 L 1850,210 L 1750,260 L 1650,290 L 1550,330 L 1450,380 L 1350,440 L 1280,420 L 1220,390 L 1160,330 L 1150,260 Z" class="continent-path" />
+                        <!-- India Subcontinent -->
+                        <path d="M 1370,390 L 1440,390 L 1480,460 L 1450,530 L 1410,550 L 1380,480 Z" class="continent-path" />
+                        <!-- Southeast Asia -->
+                        <path d="M 1550,420 L 1620,440 L 1660,510 L 1630,580 L 1580,530 L 1540,470 Z" class="continent-path" />
+                        <!-- Japan Archipelago -->
+                        <path d="M 1760,270 L 1800,260 L 1820,310 L 1780,340 Z" class="continent-path" />
+                        <!-- Australia -->
+                        <path d="M 1660,650 L 1780,630 L 1860,670 L 1880,760 L 1830,830 L 1740,840 L 1680,790 L 1640,720 Z" class="continent-path" />
+                        <!-- New Zealand -->
+                        <path d="M 1910,810 L 1940,800 L 1960,860 L 1930,880 Z" class="continent-path" />
+                    </g>
+
+                    <!-- CARTOGRAPHIC GRATICULES (POINTER EVENTS NONE) -->
+                    <g id="cartographic-grid-layer" pointer-events="none" opacity="0.3">
+                        <line x1="0" y1="125" x2="1100" y2="125" stroke="rgba(212,175,55,0.2)" stroke-dasharray="3,6" />
+                        <line x1="0" y1="250" x2="1100" y2="250" stroke="rgba(212,175,55,0.3)" stroke-dasharray="6,8" />
+                        <line x1="0" y1="375" x2="1100" y2="375" stroke="rgba(212,175,55,0.2)" stroke-dasharray="3,6" />
+                        <line x1="275" y1="0" x2="275" y2="500" stroke="rgba(212,175,55,0.2)" stroke-dasharray="3,6" />
+                        <line x1="550" y1="0" x2="550" y2="500" stroke="rgba(212,175,55,0.3)" stroke-dasharray="6,8" />
+                        <line x1="825" y1="0" x2="825" y2="500" stroke="rgba(212,175,55,0.2)" stroke-dasharray="3,6" />
+                    </g>
+
+                    <!-- ANIMATED SEA ROUTES (POINTER EVENTS NONE) -->
+                    <g id="nautical-routes-layer" pointer-events="none">
+                        <path d="M 550,250 C 440,260 380,220 260,190" class="nautical-route-line" />
+                        <path d="M 550,250 C 560,320 540,380 540,420" class="nautical-route-line" />
+                        <path d="M 550,250 C 490,270 440,260 395,265" class="nautical-route-line" />
+                        <path d="M 260,190 C 210,170 180,160 150,140" class="nautical-route-line" />
+                        <path d="M 550,250 C 720,290 850,330 1040,180" class="nautical-route-line" />
+                    </g>
+
+                    <!-- ANIMATED COMPASS & CLOUDS (POINTER EVENTS NONE) -->
+                    <g pointer-events="none">
+                        <use href="#def-compass-rose" x="180" y="380" class="floating-compass-rose" />
+                        <use href="#def-cloud" x="60" y="80" class="drifting-cloud cloud-1" />
+                        <use href="#def-cloud" x="650" y="140" class="drifting-cloud cloud-2" />
+                        <use href="#def-cloud" x="380" y="390" class="drifting-cloud cloud-3" />
+                    </g>
+
+                    <!-- Provinces Layer (Turkey 81 Provinces) -->
                     <g id="provinces-layer">
                         {{ INJECT_MAP_PATHS }}
                     </g>
-                    <!-- Animated Travel Route -->
-                    <path id="travel-route" d="" />
-                    <!-- Gliding Travel Icon (Airplane/Compass) -->
-                    <g id="travel-carrier">
-                        <circle cx="0" cy="0" r="10" fill="#f59e0b" stroke="#ffffff" stroke-width="2" />
-                        <polygon points="0,-6 5,4 0,2 -5,4" fill="#0b132b" />
+
+                    <!-- Animated Travel Route inside Turkey (POINTER EVENTS NONE) -->
+                    <path id="travel-route" d="" pointer-events="none" />
+
+                    <!-- Gliding Travel Icon (POINTER EVENTS NONE) -->
+                    <g id="travel-carrier" pointer-events="none">
+                        <circle cx="0" cy="0" r="10" fill="#d4af37" stroke="#ffffff" stroke-width="2" />
+                        <polygon points="0,-6 5,4 0,2 -5,4" fill="#181512" />
                     </g>
-                    <!-- City Pins Layer -->
+
+                    <!-- WORLD CITIES LAYER -->
+                    <g id="world-cities-layer"></g>
+
+                    <!-- TURKEY CITIES LAYER (81 PROVINCES) -->
                     <g id="city-pins-layer"></g>
                 </svg>
             </div>
         </div>
 
-        <!-- SLIDING CITY CARD -->
+        <!-- UNIFIED 3D CITY / LANDMARK DETAIL CARD (ALL WORLD CITIES) -->
         <div class="map-city-card" id="map-city-card">
-            <div style="display:flex; justify-content:space-between; align-items:flex-start;">
-                <div class="map-city-plate" id="card-city-plate">35</div>
-                <div class="map-city-name" id="card-city-name">İzmir</div>
-                <button class="btn-3d-outline" onclick="MapEngine.closeCard()">✕</button>
+            <div class="city-card-header-bar">
+                <span class="city-card-flag" id="card-city-flag">🇹🇷</span>
+                <div class="city-card-titles">
+                    <div style="display:flex; align-items:center; gap:8px;">
+                        <h3 class="city-card-title" id="card-city-name">İzmir</h3>
+                        <span class="city-card-plate-badge" id="card-city-plate">35</span>
+                    </div>
+                    <span class="city-card-subtitle" id="card-city-country">Türkiye • 1. Sefer</span>
+                </div>
+                <button class="btn-card-close" onclick="MapEngine.closeCard()">✕</button>
             </div>
-            <div style="font-size:13px; color:#94a3b8;" id="card-city-desc">Ege'nin incisi, tarihi Efes Antik Kenti ve Saat Kulesi ile keşfedilmeyi bekleyen 5 mekan, 10 bulmaca!</div>
-            <div style="display:flex; gap:10px; width:100%; margin-top:8px;">
-                <button class="btn-3d" style="flex:1;" id="card-action-btn" onclick="MapEngine.playSelectedCity()">KEŞFE BAŞLA ➔</button>
+
+            <!-- 5 ICONIC LANDMARKS LIST -->
+            <div class="city-card-landmarks-section">
+                <div class="section-label">🏛️ 5 SİMGESEL MEKAN:</div>
+                <div class="city-card-landmarks-grid" id="card-city-landmarks">
+                    <!-- Injected dynamically -->
+                </div>
+            </div>
+
+            <div class="city-card-status-bar" id="card-city-status-box">
+                <span id="card-city-desc">Ege'nin incisi, tarihi mekanları ile keşfe hazır!</span>
+            </div>
+
+            <div class="city-card-action-bar">
+                <button class="btn-3d btn-city-primary" id="card-action-btn" onclick="MapEngine.handleCityAction()">KEŞFE BAŞLA ➔</button>
             </div>
         </div>
     </div>
@@ -188,7 +287,7 @@
                 <button class="btn-3d-outline" onclick="App.goToScreen('screen-map')">⬅ Harita</button>
                 <div class="game-title-group">
                     <div class="game-city-label" id="game-city-label">İZMİR (35) — Mekan 1/5: Efes Antik Kenti — Bulmaca 1/2</div>
-                    <div class="game-stars-label" id="game-stars-label">⭐⭐⭐</div>
+                    
                 </div>
                 <div class="stat-pill">🪙 <span id="game-coins">250</span></div>
             </div>

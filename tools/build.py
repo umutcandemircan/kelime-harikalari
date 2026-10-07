@@ -49,6 +49,8 @@ def build():
         tdk_dict_data = json.load(f)
     with open('src/data/idioms.json', 'r', encoding='utf-8') as f:
         idioms_data = json.load(f)
+    with open('src/data/world_cities.json', 'r', encoding='utf-8') as f:
+        world_cities_data = json.load(f)
         
     tdk_set = set(tdk_dict_data)
     
@@ -86,16 +88,19 @@ def build():
     cities_json_str = json.dumps(unified_cities_data, ensure_ascii=False)
     tdk_json_str = json.dumps(tdk_dict_data, ensure_ascii=False)
     idioms_json_str = json.dumps(idioms_data, ensure_ascii=False)
+    world_cities_str = json.dumps(world_cities_data, ensure_ascii=False)
 
     js_data = f"""
 // --- AUTO-GENERATED EMBEDDED DATASETS ---
 const CITIES = {cities_json_str};
 const TDK_DICT_FULL = {tdk_json_str};
 const IDIOMS = {idioms_json_str};
+const WORLD_CITIES = {world_cities_str};
 if (typeof window !== 'undefined') {{
     window.CITIES = CITIES;
     window.TDK_DICT_FULL = TDK_DICT_FULL;
     window.IDIOMS = IDIOMS;
+    window.WORLD_CITIES = WORLD_CITIES;
 }}
 """
 

@@ -6,4 +6,5 @@ __pycache__/
 !icon-512.png
 .DS_Store
 Thumbs.db
+scratch/
 

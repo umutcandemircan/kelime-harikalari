@@ -1,10 +1,12 @@
-// 3. INTERACTIVE 81-PROVINCE TOUCH PAN & PINCH-ZOOM MAP ENGINE
+// 3. INTERACTIVE 3D WORLD ATLAS & CITY MAP ENGINE
 const MapEngine = {
     selectedCityIdx: 0,
+    selectedWorldCity: null,
+    isWorldCitySelected: false,
     isSelectingNextRoute: false,
     
     // Smooth Touch Pan & Zoom State
-    scale: 1.8,
+    scale: 1.2,
     panX: 0,
     panY: 0,
     isPanning: false,
@@ -18,47 +20,69 @@ const MapEngine = {
     isPinching: false,
     startPinchDist: 0,
     startPinchScale: 1,
-    
+
     init() {
-        this.renderPins();
+        this.renderWorldCities();
+        this.renderTurkeyPins();
         this.highlightProvinces();
         this.bindEvents();
         
-        // Initial Camera Setup: Center active city or Turkey overview
+        // Initial setup
         const curIdx = SaveManager.data.currentCityIdx || 0;
         if (SaveManager.data.hasSelectedStartCity) {
-            this.focusOnCity(curIdx, 1.8);
+            this.focusOnTurkeyCity(curIdx, 1.8);
         } else {
-            this.panCameraTo(550, 250, 1.0);
+            this.panCameraTo(550, 250, 1.1, true);
         }
     },
 
-    renderPins() {
+    // RENDER WORLD CITIES (PARIS, ROME, TOKYO, NEW YORK, CAIRO, ETC.)
+    renderWorldCities() {
+        const layer = document.getElementById('world-cities-layer');
+        if (!layer || typeof WORLD_CITIES === 'undefined') return;
+        
+        let html = '';
+        WORLD_CITIES.forEach((country, cIdx) => {
+            (country.cities || []).forEach((city, cityIdx) => {
+                html += `<g class="city-pin-node world-city-node" data-cidx="${cIdx}" data-cityidx="${cityIdx}" onclick="MapEngine.selectWorldCity(${cIdx}, ${cityIdx})" transform="translate(${city.cx}, ${city.cy})">
+                    <circle class="pin-hitbox" r="28" fill="transparent" />
+                    <circle class="city-pin-circle world-pin-circle" r="8" fill="#1e293b" stroke="#d4af37" stroke-width="2" />
+                    <text class="city-pin-text" y="1" font-size="9" fill="#d4af37">🔒</text>
+                    <text class="city-label-text" y="-12" font-size="11" font-weight="700" fill="#FAF4E6">${city.name}</text>
+                    <text y="18" text-anchor="middle" font-size="8" fill="#94a3b8">${country.flag} ${country.country}</text>
+                </g>`;
+            });
+        });
+        layer.innerHTML = html;
+    },
+
+    // RENDER TURKEY 81 PROVINCES
+    renderTurkeyPins() {
         const pinsLayer = document.getElementById('city-pins-layer');
-        if (!pinsLayer) return;
+        if (!pinsLayer || typeof CITIES === 'undefined') return;
+        
         let html = '';
         CITIES.forEach((c, idx) => {
             const isCurrent = idx === SaveManager.data.currentCityIdx;
             const isCompleted = SaveManager.data.completedProvinces.includes(c.plate);
-            
             const fillClass = isCurrent ? 'current' : (isCompleted ? 'completed' : 'unlocked');
             
-            // 52px Hitbox (r=26) for generous thumb touch targets on mobile
-            html += `<g class="city-pin-node ${fillClass}" data-idx="${idx}" onclick="MapEngine.handlePinClick(${idx})" transform="translate(${c.cx}, ${c.cy})">
-                <circle class="pin-hitbox" r="26" fill="transparent" />
-                <circle class="city-pin-circle ${fillClass}" r="${isCurrent ? 10 : (isCompleted ? 8 : 6)}" />
+            html += `<g class="city-pin-node ${fillClass}" data-idx="${idx}" onclick="MapEngine.selectTurkeyCity(${idx})" transform="translate(${c.cx}, ${c.cy})">
+                <circle class="pin-hitbox" r="28" fill="transparent" />
+                <circle class="city-pin-circle ${fillClass}" r="${isCurrent ? 11 : (isCompleted ? 8 : 6.5)}" />
                 <text class="city-pin-text" y="1">${isCompleted ? '✓' : (c.plate < 10 ? '0' + c.plate : c.plate)}</text>
-                <text class="city-label-text" y="${isCurrent ? -14 : -11}">${c.name}</text>
+                <text class="city-label-text" y="${isCurrent ? -15 : -11}">${c.name}</text>
             </g>`;
         });
         pinsLayer.innerHTML = html;
     },
 
     highlightProvinces() {
+        if (typeof CITIES === 'undefined') return;
         document.querySelectorAll('.province-path').forEach(el => {
             const plate = parseInt(el.dataset.plate);
             const cityIdx = CITIES.findIndex(c => c.plate === plate);
-            el.classList.remove('active-city', 'completed', 'locked');
+            el.classList.remove('active-city', 'completed', 'locked', 'focused');
             
             if (cityIdx === SaveManager.data.currentCityIdx) {
                 el.classList.add('active-city');
@@ -80,7 +104,6 @@ const MapEngine = {
             window.addEventListener('pointermove', (e) => { if(e.pointerType === 'mouse') this.onPointerMove(e); });
             window.addEventListener('pointerup', (e) => { if(e.pointerType === 'mouse') this.onPointerUp(e); });
             
-            // Desktop Wheel Zoom
             stage.addEventListener('wheel', (e) => {
                 e.preventDefault();
                 const delta = e.deltaY < 0 ? 1.18 : 0.85;
@@ -88,19 +111,19 @@ const MapEngine = {
             }, { passive: false });
         }
 
+        // Bind clicks to province paths
         document.querySelectorAll('.province-path').forEach(el => {
-            el.addEventListener('click', () => {
-                if (this.dragDistance > 8) return;
+            el.addEventListener('click', (e) => {
+                if (this.dragDistance > 18) return;
                 const plate = parseInt(el.dataset.plate);
                 const cityIdx = CITIES.findIndex(c => c.plate === plate);
-                if (cityIdx !== -1) MapEngine.selectCity(cityIdx);
+                if (cityIdx !== -1) MapEngine.selectTurkeyCity(cityIdx);
             });
         });
     },
 
-
     onTouchStart(e) {
-        if (e.target.closest('#map-city-card') || e.target.closest('.map-controls-floating')) return;
+        if (e.target.closest('#map-city-card') || e.target.closest('.map-controls-floating') || e.target.closest('.top-navbar')) return;
         if (!e.target.closest('.city-pin-node') && !e.target.closest('.province-path')) {
             this.closeCard();
         }
@@ -132,10 +155,8 @@ const MapEngine = {
             const dx = e.touches[0].clientX - e.touches[1].clientX;
             const dy = e.touches[0].clientY - e.touches[1].clientY;
             const dist = Math.hypot(dx, dy);
-            
             const centerX = (e.touches[0].clientX + e.touches[1].clientX) / 2;
             const centerY = (e.touches[0].clientY + e.touches[1].clientY) / 2;
-            
             const newScale = this.startPinchScale * (dist / this.startPinchDist);
             this.setZoom(newScale, centerX, centerY, false);
             
@@ -144,7 +165,6 @@ const MapEngine = {
             const dx = e.touches[0].clientX - this.startX;
             const dy = e.touches[0].clientY - this.startY;
             this.dragDistance = Math.hypot(dx, dy);
-            
             this.panX = this.startPanX + dx;
             this.panY = this.startPanY + dy;
             this.applyTransform(false);
@@ -155,7 +175,6 @@ const MapEngine = {
         if (this.isPinching && e.touches.length < 2) {
             this.isPinching = false;
             if (e.touches.length === 1) {
-                // Resume panning with 1 finger
                 this.isPanning = true;
                 this.startX = e.touches[0].clientX;
                 this.startY = e.touches[0].clientY;
@@ -165,13 +184,13 @@ const MapEngine = {
         } else if (this.isPanning && e.touches.length === 0) {
             this.isPanning = false;
             this.applyTransform(true);
+            // Reset dragDistance shortly after click events process
+            setTimeout(() => { this.dragDistance = 0; }, 60);
         }
     },
 
     onPointerDown(e) {
-        if (e.target.closest('#map-city-card') || e.target.closest('.map-controls-floating')) return;
-        
-        // If clicking outside on the map, dismiss card and unfocus
+        if (e.target.closest('#map-city-card') || e.target.closest('.map-controls-floating') || e.target.closest('.top-navbar')) return;
         if (!e.target.closest('.city-pin-node') && !e.target.closest('.province-path')) {
             this.closeCard();
         }
@@ -192,7 +211,6 @@ const MapEngine = {
         const dx = e.clientX - this.startX;
         const dy = e.clientY - this.startY;
         this.dragDistance = Math.hypot(dx, dy);
-        
         this.panX = this.startPanX + dx;
         this.panY = this.startPanY + dy;
         this.applyTransform(false);
@@ -202,11 +220,7 @@ const MapEngine = {
         if (!this.isPanning) return;
         this.isPanning = false;
         this.applyTransform(true);
-    },
-
-    handlePinClick(idx) {
-        if (this.dragDistance > 8) return; 
-        this.selectCity(idx);
+        setTimeout(() => { this.dragDistance = 0; }, 60);
     },
 
     zoomIn() {
@@ -214,27 +228,26 @@ const MapEngine = {
     },
 
     zoomOut() {
-        this.setZoom(Math.max(1.0, this.scale / 1.3));
+        this.setZoom(Math.max(0.7, this.scale / 1.3));
     },
 
     resetCamera() {
         const curIdx = SaveManager.data.currentCityIdx || 0;
-        this.focusOnCity(curIdx, 2.0);
+        this.focusOnTurkeyCity(curIdx, 1.6);
     },
 
     setZoom(newScale, focalX, focalY, smooth = true) {
-        const container = document.getElementById('map-stage-wrapper') || document.getElementById('map-viewport')?.parentElement || document.body;
+        const container = document.getElementById('map-stage-wrapper') || document.body;
         const vpW = container.clientWidth || 360;
         const vpH = container.clientHeight || 500;
         
         const focusX = (focalX !== undefined) ? focalX : (vpW / 2);
         const focusY = (focalY !== undefined) ? focalY : (vpH / 2);
 
-        // Keep focal point stationary during zoom
         const mapX = (focusX - this.panX) / this.scale;
         const mapY = (focusY - this.panY) / this.scale;
 
-        this.scale = Math.max(1.0, Math.min(4.5, newScale));
+        this.scale = Math.max(0.7, Math.min(4.5, newScale));
         this.panX = focusX - (mapX * this.scale);
         this.panY = focusY - (mapY * this.scale);
         this.applyTransform(smooth);
@@ -245,258 +258,278 @@ const MapEngine = {
         const viewport = document.getElementById('map-viewport');
         if (!viewport) return;
         
-        // Boundary Clamping
         const container = document.getElementById('map-stage-wrapper') || document.body;
         const vpW = container.clientWidth;
         const vpH = container.clientHeight;
         const mapW = 1100 * this.scale;
         const mapH = 500 * this.scale;
         
-        const minX = vpW - mapW - 50;
-        const maxX = 50;
-        const minY = vpH - mapH - 50;
-        const maxY = 50;
+        const minX = vpW - mapW - 120;
+        const maxX = 120;
+        const minY = vpH - mapH - 120;
+        const maxY = 120;
         
         if (this.panX > maxX) this.panX = maxX;
         if (this.panX < minX) this.panX = minX;
         if (this.panY > maxY) this.panY = maxY;
         if (this.panY < minY) this.panY = minY;
         
-        viewport.style.transition = smooth ? 'transform 0.5s cubic-bezier(0.25, 1, 0.5, 1)' : 'none';
+        viewport.style.transition = smooth ? 'transform 0.45s cubic-bezier(0.2, 0.9, 0.3, 1)' : 'none';
         viewport.style.transform = `translate3d(${this.panX}px, ${this.panY}px, 0) scale(${this.scale})`;
     },
 
     updateZoomClasses() {
         const svg = document.getElementById('turkey-map-svg');
         if (!svg) return;
-        if (this.scale <= 1.25) {
+        if (this.scale <= 1.1) {
             svg.classList.add('zoomed-out');
         } else {
             svg.classList.remove('zoomed-out');
         }
     },
 
-    panCameraTo(cx, cy, scale = 2.0) {
-        const container = document.getElementById('map-stage-wrapper') || document.getElementById('map-viewport')?.parentElement || document.body;
-        this.scale = scale;
-        this.panX = (container.clientWidth / 2) - (cx * scale);
-        this.panY = (container.clientHeight / 2) - (cy * scale);
-        this.applyTransform(true);
+    panCameraTo(targetX, targetY, targetScale = 1.8, smooth = true) {
+        const container = document.getElementById('map-stage-wrapper') || document.body;
+        const vpW = container.clientWidth || 360;
+        const vpH = container.clientHeight || 500;
+        
+        this.scale = Math.max(0.7, Math.min(4.5, targetScale));
+        this.panX = (vpW / 2) - (targetX * this.scale);
+        this.panY = (vpH / 2) - (targetY * this.scale);
+        
+        this.applyTransform(smooth);
         this.updateZoomClasses();
     },
 
-    focusOnCity(idx, customScale) {
-        if (idx < 0 || idx >= CITIES.length) return;
-        const city = CITIES[idx];
-        const path = document.querySelector(`.province-path[data-plate="${city.plate}"]`);
+    focusOnTurkeyCity(cityIdx, zoomScale = 2.2) {
+        const city = CITIES[cityIdx];
+        if (!city) return;
         
+        const path = document.querySelector(`.province-path[data-plate="${city.plate}"]`);
         let centerX = city.cx;
         let centerY = city.cy;
         
-        if (path) {
-            const bbox = path.getBBox();
-            centerX = bbox.x + bbox.width / 2;
-            centerY = bbox.y + bbox.height / 2;
+        if (path && typeof path.getBBox === 'function') {
+            try {
+                const bbox = path.getBBox();
+                if (bbox.width > 0 && bbox.height > 0) {
+                    centerX = bbox.x + bbox.width / 2;
+                    centerY = bbox.y + bbox.height / 2;
+                }
+            } catch(e) {}
         }
         
-        const container = document.getElementById('map-stage-wrapper') || document.getElementById('map-viewport')?.parentElement || document.body;
-        const scale = customScale || 2.0;
-        
-        const targetX = (container.clientWidth / 2) - (centerX * scale);
-        const targetY = (container.clientHeight / 2) - (centerY * scale);
-        
-        this.scale = scale;
-        this.panX = targetX;
-        this.panY = targetY;
-        this.applyTransform(true);
-        this.updateZoomClasses();
-        
-        // Visual focus styling
-        const svg = document.getElementById('turkey-map-svg');
-        if (svg) {
-            svg.classList.add('has-focus');
-            document.querySelectorAll('.province-path').forEach(el => el.classList.remove('focused'));
-            if (path) path.classList.add('focused');
-        }
+        this.panCameraTo(centerX, centerY, zoomScale, true);
     },
 
-    selectCity(idx) {
-        if (idx < 0 || idx >= CITIES.length) return;
+    // 1. SELECT TURKEY CITY (FULLY PLAYABLE)
+    selectTurkeyCity(idx) {
+        if (this.dragDistance > 18) return;
+        this.isWorldCitySelected = false;
         this.selectedCityIdx = idx;
         const city = CITIES[idx];
-        const isCurrent = idx === SaveManager.data.currentCityIdx;
-        const isCompleted = SaveManager.data.completedProvinces.includes(city.plate);
-        const hasStarted = SaveManager.data.hasSelectedStartCity;
-        
-        // Populate card
-        document.getElementById('card-city-plate').innerText = city.plate < 10 ? '0' + city.plate : city.plate;
-        document.getElementById('card-city-name').innerText = city.name;
-        
-        const curCity = CITIES[SaveManager.data.currentCityIdx] || CITIES[0];
-        const isCurCompleted = SaveManager.data.completedProvinces.includes(curCity.plate);
-        
+        if (!city) return;
+
+        this.focusOnTurkeyCity(idx, 2.2);
+
+        // Highlight province
+        const paths = document.querySelectorAll('.province-path');
+        paths.forEach(p => { p.classList.remove('active-city', 'focused'); });
+        const p = document.querySelector(`.province-path[data-plate="${city.plate}"]`);
+        if (p) { p.classList.add('active-city', 'focused'); }
+
+        const card = document.getElementById('map-city-card');
+        const flagEl = document.getElementById('card-city-flag');
+        const nameEl = document.getElementById('card-city-name');
+        const plateEl = document.getElementById('card-city-plate');
+        const countryEl = document.getElementById('card-city-country');
         const descEl = document.getElementById('card-city-desc');
-        if (isCompleted) {
-            descEl.innerHTML = `<span style="color:#10b981; font-weight:bold;">✓ Vilayet Keşif Mührü Alındı</span><br>${city.name} ilimizin 5 mekanındaki 25 bulmacayı başarıyla tamamladın. Koleksiyon kartpostalın mühürlendi.`;
-        } else if (isCurrent && hasStarted) {
-            const sub = SaveManager.data.currentSubLevel;
-            const m = Math.floor(sub / 5) + 1;
-            const b = (sub % 5) + 1;
-            descEl.innerHTML = `<span style="color:#f59e0b; font-weight:bold;">📍 Aktif Sefer</span> • Keşif: Mekan ${m}/5 — Bölüm ${b}/5<br>${city.name} ilindeki yolculuğun devam ediyor (${sub + 1}/25).`;
-        } else if (!hasStarted) {
-            descEl.innerHTML = `5 Mekan • 25 Bölüm • Altın Keşif Mührü<br>${city.name} ilini başlangıç noktan olarak seç ve maceraya başla!`;
-        } else if (this.isSelectingNextRoute || isCurCompleted) {
-            descEl.innerHTML = `5 Mekan • 25 Bölüm • Altın Keşif Mührü<br>Yeni rotanı ${city.name} olarak belirle ve keşfe başla!`;
-        } else {
-            descEl.innerHTML = `<span style="color:#ef4444; font-weight:bold;">🔒 Kilitli İl</span> • 5 Mekan • 25 Bölüm<br>Bu ile geçebilmek için önce aktif ilin olan <strong>${curCity.name}</strong> ilindeki 25 bulmacayı tamamlamalısın!`;
+        const landmarksGrid = document.getElementById('card-city-landmarks');
+        const actionBtn = document.getElementById('card-action-btn');
+
+        if (flagEl) flagEl.innerText = "🇹🇷";
+        if (nameEl) nameEl.innerText = city.name;
+        if (plateEl) {
+            plateEl.style.display = 'inline-block';
+            plateEl.innerText = city.plate < 10 ? '0' + city.plate : city.plate;
+        }
+        if (countryEl) countryEl.innerText = "Türkiye • 1. Sefer (Aktif)";
+
+        // 5 Iconic Landmarks
+        const rawLms = (city.levels || []).map(l => l.landmark).filter(Boolean);
+        const uniqueLms = [...new Set(rawLms)].slice(0, 5);
+        if (landmarksGrid) {
+            landmarksGrid.innerHTML = uniqueLms.map(l => `<div class="landmark-badge">🏛️ ${l}</div>`).join('');
         }
 
-        // Action button state & text
-        const actionBtn = document.getElementById('card-action-btn') || document.querySelector('#map-city-card button.btn-3d');
-        if (actionBtn) {
-            actionBtn.style.pointerEvents = 'auto';
-
-            if (!hasStarted) {
-                actionBtn.innerText = "YOLCULUĞA BURADAN BAŞLA ➔";
-                actionBtn.style.opacity = '1';
-                actionBtn.onclick = () => MapEngine.startAtCity(idx);
+        const isCurrent = idx === SaveManager.data.currentCityIdx;
+        const isCompleted = SaveManager.data.completedProvinces.includes(city.plate);
+        
+        if (descEl) {
+            if (isCompleted) {
+                descEl.innerHTML = `🟢 <strong>Tamamlandı:</strong> ${city.name} ilinin tüm 5 mekanını fethettin ve altın mührü kazandın!`;
             } else if (isCurrent) {
-                actionBtn.innerText = isCompleted ? "TEKRAR OYNA ➔" : "OYUNA DEVAM ET ➔";
-                actionBtn.style.opacity = '1';
-                actionBtn.onclick = () => MapEngine.playSelectedCity();
-            } else if (isCompleted) {
-                actionBtn.innerText = "TEKRAR OYNA ➔";
-                actionBtn.style.opacity = '1';
-                actionBtn.onclick = () => MapEngine.travelToCity(idx);
-            } else if (this.isSelectingNextRoute || isCurCompleted) {
-                actionBtn.innerText = "BURAYA SEYAHAT ET ➔";
-                actionBtn.style.opacity = '1';
-                actionBtn.onclick = () => MapEngine.travelToCity(idx);
+                const sub = SaveManager.data.currentSubLevel;
+                descEl.innerHTML = `🌟 <strong>Aktif Sefer:</strong> ${city.name} seferin devam ediyor! İlerlemen: Bulmaca ${sub + 1}/25.`;
             } else {
-                actionBtn.innerText = `🔒 KİLİTLİ (Önce ${curCity.name})`;
-                actionBtn.style.opacity = '0.65';
-                actionBtn.onclick = () => MapEngine.showLockedToast(curCity.name);
+                descEl.innerHTML = `✨ <strong>Keşfe Hazır:</strong> 5 simgesel mekan ve 25 kelime bulmacasıyla bu şehri fethet.`;
             }
         }
 
-        document.getElementById('map-city-card').classList.add('active');
-
-        // Smoothly focus camera on selected city using the exact mathematical center formula
-        this.focusOnCity(idx, 2.0);
-    },
-
-    showLockedToast(cityName) {
-        if (window.AudioEngine) AudioEngine.playWrong();
-        let toast = document.getElementById('map-locked-toast');
-        if (!toast) {
-            toast = document.createElement('div');
-            toast.id = 'map-locked-toast';
-            toast.className = 'map-locked-toast';
-            document.body.appendChild(toast);
-        }
-        toast.innerHTML = `🔒 <strong>Bu il kilitli!</strong><br>Önce <strong>${cityName}</strong> ilindeki 25 bulmacayı tamamlamalısın!`;
-        toast.classList.add('active');
-        setTimeout(() => toast.classList.remove('active'), 2500);
-    },
-
-    startAtCity(idx) {
-        SaveManager.data.hasSelectedStartCity = true;
-        SaveManager.data.currentCityIdx = idx;
-        SaveManager.data.currentSubLevel = 0;
-        SaveManager.save();
-        this.closeCard();
-        App.updateUI();
-        App.goToScreen('screen-game');
-    },
-
-    travelToCity(targetIdx) {
-        const fromIdx = SaveManager.data.currentCityIdx;
-        this.closeCard();
-        
-        if (fromIdx === targetIdx) {
-            this.playSelectedCity();
-            return;
+        if (actionBtn) {
+            actionBtn.style.background = "linear-gradient(180deg, #FAF0D7 0%, #D4AF37 60%, #9E7D1E 100%)";
+            actionBtn.style.color = "#181512";
+            if (!SaveManager.data.hasSelectedStartCity) {
+                actionBtn.innerText = "YOLCULUĞA BURADAN BAŞLA ➔";
+            } else if (isCurrent) {
+                actionBtn.innerText = "YOLCULUĞA DEVAM ET ➔";
+            } else if (isCompleted) {
+                actionBtn.innerText = "TEKRAR OYNA ➔";
+            } else {
+                actionBtn.innerText = "BU İLE SEYAHAT ET ➔";
+            }
         }
 
-        this.animateTravel(fromIdx, targetIdx, () => {
-            SaveManager.data.currentCityIdx = targetIdx;
-            SaveManager.data.currentSubLevel = 0;
-            SaveManager.save();
-            MapEngine.isSelectingNextRoute = false;
-            App.updateUI();
-            App.goToScreen('screen-game');
-        });
+        if (card) card.classList.add('visible');
+    },
+
+    // 2. SELECT WORLD CITY (COMING SOON PREVIEW)
+    selectWorldCity(countryIdx, cityIdx) {
+        if (this.dragDistance > 18) return;
+        this.isWorldCitySelected = true;
+        const country = WORLD_CITIES[countryIdx];
+        if (!country) return;
+        const city = country.cities[cityIdx];
+        if (!city) return;
+        this.selectedWorldCity = { ...city, country: country.country, flag: country.flag };
+
+        this.panCameraTo(city.cx, city.cy, 1.8, true);
+
+        // Remove province focus
+        document.querySelectorAll('.province-path').forEach(p => p.classList.remove('focused'));
+
+        const card = document.getElementById('map-city-card');
+        const flagEl = document.getElementById('card-city-flag');
+        const nameEl = document.getElementById('card-city-name');
+        const plateEl = document.getElementById('card-city-plate');
+        const countryEl = document.getElementById('card-city-country');
+        const descEl = document.getElementById('card-city-desc');
+        const landmarksGrid = document.getElementById('card-city-landmarks');
+        const actionBtn = document.getElementById('card-action-btn');
+
+        if (flagEl) flagEl.innerText = country.flag;
+        if (nameEl) nameEl.innerText = city.name;
+        if (plateEl) plateEl.style.display = 'none';
+        if (countryEl) countryEl.innerText = `${country.country} • Dünya Seferi`;
+
+        // 5 Landmarks
+        if (landmarksGrid) {
+            landmarksGrid.innerHTML = (city.landmarks || []).map(l => `<div class="landmark-badge">🏛️ ${l}</div>`).join('');
+        }
+
+        if (descEl) {
+            descEl.innerHTML = `🔒 <strong>Çok Yakında:</strong> ${city.name} şehrinin 5 simgesel mekanı keşif seferine hazırlanıyor. Türkiye Seferi'ni tamamlayarak vize kazan!`;
+        }
+
+        if (actionBtn) {
+            actionBtn.innerText = "ÇOK YAKINDA (KEŞİF HAZIRLIĞI)";
+            actionBtn.style.background = "linear-gradient(180deg, #334155 0%, #1e293b 100%)";
+            actionBtn.style.color = "#a8a29e";
+        }
+
+        if (card) card.classList.add('visible');
     },
 
     closeCard() {
         const card = document.getElementById('map-city-card');
-        if (card) card.classList.remove('active');
-        const svg = document.getElementById('turkey-map-svg');
-        if (svg) {
-            svg.classList.remove('has-focus');
-            document.querySelectorAll('.province-path').forEach(el => el.classList.remove('focused'));
-        }
+        if (card) card.classList.remove('visible');
+        document.querySelectorAll('.province-path').forEach(p => p.classList.remove('focused'));
     },
 
-    playSelectedCity() {
-        SaveManager.data.currentCityIdx = this.selectedCityIdx;
-        SaveManager.save();
-        this.closeCard();
-        App.goToScreen('screen-game');
-    },
-
-    animateTravel(fromIdx, toIdx, callback) {
-        const fromCity = CITIES[fromIdx];
-        const toCity = CITIES[toIdx];
-        const route = document.getElementById('travel-route');
-        const carrier = document.getElementById('travel-carrier');
-
-        if (!fromCity || !toCity || !route || !carrier) {
-            if (callback) callback();
+    handleCityAction() {
+        if (this.isWorldCitySelected) {
+            const wc = this.selectedWorldCity;
+            alert(`"${wc ? wc.name : 'Bu Şehir'}" çok yakında eklenecektir! Şu an aktif olan Türkiye Seferi'nin 81 ilini çözerek hazırlıklarını tamamla.`);
             return;
         }
 
-        // Curved route (quadratic bezier) with dashed golden line
+        this.playSelectedTurkeyCity();
+    },
+
+    playSelectedTurkeyCity() {
+        const city = CITIES[this.selectedCityIdx];
+        if (!city) return;
+
+        if (!SaveManager.data.hasSelectedStartCity) {
+            SaveManager.data.hasSelectedStartCity = true;
+            SaveManager.data.currentCityIdx = this.selectedCityIdx;
+            SaveManager.data.currentSubLevel = 0;
+            SaveManager.save();
+            App.updateUI();
+            this.closeCard();
+            App.goToScreen('screen-game');
+            return;
+        }
+
+        if (this.selectedCityIdx !== SaveManager.data.currentCityIdx) {
+            this.animateTravelCarrier(SaveManager.data.currentCityIdx, this.selectedCityIdx, () => {
+                SaveManager.data.currentCityIdx = this.selectedCityIdx;
+                SaveManager.data.currentSubLevel = 0;
+                SaveManager.save();
+                App.updateUI();
+                this.closeCard();
+                App.goToScreen('screen-game');
+            });
+        } else {
+            this.closeCard();
+            App.goToScreen('screen-game');
+        }
+    },
+
+    animateTravelCarrier(fromIdx, toIdx, onComplete) {
+        const fromCity = CITIES[fromIdx];
+        const toCity = CITIES[toIdx];
+        if (!fromCity || !toCity) { if (onComplete) onComplete(); return; }
+
+        const carrier = document.getElementById('travel-carrier');
+        const route = document.getElementById('travel-route');
+        if (!carrier || !route) { if (onComplete) onComplete(); return; }
+
         const midX = (fromCity.cx + toCity.cx) / 2;
-        const midY = Math.min(fromCity.cy, toCity.cy) - 60;
-        const d = `M ${fromCity.cx} ${fromCity.cy} Q ${midX} ${midY} ${toCity.cx} ${toCity.cy}`;
-        route.setAttribute('d', d);
-        route.style.opacity = '1';
-        carrier.style.opacity = '1';
+        const midY = (fromCity.cy + toCity.cy) / 2 - 40;
+        const pathData = `M ${fromCity.cx} ${fromCity.cy} Q ${midX} ${midY} ${toCity.cx} ${toCity.cy}`;
+        route.setAttribute('d', pathData);
+        route.style.display = 'block';
 
-        const totalLen = route.getTotalLength();
-        let start = null;
-        const duration = 1500;
-        const container = document.getElementById('map-stage-wrapper') || document.getElementById('map-viewport')?.parentElement || document.body;
-        const scale = 2.0;
+        carrier.style.display = 'block';
+        carrier.setAttribute('transform', `translate(${fromCity.cx}, ${fromCity.cy})`);
 
-        const self = this;
-        function step(ts) {
-            if (!start) start = ts;
-            const elapsed = ts - start;
-            const progress = Math.min(elapsed / duration, 1);
+        let progress = 0;
+        const startTime = performance.now();
+        const duration = 850;
+
+        const animate = (currentTime) => {
+            const elapsed = currentTime - startTime;
+            progress = Math.min(elapsed / duration, 1);
             
-            // easeInOutQuad
-            const ease = progress < 0.5 ? 2 * progress * progress : -1 + (4 - 2 * progress) * progress;
-            const pt = route.getPointAtLength(ease * totalLen);
-            carrier.setAttribute('transform', `translate(${pt.x}, ${pt.y}) scale(1.5)`);
-
-            // Smooth camera follow tracking the carrier in center
-            self.panX = (container.clientWidth / 2) - (pt.x * scale);
-            self.panY = (container.clientHeight / 2) - (pt.y * scale);
-            self.scale = scale;
-            self.applyTransform(false);
+            const t = progress;
+            const curX = (1 - t) * (1 - t) * fromCity.cx + 2 * (1 - t) * t * midX + t * t * toCity.cx;
+            const curY = (1 - t) * (1 - t) * fromCity.cy + 2 * (1 - t) * t * midY + t * t * toCity.cy;
+            carrier.setAttribute('transform', `translate(${curX}, ${curY})`);
 
             if (progress < 1) {
-                requestAnimationFrame(step);
+                requestAnimationFrame(animate);
             } else {
-                setTimeout(() => {
-                    route.style.opacity = '0';
-                    carrier.style.opacity = '0';
-                    if (callback) callback();
-                }, 250);
+                carrier.style.display = 'none';
+                route.style.display = 'none';
+                if (onComplete) onComplete();
             }
-        }
-        requestAnimationFrame(step);
+        };
+
+        requestAnimationFrame(animate);
     }
 };
+
+if (typeof window !== 'undefined') {
+    window.MapEngine = MapEngine;
+}

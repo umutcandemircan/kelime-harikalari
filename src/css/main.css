@@ -2151,3 +2151,653 @@ html, body {
     box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6), inset 0 2px 10px rgba(0, 0, 0, 0.5) !important;
     touch-action: none !important;
 }
+
+/* ==========================================================================
+   V2 ARCHITECTURAL ENHANCEMENTS: GLOBE, LANDMARKS & CEREMONY
+   ========================================================================== */
+
+/* 1. 3D WORLD GLOBE SCREEN */
+#screen-globe {
+    background: radial-gradient(circle at center, #111a33 0%, #070d1e 100%);
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    height: 100%;
+    display: none;
+    flex-direction: column;
+}
+
+#screen-globe.active {
+    display: flex;
+}
+
+.globe-viewport-container {
+    flex: 1;
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    touch-action: none;
+}
+
+#globe-3d-canvas {
+    width: 100%;
+    height: 100%;
+    display: block;
+    cursor: grab;
+}
+
+#globe-3d-canvas:active {
+    cursor: grabbing;
+}
+
+.globe-hud-overlay {
+    position: absolute;
+    bottom: 24px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    z-index: 10;
+    pointer-events: none;
+    width: 90%;
+    max-width: 420px;
+}
+
+.globe-hint-pill {
+    background: rgba(15, 23, 42, 0.85);
+    border: 1px solid rgba(212, 175, 55, 0.4);
+    backdrop-filter: blur(8px);
+    color: #e2e8f0;
+    font-size: 11px;
+    font-weight: 600;
+    padding: 6px 14px;
+    border-radius: 20px;
+    letter-spacing: 0.3px;
+    text-align: center;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+}
+
+.globe-jump-btn {
+    pointer-events: all;
+    background: linear-gradient(135deg, #d4af37 0%, #b45309 100%);
+    color: #181512;
+    font-weight: 900;
+    font-size: 13px;
+    padding: 12px 24px;
+    border-radius: 24px;
+    border: 2px solid #fef08a;
+    box-shadow: 0 6px 16px rgba(212, 175, 55, 0.4);
+    cursor: pointer;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.globe-jump-btn:active {
+    transform: scale(0.96);
+    box-shadow: 0 2px 8px rgba(212, 175, 55, 0.3);
+}
+
+/* 2. CITY 5-LANDMARK EXPLORATION SCREEN */
+#screen-city {
+    background: #171512;
+    display: none;
+    flex-direction: column;
+    overflow: hidden;
+    width: 100%;
+    height: 100%;
+}
+
+#screen-city.active {
+    display: flex;
+}
+
+.city-explore-header {
+    background: linear-gradient(180deg, rgba(27, 25, 23, 0.95) 0%, rgba(27, 25, 23, 0.85) 100%);
+    border-bottom: 1px solid rgba(212, 175, 55, 0.25);
+    padding: 10px 16px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    backdrop-filter: blur(10px);
+    z-index: 5;
+}
+
+.city-explore-hero {
+    padding: 12px 18px 8px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: rgba(41, 37, 36, 0.5);
+    border-bottom: 1px solid rgba(212, 175, 55, 0.15);
+}
+
+.city-hero-text h2 {
+    font-size: 22px;
+    font-weight: 900;
+    color: #FAF4E6;
+    letter-spacing: 0.5px;
+    margin: 0;
+}
+
+.city-hero-text p {
+    font-size: 12px;
+    color: #a8a29e;
+    margin: 2px 0 0;
+}
+
+.city-seal-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 12px;
+    border-radius: 16px;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 0.3px;
+}
+
+.city-seal-badge.completed {
+    background: rgba(212, 175, 55, 0.2);
+    border: 1.5px solid #d4af37;
+    color: #fef08a;
+}
+
+.city-seal-badge.ongoing {
+    background: rgba(56, 96, 92, 0.25);
+    border: 1.5px solid #4c827c;
+    color: #99f6e4;
+}
+
+.city-landmarks-scrollable {
+    flex: 1;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    padding: 12px 16px 80px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.landmark-card {
+    background: #23201d;
+    border: 1.5px solid rgba(212, 175, 55, 0.2);
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4);
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+    cursor: pointer;
+}
+
+.landmark-card:hover, .landmark-card:focus-visible {
+    transform: translateY(-2px);
+    border-color: #d4af37;
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.6);
+}
+
+.landmark-card.completed {
+    border-color: rgba(212, 175, 55, 0.5);
+}
+
+.landmark-card.active {
+    border-color: #d4af37;
+    box-shadow: 0 0 16px rgba(212, 175, 55, 0.25);
+}
+
+.landmark-card.locked {
+    opacity: 0.65;
+    filter: grayscale(0.4);
+    cursor: not-allowed;
+}
+
+.landmark-card-media {
+    height: 120px;
+    position: relative;
+    background-size: cover;
+    background-position: center;
+    background-color: #1c1917;
+}
+
+.landmark-media-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(0,0,0,0.1) 0%, rgba(23, 21, 18, 0.85) 100%);
+}
+
+.landmark-number-pill {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background: rgba(15, 23, 42, 0.85);
+    border: 1px solid rgba(212, 175, 55, 0.5);
+    color: #fef08a;
+    font-size: 10px;
+    font-weight: 800;
+    padding: 3px 8px;
+    border-radius: 10px;
+    backdrop-filter: blur(4px);
+}
+
+.landmark-status-badge {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: rgba(23, 21, 18, 0.9);
+    border: 1px solid rgba(212, 175, 55, 0.4);
+    color: #faf4e6;
+    font-size: 10px;
+    font-weight: 700;
+    padding: 3px 8px;
+    border-radius: 10px;
+    backdrop-filter: blur(4px);
+}
+
+.landmark-card-body {
+    padding: 12px 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.landmark-card-title {
+    font-size: 16px;
+    font-weight: 800;
+    color: #FAF4E6;
+    margin: 0;
+}
+
+.landmark-card-desc {
+    font-size: 12px;
+    color: #a8a29e;
+    line-height: 1.45;
+    margin: 0;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.landmark-card-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 8px;
+    padding-top: 8px;
+    border-top: 1px solid rgba(212, 175, 55, 0.1);
+}
+
+.landmark-level-dots {
+    display: flex;
+    gap: 5px;
+}
+
+.level-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #44403c;
+    border: 1px solid rgba(212, 175, 55, 0.2);
+    transition: background 0.2s, transform 0.2s;
+}
+
+.level-dot.done {
+    background: #d4af37;
+    border-color: #fef08a;
+}
+
+.level-dot.current {
+    background: #14b8a6;
+    border-color: #5eead4;
+    transform: scale(1.2);
+}
+
+.landmark-action-btn {
+    font-size: 11px;
+    font-weight: 800;
+    padding: 6px 14px;
+    border-radius: 12px;
+    border: 1px solid #d4af37;
+    background: linear-gradient(180deg, #d4af37 0%, #b45309 100%);
+    color: #181512;
+    cursor: pointer;
+    transition: transform 0.1s ease;
+}
+
+.landmark-action-btn.completed {
+    background: rgba(212, 175, 55, 0.15);
+    color: #fef08a;
+    border-color: rgba(212, 175, 55, 0.4);
+}
+
+.landmark-action-btn.locked {
+    background: #292524;
+    color: #78716c;
+    border-color: #44403c;
+    cursor: not-allowed;
+}
+
+/* 3. CITY COMPLETION CEREMONY MODAL */
+#modal-city-ceremony {
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+    background: rgba(11, 15, 26, 0.95);
+    backdrop-filter: blur(12px);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+#modal-city-ceremony.active {
+    display: flex;
+}
+
+.ceremony-dialog {
+    width: 100%;
+    max-width: 440px;
+    background: #1b1917;
+    border: 2px solid #d4af37;
+    border-radius: 20px;
+    box-shadow: 0 16px 48px rgba(212, 175, 55, 0.35);
+    padding: 24px 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    animation: ceremonySlideUp 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes ceremonySlideUp {
+    from { transform: translateY(40px) scale(0.95); opacity: 0; }
+    to { transform: translateY(0) scale(1); opacity: 1; }
+}
+
+.ceremony-hero-frame {
+    width: 100%;
+    height: 120px;
+    border-radius: 12px;
+    background-size: cover;
+    background-position: center;
+    margin: 12px 0;
+    border: 1px solid rgba(212, 175, 55, 0.4);
+    position: relative;
+    overflow: hidden;
+}
+
+.ceremony-seals-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 8px;
+    width: 100%;
+    margin: 16px 0;
+}
+
+.ceremony-seal-slot {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+}
+
+.seal-stamp-ring {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    border: 2px dashed #57534e;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #78716c;
+    font-weight: 900;
+    font-size: 14px;
+    transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1), background 0.25s, border 0.25s;
+}
+
+.ceremony-seal-slot.stamped .seal-stamp-ring {
+    border: 2.5px solid #d4af37;
+    background: radial-gradient(circle, #fef08a 0%, #d4af37 100%);
+    color: #181512;
+    transform: scale(1.15) rotate(-8deg);
+    box-shadow: 0 0 16px rgba(212, 175, 55, 0.6);
+}
+
+.seal-lm-name {
+    font-size: 9px;
+    color: #a8a29e;
+    max-width: 54px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.ceremony-grand-badge {
+    opacity: 0;
+    transform: scale(0.6);
+    transition: opacity 0.4s ease, transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+    margin: 10px 0;
+}
+
+.ceremony-grand-badge.unlocked {
+    opacity: 1;
+    transform: scale(1);
+}
+
+/* 4. FEEDBACK & BUG REPORT MODAL */
+#modal-feedback {
+    position: fixed;
+    inset: 0;
+    z-index: 1100;
+    background: rgba(11, 15, 26, 0.85);
+    backdrop-filter: blur(8px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 18px;
+}
+
+.feedback-dialog {
+    width: 100%;
+    max-width: 420px;
+    background: #1c1917;
+    border: 1.5px solid rgba(212, 175, 55, 0.4);
+    border-radius: 18px;
+    padding: 22px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.6);
+}
+
+.feedback-cat-selector {
+    display: flex;
+    gap: 6px;
+    width: 100%;
+}
+
+.feedback-cat-pill {
+    flex: 1;
+    padding: 8px 6px;
+    font-size: 11px;
+    font-weight: 700;
+    border-radius: 10px;
+    border: 1px solid #44403c;
+    background: #292524;
+    color: #d6d3d1;
+    cursor: pointer;
+    text-align: center;
+    transition: background 0.15s, border-color 0.15s;
+}
+
+.feedback-cat-pill.active {
+    background: #38605c;
+    border-color: #4c827c;
+    color: #f0fdfa;
+}
+
+.feedback-textarea {
+    width: 100%;
+    height: 110px;
+    background: #292524;
+    border: 1.5px solid #44403c;
+    border-radius: 12px;
+    padding: 10px 12px;
+    color: #f5f5f4;
+    font-size: 13px;
+    resize: none;
+    font-family: inherit;
+    box-sizing: border-box;
+}
+
+.feedback-textarea:focus {
+    outline: none;
+    border-color: #d4af37;
+}
+
+.feedback-diag-text {
+    font-size: 10px;
+    color: #78716c;
+    line-height: 1.4;
+}
+
+/* 5. ONBOARDING MODAL */
+#modal-onboarding {
+    position: fixed;
+    inset: 0;
+    z-index: 1200;
+    background: rgba(11, 15, 26, 0.92);
+    backdrop-filter: blur(10px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+.onboarding-dialog {
+    width: 100%;
+    max-width: 380px;
+    background: #1b1917;
+    border: 1.5px solid #d4af37;
+    border-radius: 20px;
+    padding: 28px 22px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.7);
+}
+
+.onboard-icon-box {
+    font-size: 42px;
+    margin-bottom: 4px;
+}
+
+.onboard-dots-container {
+    display: flex;
+    gap: 6px;
+    margin: 8px 0;
+}
+
+.onboard-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #57534e;
+    transition: background 0.2s, width 0.2s;
+}
+
+.onboard-dot.active {
+    background: #d4af37;
+    width: 20px;
+    border-radius: 4px;
+}
+
+/* 6. COUNTRY PREVIEW MODAL (LOCKED COUNTRIES) */
+#modal-country-preview {
+    position: fixed;
+    inset: 0;
+    z-index: 1100;
+    background: rgba(11, 15, 26, 0.88);
+    backdrop-filter: blur(8px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 18px;
+}
+
+.country-preview-dialog {
+    width: 100%;
+    max-width: 390px;
+    background: #1c1917;
+    border: 1.5px solid rgba(212, 175, 55, 0.4);
+    border-radius: 18px;
+    padding: 22px 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 12px;
+}
+
+.landmark-preview-list {
+    list-style: none;
+    padding: 0;
+    margin: 8px 0;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    width: 100%;
+}
+
+.landmark-preview-pill {
+    background: #292524;
+    border: 1px solid rgba(212, 175, 55, 0.2);
+    border-radius: 10px;
+    padding: 8px 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 12px;
+    color: #e7e5e4;
+}
+
+.pill-dot {
+    color: #d4af37;
+}
+
+/* 7. SMARTBOARD & DESKTOP ACCESSIBILITY & RESPONSIVE RULES */
+@media (min-width: 1024px) {
+    .landmark-card-body {
+        padding: 14px 18px;
+    }
+    .landmark-action-btn {
+        font-size: 13px;
+        padding: 8px 18px;
+    }
+    .btn-icon, .btn-icon-back {
+        min-width: 44px;
+        min-height: 44px;
+    }
+}
+
+@media (orientation: landscape) and (max-height: 600px) {
+    .crossword-viewport {
+        min-height: 35vh !important;
+        max-height: 46vh !important;
+    }
+    .wheel-assembly {
+        width: 180px !important;
+        height: 180px !important;
+    }
+    .landmark-card-media {
+        height: 90px;
+    }
+}

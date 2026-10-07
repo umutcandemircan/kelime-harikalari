@@ -1,71 +1,142 @@
-# Sözcük Seferî
+# 🧭 Sözcük Seferî
 
-Sözcük Seferî, Türkiye'nin 81 ilini kapsayan, sıfır dış bağımlılıklı (zero-dependency), tek dosyalık PWA mimarisine sahip, Türkçe çapraz bulmaca ve kelime keşif oyunudur.
+> **Dünyayı Keşfet • Şehri Tanı • Mekânı Gör • Kelimeyi Çöz • Vilayet Mührünü Kazan**
 
-## Mimari ve Geliştirme Modeli
-Proje, geliştirme aşamasında modüler ES6 kod tabanı (`src/`), doğrulanmış veri setleri (`src/data/`) ve otomatik derleme hattı (`tools/build.py`) ile yönetilir. Dağıtım aşamasında ise herhangi bir runtime veya framework gerektirmeyen tek bir `index.html` (436 KB) dosyasına derlenir.
+[![CI & Quality Gates](https://github.com/umutcandemircan/kelime-harikalari/actions/workflows/ci.yml/badge.svg)](https://github.com/umutcandemircan/kelime-harikalari/actions/workflows/ci.yml)
+[![Demo](https://img.shields.io/badge/Canlı%20Oyna-GitHub%20Pages-gold)](https://umutcandemircan.github.io/kelime-harikalari/)
+[![Version](https://img.shields.io/badge/Sürüm-v2.0.0-teal)](https://github.com/umutcandemircan/kelime-harikalari)
+[![TDK](https://img.shields.io/badge/Sözlük-TDK%20Doğrulamalı-blue)](https://sozluk.gov.tr/)
+[![Lisans](https://img.shields.io/badge/Lisans-MIT-green)](LICENSE)
+
+**Sözcük Seferî**, kadim Anadolu coğrafyasından başlayarak tüm dünyaya uzanan, sıfır dış bağımlılıklı (zero-dependency), yüksek performanslı, WebGL 3B Dünya Küresi ve Türkiye'nin 81 ilini kapsayan Türkçe çapraz bulmaca ve kültürel keşif oyunudur.
+
+🎮 **Canlı Oyna:** [https://umutcandemircan.github.io/kelime-harikalari/](https://umutcandemircan.github.io/kelime-harikalari/)
+
+---
+
+## 🌟 Temel Kullanıcı Yolculuğu (V2)
 
 ```text
-src/
-├── css/main.css
-├── js/
-│   ├── core/ (utils.js, SaveManager.js, AudioEngine.js)
-│   └── game/ (MapEngine.js, GameEngine.js, IdiomEngine.js)
-│   └── App.js
-└── data/ (unified_cities.json, tdk_dict.json, turkey_svg_map.json, idioms.json)
-      ↓ (tools/build.py)
-index.html (Single-file Zero-Dependency PWA)
+DÜNYA (3B WebGL Globe)
+  ↳ ÜLKE (Türkiye 81 Vilayet Haritası)
+      ↳ ŞEHİR (5 Simge Mekân Keşif Ekranı)
+          ↳ MEKÂN (5 Seviye / Mekân)
+              ↳ KELİME BULMACALARI (25 Seviye / Şehir)
+                  ↳ ŞEHİR TAMAMLAMA SEREMONİSİ (5 Mühür & Vilayet Madalyonu)
+                      ↳ HARİTAYA DÖNÜŞ (Vilayet Tamamlandı)
 ```
 
-## Özellik Doğrulama Matrisi (Feature Verification Matrix)
+1. **3B Dünya Küresi:** Eylemsizlik fiziği, atmosfer ışıltısı ve dünya ülkeleriyle 3 boyutlu küre.
+2. **81 İl Haritası:** Türkiye'nin tüm illerini kapsayan vektörel SVG atlas, akıcı kaydırma ve çift parmakla yakınlaştırma.
+3. **5 Simge Mekân Ekranı:** Her il için 5 gerçek simge mekân, derinlikli keşif kartları, fotoğraflar ve ilerleme durumu.
+4. **25 Seviyelik Zorluk Eğrisi:** 1-5 (Öğretici) → 6-10 (Orta) → 11-15 (Yoğun) → 16-20 (Düşündürücü) → 21-25 (Şehir Finali).
+5. **Büyük Şehir Tamamlama Seremonisi:** 25. bölüm bittiğinde 5 simge mühür sırayla vurulur, vilayet madalyonu açılır ve koleksiyon kartpostalı kazanılır.
+6. **Sürtünmesiz Hata Bildirme:** Her ekranda bulunan butonla tek dokunuşla hata, eksik veya öneri gönderebilme.
 
-| Özellik (Claim) | Gerçek Durum (Implementation) | Doğrulama & Kanıt (Verified?) |
-| :--- | :--- | :--- |
-| **81 İl Haritası** | 81 ilin gerçek SVG sınırları, plaka merkezleri ve rotası mevcut. | **VERIFIED** (`tests/browser_qa_cdp.js`: 81 pin DOM'da doğrulandı). |
-| **186 Oynanabilir Bölüm** | 8 vitrin ilinde 40 otantik bölüm + 73 ilde 146 doğrulanmış bölüm. | **VERIFIED** (`tests/validate_all_production_levels.py`: 186/186 GEÇTİ). |
-| **Kusursuz Çapraz Bulmaca** | Yalnızca 90° kesişim, paralel kelimeler arası en az 1 boş hücre kuralı. | **VERIFIED** (`tests/validate_strict_crossword.py`: 0 geometri hatası). |
-| **TDK Sözlük Doğrulaması** | Tüm bulmaca kelimeleri `tdk_dict.json` havuzundan seçilmiştir. | **VERIFIED** (186 bölümdeki tüm kelimeler sözlükte mevcut). |
-| **Çözülebilirlik (Solvability)**| Çarktaki harf kümesi bölümdeki her kelimeyi tam olarak üretir. | **VERIFIED** (Multiset frekans kontrolü: 0 hata). |
-| **Günlük Bulmaca (Daily)** | Tarih tohumlu (date-seeded) deterministik bulmaca, seri takibi ve günlük ödül. | **VERIFIED** (`tests/test_save_manager.js` ve Chrome CDP testi). |
-| **3-Yıldız Skorlama** | Hata sayısı (`mistakes`) ve kullanılan ipucuna (`hintsUsed`) göre dinamik hesap. | **VERIFIED** (Harita ve Postcard UI'da gösterim aktif). |
-| **Ekonomi ve İpuçları** | Başlangıç: 250🪙. Ampul: 30🪙, Hedef: 60🪙, Bomba: 90🪙. Bonus Sandık: 5 kelimede 30🪙. | **VERIFIED** (`tests/simulate_economy.py` ve oyun testleri). |
-| **Kayıt Güvenliği (Save)** | Versiyonlu şema, veri sınırları denetimi (clamping) ve bozulma kurtarma. | **VERIFIED** (`tests/test_save_manager.js`: Aşırı uç değerler sanitize edildi). |
-| **İlerleme Kilidi (Progression)**| Kilitli illerin JS konsolundan veya hileyle açılması engellendi. | **VERIFIED** (`MapEngine.playSelectedCity` guard testi: engellendi). |
-| **Performans (FPS)** | Donanım ivmeli CSS (`transform3d`). | **MEASURED: 62 FPS** (Chrome Headless CDP ile 1006ms boyunca ölçüldü). |
-| **Yükleme Süresi** | DOMContentLoaded ve Total Load ölçümü. | **MEASURED: 103.1ms DOMContentLoaded, 105.9ms Total Load**. |
-| **PWA & Çevrimdışı** | `manifest.json`, `sw.js` ve dahili PNG ikonları (`icon-192`, `icon-512`). | **VERIFIED** (Chrome PWA register testi başarılı). |
-| **Ödüllü Reklam (Rewarded)** | Video izleme simülasyonu ile altın ve 2X ödül kancaları. | **VERIFIED** (Web simülasyonu aktif; SDK entegrasyonuna hazır). |
-| **Geçiş Reklamı (Interstitial)**| Otomatik aralıklarla tam ekran reklam gösterme. | **NOT IMPLEMENTED** (Yalnızca ödüllü reklam kancaları mevcuttur). |
-| **Capacitor / Mobil Paket** | Bağımsız web standartları mimarisi. | **COMPATIBLE** (Capacitor www/ dizinine doğrudan kopyalanabilir). |
+---
 
-## Kurulum ve Derleme (Build Pipeline)
+## 🏗️ Mimari & Katman Düzeni (Engine ≠ Content Data)
 
-Sistemi derlemek için ek bir paket yöneticisine (npm/yarn) gerek yoktur:
+Oyun motoru ile içerik verisi birbirinden kesin olarak ayrılmıştır. Yeni bir il veya ülke eklemek için oyun koduna dokunmak gerekmez; tüm içerik bağımsız veri şemalarıyla yönetilir.
 
-```bash
-# Kaynak dosyaları denetleyip index.html çıktısına derleyin:
-python tools/build.py
-```
-
-`tools/build.py` derleyicisi çalıştırıldığında şu güvenlik adımlarını otomatik yürütür:
-1. `src/template.html` şablonunun Türkçe karakter ve token bütünlüğünü kontrol eder.
-2. `src/data/unified_cities.json` içindeki 186 bölümün tamamını geometri ve çözülebilirlik testinden geçirir. Herhangi bir seviye kural dışıysa derlemeyi durdurur.
-3. CSS ve ES6 modüllerini hiyerarşik sırayla birleştirir.
-4. Çıktı JavaScript sözdizimini Node.js derleyicisi ile doğrular.
-5. Tek dosyalık `index.html` dosyasını üretir.
-
-## Test Paketini Çalıştırma
-
-```bash
-# 1. 186 bölümün geometri ve sözlük doğrulamasını çalıştırın:
-python tests/validate_all_production_levels.py
-
-# 2. SaveManager şema ve kurtarma birim testlerini çalıştırın:
-node tests/test_save_manager.js
-
-# 3. Google Chrome ile headless tarayıcı QA testini çalıştırın:
-node tests/browser_qa_cdp.js
+```text
+kelime-harikalari/
+├── data/                      # Bağımsız İçerik Veri Setleri
+│   ├── countries/             # Ülke tanımları ve koordinatları (countries.json)
+│   ├── cities/                # 81 İl metadata (tr_cities.json)
+│   ├── landmarks/             # 405 Simge mekân & telifli fotoğraf metadatası (tr_landmarks.json)
+│   ├── levels/                # 2.025 Çözülebilir bulmaca (tr_levels.json)
+│   └── dictionary/            # TDK Sözlük snapshot & İçerik Güvenlik Filtresi
+├── src/                       # Modüler Kaynak Kod (ES6 & CSS)
+│   ├── app/                   # App orkestratörü (App.js)
+│   ├── world/                 # 3B Dünya Küresi (Globe3D.js)
+│   ├── map/                   # 81 İl haritası & Şehir ekranı (CountryMap.js, CityExploration.js)
+│   ├── game/                  # Bulmaca motoru & Seremoni (GameEngine.js, CityCompletionCeremony.js, IdiomEngine.js)
+│   ├── ui/                    # Ekran yönlendirici & Modallar (ScreenRouter.js, OnboardingModal.js, FeedbackModal.js)
+│   ├── input/                 # Çoklu cihaz girdi yöneticisi (InputManager.js)
+│   ├── audio/                 # Web Audio ses sentezleyici (AudioEngine.js)
+│   ├── save/                  # Şema v4 kayıt yöneticisi & migration (SaveManager.js)
+│   ├── services/              # Merkezi Kelime Doğrulama & Telemetri (WordValidator.js, ContentPolicy.js, Telemetry.js)
+│   ├── utils/                 # Türkçe alfabe & Görsel yükleme yardımcıları (utils.js)
+│   ├── css/                   # Tasarım sistemi & Responsive kurallar (main.css)
+│   └── template.html          # Üretim HTML şablonu
+├── tools/                     # Otomasyon, Derleme ve Kalite Araçları
+│   ├── build/                 # Tek dosya üretim derleyicisi (build.py)
+│   ├── qa/                    # Otomatik kalite kapıları (validate_release.py, validate_words.py, vb.)
+│   └── content/               # Veri seti bölücüler ve foto doğrulayıcılar
+├── tests/                     # Test Paketi
+│   ├── unit/                  # Kelime ve kayıt testleri (test_word_validator.py, test_save_migration.js)
+│   ├── integration/           # 2.025 Bölüm çözülebilirlik testi (test_puzzle_solvability.py)
+│   └── e2e/                   # Headless Chrome E2E kullanıcı yolculuğu testi (test_v2_user_journey.js)
+└── public/ / www/             # PWA ve mobil paketleme çıktıları
 ```
 
 ---
-*Bu doküman, sistemin gerçek test sonuçlarına ve ölçümlerine dayanarak hazırlanmıştır.*
+
+## 📊 Türkiye İçerik & Doğrulama Matrisi
+
+| İçerik / Standart | Sayı / Değer | Doğrulama & Kanıt Durumu |
+| :--- | :--- | :--- |
+| **Toplam İl** | 81 İl | **%100 Doğrulandı** (81 il SVG sınırları ve koordinatları) |
+| **Simge Mekân** | 405 Mekân (81 × 5) | **%100 Doğrulandı** (405 gerçek fotoğraf & lisans metadatası) |
+| **Toplam Seviye** | 2.025 Bölüm (81 × 25) | **%100 Doğrulandı** (`tools/qa/validate_puzzles.py`: 2025/2025 çözülebilir) |
+| **Kelime Doğrulaması** | 8.911 Kelime | **%100 TDK Uyumlu** (`data/dictionary/tdk_snapshot_v2.json`) |
+| **İçerik Güvenliği** | 0 Uygunsuz Sözcük | **%100 Temiz** (`ContentPolicy.check`: Küfür/argo engelli) |
+| **Kayıt Şeması** | Schema v4 | **%100 Geriye Uyumlu** (v1, v2, v3 kayıtları kayıpsız taşınır) |
+| **Girdi Desteği** | Touch + Mouse + Klavye | **Çoklu Cihaz Uyumlu** (Mobil, Tablet, Masaüstü, Akıllı Tahta) |
+| **Çevrimdışı / PWA** | Service Worker v4.1 | **Sıfır Dış Bağımlılık** (Tamamen çevrimdışı oynanabilir) |
+
+---
+
+## 🚀 Geliştirme & Derleme (Build Pipeline)
+
+Projeyi derlemek için Python ve Node.js yeterlidir:
+
+```bash
+# 1. Projeyi derleyin (index.html ve www/index.html üretir):
+python tools/build.py
+
+# 2. Kalite kapılarını ve içerik doğrulamasını çalıştırın:
+python tools/qa/validate_release.py
+```
+
+### 🧪 Testleri Çalıştırma
+
+```bash
+# Birim Testleri:
+python -m unittest tests/unit/test_word_validator.py
+node tests/unit/test_save_migration.js
+
+# Entegrasyon Testi (2.025 Bölüm Çözülebilirlik):
+python -m unittest tests/integration/test_puzzle_solvability.py
+
+# Headless Chrome E2E Kullanıcı Yolculuğu Testi:
+node tests/e2e/test_v2_user_journey.js
+```
+
+---
+
+## 📱 Cihaz & Erişilebilirlik Uyumluluğu
+
+- **Telefon (360x800, 390x844, 430x932):** Tek el kullanımına uygun harf çarkı, dokunmatik pan ve pinch-to-zoom.
+- **Tablet (768x1024, 1024x1366):** Genişletilmiş fildişi ızgara kutuları (66px'e kadar), akıcı arayüz.
+- **Masaüstü & Laptop (1366x768, 1920x1080):** Fare kaydırma, tekerlek ile yakınlaştırma ve **tam klavye desteği** (harfleri yazarak kelime oluşturma, Backspace ile silme, Enter ile onaylama, Space ile karıştırma).
+- **Akıllı Tahta:** Büyük dokunma alanları, hover bağımlılığı olmayan arayüz, yüksek kontrastlı renk paleti.
+
+---
+
+## 🔒 İçerik & Gizlilik Politikası
+
+- **TDK Standartı:** Oyundaki tüm kelimeler Türk Dil Kurumu Güncel Türkçe Sözlük veritabanından filtrelenmiştir.
+- **Aile & Okul Dostu:** Çocuklar ve okul ortamları için uygunsuz kabul edilen argo, küfür ve 18+ kelimeler `ContentPolicy` modülü tarafından engellenmektedir.
+- **Gizlilik:** Oyun hiçbir kişisel veri toplamaz, reklam izleyicisi barındırmaz ve harici çerez kullanmaz. Hata bildirimleri yalnızca cihaz sınıfı ve ekran çözünürlüğü gibi anonim teknik hata bağlamını içerir.
+
+---
+
+## 📄 Telif & Fotoğraf Lisansı
+
+Tüm simge mekân görselleri doğrulanmış kamu malı (Public Domain), Creative Commons (CC BY-SA) veya ücretsiz Unsplash lisanslı kaynaklardan temin edilmiştir. Her mekânın detaylı kaynak, yazar ve lisans metadatası `data/landmarks/tr_landmarks.json` dosyasında kayıtlıdır.
+
+---
+
+*Geliştirici: Umut Can Demircan • Sürüm: 2.0.0 (V2 Release)*

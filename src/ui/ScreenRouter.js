@@ -19,9 +19,16 @@ const ScreenRouter = {
         // Screen specific hooks
         if (screenId === 'screen-globe') {
             if (window.Globe3D) {
+                Globe3D.resume();
                 Globe3D.resize();
             }
-        } else if (screenId === 'screen-country') {
+        } else {
+            if (window.Globe3D) {
+                Globe3D.pause();
+            }
+        }
+        
+        if (screenId === 'screen-country') {
             if (window.CountryMap) {
                 CountryMap.init();
             }

@@ -378,13 +378,33 @@ const Globe3D = {
         modal.classList.remove('hidden');
     },
 
+    isPaused: false,
+
     startLoop() {
+        if (this.animId) cancelAnimationFrame(this.animId);
+        this.isPaused = false;
         const render = () => {
-            this.update();
-            this.draw();
-            this.animId = requestAnimationFrame(render);
+            if (!this.isPaused) {
+                this.update();
+                this.draw();
+                this.animId = requestAnimationFrame(render);
+            }
         };
         this.animId = requestAnimationFrame(render);
+    },
+
+    pause() {
+        this.isPaused = true;
+        if (this.animId) {
+            cancelAnimationFrame(this.animId);
+            this.animId = null;
+        }
+    },
+
+    resume() {
+        if (this.isPaused || !this.animId) {
+            this.startLoop();
+        }
     },
 
     update() {

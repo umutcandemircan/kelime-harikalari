@@ -9,12 +9,13 @@ global.localStorage = {
 };
 global.window = {};
 
-vm.runInThisContext(fs.readFileSync('src/js/core/SaveManager.js', 'utf8'));
+vm.runInThisContext(fs.readFileSync('src/save/SaveManager.js', 'utf8'));
 
 console.log('=== TESTING SAVEMANAGER CORRUPTION & BOUNDS ===');
 
+SaveManager.init();
 console.assert(SaveManager.data.coins === 250, 'Default coins should be 250');
-console.assert(SaveManager.data.version === 3, 'Default version should be 3');
+console.assert(SaveManager.data.schemaVersion === 4, 'Default schemaVersion should be 4');
 console.assert(SaveManager.data.hasSelectedStartCity === false, 'Default hasSelectedStartCity should be false');
 
 localStorage.setItem('sozcukSeferi_v2_save', JSON.stringify({
@@ -33,7 +34,7 @@ SaveManager.load();
 console.assert(SaveManager.data.coins === 99999, 'Coins should be clamped to 99999');
 console.assert(SaveManager.data.unlockedCityIdx === 80, 'Unlocked city clamped to 80');
 console.assert(SaveManager.data.currentCityIdx === 0, 'Current city clamped to 0..80');
-console.assert(SaveManager.data.currentSubLevel === 9, 'Current sublevel clamped to 9');
+console.assert(SaveManager.data.currentSubLevel === 24, 'Current sublevel clamped to 24');
 console.assert(JSON.stringify(SaveManager.data.completedProvinces) === JSON.stringify([35, 34]), 'Completed provinces sanitized');
 console.assert(SaveManager.data.stars['0_2'] === 3, 'Valid star preserved');
 console.assert(SaveManager.data.stars['0_0'] === undefined, 'Star > 3 rejected');

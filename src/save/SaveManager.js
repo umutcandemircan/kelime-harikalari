@@ -78,7 +78,7 @@ const SaveManager = {
 
         // 1. Coins
         if (typeof input.coins === 'number' && !isNaN(input.coins)) {
-            out.coins = Math.max(0, Math.min(999999, Math.floor(input.coins)));
+            out.coins = Math.max(0, Math.min(99999, Math.floor(input.coins)));
         }
 
         // 2. Start city & onboarding
@@ -139,6 +139,11 @@ const SaveManager = {
             if (typeof input.hapticEnabled === 'boolean') out.settings.hapticEnabled = input.hapticEnabled;
         }
 
+        // 8b. Bonus Chest
+        if (typeof input.bonusChest === 'number' && !isNaN(input.bonusChest)) {
+            out.bonusChest = Math.max(0, Math.min(5, Math.floor(input.bonusChest)));
+        }
+
         // 9. Versioning
         out.lastSeenVersion = typeof input.lastSeenVersion === 'string' ? input.lastSeenVersion : (typeof input.version === 'string' ? input.version : '1.0.0');
         out.schemaVersion = this.CURRENT_SCHEMA_VERSION;
@@ -167,7 +172,7 @@ const SaveManager = {
 
     addCoins(amount) {
         if (typeof amount !== 'number' || isNaN(amount) || amount <= 0) return;
-        this.data.coins = Math.min(999999, this.data.coins + Math.floor(amount));
+        this.data.coins = Math.min(99999, this.data.coins + Math.floor(amount));
         this.save();
     },
 
@@ -188,6 +193,37 @@ const SaveManager = {
             this.data.completedProvinces.push(plate);
             this.save();
         }
+    },
+
+    getDailyState(todayStr) {
+        if (!this.data.daily || !this.data.daily.lastDate) {
+            return { canPlay: true, streak: 0, completedToday: false };
+        }
+        
+        if (this.data.daily.lastDate === todayStr) {
+            return { canPlay: false, streak: this.data.daily.streak, completedToday: true };
+        }
+        
+        const last = new Date(this.data.daily.lastDate);
+        const today = new Date(todayStr);
+        const diffDays = Math.round((today - last) / (1000 * 60 * 60 * 24));
+        
+        if (diffDays === 1) {
+            return { canPlay: true, streak: this.data.daily.streak, completedToday: false };
+        } else {
+            return { canPlay: true, streak: 0, completedToday: false };
+        }
+    },
+
+    recordDailyCompletion(todayStr, rewardCoins = 50) {
+        const state = this.getDailyState(todayStr);
+        const newStreak = state.streak + 1;
+        this.data.daily.lastDate = todayStr;
+        this.data.daily.streak = newStreak;
+        this.data.daily.completedToday = true;
+        this.addCoins(rewardCoins);
+        this.save();
+        return newStreak;
     },
 
     recordFeedback(report) {

@@ -84,7 +84,7 @@ kelime-harikalari/
 | **İçerik Güvenliği** | 0 Uygunsuz Sözcük | **%100 Temiz** (`ContentPolicy.check`: Küfür/argo engelli) |
 | **Kayıt Şeması** | Schema v4 | **%100 Geriye Uyumlu** (v1, v2, v3 kayıtları kayıpsız taşınır) |
 | **Girdi Desteği** | Touch + Mouse + Klavye | **Çoklu Cihaz Uyumlu** (Mobil, Tablet, Masaüstü, Akıllı Tahta) |
-| **Çevrimdışı / PWA** | Service Worker v4.1 | **Sıfır Dış Bağımlılık** (Tamamen çevrimdışı oynanabilir) |
+| **Çevrimdışı / PWA** | Service Worker v2.0 | **Sıfır Dış Bağımlılık** (Tamamen çevrimdışı oynanabilir) |
 
 ---
 

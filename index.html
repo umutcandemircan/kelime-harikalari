@@ -2815,6 +2815,29 @@ html, body {
     }
 }
 
+/* ==========================================================================
+   ACCESSIBILITY: PREFERS-REDUCED-MOTION SUPPORT
+   ========================================================================== */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.001ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.001ms !important;
+        scroll-behavior: auto !important;
+    }
+    .drifting-cloud,
+    .floating-compass-rose,
+    .nautical-route-line,
+    .ceremony-dialog,
+    .grid-cell.solved,
+    .pulse-ring {
+        animation: none !important;
+        transition: none !important;
+    }
+}
+
 
 </style>
 </head>
@@ -3684,7 +3707,7 @@ const SaveManager = {
 
         // 1. Coins
         if (typeof input.coins === 'number' && !isNaN(input.coins)) {
-            out.coins = Math.max(0, Math.min(999999, Math.floor(input.coins)));
+            out.coins = Math.max(0, Math.min(99999, Math.floor(input.coins)));
         }
 
         // 2. Start city & onboarding
@@ -3745,6 +3768,11 @@ const SaveManager = {
             if (typeof input.hapticEnabled === 'boolean') out.settings.hapticEnabled = input.hapticEnabled;
         }
 
+        // 8b. Bonus Chest
+        if (typeof input.bonusChest === 'number' && !isNaN(input.bonusChest)) {
+            out.bonusChest = Math.max(0, Math.min(5, Math.floor(input.bonusChest)));
+        }
+
         // 9. Versioning
         out.lastSeenVersion = typeof input.lastSeenVersion === 'string' ? input.lastSeenVersion : (typeof input.version === 'string' ? input.version : '1.0.0');
         out.schemaVersion = this.CURRENT_SCHEMA_VERSION;
@@ -3773,7 +3801,7 @@ const SaveManager = {
 
     addCoins(amount) {
         if (typeof amount !== 'number' || isNaN(amount) || amount <= 0) return;
-        this.data.coins = Math.min(999999, this.data.coins + Math.floor(amount));
+        this.data.coins = Math.min(99999, this.data.coins + Math.floor(amount));
         this.save();
     },
 
@@ -3794,6 +3822,37 @@ const SaveManager = {
             this.data.completedProvinces.push(plate);
             this.save();
         }
+    },
+
+    getDailyState(todayStr) {
+        if (!this.data.daily || !this.data.daily.lastDate) {
+            return { canPlay: true, streak: 0, completedToday: false };
+        }
+        
+        if (this.data.daily.lastDate === todayStr) {
+            return { canPlay: false, streak: this.data.daily.streak, completedToday: true };
+        }
+        
+        const last = new Date(this.data.daily.lastDate);
+        const today = new Date(todayStr);
+        const diffDays = Math.round((today - last) / (1000 * 60 * 60 * 24));
+        
+        if (diffDays === 1) {
+            return { canPlay: true, streak: this.data.daily.streak, completedToday: false };
+        } else {
+            return { canPlay: true, streak: 0, completedToday: false };
+        }
+    },
+
+    recordDailyCompletion(todayStr, rewardCoins = 50) {
+        const state = this.getDailyState(todayStr);
+        const newStreak = state.streak + 1;
+        this.data.daily.lastDate = todayStr;
+        this.data.daily.streak = newStreak;
+        this.data.daily.completedToday = true;
+        this.addCoins(rewardCoins);
+        this.save();
+        return newStreak;
     },
 
     recordFeedback(report) {
@@ -4396,13 +4455,33 @@ const Globe3D = {
         modal.classList.remove('hidden');
     },
 
+    isPaused: false,
+
     startLoop() {
+        if (this.animId) cancelAnimationFrame(this.animId);
+        this.isPaused = false;
         const render = () => {
-            this.update();
-            this.draw();
-            this.animId = requestAnimationFrame(render);
+            if (!this.isPaused) {
+                this.update();
+                this.draw();
+                this.animId = requestAnimationFrame(render);
+            }
         };
         this.animId = requestAnimationFrame(render);
+    },
+
+    pause() {
+        this.isPaused = true;
+        if (this.animId) {
+            cancelAnimationFrame(this.animId);
+            this.animId = null;
+        }
+    },
+
+    resume() {
+        if (this.isPaused || !this.animId) {
+            this.startLoop();
+        }
     },
 
     update() {
@@ -4999,6 +5078,11 @@ const CityExploration = {
     },
 
     renderCityView() {
+        if (!this.currentCity) {
+            const cityIdx = SaveManager?.data?.currentCityIdx || 0;
+            this.currentCity = (typeof CITIES !== 'undefined' ? CITIES[cityIdx] : null) || window.CITIES?.[cityIdx];
+            this.currentCityIdx = cityIdx;
+        }
         const city = this.currentCity;
         if (!city) return;
 
@@ -5581,6 +5665,21 @@ const GameEngine = {
     validateWord(rawWord) {
         if (!rawWord || rawWord.length < 2) return;
         const word = ContentPolicy.normalize(rawWord);
+        
+        // 1. Content Policy Check (Strict reject on inappropriate/blocked words)
+        const policyCheck = ContentPolicy.check(word);
+        if (!policyCheck.allowed) {
+            this.mistakes++;
+            AudioEngine.playWrong();
+            const pill = document.getElementById('word-preview-pill');
+            if (pill) {
+                pill.style.background = 'rgba(185, 28, 28, 0.95)';
+                pill.classList.add('active');
+                setTimeout(() => pill.classList.remove('active'), 500);
+            }
+            return;
+        }
+
         let matched = false;
 
         this.words.forEach(w => {
@@ -5883,8 +5982,19 @@ const IdiomEngine = {
             if (!this.isDragging) return;
             this.isDragging = false;
             const word = this.selectedIndices.map(i => this.letters[i]).join('');
+            const normWord = typeof ContentPolicy !== 'undefined' ? ContentPolicy.normalize(word) : word;
             
-            if (this.idiom && word === this.idiom.answer) {
+            // Content policy check
+            if (typeof ContentPolicy !== 'undefined' && !ContentPolicy.check(normWord).allowed) {
+                if (window.AudioEngine) AudioEngine.playWrong();
+                this.selectedIndices = [];
+                document.querySelectorAll('#idiom-wheel-assembly .letter-node').forEach(n => n.classList.remove('selected'));
+                this.updateDragLine(null);
+                this.updatePreview();
+                return;
+            }
+
+            if (this.idiom && normWord === this.idiom.answer) {
                 if (window.AudioEngine) AudioEngine.playVictory();
                 SaveManager.addCoins(50);
                 
@@ -5979,9 +6089,16 @@ const ScreenRouter = {
         // Screen specific hooks
         if (screenId === 'screen-globe') {
             if (window.Globe3D) {
+                Globe3D.resume();
                 Globe3D.resize();
             }
-        } else if (screenId === 'screen-country') {
+        } else {
+            if (window.Globe3D) {
+                Globe3D.pause();
+            }
+        }
+        
+        if (screenId === 'screen-country') {
             if (window.CountryMap) {
                 CountryMap.init();
             }

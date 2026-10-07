@@ -340,6 +340,21 @@ const GameEngine = {
     validateWord(rawWord) {
         if (!rawWord || rawWord.length < 2) return;
         const word = ContentPolicy.normalize(rawWord);
+        
+        // 1. Content Policy Check (Strict reject on inappropriate/blocked words)
+        const policyCheck = ContentPolicy.check(word);
+        if (!policyCheck.allowed) {
+            this.mistakes++;
+            AudioEngine.playWrong();
+            const pill = document.getElementById('word-preview-pill');
+            if (pill) {
+                pill.style.background = 'rgba(185, 28, 28, 0.95)';
+                pill.classList.add('active');
+                setTimeout(() => pill.classList.remove('active'), 500);
+            }
+            return;
+        }
+
         let matched = false;
 
         this.words.forEach(w => {

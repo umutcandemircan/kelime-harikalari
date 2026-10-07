@@ -1,0 +1,271 @@
+[
+  {
+    "country": "İtalya",
+    "countryCode": "IT",
+    "flag": "🇮🇹",
+    "cities": [
+      {
+        "name": "Roma",
+        "cx": 1050,
+        "cy": 270,
+        "landmarks": [
+          "Kolezyum",
+          "Trevi Çeşmesi",
+          "Vatikan & Aziz Petrus",
+          "Panteon",
+          "Roma Forumu"
+        ]
+      },
+      {
+        "name": "Venedik",
+        "cx": 1045,
+        "cy": 240,
+        "landmarks": [
+          "San Marco Meydanı",
+          "Rialto Köprüsü",
+          "Büyük Kanal",
+          "Dükler Sarayı",
+          "Murano Adası"
+        ]
+      }
+    ]
+  },
+  {
+    "country": "Fransa",
+    "countryCode": "FR",
+    "flag": "🇫🇷",
+    "cities": [
+      {
+        "name": "Paris",
+        "cx": 980,
+        "cy": 220,
+        "landmarks": [
+          "Eyfel Kulesi",
+          "Louvre Müzesi",
+          "Notre Dame Katedrali",
+          "Zafer Takı",
+          "Versay Sarayı"
+        ]
+      },
+      {
+        "name": "Nice",
+        "cx": 990,
+        "cy": 255,
+        "landmarks": [
+          "Promenade des Anglais",
+          "Colline du Château",
+          "Eski Şehir",
+          "Matisse Müzesi",
+          "Cimiez"
+        ]
+      }
+    ]
+  },
+  {
+    "country": "Birleşik Krallık",
+    "countryCode": "GB",
+    "flag": "🇬🇧",
+    "cities": [
+      {
+        "name": "Londra",
+        "cx": 950,
+        "cy": 200,
+        "landmarks": [
+          "Big Ben & Parlamento",
+          "Tower Bridge",
+          "London Eye",
+          "Buckingham Sarayı",
+          "British Museum"
+        ]
+      }
+    ]
+  },
+  {
+    "country": "İspanya",
+    "countryCode": "ES",
+    "flag": "🇪🇸",
+    "cities": [
+      {
+        "name": "Barselona",
+        "cx": 950,
+        "cy": 275,
+        "landmarks": [
+          "Sagrada Familia",
+          "Park Güell",
+          "Casa Batlló",
+          "La Rambla",
+          "Gotik Mahalle"
+        ]
+      },
+      {
+        "name": "Madrid",
+        "cx": 920,
+        "cy": 280,
+        "landmarks": [
+          "Kraliyet Sarayı",
+          "Prado Müzesi",
+          "Plaza Mayor",
+          "Retiro Parkı",
+          "Puerta del Sol"
+        ]
+      }
+    ]
+  },
+  {
+    "country": "Almanya",
+    "countryCode": "DE",
+    "flag": "🇩🇪",
+    "cities": [
+      {
+        "name": "Berlin",
+        "cx": 1040,
+        "cy": 180,
+        "landmarks": [
+          "Brandenburg Kapısı",
+          "Reichstag",
+          "Müzeler Adası",
+          "Berlin Duvarı",
+          "Alexanderplatz"
+        ]
+      }
+    ]
+  },
+  {
+    "country": "Yunanistan",
+    "countryCode": "GR",
+    "flag": "🇬🇷",
+    "cities": [
+      {
+        "name": "Atina",
+        "cx": 1110,
+        "cy": 290,
+        "landmarks": [
+          "Akropolis & Parthenon",
+          "Plaka Mahallesi",
+          "Panathinaiko",
+          "Antik Agora",
+          "Lykavittos"
+        ]
+      }
+    ]
+  },
+  {
+    "country": "Mısır",
+    "countryCode": "EG",
+    "flag": "🇪🇬",
+    "cities": [
+      {
+        "name": "Kahire",
+        "cx": 1160,
+        "cy": 350,
+        "landmarks": [
+          "Giza Piramitleri",
+          "Büyük Sfenks",
+          "Han el-Halili",
+          "Mısır Müzesi",
+          "Selahaddin Kalesi"
+        ]
+      }
+    ]
+  },
+  {
+    "country": "Amerika Birleşik Devletleri",
+    "countryCode": "US",
+    "flag": "🇺🇸",
+    "cities": [
+      {
+        "name": "New York",
+        "cx": 580,
+        "cy": 270,
+        "landmarks": [
+          "Özgürlük Heykeli",
+          "Central Park",
+          "Empire State",
+          "Times Meydanı",
+          "Brooklyn Köprüsü"
+        ]
+      },
+      {
+        "name": "Los Angeles",
+        "cx": 340,
+        "cy": 310,
+        "landmarks": [
+          "Hollywood Yazısı",
+          "Santa Monica İskelesi",
+          "Griffith Gözlemevi",
+          "Beverly Hills",
+          "Walk of Fame"
+        ]
+      }
+    ]
+  },
+  {
+    "country": "Brezilya",
+    "countryCode": "BR",
+    "flag": "🇧🇷",
+    "cities": [
+      {
+        "name": "Rio de Janeiro",
+        "cx": 730,
+        "cy": 690,
+        "landmarks": [
+          "Kurtarıcı İsa Heykeli",
+          "Copacabana Plajı",
+          "Şeker Tepesi",
+          "Maracanã Stadyumu",
+          "Tijuca Ormanı"
+        ]
+      }
+    ]
+  },
+  {
+    "country": "Japonya",
+    "countryCode": "JP",
+    "flag": "🇯🇵",
+    "cities": [
+      {
+        "name": "Tokyo",
+        "cx": 1780,
+        "cy": 290,
+        "landmarks": [
+          "Tokyo Kulesi",
+          "Senso-ji Tapınağı",
+          "Şibuya Kavşağı",
+          "Meiji Tapınağı",
+          "Fuji Dağı"
+        ]
+      },
+      {
+        "name": "Kyoto",
+        "cx": 1760,
+        "cy": 305,
+        "landmarks": [
+          "Fushimi Inari",
+          "Kinkaku-ji",
+          "Arashiyama Bambu",
+          "Gion Mahallesi",
+          "Kiyomizu-dera"
+        ]
+      }
+    ]
+  },
+  {
+    "country": "Avustralya",
+    "countryCode": "AU",
+    "flag": "🇦🇺",
+    "cities": [
+      {
+        "name": "Sidney",
+        "cx": 1820,
+        "cy": 780,
+        "landmarks": [
+          "Sidney Opera Binası",
+          "Harbour Köprüsü",
+          "Bondi Plajı",
+          "Mavi Dağlar",
+          "Darling Harbour"
+        ]
+      }
+    ]
+  }
+]

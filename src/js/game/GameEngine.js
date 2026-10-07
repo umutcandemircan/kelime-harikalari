@@ -40,7 +40,7 @@ const GameEngine = {
         if (landmarkLabel) landmarkLabel.innerText = landmarkName;
 
         const currentStars = SaveManager.getStars(cityIdx, subIdx);
-        const starsLabel = document.getElementById('game-stars-label');
+        const starsLabel = null;
         if (starsLabel) {
             starsLabel.innerText = currentStars > 0 ? '★'.repeat(currentStars) + '☆'.repeat(3 - currentStars) : '⭐⭐⭐';
         }
@@ -63,7 +63,7 @@ const GameEngine = {
         const landmarkLabel = document.getElementById('game-landmark-label');
         if (landmarkLabel) landmarkLabel.innerText = "Günün Özel Meydan Okuması";
         const bgImg = document.getElementById('game-bg-img');
-        if (bgImg) bgImg.src = "https://images.unsplash.com/photo-1541432901042-2d8bd64b4a9b?auto=format&fit=crop&w=1280&q=80";
+        if (bgImg) bgImg.src = "https://images.unsplash.com/photo-1488646953014-85cb44e25828?auto=format&fit=crop&w=1280&q=80";
 
         this.initLevelCommon();
     },
@@ -120,8 +120,10 @@ const GameEngine = {
         const gap = 5;
         const sizeW = Math.floor((availW - (cols - 1) * gap) / cols);
         const sizeH = Math.floor((availH - (rows - 1) * gap) / rows);
-        let cellSize = Math.min(sizeW, sizeH, 46);
-        if (cellSize < 24) cellSize = 24;
+        // Dynamic expansive cell sizing: Allow up to 66px for small grids, min 28px
+        let maxAllowed = cols <= 5 ? 66 : (cols <= 7 ? 56 : 48);
+        let cellSize = Math.min(sizeW, sizeH, maxAllowed);
+        if (cellSize < 28) cellSize = 28;
 
         container.style.setProperty('--cell-size', `${cellSize}px`);
         container.style.gridTemplateColumns = `repeat(${cols}, var(--cell-size, ${cellSize}px))`;
@@ -180,9 +182,11 @@ const GameEngine = {
         const count = this.letters.length;
         if (count === 0) return;
         
-        const r = 100;
-        const cx = 150;
-        const cy = 150;
+        const asmEl = document.getElementById('wheel-assembly');
+        const w = (asmEl && asmEl.clientWidth > 0) ? asmEl.clientWidth : 240;
+        const cx = w / 2;
+        const cy = w / 2;
+        const r = w * 0.35;
 
         for (let i = 0; i < count; i++) {
             const angle = (i * 2 * Math.PI) / count - Math.PI / 2;
@@ -368,7 +372,7 @@ const GameEngine = {
                 
                 document.getElementById('post-landmark-title').innerText = "GÜNLÜK BULMACA TAMAMLANDI!";
                 document.getElementById('post-story-text').innerText = `Tebrikler! Günün bulmacasını başarıyla çözdün.\nSerin: ${streak} Gün! (+50 Altın)`;
-                document.getElementById('post-photo-img').src = "https://images.unsplash.com/photo-1541432901042-2d8bd64b4a9b?auto=format&fit=crop&w=1280&q=80";
+                document.getElementById('post-photo-img').src = "https://images.unsplash.com/photo-1488646953014-85cb44e25828?auto=format&fit=crop&w=1280&q=80";
                 
                 
                 

@@ -80,6 +80,22 @@ const App = {
         this.startJourney();
     },
 
+    
+    openWorldMap() {
+        this.goToScreen('screen-map');
+        if (window.MapEngine) {
+            MapEngine.setViewMode('world');
+        }
+    },
+
+    openExpedition(countryId) {
+        this.goToScreen('screen-map');
+        if (window.MapEngine) {
+            MapEngine.setViewMode('world');
+            MapEngine.selectCountry(countryId);
+        }
+    },
+
     startJourney() {
         if (!SaveManager.data.hasSelectedStartCity) {
             this.goToScreen('screen-map');

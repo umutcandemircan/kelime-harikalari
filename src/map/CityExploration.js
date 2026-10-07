@@ -21,6 +21,11 @@ const CityExploration = {
     },
 
     renderCityView() {
+        if (!this.currentCity) {
+            const cityIdx = SaveManager?.data?.currentCityIdx || 0;
+            this.currentCity = (typeof CITIES !== 'undefined' ? CITIES[cityIdx] : null) || window.CITIES?.[cityIdx];
+            this.currentCityIdx = cityIdx;
+        }
         const city = this.currentCity;
         if (!city) return;
 

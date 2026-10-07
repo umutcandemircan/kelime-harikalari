@@ -128,8 +128,19 @@ const IdiomEngine = {
             if (!this.isDragging) return;
             this.isDragging = false;
             const word = this.selectedIndices.map(i => this.letters[i]).join('');
+            const normWord = typeof ContentPolicy !== 'undefined' ? ContentPolicy.normalize(word) : word;
             
-            if (this.idiom && word === this.idiom.answer) {
+            // Content policy check
+            if (typeof ContentPolicy !== 'undefined' && !ContentPolicy.check(normWord).allowed) {
+                if (window.AudioEngine) AudioEngine.playWrong();
+                this.selectedIndices = [];
+                document.querySelectorAll('#idiom-wheel-assembly .letter-node').forEach(n => n.classList.remove('selected'));
+                this.updateDragLine(null);
+                this.updatePreview();
+                return;
+            }
+
+            if (this.idiom && normWord === this.idiom.answer) {
                 if (window.AudioEngine) AudioEngine.playVictory();
                 SaveManager.addCoins(50);
                 

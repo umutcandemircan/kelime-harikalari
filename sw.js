@@ -1,4 +1,4 @@
-const CACHE_NAME = 'sozcuk-seferi-v4.1.0-release';
+const CACHE_NAME = 'sozcuk-seferi-v2.0.0';
 const STATIC_ASSETS = [
   './',
   './index.html',

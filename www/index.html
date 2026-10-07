@@ -1064,24 +1064,48 @@
             to { stroke-dashoffset: -20; }
         }
 
+        /* UNIVERSAL HIDDEN UTILITY */
+        .hidden {
+            display: none !important;
+            pointer-events: none !important;
+            visibility: hidden !important;
+            opacity: 0 !important;
+        }
+
         /* MODALS */
         .modal-backdrop {
             position: fixed;
             top: 0;
             left: 0;
+            right: 0;
+            bottom: 0;
             width: 100%;
             height: 100%;
             background: rgba(0, 0, 0, 0.75);
             backdrop-filter: blur(4px);
-            display: none;
+            display: flex;
             align-items: center;
             justify-content: center;
-            z-index: 100;
+            z-index: 1000;
             padding: 16px;
+            box-sizing: border-box;
         }
 
-        .modal-backdrop.active {
-            display: flex;
+        .modal-backdrop.hidden,
+        #modal-onboarding.hidden,
+        #modal-feedback.hidden,
+        #modal-release-notes.hidden,
+        #modal-country-preview.hidden,
+        #modal-city-ceremony.hidden,
+        #modal-postcard.hidden,
+        #modal-city-completed.hidden,
+        #modal-daily.hidden,
+        #modal-settings.hidden,
+        #modal-insufficient-gold.hidden {
+            display: none !important;
+            pointer-events: none !important;
+            visibility: hidden !important;
+            opacity: 0 !important;
         }
 
         .modal-dialog {
@@ -2496,19 +2520,10 @@ html, body {
 
 /* 3. CITY COMPLETION CEREMONY MODAL */
 #modal-city-ceremony {
-    position: fixed;
-    inset: 0;
-    z-index: 1000;
+    z-index: 1100;
     background: rgba(11, 15, 26, 0.95);
     backdrop-filter: blur(12px);
-    display: none;
-    align-items: center;
-    justify-content: center;
     padding: 20px;
-}
-
-#modal-city-ceremony.active {
-    display: flex;
 }
 
 .ceremony-dialog {
@@ -2605,14 +2620,9 @@ html, body {
 
 /* 4. FEEDBACK & BUG REPORT MODAL */
 #modal-feedback {
-    position: fixed;
-    inset: 0;
     z-index: 1100;
     background: rgba(11, 15, 26, 0.85);
     backdrop-filter: blur(8px);
-    display: flex;
-    align-items: center;
-    justify-content: center;
     padding: 18px;
 }
 
@@ -2682,14 +2692,9 @@ html, body {
 
 /* 5. ONBOARDING MODAL */
 #modal-onboarding {
-    position: fixed;
-    inset: 0;
     z-index: 1200;
     background: rgba(11, 15, 26, 0.92);
     backdrop-filter: blur(10px);
-    display: flex;
-    align-items: center;
-    justify-content: center;
     padding: 20px;
 }
 
@@ -2735,14 +2740,9 @@ html, body {
 
 /* 6. COUNTRY PREVIEW MODAL (LOCKED COUNTRIES) */
 #modal-country-preview {
-    position: fixed;
-    inset: 0;
     z-index: 1100;
     background: rgba(11, 15, 26, 0.88);
     backdrop-filter: blur(8px);
-    display: flex;
-    align-items: center;
-    justify-content: center;
     padding: 18px;
 }
 
@@ -3242,15 +3242,15 @@ html, body {
     <!-- ==================== MODALS ==================== -->
 
     <!-- MODAL 1: ONBOARDING CAROUSEL -->
-    <div class="modal-backdrop hidden" id="modal-onboarding">
+    <div class="modal-backdrop hidden" id="modal-onboarding" role="dialog" aria-modal="true" aria-hidden="true" aria-labelledby="onboard-title">
         <div class="onboarding-dialog">
             <div class="onboard-icon-box" id="onboard-icon">🧭</div>
             <h2 id="onboard-title" style="color:var(--gold-primary); font-size:18px;">Sözcük Seferî'ne Hoş Geldin</h2>
             <p id="onboard-desc" style="color:#d6d3d1; font-size:13px; line-height:1.5;">Dünya ve Türkiye kültür yolculuğu başlıyor.</p>
             <div class="onboard-dots-container" id="onboard-dots"></div>
             <div style="display:flex; gap:10px; width:100%; margin-top:8px;">
-                <button class="btn-3d-outline" style="flex:1;" onclick="OnboardingModal.skip()">Atla</button>
-                <button class="btn-3d" style="flex:2;" id="onboard-btn-next" onclick="OnboardingModal.next()">İlerle →</button>
+                <button type="button" class="btn-3d-outline" id="onboard-btn-skip" style="flex:1;" onclick="OnboardingModal.skip()">Atla</button>
+                <button type="button" class="btn-3d" style="flex:2;" id="onboard-btn-next" onclick="OnboardingModal.next()">İlerle →</button>
             </div>
         </div>
     </div>
@@ -4053,9 +4053,18 @@ const InputManager = {
 
     handleEscape() {
         // Find visible modals
-        const visibleModal = document.querySelector('.modal-overlay:not(.hidden)');
+        const visibleModal = document.querySelector('.modal-backdrop:not(.hidden)');
         if (visibleModal) {
-            visibleModal.classList.add('hidden');
+            if (visibleModal.id === 'modal-onboarding' && window.OnboardingModal) {
+                OnboardingModal.skip();
+            } else if (visibleModal.id === 'modal-feedback' && window.FeedbackModal) {
+                FeedbackModal.close();
+            } else if (visibleModal.id === 'modal-release-notes' && window.ReleaseNotesModal) {
+                ReleaseNotesModal.close();
+            } else {
+                visibleModal.classList.add('hidden');
+                visibleModal.setAttribute('aria-hidden', 'true');
+            }
             return;
         }
 
@@ -6181,17 +6190,37 @@ const OnboardingModal = {
         }
     ],
 
+    init() {
+        // Keyboard support: Enter/Space advances or finishes, Escape skips
+        window.addEventListener('keydown', (e) => {
+            const modal = document.getElementById('modal-onboarding');
+            if (modal && !modal.classList.contains('hidden')) {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    this.next();
+                } else if (e.key === 'Escape') {
+                    e.preventDefault();
+                    this.skip();
+                }
+            }
+        });
+    },
+
     open() {
         const modal = document.getElementById('modal-onboarding');
         if (!modal) return;
         this.currentStep = 0;
         this.renderStep();
         modal.classList.remove('hidden');
+        modal.setAttribute('aria-hidden', 'false');
     },
 
     close() {
         const modal = document.getElementById('modal-onboarding');
-        if (modal) modal.classList.add('hidden');
+        if (modal) {
+            modal.classList.add('hidden');
+            modal.setAttribute('aria-hidden', 'true');
+        }
         SaveManager.data.onboardingCompleted = true;
         SaveManager.save();
     },
@@ -6200,20 +6229,29 @@ const OnboardingModal = {
         if (this.currentStep < this.totalSteps - 1) {
             this.currentStep++;
             this.renderStep();
-            AudioEngine.playPop(this.currentStep);
-        } else {
-            this.close();
-            // Start journey
-            if (window.ScreenRouter) {
-                ScreenRouter.goTo('screen-globe');
+            if (window.AudioEngine && typeof AudioEngine.playPop === 'function') {
+                AudioEngine.playPop(this.currentStep);
             }
+        } else {
+            this.finish();
+        }
+    },
+
+    finish() {
+        this.close();
+        if (window.AudioEngine && typeof AudioEngine.playFanfare === 'function') {
+            AudioEngine.playFanfare();
+        }
+        // Navigate cleanly to Hub screen
+        if (window.ScreenRouter && typeof ScreenRouter.goTo === 'function') {
+            ScreenRouter.goTo('screen-hub');
         }
     },
 
     skip() {
         this.close();
-        if (window.ScreenRouter) {
-            ScreenRouter.goTo('screen-globe');
+        if (window.ScreenRouter && typeof ScreenRouter.goTo === 'function') {
+            ScreenRouter.goTo('screen-hub');
         }
     },
 
@@ -6231,12 +6269,12 @@ const OnboardingModal = {
 
         if (dotsEl) {
             dotsEl.innerHTML = this.steps.map((_, i) => 
-                `<span class="onboard-dot ${i === this.currentStep ? 'active' : ''}"></span>`
+                `<span class="onboard-dot ${i === this.currentStep ? 'active' : ''}" aria-label="Adım ${i + 1}"></span>`
             ).join('');
         }
 
         if (btnNext) {
-            btnNext.innerText = this.currentStep === this.totalSteps - 1 ? 'Sefer Başlasın! 🚀' : 'İlerle →';
+            btnNext.innerText = this.currentStep === this.totalSteps - 1 ? 'SEFER BAŞLASIN! 🚀' : 'İlerle →';
         }
     }
 };
@@ -6470,6 +6508,11 @@ const App = {
         // Initialize 81-city CountryMap
         if (window.CountryMap) {
             CountryMap.init();
+        }
+
+        // Initialize Onboarding
+        if (window.OnboardingModal && typeof OnboardingModal.init === 'function') {
+            OnboardingModal.init();
         }
 
         // Check Onboarding

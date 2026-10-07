@@ -1051,24 +1051,48 @@
             to { stroke-dashoffset: -20; }
         }
 
+        /* UNIVERSAL HIDDEN UTILITY */
+        .hidden {
+            display: none !important;
+            pointer-events: none !important;
+            visibility: hidden !important;
+            opacity: 0 !important;
+        }
+
         /* MODALS */
         .modal-backdrop {
             position: fixed;
             top: 0;
             left: 0;
+            right: 0;
+            bottom: 0;
             width: 100%;
             height: 100%;
             background: rgba(0, 0, 0, 0.75);
             backdrop-filter: blur(4px);
-            display: none;
+            display: flex;
             align-items: center;
             justify-content: center;
-            z-index: 100;
+            z-index: 1000;
             padding: 16px;
+            box-sizing: border-box;
         }
 
-        .modal-backdrop.active {
-            display: flex;
+        .modal-backdrop.hidden,
+        #modal-onboarding.hidden,
+        #modal-feedback.hidden,
+        #modal-release-notes.hidden,
+        #modal-country-preview.hidden,
+        #modal-city-ceremony.hidden,
+        #modal-postcard.hidden,
+        #modal-city-completed.hidden,
+        #modal-daily.hidden,
+        #modal-settings.hidden,
+        #modal-insufficient-gold.hidden {
+            display: none !important;
+            pointer-events: none !important;
+            visibility: hidden !important;
+            opacity: 0 !important;
         }
 
         .modal-dialog {
@@ -2483,19 +2507,10 @@ html, body {
 
 /* 3. CITY COMPLETION CEREMONY MODAL */
 #modal-city-ceremony {
-    position: fixed;
-    inset: 0;
-    z-index: 1000;
+    z-index: 1100;
     background: rgba(11, 15, 26, 0.95);
     backdrop-filter: blur(12px);
-    display: none;
-    align-items: center;
-    justify-content: center;
     padding: 20px;
-}
-
-#modal-city-ceremony.active {
-    display: flex;
 }
 
 .ceremony-dialog {
@@ -2592,14 +2607,9 @@ html, body {
 
 /* 4. FEEDBACK & BUG REPORT MODAL */
 #modal-feedback {
-    position: fixed;
-    inset: 0;
     z-index: 1100;
     background: rgba(11, 15, 26, 0.85);
     backdrop-filter: blur(8px);
-    display: flex;
-    align-items: center;
-    justify-content: center;
     padding: 18px;
 }
 
@@ -2669,14 +2679,9 @@ html, body {
 
 /* 5. ONBOARDING MODAL */
 #modal-onboarding {
-    position: fixed;
-    inset: 0;
     z-index: 1200;
     background: rgba(11, 15, 26, 0.92);
     backdrop-filter: blur(10px);
-    display: flex;
-    align-items: center;
-    justify-content: center;
     padding: 20px;
 }
 
@@ -2722,14 +2727,9 @@ html, body {
 
 /* 6. COUNTRY PREVIEW MODAL (LOCKED COUNTRIES) */
 #modal-country-preview {
-    position: fixed;
-    inset: 0;
     z-index: 1100;
     background: rgba(11, 15, 26, 0.88);
     backdrop-filter: blur(8px);
-    display: flex;
-    align-items: center;
-    justify-content: center;
     padding: 18px;
 }
 

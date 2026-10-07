@@ -333,15 +333,15 @@
     <!-- ==================== MODALS ==================== -->
 
     <!-- MODAL 1: ONBOARDING CAROUSEL -->
-    <div class="modal-backdrop hidden" id="modal-onboarding">
+    <div class="modal-backdrop hidden" id="modal-onboarding" role="dialog" aria-modal="true" aria-hidden="true" aria-labelledby="onboard-title">
         <div class="onboarding-dialog">
             <div class="onboard-icon-box" id="onboard-icon">🧭</div>
             <h2 id="onboard-title" style="color:var(--gold-primary); font-size:18px;">Sözcük Seferî'ne Hoş Geldin</h2>
             <p id="onboard-desc" style="color:#d6d3d1; font-size:13px; line-height:1.5;">Dünya ve Türkiye kültür yolculuğu başlıyor.</p>
             <div class="onboard-dots-container" id="onboard-dots"></div>
             <div style="display:flex; gap:10px; width:100%; margin-top:8px;">
-                <button class="btn-3d-outline" style="flex:1;" onclick="OnboardingModal.skip()">Atla</button>
-                <button class="btn-3d" style="flex:2;" id="onboard-btn-next" onclick="OnboardingModal.next()">İlerle →</button>
+                <button type="button" class="btn-3d-outline" id="onboard-btn-skip" style="flex:1;" onclick="OnboardingModal.skip()">Atla</button>
+                <button type="button" class="btn-3d" style="flex:2;" id="onboard-btn-next" onclick="OnboardingModal.next()">İlerle →</button>
             </div>
         </div>
     </div>

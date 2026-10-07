@@ -1,0 +1,58 @@
+name: Sözcük Seferî CI & Quality Gates
+
+on:
+  push:
+    branches: [ main, gh-pages ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  quality-gate:
+    runs-on: ubuntu-latest
+    name: Build & Automated QA Quality Gates
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Set up Node.js 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install Dependencies
+        run: |
+          npm ci || npm install --no-audit
+
+      - name: Run Modular Data & Word Validation QA
+        run: |
+          python tools/qa/validate_words.py
+
+      - name: Run Landmarks & Attribution Metadata QA
+        run: |
+          python tools/qa/validate_landmarks.py
+
+      - name: Run 2,025 Puzzles Geometry & Solvability QA
+        run: |
+          python tools/qa/validate_puzzles.py
+
+      - name: Run Python Unit & Integration Tests
+        run: |
+          python -m unittest discover -s tests -p "test_*.py"
+
+      - name: Run SaveManager Schema Migration Unit Tests
+        run: |
+          node tests/unit/test_save_migration.js
+
+      - name: Execute Production Build Pipeline
+        run: |
+          python tools/build/build.py
+
+      - name: Run Master Release Gate Verification
+        run: |
+          python tools/qa/validate_release.py

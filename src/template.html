@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
     <meta name="referrer" content="no-referrer">
-    <title>Sözcük Seferî: 1. Sefer Türkiye</title>
+    <title>Sözcük Seferî: Dünya ve Türkiye Kelime Keşfi</title>
     <!-- SVG Data-URI Favicon: Compass & Gold 'S' -->
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='30' fill='%230b132b' stroke='%23f59e0b' stroke-width='3'/%3E%3Cpolygon points='32,8 37,27 56,32 37,37 32,56 27,37 8,32 27,27' fill='%230d9488'/%3E%3Ccircle cx='32' cy='32' r='12' fill='%23f8f9fa'/%3E%3Ctext x='32' y='38' font-size='16' font-weight='900' font-family='sans-serif' fill='%230b132b' text-anchor='middle'%3ES%3C/text%3E%3C/svg%3E">
     <link rel="manifest" href="manifest.json">
@@ -14,10 +14,8 @@
 </style>
 </head>
 <body>
-    
 
-
-            <!-- SCREEN 1: HUB / ANA MENÜ -->
+    <!-- SCREEN 1: HUB / ANA MENÜ -->
     <div id="screen-hub" class="screen active">
         <!-- TOP NAVBAR -->
         <div class="top-navbar">
@@ -33,12 +31,13 @@
                 </div>
                 <div class="brand-text">
                     <span class="brand-title">SÖZCÜK SEFERÎ</span>
-                    <span class="brand-subtitle">DÜNYA KELİME ATLASI</span>
+                    <span class="brand-subtitle">DÜNYA & TÜRKİYE ATLASI</span>
                 </div>
             </div>
             <div class="nav-stats">
-                <div class="stat-pill" title="Mevcut Altın">🪙 <span id="hub-coins">250</span></div>
-                <button class="btn-icon" onclick="App.showSettings()" title="Ayarlar">⚙️</button>
+                <button class="btn-icon" onclick="FeedbackModal.open()" title="Hata / Öneri Bildir">💬</button>
+                <div class="stat-pill" title="Mevcut Altın">🪙 <span class="currency-val" id="hub-coins">250</span></div>
+                <button class="btn-icon" onclick="App.showModal('modal-settings')" title="Ayarlar">⚙️</button>
             </div>
         </div>
 
@@ -55,18 +54,37 @@
             </div>
         </div>
 
-        <!-- 3 CORE GAME MODES -->
+        <!-- 4 GAME MODES -->
         <div class="hub-modes-container">
-            <!-- MODE 1: SÖZCÜK SEFERİ (DÜNYA TURU) -->
-            <div class="hub-mode-card mode-card-primary" onclick="App.openWorldMap()">
-                <div class="mode-card-badge-top">ANA OYUN MODU</div>
+            <!-- MODE 1: 3D DÜNYA KÜRESİ -->
+            <div class="hub-mode-card mode-card-primary" onclick="App.openGlobe()">
+                <div class="mode-card-badge-top">YENİ • 3B GLOBE</div>
                 <div class="mode-card-main">
                     <div class="mode-card-icon-box">🌍</div>
                     <div class="mode-card-text">
-                        <h3 class="mode-card-title">Sözcük Seferi</h3>
-                        <p class="mode-card-desc">Dünya haritasında şehirleri ve her şehrin 5 simgesel mekanını kelimelerle keşfet.</p>
+                        <h3 class="mode-card-title">3B Dünya Küresi</h3>
+                        <p class="mode-card-desc">Etkileşimli 3 boyutlu küreyi çevir, ülkeleri ve coğrafyaları keşfet.</p>
                         <div class="mode-card-meta">
-                            <span class="meta-pill">📍 Aktif Sefer: Türkiye</span>
+                            <span class="meta-pill">🌐 Küresel Keşif</span>
+                            <span class="meta-pill">🇹🇷 Türkiye Aktif</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="mode-card-action">
+                    <span class="action-label">Dünya Küresini Aç</span>
+                    <span class="action-btn-circle">➔</span>
+                </div>
+            </div>
+
+            <!-- MODE 2: TÜRKİYE SEFERİ (81 İL) -->
+            <div class="hub-mode-card" style="border-color:rgba(212,175,55,0.4);" onclick="App.startJourney()">
+                <div class="mode-card-badge-top" style="background:#b45309;">ANA SEFER</div>
+                <div class="mode-card-main">
+                    <div class="mode-card-icon-box" style="background:rgba(212,175,55,0.2);">🇹🇷</div>
+                    <div class="mode-card-text">
+                        <h3 class="mode-card-title">Türkiye Seferi</h3>
+                        <p class="mode-card-desc">81 il, 405 simge mekân ve 2.025 bölümle Anadolu'yu adım adım fethet.</p>
+                        <div class="mode-card-meta">
                             <span class="meta-pill" id="hub-progress-badge">Vilayet: 0/81</span>
                         </div>
                     </div>
@@ -77,36 +95,30 @@
                 </div>
             </div>
 
-            <!-- MODE 2: ATASÖZÜ & DEYİM SANDIĞI -->
-            <div class="hub-mode-card mode-card-idiom" onclick="App.goToScreen('screen-idiom')">
-                <div class="mode-card-badge-top" style="background:#b45309;">KÜLTÜR HAZİNESİ</div>
+            <!-- MODE 3: ATASÖZÜ & DEYİMLER -->
+            <div class="hub-mode-card mode-card-idiom" onclick="App.openIdiomMode()">
+                <div class="mode-card-badge-top" style="background:#0d9488;">KÜLTÜR HAZİNESİ</div>
                 <div class="mode-card-main">
-                    <div class="mode-card-icon-box" style="background:rgba(180,83,9,0.25); border-color:rgba(212,175,55,0.4);">📜</div>
+                    <div class="mode-card-icon-box">📜</div>
                     <div class="mode-card-text">
                         <h3 class="mode-card-title">Atasözü & Deyim Sandığı</h3>
-                        <p class="mode-card-desc">Kültürel atasözü ve deyimlerdeki eksik sözcükleri bularak halk bilgeliğini tamamla.</p>
-                        <div class="mode-card-meta">
-                            <span class="meta-pill" style="border-color:rgba(212,175,55,0.3); color:#fde68a;">🧠 Dil & Zeka</span>
-                        </div>
+                        <p class="mode-card-desc">Kültürel atasözü ve deyimlerdeki eksik sözcükleri bularak bilgeliği tamamla.</p>
                     </div>
                 </div>
                 <div class="mode-card-action">
-                    <span class="action-label">Deyim Avcısını Başlat</span>
+                    <span class="action-label">Deyim Sandığını Aç</span>
                     <span class="action-btn-circle">➔</span>
                 </div>
             </div>
 
-            <!-- MODE 3: GÜNÜN SEFERİ -->
-            <div class="hub-mode-card mode-card-daily" onclick="App.showDailyModal()">
-                <div class="mode-card-badge-top" style="background:#047857;">ÖZEL ROTA</div>
+            <!-- MODE 4: GÜNÜN SEFERİ -->
+            <div class="hub-mode-card mode-card-daily" onclick="App.openDailyChallenge()">
+                <div class="mode-card-badge-top" style="background:#047857;">GÜNLÜK MEYDAN OKUMA</div>
                 <div class="mode-card-main">
-                    <div class="mode-card-icon-box" style="background:rgba(4,120,87,0.25); border-color:rgba(16,185,129,0.4);">📅</div>
+                    <div class="mode-card-icon-box">📅</div>
                     <div class="mode-card-text">
-                        <h3 class="mode-card-title">Günün Seferi</h3>
-                        <p class="mode-card-desc">Her gün yenilenen özel keşif bulmacasıyla seriyi koru ve bonus altın kazan.</p>
-                        <div class="mode-card-meta">
-                            <span class="meta-pill" style="border-color:rgba(16,185,129,0.4); color:#a7f3d0;">🪙 +50 Altın Ödülü</span>
-                        </div>
+                        <h3 class="mode-card-title">Günün Bulmacası</h3>
+                        <p class="mode-card-desc">Her gün yenilenen bulmaca ile serini koru, +50 Altın kazan.</p>
                     </div>
                 </div>
                 <div class="mode-card-action">
@@ -119,212 +131,168 @@
         <!-- FOOTER -->
         <div class="hub-footer-status">
             <span id="hub-stars-summary">📜 0/81 Vilayet Mührü Kazanıldı</span>
-            <span class="hub-version">Sözcük Seferî • v4.0</span>
+            <div style="display:flex; align-items:center; gap:12px; margin-top:4px;">
+                <button class="btn-3d-outline" style="font-size:11px; padding:4px 10px;" onclick="FeedbackModal.open()">💬 Hata / Öneri Bildir</button>
+                <span class="hub-version">v2.0.0</span>
+            </div>
         </div>
     </div>
 
-        <!-- SCREEN 2: DÜNYA VE ŞEHİR HARİTASI -->
-    <div id="screen-map" class="screen">
+    <!-- SCREEN 2: 3D DÜNYA KÜRESİ -->
+    <div id="screen-globe" class="screen">
         <div class="top-navbar">
-            <button class="btn-icon-back" onclick="App.goToScreen('screen-hub')">⬅ Ana Menü</button>
-            <div class="map-title-badge">🌍 DÜNYA ATLASI</div>
-            <div class="stat-pill">🪙 <span id="map-coins">250</span></div>
+            <button class="btn-icon-back" onclick="ScreenRouter.goTo('screen-hub')">⬅ Ana Menü</button>
+            <div class="map-title-badge">🌍 3B DÜNYA KÜRESİ</div>
+            <div style="display:flex; gap:8px; align-items:center;">
+                <button class="btn-icon" onclick="FeedbackModal.open()" title="Hata Bildir">💬</button>
+                <div class="stat-pill">🪙 <span class="currency-val">250</span></div>
+            </div>
         </div>
 
-        <!-- Interactive Guidance Banner -->
+        <div class="globe-viewport-container">
+            <canvas id="globe-3d-canvas"></canvas>
+            <div class="globe-hud-overlay">
+                <div class="globe-hint-pill">
+                    ✨ Küreyi parmağınızla çevirin • Ülkelere dokunarak keşfedin
+                </div>
+                <button class="globe-jump-btn" onclick="Globe3D.transitionToPlayableCountry(Globe3D.COUNTRIES[0])">
+                    🇹🇷 Türkiye Haritasına Gir (81 İl) ➔
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- SCREEN 3: TÜRKİYE 81 İL HARİTASI (SCREEN-MAP / SCREEN-COUNTRY) -->
+    <div id="screen-country" class="screen">
+        <div class="top-navbar">
+            <button class="btn-icon-back" onclick="ScreenRouter.goTo('screen-globe')">🌍 Dünya Küresi</button>
+            <div class="map-title-badge">🇹🇷 TÜRKİYE SEFERİ</div>
+            <div style="display:flex; gap:8px; align-items:center;">
+                <button class="btn-icon" onclick="FeedbackModal.open()" title="Hata Bildir">💬</button>
+                <div class="stat-pill">🪙 <span class="currency-val" id="map-coins">250</span></div>
+            </div>
+        </div>
+
         <div class="map-guidance-banner" id="map-guidance-banner">
-            🗺️ Keşfetmek istediğin şehri veya ülkeyi haritadan seç!
+            🗺️ Keşfetmek istediğin ili haritadan seç!
         </div>
 
         <!-- FLOATING ZOOM CONTROLS -->
         <div class="map-controls-floating">
-            <button class="map-ctrl-btn" onclick="MapEngine.zoomIn()" title="Yakınlaştır">➕</button>
-            <button class="map-ctrl-btn" onclick="MapEngine.zoomOut()" title="Uzaklaştır">➖</button>
-            <button class="map-ctrl-btn map-ctrl-reset" onclick="MapEngine.resetCamera()" title="Odakla / Sıfırla">🎯</button>
+            <button class="map-ctrl-btn" onclick="CountryMap.zoomIn()" title="Yakınlaştır">➕</button>
+            <button class="map-ctrl-btn" onclick="CountryMap.zoomOut()" title="Uzaklaştır">➖</button>
+            <button class="map-ctrl-btn map-ctrl-reset" onclick="CountryMap.resetView()" title="Sıfırla">🎯</button>
         </div>
 
         <div id="map-stage-wrapper">
             <div id="map-viewport">
                 <svg class="turkey-svg" viewBox="0 0 1100 500" id="turkey-map-svg">
-                    <defs>
-                        <!-- Compass Def -->
-                        <g id="def-compass-rose">
-                            <circle cx="0" cy="0" r="38" fill="rgba(11,15,26,0.7)" stroke="rgba(212,175,55,0.4)" stroke-width="1.2" />
-                            <circle cx="0" cy="0" r="4" fill="#d4af37" />
-                            <polygon points="0,-36 4,-8 0,0 -4,-8" fill="#d4af37" />
-                            <polygon points="0,36 4,8 0,0 -4,8" fill="#78716c" />
-                            <polygon points="36,0 8,4 0,0 8,-4" fill="#d4af37" />
-                            <polygon points="-36,0 -8,4 0,0 -8,-4" fill="#78716c" />
-                            <text x="0" y="-23" font-size="7" font-weight="bold" fill="#d4af37" text-anchor="middle">N</text>
-                            <text x="0" y="30" font-size="7" font-weight="bold" fill="#78716c" text-anchor="middle">S</text>
-                        </g>
-
-                        <!-- Cloud Def -->
-                        <g id="def-cloud">
-                            <path d="M10 20 A10 10 0 0 1 30 14 A14 14 0 0 1 52 14 A12 12 0 0 1 68 20 A8 8 0 0 1 68 28 L10 28 A8 8 0 0 1 10 20 Z" fill="rgba(255,255,255,0.05)" />
-                        </g>
-                    </defs>
-
-                    <!-- WORLD CONTINENTS SILHOUETTES (POINTER EVENTS NONE) -->
-                    <!-- COMPLETE 3D WORLD MAP CONTINENTS LAYER -->
-                    <g id="world-continents-layer" pointer-events="none">
-                        <!-- North America -->
-                        <path d="M 180,80 L 320,60 L 520,70 L 620,130 L 680,180 L 640,240 L 580,280 L 540,320 L 480,360 L 460,420 L 500,460 L 520,510 L 490,520 L 450,470 L 400,430 L 320,380 L 260,330 L 220,270 L 160,200 L 140,140 Z" class="continent-path" />
-                        <!-- Greenland -->
-                        <path d="M 720,50 L 840,40 L 880,90 L 830,160 L 760,170 L 710,120 Z" class="continent-path" />
-                        <!-- South America -->
-                        <path d="M 500,530 L 560,510 L 640,540 L 730,560 L 790,620 L 770,690 L 720,770 L 670,860 L 640,920 L 620,870 L 610,790 L 570,720 L 520,640 L 480,580 Z" class="continent-path" />
-                        <!-- Europe -->
-                        <path d="M 940,110 L 1020,90 L 1080,120 L 1150,150 L 1120,220 L 1050,230 L 980,260 L 940,280 L 910,240 L 930,190 L 920,150 Z" class="continent-path" />
-                        <!-- British Isles -->
-                        <path d="M 920,190 L 950,180 L 960,210 L 930,230 Z" class="continent-path" />
-                        <!-- Africa -->
-                        <path d="M 940,320 L 1050,310 L 1160,330 L 1220,390 L 1290,480 L 1260,580 L 1220,680 L 1180,770 L 1120,840 L 1080,780 L 1020,690 L 980,590 L 920,520 L 890,440 L 890,370 Z" class="continent-path" />
-                        <!-- Madagascar -->
-                        <path d="M 1280,680 L 1310,670 L 1330,730 L 1300,770 L 1280,720 Z" class="continent-path" />
-                        <!-- Asia & Siberia -->
-                        <path d="M 1150,150 L 1320,110 L 1520,80 L 1720,90 L 1880,120 L 1850,210 L 1750,260 L 1650,290 L 1550,330 L 1450,380 L 1350,440 L 1280,420 L 1220,390 L 1160,330 L 1150,260 Z" class="continent-path" />
-                        <!-- India Subcontinent -->
-                        <path d="M 1370,390 L 1440,390 L 1480,460 L 1450,530 L 1410,550 L 1380,480 Z" class="continent-path" />
-                        <!-- Southeast Asia -->
-                        <path d="M 1550,420 L 1620,440 L 1660,510 L 1630,580 L 1580,530 L 1540,470 Z" class="continent-path" />
-                        <!-- Japan Archipelago -->
-                        <path d="M 1760,270 L 1800,260 L 1820,310 L 1780,340 Z" class="continent-path" />
-                        <!-- Australia -->
-                        <path d="M 1660,650 L 1780,630 L 1860,670 L 1880,760 L 1830,830 L 1740,840 L 1680,790 L 1640,720 Z" class="continent-path" />
-                        <!-- New Zealand -->
-                        <path d="M 1910,810 L 1940,800 L 1960,860 L 1930,880 Z" class="continent-path" />
-                    </g>
-
-                    <!-- CARTOGRAPHIC GRATICULES (POINTER EVENTS NONE) -->
-                    <g id="cartographic-grid-layer" pointer-events="none" opacity="0.3">
-                        <line x1="0" y1="125" x2="1100" y2="125" stroke="rgba(212,175,55,0.2)" stroke-dasharray="3,6" />
-                        <line x1="0" y1="250" x2="1100" y2="250" stroke="rgba(212,175,55,0.3)" stroke-dasharray="6,8" />
-                        <line x1="0" y1="375" x2="1100" y2="375" stroke="rgba(212,175,55,0.2)" stroke-dasharray="3,6" />
-                        <line x1="275" y1="0" x2="275" y2="500" stroke="rgba(212,175,55,0.2)" stroke-dasharray="3,6" />
-                        <line x1="550" y1="0" x2="550" y2="500" stroke="rgba(212,175,55,0.3)" stroke-dasharray="6,8" />
-                        <line x1="825" y1="0" x2="825" y2="500" stroke="rgba(212,175,55,0.2)" stroke-dasharray="3,6" />
-                    </g>
-
-                    <!-- ANIMATED SEA ROUTES (POINTER EVENTS NONE) -->
-                    <g id="nautical-routes-layer" pointer-events="none">
-                        <path d="M 550,250 C 440,260 380,220 260,190" class="nautical-route-line" />
-                        <path d="M 550,250 C 560,320 540,380 540,420" class="nautical-route-line" />
-                        <path d="M 550,250 C 490,270 440,260 395,265" class="nautical-route-line" />
-                        <path d="M 260,190 C 210,170 180,160 150,140" class="nautical-route-line" />
-                        <path d="M 550,250 C 720,290 850,330 1040,180" class="nautical-route-line" />
-                    </g>
-
-                    <!-- ANIMATED COMPASS & CLOUDS (POINTER EVENTS NONE) -->
-                    <g pointer-events="none">
-                        <use href="#def-compass-rose" x="180" y="380" class="floating-compass-rose" />
-                        <use href="#def-cloud" x="60" y="80" class="drifting-cloud cloud-1" />
-                        <use href="#def-cloud" x="650" y="140" class="drifting-cloud cloud-2" />
-                        <use href="#def-cloud" x="380" y="390" class="drifting-cloud cloud-3" />
-                    </g>
-
                     <!-- Provinces Layer (Turkey 81 Provinces) -->
                     <g id="provinces-layer">
                         {{ INJECT_MAP_PATHS }}
                     </g>
-
-                    <!-- Animated Travel Route inside Turkey (POINTER EVENTS NONE) -->
-                    <path id="travel-route" d="" pointer-events="none" />
-
-                    <!-- Gliding Travel Icon (POINTER EVENTS NONE) -->
-                    <g id="travel-carrier" pointer-events="none">
-                        <circle cx="0" cy="0" r="10" fill="#d4af37" stroke="#ffffff" stroke-width="2" />
-                        <polygon points="0,-6 5,4 0,2 -5,4" fill="#181512" />
-                    </g>
-
-                    <!-- WORLD CITIES LAYER -->
-                    <g id="world-cities-layer"></g>
-
                     <!-- TURKEY CITIES LAYER (81 PROVINCES) -->
                     <g id="city-pins-layer"></g>
                 </svg>
             </div>
         </div>
 
-        <!-- UNIFIED 3D CITY / LANDMARK DETAIL CARD (ALL WORLD CITIES) -->
+        <!-- CITY DETAIL CARD -->
         <div class="map-city-card" id="map-city-card">
             <div class="city-card-header-bar">
-                <span class="city-card-flag" id="card-city-flag">🇹🇷</span>
+                <span class="city-card-flag">🇹🇷</span>
                 <div class="city-card-titles">
                     <div style="display:flex; align-items:center; gap:8px;">
-                        <h3 class="city-card-title" id="card-city-name">İzmir</h3>
-                        <span class="city-card-plate-badge" id="card-city-plate">35</span>
+                        <h3 class="city-card-title" id="map-card-title">İzmir</h3>
+                        <span class="city-card-plate-badge" id="map-card-plate">35</span>
                     </div>
-                    <span class="city-card-subtitle" id="card-city-country">Türkiye • 1. Sefer</span>
+                    <span class="city-card-subtitle" id="map-card-badge">Keşfedilmeyi Bekliyor</span>
                 </div>
-                <button class="btn-card-close" onclick="MapEngine.closeCard()">✕</button>
+                <button class="btn-card-close" onclick="CountryMap.closeCard()">✕</button>
             </div>
-
-            <!-- 5 ICONIC LANDMARKS LIST -->
-            <div class="city-card-landmarks-section">
-                <div class="section-label">🏛️ 5 SİMGESEL MEKAN:</div>
-                <div class="city-card-landmarks-grid" id="card-city-landmarks">
-                    <!-- Injected dynamically -->
+            <div style="display:flex; gap:12px; align-items:center; margin:8px 0;">
+                <div id="map-card-landmark-thumb" style="width:64px; height:64px; border-radius:10px; background-size:cover; background-position:center; border:1px solid #d4af37;"></div>
+                <div style="flex:1;">
+                    <div id="map-card-landmark-name" style="font-weight:800; font-size:13px; color:#FAF4E6;">1. Mekân</div>
+                    <p id="map-card-desc" style="font-size:11px; color:#a8a29e; line-height:1.4; margin-top:2px;"></p>
                 </div>
             </div>
+            <button class="btn-3d btn-city-primary" id="map-card-action-btn" style="width:100%; padding:10px;">ŞEHRİ KEŞFET (5 MEKÂN) ➔</button>
+        </div>
+    </div>
+    <!-- Backwards compatible alias for screen-map -->
+    <div id="screen-map" style="display:none;"></div>
 
-            <div class="city-card-status-bar" id="card-city-status-box">
-                <span id="card-city-desc">Ege'nin incisi, tarihi mekanları ile keşfe hazır!</span>
+    <!-- SCREEN 4: CITY 5-LANDMARK EXPLORATION -->
+    <div id="screen-city" class="screen">
+        <div class="city-explore-header">
+            <button class="btn-icon-back" onclick="ScreenRouter.goTo('screen-country')">⬅ Harita</button>
+            <div style="display:flex; flex-direction:column; align-items:center;">
+                <span style="font-size:10px; font-weight:700; color:#d4af37; letter-spacing:1px;">ŞEHİR SEFERİ</span>
+                <strong id="city-explore-title" style="font-size:16px; color:#faf4e6;">İSTANBUL</strong>
             </div>
+            <div style="display:flex; gap:8px; align-items:center;">
+                <button class="btn-icon" onclick="FeedbackModal.open()" title="Hata Bildir">💬</button>
+                <div class="stat-pill">🪙 <span class="currency-val">250</span></div>
+            </div>
+        </div>
 
-            <div class="city-card-action-bar">
-                <button class="btn-3d btn-city-primary" id="card-action-btn" onclick="MapEngine.handleCityAction()">KEŞFE BAŞLA ➔</button>
+        <div class="city-explore-hero">
+            <div class="city-hero-text">
+                <span id="city-explore-plate" style="font-size:11px; color:#d4af37; font-weight:700;">34 • Vilayet</span>
+                <p id="city-explore-progress">0/25 Bölüm Çözüldü</p>
             </div>
+            <div id="city-explore-seal-badge" class="city-seal-badge ongoing">
+                📜 <span>Keşif Sürüyor</span>
+            </div>
+        </div>
+
+        <!-- 5 LANDMARK CARDS CONTAINER -->
+        <div class="city-landmarks-scrollable" id="city-landmarks-container">
+            <!-- Dynamic 5 landmark cards rendered by CityExploration.js -->
         </div>
     </div>
 
-    <!-- SCREEN 3: GAMEPLAY (CROSSWORD & WHEEL) -->
+    <!-- SCREEN 5: GAMEPLAY (CROSSWORD & WHEEL) -->
     <div id="screen-game" class="screen">
         <img src="" id="game-bg-img" class="game-bg-image" alt="Landmark Background" />
         <div class="game-ui-layer">
-            <!-- REVISED TOP HEADER -->
             <div class="game-header">
-                <button class="btn-3d-outline" onclick="App.goToScreen('screen-map')">⬅ Harita</button>
+                <button class="btn-3d-outline" onclick="ScreenRouter.goTo('screen-city')">⬅ Mekânlar</button>
                 <div class="game-title-group">
-                    <div class="game-city-label" id="game-city-label">İZMİR (35) — Mekan 1/5: Efes Antik Kenti — Bulmaca 1/2</div>
-                    
+                    <div class="game-city-label" id="game-city-label">İSTANBUL (34) — Mekân 1/5: Ayasofya — Bölüm 1/5</div>
+                    <div class="game-landmark-label" id="game-landmark-label">Ayasofya-i Kebir Cami</div>
                 </div>
-                <div class="stat-pill">🪙 <span id="game-coins">250</span></div>
+                <div style="display:flex; gap:8px; align-items:center;">
+                    <button class="btn-icon" onclick="FeedbackModal.open()" title="Hata Bildir">💬</button>
+                    <div class="stat-pill">🪙 <span class="currency-val" id="game-coins">250</span></div>
+                </div>
             </div>
 
-            <!-- CROSSWORD GRID (AUTO-FIT CONTAINER) -->
+            <!-- CROSSWORD GRID VIEWPORT -->
             <div class="crossword-viewport" id="crossword-viewport">
                 <div class="crossword-board" id="crossword-board"></div>
             </div>
 
-            <!-- BOTTOM AREA -->
+            <!-- BOTTOM WHEEL & CONTROLS -->
             <div class="bottom-action-area">
                 <div class="word-preview-pill" id="word-preview-pill"></div>
 
                 <div class="wheel-assembly" id="wheel-assembly">
                     <svg class="wheel-svg-layer" id="wheel-svg-layer">
-                        <polyline id="wheel-drag-line" fill="none" stroke="#f59e0b" stroke-width="7" stroke-linecap="round" stroke-linejoin="round" />
+                        <polyline id="wheel-drag-line" fill="none" stroke="#d4af37" stroke-width="7" stroke-linecap="round" stroke-linejoin="round" />
                     </svg>
                     <div id="wheel-letters-container"></div>
                 </div>
 
-                <!-- 4 TACTILE (3D) POWER-UPS ARSENAL -->
                 <div class="powerups-toolbar">
                     <button type="button" class="powerup-btn" onclick="GameEngine.shuffleLetters()" title="Harfleri Karıştır">
                         <span class="powerup-icon">🔀</span>
                         <span class="powerup-price">Ücretsiz</span>
                     </button>
-                    <button type="button" class="powerup-btn" onclick="GameEngine.useBulb()" title="Rastgele Harf Aç (Ampul)">
+                    <button type="button" class="powerup-btn" onclick="GameEngine.useHint()" title="Rastgele Harf Aç (Ampul)">
                         <span class="powerup-icon">💡</span>
-                        <span class="powerup-price">30</span>
-                    </button>
-                    <button type="button" class="powerup-btn" onclick="GameEngine.useTarget()" title="Hedef Harfi Seç (Hedef)">
-                        <span class="powerup-icon">🎯</span>
-                        <span class="powerup-price">60</span>
-                    </button>
-                    <button type="button" class="powerup-btn" onclick="GameEngine.useBomb()" title="Bomba Patlat (3 Harf Aç)">
-                        <span class="powerup-icon">💣</span>
-                        <span class="powerup-price">90</span>
+                        <span class="powerup-price">25</span>
                     </button>
                     <button type="button" class="powerup-btn" style="border-color:#a855f7;" title="TDK Bonus Kelime Sandığı">
                         <span class="powerup-icon">📦</span>
@@ -335,168 +303,197 @@
         </div>
     </div>
 
-    <!-- SCREEN 4: DEYİM AVCISI -->
+    <!-- SCREEN 6: DEYİM AVCISI -->
     <div id="screen-idiom" class="screen">
-        <div class="top-navbar" style="background: rgba(15, 23, 42, 0.75); backdrop-filter: blur(8px);">
-            <button class="btn-3d-outline" onclick="App.goToScreen('screen-hub')">⬅ Menü</button>
-            <div class="game-city-label" style="color:var(--gold-primary); letter-spacing:2px;">🎭 DEYİM AVCISI</div>
-            <div class="stat-pill">🪙 <span id="idiom-coins">250</span></div>
+        <div class="top-navbar">
+            <button class="btn-3d-outline" onclick="ScreenRouter.goTo('screen-hub')">⬅ Menü</button>
+            <div class="game-city-label" style="color:var(--gold-primary); letter-spacing:2px;">🎭 DEYİM SANDIĞI</div>
+            <div class="stat-pill">🪙 <span class="currency-val" id="idiom-coins">250</span></div>
         </div>
-
         <div class="idiom-desk-area">
             <div class="idiom-parchment-card">
                 <div class="parchment-stamp">KÜLTÜR HAZİNESİ</div>
-                <div class="idiom-banner">Eksik Deyim Kelimesini Tamamla</div>
+                <div class="idiom-banner">Eksik Sözcüğü Tamamla</div>
                 <div class="idiom-clue-box" id="idiom-clue-box"></div>
                 <div class="idiom-board" id="idiom-board"></div>
                 <div class="idiom-meaning-box" id="idiom-meaning-box"></div>
             </div>
         </div>
-
         <div class="bottom-action-area">
-            <div class="word-preview-pill" id="idiom-preview-pill" style="background:#0d9488;"></div>
-            <div class="wheel-assembly" id="idiom-wheel-assembly" style="border-color:var(--gold-primary);">
+            <div class="word-preview-pill" id="idiom-preview-pill"></div>
+            <div class="wheel-assembly" id="idiom-wheel-assembly">
                 <svg class="wheel-svg-layer">
-                    <polyline id="idiom-drag-line" fill="none" stroke="#f59e0b" stroke-width="7" stroke-linecap="round" stroke-linejoin="round" />
+                    <polyline id="idiom-drag-line" fill="none" stroke="#d4af37" stroke-width="7" stroke-linecap="round" stroke-linejoin="round" />
                 </svg>
                 <div id="idiom-letters-container"></div>
             </div>
         </div>
     </div>
 
-    <!-- MODAL 1: KEŞİF KARTPOSTALI (POSTCARD WIN MODAL) -->
-    <div class="modal-backdrop" id="modal-postcard">
+    <!-- ==================== MODALS ==================== -->
+
+    <!-- MODAL 1: ONBOARDING CAROUSEL -->
+    <div class="modal-backdrop hidden" id="modal-onboarding">
+        <div class="onboarding-dialog">
+            <div class="onboard-icon-box" id="onboard-icon">🧭</div>
+            <h2 id="onboard-title" style="color:var(--gold-primary); font-size:18px;">Sözcük Seferî'ne Hoş Geldin</h2>
+            <p id="onboard-desc" style="color:#d6d3d1; font-size:13px; line-height:1.5;">Dünya ve Türkiye kültür yolculuğu başlıyor.</p>
+            <div class="onboard-dots-container" id="onboard-dots"></div>
+            <div style="display:flex; gap:10px; width:100%; margin-top:8px;">
+                <button class="btn-3d-outline" style="flex:1;" onclick="OnboardingModal.skip()">Atla</button>
+                <button class="btn-3d" style="flex:2;" id="onboard-btn-next" onclick="OnboardingModal.next()">İlerle →</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL 2: FEEDBACK & HATA BİLDİR -->
+    <div class="modal-backdrop hidden" id="modal-feedback">
+        <div class="feedback-dialog">
+            <div style="display:flex; justify-content:space-between; align-items:center;">
+                <h3 style="color:var(--gold-primary); font-size:16px; margin:0;">💬 Bildirim / Hata Bildir</h3>
+                <button class="btn-card-close" onclick="FeedbackModal.close()">✕</button>
+            </div>
+            <div id="feedback-form-body" style="display:flex; flex-direction:column; gap:10px;">
+                <div class="feedback-cat-selector">
+                    <button class="feedback-cat-pill active" data-cat="bug" onclick="FeedbackModal.setCategory('bug')">🐛 Hata</button>
+                    <button class="feedback-cat-pill" data-cat="content" onclick="FeedbackModal.setCategory('content')">📝 Eksik</button>
+                    <button class="feedback-cat-pill" data-cat="suggestion" onclick="FeedbackModal.setCategory('suggestion')">💡 Öneri</button>
+                    <button class="feedback-cat-pill" data-cat="question" onclick="FeedbackModal.setCategory('question')">❓ Soru</button>
+                </div>
+                <textarea id="feedback-message-input" class="feedback-textarea" placeholder="Gördüğünüz hatayı veya önerinizi kısaca yazın..."></textarea>
+                <div class="feedback-diag-text" id="feedback-diag-preview">Sistem bilgisi otomatik eklenir (Kişisel veri toplanmaz).</div>
+                <div style="display:flex; gap:8px;">
+                    <button class="btn-3d-outline" style="flex:1;" onclick="FeedbackModal.close()">Vazgeç</button>
+                    <button class="btn-3d" style="flex:2;" onclick="FeedbackModal.submit()">Gönder ➔</button>
+                </div>
+            </div>
+            <div id="feedback-success-notice" class="hidden" style="text-align:center; padding:16px;">
+                <div style="font-size:32px;">✅</div>
+                <h4 style="color:#fef08a; margin:8px 0 4px;">Bildiriminiz Alındı!</h4>
+                <p style="font-size:12px; color:#a8a29e;">Katkınız için teşekkür ederiz. İyi oyunlar!</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL 3: RELEASE NOTES ("NELER YENİ?") -->
+    <div class="modal-backdrop hidden" id="modal-release-notes">
+        <div class="modal-dialog" style="max-width:400px; text-align:left;">
+            <div style="text-align:center;">
+                <div style="font-size:28px;">🚀</div>
+                <h3 style="color:var(--gold-primary); font-size:18px; margin:4px 0;">Sözcük Seferî v2.0.0</h3>
+                <span style="font-size:11px; color:#94a3b8;">Büyük V2 Güncellemesi</span>
+            </div>
+            <div style="margin:16px 0; display:flex; flex-direction:column; gap:8px; font-size:12px; color:#e2e8f0; line-height:1.5;">
+                <div>🌍 <strong>3B Dünya Küresi:</strong> Tüm kıtaları ve ülkeleri 3 boyutta keşfedin.</div>
+                <div>🏛️ <strong>5 Simge Mekân Keşif Ekranı:</strong> Her şehirde 5 simgesel mekân ve derinlikli kartlar.</div>
+                <div>📜 <strong>Şehir Tamamlama Seremonisi:</strong> 25 bölüm bittiğinde 5 mühür ve vilayet madalyonu!</div>
+                <div>🔤 <strong>Büyütülen Dokunsal Izgara:</strong> Genişletilmiş fildişi kutucuklar ve akıcı harf çarkı.</div>
+                <div>📖 <strong>TDK Sözlük & İçerik Güvenliği:</strong> 2.025 bölümün tamamı doğrulanmış Türkçe sözcükler.</div>
+            </div>
+            <button class="btn-3d" style="width:100%; padding:10px;" onclick="ReleaseNotesModal.close()">Keşfe Devam Et ➔</button>
+        </div>
+    </div>
+
+    <!-- MODAL 4: COUNTRY PREVIEW (LOCKED COUNTRIES) -->
+    <div class="modal-backdrop hidden" id="modal-country-preview">
+        <div class="country-preview-dialog">
+            <span id="country-preview-flag" style="font-size:42px;">🇫🇷</span>
+            <h3 id="country-preview-title" style="color:var(--gold-primary); margin:0;">Fransa</h3>
+            <p id="country-preview-desc" style="font-size:12px; color:#a8a29e; margin:0; line-height:1.4;"></p>
+            <div style="width:100%; text-align:left;">
+                <span style="font-size:11px; font-weight:700; color:#d4af37;">HAZIRLANAN SİMGE MEKÂNLAR:</span>
+                <ul class="landmark-preview-list" id="country-preview-landmarks"></ul>
+            </div>
+            <div style="font-size:11px; color:#f59e0b; font-weight:700;">🔒 Çok Yakında (Keşif Hazırlığında)</div>
+            <button class="btn-3d-outline" style="width:100%;" onclick="document.getElementById('modal-country-preview').classList.add('hidden')">Tamam</button>
+        </div>
+    </div>
+
+    <!-- MODAL 5: GRAND CITY COMPLETION CEREMONY -->
+    <div class="modal-backdrop hidden" id="modal-city-ceremony">
+        <div class="ceremony-dialog">
+            <div style="font-size:28px;">🏆</div>
+            <span style="font-size:11px; font-weight:800; color:#d4af37; letter-spacing:1.5px;" id="ceremony-city-plate">VİLAYET TAMAMLANDI!</span>
+            <h2 id="ceremony-city-name" style="font-size:22px; color:#faf4e6; margin:4px 0;">İSTANBUL</h2>
+            
+            <div class="ceremony-hero-frame" id="ceremony-hero-img"></div>
+
+            <div class="ceremony-seals-grid" id="ceremony-seals-grid"></div>
+
+            <div class="ceremony-grand-badge" id="ceremony-grand-badge">
+                <span style="font-size:13px; font-weight:800; color:#fef08a;">🏅 Vilayet Mührü & +100 Altın Kazanıldı!</span>
+            </div>
+
+            <button class="btn-3d" id="ceremony-continue-btn" style="width:100%; padding:12px; margin-top:8px;">
+                HARİTAYA DÖN VE YENİ SEFERE BAŞLA ➔
+            </button>
+        </div>
+    </div>
+
+    <!-- MODAL 6: LEVEL POSTCARD WIN MODAL -->
+    <div class="modal-backdrop hidden" id="modal-postcard">
         <div class="modal-dialog">
-            <div style="font-size:12px; font-weight:800; color:var(--turquoise); letter-spacing:2px;">MÜHÜRLÜ KEŞİF KARTPOSTALI</div>
-            <div style="font-size:20px; font-weight:900; color:var(--gold-primary); margin-top:4px;" id="post-landmark-title">Efes - Celsus Kütüphanesi</div>
+            <div style="font-size:11px; font-weight:800; color:var(--turquoise); letter-spacing:2px;">KEŞİF KARTPOSTALI</div>
+            <div style="font-size:18px; font-weight:900; color:var(--gold-primary); margin:4px 0;" id="post-landmark-title">Efes</div>
             
             <div class="postcard-photo-frame">
                 <img src="" id="post-photo-img" class="postcard-img" alt="Landmark" />
-                
             </div>
 
-            <div class="postcard-story" id="post-story-text">
-                Efes Antik Kenti'nin kalbinde yer alan Celsus Kütüphanesi, dönemin en büyük bilgi hazinelerinden biri olarak kabul edilir.
-            </div>
+            <div class="postcard-story" id="post-story-text"></div>
 
-            <div style="display:flex; gap:10px; width:100%;">
-                <button class="btn-3d btn-3d-ocean" style="flex:1; padding:12px;" onclick="App.claim2xReward()">🎥 2X ALTIN</button>
-                <button class="btn-3d" style="flex:1; padding:12px;" onclick="App.continueAfterWin()">DEVAM ET ➔</button>
+            <div style="display:flex; gap:10px; width:100%; margin-top:10px;">
+                <button class="btn-3d" style="width:100%; padding:12px;" onclick="GameEngine.nextLevel()">SONRAKİ BÖLÜM ➔</button>
             </div>
         </div>
     </div>
 
-    <!-- MODAL: MAJOR ŞEHİR TAMAMLANDI KARTPOSTALI & YENİ ROTA SEÇİMİ -->
-    <div class="modal-backdrop" id="modal-city-completed">
-        <div class="modal-dialog" style="border: 2px solid var(--gold-primary); box-shadow: 0 10px 40px rgba(245, 158, 11, 0.3);">
-            <div style="font-size:32px;">🏆</div>
-            <div style="font-size:13px; font-weight:800; color:var(--gold-primary); letter-spacing:2px;">İL SEFERİ TAMAMLANDI!</div>
-            <div style="font-size:22px; font-weight:900; color:#ffffff; margin-top:4px;" id="completed-city-title">İZMİR TAMAMLANDI!</div>
-            
-            <div class="postcard-photo-frame" style="margin: 12px 0;">
-                <img src="" id="completed-city-img" class="postcard-img" alt="Completed City" />
-                
-            </div>
-
-            <div class="postcard-story" id="completed-city-story" style="font-size:13px; line-height:1.5;">
-                Tebrikler! Bu ilin 5 mekanındaki 25 bulmacayı başarıyla tamamladın ve altın mührü kazandın!
-            </div>
-
-            <div style="font-size:15px; font-weight:bold; color:var(--turquoise); margin-bottom:14px;">
-                🎁 İl Tamamlama Ödülü: +100 Altın!
-            </div>
-
-            <button class="btn-3d btn-3d-ocean" style="width:100%; padding:14px; font-size:14px;" onclick="App.onCityCompletedTravel()">
-                YENİ ŞEHRE SEYAHAT ET ➔
-            </button>
-        </div>
-    </div>
-
-    <!-- MODAL: SEFER GÜNLÜĞÜ (JOURNAL / UPDATE NOTES) -->
-    <div class="modal-backdrop" id="modal-journal">
-        <div class="modal-dialog" style="text-align: left; padding: 24px;">
-            <div style="font-size:24px; font-weight:900; color:var(--gold-primary); margin-bottom: 8px; text-align:center;">📜 SEFER GÜNLÜĞÜ</div>
-            <p style="font-size:14px; color:#cbd5e1; margin-bottom:20px; text-align:center; line-height:1.5;">
-                Sözcük Seferî dünyasına hoş geldin yolcu! Türkiye'nin 81 ilindeki gizli kelimeleri keşfetmeye hazır mısın?
-            </p>
-            
-            <div style="background: rgba(13, 148, 136, 0.1); border: 1px solid rgba(13, 148, 136, 0.4); padding: 16px; border-radius: 12px; margin-bottom: 24px;">
-                <div style="font-size:13px; font-weight:800; color:var(--turquoise); margin-bottom:12px; letter-spacing:1px; text-transform:uppercase;">Bu Sürümde Neler Yeni?</div>
-                <ul style="font-size:13px; color:#f8f9fa; margin-left:16px; line-height:1.6;">
-                    <li style="margin-bottom:8px;"><strong>Harita Serbestliği:</strong> Artık yolculuğa Türkiye'nin 81 ilinden dilediğini seçerek başlayabilirsin.</li>
-                    <li style="margin-bottom:8px;"><strong>2.025 Yeni Bölüm:</strong> Her ilde 5 mekan ve 25 benzersiz bulmaca hiyerarşisi (Kolay'dan Düşündürücü'ye).</li>
-                    <li style="margin-bottom:8px;"><strong>Gerçek Fotoğraflar:</strong> Tüm vitrin mekanları yüksek çözünürlüklü gerçek fotoğraflarla güncellendi.</li>
-                    <li><strong>Deyim Avcısı Modu:</strong> Kültürel atasözü ve deyimleri çözerek altın kazanma fırsatı!</li>
-                </ul>
-            </div>
-            
-            <button class="btn-3d" style="width:100%; padding:14px; font-size:15px;" onclick="App.startJourneyFromJournal()">
-                YOLCULUĞA BAŞLA ➔
-            </button>
-        </div>
-    </div>
-
-    <!-- MODAL: YOLCULUĞA HANGİ İLDEN BAŞLAMAK İSTERSİN? (ONBOARDING) -->
-    <div class="modal-backdrop" id="modal-start-city">
+    <!-- MODAL 7: CITY COMPLETED MODAL (BACKWARD COMPAT) -->
+    <div class="modal-backdrop hidden" id="modal-city-completed">
         <div class="modal-dialog">
-            <div style="font-size:32px; margin-bottom:8px;">🗺️</div>
-            <div style="font-size:20px; font-weight:900; color:var(--gold-primary);">Yolculuğa Hangi İlden Başlamak İstersin?</div>
-            <p style="font-size:13px; color:#cbd5e1; margin:12px 0 20px; line-height:1.6;">
-                Sözcük Seferî'ne Türkiye'nin 81 ilinden dilediğini seçerek başlayabilirsin! Harita üzerinde seyahatine başlamak istediğin ili tıkla.
-            </p>
-            <button class="btn-3d btn-3d-ocean" style="width:100%; padding:12px;" onclick="App.hideModal('modal-start-city')">
-                HARİTADAN İL SEÇ ➔
-            </button>
+            <h3 id="completed-city-title">İL TAMAMLANDI!</h3>
+            <img src="" id="completed-city-img" class="postcard-img" alt="City" />
+            <p id="completed-city-story">Tebrikler!</p>
+            <button class="btn-3d" onclick="App.hideModal('modal-city-completed'); ScreenRouter.goTo('screen-country');">HARİTAYA DÖN ➔</button>
         </div>
     </div>
 
-    <!-- MODAL 2: GÜNLÜK BULMACA TAKVİMİ -->
-    <div class="modal-backdrop" id="modal-daily">
+    <!-- MODAL 8: GÜNLÜK BULMACA -->
+    <div class="modal-backdrop hidden" id="modal-daily">
         <div class="modal-dialog">
             <div style="font-size:24px; font-weight:900; color:var(--gold-primary);">📅 GÜNLÜK BULMACA</div>
-            <div style="font-size:13px; color:#94a3b8; margin: 8px 0 16px;">Bugünün tarihi: <strong id="daily-date-str" style="color:var(--text-ivory);">2026-10-05</strong></div>
-            
-            <p style="font-size:13px; color:#cbd5e1; margin-bottom:20px;">Özel yıldızlı kelimeleri çözerek takvim serini artır ve ekstra altın kazan!</p>
-
-            <button class="btn-3d btn-3d-ocean" style="width:100%;" onclick="App.startDailyChallenge()">GÜNÜN BULMACASINI OYNA ➔</button>
-            <button class="btn-3d-outline" style="width:100%; margin-top:10px;" onclick="App.hideModal('modal-daily')">KAPAT</button>
+            <p style="font-size:13px; color:#cbd5e1; margin:12px 0 20px;">Günün özel bulmacasını çözerek serini koru ve +50 Altın kazan!</p>
+            <button class="btn-3d" style="width:100%;" onclick="App.hideModal('modal-daily'); App.openDailyChallenge();">BULMACAYI OYNA ➔</button>
+            <button class="btn-3d-outline" style="width:100%; margin-top:8px;" onclick="App.hideModal('modal-daily')">KAPAT</button>
         </div>
     </div>
 
-    <!-- MODAL 3: YETERSİZ ALTIN & REKLAM İPUCU MODALI -->
-    <div class="modal-backdrop" id="modal-insufficient-gold">
+    <!-- MODAL 9: YETERSİZ ALTIN -->
+    <div class="modal-backdrop hidden" id="modal-insufficient-gold">
         <div class="modal-dialog">
-            <div style="font-size:36px; margin-bottom:8px;">🪙</div>
-            <div style="font-size:20px; font-weight:900; color:var(--gold-primary);">Yetersiz Altın!</div>
-            <p style="font-size:13px; color:#cbd5e1; margin:10px 0 20px;">Bu ipucunu kullanmak için yeterli altının yok. Kısa bir sponsorlu video izleyerek anında +100 Altın kazanabilirsin.</p>
-            <button class="btn-3d" style="width:100%;" onclick="App.watchAdForGold()">🎥 VİDEO İZLE (+100 ALTIN)</button>
-            <button class="btn-3d-outline" style="width:100%; margin-top:10px;" onclick="App.hideModal('modal-insufficient-gold')">VAZGEÇ</button>
+            <div style="font-size:32px;">🪙</div>
+            <h3 style="color:var(--gold-primary);">Yetersiz Altın!</h3>
+            <p style="font-size:13px; color:#cbd5e1; margin:10px 0 16px;">İpucu almak için yeterli altının yok. Yeni bölümler çözerek altın kazanabilirsin.</p>
+            <button class="btn-3d-outline" style="width:100%;" onclick="App.hideModal('modal-insufficient-gold')">TAMAM</button>
         </div>
     </div>
 
-    <!-- MODAL 4: AYARLAR -->
-    <div class="modal-backdrop" id="modal-settings">
+    <!-- MODAL 10: AYARLAR -->
+    <div class="modal-backdrop hidden" id="modal-settings">
         <div class="modal-dialog">
-            <div style="font-size:20px; font-weight:900; color:var(--gold-primary); margin-bottom:16px;">OYUN AYARLARI</div>
-            
-            <div style="width:100%; display:flex; justify-content:space-between; align-items:center; margin-bottom:16px;">
+            <h3 style="color:var(--gold-primary); margin-bottom:14px;">OYUN AYARLARI</h3>
+            <div style="width:100%; display:flex; justify-content:space-between; align-items:center; margin-bottom:14px;">
                 <span>🔊 Ses Efektleri</span>
-                <input type="checkbox" id="setting-sound" checked onchange="AudioEngine.toggleSound(this.checked)" style="transform:scale(1.4);" />
+                <input type="checkbox" id="setting-sound" checked onchange="AudioEngine.toggleSound(this.checked)" style="transform:scale(1.3);" />
             </div>
-            <div style="width:100%; display:flex; justify-content:space-between; align-items:center; margin-bottom:24px;">
-                <span>📳 Haptik Titreşim</span>
-                <input type="checkbox" id="setting-vibrate" checked onchange="SaveManager.setHaptic(this.checked)" style="transform:scale(1.4);" />
-            </div>
-
-            <button class="btn-3d" style="width:100%; margin-bottom:12px;" onclick="App.hideModal('modal-settings')">TAMAM</button>
-
-            <button class="btn-3d-outline" style="width:100%; border-color:#ef4444; color:#ef4444; font-size:12px; padding:8px;" onclick="App.resetProgress()">
-                🔄 İlerlemeyi Sıfırla (Baştan Başla)
+            <button class="btn-3d" style="width:100%; margin-bottom:10px;" onclick="App.hideModal('modal-settings')">TAMAM</button>
+            <button class="btn-3d-outline" style="width:100%; border-color:#ef4444; color:#ef4444; font-size:11px; padding:6px;" onclick="if(confirm('İlerlemen sıfırlanacak. Emin misin?')) { localStorage.clear(); location.reload(); }">
+                🔄 İlerlemeyi Sıfırla
             </button>
         </div>
     </div>
 
-    <!-- JAVASCRIPT MOTORU -->
+    <!-- INJECTED RUNTIME JAVASCRIPT -->
     <script>
 {{ INJECT_JS }}
 </script>

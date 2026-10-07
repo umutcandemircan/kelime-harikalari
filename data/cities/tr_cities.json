@@ -1,0 +1,1460 @@
+[
+  {
+    "id": "tr-adana",
+    "countryId": "tr",
+    "plate": 1,
+    "name": "Adana",
+    "cx": 564.3,
+    "cy": 392.6,
+    "status": "playable",
+    "totalLandmarks": 5,
+    "totalLevels": 25,
+    "landmarkIds": [
+      "tr-adana-lm-01",
+      "tr-adana-lm-02",
+      "tr-adana-lm-03",
+      "tr-adana-lm-04",
+      "tr-adana-lm-05"
+    ]
+  },
+  {
+    "id": "tr-adiyaman",
+    "countryId": "tr",
+    "plate": 2,
+    "name": "Adıyaman",
+    "cx": 723.9,
+    "cy": 331.3,
+    "status": "playable",
+    "totalLandmarks": 5,
+    "totalLevels": 25,
+    "landmarkIds": [
+      "tr-adiyaman-lm-01",
+      "tr-adiyaman-lm-02",
+      "tr-adiyaman-lm-03",
+      "tr-adiyaman-lm-04",
+      "tr-adiyaman-lm-05"
+    ]
+  },
+  {
+    "id": "tr-afyonkarahisar",
+    "countryId": "tr",
+    "plate": 3,
+    "name": "Afyonkarahisar",
+    "cx": 294.4,
+    "cy": 279.3,
+    "status": "playable",
+    "totalLandmarks": 5,
+    "totalLevels": 25,
+    "landmarkIds": [
+      "tr-afyonkarahisar-lm-01",
+      "tr-afyonkarahisar-lm-02",
+      "tr-afyonkarahisar-lm-03",
+      "tr-afyonkarahisar-lm-04",
+      "tr-afyonkarahisar-lm-05"
+    ]
+  },
+  {
+    "id": "tr-agri",
+    "countryId": "tr",
+    "plate": 4,
+    "name": "Ağrı",
+    "cx": 998.3,
+    "cy": 213.2,
+    "status": "playable",
+    "totalLandmarks": 5,
+    "totalLevels": 25,
+    "landmarkIds": [
+      "tr-agri-lm-01",
+      "tr-agri-lm-02",
+      "tr-agri-lm-03",
+      "tr-agri-lm-04",
+      "tr-agri-lm-05"
+    ]
+  },
+  {
+    "id": "tr-amasya",
+    "countryId": "tr",
+    "plate": 5,
+    "name": "Amasya",
+    "cx": 577.7,
+    "cy": 131.6,
+    "status": "playable",
+    "totalLandmarks": 5,
+    "totalLevels": 25,
+    "landmarkIds": [
+      "tr-amasya-lm-01",
+      "tr-amasya-lm-02",
+      "tr-amasya-lm-03",
+      "tr-amasya-lm-04",
+      "tr-amasya-lm-05"
+    ]
+  },
+  {
+    "id": "tr-ankara",
+    "countryId": "tr",
+    "plate": 6,
+    "name": "Ankara",
+    "cx": 405.5,
+    "cy": 200.1,
+    "status": "playable",
+    "totalLandmarks": 5,
+    "totalLevels": 25,
+    "landmarkIds": [
+      "tr-ankara-lm-01",
+      "tr-ankara-lm-02",
+      "tr-ankara-lm-03",
+      "tr-ankara-lm-04",
+      "tr-ankara-lm-05"
+    ]
+  },
+  {
+    "id": "tr-antalya",
+    "countryId": "tr",
+    "plate": 7,
+    "name": "Antalya",
+    "cx": 275.7,
+    "cy": 435.0,
+    "status": "playable",
+    "totalLandmarks": 5,
+    "totalLevels": 25,
+    "landmarkIds": [
+      "tr-antalya-lm-01",
+      "tr-antalya-lm-02",
+      "tr-antalya-lm-03",
+      "tr-antalya-lm-04",
+      "tr-antalya-lm-05"
+    ]
+  },
+  {
+    "id": "tr-artvin",
+    "countryId": "tr",
+    "plate": 8,
+    "name": "Artvin",
+    "cx": 907.5,
+    "cy": 97.9,
+    "status": "playable",
+    "totalLandmarks": 5,
+    "totalLevels": 25,
+    "landmarkIds": [
+      "tr-artvin-lm-01",
+      "tr-artvin-lm-02",
+      "tr-artvin-lm-03",
+      "tr-artvin-lm-04",
+      "tr-artvin-lm-05"
+    ]
+  },
+  {
+    "id": "tr-aydin",
+    "countryId": "tr",
+    "plate": 9,
+    "name": "Aydın",
+    "cx": 127.6,
+    "cy": 346.7,
+    "status": "playable",
+    "totalLandmarks": 5,
+    "totalLevels": 25,
+    "landmarkIds": [
+      "tr-aydin-lm-01",
+      "tr-aydin-lm-02",
+      "tr-aydin-lm-03",
+      "tr-aydin-lm-04",
+      "tr-aydin-lm-05"
+    ]
+  },
+  {
+    "id": "tr-balikesir",
+    "countryId": "tr",
+    "plate": 10,
+    "name": "Balıkesir",
+    "cx": 115.8,
+    "cy": 190.1,
+    "status": "playable",
+    "totalLandmarks": 5,
+    "totalLevels": 25,
+    "landmarkIds": [
+      "tr-balikesir-lm-01",
+      "tr-balikesir-lm-02",
+      "tr-balikesir-lm-03",
+      "tr-balikesir-lm-04",
+      "tr-balikesir-lm-05"
+    ]
+  },
+  {
+    "id": "tr-bilecik",
+    "countryId": "tr",
+    "plate": 11,
+    "name": "Bilecik",
+    "cx": 263.9,
+    "cy": 173.6,
+    "status": "playable",
+    "totalLandmarks": 5,
+    "totalLevels": 25,
+    "landmarkIds": [
+      "tr-bilecik-lm-01",
+      "tr-bilecik-lm-02",
+      "tr-bilecik-lm-03",
+      "tr-bilecik-lm-04",
+      "tr-bilecik-lm-05"
+    ]
+  },
+  {
+    "id": "tr-bingol",
+    "countryId": "tr",
+    "plate": 12,
+    "name": "Bingöl",
+    "cx": 843.2,
+    "cy": 245.2,
+    "status": "playable",
+    "totalLandmarks": 5,
+    "totalLevels": 25,
+    "landmarkIds": [
+      "tr-bingol-lm-01",
+      "tr-bingol-lm-02",
+      "tr-bingol-lm-03",
+      "tr-bingol-lm-04",
+      "tr-bingol-lm-05"
+    ]
+  },
+  {
+    "id": "tr-bitlis",
+    "countryId": "tr",
+    "plate": 13,
+    "name": "Bitlis",
+    "cx": 943.6,
+    "cy": 281.3,
+    "status": "playable",
+    "totalLandmarks": 5,
+    "totalLevels": 25,
+    "landmarkIds": [
+      "tr-bitlis-lm-01",
+      "tr-bitlis-lm-02",
+      "tr-bitlis-lm-03",
+      "tr-bitlis-lm-04",
+      "tr-bitlis-lm-05"
+    ]
+  },
+  {
+    "id": "tr-bolu",
+    "countryId": "tr",
+    "plate": 14,
+    "name": "Bolu",
+    "cx": 344.7,
+    "cy": 137.7,
+    "status": "playable",
+    "totalLandmarks": 5,
+    "totalLevels": 25,
+    "landmarkIds": [
+      "tr-bolu-lm-01",
+      "tr-bolu-lm-02",
+      "tr-bolu-lm-03",
+      "tr-bolu-lm-04",
+      "tr-bolu-lm-05"
+    ]
+  },
+  {
+    "id": "tr-burdur",
+    "countryId": "tr",
+    "plate": 15,
+    "name": "Burdur",
+    "cx": 265.1,
+    "cy": 366.7,
+    "status": "playable",
+    "totalLandmarks": 5,
+    "totalLevels": 25,
+    "landmarkIds": [
+      "tr-burdur-lm-01",
+      "tr-burdur-lm-02",
+      "tr-burdur-lm-03",
+      "tr-burdur-lm-04",
+      "tr-burdur-lm-05"
+    ]
+  },
+  {
+    "id": "tr-bursa",
+    "countryId": "tr",
+    "plate": 16,
+    "name": "Bursa",
+    "cx": 212.3,
+    "cy": 165.1,
+    "status": "playable",
+    "totalLandmarks": 5,
+    "totalLevels": 25,
+    "landmarkIds": [
+      "tr-bursa-lm-01",
+      "tr-bursa-lm-02",
+      "tr-bursa-lm-03",
+      "tr-bursa-lm-04",
+      "tr-bursa-lm-05"
+    ]
+  },
+  {
+    "id": "tr-canakkale",
+    "countryId": "tr",
+    "plate": 17,
+    "name": "Çanakkale",
+    "cx": 72.0,
+    "cy": 171.2,
+    "status": "playable",
+    "totalLandmarks": 5,
+    "totalLevels": 25,
+    "landmarkIds": [
+      "tr-canakkale-lm-01",
+      "tr-canakkale-lm-02",
+      "tr-canakkale-lm-03",
+      "tr-canakkale-lm-04",
+      "tr-canakkale-lm-05"
+    ]
+  },
+  {
+    "id": "tr-cankiri",
+    "countryId": "tr",
+    "plate": 18,
+    "name": "Çankırı",
+    "cx": 451.3,
+    "cy": 128.8,
+    "status": "playable",
+    "totalLandmarks": 5,
+    "totalLevels": 25,
+    "landmarkIds": [
+      "tr-cankiri-lm-01",
+      "tr-cankiri-lm-02",
+      "tr-cankiri-lm-03",
+      "tr-cankiri-lm-04",
+      "tr-cankiri-lm-05"
+    ]
+  },
+  {
+    "id": "tr-corum",
+    "countryId": "tr",
+    "plate": 19,
+    "name": "Çorum",
+    "cx": 519.4,
+    "cy": 136.3,
+    "status": "playable",
+    "totalLandmarks": 5,
+    "totalLevels": 25,
+    "landmarkIds": [
+      "tr-corum-lm-01",
+      "tr-corum-lm-02",
+      "tr-corum-lm-03",
+      "tr-corum-lm-04",
+      "tr-corum-lm-05"
+    ]
+  },
+  {
+    "id": "tr-denizli",
+    "countryId": "tr",
+    "plate": 20,
+    "name": "Denizli",
+    "cx": 222.7,
+    "cy": 340.4,
+    "status": "playable",
+    "totalLandmarks": 5,
+    "totalLevels": 25,
+    "landmarkIds": [
+      "tr-denizli-lm-01",
+      "tr-denizli-lm-02",
+      "tr-denizli-lm-03",
+      "tr-denizli-lm-04",
+      "tr-denizli-lm-05"
+    ]
+  },
+  {
+    "id": "tr-diyarbakir",
+    "countryId": "tr",
+    "plate": 21,
+    "name": "Diyarbakır",
+    "cx": 828.7,
+    "cy": 313.2,
+    "status": "playable",
+    "totalLandmarks": 5,
+    "totalLevels": 25,
+    "landmarkIds": [
+      "tr-diyarbakir-lm-01",
+      "tr-diyarbakir-lm-02",
+      "tr-diyarbakir-lm-03",
+      "tr-diyarbakir-lm-04",
+      "tr-diyarbakir-lm-05"
+    ]
+  },
+  {
+    "id": "tr-edirne",
+    "countryId": "tr",
+    "plate": 22,
+    "name": "Edirne",
+    "cx": 71.9,
+    "cy": 100.6,
+    "status": "playable",
+    "totalLandmarks": 5,
+    "totalLevels": 25,
+    "landmarkIds": [
+      "tr-edirne-lm-01",
+      "tr-edirne-lm-02",
+      "tr-edirne-lm-03",
+      "tr-edirne-lm-04",
+      "tr-edirne-lm-05"
+    ]
+  },
+  {
+    "id": "tr-elazig",
+    "countryId": "tr",
+    "plate": 23,
+    "name": "Elazığ",
+    "cx": 783.4,
+    "cy": 267.7,
+    "status": "playable",
+    "totalLandmarks": 5,
+    "totalLevels": 25,
+    "landmarkIds": [
+      "tr-elazig-lm-01",
+      "tr-elazig-lm-02",
+      "tr-elazig-lm-03",
+      "tr-elazig-lm-04",
+      "tr-elazig-lm-05"
+    ]
+  },
+  {
+    "id": "tr-erzincan",
+    "countryId": "tr",
+    "plate": 24,
+    "name": "Erzincan",
+    "cx": 770.3,
+    "cy": 207.6,
+    "status": "playable",
+    "totalLandmarks": 5,
+    "totalLevels": 25,
+    "landmarkIds": [
+      "tr-erzincan-lm-01",
+      "tr-erzincan-lm-02",
+      "tr-erzincan-lm-03",
+      "tr-erzincan-lm-04",
+      "tr-erzincan-lm-05"
+    ]
+  },
+  {
+    "id": "tr-erzurum",
+    "countryId": "tr",
+    "plate": 25,
+    "name": "Erzurum",
+    "cx": 894.7,
+    "cy": 174.4,
+    "status": "playable",
+    "totalLandmarks": 5,
+    "totalLevels": 25,
+    "landmarkIds": [
+      "tr-erzurum-lm-01",
+      "tr-erzurum-lm-02",
+      "tr-erzurum-lm-03",
+      "tr-erzurum-lm-04",
+      "tr-erzurum-lm-05"
+    ]
+  },
+  {
+    "id": "tr-eskisehir",
+    "countryId": "tr",
+    "plate": 26,
+    "name": "Eskişehir",
+    "cx": 316.7,
+    "cy": 208.8,
+    "status": "playable",
+    "totalLandmarks": 5,
+    "totalLevels": 25,
+    "landmarkIds": [
+      "tr-eskisehir-lm-01",
+      "tr-eskisehir-lm-02",
+      "tr-eskisehir-lm-03",
+      "tr-eskisehir-lm-04",
+      "tr-eskisehir-lm-05"
+    ]
+  },
+  {
+    "id": "tr-gaziantep",
+    "countryId": "tr",
+    "plate": 27,
+    "name": "Gaziantep",
+    "cx": 667.0,
+    "cy": 382.0,
+    "status": "playable",
+    "totalLandmarks": 5,
+    "totalLevels": 25,
+    "landmarkIds": [
+      "tr-gaziantep-lm-01",
+      "tr-gaziantep-lm-02",
+      "tr-gaziantep-lm-03",
+      "tr-gaziantep-lm-04",
+      "tr-gaziantep-lm-05"
+    ]
+  },
+  {
+    "id": "tr-giresun",
+    "countryId": "tr",
+    "plate": 28,
+    "name": "Giresun",
+    "cx": 739.7,
+    "cy": 131.7,
+    "status": "playable",
+    "totalLandmarks": 5,
+    "totalLevels": 25,
+    "landmarkIds": [
+      "tr-giresun-lm-01",
+      "tr-giresun-lm-02",
+      "tr-giresun-lm-03",
+      "tr-giresun-lm-04",
+      "tr-giresun-lm-05"
+    ]
+  },
+  {
+    "id": "tr-gumushane",
+    "countryId": "tr",
+    "plate": 29,
+    "name": "Gümüşhane",
+    "cx": 783.3,
+    "cy": 153.2,
+    "status": "playable",
+    "totalLandmarks": 5,
+    "totalLevels": 25,
+    "landmarkIds": [
+      "tr-gumushane-lm-01",
+      "tr-gumushane-lm-02",
+      "tr-gumushane-lm-03",
+      "tr-gumushane-lm-04",
+      "tr-gumushane-lm-05"
+    ]
+  },
+  {
+    "id": "tr-hakkâri",
+    "countryId": "tr",
+    "plate": 30,
+    "name": "Hakkâri",
+    "cx": 1044.9,
+    "cy": 362.5,
+    "status": "playable",
+    "totalLandmarks": 5,
+    "totalLevels": 25,
+    "landmarkIds": [
+      "tr-hakkâri-lm-01",
+      "tr-hakkâri-lm-02",
+      "tr-hakkâri-lm-03",
+      "tr-hakkâri-lm-04",
+      "tr-hakkâri-lm-05"
+    ]
+  },
+  {
+    "id": "tr-hatay",
+    "countryId": "tr",
+    "plate": 31,
+    "name": "Hatay",
+    "cx": 604.3,
+    "cy": 429.6,
+    "status": "playable",
+    "totalLandmarks": 5,
+    "totalLevels": 25,
+    "landmarkIds": [
+      "tr-hatay-lm-01",
+      "tr-hatay-lm-02",
+      "tr-hatay-lm-03",
+      "tr-hatay-lm-04",
+      "tr-hatay-lm-05"
+    ]
+  },
+  {
+    "id": "tr-isparta",
+    "countryId": "tr",
+    "plate": 32,
+    "name": "Isparta",
+    "cx": 308.2,
+    "cy": 328.0,
+    "status": "playable",
+    "totalLandmarks": 5,
+    "totalLevels": 25,
+    "landmarkIds": [
+      "tr-isparta-lm-01",
+      "tr-isparta-lm-02",
+      "tr-isparta-lm-03",
+      "tr-isparta-lm-04",
+      "tr-isparta-lm-05"
+    ]
+  },
+  {
+    "id": "tr-mersin",
+    "countryId": "tr",
+    "plate": 33,
+    "name": "Mersin",
+    "cx": 470.3,
+    "cy": 427.3,
+    "status": "playable",
+    "totalLandmarks": 5,
+    "totalLevels": 25,
+    "landmarkIds": [
+      "tr-mersin-lm-01",
+      "tr-mersin-lm-02",
+      "tr-mersin-lm-03",
+      "tr-mersin-lm-04",
+      "tr-mersin-lm-05"
+    ]
+  },
+  {
+    "id": "tr-i̇stanbul",
+    "countryId": "tr",
+    "plate": 34,
+    "name": "İstanbul",
+    "cx": 207.3,
+    "cy": 108.3,
+    "status": "playable",
+    "totalLandmarks": 5,
+    "totalLevels": 25,
+    "landmarkIds": [
+      "tr-i̇stanbul-lm-01",
+      "tr-i̇stanbul-lm-02",
+      "tr-i̇stanbul-lm-03",
+      "tr-i̇stanbul-lm-04",
+      "tr-i̇stanbul-lm-05"
+    ]
+  },
+  {
+    "id": "tr-i̇zmir",
+    "countryId": "tr",
+    "plate": 35,
+    "name": "İzmir",
+    "cx": 86.4,
+    "cy": 286.4,
+    "status": "playable",
+    "totalLandmarks": 5,
+    "totalLevels": 25,
+    "landmarkIds": [
+      "tr-i̇zmir-lm-01",
+      "tr-i̇zmir-lm-02",
+      "tr-i̇zmir-lm-03",
+      "tr-i̇zmir-lm-04",
+      "tr-i̇zmir-lm-05"
+    ]
+  },
+  {
+    "id": "tr-kars",
+    "countryId": "tr",
+    "plate": 36,
+    "name": "Kars",
+    "cx": 984.6,
+    "cy": 141.8,
+    "status": "playable",
+    "totalLandmarks": 5,
+    "totalLevels": 25,
+    "landmarkIds": [
+      "tr-kars-lm-01",
+      "tr-kars-lm-02",
+      "tr-kars-lm-03",
+      "tr-kars-lm-04",
+      "tr-kars-lm-05"
+    ]
+  },
+  {
+    "id": "tr-kastamonu",
+    "countryId": "tr",
+    "plate": 37,
+    "name": "Kastamonu",
+    "cx": 465.3,
+    "cy": 81.4,
+    "status": "playable",
+    "totalLandmarks": 5,
+    "totalLevels": 25,
+    "landmarkIds": [
+      "tr-kastamonu-lm-01",
+      "tr-kastamonu-lm-02",
+      "tr-kastamonu-lm-03",
+      "tr-kastamonu-lm-04",
+      "tr-kastamonu-lm-05"
+    ]
+  },
+  {
+    "id": "tr-kayseri",
+    "countryId": "tr",
+    "plate": 38,
+    "name": "Kayseri",
+    "cx": 578.0,
+    "cy": 272.7,
+    "status": "playable",
+    "totalLandmarks": 5,
+    "totalLevels": 25,
+    "landmarkIds": [
+      "tr-kayseri-lm-01",
+      "tr-kayseri-lm-02",
+      "tr-kayseri-lm-03",
+      "tr-kayseri-lm-04",
+      "tr-kayseri-lm-05"
+    ]
+  },
+  {
+    "id": "tr-kirklareli",
+    "countryId": "tr",
+    "plate": 39,
+    "name": "Kırklareli",
+    "cx": 126.5,
+    "cy": 55.4,
+    "status": "playable",
+    "totalLandmarks": 5,
+    "totalLevels": 25,
+    "landmarkIds": [
+      "tr-kirklareli-lm-01",
+      "tr-kirklareli-lm-02",
+      "tr-kirklareli-lm-03",
+      "tr-kirklareli-lm-04",
+      "tr-kirklareli-lm-05"
+    ]
+  },
+  {
+    "id": "tr-kirsehir",
+    "countryId": "tr",
+    "plate": 40,
+    "name": "Kırşehir",
+    "cx": 496.5,
+    "cy": 231.6,
+    "status": "playable",
+    "totalLandmarks": 5,
+    "totalLevels": 25,
+    "landmarkIds": [
+      "tr-kirsehir-lm-01",
+      "tr-kirsehir-lm-02",
+      "tr-kirsehir-lm-03",
+      "tr-kirsehir-lm-04",
+      "tr-kirsehir-lm-05"
+    ]
+  },
+  {
+    "id": "tr-kocaeli",
+    "countryId": "tr",
+    "plate": 41,
+    "name": "Kocaeli",
+    "cx": 254.1,
+    "cy": 116.2,
+    "status": "playable",
+    "totalLandmarks": 5,
+    "totalLevels": 25,
+    "landmarkIds": [
+      "tr-kocaeli-lm-01",
+      "tr-kocaeli-lm-02",
+      "tr-kocaeli-lm-03",
+      "tr-kocaeli-lm-04",
+      "tr-kocaeli-lm-05"
+    ]
+  },
+  {
+    "id": "tr-konya",
+    "countryId": "tr",
+    "plate": 42,
+    "name": "Konya",
+    "cx": 417.0,
+    "cy": 324.6,
+    "status": "playable",
+    "totalLandmarks": 5,
+    "totalLevels": 25,
+    "landmarkIds": [
+      "tr-konya-lm-01",
+      "tr-konya-lm-02",
+      "tr-konya-lm-03",
+      "tr-konya-lm-04",
+      "tr-konya-lm-05"
+    ]
+  },
+  {
+    "id": "tr-kutahya",
+    "countryId": "tr",
+    "plate": 43,
+    "name": "Kütahya",
+    "cx": 236.3,
+    "cy": 229.7,
+    "status": "playable",
+    "totalLandmarks": 5,
+    "totalLevels": 25,
+    "landmarkIds": [
+      "tr-kutahya-lm-01",
+      "tr-kutahya-lm-02",
+      "tr-kutahya-lm-03",
+      "tr-kutahya-lm-04",
+      "tr-kutahya-lm-05"
+    ]
+  },
+  {
+    "id": "tr-malatya",
+    "countryId": "tr",
+    "plate": 44,
+    "name": "Malatya",
+    "cx": 711.7,
+    "cy": 285.8,
+    "status": "playable",
+    "totalLandmarks": 5,
+    "totalLevels": 25,
+    "landmarkIds": [
+      "tr-malatya-lm-01",
+      "tr-malatya-lm-02",
+      "tr-malatya-lm-03",
+      "tr-malatya-lm-04",
+      "tr-malatya-lm-05"
+    ]
+  },
+  {
+    "id": "tr-manisa",
+    "countryId": "tr",
+    "plate": 45,
+    "name": "Manisa",
+    "cx": 158.5,
+    "cy": 264.5,
+    "status": "playable",
+    "totalLandmarks": 5,
+    "totalLevels": 25,
+    "landmarkIds": [
+      "tr-manisa-lm-01",
+      "tr-manisa-lm-02",
+      "tr-manisa-lm-03",
+      "tr-manisa-lm-04",
+      "tr-manisa-lm-05"
+    ]
+  },
+  {
+    "id": "tr-kahramanmaras",
+    "countryId": "tr",
+    "plate": 46,
+    "name": "Kahramanmaraş",
+    "cx": 645.0,
+    "cy": 329.9,
+    "status": "playable",
+    "totalLandmarks": 5,
+    "totalLevels": 25,
+    "landmarkIds": [
+      "tr-kahramanmaras-lm-01",
+      "tr-kahramanmaras-lm-02",
+      "tr-kahramanmaras-lm-03",
+      "tr-kahramanmaras-lm-04",
+      "tr-kahramanmaras-lm-05"
+    ]
+  },
+  {
+    "id": "tr-mardin",
+    "countryId": "tr",
+    "plate": 47,
+    "name": "Mardin",
+    "cx": 866.9,
+    "cy": 361.7,
+    "status": "playable",
+    "totalLandmarks": 5,
+    "totalLevels": 25,
+    "landmarkIds": [
+      "tr-mardin-lm-01",
+      "tr-mardin-lm-02",
+      "tr-mardin-lm-03",
+      "tr-mardin-lm-04",
+      "tr-mardin-lm-05"
+    ]
+  },
+  {
+    "id": "tr-mugla",
+    "countryId": "tr",
+    "plate": 48,
+    "name": "Muğla",
+    "cx": 157.7,
+    "cy": 401.6,
+    "status": "playable",
+    "totalLandmarks": 5,
+    "totalLevels": 25,
+    "landmarkIds": [
+      "tr-mugla-lm-01",
+      "tr-mugla-lm-02",
+      "tr-mugla-lm-03",
+      "tr-mugla-lm-04",
+      "tr-mugla-lm-05"
+    ]
+  },
+  {
+    "id": "tr-mus",
+    "countryId": "tr",
+    "plate": 49,
+    "name": "Muş",
+    "cx": 913.2,
+    "cy": 249.2,
+    "status": "playable",
+    "totalLandmarks": 5,
+    "totalLevels": 25,
+    "landmarkIds": [
+      "tr-mus-lm-01",
+      "tr-mus-lm-02",
+      "tr-mus-lm-03",
+      "tr-mus-lm-04",
+      "tr-mus-lm-05"
+    ]
+  },
+  {
+    "id": "tr-nevsehir",
+    "countryId": "tr",
+    "plate": 50,
+    "name": "Nevşehir",
+    "cx": 518.9,
+    "cy": 255.1,
+    "status": "playable",
+    "totalLandmarks": 5,
+    "totalLevels": 25,
+    "landmarkIds": [
+      "tr-nevsehir-lm-01",
+      "tr-nevsehir-lm-02",
+      "tr-nevsehir-lm-03",
+      "tr-nevsehir-lm-04",
+      "tr-nevsehir-lm-05"
+    ]
+  },
+  {
+    "id": "tr-nigde",
+    "countryId": "tr",
+    "plate": 51,
+    "name": "Niğde",
+    "cx": 521.2,
+    "cy": 324.7,
+    "status": "playable",
+    "totalLandmarks": 5,
+    "totalLevels": 25,
+    "landmarkIds": [
+      "tr-nigde-lm-01",
+      "tr-nigde-lm-02",
+      "tr-nigde-lm-03",
+      "tr-nigde-lm-04",
+      "tr-nigde-lm-05"
+    ]
+  },
+  {
+    "id": "tr-ordu",
+    "countryId": "tr",
+    "plate": 52,
+    "name": "Ordu",
+    "cx": 670.6,
+    "cy": 121.4,
+    "status": "playable",
+    "totalLandmarks": 5,
+    "totalLevels": 25,
+    "landmarkIds": [
+      "tr-ordu-lm-01",
+      "tr-ordu-lm-02",
+      "tr-ordu-lm-03",
+      "tr-ordu-lm-04",
+      "tr-ordu-lm-05"
+    ]
+  },
+  {
+    "id": "tr-rize",
+    "countryId": "tr",
+    "plate": 53,
+    "name": "Rize",
+    "cx": 860.3,
+    "cy": 108.8,
+    "status": "playable",
+    "totalLandmarks": 5,
+    "totalLevels": 25,
+    "landmarkIds": [
+      "tr-rize-lm-01",
+      "tr-rize-lm-02",
+      "tr-rize-lm-03",
+      "tr-rize-lm-04",
+      "tr-rize-lm-05"
+    ]
+  },
+  {
+    "id": "tr-sakarya",
+    "countryId": "tr",
+    "plate": 54,
+    "name": "Sakarya",
+    "cx": 291.2,
+    "cy": 123.3,
+    "status": "playable",
+    "totalLandmarks": 5,
+    "totalLevels": 25,
+    "landmarkIds": [
+      "tr-sakarya-lm-01",
+      "tr-sakarya-lm-02",
+      "tr-sakarya-lm-03",
+      "tr-sakarya-lm-04",
+      "tr-sakarya-lm-05"
+    ]
+  },
+  {
+    "id": "tr-samsun",
+    "countryId": "tr",
+    "plate": 55,
+    "name": "Samsun",
+    "cx": 606.6,
+    "cy": 93.9,
+    "status": "playable",
+    "totalLandmarks": 5,
+    "totalLevels": 25,
+    "landmarkIds": [
+      "tr-samsun-lm-01",
+      "tr-samsun-lm-02",
+      "tr-samsun-lm-03",
+      "tr-samsun-lm-04",
+      "tr-samsun-lm-05"
+    ]
+  },
+  {
+    "id": "tr-siirt",
+    "countryId": "tr",
+    "plate": 56,
+    "name": "Siirt",
+    "cx": 928.3,
+    "cy": 324.5,
+    "status": "playable",
+    "totalLandmarks": 5,
+    "totalLevels": 25,
+    "landmarkIds": [
+      "tr-siirt-lm-01",
+      "tr-siirt-lm-02",
+      "tr-siirt-lm-03",
+      "tr-siirt-lm-04",
+      "tr-siirt-lm-05"
+    ]
+  },
+  {
+    "id": "tr-sinop",
+    "countryId": "tr",
+    "plate": 57,
+    "name": "Sinop",
+    "cx": 532.2,
+    "cy": 56.8,
+    "status": "playable",
+    "totalLandmarks": 5,
+    "totalLevels": 25,
+    "landmarkIds": [
+      "tr-sinop-lm-01",
+      "tr-sinop-lm-02",
+      "tr-sinop-lm-03",
+      "tr-sinop-lm-04",
+      "tr-sinop-lm-05"
+    ]
+  },
+  {
+    "id": "tr-sivas",
+    "countryId": "tr",
+    "plate": 58,
+    "name": "Sivas",
+    "cx": 664.6,
+    "cy": 203.1,
+    "status": "playable",
+    "totalLandmarks": 5,
+    "totalLevels": 25,
+    "landmarkIds": [
+      "tr-sivas-lm-01",
+      "tr-sivas-lm-02",
+      "tr-sivas-lm-03",
+      "tr-sivas-lm-04",
+      "tr-sivas-lm-05"
+    ]
+  },
+  {
+    "id": "tr-tekirdag",
+    "countryId": "tr",
+    "plate": 59,
+    "name": "Tekirdağ",
+    "cx": 123.5,
+    "cy": 100.9,
+    "status": "playable",
+    "totalLandmarks": 5,
+    "totalLevels": 25,
+    "landmarkIds": [
+      "tr-tekirdag-lm-01",
+      "tr-tekirdag-lm-02",
+      "tr-tekirdag-lm-03",
+      "tr-tekirdag-lm-04",
+      "tr-tekirdag-lm-05"
+    ]
+  },
+  {
+    "id": "tr-tokat",
+    "countryId": "tr",
+    "plate": 60,
+    "name": "Tokat",
+    "cx": 626.8,
+    "cy": 150.8,
+    "status": "playable",
+    "totalLandmarks": 5,
+    "totalLevels": 25,
+    "landmarkIds": [
+      "tr-tokat-lm-01",
+      "tr-tokat-lm-02",
+      "tr-tokat-lm-03",
+      "tr-tokat-lm-04",
+      "tr-tokat-lm-05"
+    ]
+  },
+  {
+    "id": "tr-trabzon",
+    "countryId": "tr",
+    "plate": 61,
+    "name": "Trabzon",
+    "cx": 803.6,
+    "cy": 124.3,
+    "status": "playable",
+    "totalLandmarks": 5,
+    "totalLevels": 25,
+    "landmarkIds": [
+      "tr-trabzon-lm-01",
+      "tr-trabzon-lm-02",
+      "tr-trabzon-lm-03",
+      "tr-trabzon-lm-04",
+      "tr-trabzon-lm-05"
+    ]
+  },
+  {
+    "id": "tr-tunceli",
+    "countryId": "tr",
+    "plate": 62,
+    "name": "Tunceli",
+    "cx": 789.5,
+    "cy": 233.2,
+    "status": "playable",
+    "totalLandmarks": 5,
+    "totalLevels": 25,
+    "landmarkIds": [
+      "tr-tunceli-lm-01",
+      "tr-tunceli-lm-02",
+      "tr-tunceli-lm-03",
+      "tr-tunceli-lm-04",
+      "tr-tunceli-lm-05"
+    ]
+  },
+  {
+    "id": "tr-sanliurfa",
+    "countryId": "tr",
+    "plate": 63,
+    "name": "Şanlıurfa",
+    "cx": 751.6,
+    "cy": 364.7,
+    "status": "playable",
+    "totalLandmarks": 5,
+    "totalLevels": 25,
+    "landmarkIds": [
+      "tr-sanliurfa-lm-01",
+      "tr-sanliurfa-lm-02",
+      "tr-sanliurfa-lm-03",
+      "tr-sanliurfa-lm-04",
+      "tr-sanliurfa-lm-05"
+    ]
+  },
+  {
+    "id": "tr-usak",
+    "countryId": "tr",
+    "plate": 64,
+    "name": "Uşak",
+    "cx": 229.2,
+    "cy": 284.6,
+    "status": "playable",
+    "totalLandmarks": 5,
+    "totalLevels": 25,
+    "landmarkIds": [
+      "tr-usak-lm-01",
+      "tr-usak-lm-02",
+      "tr-usak-lm-03",
+      "tr-usak-lm-04",
+      "tr-usak-lm-05"
+    ]
+  },
+  {
+    "id": "tr-van",
+    "countryId": "tr",
+    "plate": 65,
+    "name": "Van",
+    "cx": 1018.4,
+    "cy": 286.3,
+    "status": "playable",
+    "totalLandmarks": 5,
+    "totalLevels": 25,
+    "landmarkIds": [
+      "tr-van-lm-01",
+      "tr-van-lm-02",
+      "tr-van-lm-03",
+      "tr-van-lm-04",
+      "tr-van-lm-05"
+    ]
+  },
+  {
+    "id": "tr-yozgat",
+    "countryId": "tr",
+    "plate": 66,
+    "name": "Yozgat",
+    "cx": 549.2,
+    "cy": 202.3,
+    "status": "playable",
+    "totalLandmarks": 5,
+    "totalLevels": 25,
+    "landmarkIds": [
+      "tr-yozgat-lm-01",
+      "tr-yozgat-lm-02",
+      "tr-yozgat-lm-03",
+      "tr-yozgat-lm-04",
+      "tr-yozgat-lm-05"
+    ]
+  },
+  {
+    "id": "tr-zonguldak",
+    "countryId": "tr",
+    "plate": 67,
+    "name": "Zonguldak",
+    "cx": 360.5,
+    "cy": 87.9,
+    "status": "playable",
+    "totalLandmarks": 5,
+    "totalLevels": 25,
+    "landmarkIds": [
+      "tr-zonguldak-lm-01",
+      "tr-zonguldak-lm-02",
+      "tr-zonguldak-lm-03",
+      "tr-zonguldak-lm-04",
+      "tr-zonguldak-lm-05"
+    ]
+  },
+  {
+    "id": "tr-aksaray",
+    "countryId": "tr",
+    "plate": 68,
+    "name": "Aksaray",
+    "cx": 478.2,
+    "cy": 289.6,
+    "status": "playable",
+    "totalLandmarks": 5,
+    "totalLevels": 25,
+    "landmarkIds": [
+      "tr-aksaray-lm-01",
+      "tr-aksaray-lm-02",
+      "tr-aksaray-lm-03",
+      "tr-aksaray-lm-04",
+      "tr-aksaray-lm-05"
+    ]
+  },
+  {
+    "id": "tr-bayburt",
+    "countryId": "tr",
+    "plate": 69,
+    "name": "Bayburt",
+    "cx": 821.4,
+    "cy": 163.3,
+    "status": "playable",
+    "totalLandmarks": 5,
+    "totalLevels": 25,
+    "landmarkIds": [
+      "tr-bayburt-lm-01",
+      "tr-bayburt-lm-02",
+      "tr-bayburt-lm-03",
+      "tr-bayburt-lm-04",
+      "tr-bayburt-lm-05"
+    ]
+  },
+  {
+    "id": "tr-karaman",
+    "countryId": "tr",
+    "plate": 70,
+    "name": "Karaman",
+    "cx": 436.8,
+    "cy": 387.4,
+    "status": "playable",
+    "totalLandmarks": 5,
+    "totalLevels": 25,
+    "landmarkIds": [
+      "tr-karaman-lm-01",
+      "tr-karaman-lm-02",
+      "tr-karaman-lm-03",
+      "tr-karaman-lm-04",
+      "tr-karaman-lm-05"
+    ]
+  },
+  {
+    "id": "tr-kirikkale",
+    "countryId": "tr",
+    "plate": 71,
+    "name": "Kırıkkale",
+    "cx": 463.0,
+    "cy": 198.8,
+    "status": "playable",
+    "totalLandmarks": 5,
+    "totalLevels": 25,
+    "landmarkIds": [
+      "tr-kirikkale-lm-01",
+      "tr-kirikkale-lm-02",
+      "tr-kirikkale-lm-03",
+      "tr-kirikkale-lm-04",
+      "tr-kirikkale-lm-05"
+    ]
+  },
+  {
+    "id": "tr-batman",
+    "countryId": "tr",
+    "plate": 72,
+    "name": "Batman",
+    "cx": 889.4,
+    "cy": 317.5,
+    "status": "playable",
+    "totalLandmarks": 5,
+    "totalLevels": 25,
+    "landmarkIds": [
+      "tr-batman-lm-01",
+      "tr-batman-lm-02",
+      "tr-batman-lm-03",
+      "tr-batman-lm-04",
+      "tr-batman-lm-05"
+    ]
+  },
+  {
+    "id": "tr-sirnak",
+    "countryId": "tr",
+    "plate": 73,
+    "name": "Şırnak",
+    "cx": 950.0,
+    "cy": 359.8,
+    "status": "playable",
+    "totalLandmarks": 5,
+    "totalLevels": 25,
+    "landmarkIds": [
+      "tr-sirnak-lm-01",
+      "tr-sirnak-lm-02",
+      "tr-sirnak-lm-03",
+      "tr-sirnak-lm-04",
+      "tr-sirnak-lm-05"
+    ]
+  },
+  {
+    "id": "tr-bartin",
+    "countryId": "tr",
+    "plate": 74,
+    "name": "Bartın",
+    "cx": 395.9,
+    "cy": 65.3,
+    "status": "playable",
+    "totalLandmarks": 5,
+    "totalLevels": 25,
+    "landmarkIds": [
+      "tr-bartin-lm-01",
+      "tr-bartin-lm-02",
+      "tr-bartin-lm-03",
+      "tr-bartin-lm-04",
+      "tr-bartin-lm-05"
+    ]
+  },
+  {
+    "id": "tr-ardahan",
+    "countryId": "tr",
+    "plate": 75,
+    "name": "Ardahan",
+    "cx": 964.5,
+    "cy": 93.9,
+    "status": "playable",
+    "totalLandmarks": 5,
+    "totalLevels": 25,
+    "landmarkIds": [
+      "tr-ardahan-lm-01",
+      "tr-ardahan-lm-02",
+      "tr-ardahan-lm-03",
+      "tr-ardahan-lm-04",
+      "tr-ardahan-lm-05"
+    ]
+  },
+  {
+    "id": "tr-igdir",
+    "countryId": "tr",
+    "plate": 76,
+    "name": "Iğdır",
+    "cx": 1027.2,
+    "cy": 184.9,
+    "status": "playable",
+    "totalLandmarks": 5,
+    "totalLevels": 25,
+    "landmarkIds": [
+      "tr-igdir-lm-01",
+      "tr-igdir-lm-02",
+      "tr-igdir-lm-03",
+      "tr-igdir-lm-04",
+      "tr-igdir-lm-05"
+    ]
+  },
+  {
+    "id": "tr-yalova",
+    "countryId": "tr",
+    "plate": 77,
+    "name": "Yalova",
+    "cx": 213.7,
+    "cy": 139.7,
+    "status": "playable",
+    "totalLandmarks": 5,
+    "totalLevels": 25,
+    "landmarkIds": [
+      "tr-yalova-lm-01",
+      "tr-yalova-lm-02",
+      "tr-yalova-lm-03",
+      "tr-yalova-lm-04",
+      "tr-yalova-lm-05"
+    ]
+  },
+  {
+    "id": "tr-karabuk",
+    "countryId": "tr",
+    "plate": 78,
+    "name": "Karabük",
+    "cx": 409.1,
+    "cy": 92.6,
+    "status": "playable",
+    "totalLandmarks": 5,
+    "totalLevels": 25,
+    "landmarkIds": [
+      "tr-karabuk-lm-01",
+      "tr-karabuk-lm-02",
+      "tr-karabuk-lm-03",
+      "tr-karabuk-lm-04",
+      "tr-karabuk-lm-05"
+    ]
+  },
+  {
+    "id": "tr-kilis",
+    "countryId": "tr",
+    "plate": 79,
+    "name": "Kilis",
+    "cx": 651.9,
+    "cy": 405.5,
+    "status": "playable",
+    "totalLandmarks": 5,
+    "totalLevels": 25,
+    "landmarkIds": [
+      "tr-kilis-lm-01",
+      "tr-kilis-lm-02",
+      "tr-kilis-lm-03",
+      "tr-kilis-lm-04",
+      "tr-kilis-lm-05"
+    ]
+  },
+  {
+    "id": "tr-osmaniye",
+    "countryId": "tr",
+    "plate": 80,
+    "name": "Osmaniye",
+    "cx": 603.3,
+    "cy": 372.5,
+    "status": "playable",
+    "totalLandmarks": 5,
+    "totalLevels": 25,
+    "landmarkIds": [
+      "tr-osmaniye-lm-01",
+      "tr-osmaniye-lm-02",
+      "tr-osmaniye-lm-03",
+      "tr-osmaniye-lm-04",
+      "tr-osmaniye-lm-05"
+    ]
+  },
+  {
+    "id": "tr-duzce",
+    "countryId": "tr",
+    "plate": 81,
+    "name": "Düzce",
+    "cx": 333.4,
+    "cy": 117.5,
+    "status": "playable",
+    "totalLandmarks": 5,
+    "totalLevels": 25,
+    "landmarkIds": [
+      "tr-duzce-lm-01",
+      "tr-duzce-lm-02",
+      "tr-duzce-lm-03",
+      "tr-duzce-lm-04",
+      "tr-duzce-lm-05"
+    ]
+  }
+]

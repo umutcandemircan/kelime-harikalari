@@ -139,4 +139,4 @@ Tüm simge mekân görselleri doğrulanmış kamu malı (Public Domain), Creativ
 
 ---
 
-*Geliştirici: Umut Can Demircan • Sürüm: 2.0.0 (V2 Release)*
+*Geliştirici: Umutcan Demircan • Sürüm: 2.0.0 (V2 Release)*

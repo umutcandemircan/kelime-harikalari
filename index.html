@@ -2838,109 +2838,13 @@ html, body {
     }
 }
 
-/* ==========================================================================
-   MAINTENANCE / ALPHA PREPARATION OVERLAY (GITHUB PAGES ONLY)
-   ========================================================================== */
-#maintenance-overlay {
-    position: fixed;
-    inset: 0;
-    width: 100vw;
-    height: 100vh;
-    background: radial-gradient(circle at center, #1b263b 0%, #0b132b 100%);
-    z-index: 9999999;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: #fff;
-    text-align: center;
-    padding: 24px;
-    box-sizing: border-box;
-    touch-action: none;
-}
 
-#maintenance-overlay.hidden {
-    display: none !important;
-    pointer-events: none !important;
-    visibility: hidden !important;
-}
-
-.maintenance-content {
-    background: rgba(15, 23, 42, 0.9);
-    border: 2px solid #d4af37;
-    border-radius: 20px;
-    padding: 36px 24px;
-    max-width: 440px;
-    width: 100%;
-    box-shadow: 0 16px 50px rgba(0, 0, 0, 0.9);
-    animation: fadeUp 0.4s ease-out;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.maintenance-content h1 {
-    font-size: 26px;
-    font-weight: 900;
-    color: #d4af37;
-    margin: 0 0 6px;
-    letter-spacing: 2px;
-}
-
-.maintenance-content h2 {
-    font-size: 15px;
-    font-weight: 700;
-    margin: 0 0 16px;
-    color: #f59e0b;
-    letter-spacing: 1px;
-}
-
-.maintenance-content p {
-    font-size: 13.5px;
-    line-height: 1.6;
-    margin: 0 0 12px;
-    color: #e2e8f0;
-}
-
-.maintenance-badge {
-    background: rgba(212, 175, 55, 0.15);
-    border: 1px solid #d4af37;
-    color: #fef08a;
-    font-size: 11px;
-    font-weight: 800;
-    padding: 6px 14px;
-    border-radius: 20px;
-    margin: 6px 0 16px;
-    letter-spacing: 1px;
-}
-
-.maintenance-spinner {
-    width: 32px;
-    height: 32px;
-    border: 3px solid rgba(212, 175, 55, 0.2);
-    border-top: 3px solid #d4af37;
-    border-radius: 50%;
-    animation: spin 1s linear infinite;
-}
 
 
 
 </style>
 </head>
 <body>
-    <!-- GITHUB PAGES MAINTENANCE / ALPHA PREPARATION OVERLAY -->
-    <div id="maintenance-overlay" class="hidden">
-        <div class="maintenance-content">
-            <div style="font-size:42px; margin-bottom:8px;">🧭</div>
-            <h1>SÖZCÜK SEFERÎ</h1>
-            <h2>🛠 TEKNİK BAKIM</h2>
-            <p>Sözcük Seferî <strong>Alpha</strong> sürümünün çıkışına hazırlanıyoruz!</p>
-            <p>Oyuncularımıza kusursuz bir keşif ve kelime deneyimi sunabilmek için oyunun ilk genel Alpha sürümü öncesinde son teknik bakım, optimizasyon ve güvenlik kontrollerini yürütüyorum.</p>
-            <div class="maintenance-badge">🚀 ALPHA SÜRÜMÜ ÇOK YAKINDA</div>
-            <p style="font-size:12px; color:#94a3b8; margin:4px 0 0;">Anlayışınız ve ilginiz için teşekkür ederim.</p>
-            <div class="maintenance-spinner"></div>
-        </div>
-    </div>
-
     <div id="screen-hub" class="screen active">
         <!-- TOP NAVBAR -->
         <div class="top-navbar">
@@ -6571,20 +6475,6 @@ const App = {
     ],
 
     init() {
-        // Check GitHub Pages maintenance / Alpha preparation overlay
-        try {
-            const isGitHub = typeof window !== 'undefined' && window.location.hostname.indexOf('github.io') !== -1;
-            const isBypass = typeof window !== 'undefined' && window.location.search.indexOf('preview=1') !== -1;
-            const maintenanceEl = document.getElementById('maintenance-overlay');
-            if (maintenanceEl) {
-                if (isGitHub && !isBypass) {
-                    maintenanceEl.classList.remove('hidden');
-                } else {
-                    maintenanceEl.classList.add('hidden');
-                }
-            }
-        } catch(e) {}
-
         SaveManager.init();
         InputManager.init();
         WordValidator.init();

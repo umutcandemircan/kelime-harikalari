@@ -44,20 +44,6 @@ const App = {
     ],
 
     init() {
-        // Check GitHub Pages maintenance / Alpha preparation overlay
-        try {
-            const isGitHub = typeof window !== 'undefined' && window.location.hostname.indexOf('github.io') !== -1;
-            const isBypass = typeof window !== 'undefined' && window.location.search.indexOf('preview=1') !== -1;
-            const maintenanceEl = document.getElementById('maintenance-overlay');
-            if (maintenanceEl) {
-                if (isGitHub && !isBypass) {
-                    maintenanceEl.classList.remove('hidden');
-                } else {
-                    maintenanceEl.classList.add('hidden');
-                }
-            }
-        } catch(e) {}
-
         SaveManager.init();
         InputManager.init();
         WordValidator.init();

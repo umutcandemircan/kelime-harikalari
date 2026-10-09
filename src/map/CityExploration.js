@@ -41,10 +41,10 @@ const CityExploration = {
         const isCityCompleted = SaveManager.data.completedProvinces.includes(city.plate);
         if (sealBadgeEl) {
             if (isCityCompleted) {
-                sealBadgeEl.innerHTML = `🏆 <span>Vilayet Mührü Kazanıldı</span>`;
+                sealBadgeEl.innerHTML = `<span>Vilayet Mührü Kazanıldı</span>`;
                 sealBadgeEl.className = 'city-seal-badge completed';
             } else {
-                sealBadgeEl.innerHTML = `📜 <span>Keşif Sürüyor</span>`;
+                sealBadgeEl.innerHTML = `<span>Keşif Sürüyor</span>`;
                 sealBadgeEl.className = 'city-seal-badge ongoing';
             }
         }
@@ -100,7 +100,7 @@ const CityExploration = {
                     <div class="landmark-media-overlay"></div>
                     <span class="landmark-number-pill">Mekân ${landmarkNo}/5</span>
                     <span class="landmark-status-badge">
-                        ${landmarkCompleted ? '✓ Tamamlandı' : (landmarkUnlocked ? `Bölüm ${currentLevelInLandmark}/5` : '🔒 Kilitli')}
+                        ${landmarkCompleted ? '✓ Tamamlandı' : (landmarkUnlocked ? `Bölüm ${currentLevelInLandmark}/5` : 'Kilitli')}
                     </span>
                 </div>
                 <div class="landmark-card-body">

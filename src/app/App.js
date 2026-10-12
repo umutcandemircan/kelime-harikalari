@@ -43,8 +43,20 @@ const App = {
         }
     ],
 
+    // Adres taşıma ayarları
+    OLD_HOST: 'umutcandemircan.github.io',
+    NEW_URL: 'https://sozcuk-seferi.umutcan-demircan-dev.workers.dev/',
+    TRANSFER_PARAM: 'aktar',
+
     init() {
+        // Yeni adreste: eski adresten gelen ilerlemeyi içe aktar (SaveManager yüklenmeden önce)
+        this.importTransferredSave();
+
         SaveManager.init();
+
+        // Eski adreste: yalnızca taşınma bildirimini göster, oyunu başlatma
+        if (this.showMovedNotice()) return;
+
         InputManager.init();
         WordValidator.init();
         AudioEngine.init();
@@ -96,6 +108,109 @@ const App = {
         ScreenRouter.goTo('screen-hub');
     },
 
+    // ---------- ADRES TAŞIMA ----------
+
+    _progressScore(save) {
+        if (!save || typeof save !== 'object') return -1;
+        const provinces = Array.isArray(save.completedProvinces) ? save.completedProvinces.length : 0;
+        const landmarks = Array.isArray(save.completedLandmarks) ? save.completedLandmarks.length : 0;
+        const sub = Number(save.currentSubLevel) || 0;
+        return provinces * 10000 + landmarks * 100 + sub;
+    },
+
+    _encodeSave(obj) {
+        const json = JSON.stringify(obj);
+        const b64 = btoa(unescape(encodeURIComponent(json)));
+        return b64.replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
+    },
+
+    _decodeSave(str) {
+        let b64 = str.replace(/-/g, '+').replace(/_/g, '/');
+        while (b64.length % 4) b64 += '=';
+        return JSON.parse(decodeURIComponent(escape(atob(b64))));
+    },
+
+    importTransferredSave() {
+        try {
+            const hash = window.location.hash || '';
+            const prefix = `#${this.TRANSFER_PARAM}=`;
+            if (!hash.startsWith(prefix)) return;
+
+            const incoming = this._decodeSave(hash.slice(prefix.length));
+            // Adres çubuğundan veriyi hemen temizle
+            history.replaceState(null, '', window.location.pathname + window.location.search);
+
+            if (!incoming || typeof incoming !== 'object' || !Array.isArray(incoming.completedProvinces)) return;
+
+            let existing = null;
+            try { existing = JSON.parse(localStorage.getItem(SaveManager.KEY) || 'null'); } catch (e) {}
+
+            // Yerelde daha ileri bir kayıt varsa üzerine yazma
+            if (existing && this._progressScore(existing) >= this._progressScore(incoming)) return;
+
+            localStorage.setItem(SaveManager.KEY, JSON.stringify(incoming));
+            console.info('[Taşıma] Eski adresten gelen ilerleme içe aktarıldı.');
+        } catch (e) {
+            console.warn('[Taşıma] İlerleme içe aktarılamadı:', e);
+        }
+    },
+
+    showMovedNotice() {
+        if (typeof window === 'undefined' || window.location.hostname !== this.OLD_HOST) return false;
+
+        const overlay = document.getElementById('moved-overlay');
+        if (!overlay) return false;
+
+        // Mevcut ilerlemeyi bağlantıya ekle
+        let targetUrl = this.NEW_URL;
+        const save = SaveManager.data;
+        const score = this._progressScore(save);
+        const hasProgress = score > 0 || (save && save.coins !== SaveManager.defaultData.coins);
+        if (hasProgress) {
+            try {
+                targetUrl = `${this.NEW_URL}#${this.TRANSFER_PARAM}=${this._encodeSave(save)}`;
+            } catch (e) {}
+        }
+
+        const goBtn = document.getElementById('moved-go-btn');
+        if (goBtn) goBtn.href = targetUrl;
+
+        const note = document.getElementById('moved-progress-note');
+        if (note) {
+            if (hasProgress) {
+                const provinces = (save.completedProvinces || []).length;
+                note.innerHTML = `İlerlemen (<strong>${provinces}/81 vilayet</strong>, <strong>${save.coins} altın</strong>) bu butonla yeni adrese otomatik aktarılır. Yer imlerini de güncellemeyi unutma.`;
+            } else {
+                note.textContent = 'Yer imlerini yeni adresle güncellemeyi unutma.';
+            }
+        }
+
+        const copyBtn = document.getElementById('moved-copy-btn');
+        if (copyBtn) {
+            copyBtn.addEventListener('click', () => {
+                const done = () => {
+                    copyBtn.textContent = 'Bağlantı Kopyalandı ✓';
+                    setTimeout(() => { copyBtn.textContent = 'Bağlantıyı Kopyala'; }, 2200);
+                };
+                if (navigator.clipboard && navigator.clipboard.writeText) {
+                    navigator.clipboard.writeText(this.NEW_URL).then(done).catch(() => window.prompt('Yeni adres:', this.NEW_URL));
+                } else {
+                    window.prompt('Yeni adres:', this.NEW_URL);
+                }
+            });
+        }
+
+        // Arka plandaki oyun ekranlarını erişilebilirlik ağacından ve etkileşimden çıkar
+        document.querySelectorAll('body > *:not(#moved-overlay):not(script)').forEach(el => {
+            el.setAttribute('aria-hidden', 'true');
+            el.setAttribute('inert', '');
+        });
+
+        overlay.classList.remove('hidden');
+        if (goBtn) goBtn.focus({ preventScroll: true });
+        return true;
+    },
+
     updateUI() {
         const coins = SaveManager.data.coins;
         document.querySelectorAll('.currency-val').forEach(el => {
@@ -106,7 +221,7 @@ const App = {
         
         const hubStarsSummary = document.getElementById('hub-stars-summary');
         if (hubStarsSummary) {
-            hubStarsSummary.innerText = `📜 ${completedCount}/81 Vilayet Mührü`;
+            hubStarsSummary.innerText = `${completedCount}/81 Vilayet Mührü`;
         }
 
         const footerProgress = document.getElementById('hub-footer-progress');

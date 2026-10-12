@@ -2915,3 +2915,268 @@ html, body {
 
 
 
+/* ==========================================================================
+   ADRES TAŞIMA BİLDİRİMİ (yalnızca eski GitHub Pages adresi)
+   ========================================================================== */
+#moved-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 9999999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    background: radial-gradient(ellipse at 50% 35%, #111a2e 0%, #070b15 75%);
+    color: #f8fafc;
+    font-family: var(--font-ui);
+    text-align: center;
+    overflow-y: auto;
+    touch-action: pan-y;
+}
+
+#moved-overlay.hidden {
+    display: none !important;
+}
+
+.moved-bg {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    overflow: hidden;
+}
+
+.moved-stars {
+    position: absolute;
+    inset: -40%;
+    background-image:
+        radial-gradient(1px 1px at 12% 18%, rgba(255,255,255,0.45) 50%, transparent 51%),
+        radial-gradient(1px 1px at 68% 42%, rgba(255,255,255,0.3) 50%, transparent 51%),
+        radial-gradient(1.5px 1.5px at 38% 72%, rgba(212,175,55,0.45) 50%, transparent 51%),
+        radial-gradient(1px 1px at 84% 86%, rgba(255,255,255,0.25) 50%, transparent 51%),
+        radial-gradient(1px 1px at 52% 8%, rgba(212,175,55,0.35) 50%, transparent 51%);
+    background-size: 220px 220px;
+    opacity: 0.6;
+    animation: movedDrift 90s linear infinite;
+}
+
+.moved-ring {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: min(130vw, 860px);
+    height: min(130vw, 860px);
+    border: 1px dashed rgba(212, 175, 55, 0.09);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    animation: movedSpin 160s linear infinite;
+}
+
+.moved-ring::after {
+    content: '';
+    position: absolute;
+    inset: 14%;
+    border: 1px solid rgba(248, 250, 252, 0.035);
+    border-radius: 50%;
+}
+
+@keyframes movedDrift {
+    to { transform: translate(110px, 110px); }
+}
+
+@keyframes movedSpin {
+    to { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+.moved-card {
+    position: relative;
+    width: 100%;
+    max-width: 440px;
+    padding: 28px 26px 24px;
+    border-radius: 22px;
+    background: rgba(13, 20, 36, 0.78);
+    border: 1px solid rgba(212, 175, 55, 0.22);
+    box-shadow: 0 24px 60px rgba(0, 0, 0, 0.55);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    animation: movedRise 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes movedRise {
+    from { opacity: 0; transform: translateY(14px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+.moved-route {
+    width: 200px;
+    height: auto;
+    margin-bottom: 10px;
+}
+
+.moved-route-path {
+    animation: movedDash 2.4s linear infinite;
+}
+
+@keyframes movedDash {
+    to { stroke-dashoffset: -18; }
+}
+
+.moved-route-label {
+    font-family: var(--font-ui);
+    font-size: 8px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    fill: #64748b;
+}
+
+.moved-route-label.gold {
+    fill: #d4af37;
+}
+
+.moved-eyebrow {
+    font-family: var(--font-heading);
+    font-size: 13px;
+    font-weight: 800;
+    letter-spacing: 3px;
+    color: #d4af37;
+}
+
+.moved-badge {
+    margin: 10px 0 14px;
+    padding: 5px 12px;
+    border-radius: 999px;
+    border: 1px solid rgba(212, 175, 55, 0.35);
+    background: rgba(212, 175, 55, 0.08);
+    color: #fef08a;
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 1.8px;
+}
+
+.moved-title {
+    font-family: var(--font-heading);
+    font-size: 23px;
+    font-weight: 700;
+    line-height: 1.3;
+    color: #fdfbf7;
+    margin: 0 0 10px;
+}
+
+.moved-desc {
+    font-size: 14px;
+    line-height: 1.6;
+    color: #cbd5e1;
+    margin: 0 0 18px;
+}
+
+.moved-address {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    max-width: 100%;
+    padding: 9px 12px;
+    margin-bottom: 16px;
+    border-radius: 10px;
+    background: rgba(7, 11, 21, 0.7);
+    border: 1px solid rgba(148, 163, 184, 0.18);
+    color: #94a3b8;
+    font-size: 12px;
+    font-weight: 600;
+    user-select: text;
+    -webkit-user-select: text;
+}
+
+.moved-address svg {
+    flex-shrink: 0;
+    color: #22c55e;
+}
+
+.moved-address span {
+    overflow-wrap: anywhere;
+    color: #e2e8f0;
+}
+
+.moved-primary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    width: 100%;
+    min-height: 48px;
+    padding: 12px 18px;
+    border-radius: 12px;
+    background: linear-gradient(180deg, #d4af37 0%, #b45309 100%);
+    color: #0b132b;
+    font-size: 14px;
+    font-weight: 800;
+    letter-spacing: 0.6px;
+    text-decoration: none;
+    text-transform: uppercase;
+    box-shadow: 0 4px 0 #78350f, 0 8px 18px rgba(0, 0, 0, 0.4);
+    transition: transform 0.08s ease, box-shadow 0.08s ease;
+}
+
+.moved-primary:active {
+    transform: translateY(3px);
+    box-shadow: 0 1px 0 #78350f, 0 3px 6px rgba(0, 0, 0, 0.4);
+}
+
+.moved-primary:focus-visible,
+.moved-secondary:focus-visible {
+    outline: 2px solid #fef08a;
+    outline-offset: 3px;
+}
+
+.moved-secondary {
+    width: 100%;
+    min-height: 44px;
+    margin-top: 10px;
+    border-radius: 12px;
+    border: 1px solid rgba(212, 175, 55, 0.3);
+    background: transparent;
+    color: #d4af37;
+    font-family: var(--font-ui);
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: border-color 0.15s ease, color 0.15s ease;
+}
+
+.moved-secondary:hover {
+    border-color: #fef08a;
+    color: #fef08a;
+}
+
+.moved-note {
+    margin: 16px 0 0;
+    font-size: 12px;
+    line-height: 1.5;
+    color: #94a3b8;
+}
+
+.moved-note strong {
+    color: #e2e8f0;
+}
+
+@media (max-width: 380px) {
+    .moved-card { padding: 22px 18px 20px; }
+    .moved-title { font-size: 20px; }
+    .moved-desc { font-size: 13px; }
+}
+
+@media (min-width: 1280px) {
+    .moved-card { max-width: 500px; padding: 36px 34px 30px; }
+    .moved-title { font-size: 27px; }
+    .moved-desc { font-size: 15px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .moved-stars,
+    .moved-ring,
+    .moved-card,
+    .moved-route-path {
+        animation: none !important;
+    }
+}

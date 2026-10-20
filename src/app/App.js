@@ -179,7 +179,7 @@ const App = {
         if (note) {
             if (hasProgress) {
                 const provinces = (save.completedProvinces || []).length;
-                note.innerHTML = `İlerlemen (<strong>${provinces}/81 vilayet</strong>, <strong>${save.coins} altın</strong>) bu butonla yeni adrese otomatik aktarılır. Yer imlerini de güncellemeyi unutma.`;
+                note.innerHTML = `İlerlemen (<strong>${provinces}/81 vilayet</strong>, <strong>${save.coins} altın</strong>) bu butonla Harfiye'ye otomatik taşınır. Yer imlerini de güncellemeyi unutma.`;
             } else {
                 note.textContent = 'Yer imlerini yeni adresle güncellemeyi unutma.';
             }
@@ -189,7 +189,7 @@ const App = {
         if (copyBtn) {
             copyBtn.addEventListener('click', () => {
                 const done = () => {
-                    copyBtn.textContent = 'Bağlantı Kopyalandı ✓';
+                    copyBtn.textContent = 'Bağlantı Kopyalandı';
                     setTimeout(() => { copyBtn.textContent = 'Bağlantıyı Kopyala'; }, 2200);
                 };
                 if (navigator.clipboard && navigator.clipboard.writeText) {
@@ -206,8 +206,16 @@ const App = {
             el.setAttribute('inert', '');
         });
 
+        document.title = 'Harfiye — Yeni Adresimiz';
+
+        // Hareket azaltma tercihinde SVG (SMIL) yelkenli animasyonunu durdur
+        if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+            overlay.querySelectorAll('svg').forEach(svg => {
+                if (typeof svg.pauseAnimations === 'function') svg.pauseAnimations();
+            });
+        }
+
         overlay.classList.remove('hidden');
-        if (goBtn) goBtn.focus({ preventScroll: true });
         return true;
     },
 

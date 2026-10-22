@@ -3546,7 +3546,7 @@ html, body {
             </svg>
 
             <h1 class="moved-title" id="moved-title">Sözcük Seferî artık <em>Harfiye</em>.</h1>
-            <p class="moved-desc" id="moved-desc">Aynı yolculuk; yeni bir isim, yeni bir adres. Oyun bundan sonra yalnızca yeni limanında güncelleniyor. Bulmacalar, vilayetler ve ilerlemen seninle birlikte geliyor.</p>
+            <p class="moved-desc" id="moved-desc">Aynı yolculuk; yeni bir isim, yeni bir adres. Harfiye artık kendi alan adında ve bundan sonra yalnızca orada güncelleniyor.</p>
 
             <div class="moved-address" title="Yeni adres">
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>
@@ -7410,6 +7410,8 @@ const App = {
     OLD_HOST: 'umutcandemircan.github.io',
     NEW_URL: 'https://www.harfiye.com/',
     TRANSFER_PARAM: 'aktar',
+    // Yeni site #aktar= bağlantısını okuyabildiğinde true yapılmalı
+    SAVE_TRANSFER_ENABLED: false,
 
     init() {
         // Yeni adreste: eski adresten gelen ilerlemeyi içe aktar (SaveManager yüklenmeden önce)
@@ -7528,7 +7530,9 @@ const App = {
         let targetUrl = this.NEW_URL;
         const save = SaveManager.data;
         const score = this._progressScore(save);
-        const hasProgress = score > 0 || (save && save.coins !== SaveManager.defaultData.coins);
+        // Yeni sitenin (www.harfiye.com) #aktar desteği yoksa ilerleme taşıma vaadi gösterilmez
+        const hasProgress = this.SAVE_TRANSFER_ENABLED &&
+            (score > 0 || (save && save.coins !== SaveManager.defaultData.coins));
         if (hasProgress) {
             try {
                 targetUrl = `${this.NEW_URL}#${this.TRANSFER_PARAM}=${this._encodeSave(save)}`;

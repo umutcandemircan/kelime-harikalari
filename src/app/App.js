@@ -47,6 +47,8 @@ const App = {
     OLD_HOST: 'umutcandemircan.github.io',
     NEW_URL: 'https://www.harfiye.com/',
     TRANSFER_PARAM: 'aktar',
+    // Yeni site #aktar= bağlantısını okuyabildiğinde true yapılmalı
+    SAVE_TRANSFER_ENABLED: false,
 
     init() {
         // Yeni adreste: eski adresten gelen ilerlemeyi içe aktar (SaveManager yüklenmeden önce)
@@ -165,7 +167,9 @@ const App = {
         let targetUrl = this.NEW_URL;
         const save = SaveManager.data;
         const score = this._progressScore(save);
-        const hasProgress = score > 0 || (save && save.coins !== SaveManager.defaultData.coins);
+        // Yeni sitenin (www.harfiye.com) #aktar desteği yoksa ilerleme taşıma vaadi gösterilmez
+        const hasProgress = this.SAVE_TRANSFER_ENABLED &&
+            (score > 0 || (save && save.coins !== SaveManager.defaultData.coins));
         if (hasProgress) {
             try {
                 targetUrl = `${this.NEW_URL}#${this.TRANSFER_PARAM}=${this._encodeSave(save)}`;

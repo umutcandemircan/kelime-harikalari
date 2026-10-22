@@ -45,7 +45,7 @@ const App = {
 
     // Adres taşıma ayarları
     OLD_HOST: 'umutcandemircan.github.io',
-    NEW_URL: 'https://sozcuk-seferi.umutcan-demircan-dev.workers.dev/',
+    NEW_URL: 'https://www.harfiye.com/',
     TRANSFER_PARAM: 'aktar',
 
     init() {

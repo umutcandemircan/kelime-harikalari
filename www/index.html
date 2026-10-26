@@ -2932,280 +2932,303 @@ html, body {
 
 /* --- moved.css --- */
 /* ==========================================================================
-   TAŞINMA BİLDİRİMİ — "Sözcük Seferî artık Harfiye"
-   Yalnızca eski GitHub Pages adresinde görünür.
-   Tüm animasyonlar transform / opacity üzerinden çalışır (düşük maliyet).
+   HARFİYE PORTOLAN ÇARTASI & HARF ÇARKI (AKTARMA EKRANI)
+   Yalnızca eski GitHub Pages adresinde (umutcandemircan.github.io) görünür.
    ========================================================================== */
+
 #moved-overlay {
-    --mv-gold: #d4af37;
-    --mv-gold-soft: #f3d98b;
-    --mv-ivory: #fdfbf7;
-    --mv-navy: #0b132b;
-    --mv-ink: #070b15;
-    --mv-muted: #94a3b8;
+    --mv-ink: #050811;
+    --mv-navy-deep: #090e1c;
+    --mv-navy: #0e172a;
+    --mv-navy-card: rgba(14, 23, 42, 0.72);
+    --mv-gold: #c9a54a;
+    --mv-gold-soft: #f1dc9c;
+    --mv-gold-dark: #8a6c25;
+    --mv-ivory: #f6f1e4;
+    --mv-slate: #94a3b8;
+    --mv-slate-light: #cbd5e1;
+    --mv-muted: #64748b;
 
     position: fixed;
     inset: 0;
     z-index: 9999999;
     display: flex;
-    padding: 24px 18px;
-    background: radial-gradient(ellipse at 50% 30%, #121c33 0%, var(--mv-ink) 72%);
+    align-items: center;
+    justify-content: center;
+    padding: clamp(16px, 3.5vw, 44px);
+    background: radial-gradient(ellipse 90% 75% at 50% 32%, #121d36 0%, #080d1a 62%, var(--mv-ink) 100%);
     color: var(--mv-ivory);
     font-family: var(--font-ui);
-    text-align: center;
     overflow-y: auto;
-    touch-action: pan-y;
+    overflow-x: hidden;
+    box-sizing: border-box;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
 
 #moved-overlay.hidden {
     display: none !important;
 }
 
-/* ---------- Arka plan: yıldızlar, harita ızgarası, pusula halkası ---------- */
-.moved-bg {
+/* ---------- 1. GÖKYÜZÜ, YILDIZLAR VE GREN DOKUSU ---------- */
+.mv-sky {
     position: fixed;
     inset: 0;
     pointer-events: none;
+    z-index: 0;
     overflow: hidden;
 }
 
-.moved-stars {
+.mv-stars {
     position: absolute;
-    inset: -40%;
+    inset: -30%;
     background-image:
-        radial-gradient(1px 1px at 12% 18%, rgba(255,255,255,0.5) 50%, transparent 51%),
-        radial-gradient(1px 1px at 68% 42%, rgba(255,255,255,0.32) 50%, transparent 51%),
-        radial-gradient(1.5px 1.5px at 38% 72%, rgba(212,175,55,0.5) 50%, transparent 51%),
-        radial-gradient(1px 1px at 84% 86%, rgba(255,255,255,0.28) 50%, transparent 51%),
-        radial-gradient(1px 1px at 52% 8%, rgba(212,175,55,0.4) 50%, transparent 51%),
-        radial-gradient(1px 1px at 24% 54%, rgba(255,255,255,0.22) 50%, transparent 51%);
-    background-size: 240px 240px;
-    opacity: 0.65;
-    animation: mvDrift 110s linear infinite;
+        radial-gradient(1px 1px at 15% 20%, rgba(255, 255, 255, 0.55) 50%, transparent 51%),
+        radial-gradient(1px 1px at 70% 38%, rgba(255, 255, 255, 0.4) 50%, transparent 51%),
+        radial-gradient(1.5px 1.5px at 35% 68%, rgba(201, 165, 74, 0.6) 50%, transparent 51%),
+        radial-gradient(1px 1px at 82% 82%, rgba(255, 255, 255, 0.35) 50%, transparent 51%),
+        radial-gradient(1px 1px at 50% 12%, rgba(201, 165, 74, 0.45) 50%, transparent 51%),
+        radial-gradient(1px 1px at 28% 48%, rgba(255, 255, 255, 0.3) 50%, transparent 51%);
+    background-size: 260px 260px;
+    opacity: 0.6;
+    animation: mvDrift 140s linear infinite;
     will-change: transform;
 }
 
-.moved-stars.layer-2 {
+.mv-stars-2 {
     background-size: 380px 380px;
     opacity: 0.35;
-    animation-duration: 170s;
-    animation-direction: reverse;
+    animation: mvDrift 200s linear infinite reverse;
 }
 
-.moved-grid {
+.mv-grain {
     position: absolute;
-    left: 50%;
-    top: 50%;
-    width: min(150vw, 1100px);
-    height: auto;
-    transform: translate(-50%, -50%);
+    inset: 0;
+    background-image: radial-gradient(rgba(201, 165, 74, 0.04) 1px, transparent 1px);
+    background-size: 24px 24px;
     opacity: 0.5;
-}
-
-.moved-ring {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: min(125vw, 820px);
-    height: min(125vw, 820px);
-    border: 1px dashed rgba(212, 175, 55, 0.1);
-    border-radius: 50%;
-    transform: translate(-50%, -50%);
-    animation: mvSpin 180s linear infinite;
-    will-change: transform;
-}
-
-.moved-ring::before,
-.moved-ring::after {
-    content: '';
-    position: absolute;
-    border-radius: 50%;
-}
-
-.moved-ring::before {
-    inset: 12%;
-    border: 1px solid rgba(248, 250, 252, 0.035);
-}
-
-/* Halka üzerinde dönen küçük altın işaret */
-.moved-ring::after {
-    width: 6px;
-    height: 6px;
-    top: -3px;
-    left: calc(50% - 3px);
-    background: var(--mv-gold);
-    opacity: 0.55;
-}
-
-@keyframes mvDrift {
-    to { transform: translate(120px, 120px); }
-}
-
-@keyframes mvSpin {
-    to { transform: translate(-50%, -50%) rotate(360deg); }
-}
-
-/* ---------- Kart ---------- */
-.moved-card {
-    position: relative;
-    width: 100%;
-    max-width: 460px;
-    padding: 30px 26px 24px;
-    border-radius: 22px;
-    background: rgba(12, 19, 35, 0.8);
-    border: 1px solid rgba(212, 175, 55, 0.22);
-    box-shadow: 0 30px 70px rgba(0, 0, 0, 0.55);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin: auto; /* taşma durumunda üst kısım kesilmeden ortalar */
-    animation: mvRise 0.7s cubic-bezier(0.16, 1, 0.3, 1) both;
-}
-
-/* Köşe süsleri (eski harita çerçevesi) */
-.moved-card::before,
-.moved-card::after {
-    content: '';
-    position: absolute;
-    width: 18px;
-    height: 18px;
-    border-color: rgba(212, 175, 55, 0.45);
-    border-style: solid;
     pointer-events: none;
 }
 
-.moved-card::before {
-    top: 10px;
-    left: 10px;
-    border-width: 1px 0 0 1px;
-    border-top-left-radius: 6px;
+@keyframes mvDrift {
+    to { transform: translate(140px, 140px); }
 }
 
-.moved-card::after {
-    bottom: 10px;
-    right: 10px;
-    border-width: 0 1px 1px 0;
-    border-bottom-right-radius: 6px;
+/* ---------- 2. DENİZCİLİK HARİTASI ÇERÇEVESİ (BORDÜR & KÖŞELER) ---------- */
+.mv-frame {
+    position: fixed;
+    inset: clamp(8px, 1.8vw, 24px);
+    pointer-events: none;
+    z-index: 1;
+    border: 1px solid rgba(201, 165, 74, 0.16);
+    box-sizing: border-box;
 }
 
-@keyframes mvRise {
-    from { opacity: 0; transform: translateY(18px) scale(0.985); }
-    to   { opacity: 1; transform: none; }
-}
-
-.moved-eyebrow {
-    font-size: 10.5px;
-    font-weight: 800;
-    letter-spacing: 2.6px;
+.mv-corner {
+    position: absolute;
+    width: 24px;
+    height: 24px;
     color: var(--mv-gold);
-    opacity: 0;
-    animation: mvFade 0.6s ease 0.25s forwards;
+    opacity: 0.65;
 }
 
-/* ---------- İsim değişimi sahnesi ---------- */
-.moved-rename {
+.mv-c-tl { top: -1px; left: -1px; }
+.mv-c-tr { top: -1px; right: -1px; transform: scaleX(-1); }
+.mv-c-bl { bottom: -1px; left: -1px; transform: scaleY(-1); }
+.mv-c-br { bottom: -1px; right: -1px; transform: scale(-1); }
+
+.mv-mark {
+    position: absolute;
+    font-family: var(--font-heading);
+    font-size: clamp(8px, 0.8vw, 9.5px);
+    font-weight: 700;
+    letter-spacing: 2px;
+    color: rgba(201, 165, 74, 0.45);
+    text-transform: uppercase;
+}
+
+.mv-m-tl { top: 8px; left: 32px; }
+.mv-m-tr { top: 8px; right: 32px; }
+.mv-m-bl { bottom: 8px; left: 32px; }
+.mv-m-br {
+    bottom: 8px;
+    right: 32px;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.mv-m-br svg {
+    color: rgba(201, 165, 74, 0.4);
+}
+
+@media (max-width: 820px) {
+    .mv-frame { inset: 6px; }
+    .mv-mark { display: none; }
+}
+
+/* ---------- 3. ANA SAHNE (STAGE) ---------- */
+.mv-stage {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    max-width: 1160px;
+    margin: auto;
+    display: grid;
+    grid-template-columns: minmax(320px, 1.05fr) minmax(320px, 0.95fr);
+    align-items: center;
+    gap: clamp(24px, 4vw, 56px);
+    box-sizing: border-box;
+    padding: clamp(8px, 2vw, 24px) 0;
+}
+
+/* ---------- 4. METİN BÖLÜMÜ (COPY) ---------- */
+.mv-copy {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    margin: 16px 0 6px;
+    align-items: flex-start;
+    text-align: left;
+    max-width: 540px;
 }
 
-.moved-oldname {
+.mv-rise {
+    opacity: 0;
+    transform: translateY(16px);
+    animation: mvFadeUp 0.75s cubic-bezier(0.16, 1, 0.3, 1) var(--t, 0s) forwards;
+}
+
+@keyframes mvFadeUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.mv-eyebrow {
+    font-family: var(--font-heading);
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 3.5px;
+    color: var(--mv-gold);
+    text-transform: uppercase;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 12px;
+}
+
+.mv-eyebrow::after {
+    content: '';
+    display: inline-block;
+    width: 28px;
+    height: 1px;
+    background: linear-gradient(90deg, var(--mv-gold), transparent);
+}
+
+.mv-title {
+    margin: 0 0 16px;
+    line-height: 1.22;
+    width: 100%;
+}
+
+.mv-old {
     position: relative;
     display: inline-block;
     font-family: var(--font-heading);
-    font-size: 15px;
+    font-size: clamp(15px, 1.8vw, 19px);
     font-weight: 700;
-    letter-spacing: 3px;
-    color: #cbd5e1;
-    padding: 0 4px;
-    opacity: 0;
-    animation:
-        mvFade 0.5s ease 0.45s forwards,
-        mvDim 0.6s ease 1.25s forwards;
+    letter-spacing: 2.8px;
+    color: #94a3b8;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+    opacity: 0.85;
 }
 
-/* Eski ismin üstünü çizen altın kalem darbesi */
-.moved-oldname::after {
+.mv-old::after {
     content: '';
     position: absolute;
     left: -2px;
     right: -2px;
     top: 52%;
-    height: 1.5px;
+    height: 1.8px;
     background: var(--mv-gold);
     transform: scaleX(0);
     transform-origin: left center;
-    animation: mvStrike 0.55s cubic-bezier(0.65, 0, 0.35, 1) 0.95s forwards;
+    animation: mvStrike 0.6s cubic-bezier(0.65, 0, 0.35, 1) 0.9s forwards,
+               mvDimStrike 0.8s ease 1.6s forwards;
 }
 
 @keyframes mvStrike {
     to { transform: scaleX(1); }
 }
 
-@keyframes mvDim {
+@keyframes mvDimStrike {
     to { opacity: 0.45; }
 }
 
-.moved-arrow {
-    width: 14px;
-    height: 22px;
-    margin: 8px 0 10px;
-    color: var(--mv-gold);
-    opacity: 0;
-    animation: mvFade 0.4s ease 1.35s forwards;
+.mv-old-l {
+    display: inline-block;
+    animation: mvLetterDim 0.5s ease 1.3s forwards;
 }
 
-.moved-arrow line {
-    stroke-dasharray: 3 3;
-    animation: mvDashDown 1.2s linear infinite;
+@keyframes mvLetterDim {
+    to { opacity: 0.55; color: #64748b; }
 }
 
-@keyframes mvDashDown {
-    to { stroke-dashoffset: -12; }
+/* Ekran okuyucu gizli metni */
+.mv-sr {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    border: 0;
 }
 
-/* Harf karoları: H A R F İ Y E */
-.moved-tiles {
+/* Harfiye Harf Taşları (Tiles) */
+.mv-tiles {
     display: flex;
-    gap: clamp(3px, 1.2vw, 7px);
-    perspective: 600px;
+    gap: clamp(3px, 1.2vw, 8px);
+    perspective: 700px;
+    margin-top: 10px;
+    padding-bottom: 4px;
+    max-width: 100%;
 }
 
-.moved-tile {
+.mv-tile {
     position: relative;
     display: grid;
     place-items: center;
-    width: clamp(30px, 9vw, 46px);
-    height: clamp(36px, 10.5vw, 52px);
+    width: clamp(30px, 4.4vw, 48px);
+    height: clamp(38px, 5.4vw, 58px);
     border-radius: 9px;
-    background: linear-gradient(180deg, #fdfbf7 0%, #efe6d2 100%);
-    color: var(--mv-navy);
+    background: linear-gradient(180deg, #fdfbf7 0%, #ede3ce 100%);
+    color: #0c1527;
     font-family: var(--font-heading);
-    font-size: clamp(18px, 5.4vw, 27px);
-    font-weight: 800;
+    font-size: clamp(18px, 2.6vw, 29px);
+    font-weight: 900;
     line-height: 1;
-    box-shadow: 0 3px 0 #b8a27a, 0 8px 16px rgba(0, 0, 0, 0.35);
+    box-shadow: 0 4px 0 #b39b6e, 0 10px 24px rgba(0, 0, 0, 0.45);
     overflow: hidden;
     opacity: 0;
-    transform: rotateX(-90deg) translateY(-6px);
+    transform: rotateX(-90deg) translateY(-8px);
     transform-origin: 50% 0%;
-    animation: mvTileIn 0.55s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
-    animation-delay: calc(1.5s + var(--i) * 0.09s);
+    animation: mvTileIn 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+    animation-delay: calc(1.7s + var(--i) * 0.09s);
+    user-select: none;
 }
 
-/* Karoların üzerinden geçen ince ışık */
-.moved-tile::after {
+.mv-tile::after {
     content: '';
     position: absolute;
     inset: -20% auto -20% -60%;
-    width: 40%;
+    width: 45%;
     background: linear-gradient(100deg, transparent, rgba(255, 255, 255, 0.75), transparent);
-    transform: translateX(0) skewX(-12deg);
-    animation: mvShine 5.5s ease-in-out infinite;
-    animation-delay: calc(3s + var(--i) * 0.08s);
+    transform: translateX(0) skewX(-14deg);
+    animation: mvShine 6s ease-in-out infinite;
+    animation-delay: calc(3.6s + var(--i) * 0.1s);
 }
 
 @keyframes mvTileIn {
@@ -3213,258 +3236,694 @@ html, body {
 }
 
 @keyframes mvShine {
-    0%, 70% { transform: translateX(0) skewX(-12deg); }
-    85%, 100% { transform: translateX(420%) skewX(-12deg); }
+    0%, 72% { transform: translateX(0) skewX(-14deg); }
+    88%, 100% { transform: translateX(450%) skewX(-14deg); }
 }
 
-.moved-tagline {
-    margin-top: 12px;
-    font-size: 11px;
-    font-weight: 700;
-    letter-spacing: 2px;
-    color: var(--mv-gold-soft);
-    opacity: 0;
-    animation: mvFade 0.6s ease 2.3s forwards;
+.mv-desc {
+    font-size: clamp(14px, 1.15vw, 15.5px);
+    line-height: 1.7;
+    color: var(--mv-slate-light);
+    margin: 0 0 20px;
+    max-width: 520px;
 }
 
-/* ---------- Rota: eski liman → yeni liman ---------- */
-.moved-route {
-    width: 100%;
-    max-width: 280px;
-    height: auto;
-    margin: 14px 0 4px;
-    opacity: 0;
-    animation: mvFade 0.6s ease 2.1s forwards;
-}
-
-.moved-route-path {
-    animation: mvDash 2.2s linear infinite;
-}
-
-@keyframes mvDash {
-    to { stroke-dashoffset: -18; }
-}
-
-.moved-route-label {
-    font-family: var(--font-ui);
-    font-size: 8px;
-    font-weight: 800;
-    letter-spacing: 1.4px;
-    fill: #64748b;
-}
-
-.moved-route-label.gold {
-    fill: var(--mv-gold);
-}
-
-.moved-port-pulse {
-    transform-box: fill-box;
-    transform-origin: center;
-    animation: mvPulse 2.4s ease-out infinite;
-}
-
-@keyframes mvPulse {
-    0%   { transform: scale(0.6); opacity: 0.7; }
-    100% { transform: scale(2.2); opacity: 0; }
-}
-
-/* ---------- Metinler ---------- */
-.moved-title {
-    font-family: var(--font-heading);
-    font-size: 22px;
-    font-weight: 700;
-    line-height: 1.3;
-    color: var(--mv-ivory);
-    margin: 6px 0 10px;
-}
-
-.moved-title em {
-    font-style: normal;
-    color: var(--mv-gold);
-}
-
-.moved-desc {
-    font-size: 14px;
-    line-height: 1.65;
-    color: #cbd5e1;
-    margin: 0 0 18px;
-}
-
-.moved-title,
-.moved-desc,
-.moved-address,
-.moved-actions,
-.moved-note,
-.moved-sign {
-    opacity: 0;
-    animation: mvFadeUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-}
-
-.moved-title   { animation-delay: 2.35s; }
-.moved-desc    { animation-delay: 2.45s; }
-.moved-address { animation-delay: 2.55s; }
-.moved-actions { animation-delay: 2.65s; }
-.moved-note    { animation-delay: 2.75s; }
-.moved-sign    { animation-delay: 2.85s; }
-
-@keyframes mvFade {
-    to { opacity: 1; }
-}
-
-@keyframes mvFadeUp {
-    from { opacity: 0; transform: translateY(8px); }
-    to   { opacity: 1; transform: none; }
-}
-
-.moved-address {
+/* Adres Rozeti */
+.mv-address {
     display: inline-flex;
     align-items: center;
-    gap: 8px;
+    gap: 12px;
+    padding: 8px 16px;
+    border-radius: 12px;
+    background: rgba(8, 14, 28, 0.78);
+    border: 1px solid rgba(201, 165, 74, 0.28);
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.35);
+    margin-bottom: 22px;
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    box-sizing: border-box;
     max-width: 100%;
-    padding: 9px 12px;
-    margin-bottom: 16px;
-    border-radius: 10px;
-    background: rgba(7, 11, 21, 0.7);
-    border: 1px solid rgba(148, 163, 184, 0.18);
-    color: var(--mv-muted);
-    font-size: 12px;
-    font-weight: 600;
+}
+
+.mv-address-label {
+    font-family: var(--font-heading);
+    font-size: 9.5px;
+    font-weight: 800;
+    letter-spacing: 2px;
+    color: var(--mv-gold);
+    text-transform: uppercase;
+    padding-right: 10px;
+    border-right: 1px solid rgba(201, 165, 74, 0.22);
+    white-space: nowrap;
+}
+
+.mv-address-url {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    font-size: 13.5px;
+    font-weight: 700;
+    color: #e2e8f0;
     user-select: text;
     -webkit-user-select: text;
-}
-
-.moved-address svg {
-    flex-shrink: 0;
-    color: #22c55e;
-}
-
-.moved-address span {
     overflow-wrap: anywhere;
-    color: #e2e8f0;
 }
 
-.moved-actions {
+.mv-address-url svg {
+    color: #22c55e;
+    flex-shrink: 0;
+}
+
+/* Eylem Butonları */
+.mv-actions {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    flex-wrap: wrap;
     width: 100%;
+    margin-bottom: 18px;
 }
 
-.moved-primary {
+.mv-primary {
     position: relative;
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    gap: 8px;
-    width: 100%;
-    min-height: 50px;
-    padding: 12px 18px;
-    border-radius: 12px;
-    background: linear-gradient(180deg, #e2bf4a 0%, #b8860b 100%);
-    color: var(--mv-navy);
+    gap: 10px;
+    min-height: 52px;
+    padding: 13px 26px;
+    border-radius: 14px;
+    background: linear-gradient(180deg, #e4bf4d 0%, #b8860b 100%);
+    color: #070d1d;
+    font-family: var(--font-heading);
     font-size: 14px;
-    font-weight: 800;
+    font-weight: 900;
     letter-spacing: 0.8px;
     text-decoration: none;
     text-transform: uppercase;
-    box-shadow: 0 4px 0 #7a5a12, 0 10px 20px rgba(0, 0, 0, 0.4);
+    box-shadow: 0 4px 0 #785810, 0 12px 28px rgba(0, 0, 0, 0.45);
     overflow: hidden;
-    transition: transform 0.08s ease, box-shadow 0.08s ease;
+    transition: transform 0.12s ease, box-shadow 0.12s ease;
+    cursor: pointer;
+    box-sizing: border-box;
 }
 
-.moved-primary::after {
+.mv-primary::after {
     content: '';
     position: absolute;
     top: 0;
     bottom: 0;
     left: -40%;
-    width: 30%;
-    background: linear-gradient(100deg, transparent, rgba(255, 255, 255, 0.45), transparent);
-    transform: skewX(-15deg);
-    animation: mvBtnShine 4s ease-in-out 3.4s infinite;
+    width: 35%;
+    background: linear-gradient(100deg, transparent, rgba(255, 255, 255, 0.5), transparent);
+    transform: skewX(-16deg);
+    animation: mvBtnShine 4.5s ease-in-out 3.8s infinite;
 }
 
 @keyframes mvBtnShine {
-    0%, 75% { transform: translateX(0) skewX(-15deg); }
-    100%    { transform: translateX(520%) skewX(-15deg); }
+    0%, 75% { transform: translateX(0) skewX(-16deg); }
+    100%    { transform: translateX(520%) skewX(-16deg); }
 }
 
-.moved-primary svg {
+.mv-primary svg {
     transition: transform 0.2s ease;
+    flex-shrink: 0;
 }
 
-.moved-primary:hover svg {
-    transform: translateX(3px);
+.mv-primary:hover svg {
+    transform: translateX(4px);
 }
 
-.moved-primary:active {
+.mv-primary:active {
     transform: translateY(3px);
-    box-shadow: 0 1px 0 #7a5a12, 0 3px 6px rgba(0, 0, 0, 0.4);
+    box-shadow: 0 1px 0 #785810, 0 4px 8px rgba(0, 0, 0, 0.45);
 }
 
-.moved-primary:focus-visible,
-.moved-secondary:focus-visible {
+.mv-primary:focus-visible,
+.mv-secondary:focus-visible {
     outline: 2px solid #fef08a;
     outline-offset: 3px;
 }
 
-.moved-secondary {
-    width: 100%;
-    min-height: 44px;
-    margin-top: 10px;
-    border-radius: 12px;
-    border: 1px solid rgba(212, 175, 55, 0.3);
-    background: transparent;
-    color: var(--mv-gold);
+.mv-secondary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    min-height: 52px;
+    padding: 13px 20px;
+    border-radius: 14px;
+    background: rgba(14, 23, 42, 0.65);
+    border: 1px solid rgba(201, 165, 74, 0.32);
+    color: var(--mv-gold-soft);
     font-family: var(--font-ui);
-    font-size: 13px;
+    font-size: 13.5px;
     font-weight: 700;
     cursor: pointer;
-    transition: border-color 0.15s ease, color 0.15s ease;
+    transition: border-color 0.18s ease, color 0.18s ease, background 0.18s ease;
+    box-sizing: border-box;
 }
 
-.moved-secondary:hover {
+.mv-secondary svg {
+    flex-shrink: 0;
+}
+
+.mv-secondary:hover {
     border-color: #fef08a;
     color: #fef08a;
+    background: rgba(201, 165, 74, 0.1);
 }
 
-.moved-note {
-    margin: 16px 0 0;
+.mv-note {
     font-size: 12px;
     line-height: 1.55;
-    color: var(--mv-muted);
+    color: var(--mv-slate);
+    margin: 0 0 16px;
 }
 
-.moved-note strong {
-    color: #e2e8f0;
-}
-
-.moved-sign {
-    margin: 16px 0 0;
-    padding-top: 14px;
-    width: 100%;
-    border-top: 1px solid rgba(212, 175, 55, 0.12);
-    font-size: 11.5px;
-    line-height: 1.55;
-    color: #7c8aa0;
+.mv-sign {
+    font-size: 12px;
+    line-height: 1.65;
+    color: #728197;
     font-style: italic;
+    border-top: 1px solid rgba(201, 165, 74, 0.14);
+    padding-top: 14px;
+    max-width: 480px;
+    margin: 0;
 }
 
-/* ---------- Duyarlı ölçüler ---------- */
-@media (max-width: 380px) {
-    .moved-card { padding: 24px 16px 20px; }
-    .moved-title { font-size: 19px; }
-    .moved-desc { font-size: 13px; }
+/* ---------- 5. PORTOLAN HARİTASI & ÇARK (CHART) ---------- */
+.mv-chart {
+    position: relative;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    perspective: 1000px;
+    margin: 0;
+    box-sizing: border-box;
 }
 
-@media (max-height: 700px) and (min-width: 600px), (max-height: 640px) {
-    .moved-route { display: none; }
+.mv-chart-sq {
+    position: relative;
+    width: 100%;
+    max-width: 480px;
+    aspect-ratio: 1 / 1;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    background: radial-gradient(circle at 50% 50%, rgba(18, 29, 54, 0.65) 0%, rgba(8, 13, 26, 0.85) 68%, transparent 100%);
+    box-shadow: 0 24px 64px rgba(0, 0, 0, 0.65);
+    box-sizing: border-box;
 }
 
-@media (min-width: 1280px) {
-    .moved-card { max-width: 520px; padding: 38px 36px 30px; }
-    .moved-title { font-size: 26px; }
-    .moved-desc { font-size: 15px; }
+.mv-par {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    transition: transform 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+    will-change: transform;
 }
 
-/* ---------- Hareket azaltma tercihi ---------- */
+.mv-par svg {
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+
+/* Portolan Ağı */
+.mv-net-ring {
+    fill: none;
+    stroke: rgba(201, 165, 74, 0.22);
+    stroke-dasharray: 4 6;
+    stroke-width: 1.2;
+}
+
+.mv-net-lines {
+    fill: none;
+    stroke: rgba(201, 165, 74, 0.08);
+    stroke-width: 0.6;
+}
+
+.mv-rhumb {
+    fill: none;
+    stroke: rgba(201, 165, 74, 0.18);
+    stroke-width: 0.9;
+    stroke-dasharray: 1;
+    stroke-dashoffset: 1;
+    animation: mvDrawLine 1.8s ease forwards;
+    animation-delay: calc(0.35s + var(--i) * 0.08s);
+}
+
+.mv-rhumb.is-cardinal {
+    stroke: rgba(241, 220, 156, 0.38);
+    stroke-width: 1.3;
+}
+
+@keyframes mvDrawLine {
+    to { stroke-dashoffset: 0; }
+}
+
+.mv-net-dots circle {
+    fill: var(--mv-gold);
+    opacity: 0.55;
+}
+
+/* Pusula Gülü */
+.mv-rose-spin {
+    animation: mvSpin 260s linear infinite;
+    transform-origin: 300px 300px;
+    will-change: transform;
+}
+
+@keyframes mvSpin {
+    to { transform: rotate(360deg); }
+}
+
+.mv-rose-ring {
+    fill: none;
+    stroke: rgba(201, 165, 74, 0.28);
+    stroke-width: 1;
+}
+
+.mv-rose-ring.is-faint {
+    stroke: rgba(201, 165, 74, 0.12);
+}
+
+.mv-tick {
+    fill: none;
+    stroke: rgba(201, 165, 74, 0.25);
+    stroke-width: 0.8;
+}
+
+.mv-tick.is-mid {
+    stroke: rgba(201, 165, 74, 0.45);
+    stroke-width: 1.1;
+}
+
+.mv-tick.is-major {
+    stroke: rgba(241, 220, 156, 0.75);
+    stroke-width: 1.5;
+}
+
+.mv-star-l {
+    fill: #c9a54a;
+    opacity: 0.85;
+}
+
+.mv-star-r {
+    fill: #8a6c25;
+    opacity: 0.95;
+}
+
+.mv-star-l.is-north {
+    fill: #f1dc9c;
+    opacity: 1;
+}
+
+.mv-rose-labels text {
+    font-family: var(--font-heading);
+    font-size: 13.5px;
+    font-weight: 800;
+    fill: var(--mv-gold);
+    letter-spacing: 1px;
+}
+
+/* Harf Çarkı */
+.mv-wheel-face {
+    stroke: rgba(201, 165, 74, 0.4);
+    stroke-width: 2.2;
+    filter: drop-shadow(0 14px 28px rgba(0, 0, 0, 0.65));
+}
+
+.mv-wheel-inner {
+    fill: none;
+    stroke: rgba(201, 165, 74, 0.28);
+    stroke-width: 1.2;
+    stroke-dasharray: 2 4;
+}
+
+/* HARFİYE Bağlantı İzi */
+.mv-trace {
+    fill: none;
+    stroke: #f1dc9c;
+    stroke-width: 3.6;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    filter: drop-shadow(0 0 7px rgba(241, 220, 156, 0.75));
+    stroke-dasharray: 1;
+    stroke-dashoffset: 1;
+    animation: mvTraceLoop 9s cubic-bezier(0.42, 0, 0.25, 1) infinite;
+}
+
+@keyframes mvTraceLoop {
+    0%, 9% {
+        stroke-dashoffset: 1;
+        opacity: 0;
+    }
+    11% {
+        stroke-dashoffset: 1;
+        opacity: 1;
+    }
+    28% {
+        stroke-dashoffset: 0;
+        opacity: 1;
+    }
+    38% {
+        stroke-dashoffset: 0;
+        opacity: 0.9;
+    }
+    45%, 100% {
+        stroke-dashoffset: 0;
+        opacity: 0;
+    }
+}
+
+/* Çark Harf Düğümleri */
+.mv-node-bg {
+    fill: #15223a;
+    stroke: rgba(201, 165, 74, 0.45);
+    stroke-width: 2.2;
+    transition: all 0.25s ease;
+}
+
+.mv-node-tx {
+    font-family: var(--font-heading);
+    font-size: 20px;
+    font-weight: 900;
+    fill: var(--mv-ivory);
+    pointer-events: none;
+}
+
+.mv-node {
+    animation: mvNodeLight 9s ease-in-out infinite;
+    animation-delay: var(--d, 0s);
+}
+
+@keyframes mvNodeLight {
+    0%, 2% {
+        filter: none;
+    }
+    4%, 18% {
+        filter: drop-shadow(0 0 10px rgba(241, 220, 156, 0.85));
+    }
+    4% {
+        transform: scale(1.08);
+        transform-origin: center;
+    }
+    18% {
+        transform: scale(1);
+    }
+    24%, 100% {
+        filter: none;
+        transform: none;
+    }
+}
+
+/* Posta / Liman Mührü */
+.mv-stamp {
+    position: absolute;
+    top: 2%;
+    left: 2%;
+    width: 28%;
+    height: 28%;
+    pointer-events: none;
+}
+
+.mv-stamp-ring {
+    fill: none;
+    stroke: rgba(201, 165, 74, 0.4);
+    stroke-width: 1.2;
+}
+
+.mv-stamp-ring.is-bold {
+    stroke-width: 2.2;
+    stroke: rgba(201, 165, 74, 0.5);
+}
+
+.mv-stamp-ring.is-dash {
+    stroke-dasharray: 3 3;
+}
+
+.mv-stamp-arc {
+    font-family: var(--font-heading);
+    font-size: 8px;
+    font-weight: 800;
+    letter-spacing: 1.8px;
+    fill: rgba(201, 165, 74, 0.55);
+}
+
+.mv-stamp-star {
+    fill: var(--mv-gold);
+    opacity: 0.65;
+}
+
+.mv-stamp-name {
+    font-family: var(--font-heading);
+    font-size: 15px;
+    font-weight: 900;
+    letter-spacing: 2.5px;
+    fill: var(--mv-gold);
+    opacity: 0.75;
+}
+
+.mv-stamp-tld {
+    font-family: var(--font-heading);
+    font-size: 9.5px;
+    font-weight: 800;
+    letter-spacing: 3px;
+    fill: rgba(201, 165, 74, 0.55);
+}
+
+/* Seyrüsefer Rotası (Route) */
+.mv-route {
+    width: 100%;
+    max-width: 440px;
+    height: auto;
+    margin-top: 14px;
+    box-sizing: border-box;
+}
+
+.mv-route-path {
+    fill: none;
+    stroke: var(--mv-gold);
+    stroke-width: 1.5;
+    stroke-dasharray: 4 6;
+    stroke-linecap: round;
+    opacity: 0.8;
+    animation: mvDashRoute 2.4s linear infinite;
+}
+
+@keyframes mvDashRoute {
+    to { stroke-dashoffset: -20; }
+}
+
+.mv-port {
+    fill: none;
+    stroke: #64748b;
+    stroke-width: 1.6;
+}
+
+.mv-port.is-new {
+    fill: #0c1527;
+    stroke: var(--mv-gold);
+}
+
+.mv-port-dot {
+    fill: #64748b;
+}
+
+.mv-port-dot.is-new {
+    fill: var(--mv-gold-soft);
+}
+
+.mv-port-pulse {
+    fill: none;
+    stroke: var(--mv-gold);
+    stroke-width: 1.2;
+    transform-origin: 560px 46px;
+    animation: mvPulseBeacon 2.4s ease-out infinite;
+}
+
+@keyframes mvPulseBeacon {
+    0%   { transform: scale(0.6); opacity: 0.8; }
+    100% { transform: scale(2.4); opacity: 0; }
+}
+
+.mv-route-label {
+    font-family: var(--font-ui);
+    font-size: 8.5px;
+    font-weight: 800;
+    letter-spacing: 1.6px;
+    fill: #64748b;
+}
+
+.mv-route-label.is-new {
+    fill: var(--mv-gold);
+}
+
+/* ---------- 6. DUYARLI DÜZEN (RESPONSIVE BREAKPOINTS) ---------- */
+
+/* Tablet ve Dikey Ekranlar */
+@media (max-width: 960px) {
+    #moved-overlay {
+        padding: 24px 18px;
+        align-items: flex-start;
+    }
+
+    .mv-stage {
+        grid-template-columns: 1fr;
+        max-width: 520px;
+        gap: 28px;
+        text-align: center;
+        margin: auto;
+    }
+
+    .mv-copy {
+        align-items: center;
+        text-align: center;
+        max-width: 100%;
+    }
+
+    .mv-eyebrow::after {
+        display: none;
+    }
+
+    .mv-tiles {
+        justify-content: center;
+    }
+
+    .mv-actions {
+        justify-content: center;
+    }
+
+    .mv-chart {
+        order: -1;
+    }
+
+    .mv-chart-sq {
+        max-width: 360px;
+    }
+}
+
+/* Telefonlar (<= 560px) */
+@media (max-width: 560px) {
+    #moved-overlay {
+        padding: 18px 14px;
+    }
+
+    .mv-chart-sq {
+        max-width: min(290px, 78vw);
+    }
+
+    .mv-route {
+        max-width: min(320px, 88vw);
+    }
+
+    .mv-actions {
+        flex-direction: column;
+        gap: 10px;
+        width: 100%;
+    }
+
+    .mv-primary,
+    .mv-secondary {
+        width: 100%;
+        min-height: 48px;
+        font-size: 13.5px;
+    }
+
+    .mv-desc {
+        font-size: 13.5px;
+        line-height: 1.6;
+    }
+
+    .mv-address {
+        padding: 6px 12px;
+        font-size: 12px;
+    }
+
+    .mv-address-label {
+        font-size: 8.5px;
+        letter-spacing: 1.5px;
+    }
+
+    .mv-address-url {
+        font-size: 12.5px;
+    }
+
+    .mv-sign {
+        font-size: 11px;
+    }
+}
+
+/* Çok Küçük Telefonlar (<= 360px) */
+@media (max-width: 360px) {
+    .mv-tile {
+        width: 28px;
+        height: 36px;
+        font-size: 17px;
+    }
+
+    .mv-tiles {
+        gap: 2px;
+    }
+
+    .mv-chart-sq {
+        max-width: 250px;
+    }
+}
+
+/* Yatay Telefonlar & Kısa Ekranlar (Landscape) */
+@media (max-height: 620px) and (min-width: 680px) {
+    #moved-overlay {
+        padding: 16px 24px;
+        align-items: center;
+    }
+
+    .mv-stage {
+        grid-template-columns: 1.15fr 0.85fr;
+        max-width: 900px;
+        gap: 24px;
+        text-align: left;
+    }
+
+    .mv-copy {
+        align-items: flex-start;
+        text-align: left;
+        order: 1;
+    }
+
+    .mv-chart {
+        order: 2;
+    }
+
+    .mv-chart-sq {
+        max-width: 240px;
+    }
+
+    .mv-route {
+        display: none;
+    }
+
+    .mv-desc {
+        font-size: 13px;
+        margin-bottom: 12px;
+    }
+
+    .mv-actions {
+        margin-bottom: 10px;
+    }
+
+    .mv-sign {
+        display: none;
+    }
+}
+
+/* ---------- 7. HAREKET AZALTMA TERCİHİ (ACCESSIBILITY) ---------- */
 @media (prefers-reduced-motion: reduce) {
     #moved-overlay *,
     #moved-overlay *::before,
@@ -3472,14 +3931,24 @@ html, body {
         animation: none !important;
         transition: none !important;
     }
-    .moved-eyebrow, .moved-oldname, .moved-arrow, .moved-tile, .moved-tagline,
-    .moved-route, .moved-title, .moved-desc, .moved-address, .moved-actions,
-    .moved-note, .moved-sign {
+
+    .mv-rise,
+    .mv-tile,
+    .mv-trace,
+    .mv-old-l,
+    .mv-node {
         opacity: 1 !important;
         transform: none !important;
     }
-    .moved-oldname { opacity: 0.45 !important; }
-    .moved-oldname::after { transform: scaleX(1) !important; }
+
+    .mv-old::after {
+        transform: scaleX(1) !important;
+        opacity: 0.5 !important;
+    }
+
+    .mv-trace {
+        stroke-dashoffset: 0 !important;
+    }
 }
 
 
@@ -3488,82 +3957,160 @@ html, body {
 <body>
     <!-- TAŞINMA BİLDİRİMİ: Sözcük Seferî → Harfiye (yalnızca eski GitHub Pages adresinde görünür) -->
     <div id="moved-overlay" class="hidden" role="dialog" aria-modal="true" aria-labelledby="moved-title" aria-describedby="moved-desc">
-        <div class="moved-bg" aria-hidden="true">
-            <div class="moved-stars"></div>
-            <div class="moved-stars layer-2"></div>
-            <svg class="moved-grid" viewBox="0 0 400 400" fill="none" stroke="rgba(212,175,55,0.07)" stroke-width="0.6">
-                <circle cx="200" cy="200" r="190"/>
-                <ellipse cx="200" cy="200" rx="190" ry="60"/>
-                <ellipse cx="200" cy="200" rx="190" ry="125"/>
-                <ellipse cx="200" cy="200" rx="60" ry="190"/>
-                <ellipse cx="200" cy="200" rx="125" ry="190"/>
-                <line x1="10" y1="200" x2="390" y2="200"/>
-                <line x1="200" y1="10" x2="200" y2="390"/>
-            </svg>
-            <div class="moved-ring"></div>
+        <div class="mv-sky" aria-hidden="true">
+            <div class="mv-stars"></div>
+            <div class="mv-stars mv-stars-2"></div>
+            <div class="mv-grain"></div>
         </div>
 
-        <div class="moved-card">
-            <span class="moved-eyebrow">YENİ İSİM · YENİ LİMAN</span>
+        <div class="mv-frame" aria-hidden="true">
+            <span class="mv-corner mv-c-tl"><svg viewBox="0 0 26 26" fill="none" stroke="currentColor" stroke-width="1"><path d="M1 25V6a5 5 0 0 1 5-5h19"/><path d="M5 25V9a4 4 0 0 1 4-4h16" opacity=".45"/><rect x="2.5" y="2.5" width="3" height="3" transform="rotate(45 4 4)" fill="currentColor" stroke="none"/></svg></span>
+            <span class="mv-corner mv-c-tr"><svg viewBox="0 0 26 26" fill="none" stroke="currentColor" stroke-width="1"><path d="M1 25V6a5 5 0 0 1 5-5h19"/><path d="M5 25V9a4 4 0 0 1 4-4h16" opacity=".45"/><rect x="2.5" y="2.5" width="3" height="3" transform="rotate(45 4 4)" fill="currentColor" stroke="none"/></svg></span>
+            <span class="mv-corner mv-c-bl"><svg viewBox="0 0 26 26" fill="none" stroke="currentColor" stroke-width="1"><path d="M1 25V6a5 5 0 0 1 5-5h19"/><path d="M5 25V9a4 4 0 0 1 4-4h16" opacity=".45"/><rect x="2.5" y="2.5" width="3" height="3" transform="rotate(45 4 4)" fill="currentColor" stroke="none"/></svg></span>
+            <span class="mv-corner mv-c-br"><svg viewBox="0 0 26 26" fill="none" stroke="currentColor" stroke-width="1"><path d="M1 25V6a5 5 0 0 1 5-5h19"/><path d="M5 25V9a4 4 0 0 1 4-4h16" opacity=".45"/><rect x="2.5" y="2.5" width="3" height="3" transform="rotate(45 4 4)" fill="currentColor" stroke="none"/></svg></span>
+            <span class="mv-mark mv-m-tl">HARFİYE · DENİZ HARİTASI</span>
+            <span class="mv-mark mv-m-tr">LEVHA · I</span>
+            <span class="mv-mark mv-m-bl">41°00′ K · 28°58′ D</span>
+            <span class="mv-mark mv-m-br"><svg width="64" height="6" viewBox="0 0 64 6"><rect x=".5" y=".5" width="63" height="5" fill="none" stroke="currentColor"/><rect x="0" y="0" width="16" height="6" fill="currentColor"/><rect x="32" y="0" width="16" height="6" fill="currentColor"/></svg>ÖLÇEK 1 : HARF</span>
+        </div>
 
-            <div class="moved-rename" aria-hidden="true">
-                <span class="moved-oldname">SÖZCÜK SEFERÎ</span>
-                <svg class="moved-arrow" viewBox="0 0 14 22" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
-                    <line x1="7" y1="1" x2="7" y2="17"/>
-                    <polyline points="2.5 13 7 18.5 11.5 13"/>
-                </svg>
-                <div class="moved-tiles">
-                    <span class="moved-tile" style="--i:0">H</span>
-                    <span class="moved-tile" style="--i:1">A</span>
-                    <span class="moved-tile" style="--i:2">R</span>
-                    <span class="moved-tile" style="--i:3">F</span>
-                    <span class="moved-tile" style="--i:4">İ</span>
-                    <span class="moved-tile" style="--i:5">Y</span>
-                    <span class="moved-tile" style="--i:6">E</span>
+        <div class="mv-stage">
+            <section class="mv-copy">
+                <span class="mv-eyebrow mv-rise" style="--t:.15s">YENİ İSİM · YENİ LİMAN</span>
+
+                <h1 class="mv-title" id="moved-title">
+                    <span class="mv-old mv-rise" style="--t:.3s"><span class="mv-old-l" style="--i:0">S</span><span class="mv-old-l" style="--i:1">ö</span><span class="mv-old-l" style="--i:2">z</span><span class="mv-old-l" style="--i:3">c</span><span class="mv-old-l" style="--i:4">ü</span><span class="mv-old-l" style="--i:5">k</span><span class="mv-old-l" style="--i:6">&nbsp;</span><span class="mv-old-l" style="--i:7">S</span><span class="mv-old-l" style="--i:8">e</span><span class="mv-old-l" style="--i:9">f</span><span class="mv-old-l" style="--i:10">e</span><span class="mv-old-l" style="--i:11">r</span><span class="mv-old-l" style="--i:12">î</span></span>
+                    <span class="mv-sr"> artık Harfiye.</span>
+                    <span class="mv-tiles" aria-hidden="true">
+                    <span class="mv-tile" style="--i:0">H</span>
+                    <span class="mv-tile" style="--i:1">A</span>
+                    <span class="mv-tile" style="--i:2">R</span>
+                    <span class="mv-tile" style="--i:3">F</span>
+                    <span class="mv-tile" style="--i:4">İ</span>
+                    <span class="mv-tile" style="--i:5">Y</span>
+                    <span class="mv-tile" style="--i:6">E</span>
+                    </span>
+                </h1>
+
+                <p class="mv-desc mv-rise" id="moved-desc" style="--t:2.2s">Aynı yolculuk; yeni bir isim, yeni bir adres. Harfiye artık kendi alan adında ve bundan sonra yalnızca orada güncelleniyor.</p>
+
+                <div class="mv-address mv-rise" style="--t:2.3s">
+                    <span class="mv-address-label">YENİ ADRES</span>
+                    <span class="mv-address-url">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>
+                        <span id="moved-address-text">www.harfiye.com</span>
+                    </span>
                 </div>
-                <span class="moved-tagline">HARF HARF TÜRKİYE</span>
-            </div>
 
-            <svg class="moved-route" viewBox="0 0 280 74" aria-hidden="true">
-                <path id="moved-route-line" class="moved-route-path" d="M30 50 C 90 4, 190 4, 250 50" fill="none" stroke="#d4af37" stroke-width="1.4" stroke-dasharray="4 5" stroke-linecap="round" opacity="0.8"/>
-                <circle cx="30" cy="50" r="4.5" fill="none" stroke="#64748b" stroke-width="1.4"/>
-                <circle cx="30" cy="50" r="1.6" fill="#64748b"/>
-                <circle class="moved-port-pulse" cx="250" cy="50" r="6" fill="none" stroke="#d4af37" stroke-width="1"/>
-                <circle cx="250" cy="50" r="4.5" fill="#0d1424" stroke="#d4af37" stroke-width="1.4"/>
-                <circle cx="250" cy="50" r="1.6" fill="#f3d98b"/>
-                <!-- Rota boyunca ilerleyen küçük yelkenli -->
-                <g>
-                    <path d="M-6 2 L6 2 L4 5 L-4 5 Z" fill="#d4af37"/>
-                    <path d="M0 1 L0 -8 L5 1 Z" fill="#fdfbf7"/>
-                    <path d="M-1 1 L-1 -6 L-5 1 Z" fill="#e8dcc0"/>
-                    <animateMotion dur="5s" repeatCount="indefinite" rotate="auto" keyPoints="0;1;1" keyTimes="0;0.8;1" calcMode="linear">
-                        <mpath href="#moved-route-line"/>
-                    </animateMotion>
-                    <animate attributeName="opacity" values="0;1;1;0;0" keyTimes="0;0.08;0.74;0.82;1" dur="5s" repeatCount="indefinite"/>
-                </g>
-                <text x="30" y="68" text-anchor="middle" class="moved-route-label">ESKİ LİMAN</text>
-                <text x="250" y="68" text-anchor="middle" class="moved-route-label gold">HARFİYE</text>
-            </svg>
+                <div class="mv-actions mv-rise" style="--t:2.4s">
+                    <a class="mv-primary" id="moved-go-btn" href="https://www.harfiye.com/" rel="noopener">
+                        <span>Harfiye'ye Geç</span>
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="4" y1="12" x2="19" y2="12"/><polyline points="13 6 19 12 13 18"/></svg>
+                    </a>
+                    <button type="button" class="mv-secondary" id="moved-copy-btn">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 13a5 5 0 0 0 7.5.5l3-3a5 5 0 0 0-7-7l-1.7 1.7"/><path d="M14 11a5 5 0 0 0-7.5-.5l-3 3a5 5 0 0 0 7 7l1.7-1.7"/></svg>
+                        <span class="mv-btn-label">Bağlantıyı Kopyala</span>
+                    </button>
+                </div>
 
-            <h1 class="moved-title" id="moved-title">Sözcük Seferî artık <em>Harfiye</em>.</h1>
-            <p class="moved-desc" id="moved-desc">Aynı yolculuk; yeni bir isim, yeni bir adres. Harfiye artık kendi alan adında ve bundan sonra yalnızca orada güncelleniyor.</p>
+                <p class="mv-note mv-rise" id="moved-progress-note" style="--t:2.55s">Yer imlerini yeni adresle güncellemeyi unutma.</p>
 
-            <div class="moved-address" title="Yeni adres">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>
-                <span id="moved-address-text">www.harfiye.com</span>
-            </div>
+                <p class="mv-sign mv-rise" style="--t:2.65s">Harfiye tek kişilik küçük bir atölyede, her harfi özenle yerleştirilerek büyüyor. Yolculuğa eşlik ettiğin için teşekkürler.</p>
+            </section>
 
-            <div class="moved-actions">
-                <a class="moved-primary" id="moved-go-btn" href="https://www.harfiye.com/" rel="noopener">
-                    Harfiye'ye Geç
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="13 6 19 12 13 18"/></svg>
-                </a>
-                <button type="button" class="moved-secondary" id="moved-copy-btn">Bağlantıyı Kopyala</button>
-            </div>
+            <figure class="mv-chart" aria-hidden="true">
+                <div class="mv-chart-sq">
+                    <div class="mv-par mv-net" style="--d:12">
+                        <div class="mv-net-in">
+                        <svg viewBox="0 0 600 600">
+                            <circle class="mv-net-ring" cx="300" cy="300" r="270"/>
+                            <path class="mv-net-lines" d="M300.0 30.0L403.3 50.6M300.0 30.0L490.9 109.1M300.0 30.0L549.4 196.7M300.0 30.0L570.0 300.0M300.0 30.0L549.4 403.3M300.0 30.0L490.9 490.9M300.0 30.0L403.3 549.4M300.0 30.0L300.0 570.0M300.0 30.0L196.7 549.4M300.0 30.0L109.1 490.9M300.0 30.0L50.6 403.3M300.0 30.0L30.0 300.0M300.0 30.0L50.6 196.7M300.0 30.0L109.1 109.1M300.0 30.0L196.7 50.6M403.3 50.6L490.9 109.1M403.3 50.6L549.4 196.7M403.3 50.6L570.0 300.0M403.3 50.6L549.4 403.3M403.3 50.6L490.9 490.9M403.3 50.6L403.3 549.4M403.3 50.6L300.0 570.0M403.3 50.6L196.7 549.4M403.3 50.6L109.1 490.9M403.3 50.6L50.6 403.3M403.3 50.6L30.0 300.0M403.3 50.6L50.6 196.7M403.3 50.6L109.1 109.1M403.3 50.6L196.7 50.6M490.9 109.1L549.4 196.7M490.9 109.1L570.0 300.0M490.9 109.1L549.4 403.3M490.9 109.1L490.9 490.9M490.9 109.1L403.3 549.4M490.9 109.1L300.0 570.0M490.9 109.1L196.7 549.4M490.9 109.1L109.1 490.9M490.9 109.1L50.6 403.3M490.9 109.1L30.0 300.0M490.9 109.1L50.6 196.7M490.9 109.1L109.1 109.1M490.9 109.1L196.7 50.6M549.4 196.7L570.0 300.0M549.4 196.7L549.4 403.3M549.4 196.7L490.9 490.9M549.4 196.7L403.3 549.4M549.4 196.7L300.0 570.0M549.4 196.7L196.7 549.4M549.4 196.7L109.1 490.9M549.4 196.7L50.6 403.3M549.4 196.7L30.0 300.0M549.4 196.7L50.6 196.7M549.4 196.7L109.1 109.1M549.4 196.7L196.7 50.6M570.0 300.0L549.4 403.3M570.0 300.0L490.9 490.9M570.0 300.0L403.3 549.4M570.0 300.0L300.0 570.0M570.0 300.0L196.7 549.4M570.0 300.0L109.1 490.9M570.0 300.0L50.6 403.3M570.0 300.0L30.0 300.0M570.0 300.0L50.6 196.7M570.0 300.0L109.1 109.1M570.0 300.0L196.7 50.6M549.4 403.3L490.9 490.9M549.4 403.3L403.3 549.4M549.4 403.3L300.0 570.0M549.4 403.3L196.7 549.4M549.4 403.3L109.1 490.9M549.4 403.3L50.6 403.3M549.4 403.3L30.0 300.0M549.4 403.3L50.6 196.7M549.4 403.3L109.1 109.1M549.4 403.3L196.7 50.6M490.9 490.9L403.3 549.4M490.9 490.9L300.0 570.0M490.9 490.9L196.7 549.4M490.9 490.9L109.1 490.9M490.9 490.9L50.6 403.3M490.9 490.9L30.0 300.0M490.9 490.9L50.6 196.7M490.9 490.9L109.1 109.1M490.9 490.9L196.7 50.6M403.3 549.4L300.0 570.0M403.3 549.4L196.7 549.4M403.3 549.4L109.1 490.9M403.3 549.4L50.6 403.3M403.3 549.4L30.0 300.0M403.3 549.4L50.6 196.7M403.3 549.4L109.1 109.1M403.3 549.4L196.7 50.6M300.0 570.0L196.7 549.4M300.0 570.0L109.1 490.9M300.0 570.0L50.6 403.3M300.0 570.0L30.0 300.0M300.0 570.0L50.6 196.7M300.0 570.0L109.1 109.1M300.0 570.0L196.7 50.6M196.7 549.4L109.1 490.9M196.7 549.4L50.6 403.3M196.7 549.4L30.0 300.0M196.7 549.4L50.6 196.7M196.7 549.4L109.1 109.1M196.7 549.4L196.7 50.6M109.1 490.9L50.6 403.3M109.1 490.9L30.0 300.0M109.1 490.9L50.6 196.7M109.1 490.9L109.1 109.1M109.1 490.9L196.7 50.6M50.6 403.3L30.0 300.0M50.6 403.3L50.6 196.7M50.6 403.3L109.1 109.1M50.6 403.3L196.7 50.6M30.0 300.0L50.6 196.7M30.0 300.0L109.1 109.1M30.0 300.0L196.7 50.6M50.6 196.7L109.1 109.1M50.6 196.7L196.7 50.6M109.1 109.1L196.7 50.6"/>
+                            <path class="mv-rhumb is-cardinal" style="--i:0" pathLength="1" d="M300 300L300.0 30.0"/>
+                            <path class="mv-rhumb" style="--i:1" pathLength="1" d="M300 300L490.9 109.1"/>
+                            <path class="mv-rhumb is-cardinal" style="--i:2" pathLength="1" d="M300 300L570.0 300.0"/>
+                            <path class="mv-rhumb" style="--i:3" pathLength="1" d="M300 300L490.9 490.9"/>
+                            <path class="mv-rhumb is-cardinal" style="--i:4" pathLength="1" d="M300 300L300.0 570.0"/>
+                            <path class="mv-rhumb" style="--i:5" pathLength="1" d="M300 300L109.1 490.9"/>
+                            <path class="mv-rhumb is-cardinal" style="--i:6" pathLength="1" d="M300 300L30.0 300.0"/>
+                            <path class="mv-rhumb" style="--i:7" pathLength="1" d="M300 300L109.1 109.1"/>
+                            <g class="mv-net-dots"><circle cx="300.0" cy="30.0" r="2.2"/><circle cx="403.3" cy="50.6" r="2.2"/><circle cx="490.9" cy="109.1" r="2.2"/><circle cx="549.4" cy="196.7" r="2.2"/><circle cx="570.0" cy="300.0" r="2.2"/><circle cx="549.4" cy="403.3" r="2.2"/><circle cx="490.9" cy="490.9" r="2.2"/><circle cx="403.3" cy="549.4" r="2.2"/><circle cx="300.0" cy="570.0" r="2.2"/><circle cx="196.7" cy="549.4" r="2.2"/><circle cx="109.1" cy="490.9" r="2.2"/><circle cx="50.6" cy="403.3" r="2.2"/><circle cx="30.0" cy="300.0" r="2.2"/><circle cx="50.6" cy="196.7" r="2.2"/><circle cx="109.1" cy="109.1" r="2.2"/><circle cx="196.7" cy="50.6" r="2.2"/></g>
+                        </svg>
+                        </div>
+                    </div>
 
-            <p class="moved-note" id="moved-progress-note">Yer imlerini yeni adresle güncellemeyi unutma.</p>
+                    <div class="mv-par mv-layer" style="--d:6">
+                        <div class="mv-rose-in"><div class="mv-rose-spin">
+                        <svg viewBox="0 0 600 600">
+                            <circle class="mv-rose-ring" cx="300" cy="300" r="208"/>
+                            <circle class="mv-rose-ring is-faint" cx="300" cy="300" r="196"/>
+                            <path class="mv-tick" d="M317.1 104.7L317.8 96.8M334.0 107.0L335.4 99.1M367.0 115.8L369.8 108.3M382.8 122.4L386.2 115.1M412.4 139.4L417.0 132.9M426.0 149.9L431.1 143.7M450.1 174.0L456.3 168.9M460.6 187.6L467.1 183.0M477.6 217.2L484.9 213.8M484.2 233.0L491.7 230.2M493.0 266.0L500.9 264.6M495.3 282.9L503.2 282.2M495.3 317.1L503.2 317.8M493.0 334.0L500.9 335.4M484.2 367.0L491.7 369.8M477.6 382.8L484.9 386.2M460.6 412.4L467.1 417.0M450.1 426.0L456.3 431.1M426.0 450.1L431.1 456.3M412.4 460.6L417.0 467.1M382.8 477.6L386.2 484.9M367.0 484.2L369.8 491.7M334.0 493.0L335.4 500.9M317.1 495.3L317.8 503.2M282.9 495.3L282.2 503.2M266.0 493.0L264.6 500.9M233.0 484.2L230.2 491.7M217.2 477.6L213.8 484.9M187.6 460.6L183.0 467.1M174.0 450.1L168.9 456.3M149.9 426.0L143.7 431.1M139.4 412.4L132.9 417.0M122.4 382.8L115.1 386.2M115.8 367.0L108.3 369.8M107.0 334.0L99.1 335.4M104.7 317.1L96.8 317.8M104.7 282.9L96.8 282.2M107.0 266.0L99.1 264.6M115.8 233.0L108.3 230.2M122.4 217.2L115.1 213.8M139.4 187.6L132.9 183.0M149.9 174.0L143.7 168.9M174.0 149.9L168.9 143.7M187.6 139.4L183.0 132.9M217.2 122.4L213.8 115.1M233.0 115.8L230.2 108.3M266.0 107.0L264.6 99.1M282.9 104.7L282.2 96.8"/>
+                            <path class="mv-tick is-mid" d="M350.7 110.7L354.4 97.2M398.0 130.3L405.0 118.1M469.7 202.0L481.9 195.0M489.3 249.3L502.8 245.6M489.3 350.7L502.8 354.4M469.7 398.0L481.9 405.0M398.0 469.7L405.0 481.9M350.7 489.3L354.4 502.8M249.3 489.3L245.6 502.8M202.0 469.7L195.0 481.9M130.3 398.0L118.1 405.0M110.7 350.7L97.2 354.4M110.7 249.3L97.2 245.6M130.3 202.0L118.1 195.0M202.0 130.3L195.0 118.1M249.3 110.7L245.6 97.2"/>
+                            <path class="mv-tick is-major" d="M300.0 114.0L300.0 84.0M431.5 168.5L452.7 147.3M486.0 300.0L516.0 300.0M431.5 431.5L452.7 452.7M300.0 486.0L300.0 516.0M168.5 431.5L147.3 452.7M114.0 300.0L84.0 300.0M168.5 168.5L147.3 147.3"/>
+                            <g class="mv-star"><polygon class="mv-star-l" points="406.1 193.9 316.9 268.2 300 300"/><polygon class="mv-star-r" points="406.1 193.9 300 300 331.8 283.1"/><polygon class="mv-star-l" points="406.1 406.1 331.8 316.9 300 300"/><polygon class="mv-star-r" points="406.1 406.1 300 300 316.9 331.8"/><polygon class="mv-star-l" points="193.9 406.1 283.1 331.8 300 300"/><polygon class="mv-star-r" points="193.9 406.1 300 300 268.2 316.9"/><polygon class="mv-star-l" points="193.9 193.9 268.2 283.1 300 300"/><polygon class="mv-star-r" points="193.9 193.9 300 300 283.1 268.2"/><polygon class="mv-star-l is-north" points="300.0 100.0 287.7 266.2 300 300"/><polygon class="mv-star-r" points="300.0 100.0 300 300 312.3 266.2"/><polygon class="mv-star-l" points="500.0 300.0 333.8 287.7 300 300"/><polygon class="mv-star-r" points="500.0 300.0 300 300 333.8 312.3"/><polygon class="mv-star-l" points="300.0 500.0 312.3 333.8 300 300"/><polygon class="mv-star-r" points="300.0 500.0 300 300 287.7 333.8"/><polygon class="mv-star-l" points="100.0 300.0 266.2 312.3 300 300"/><polygon class="mv-star-r" points="100.0 300.0 300 300 266.2 287.7"/></g>
+                            <g class="mv-rose-labels"><text x="300.0" y="62.0" text-anchor="middle" dy=".35em">K</text><text x="538.0" y="300.0" text-anchor="middle" dy=".35em">D</text><text x="300.0" y="538.0" text-anchor="middle" dy=".35em">G</text><text x="62.0" y="300.0" text-anchor="middle" dy=".35em">B</text></g>
+                        </svg>
+                        </div></div>
+                    </div>
 
-            <p class="moved-sign">Harfiye tek kişilik küçük bir atölyede, her harfi özenle yerleştirilerek büyüyor. Yolculuğa eşlik ettiğin için teşekkürler.</p>
+                    <div class="mv-par mv-layer" style="--d:-3">
+                        <div class="mv-wheel-in">
+                        <svg viewBox="0 0 600 600">
+                            <defs>
+                                <radialGradient id="mv-face" cx="50%" cy="42%" r="60%">
+                                    <stop offset="0" stop-color="#16213b"/>
+                                    <stop offset="1" stop-color="#0a1121"/>
+                                </radialGradient>
+                            </defs>
+                            <circle class="mv-wheel-face" cx="300" cy="300" r="124" fill="url(#mv-face)"/>
+                            <circle class="mv-wheel-inner" cx="300" cy="300" r="115"/>
+                            <path class="mv-trace" pathLength="1" style="--t0:0.95s" d="M300.0 220.0L265.3 372.1L378.0 317.8L237.5 250.1L222.0 317.8L362.5 250.1L334.7 372.1"/>
+                            <g class="mv-node" style="--k:0;--d:0.950s"><circle class="mv-node-bg" cx="300.0" cy="220.0" r="25"/><text class="mv-node-tx" x="300.0" y="220.0" text-anchor="middle" dy=".36em">H</text></g>
+                            <g class="mv-node" style="--k:1;--d:1.934s"><circle class="mv-node-bg" cx="362.5" cy="250.1" r="25"/><text class="mv-node-tx" x="362.5" y="250.1" text-anchor="middle" dy=".36em">Y</text></g>
+                            <g class="mv-node" style="--k:2;--d:1.368s"><circle class="mv-node-bg" cx="378.0" cy="317.8" r="25"/><text class="mv-node-tx" x="378.0" y="317.8" text-anchor="middle" dy=".36em">R</text></g>
+                            <g class="mv-node" style="--k:3;--d:2.120s"><circle class="mv-node-bg" cx="334.7" cy="372.1" r="25"/><text class="mv-node-tx" x="334.7" y="372.1" text-anchor="middle" dy=".36em">E</text></g>
+                            <g class="mv-node" style="--k:4;--d:1.182s"><circle class="mv-node-bg" cx="265.3" cy="372.1" r="25"/><text class="mv-node-tx" x="265.3" y="372.1" text-anchor="middle" dy=".36em">A</text></g>
+                            <g class="mv-node" style="--k:5;--d:1.702s"><circle class="mv-node-bg" cx="222.0" cy="317.8" r="25"/><text class="mv-node-tx" x="222.0" y="317.8" text-anchor="middle" dy=".36em">İ</text></g>
+                            <g class="mv-node" style="--k:6;--d:1.599s"><circle class="mv-node-bg" cx="237.5" cy="250.1" r="25"/><text class="mv-node-tx" x="237.5" y="250.1" text-anchor="middle" dy=".36em">F</text></g>
+                        </svg>
+                        </div>
+                    </div>
+
+                    <div class="mv-par mv-stamp" style="--d:16">
+                        <div class="mv-stamp-in">
+                        <svg viewBox="0 0 200 200">
+                            <defs><path id="mv-stamp-circle" d="M100 100m-71 0a71 71 0 1 1 142 0a71 71 0 1 1-142 0"/></defs>
+                            <g transform="rotate(-14 100 100)">
+                                <circle cx="100" cy="100" r="93" class="mv-stamp-ring is-bold"/>
+                                <circle cx="100" cy="100" r="85" class="mv-stamp-ring"/>
+                                <circle cx="100" cy="100" r="55" class="mv-stamp-ring is-dash"/>
+                                <text class="mv-stamp-arc"><textPath href="#mv-stamp-circle" textLength="440" lengthAdjust="spacing">YENİ LİMAN · HARFİYE · YENİ LİMAN · HARFİYE ·</textPath></text>
+                                <path class="mv-stamp-star" d="M100 66l2.6 6.4 6.4 2.6-6.4 2.6-2.6 6.4-2.6-6.4-6.4-2.6 6.4-2.6z"/>
+                                <text class="mv-stamp-name" x="100" y="108" text-anchor="middle">HARFİYE</text>
+                                <text class="mv-stamp-tld" x="100" y="126" text-anchor="middle">· COM ·</text>
+                            </g>
+                        </svg>
+                        </div>
+                    </div>
+                </div>
+
+                <svg class="mv-route mv-rise" style="--t:2.3s" viewBox="0 0 600 74">
+                    <path id="mv-route-line" class="mv-route-path" d="M40 46 C 200 -4, 400 -4, 560 46"/>
+                    <circle cx="40" cy="46" r="5" class="mv-port"/>
+                    <circle cx="40" cy="46" r="1.8" class="mv-port-dot"/>
+                    <circle cx="560" cy="46" r="7" class="mv-port-pulse"/>
+                    <circle cx="560" cy="46" r="5" class="mv-port is-new"/>
+                    <circle cx="560" cy="46" r="1.8" class="mv-port-dot is-new"/>
+                    <g class="mv-ship">
+                        <path d="M-7 2 L7 2 L5 5.5 L-5 5.5 Z" fill="#c9a54a"/>
+                        <path d="M0 1 L0 -9 L6 1 Z" fill="#f6f1e4"/>
+                        <path d="M-1.2 1 L-1.2 -6.5 L-5.5 1 Z" fill="#d9ccae"/>
+                        <animateMotion dur="7s" repeatCount="indefinite" rotate="auto" keyPoints="0;1;1" keyTimes="0;0.86;1" calcMode="linear"><mpath href="#mv-route-line"/></animateMotion>
+                        <animate attributeName="opacity" values="0;1;1;0;0" keyTimes="0;0.06;0.8;0.86;1" dur="7s" repeatCount="indefinite"/>
+                    </g>
+                    <text x="40" y="70" text-anchor="middle" class="mv-route-label">ESKİ LİMAN</text>
+                    <text x="560" y="70" text-anchor="middle" class="mv-route-label is-new">HARFİYE</text>
+                </svg>
+            </figure>
         </div>
     </div>
 
@@ -7554,10 +8101,11 @@ const App = {
 
         const copyBtn = document.getElementById('moved-copy-btn');
         if (copyBtn) {
+            const labelEl = copyBtn.querySelector('.mv-btn-label') || copyBtn;
             copyBtn.addEventListener('click', () => {
                 const done = () => {
-                    copyBtn.textContent = 'Bağlantı Kopyalandı';
-                    setTimeout(() => { copyBtn.textContent = 'Bağlantıyı Kopyala'; }, 2200);
+                    labelEl.textContent = 'Bağlantı Kopyalandı';
+                    setTimeout(() => { labelEl.textContent = 'Bağlantıyı Kopyala'; }, 2200);
                 };
                 if (navigator.clipboard && navigator.clipboard.writeText) {
                     navigator.clipboard.writeText(this.NEW_URL).then(done).catch(() => window.prompt('Yeni adres:', this.NEW_URL));
@@ -7581,6 +8129,38 @@ const App = {
                 if (typeof svg.pauseAnimations === 'function') svg.pauseAnimations();
             });
         }
+
+        // Masaüstü için hafif kartografik derinlik / parallaks hareketi
+        if (window.matchMedia && window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+            const parLayers = overlay.querySelectorAll('.mv-par');
+            if (parLayers.length) {
+                let rafId = null;
+                window.addEventListener('mousemove', (e) => {
+                    if (rafId) cancelAnimationFrame(rafId);
+                    rafId = requestAnimationFrame(() => {
+                        const cx = window.innerWidth / 2;
+                        const cy = window.innerHeight / 2;
+                        const dx = (e.clientX - cx) / cx;
+                        const dy = (e.clientY - cy) / cy;
+                        parLayers.forEach(el => {
+                            const d = parseFloat(el.style.getPropertyValue('--d') || '0');
+                            if (!d) return;
+                            el.style.transform = 'translate3d(' + (dx * d).toFixed(1) + 'px, ' + (dy * d).toFixed(1) + 'px, 0)';
+                        });
+                    });
+                }, { passive: true });
+            }
+        }
+
+        // Sekme arka plana alındığında animasyonları durdurup pil/CPU tasarrufu sağla
+        document.addEventListener('visibilitychange', () => {
+            const svgs = overlay.querySelectorAll('svg');
+            if (document.hidden) {
+                svgs.forEach(s => { if (typeof s.pauseAnimations === 'function') s.pauseAnimations(); });
+            } else {
+                svgs.forEach(s => { if (typeof s.unpauseAnimations === 'function') s.unpauseAnimations(); });
+            }
+        });
 
         overlay.classList.remove('hidden');
         return true;

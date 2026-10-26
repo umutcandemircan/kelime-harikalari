@@ -191,10 +191,11 @@ const App = {
 
         const copyBtn = document.getElementById('moved-copy-btn');
         if (copyBtn) {
+            const labelEl = copyBtn.querySelector('.mv-btn-label') || copyBtn;
             copyBtn.addEventListener('click', () => {
                 const done = () => {
-                    copyBtn.textContent = 'Bağlantı Kopyalandı';
-                    setTimeout(() => { copyBtn.textContent = 'Bağlantıyı Kopyala'; }, 2200);
+                    labelEl.textContent = 'Bağlantı Kopyalandı';
+                    setTimeout(() => { labelEl.textContent = 'Bağlantıyı Kopyala'; }, 2200);
                 };
                 if (navigator.clipboard && navigator.clipboard.writeText) {
                     navigator.clipboard.writeText(this.NEW_URL).then(done).catch(() => window.prompt('Yeni adres:', this.NEW_URL));
@@ -218,6 +219,38 @@ const App = {
                 if (typeof svg.pauseAnimations === 'function') svg.pauseAnimations();
             });
         }
+
+        // Masaüstü için hafif kartografik derinlik / parallaks hareketi
+        if (window.matchMedia && window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+            const parLayers = overlay.querySelectorAll('.mv-par');
+            if (parLayers.length) {
+                let rafId = null;
+                window.addEventListener('mousemove', (e) => {
+                    if (rafId) cancelAnimationFrame(rafId);
+                    rafId = requestAnimationFrame(() => {
+                        const cx = window.innerWidth / 2;
+                        const cy = window.innerHeight / 2;
+                        const dx = (e.clientX - cx) / cx;
+                        const dy = (e.clientY - cy) / cy;
+                        parLayers.forEach(el => {
+                            const d = parseFloat(el.style.getPropertyValue('--d') || '0');
+                            if (!d) return;
+                            el.style.transform = 'translate3d(' + (dx * d).toFixed(1) + 'px, ' + (dy * d).toFixed(1) + 'px, 0)';
+                        });
+                    });
+                }, { passive: true });
+            }
+        }
+
+        // Sekme arka plana alındığında animasyonları durdurup pil/CPU tasarrufu sağla
+        document.addEventListener('visibilitychange', () => {
+            const svgs = overlay.querySelectorAll('svg');
+            if (document.hidden) {
+                svgs.forEach(s => { if (typeof s.pauseAnimations === 'function') s.pauseAnimations(); });
+            } else {
+                svgs.forEach(s => { if (typeof s.unpauseAnimations === 'function') s.unpauseAnimations(); });
+            }
+        });
 
         overlay.classList.remove('hidden');
         return true;

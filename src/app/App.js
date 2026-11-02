@@ -45,7 +45,7 @@ const App = {
 
     // Adres taşıma ayarları
     OLD_HOST: 'umutcandemircan.github.io',
-    NEW_URL: 'https://www.harfiye.com/',
+    NEW_URL: 'https://harfora.com/',
     TRANSFER_PARAM: 'aktar',
     // Yeni site #aktar= bağlantısını okuyabildiğinde true yapılmalı
     SAVE_TRANSFER_ENABLED: false,
@@ -167,7 +167,7 @@ const App = {
         let targetUrl = this.NEW_URL;
         const save = SaveManager.data;
         const score = this._progressScore(save);
-        // Yeni sitenin (www.harfiye.com) #aktar desteği yoksa ilerleme taşıma vaadi gösterilmez
+        // Yeni sitenin (harfora.com) #aktar desteği yoksa ilerleme taşıma vaadi gösterilmez
         const hasProgress = this.SAVE_TRANSFER_ENABLED &&
             (score > 0 || (save && save.coins !== SaveManager.defaultData.coins));
         if (hasProgress) {
@@ -183,7 +183,7 @@ const App = {
         if (note) {
             if (hasProgress) {
                 const provinces = (save.completedProvinces || []).length;
-                note.innerHTML = `İlerlemen (<strong>${provinces}/81 vilayet</strong>, <strong>${save.coins} altın</strong>) bu butonla Harfiye'ye otomatik taşınır. Yer imlerini de güncellemeyi unutma.`;
+                note.innerHTML = `İlerlemen (<strong>${provinces}/81 vilayet</strong>, <strong>${save.coins} altın</strong>) bu butonla Harfora'ya otomatik taşınır. Yer imlerini de güncellemeyi unutma.`;
             } else {
                 note.textContent = 'Yer imlerini yeni adresle güncellemeyi unutma.';
             }
@@ -211,13 +211,22 @@ const App = {
             el.setAttribute('inert', '');
         });
 
-        document.title = 'Harfiye — Yeni Adresimiz';
+        document.title = 'Harfora — Yeni Adresimiz';
 
         // Hareket azaltma tercihinde SVG (SMIL) yelkenli animasyonunu durdur
-        if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        const reducedMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)');
+        const applyMotionPref = () => {
             overlay.querySelectorAll('svg').forEach(svg => {
-                if (typeof svg.pauseAnimations === 'function') svg.pauseAnimations();
+                if (reducedMotion && reducedMotion.matches) {
+                    if (typeof svg.pauseAnimations === 'function') svg.pauseAnimations();
+                } else if (!document.hidden) {
+                    if (typeof svg.unpauseAnimations === 'function') svg.unpauseAnimations();
+                }
             });
+        };
+        applyMotionPref();
+        if (reducedMotion && reducedMotion.addEventListener) {
+            reducedMotion.addEventListener('change', applyMotionPref);
         }
 
         // Masaüstü için hafif kartografik derinlik / parallaks hareketi
@@ -242,13 +251,14 @@ const App = {
             }
         }
 
-        // Sekme arka plana alındığında animasyonları durdurup pil/CPU tasarrufu sağla
+        // Sekme arka plana alındığında CSS ve SVG animasyonlarını durdurup pil/CPU tasarrufu sağla
         document.addEventListener('visibilitychange', () => {
+            overlay.classList.toggle('is-paused', document.hidden);
             const svgs = overlay.querySelectorAll('svg');
             if (document.hidden) {
-                svgs.forEach(s => { if (typeof s.pauseAnimations === 'function') s.pauseAnimations(); });
-            } else {
-                svgs.forEach(s => { if (typeof s.unpauseAnimations === 'function') s.unpauseAnimations(); });
+                svgs.forEach(svg => { if (typeof svg.pauseAnimations === 'function') svg.pauseAnimations(); });
+            } else if (!reducedMotion || !reducedMotion.matches) {
+                svgs.forEach(svg => { if (typeof svg.unpauseAnimations === 'function') svg.unpauseAnimations(); });
             }
         });
 

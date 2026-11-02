@@ -2932,8 +2932,9 @@ html, body {
 
 /* --- moved.css --- */
 /* ==========================================================================
-   HARFİYE PORTOLAN ÇARTASI & HARF ÇARKI (AKTARMA EKRANI)
+   HARFORA PORTOLAN ÇARTASI & HARF ÇARKI (AKTARMA EKRANI)
    Yalnızca eski GitHub Pages adresinde (umutcandemircan.github.io) görünür.
+   Tüm sürekli animasyonlar transform / opacity / SVG boyama üzerinden çalışır.
    ========================================================================== */
 
 #moved-overlay {
@@ -2970,6 +2971,13 @@ html, body {
     display: none !important;
 }
 
+/* Sekme arka plandayken sıfır CPU / pil tüketimi */
+#moved-overlay.is-paused *,
+#moved-overlay.is-paused *::before,
+#moved-overlay.is-paused *::after {
+    animation-play-state: paused !important;
+}
+
 /* ---------- 1. GÖKYÜZÜ, YILDIZLAR VE GREN DOKUSU ---------- */
 .mv-sky {
     position: fixed;
@@ -2980,8 +2988,10 @@ html, body {
 }
 
 .mv-stars {
+    --tile-x: 260px;
+    --tile-y: 260px;
     position: absolute;
-    inset: -30%;
+    inset: -400px;
     background-image:
         radial-gradient(1px 1px at 15% 20%, rgba(255, 255, 255, 0.55) 50%, transparent 51%),
         radial-gradient(1px 1px at 70% 38%, rgba(255, 255, 255, 0.4) 50%, transparent 51%),
@@ -2996,9 +3006,11 @@ html, body {
 }
 
 .mv-stars-2 {
+    --tile-x: -380px;
+    --tile-y: 380px;
     background-size: 380px 380px;
     opacity: 0.35;
-    animation: mvDrift 200s linear infinite reverse;
+    animation: mvDrift 210s linear infinite;
 }
 
 .mv-grain {
@@ -3010,8 +3022,9 @@ html, body {
     pointer-events: none;
 }
 
+/* Karo boyutuyla tam uyumlu kaydırma: döngü başında sıçrama olmaz */
 @keyframes mvDrift {
-    to { transform: translate(140px, 140px); }
+    to { transform: translate3d(var(--tile-x), var(--tile-y), 0); }
 }
 
 /* ---------- 2. DENİZCİLİK HARİTASI ÇERÇEVESİ (BORDÜR & KÖŞELER) ---------- */
@@ -3093,8 +3106,8 @@ html, body {
 
 .mv-rise {
     opacity: 0;
-    transform: translateY(16px);
-    animation: mvFadeUp 0.75s cubic-bezier(0.16, 1, 0.3, 1) var(--t, 0s) forwards;
+    transform: translateY(14px);
+    animation: mvFadeUp 0.72s cubic-bezier(0.16, 1, 0.3, 1) var(--t, 0s) forwards;
 }
 
 @keyframes mvFadeUp {
@@ -3141,7 +3154,6 @@ html, body {
     color: #94a3b8;
     text-transform: uppercase;
     margin-bottom: 8px;
-    opacity: 0.85;
 }
 
 .mv-old::after {
@@ -3154,8 +3166,9 @@ html, body {
     background: var(--mv-gold);
     transform: scaleX(0);
     transform-origin: left center;
-    animation: mvStrike 0.6s cubic-bezier(0.65, 0, 0.35, 1) 0.9s forwards,
-               mvDimStrike 0.8s ease 1.6s forwards;
+    animation:
+        mvStrike 0.52s cubic-bezier(0.65, 0, 0.35, 1) 0.72s forwards,
+        mvDimStrike 0.7s ease 1.4s forwards;
 }
 
 @keyframes mvStrike {
@@ -3166,13 +3179,15 @@ html, body {
     to { opacity: 0.45; }
 }
 
+/* Kalem soldan sağa geçtikçe her harf sırayla soluklaşır */
 .mv-old-l {
     display: inline-block;
-    animation: mvLetterDim 0.5s ease 1.3s forwards;
+    animation: mvLetterDim 0.4s ease forwards;
+    animation-delay: calc(0.74s + var(--i) * 0.035s);
 }
 
 @keyframes mvLetterDim {
-    to { opacity: 0.55; color: #64748b; }
+    to { opacity: 0.52; color: #64748b; }
 }
 
 /* Ekran okuyucu gizli metni */
@@ -3187,7 +3202,7 @@ html, body {
     border: 0;
 }
 
-/* Harfiye Harf Taşları (Tiles) */
+/* Harfora Harf Taşları (Tiles) */
 .mv-tiles {
     display: flex;
     gap: clamp(3px, 1.2vw, 8px);
@@ -3213,31 +3228,31 @@ html, body {
     box-shadow: 0 4px 0 #b39b6e, 0 10px 24px rgba(0, 0, 0, 0.45);
     overflow: hidden;
     opacity: 0;
-    transform: rotateX(-90deg) translateY(-8px);
-    transform-origin: 50% 0%;
-    animation: mvTileIn 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
-    animation-delay: calc(1.7s + var(--i) * 0.09s);
+    transform: translateY(14px) scale(0.84) rotateX(-30deg);
+    transform-origin: 50% 50%;
+    animation: mvTileIn 0.48s cubic-bezier(0.22, 1.35, 0.36, 1) var(--ti, 1.1s) forwards;
     user-select: none;
 }
 
+/* Her 9 sn döngüde çark HARFORA'yı tamamladığında (%30) taşların üzerinden altın ışıltı geçer */
 .mv-tile::after {
     content: '';
     position: absolute;
-    inset: -20% auto -20% -60%;
+    inset: -20% auto -20% -65%;
     width: 45%;
-    background: linear-gradient(100deg, transparent, rgba(255, 255, 255, 0.75), transparent);
+    background: linear-gradient(100deg, transparent, rgba(255, 255, 255, 0.78), transparent);
     transform: translateX(0) skewX(-14deg);
-    animation: mvShine 6s ease-in-out infinite;
-    animation-delay: calc(3.6s + var(--i) * 0.1s);
+    animation: mvShine 9s ease-in-out infinite;
+    animation-delay: calc(var(--i) * 0.065s);
 }
 
 @keyframes mvTileIn {
-    to { opacity: 1; transform: none; }
+    to { opacity: 1; transform: translateY(0) scale(1) rotateX(0deg); }
 }
 
 @keyframes mvShine {
-    0%, 72% { transform: translateX(0) skewX(-14deg); }
-    88%, 100% { transform: translateX(450%) skewX(-14deg); }
+    0%, 30% { transform: translateX(0) skewX(-14deg); }
+    40%, 100% { transform: translateX(460%) skewX(-14deg); }
 }
 
 .mv-desc {
@@ -3333,16 +3348,16 @@ html, body {
     position: absolute;
     top: 0;
     bottom: 0;
-    left: -40%;
+    left: -45%;
     width: 35%;
     background: linear-gradient(100deg, transparent, rgba(255, 255, 255, 0.5), transparent);
-    transform: skewX(-16deg);
-    animation: mvBtnShine 4.5s ease-in-out 3.8s infinite;
+    transform: translateX(0) skewX(-16deg);
+    animation: mvBtnShine 5s ease-in-out 3.6s infinite;
 }
 
 @keyframes mvBtnShine {
-    0%, 75% { transform: translateX(0) skewX(-16deg); }
-    100%    { transform: translateX(520%) skewX(-16deg); }
+    0%, 76% { transform: translateX(0) skewX(-16deg); }
+    100%    { transform: translateX(540%) skewX(-16deg); }
 }
 
 .mv-primary svg {
@@ -3436,6 +3451,13 @@ html, body {
     background: radial-gradient(circle at 50% 50%, rgba(18, 29, 54, 0.65) 0%, rgba(8, 13, 26, 0.85) 68%, transparent 100%);
     box-shadow: 0 24px 64px rgba(0, 0, 0, 0.65);
     box-sizing: border-box;
+    opacity: 0;
+    transform: scale(0.96);
+    animation: mvChartIn 0.85s cubic-bezier(0.16, 1, 0.3, 1) 0.08s forwards;
+}
+
+@keyframes mvChartIn {
+    to { opacity: 1; transform: scale(1); }
 }
 
 .mv-par {
@@ -3452,6 +3474,25 @@ html, body {
     width: 100%;
     height: 100%;
     display: block;
+}
+
+/* Katman sarmalayıcılar tam kare olmalı ki dönme merkezleri tam (50%, 50%) kalsın */
+.mv-net-in,
+.mv-rose-in,
+.mv-wheel-in,
+.mv-stamp-in {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.mv-ticks-spin,
+.mv-needle-sway,
+.mv-rose-cardinals {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
 }
 
 /* Portolan Ağı */
@@ -3474,8 +3515,8 @@ html, body {
     stroke-width: 0.9;
     stroke-dasharray: 1;
     stroke-dashoffset: 1;
-    animation: mvDrawLine 1.8s ease forwards;
-    animation-delay: calc(0.35s + var(--i) * 0.08s);
+    animation: mvDrawLine 1.6s ease forwards;
+    animation-delay: calc(0.25s + var(--i) * 0.07s);
 }
 
 .mv-rhumb.is-cardinal {
@@ -3492,15 +3533,26 @@ html, body {
     opacity: 0.55;
 }
 
-/* Pusula Gülü */
-.mv-rose-spin {
-    animation: mvSpin 260s linear infinite;
-    transform-origin: 300px 300px;
+/* Pusula Gülü: simetrik derece halkası tam tur döner, ibre Kuzey etrafında hafifçe salınır, K/D/G/B dik kalır */
+.mv-ticks-spin {
+    animation: mvSpin 280s linear infinite;
+    transform-origin: 50% 50%;
+    will-change: transform;
+}
+
+.mv-needle-sway {
+    animation: mvCompassSway 7.5s ease-in-out infinite alternate;
+    transform-origin: 50% 50%;
     will-change: transform;
 }
 
 @keyframes mvSpin {
     to { transform: rotate(360deg); }
+}
+
+@keyframes mvCompassSway {
+    from { transform: rotate(-2.6deg); }
+    to   { transform: rotate(2.6deg); }
 }
 
 .mv-rose-ring {
@@ -3544,6 +3596,11 @@ html, body {
     opacity: 1;
 }
 
+.mv-star-r.is-north-r {
+    fill: #b8923a;
+    opacity: 1;
+}
+
 .mv-rose-labels text {
     font-family: var(--font-heading);
     font-size: 13.5px;
@@ -3566,7 +3623,7 @@ html, body {
     stroke-dasharray: 2 4;
 }
 
-/* HARFİYE Bağlantı İzi */
+/* HARFORA Bağlantı İzi (9 sn birleşik döngü) */
 .mv-trace {
     fill: none;
     stroke: #f1dc9c;
@@ -3576,71 +3633,225 @@ html, body {
     filter: drop-shadow(0 0 7px rgba(241, 220, 156, 0.75));
     stroke-dasharray: 1;
     stroke-dashoffset: 1;
-    animation: mvTraceLoop 9s cubic-bezier(0.42, 0, 0.25, 1) infinite;
+    animation: mvTraceLoop 9s linear infinite;
 }
 
 @keyframes mvTraceLoop {
-    0%, 9% {
+    0%, 11.4% {
         stroke-dashoffset: 1;
         opacity: 0;
     }
-    11% {
+    12.0% {
         stroke-dashoffset: 1;
         opacity: 1;
     }
-    28% {
+    30.0% {
         stroke-dashoffset: 0;
         opacity: 1;
     }
-    38% {
+    41.0% {
         stroke-dashoffset: 0;
-        opacity: 0.9;
+        opacity: 1;
     }
-    45%, 100% {
+    47.0%, 100% {
         stroke-dashoffset: 0;
         opacity: 0;
     }
 }
 
-/* Çark Harf Düğümleri */
+/* Çark Harf Düğümleri: her düğüm kendi merkezi etrafında ölçeklenir ve izle eşzamanlı yanıp birlikte söner */
+.mv-node {
+    transform-box: fill-box;
+    transform-origin: center;
+}
+
 .mv-node-bg {
     fill: #15223a;
     stroke: rgba(201, 165, 74, 0.45);
     stroke-width: 2.2;
-    transition: all 0.25s ease;
 }
 
 .mv-node-tx {
     font-family: var(--font-heading);
-    font-size: 20px;
+    font-size: 19.5px;
     font-weight: 900;
     fill: var(--mv-ivory);
     pointer-events: none;
 }
 
-.mv-node {
-    animation: mvNodeLight 9s ease-in-out infinite;
-    animation-delay: var(--d, 0s);
+.mv-step-0 {
+    animation: mvPop0 9s linear infinite;
+}
+.mv-step-0 .mv-node-bg {
+    animation: mvBg0 9s linear infinite;
+}
+.mv-step-0 .mv-node-tx {
+    animation: mvTx0 9s linear infinite;
+}
+@keyframes mvPop0 {
+    0%, 11.65% { transform: scale(1); }
+    13.00% { transform: scale(1.1); }
+    14.80%, 100% { transform: scale(1); }
+}
+@keyframes mvBg0 {
+    0%, 11.65% { fill: #15223a; stroke: rgba(201, 165, 74, 0.45); }
+    12.90%, 41.0% { fill: #ecd282; stroke: #f9ecc2; }
+    47.0%, 100% { fill: #15223a; stroke: rgba(201, 165, 74, 0.45); }
+}
+@keyframes mvTx0 {
+    0%, 11.65% { fill: #f6f1e4; }
+    12.90%, 41.0% { fill: #0b132b; }
+    47.0%, 100% { fill: #f6f1e4; }
 }
 
-@keyframes mvNodeLight {
-    0%, 2% {
-        filter: none;
-    }
-    4%, 18% {
-        filter: drop-shadow(0 0 10px rgba(241, 220, 156, 0.85));
-    }
-    4% {
-        transform: scale(1.08);
-        transform-origin: center;
-    }
-    18% {
-        transform: scale(1);
-    }
-    24%, 100% {
-        filter: none;
-        transform: none;
-    }
+.mv-step-1 {
+    animation: mvPop1 9s linear infinite;
+}
+.mv-step-1 .mv-node-bg {
+    animation: mvBg1 9s linear infinite;
+}
+.mv-step-1 .mv-node-tx {
+    animation: mvTx1 9s linear infinite;
+}
+@keyframes mvPop1 {
+    0%, 14.96% { transform: scale(1); }
+    16.31% { transform: scale(1.1); }
+    18.11%, 100% { transform: scale(1); }
+}
+@keyframes mvBg1 {
+    0%, 14.96% { fill: #15223a; stroke: rgba(201, 165, 74, 0.45); }
+    16.21%, 41.0% { fill: #ecd282; stroke: #f9ecc2; }
+    47.0%, 100% { fill: #15223a; stroke: rgba(201, 165, 74, 0.45); }
+}
+@keyframes mvTx1 {
+    0%, 14.96% { fill: #f6f1e4; }
+    16.21%, 41.0% { fill: #0b132b; }
+    47.0%, 100% { fill: #f6f1e4; }
+}
+
+.mv-step-2 {
+    animation: mvPop2 9s linear infinite;
+}
+.mv-step-2 .mv-node-bg {
+    animation: mvBg2 9s linear infinite;
+}
+.mv-step-2 .mv-node-tx {
+    animation: mvTx2 9s linear infinite;
+}
+@keyframes mvPop2 {
+    0%, 18.26% { transform: scale(1); }
+    19.61% { transform: scale(1.1); }
+    21.41%, 100% { transform: scale(1); }
+}
+@keyframes mvBg2 {
+    0%, 18.26% { fill: #15223a; stroke: rgba(201, 165, 74, 0.45); }
+    19.51%, 41.0% { fill: #ecd282; stroke: #f9ecc2; }
+    47.0%, 100% { fill: #15223a; stroke: rgba(201, 165, 74, 0.45); }
+}
+@keyframes mvTx2 {
+    0%, 18.26% { fill: #f6f1e4; }
+    19.51%, 41.0% { fill: #0b132b; }
+    47.0%, 100% { fill: #f6f1e4; }
+}
+
+.mv-step-3 {
+    animation: mvPop3 9s linear infinite;
+}
+.mv-step-3 .mv-node-bg {
+    animation: mvBg3 9s linear infinite;
+}
+.mv-step-3 .mv-node-tx {
+    animation: mvTx3 9s linear infinite;
+}
+@keyframes mvPop3 {
+    0%, 21.57% { transform: scale(1); }
+    22.92% { transform: scale(1.1); }
+    24.72%, 100% { transform: scale(1); }
+}
+@keyframes mvBg3 {
+    0%, 21.57% { fill: #15223a; stroke: rgba(201, 165, 74, 0.45); }
+    22.82%, 41.0% { fill: #ecd282; stroke: #f9ecc2; }
+    47.0%, 100% { fill: #15223a; stroke: rgba(201, 165, 74, 0.45); }
+}
+@keyframes mvTx3 {
+    0%, 21.57% { fill: #f6f1e4; }
+    22.82%, 41.0% { fill: #0b132b; }
+    47.0%, 100% { fill: #f6f1e4; }
+}
+
+.mv-step-4 {
+    animation: mvPop4 9s linear infinite;
+}
+.mv-step-4 .mv-node-bg {
+    animation: mvBg4 9s linear infinite;
+}
+.mv-step-4 .mv-node-tx {
+    animation: mvTx4 9s linear infinite;
+}
+@keyframes mvPop4 {
+    0%, 24.87% { transform: scale(1); }
+    26.22% { transform: scale(1.1); }
+    28.02%, 100% { transform: scale(1); }
+}
+@keyframes mvBg4 {
+    0%, 24.87% { fill: #15223a; stroke: rgba(201, 165, 74, 0.45); }
+    26.12%, 41.0% { fill: #ecd282; stroke: #f9ecc2; }
+    47.0%, 100% { fill: #15223a; stroke: rgba(201, 165, 74, 0.45); }
+}
+@keyframes mvTx4 {
+    0%, 24.87% { fill: #f6f1e4; }
+    26.12%, 41.0% { fill: #0b132b; }
+    47.0%, 100% { fill: #f6f1e4; }
+}
+
+.mv-step-5 {
+    animation: mvPop5 9s linear infinite;
+}
+.mv-step-5 .mv-node-bg {
+    animation: mvBg5 9s linear infinite;
+}
+.mv-step-5 .mv-node-tx {
+    animation: mvTx5 9s linear infinite;
+}
+@keyframes mvPop5 {
+    0%, 26.34% { transform: scale(1); }
+    27.69% { transform: scale(1.1); }
+    29.49%, 100% { transform: scale(1); }
+}
+@keyframes mvBg5 {
+    0%, 26.34% { fill: #15223a; stroke: rgba(201, 165, 74, 0.45); }
+    27.59%, 41.0% { fill: #ecd282; stroke: #f9ecc2; }
+    47.0%, 100% { fill: #15223a; stroke: rgba(201, 165, 74, 0.45); }
+}
+@keyframes mvTx5 {
+    0%, 26.34% { fill: #f6f1e4; }
+    27.59%, 41.0% { fill: #0b132b; }
+    47.0%, 100% { fill: #f6f1e4; }
+}
+
+.mv-step-6 {
+    animation: mvPop6 9s linear infinite;
+}
+.mv-step-6 .mv-node-bg {
+    animation: mvBg6 9s linear infinite;
+}
+.mv-step-6 .mv-node-tx {
+    animation: mvTx6 9s linear infinite;
+}
+@keyframes mvPop6 {
+    0%, 29.65% { transform: scale(1); }
+    31.00% { transform: scale(1.1); }
+    32.80%, 100% { transform: scale(1); }
+}
+@keyframes mvBg6 {
+    0%, 29.65% { fill: #15223a; stroke: rgba(201, 165, 74, 0.45); }
+    30.90%, 41.0% { fill: #ecd282; stroke: #f9ecc2; }
+    47.0%, 100% { fill: #15223a; stroke: rgba(201, 165, 74, 0.45); }
+}
+@keyframes mvTx6 {
+    0%, 29.65% { fill: #f6f1e4; }
+    30.90%, 41.0% { fill: #0b132b; }
+    47.0%, 100% { fill: #f6f1e4; }
 }
 
 /* Posta / Liman Mührü */
@@ -3651,6 +3862,22 @@ html, body {
     width: 28%;
     height: 28%;
     pointer-events: none;
+}
+
+.mv-stamp-in {
+    opacity: 0;
+    transform: scale(1.18);
+    transform-origin: 50% 50%;
+    animation: mvStampIn 0.55s cubic-bezier(0.22, 1, 0.36, 1) 2.35s forwards;
+}
+
+@keyframes mvStampIn {
+    to { opacity: 1; transform: scale(1); }
+}
+
+.mv-stamp-bg {
+    fill: rgba(10, 17, 33, 0.88);
+    filter: drop-shadow(0 8px 18px rgba(0, 0, 0, 0.45));
 }
 
 .mv-stamp-ring {
@@ -3744,12 +3971,13 @@ html, body {
     fill: none;
     stroke: var(--mv-gold);
     stroke-width: 1.2;
-    transform-origin: 560px 46px;
+    transform-box: fill-box;
+    transform-origin: center;
     animation: mvPulseBeacon 2.4s ease-out infinite;
 }
 
 @keyframes mvPulseBeacon {
-    0%   { transform: scale(0.6); opacity: 0.8; }
+    0%   { transform: scale(0.6); opacity: 0.85; }
     100% { transform: scale(2.4); opacity: 0; }
 }
 
@@ -3936,7 +4164,9 @@ html, body {
     .mv-tile,
     .mv-trace,
     .mv-old-l,
-    .mv-node {
+    .mv-node,
+    .mv-chart-sq,
+    .mv-stamp-in {
         opacity: 1 !important;
         transform: none !important;
     }
@@ -3946,8 +4176,19 @@ html, body {
         opacity: 0.5 !important;
     }
 
+    .mv-rhumb,
     .mv-trace {
         stroke-dashoffset: 0 !important;
+        opacity: 1 !important;
+    }
+
+    .mv-node-bg {
+        fill: #ecd282 !important;
+        stroke: #f9ecc2 !important;
+    }
+
+    .mv-node-tx {
+        fill: #0b132b !important;
     }
 }
 
@@ -3955,7 +4196,7 @@ html, body {
 </style>
 </head>
 <body>
-    <!-- TAŞINMA BİLDİRİMİ: Sözcük Seferî → Harfiye (yalnızca eski GitHub Pages adresinde görünür) -->
+    <!-- TAŞINMA BİLDİRİMİ: Sözcük Seferî → Harfora (yalnızca eski GitHub Pages adresinde görünür) -->
     <div id="moved-overlay" class="hidden" role="dialog" aria-modal="true" aria-labelledby="moved-title" aria-describedby="moved-desc">
         <div class="mv-sky" aria-hidden="true">
             <div class="mv-stars"></div>
@@ -3968,7 +4209,7 @@ html, body {
             <span class="mv-corner mv-c-tr"><svg viewBox="0 0 26 26" fill="none" stroke="currentColor" stroke-width="1"><path d="M1 25V6a5 5 0 0 1 5-5h19"/><path d="M5 25V9a4 4 0 0 1 4-4h16" opacity=".45"/><rect x="2.5" y="2.5" width="3" height="3" transform="rotate(45 4 4)" fill="currentColor" stroke="none"/></svg></span>
             <span class="mv-corner mv-c-bl"><svg viewBox="0 0 26 26" fill="none" stroke="currentColor" stroke-width="1"><path d="M1 25V6a5 5 0 0 1 5-5h19"/><path d="M5 25V9a4 4 0 0 1 4-4h16" opacity=".45"/><rect x="2.5" y="2.5" width="3" height="3" transform="rotate(45 4 4)" fill="currentColor" stroke="none"/></svg></span>
             <span class="mv-corner mv-c-br"><svg viewBox="0 0 26 26" fill="none" stroke="currentColor" stroke-width="1"><path d="M1 25V6a5 5 0 0 1 5-5h19"/><path d="M5 25V9a4 4 0 0 1 4-4h16" opacity=".45"/><rect x="2.5" y="2.5" width="3" height="3" transform="rotate(45 4 4)" fill="currentColor" stroke="none"/></svg></span>
-            <span class="mv-mark mv-m-tl">HARFİYE · DENİZ HARİTASI</span>
+            <span class="mv-mark mv-m-tl">HARFORA · DENİZ HARİTASI</span>
             <span class="mv-mark mv-m-tr">LEVHA · I</span>
             <span class="mv-mark mv-m-bl">41°00′ K · 28°58′ D</span>
             <span class="mv-mark mv-m-br"><svg width="64" height="6" viewBox="0 0 64 6"><rect x=".5" y=".5" width="63" height="5" fill="none" stroke="currentColor"/><rect x="0" y="0" width="16" height="6" fill="currentColor"/><rect x="32" y="0" width="16" height="6" fill="currentColor"/></svg>ÖLÇEK 1 : HARF</span>
@@ -3979,32 +4220,32 @@ html, body {
                 <span class="mv-eyebrow mv-rise" style="--t:.15s">YENİ İSİM · YENİ LİMAN</span>
 
                 <h1 class="mv-title" id="moved-title">
-                    <span class="mv-old mv-rise" style="--t:.3s"><span class="mv-old-l" style="--i:0">S</span><span class="mv-old-l" style="--i:1">ö</span><span class="mv-old-l" style="--i:2">z</span><span class="mv-old-l" style="--i:3">c</span><span class="mv-old-l" style="--i:4">ü</span><span class="mv-old-l" style="--i:5">k</span><span class="mv-old-l" style="--i:6">&nbsp;</span><span class="mv-old-l" style="--i:7">S</span><span class="mv-old-l" style="--i:8">e</span><span class="mv-old-l" style="--i:9">f</span><span class="mv-old-l" style="--i:10">e</span><span class="mv-old-l" style="--i:11">r</span><span class="mv-old-l" style="--i:12">î</span></span>
-                    <span class="mv-sr"> artık Harfiye.</span>
+                    <span class="mv-old mv-rise" style="--t:.28s"><span class="mv-old-l" style="--i:0">S</span><span class="mv-old-l" style="--i:1">ö</span><span class="mv-old-l" style="--i:2">z</span><span class="mv-old-l" style="--i:3">c</span><span class="mv-old-l" style="--i:4">ü</span><span class="mv-old-l" style="--i:5">k</span><span class="mv-old-l" style="--i:6">&nbsp;</span><span class="mv-old-l" style="--i:7">S</span><span class="mv-old-l" style="--i:8">e</span><span class="mv-old-l" style="--i:9">f</span><span class="mv-old-l" style="--i:10">e</span><span class="mv-old-l" style="--i:11">r</span><span class="mv-old-l" style="--i:12">î</span></span>
+                    <span class="mv-sr"> artık Harfora.</span>
                     <span class="mv-tiles" aria-hidden="true">
-                    <span class="mv-tile" style="--i:0">H</span>
-                    <span class="mv-tile" style="--i:1">A</span>
-                    <span class="mv-tile" style="--i:2">R</span>
-                    <span class="mv-tile" style="--i:3">F</span>
-                    <span class="mv-tile" style="--i:4">İ</span>
-                    <span class="mv-tile" style="--i:5">Y</span>
-                    <span class="mv-tile" style="--i:6">E</span>
+                    <span class="mv-tile" style="--i:0;--ti:1.08s">H</span>
+                    <span class="mv-tile" style="--i:1;--ti:1.38s">A</span>
+                    <span class="mv-tile" style="--i:2;--ti:1.68s">R</span>
+                    <span class="mv-tile" style="--i:3;--ti:1.97s">F</span>
+                    <span class="mv-tile" style="--i:4;--ti:2.27s">O</span>
+                    <span class="mv-tile" style="--i:5;--ti:2.40s">R</span>
+                    <span class="mv-tile" style="--i:6;--ti:2.70s">A</span>
                     </span>
                 </h1>
 
-                <p class="mv-desc mv-rise" id="moved-desc" style="--t:2.2s">Aynı yolculuk; yeni bir isim, yeni bir adres. Harfiye artık kendi alan adında ve bundan sonra yalnızca orada güncelleniyor.</p>
+                <p class="mv-desc mv-rise" id="moved-desc" style="--t:2.35s">Aynı yolculuk; yeni bir isim, yeni bir adres. Harfora artık kendi alan adında ve bundan sonra yalnızca orada güncelleniyor.</p>
 
-                <div class="mv-address mv-rise" style="--t:2.3s">
+                <div class="mv-address mv-rise" style="--t:2.48s">
                     <span class="mv-address-label">YENİ ADRES</span>
                     <span class="mv-address-url">
                         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>
-                        <span id="moved-address-text">www.harfiye.com</span>
+                        <span id="moved-address-text">harfora.com</span>
                     </span>
                 </div>
 
-                <div class="mv-actions mv-rise" style="--t:2.4s">
-                    <a class="mv-primary" id="moved-go-btn" href="https://www.harfiye.com/" rel="noopener">
-                        <span>Harfiye'ye Geç</span>
+                <div class="mv-actions mv-rise" style="--t:2.6s">
+                    <a class="mv-primary" id="moved-go-btn" href="https://harfora.com/" rel="noopener">
+                        <span>Harfora'ya Geç</span>
                         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="4" y1="12" x2="19" y2="12"/><polyline points="13 6 19 12 13 18"/></svg>
                     </a>
                     <button type="button" class="mv-secondary" id="moved-copy-btn">
@@ -4013,9 +4254,9 @@ html, body {
                     </button>
                 </div>
 
-                <p class="mv-note mv-rise" id="moved-progress-note" style="--t:2.55s">Yer imlerini yeni adresle güncellemeyi unutma.</p>
+                <p class="mv-note mv-rise" id="moved-progress-note" style="--t:2.72s">Yer imlerini yeni adresle güncellemeyi unutma.</p>
 
-                <p class="mv-sign mv-rise" style="--t:2.65s">Harfiye tek kişilik küçük bir atölyede, her harfi özenle yerleştirilerek büyüyor. Yolculuğa eşlik ettiğin için teşekkürler.</p>
+                <p class="mv-sign mv-rise" style="--t:2.84s">Harfora tek kişilik küçük bir atölyede, her harfi özenle yerleştirilerek büyüyor. Yolculuğa eşlik ettiğin için teşekkürler.</p>
             </section>
 
             <figure class="mv-chart" aria-hidden="true">
@@ -4039,20 +4280,30 @@ html, body {
                     </div>
 
                     <div class="mv-par mv-layer" style="--d:6">
-                        <div class="mv-rose-in"><div class="mv-rose-spin">
-                        <svg viewBox="0 0 600 600">
-                            <circle class="mv-rose-ring" cx="300" cy="300" r="208"/>
-                            <circle class="mv-rose-ring is-faint" cx="300" cy="300" r="196"/>
-                            <path class="mv-tick" d="M317.1 104.7L317.8 96.8M334.0 107.0L335.4 99.1M367.0 115.8L369.8 108.3M382.8 122.4L386.2 115.1M412.4 139.4L417.0 132.9M426.0 149.9L431.1 143.7M450.1 174.0L456.3 168.9M460.6 187.6L467.1 183.0M477.6 217.2L484.9 213.8M484.2 233.0L491.7 230.2M493.0 266.0L500.9 264.6M495.3 282.9L503.2 282.2M495.3 317.1L503.2 317.8M493.0 334.0L500.9 335.4M484.2 367.0L491.7 369.8M477.6 382.8L484.9 386.2M460.6 412.4L467.1 417.0M450.1 426.0L456.3 431.1M426.0 450.1L431.1 456.3M412.4 460.6L417.0 467.1M382.8 477.6L386.2 484.9M367.0 484.2L369.8 491.7M334.0 493.0L335.4 500.9M317.1 495.3L317.8 503.2M282.9 495.3L282.2 503.2M266.0 493.0L264.6 500.9M233.0 484.2L230.2 491.7M217.2 477.6L213.8 484.9M187.6 460.6L183.0 467.1M174.0 450.1L168.9 456.3M149.9 426.0L143.7 431.1M139.4 412.4L132.9 417.0M122.4 382.8L115.1 386.2M115.8 367.0L108.3 369.8M107.0 334.0L99.1 335.4M104.7 317.1L96.8 317.8M104.7 282.9L96.8 282.2M107.0 266.0L99.1 264.6M115.8 233.0L108.3 230.2M122.4 217.2L115.1 213.8M139.4 187.6L132.9 183.0M149.9 174.0L143.7 168.9M174.0 149.9L168.9 143.7M187.6 139.4L183.0 132.9M217.2 122.4L213.8 115.1M233.0 115.8L230.2 108.3M266.0 107.0L264.6 99.1M282.9 104.7L282.2 96.8"/>
-                            <path class="mv-tick is-mid" d="M350.7 110.7L354.4 97.2M398.0 130.3L405.0 118.1M469.7 202.0L481.9 195.0M489.3 249.3L502.8 245.6M489.3 350.7L502.8 354.4M469.7 398.0L481.9 405.0M398.0 469.7L405.0 481.9M350.7 489.3L354.4 502.8M249.3 489.3L245.6 502.8M202.0 469.7L195.0 481.9M130.3 398.0L118.1 405.0M110.7 350.7L97.2 354.4M110.7 249.3L97.2 245.6M130.3 202.0L118.1 195.0M202.0 130.3L195.0 118.1M249.3 110.7L245.6 97.2"/>
-                            <path class="mv-tick is-major" d="M300.0 114.0L300.0 84.0M431.5 168.5L452.7 147.3M486.0 300.0L516.0 300.0M431.5 431.5L452.7 452.7M300.0 486.0L300.0 516.0M168.5 431.5L147.3 452.7M114.0 300.0L84.0 300.0M168.5 168.5L147.3 147.3"/>
-                            <g class="mv-star"><polygon class="mv-star-l" points="406.1 193.9 316.9 268.2 300 300"/><polygon class="mv-star-r" points="406.1 193.9 300 300 331.8 283.1"/><polygon class="mv-star-l" points="406.1 406.1 331.8 316.9 300 300"/><polygon class="mv-star-r" points="406.1 406.1 300 300 316.9 331.8"/><polygon class="mv-star-l" points="193.9 406.1 283.1 331.8 300 300"/><polygon class="mv-star-r" points="193.9 406.1 300 300 268.2 316.9"/><polygon class="mv-star-l" points="193.9 193.9 268.2 283.1 300 300"/><polygon class="mv-star-r" points="193.9 193.9 300 300 283.1 268.2"/><polygon class="mv-star-l is-north" points="300.0 100.0 287.7 266.2 300 300"/><polygon class="mv-star-r" points="300.0 100.0 300 300 312.3 266.2"/><polygon class="mv-star-l" points="500.0 300.0 333.8 287.7 300 300"/><polygon class="mv-star-r" points="500.0 300.0 300 300 333.8 312.3"/><polygon class="mv-star-l" points="300.0 500.0 312.3 333.8 300 300"/><polygon class="mv-star-r" points="300.0 500.0 300 300 287.7 333.8"/><polygon class="mv-star-l" points="100.0 300.0 266.2 312.3 300 300"/><polygon class="mv-star-r" points="100.0 300.0 300 300 266.2 287.7"/></g>
-                            <g class="mv-rose-labels"><text x="300.0" y="62.0" text-anchor="middle" dy=".35em">K</text><text x="538.0" y="300.0" text-anchor="middle" dy=".35em">D</text><text x="300.0" y="538.0" text-anchor="middle" dy=".35em">G</text><text x="62.0" y="300.0" text-anchor="middle" dy=".35em">B</text></g>
-                        </svg>
-                        </div></div>
+                        <div class="mv-rose-in">
+                            <div class="mv-ticks-spin">
+                                <svg viewBox="0 0 600 600">
+                                    <circle class="mv-rose-ring" cx="300" cy="300" r="208"/>
+                                    <circle class="mv-rose-ring is-faint" cx="300" cy="300" r="196"/>
+                                    <path class="mv-tick" d="M317.1 104.7L317.8 96.8M334.0 107.0L335.4 99.1M367.0 115.8L369.8 108.3M382.8 122.4L386.2 115.1M412.4 139.4L417.0 132.9M426.0 149.9L431.1 143.7M450.1 174.0L456.3 168.9M460.6 187.6L467.1 183.0M477.6 217.2L484.9 213.8M484.2 233.0L491.7 230.2M493.0 266.0L500.9 264.6M495.3 282.9L503.2 282.2M495.3 317.1L503.2 317.8M493.0 334.0L500.9 335.4M484.2 367.0L491.7 369.8M477.6 382.8L484.9 386.2M460.6 412.4L467.1 417.0M450.1 426.0L456.3 431.1M426.0 450.1L431.1 456.3M412.4 460.6L417.0 467.1M382.8 477.6L386.2 484.9M367.0 484.2L369.8 491.7M334.0 493.0L335.4 500.9M317.1 495.3L317.8 503.2M282.9 495.3L282.2 503.2M266.0 493.0L264.6 500.9M233.0 484.2L230.2 491.7M217.2 477.6L213.8 484.9M187.6 460.6L183.0 467.1M174.0 450.1L168.9 456.3M149.9 426.0L143.7 431.1M139.4 412.4L132.9 417.0M122.4 382.8L115.1 386.2M115.8 367.0L108.3 369.8M107.0 334.0L99.1 335.4M104.7 317.1L96.8 317.8M104.7 282.9L96.8 282.2M107.0 266.0L99.1 264.6M115.8 233.0L108.3 230.2M122.4 217.2L115.1 213.8M139.4 187.6L132.9 183.0M149.9 174.0L143.7 168.9M174.0 149.9L168.9 143.7M187.6 139.4L183.0 132.9M217.2 122.4L213.8 115.1M233.0 115.8L230.2 108.3M266.0 107.0L264.6 99.1M282.9 104.7L282.2 96.8"/>
+                                    <path class="mv-tick is-mid" d="M350.7 110.7L354.4 97.2M398.0 130.3L405.0 118.1M469.7 202.0L481.9 195.0M489.3 249.3L502.8 245.6M489.3 350.7L502.8 354.4M469.7 398.0L481.9 405.0M398.0 469.7L405.0 481.9M350.7 489.3L354.4 502.8M249.3 489.3L245.6 502.8M202.0 469.7L195.0 481.9M130.3 398.0L118.1 405.0M110.7 350.7L97.2 354.4M110.7 249.3L97.2 245.6M130.3 202.0L118.1 195.0M202.0 130.3L195.0 118.1M249.3 110.7L245.6 97.2"/>
+                                    <path class="mv-tick is-major" d="M300.0 114.0L300.0 84.0M431.5 168.5L452.7 147.3M486.0 300.0L516.0 300.0M431.5 431.5L452.7 452.7M300.0 486.0L300.0 516.0M168.5 431.5L147.3 452.7M114.0 300.0L84.0 300.0M168.5 168.5L147.3 147.3"/>
+                                </svg>
+                            </div>
+                            <div class="mv-needle-sway">
+                                <svg viewBox="0 0 600 600">
+                                    <g class="mv-star"><polygon class="mv-star-l" points="406.1 193.9 316.9 268.2 300 300"/><polygon class="mv-star-r" points="406.1 193.9 300 300 331.8 283.1"/><polygon class="mv-star-l" points="406.1 406.1 331.8 316.9 300 300"/><polygon class="mv-star-r" points="406.1 406.1 300 300 316.9 331.8"/><polygon class="mv-star-l" points="193.9 406.1 283.1 331.8 300 300"/><polygon class="mv-star-r" points="193.9 406.1 300 300 268.2 316.9"/><polygon class="mv-star-l" points="193.9 193.9 268.2 283.1 300 300"/><polygon class="mv-star-r" points="193.9 193.9 300 300 283.1 268.2"/><polygon class="mv-star-l is-north" points="300.0 100.0 287.7 266.2 300 300"/><polygon class="mv-star-r is-north-r" points="300.0 100.0 300 300 312.3 266.2"/><polygon class="mv-star-l" points="500.0 300.0 333.8 287.7 300 300"/><polygon class="mv-star-r" points="500.0 300.0 300 300 333.8 312.3"/><polygon class="mv-star-l" points="300.0 500.0 312.3 333.8 300 300"/><polygon class="mv-star-r" points="300.0 500.0 300 300 287.7 333.8"/><polygon class="mv-star-l" points="100.0 300.0 266.2 312.3 300 300"/><polygon class="mv-star-r" points="100.0 300.0 300 300 266.2 287.7"/></g>
+                                </svg>
+                            </div>
+                            <div class="mv-rose-cardinals">
+                                <svg viewBox="0 0 600 600">
+                                    <g class="mv-rose-labels"><text x="300.0" y="62.0" text-anchor="middle" dy=".35em">K</text><text x="538.0" y="300.0" text-anchor="middle" dy=".35em">D</text><text x="300.0" y="538.0" text-anchor="middle" dy=".35em">G</text><text x="62.0" y="300.0" text-anchor="middle" dy=".35em">B</text></g>
+                                </svg>
+                            </div>
+                        </div>
                     </div>
 
-                    <div class="mv-par mv-layer" style="--d:-3">
+                    <div class="mv-par mv-layer" style="--d:-4">
                         <div class="mv-wheel-in">
                         <svg viewBox="0 0 600 600">
                             <defs>
@@ -4063,14 +4314,14 @@ html, body {
                             </defs>
                             <circle class="mv-wheel-face" cx="300" cy="300" r="124" fill="url(#mv-face)"/>
                             <circle class="mv-wheel-inner" cx="300" cy="300" r="115"/>
-                            <path class="mv-trace" pathLength="1" style="--t0:0.95s" d="M300.0 220.0L265.3 372.1L378.0 317.8L237.5 250.1L222.0 317.8L362.5 250.1L334.7 372.1"/>
-                            <g class="mv-node" style="--k:0;--d:0.950s"><circle class="mv-node-bg" cx="300.0" cy="220.0" r="25"/><text class="mv-node-tx" x="300.0" y="220.0" text-anchor="middle" dy=".36em">H</text></g>
-                            <g class="mv-node" style="--k:1;--d:1.934s"><circle class="mv-node-bg" cx="362.5" cy="250.1" r="25"/><text class="mv-node-tx" x="362.5" y="250.1" text-anchor="middle" dy=".36em">Y</text></g>
-                            <g class="mv-node" style="--k:2;--d:1.368s"><circle class="mv-node-bg" cx="378.0" cy="317.8" r="25"/><text class="mv-node-tx" x="378.0" y="317.8" text-anchor="middle" dy=".36em">R</text></g>
-                            <g class="mv-node" style="--k:3;--d:2.120s"><circle class="mv-node-bg" cx="334.7" cy="372.1" r="25"/><text class="mv-node-tx" x="334.7" y="372.1" text-anchor="middle" dy=".36em">E</text></g>
-                            <g class="mv-node" style="--k:4;--d:1.182s"><circle class="mv-node-bg" cx="265.3" cy="372.1" r="25"/><text class="mv-node-tx" x="265.3" y="372.1" text-anchor="middle" dy=".36em">A</text></g>
-                            <g class="mv-node" style="--k:5;--d:1.702s"><circle class="mv-node-bg" cx="222.0" cy="317.8" r="25"/><text class="mv-node-tx" x="222.0" y="317.8" text-anchor="middle" dy=".36em">İ</text></g>
-                            <g class="mv-node" style="--k:6;--d:1.599s"><circle class="mv-node-bg" cx="237.5" cy="250.1" r="25"/><text class="mv-node-tx" x="237.5" y="250.1" text-anchor="middle" dy=".36em">F</text></g>
+                            <path class="mv-trace" pathLength="1" d="M300.0 218.0L335.6 373.9L235.9 248.9L379.9 318.2L220.1 318.2L264.4 373.9L364.1 248.9"/>
+                            <g class="mv-node mv-step-0"><circle class="mv-node-bg" cx="300.0" cy="218.0" r="24"/><text class="mv-node-tx" x="300.0" y="218.0" text-anchor="middle" dy=".36em">H</text></g>
+                            <g class="mv-node mv-step-6"><circle class="mv-node-bg" cx="364.1" cy="248.9" r="24"/><text class="mv-node-tx" x="364.1" y="248.9" text-anchor="middle" dy=".36em">A</text></g>
+                            <g class="mv-node mv-step-3"><circle class="mv-node-bg" cx="379.9" cy="318.2" r="24"/><text class="mv-node-tx" x="379.9" y="318.2" text-anchor="middle" dy=".36em">F</text></g>
+                            <g class="mv-node mv-step-1"><circle class="mv-node-bg" cx="335.6" cy="373.9" r="24"/><text class="mv-node-tx" x="335.6" y="373.9" text-anchor="middle" dy=".36em">A</text></g>
+                            <g class="mv-node mv-step-5"><circle class="mv-node-bg" cx="264.4" cy="373.9" r="24"/><text class="mv-node-tx" x="264.4" y="373.9" text-anchor="middle" dy=".36em">R</text></g>
+                            <g class="mv-node mv-step-4"><circle class="mv-node-bg" cx="220.1" cy="318.2" r="24"/><text class="mv-node-tx" x="220.1" y="318.2" text-anchor="middle" dy=".36em">O</text></g>
+                            <g class="mv-node mv-step-2"><circle class="mv-node-bg" cx="235.9" cy="248.9" r="24"/><text class="mv-node-tx" x="235.9" y="248.9" text-anchor="middle" dy=".36em">R</text></g>
                         </svg>
                         </div>
                     </div>
@@ -4080,12 +4331,13 @@ html, body {
                         <svg viewBox="0 0 200 200">
                             <defs><path id="mv-stamp-circle" d="M100 100m-71 0a71 71 0 1 1 142 0a71 71 0 1 1-142 0"/></defs>
                             <g transform="rotate(-14 100 100)">
+                                <circle cx="100" cy="100" r="93" class="mv-stamp-bg"/>
                                 <circle cx="100" cy="100" r="93" class="mv-stamp-ring is-bold"/>
                                 <circle cx="100" cy="100" r="85" class="mv-stamp-ring"/>
                                 <circle cx="100" cy="100" r="55" class="mv-stamp-ring is-dash"/>
-                                <text class="mv-stamp-arc"><textPath href="#mv-stamp-circle" textLength="440" lengthAdjust="spacing">YENİ LİMAN · HARFİYE · YENİ LİMAN · HARFİYE ·</textPath></text>
+                                <text class="mv-stamp-arc"><textPath href="#mv-stamp-circle" textLength="440" lengthAdjust="spacing">YENİ LİMAN · HARFORA · YENİ LİMAN · HARFORA ·</textPath></text>
                                 <path class="mv-stamp-star" d="M100 66l2.6 6.4 6.4 2.6-6.4 2.6-2.6 6.4-2.6-6.4-6.4-2.6 6.4-2.6z"/>
-                                <text class="mv-stamp-name" x="100" y="108" text-anchor="middle">HARFİYE</text>
+                                <text class="mv-stamp-name" x="100" y="108" text-anchor="middle">HARFORA</text>
                                 <text class="mv-stamp-tld" x="100" y="126" text-anchor="middle">· COM ·</text>
                             </g>
                         </svg>
@@ -4093,7 +4345,7 @@ html, body {
                     </div>
                 </div>
 
-                <svg class="mv-route mv-rise" style="--t:2.3s" viewBox="0 0 600 74">
+                <svg class="mv-route mv-rise" style="--t:2.45s" viewBox="0 0 600 74">
                     <path id="mv-route-line" class="mv-route-path" d="M40 46 C 200 -4, 400 -4, 560 46"/>
                     <circle cx="40" cy="46" r="5" class="mv-port"/>
                     <circle cx="40" cy="46" r="1.8" class="mv-port-dot"/>
@@ -4104,11 +4356,11 @@ html, body {
                         <path d="M-7 2 L7 2 L5 5.5 L-5 5.5 Z" fill="#c9a54a"/>
                         <path d="M0 1 L0 -9 L6 1 Z" fill="#f6f1e4"/>
                         <path d="M-1.2 1 L-1.2 -6.5 L-5.5 1 Z" fill="#d9ccae"/>
-                        <animateMotion dur="7s" repeatCount="indefinite" rotate="auto" keyPoints="0;1;1" keyTimes="0;0.86;1" calcMode="linear"><mpath href="#mv-route-line"/></animateMotion>
+                        <animateMotion dur="7s" repeatCount="indefinite" rotate="auto" keyPoints="0;1;1" keyTimes="0;0.86;1" calcMode="linear" path="M40 46 C 200 -4, 400 -4, 560 46"/>
                         <animate attributeName="opacity" values="0;1;1;0;0" keyTimes="0;0.06;0.8;0.86;1" dur="7s" repeatCount="indefinite"/>
                     </g>
                     <text x="40" y="70" text-anchor="middle" class="mv-route-label">ESKİ LİMAN</text>
-                    <text x="560" y="70" text-anchor="middle" class="mv-route-label is-new">HARFİYE</text>
+                    <text x="560" y="70" text-anchor="middle" class="mv-route-label is-new">HARFORA</text>
                 </svg>
             </figure>
         </div>
@@ -7955,7 +8207,7 @@ const App = {
 
     // Adres taşıma ayarları
     OLD_HOST: 'umutcandemircan.github.io',
-    NEW_URL: 'https://www.harfiye.com/',
+    NEW_URL: 'https://harfora.com/',
     TRANSFER_PARAM: 'aktar',
     // Yeni site #aktar= bağlantısını okuyabildiğinde true yapılmalı
     SAVE_TRANSFER_ENABLED: false,
@@ -8077,7 +8329,7 @@ const App = {
         let targetUrl = this.NEW_URL;
         const save = SaveManager.data;
         const score = this._progressScore(save);
-        // Yeni sitenin (www.harfiye.com) #aktar desteği yoksa ilerleme taşıma vaadi gösterilmez
+        // Yeni sitenin (harfora.com) #aktar desteği yoksa ilerleme taşıma vaadi gösterilmez
         const hasProgress = this.SAVE_TRANSFER_ENABLED &&
             (score > 0 || (save && save.coins !== SaveManager.defaultData.coins));
         if (hasProgress) {
@@ -8093,7 +8345,7 @@ const App = {
         if (note) {
             if (hasProgress) {
                 const provinces = (save.completedProvinces || []).length;
-                note.innerHTML = `İlerlemen (<strong>${provinces}/81 vilayet</strong>, <strong>${save.coins} altın</strong>) bu butonla Harfiye'ye otomatik taşınır. Yer imlerini de güncellemeyi unutma.`;
+                note.innerHTML = `İlerlemen (<strong>${provinces}/81 vilayet</strong>, <strong>${save.coins} altın</strong>) bu butonla Harfora'ya otomatik taşınır. Yer imlerini de güncellemeyi unutma.`;
             } else {
                 note.textContent = 'Yer imlerini yeni adresle güncellemeyi unutma.';
             }
@@ -8121,13 +8373,22 @@ const App = {
             el.setAttribute('inert', '');
         });
 
-        document.title = 'Harfiye — Yeni Adresimiz';
+        document.title = 'Harfora — Yeni Adresimiz';
 
         // Hareket azaltma tercihinde SVG (SMIL) yelkenli animasyonunu durdur
-        if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        const reducedMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)');
+        const applyMotionPref = () => {
             overlay.querySelectorAll('svg').forEach(svg => {
-                if (typeof svg.pauseAnimations === 'function') svg.pauseAnimations();
+                if (reducedMotion && reducedMotion.matches) {
+                    if (typeof svg.pauseAnimations === 'function') svg.pauseAnimations();
+                } else if (!document.hidden) {
+                    if (typeof svg.unpauseAnimations === 'function') svg.unpauseAnimations();
+                }
             });
+        };
+        applyMotionPref();
+        if (reducedMotion && reducedMotion.addEventListener) {
+            reducedMotion.addEventListener('change', applyMotionPref);
         }
 
         // Masaüstü için hafif kartografik derinlik / parallaks hareketi
@@ -8152,13 +8413,14 @@ const App = {
             }
         }
 
-        // Sekme arka plana alındığında animasyonları durdurup pil/CPU tasarrufu sağla
+        // Sekme arka plana alındığında CSS ve SVG animasyonlarını durdurup pil/CPU tasarrufu sağla
         document.addEventListener('visibilitychange', () => {
+            overlay.classList.toggle('is-paused', document.hidden);
             const svgs = overlay.querySelectorAll('svg');
             if (document.hidden) {
-                svgs.forEach(s => { if (typeof s.pauseAnimations === 'function') s.pauseAnimations(); });
-            } else {
-                svgs.forEach(s => { if (typeof s.unpauseAnimations === 'function') s.unpauseAnimations(); });
+                svgs.forEach(svg => { if (typeof svg.pauseAnimations === 'function') svg.pauseAnimations(); });
+            } else if (!reducedMotion || !reducedMotion.matches) {
+                svgs.forEach(svg => { if (typeof svg.unpauseAnimations === 'function') svg.unpauseAnimations(); });
             }
         });
 
